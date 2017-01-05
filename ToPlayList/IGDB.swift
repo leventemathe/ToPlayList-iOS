@@ -80,7 +80,7 @@ struct IGDB {
                     let result = IGDBJSON.instance.getNewestGameList(json)
                     switch result {
                     case .succes(let gameData):
-                        self.loadGameIDs(onComplete, from: gameData)
+                        self.loadFromGameIDs(onComplete, from: gameData)
                     case .failure(let error):
                         onComplete(IGDBResult.failure(error))
                     }
@@ -91,7 +91,7 @@ struct IGDB {
         }
     }
     
-    private func loadGameIDs(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, from gameData: GameData) {
+    private func loadFromGameIDs(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, from gameData: GameData) {
         var genreLoaded = false
         var devLoaded = false
         

@@ -11,9 +11,13 @@ import Foundation
 class Game: IdentifiableObject {
     
     private var _coverURL: URL?
+    
     private var _genres: [Genre]?
     private var _developers: [Company]?
-        
+    
+    private var _firstReleaseDate: Double?
+    private var _firstReleaseDateAsString: String?
+    
     var coverURL: URL? {
         get { return _coverURL }
         set { _coverURL = newValue }
@@ -55,6 +59,25 @@ class Game: IdentifiableObject {
         set {
             _developers = newValue
         }
+    }
+    
+    var firstReleaseDate: Double? {
+        get {
+            return _firstReleaseDate
+        }
+        set {
+            _firstReleaseDate = newValue
+        }
+    }
+    
+    var firstReleaseDateAsString: String? {
+        if _firstReleaseDateAsString == nil {
+            if _firstReleaseDate == nil {
+                return nil
+            }
+            _firstReleaseDateAsString = Dates.dateFromUnixTime(_firstReleaseDate!)
+        }
+        return _firstReleaseDateAsString
     }
     
     func addGenre(_ genre: Genre) {

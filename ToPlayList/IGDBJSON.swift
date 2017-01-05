@@ -37,6 +37,10 @@ struct IGDBJSON {
             if let coverURL = (obj["cover"] as? JSONPair)?["cloudinary_id"] as? String {
                 game.coverURL = URL(string: "\(IGDB.BASE_URL_IMG)\(IGDB.IMG_THUMB)/\(coverURL)")
             }
+            if let firsReleaseDate = obj["first_release_date"] as? Double {
+                game.firstReleaseDate = firsReleaseDate / 1000.0
+            }
+            
             return game
         }
         return nil

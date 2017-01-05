@@ -18,7 +18,7 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     private var refreshVC = UIRefreshControl()
     
-    private var games = [Game]() {
+    private var gameSections = [GameSection]() {
         didSet {
             tableView.reloadData()
         }
@@ -49,7 +49,7 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         IGDB.instance.getNewestGamesList { result in
             switch result {
             case .succes(let games):
-                self.games = games
+                self.gameSections = GameSection.buildGameSectionsForNewestGames(from: games)
                 self.resetListBackground()
             case .failure(let error):
                 self.setListBackground()
@@ -68,7 +68,7 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
 
     //TODO move to TableViewDelegates with delegate methods
     private func setListBackground() {
-        if(games.count > 0) {
+        if(gameSections.count > 0) {
             return
         }
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
@@ -88,20 +88,30 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return gameSections.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: NewestReleasesCell.reuseIdentifier, for: indexPath) as? NewestReleasesCell {
-            let game = games[indexPath.row]
+            let game = gameSections[indexPath.section].games[indexPath.row]
             cell.update(game)
             return cell
         }
         return UITableViewCell()
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat(20.0)
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = Bundle.main.loadNibNamed("DateTableCellHeaderView", owner: self, options: nil)?.first as! DateTableCellHeaderView
+        headerView.dateLbl.text = gameSections[section].header
+        return headerView
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return games.count
+        return gameSections[section].games.count
     }
 }
 
