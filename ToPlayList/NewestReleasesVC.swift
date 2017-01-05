@@ -15,7 +15,6 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     @IBOutlet weak var navBar: ShadowyView!
     
     private var noDataLbl = UILabel()
-    
     private var refreshVC = UIRefreshControl()
     
     private var gameSections = [GameSection]() {
@@ -23,6 +22,9 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
             tableView.reloadData()
         }
     }
+    
+    private let paginationLimit = 10
+    private var paginationOffset = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,27 +48,45 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     private func reloadGames() {
-        IGDB.instance.getNewestGamesList { result in
-            switch result {
-            case .succes(let games):
-                self.gameSections = GameSection.buildGameSectionsForNewestGames(from: games)
-                self.resetListBackground()
-            case .failure(let error):
-                self.setListBackground()
-                switch error {
-                case .serverError, .urlError, .jsonError:
-                    self.presentNetworkingError(with: "There was an error with the server, please check back later!")
-                    break
-                case .noInternetError:
-                    self.presentNetworkingError(with: "No internet connection!")
-                    break
-                }
-            }
-            self.refreshVC.endRefreshing()
-        }
+        IGDB.instance.getNewestGamesList({ result in
+            self.handleLoadingGames(from: result, likeFunction: self.relaodGamesHandler)
+        }, withLimit: paginationLimit)
     }
-
-    //TODO move to TableViewDelegates with delegate methods
+    
+    private func relaodGamesHandler(_ games: [Game]) {
+        self.gameSections = GameSection.buildGameSectionsForNewestGames(fromGames: games)
+    }
+    
+    private func loadMoreGames() {
+        paginationOffset += paginationLimit
+        IGDB.instance.getNewestGamesList ({ result in
+            self.handleLoadingGames(from: result, likeFunction: self.loadMoreGamesHandler)
+        }, withLimit: paginationLimit, withOffset: paginationOffset)
+    }
+    
+    private func loadMoreGamesHandler(_ games: [Game]) {
+        self.gameSections = GameSection.buildGameSectionsForNewestGames(fromGames: games, continuationOf: self.gameSections)
+    }
+    
+    private func handleLoadingGames(from result: IGDBResult<[Game]>, likeFunction this: ([Game])->Void) {
+        switch result {
+        case .succes(let games):
+            this(games)
+            self.resetListBackground()
+        case .failure(let error):
+            self.setListBackground()
+            switch error {
+            case .serverError, .urlError, .jsonError:
+                self.presentNetworkingError(withMessage: "There was an error with the server, please check back later!")
+                break
+            case .noInternetError:
+                self.presentNetworkingError(withMessage: "No internet connection!")
+                break
+            }
+        }
+        self.refreshVC.endRefreshing()
+    }
+    
     private func setListBackground() {
         if(gameSections.count > 0) {
             return
@@ -80,7 +100,7 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         tableView.separatorStyle = UITableViewCellSeparatorStyle.singleLine
     }
 
-    private func presentNetworkingError(with message: String) {
+    private func presentNetworkingError(withMessage message: String) {
         let alert = UIAlertController(title: "Error 😟", message: message, preferredStyle: UIAlertControllerStyle.alert)
         let okBtn = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
         alert.addAction(okBtn)
@@ -97,6 +117,7 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
             cell.update(game)
             return cell
         }
+        
         return UITableViewCell()
     }
     
@@ -112,6 +133,15 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return gameSections[section].games.count
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        
+        if offsetY > contentHeight - scrollView.frame.size.height && paginationOffset < 10 {
+            loadMoreGames()
+        }
     }
 }
 

@@ -65,13 +65,14 @@ struct IGDB {
         IGDBKeys.BASE_KEY.key: IGDBKeys.BASE_KEY.value
     ]
     
-    public func getNewestGamesList(_ onComplete: @escaping (IGDBResult<[Game]>)->Void) {
+    public func getNewestGamesList(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, withLimit limit: Int, withOffset offset: Int) {
         let url =  IGDB.BASE_URL + IGDB.GAMES
         let currentDate = Int64(Date().timeIntervalSince1970) * 1000
         let parameters: Parameters = ["fields": "id,name,first_release_date,release_dates,genres,developers,cover",
                                       "order": "first_release_date:desc",
                                       "filter[first_release_date][lt]": currentDate,
-                                      "limit": 10]
+                                      "limit": limit,
+                                      "offset": offset]
         
         Alamofire.request(url, parameters: parameters, headers: IGDB.HEADERS).validate().responseJSON { response in
             switch response.result {
@@ -80,7 +81,7 @@ struct IGDB {
                     let result = IGDBJSON.instance.getNewestGameList(json)
                     switch result {
                     case .succes(let gameData):
-                        self.loadFromGameIDs(onComplete, from: gameData)
+                        self.loadFromGameIDs(onComplete, fromGameData: gameData)
                     case .failure(let error):
                         onComplete(IGDBResult.failure(error))
                     }
@@ -91,41 +92,45 @@ struct IGDB {
         }
     }
     
-    private func loadFromGameIDs(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, from gameData: GameData) {
+    public func getNewestGamesList(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, withLimit limit: Int) {
+        getNewestGamesList(onComplete, withLimit: limit, withOffset: 0)
+    }
+    
+    private func loadFromGameIDs(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, fromGameData gameData: GameData) {
         var genreLoaded = false
         var devLoaded = false
         
         self.getGenres({ result in
             switch result {
             case .succes(let genres):
-                self.handleGenreResult(genres, for: gameData)
+                self.handleGenreResult(genres, forGameData: gameData)
                 genreLoaded = true
                 if genreLoaded && devLoaded {
-                    onComplete(IGDBResult.succes(Array(gameData.keys)))
+                    onComplete(IGDBResult.succes(self.getGames(gameData)))
                 }
             case .failure(let error):
                 onComplete(IGDBResult.failure(error))
             }
-        }, withIDs: self.buildGenreIDs(Array(gameData.values)))
+        }, withIDs: self.buildGenreIDs(gameData))
         
         self.getCompanies({ result in
             switch result {
             case .succes(let devs):
-                self.handleDevelopersResult(devs, for: gameData)
+                self.handleDevelopersResult(devs, forGameData: gameData)
                 devLoaded = true
                 if genreLoaded && devLoaded {
-                    onComplete(IGDBResult.succes(Array(gameData.keys)))
+                    onComplete(IGDBResult.succes(self.getGames(gameData)))
                 }
             case .failure(let error):
                 onComplete(IGDBResult.failure(error))
             }
-        }, withIDs: self.buildDeveloperIDs(Array(gameData.values)))
+        }, withIDs: self.buildDeveloperIDs(gameData))
     }
     
-    private func buildGenreIDs(_ ids: [GameIDs]) -> Set<Int> {
+    private func buildGenreIDs(_ gameData: GameData) -> Set<Int> {
         var result = Set<Int>()
-        for gameIDs in ids {
-            if let genres = gameIDs.genres {
+        for (_, ids) in gameData {
+            if let genres = ids.genres {
                 for genre in genres {
                     result.insert(genre)
                 }
@@ -134,10 +139,10 @@ struct IGDB {
         return result
     }
     
-    private func buildDeveloperIDs(_ ids: [GameIDs]) -> Set<Int> {
+    private func buildDeveloperIDs(_ gameData: GameData) -> Set<Int> {
         var result = Set<Int>()
-        for gameIDs in ids {
-            if let devs = gameIDs.developers {
+        for (_, ids) in gameData {
+            if let devs = ids.developers {
                 for dev in devs {
                     result.insert(dev)
                 }
@@ -146,7 +151,15 @@ struct IGDB {
         return result
     }
     
-    private func handleGenreResult(_ genres: [Genre], for gameData: GameData) {
+    private func getGames(_ gameData: GameData) -> [Game] {
+        var result = [Game]()
+        for (game, _) in gameData {
+            result.append(game)
+        }
+        return result
+    }
+    
+    private func handleGenreResult(_ genres: [Genre], forGameData gameData: GameData) {
         for genre in genres {
             for (game, gameIDs) in gameData {
                 if gameIDs.genres == nil {
@@ -161,7 +174,7 @@ struct IGDB {
         }
     }
     
-    private func handleDevelopersResult(_ devs: [Company], for gameData: GameData) {
+    private func handleDevelopersResult(_ devs: [Company], forGameData gameData: GameData) {
         for dev in devs {
             for (game, gameIDs) in gameData {
                 if gameIDs.developers == nil {

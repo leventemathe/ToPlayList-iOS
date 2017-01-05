@@ -12,14 +12,63 @@ struct GameSection {
     let header: String
     var games: [Game]
     
-    static func buildGameSectionsForNewestGames(from games: [Game]) -> [GameSection] {
-        var prevGame = games[0]
-        
+    /*
+    init(header: String, games: [Game]) {
+        self.header = header
+        self.games = games
+    }
+    */
+    static func buildGameSectionsForNewestGames(fromGames games: [Game]) -> [GameSection] {
         var gameSections = [GameSection]()
         var tempGames = [Game]()
-        tempGames.append(prevGame)
         
-        for i in 1..<games.count {
+        var prevGame = games[0]
+        tempGames.append(prevGame)
+
+        buildGameSectionLoop(1, fromGames: games, intoGameSection: &gameSections, withTempGames: &tempGames, withPrevGame: &prevGame)
+        
+        return gameSections
+    }
+    
+    static func buildGameSectionsForNewestGames(fromGames games: [Game], continuationOf prevGameSections: [GameSection]) -> [GameSection] {
+        var gameSections = prevGameSections
+        var tempGames = [Game]()
+        
+        var prevGame = gameSections.last!.games.last!
+        
+        var j = 0
+        while j < games.count {
+            let game = games[j]
+            if game.firstReleaseDate == nil || prevGame.firstReleaseDate == nil {
+                tempGames.append(game)
+            }
+            else if game.firstReleaseDate! < prevGame.firstReleaseDate! {
+                gameSections[gameSections.count - 1].games.append(contentsOf: tempGames)
+                tempGames = [Game]()
+                tempGames.append(game)
+                prevGame = game
+                j += 1
+                if(game == games.last!) {
+                    gameSections.append(GameSection(header: game.firstReleaseDateAsString!, games: tempGames))
+                }
+                break
+            } else {
+                tempGames.append(game)
+                if(game == games.last!) {
+                    gameSections[gameSections.count - 1].games.append(contentsOf: tempGames)
+                }
+            }
+            prevGame = game
+            j += 1
+        }
+        
+        buildGameSectionLoop(j, fromGames: games, intoGameSection: &gameSections, withTempGames: &tempGames, withPrevGame: &prevGame)
+        
+        return gameSections
+    }
+    
+    private static func buildGameSectionLoop(_ startIndex: Int, fromGames games: [Game], intoGameSection gameSections: inout [GameSection], withTempGames tempGames: inout [Game], withPrevGame prevGame: inout Game) {
+        for i in startIndex..<games.count {
             let game = games[i]
             if game.firstReleaseDate == nil || prevGame.firstReleaseDate == nil {
                 tempGames.append(game)
@@ -27,14 +76,16 @@ struct GameSection {
                 gameSections.append(GameSection(header: prevGame.firstReleaseDateAsString!, games: tempGames))
                 tempGames = [Game]()
                 tempGames.append(game)
-            } else if game == games[games.count-1] {
-                tempGames.append(game)
-                gameSections[gameSections.count-1].games.append(contentsOf: tempGames)
+                if(game == games.last!) {
+                    gameSections.append(GameSection(header: game.firstReleaseDateAsString!, games: tempGames))
+                }
             } else {
                 tempGames.append(game)
+                if(game == games.last!) {
+                    gameSections[gameSections.count - 1].games.append(contentsOf: tempGames)
+                }
             }
             prevGame = game
         }
-        return gameSections
     }
 }

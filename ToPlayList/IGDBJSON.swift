@@ -10,7 +10,7 @@ import Foundation
 
 typealias JSON = [Any]
 typealias JSONPair = [String: Any]
-typealias GameData = [Game: GameIDs]
+typealias GameData = [(Game, GameIDs)]
 
 struct IGDBJSON {
 
@@ -21,8 +21,8 @@ struct IGDBJSON {
     func getNewestGameList(_ json: JSON) -> IGDBResult<GameData> {
         var result = GameData()
         for any in json {
-            if let obj = any as? JSONPair, let game = setGame(from: obj) {
-                result[game] = setGameIDs(from: obj, with: game.id)
+            if let obj = any as? JSONPair, let game = setGame(fromObj: obj) {
+                result.append((game, setGameIDs(fromObj: obj, withGameID: game.id)))
             } else {
                 return IGDBResult.failure(IGDBError.jsonError)
             }
@@ -30,7 +30,7 @@ struct IGDBJSON {
         return IGDBResult.succes(result)
     }
     
-    private func setGame(from obj: JSONPair) -> Game? {
+    private func setGame(fromObj obj: JSONPair) -> Game? {
         if let name = obj["name"] as? String, let id = obj["id"] as? Int {
             let game = Game(id, withName: name)
             
@@ -46,7 +46,7 @@ struct IGDBJSON {
         return nil
     }
     
-    private func setGameIDs(from obj: JSONPair, with gameID: Int) -> GameIDs {
+    private func setGameIDs(fromObj obj: JSONPair, withGameID gameID: Int) -> GameIDs {
         var gameIDs = GameIDs(gameID)
         
         if let genreIDs = obj["genres"] as? [Int] {
