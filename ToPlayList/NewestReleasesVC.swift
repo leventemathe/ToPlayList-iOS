@@ -65,7 +65,7 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     private func loadMoreGamesHandler(_ games: [Game]) {
-        self.gameSections = GameSection.buildGameSectionsForNewestGames(fromGames: games, continuationOf: self.gameSections)
+        self.gameSections.append(contentsOf: GameSection.buildGameSectionsForNewestGames(fromGames: games, continuationOf: &self.gameSections))
     }
     
     private func handleLoadingGames(from result: IGDBResult<[Game]>, likeFunction this: ([Game])->Void) {

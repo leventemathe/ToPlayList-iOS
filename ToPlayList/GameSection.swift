@@ -8,16 +8,15 @@
 
 import Foundation
 
-struct GameSection {
+class GameSection {
     let header: String
     var games: [Game]
     
-    /*
     init(header: String, games: [Game]) {
         self.header = header
         self.games = games
     }
-    */
+ 
     static func buildGameSectionsForNewestGames(fromGames games: [Game]) -> [GameSection] {
         var gameSections = [GameSection]()
         var tempGames = [Game]()
@@ -30,11 +29,11 @@ struct GameSection {
         return gameSections
     }
     
-    static func buildGameSectionsForNewestGames(fromGames games: [Game], continuationOf prevGameSections: [GameSection]) -> [GameSection] {
-        var gameSections = prevGameSections
+    static func buildGameSectionsForNewestGames(fromGames games: [Game], continuationOf prevGameSections: inout [GameSection]) -> [GameSection] {
+        var gameSections = [GameSection]()
         var tempGames = [Game]()
         
-        var prevGame = gameSections.last!.games.last!
+        var prevGame = prevGameSections.last!.games.last!
         
         var j = 0
         while j < games.count {
@@ -43,19 +42,19 @@ struct GameSection {
                 tempGames.append(game)
             }
             else if game.firstReleaseDate! < prevGame.firstReleaseDate! {
-                gameSections[gameSections.count - 1].games.append(contentsOf: tempGames)
+                prevGameSections[prevGameSections.count - 1].games.append(contentsOf: tempGames)
                 tempGames = [Game]()
                 tempGames.append(game)
                 prevGame = game
                 j += 1
                 if(game == games.last!) {
-                    gameSections.append(GameSection(header: game.firstReleaseDateAsString!, games: tempGames))
+                    prevGameSections.append(GameSection(header: game.firstReleaseDateAsString!, games: tempGames))
                 }
                 break
             } else {
                 tempGames.append(game)
                 if(game == games.last!) {
-                    gameSections[gameSections.count - 1].games.append(contentsOf: tempGames)
+                    prevGameSections[prevGameSections.count - 1].games.append(contentsOf: tempGames)
                 }
             }
             prevGame = game
