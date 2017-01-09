@@ -29,8 +29,7 @@ class GameSection {
         return gameSections
     }
     
-    static func buildGameSectionsForNewestGames(fromGames games: [Game], continuationOf prevGameSections: inout [GameSection]) -> [GameSection] {
-        var gameSections = [GameSection]()
+    static func buildGameSectionsForNewestGames(fromGames games: [Game], continuationOf prevGameSections: inout [GameSection]) {
         var tempGames = [Game]()
         
         var prevGame = prevGameSections.last!.games.last!
@@ -47,23 +46,25 @@ class GameSection {
                 tempGames.append(game)
                 prevGame = game
                 j += 1
-                if(game == games.last!) {
-                    prevGameSections.append(GameSection(header: game.firstReleaseDateAsString!, games: tempGames))
+                if let lastGame = games.last {
+                    if game == lastGame {
+                        prevGameSections.append(GameSection(header: game.firstReleaseDateAsString!, games: tempGames))
+                    }
                 }
                 break
             } else {
                 tempGames.append(game)
-                if(game == games.last!) {
-                    prevGameSections[prevGameSections.count - 1].games.append(contentsOf: tempGames)
+                if let lastGame = games.last {
+                    if game == lastGame && prevGameSections.count > 0 {
+                        prevGameSections[prevGameSections.count - 1].games.append(contentsOf: tempGames)
+                    }
                 }
             }
             prevGame = game
             j += 1
         }
         
-        buildGameSectionLoop(j, fromGames: games, intoGameSection: &gameSections, withTempGames: &tempGames, withPrevGame: &prevGame)
-        
-        return gameSections
+        buildGameSectionLoop(j, fromGames: games, intoGameSection: &prevGameSections, withTempGames: &tempGames, withPrevGame: &prevGame)
     }
     
     private static func buildGameSectionLoop(_ startIndex: Int, fromGames games: [Game], intoGameSection gameSections: inout [GameSection], withTempGames tempGames: inout [Game], withPrevGame prevGame: inout Game) {
@@ -75,13 +76,21 @@ class GameSection {
                 gameSections.append(GameSection(header: prevGame.firstReleaseDateAsString!, games: tempGames))
                 tempGames = [Game]()
                 tempGames.append(game)
-                if(game == games.last!) {
-                    gameSections.append(GameSection(header: game.firstReleaseDateAsString!, games: tempGames))
+                if let lastGame = games.last {
+                    if game == lastGame {
+                        gameSections.append(GameSection(header: game.firstReleaseDateAsString!, games: tempGames))
+                    }
                 }
             } else {
                 tempGames.append(game)
-                if(game == games.last!) {
-                    gameSections[gameSections.count - 1].games.append(contentsOf: tempGames)
+                if let lastGame = games.last {
+                    if game == lastGame && gameSections.count > 0 {
+                        if gameSections[gameSections.count - 1].header == game.firstReleaseDateAsString {
+                            gameSections[gameSections.count - 1].games.append(contentsOf: tempGames)
+                        } else {
+                            gameSections.append(GameSection(header: game.firstReleaseDateAsString!, games: tempGames))
+                        }
+                    }
                 }
             }
             prevGame = game

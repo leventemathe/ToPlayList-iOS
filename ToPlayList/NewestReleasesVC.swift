@@ -17,10 +17,14 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     private var noDataLbl = UILabel()
     private var refreshVC = UIRefreshControl()
     
-    private var gameSections = [GameSection]() {
+    private var _gameSections = [GameSection]() {
         didSet {
             tableView.reloadData()
         }
+    }
+    
+    public var gameSections: [GameSection] {
+        return _gameSections
     }
     
     private let paginationLimit = 10
@@ -47,31 +51,32 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         reloadGames()
     }
     
-    private func reloadGames() {
-        IGDB.instance.getNewestGamesList({ result in
-            self.handleLoadingGames(from: result, likeFunction: self.relaodGamesHandler)
+    func reloadGames() {
+        IGDB.instance.getGamesList({ result in
+            self.handleLoadingGames(fromResult: result, withResultPacker: self.relaodGamesResultPacker)
         }, withLimit: paginationLimit)
     }
     
-    private func relaodGamesHandler(_ games: [Game]) {
-        self.gameSections = GameSection.buildGameSectionsForNewestGames(fromGames: games)
+    private func relaodGamesResultPacker(_ games: [Game]) {
+        self._gameSections = GameSection.buildGameSectionsForNewestGames(fromGames: games)
+        self.paginationOffset = 0
     }
     
-    private func loadMoreGames() {
+    func loadMoreGames() {
         paginationOffset += paginationLimit
-        IGDB.instance.getNewestGamesList ({ result in
-            self.handleLoadingGames(from: result, likeFunction: self.loadMoreGamesHandler)
+        IGDB.instance.getGamesList ({ result in
+            self.handleLoadingGames(fromResult: result, withResultPacker: self.loadMoreGamesResultPacker)
         }, withLimit: paginationLimit, withOffset: paginationOffset)
     }
     
-    private func loadMoreGamesHandler(_ games: [Game]) {
-        self.gameSections.append(contentsOf: GameSection.buildGameSectionsForNewestGames(fromGames: games, continuationOf: &self.gameSections))
+    private func loadMoreGamesResultPacker(_ games: [Game]) {
+        GameSection.buildGameSectionsForNewestGames(fromGames: games, continuationOf: &self._gameSections)
     }
     
-    private func handleLoadingGames(from result: IGDBResult<[Game]>, likeFunction this: ([Game])->Void) {
+    private func handleLoadingGames(fromResult result: IGDBResult<[Game]>, withResultPacker packer: ([Game])->Void) {
         switch result {
         case .succes(let games):
-            this(games)
+            packer(games)
             self.resetListBackground()
         case .failure(let error):
             self.setListBackground()
@@ -88,7 +93,7 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     private func setListBackground() {
-        if(gameSections.count > 0) {
+        if(_gameSections.count > 0) {
             return
         }
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
@@ -108,12 +113,17 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return gameSections.count
+        return _gameSections.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section >= _gameSections.count-1 {
+            print("loading more...")
+            loadMoreGames()
+        }
+        
         if let cell = tableView.dequeueReusableCell(withIdentifier: NewestReleasesCell.reuseIdentifier, for: indexPath) as? NewestReleasesCell {
-            let game = gameSections[indexPath.section].games[indexPath.row]
+            let game = _gameSections[indexPath.section].games[indexPath.row]
             cell.update(game)
             return cell
         }
@@ -127,21 +137,12 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = Bundle.main.loadNibNamed("DateTableCellHeaderView", owner: self, options: nil)?.first as! DateTableCellHeaderView
-        headerView.dateLbl.text = gameSections[section].header
+        headerView.dateLbl.text = _gameSections[section].header
         return headerView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return gameSections[section].games.count
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offsetY = scrollView.contentOffset.y
-        let contentHeight = scrollView.contentSize.height
-        
-        if offsetY > contentHeight - scrollView.frame.size.height && paginationOffset < 10 {
-            loadMoreGames()
-        }
+        return _gameSections[section].games.count
     }
 }
 

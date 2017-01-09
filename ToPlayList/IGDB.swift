@@ -65,12 +65,11 @@ struct IGDB {
         IGDBKeys.BASE_KEY.key: IGDBKeys.BASE_KEY.value
     ]
     
-    public func getNewestGamesList(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, withLimit limit: Int, withOffset offset: Int) {
+    public func getGamesList(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, withLimit limit: Int, withOffset offset: Int, withDate date: Double = Date().timeIntervalSince1970) {
         let url =  IGDB.BASE_URL + IGDB.GAMES
-        let currentDate = Int64(Date().timeIntervalSince1970) * 1000
         let parameters: Parameters = ["fields": "id,name,first_release_date,release_dates,genres,developers,cover",
                                       "order": "first_release_date:desc",
-                                      "filter[first_release_date][lt]": currentDate,
+                                      "filter[first_release_date][lt]": Int64(date) * 1000,
                                       "limit": limit,
                                       "offset": offset]
         
@@ -92,8 +91,8 @@ struct IGDB {
         }
     }
     
-    public func getNewestGamesList(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, withLimit limit: Int) {
-        getNewestGamesList(onComplete, withLimit: limit, withOffset: 0)
+    public func getGamesList(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, withLimit limit: Int, withDate date: Double = Date().timeIntervalSince1970) {
+        getGamesList(onComplete, withLimit: limit, withOffset: 0, withDate: date)
     }
     
     private func loadFromGameIDs(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, fromGameData gameData: GameData) {
