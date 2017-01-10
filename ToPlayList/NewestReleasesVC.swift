@@ -12,7 +12,6 @@ import Kingfisher
 class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var navBar: ShadowyView!
     
     private var noDataLbl = UILabel()
     private var refreshVC = UIRefreshControl()
@@ -36,7 +35,6 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        navBar.addDropShadow()
         
         noDataLbl.bounds = CGRect(x: 0.0, y: 0.0, width: tableView.bounds.width, height: tableView.bounds.height)
         noDataLbl.text = "No data. Pull to refresh!"
@@ -150,6 +148,15 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         if position > height - scrollView.frame.size.height * 1.5 && !loadingMoreGames {
             loadingMoreGames = true
             loadMoreGames()
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationVC = segue.destination as? GameDetailsVC {
+            if let i = tableView.indexPathForSelectedRow {
+                let game = gameSections[i.section].games[i.row]
+                destinationVC.game = game
+            }
         }
     }
 }

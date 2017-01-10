@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		609081816AD174091BB44F9F /* Pods_ToPlayList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E17E2C0267533870C1E3DC /* Pods_ToPlayList.framework */; };
 		D70B03231E0C1F9500F67E7A /* IGDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70B03221E0C1F9500F67E7A /* IGDB.swift */; };
+		D71E51571E257BF100C7F920 /* GameDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71E51561E257BF100C7F920 /* GameDetailsVC.swift */; };
 		D726BC861E0ABDD800D6C9CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D726BC851E0ABDD800D6C9CD /* AppDelegate.swift */; };
 		D726BC881E0ABDD800D6C9CD /* NewestReleasesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D726BC871E0ABDD800D6C9CD /* NewestReleasesVC.swift */; };
 		D726BC8B1E0ABDD800D6C9CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D726BC891E0ABDD800D6C9CD /* Main.storyboard */; };
@@ -23,7 +24,6 @@
 		D76606FD1E13123400D5979C /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76606FC1E13123400D5979C /* RoundedCorners.swift */; };
 		D76B47FD1E197CCD00D18DDF /* GameIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76B47FC1E197CCD00D18DDF /* GameIDs.swift */; };
 		D7898E7B1E131992008B7647 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7898E7A1E131992008B7647 /* ReusableView.swift */; };
-		D7898E7D1E13206B008B7647 /* DropShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7898E7C1E13206B008B7647 /* DropShadow.swift */; };
 		D78C0E291E1465440088560F /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78C0E281E1465440088560F /* Identifiable.swift */; };
 		D795B00D1E1DB3D700776670 /* GameSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D795B00C1E1DB3D700776670 /* GameSection.swift */; };
 		D795B0101E1DBA5700776670 /* Dates.swift in Sources */ = {isa = PBXBuildFile; fileRef = D795B00F1E1DBA5700776670 /* Dates.swift */; };
@@ -47,6 +47,7 @@
 		A6E17E2C0267533870C1E3DC /* Pods_ToPlayList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ToPlayList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B494F0F8C618EBA6342ABA8D /* Pods-ToPlayList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToPlayList.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ToPlayList/Pods-ToPlayList.debug.xcconfig"; sourceTree = "<group>"; };
 		D70B03221E0C1F9500F67E7A /* IGDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGDB.swift; sourceTree = "<group>"; };
+		D71E51561E257BF100C7F920 /* GameDetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameDetailsVC.swift; sourceTree = "<group>"; };
 		D726BC821E0ABDD800D6C9CD /* ToPlayList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToPlayList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D726BC851E0ABDD800D6C9CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D726BC871E0ABDD800D6C9CD /* NewestReleasesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewestReleasesVC.swift; sourceTree = "<group>"; };
@@ -65,7 +66,6 @@
 		D76606FC1E13123400D5979C /* RoundedCorners.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedCorners.swift; sourceTree = "<group>"; };
 		D76B47FC1E197CCD00D18DDF /* GameIDs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameIDs.swift; sourceTree = "<group>"; };
 		D7898E7A1E131992008B7647 /* ReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
-		D7898E7C1E13206B008B7647 /* DropShadow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropShadow.swift; sourceTree = "<group>"; };
 		D78C0E281E1465440088560F /* Identifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
 		D795B00C1E1DB3D700776670 /* GameSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSection.swift; sourceTree = "<group>"; };
 		D795B00F1E1DBA5700776670 /* Dates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dates.swift; sourceTree = "<group>"; };
@@ -149,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				D726BC871E0ABDD800D6C9CD /* NewestReleasesVC.swift */,
+				D71E51561E257BF100C7F920 /* GameDetailsVC.swift */,
 				D795B00C1E1DB3D700776670 /* GameSection.swift */,
 			);
 			name = Controller;
@@ -162,7 +163,6 @@
 				D726BC9A1E0AC7AA00D6C9CD /* NewestReleasesCell.swift */,
 				D76606FC1E13123400D5979C /* RoundedCorners.swift */,
 				D7898E7A1E131992008B7647 /* ReusableView.swift */,
-				D7898E7C1E13206B008B7647 /* DropShadow.swift */,
 				D76437E21E1E506D00B09C7E /* DateTableCellHeaderView.swift */,
 				D76437E31E1E506D00B09C7E /* DateTableCellHeaderView.xib */,
 			);
@@ -379,8 +379,8 @@
 				D726BC9B1E0AC7AA00D6C9CD /* NewestReleasesCell.swift in Sources */,
 				D78C0E291E1465440088560F /* Identifiable.swift in Sources */,
 				D7898E7B1E131992008B7647 /* ReusableView.swift in Sources */,
+				D71E51571E257BF100C7F920 /* GameDetailsVC.swift in Sources */,
 				D795B0101E1DBA5700776670 /* Dates.swift in Sources */,
-				D7898E7D1E13206B008B7647 /* DropShadow.swift in Sources */,
 				D79B28281E1D28D4002BE4AC /* IGDBKeys.swift in Sources */,
 				D726BC9D1E0ACF3900D6C9CD /* Game.swift in Sources */,
 				D726BC861E0ABDD800D6C9CD /* AppDelegate.swift in Sources */,
@@ -604,6 +604,7 @@
 				D75A411C1E241FC600E91514 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
