@@ -17,6 +17,8 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     private var noDataLbl = UILabel()
     private var refreshVC = UIRefreshControl()
     
+    private var loadingMoreGames = true
+    
     private var _gameSections = [GameSection]() {
         didSet {
             tableView.reloadData()
@@ -90,6 +92,7 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
             }
         }
         self.refreshVC.endRefreshing()
+        loadingMoreGames = false
     }
     
     private func setListBackground() {
@@ -117,11 +120,6 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section >= _gameSections.count-1 {
-            print("loading more...")
-            loadMoreGames()
-        }
-        
         if let cell = tableView.dequeueReusableCell(withIdentifier: NewestReleasesCell.reuseIdentifier, for: indexPath) as? NewestReleasesCell {
             let game = _gameSections[indexPath.section].games[indexPath.row]
             cell.update(game)
@@ -143,6 +141,16 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return _gameSections[section].games.count
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let position = scrollView.contentOffset.y
+        let height = scrollView.contentSize.height
+        
+        if position > height - scrollView.frame.size.height * 1.5 && !loadingMoreGames {
+            loadingMoreGames = true
+            loadMoreGames()
+        }
     }
 }
 
