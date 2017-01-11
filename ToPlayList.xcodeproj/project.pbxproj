@@ -14,6 +14,8 @@
 		D71981171E26A2A5005823C2 /* UpcomingReleases.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71981161E26A2A5005823C2 /* UpcomingReleases.swift */; };
 		D71981191E26A337005823C2 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71981181E26A337005823C2 /* LoginVC.swift */; };
 		D719811B1E26A389005823C2 /* ListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D719811A1E26A389005823C2 /* ListVC.swift */; };
+		D719811D1E26AB3F005823C2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D719811C1E26AB3F005823C2 /* GoogleService-Info.plist */; };
+		D719811E1E26AB3F005823C2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D719811C1E26AB3F005823C2 /* GoogleService-Info.plist */; };
 		D71E51571E257BF100C7F920 /* GameDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71E51561E257BF100C7F920 /* GameDetailsVC.swift */; };
 		D726BC861E0ABDD800D6C9CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D726BC851E0ABDD800D6C9CD /* AppDelegate.swift */; };
 		D726BC881E0ABDD800D6C9CD /* NewestReleasesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D726BC871E0ABDD800D6C9CD /* NewestReleasesVC.swift */; };
@@ -57,6 +59,7 @@
 		D71981161E26A2A5005823C2 /* UpcomingReleases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpcomingReleases.swift; sourceTree = "<group>"; };
 		D71981181E26A337005823C2 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		D719811A1E26A389005823C2 /* ListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListVC.swift; sourceTree = "<group>"; };
+		D719811C1E26AB3F005823C2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D71E51561E257BF100C7F920 /* GameDetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameDetailsVC.swift; sourceTree = "<group>"; };
 		D726BC821E0ABDD800D6C9CD /* ToPlayList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToPlayList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D726BC851E0ABDD800D6C9CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -126,6 +129,7 @@
 		D726BC791E0ABDD800D6C9CD = {
 			isa = PBXGroup;
 			children = (
+				D719811C1E26AB3F005823C2 /* GoogleService-Info.plist */,
 				D726BC841E0ABDD800D6C9CD /* ToPlayList */,
 				D75A41141E241FC600E91514 /* ToPlayListUnitTests */,
 				D726BC831E0ABDD800D6C9CD /* Products */,
@@ -322,6 +326,7 @@
 				D726BC901E0ABDD800D6C9CD /* LaunchScreen.storyboard in Resources */,
 				D7C3A1721E0DD9120091279C /* Assets.xcassets in Resources */,
 				D726BC8B1E0ABDD800D6C9CD /* Main.storyboard in Resources */,
+				D719811D1E26AB3F005823C2 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,6 +334,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D719811E1E26AB3F005823C2 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

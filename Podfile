@@ -5,5 +5,6 @@ target 'ToPlayList' do
 
   pod 'Alamofire', '~> 4.2'
   pod 'Kingfisher', '~> 3.0'
+  pod 'Firebase/Core'
 
 end
