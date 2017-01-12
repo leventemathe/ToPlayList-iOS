@@ -14,11 +14,6 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var genreLabel: UILabel!
     @IBOutlet weak var developerLabel: UILabel!
-
-    override public func awakeFromNib() {
-        super.awakeFromNib()
-        coverView.addRoundedCorners()
-    }
     
     func update(_ game: Game) {
         titleLabel.text = game.name

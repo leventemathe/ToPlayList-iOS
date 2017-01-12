@@ -10,13 +10,9 @@ import UIKit
 
 public protocol RoundedCorners { }
 
-extension RoundedCorners where Self: UIImageView {
+extension RoundedCorners where Self: UIView {
     
     func addRoundedCorners(_ amount: CGFloat = 14.0) {
         layer.cornerRadius = amount
     }
-}
-
-class ListImageView: UIImageView, RoundedCorners {
-    
 }
