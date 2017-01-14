@@ -14,6 +14,14 @@ class GameDetailsVC: UIViewController {
     
     var game: Game?
     
+    override func viewWillAppear(_ animated: Bool) {
+
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
     override func viewDidLoad() {
         if let game = game {
             titleLbl.text = game.name
