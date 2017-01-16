@@ -8,6 +8,6 @@
 
 import UIKit
 
-class ListVC: UIViewController {
+class ListVC: UIViewController, IdentifiableVC {
     
 }
