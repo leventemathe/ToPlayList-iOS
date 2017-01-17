@@ -9,17 +9,6 @@
 import UIKit
 import FirebaseAuth
 
-extension UILabel {
-    
-    func show(withText text: String) {
-        self.text = text
-    }
-    
-    func hide() {
-        self.text = ""
-    }
-}
-
 class LoginVC: UIViewController, IdentifiableVC {
     
     @IBOutlet weak var emailField: LoginSceneTextFieldEmail!
@@ -31,14 +20,14 @@ class LoginVC: UIViewController, IdentifiableVC {
             
             self.errorView.hide()
             
-            // trim white space
+            // TODO trim white space
             
             if email == "" && password == "" {
-                self.errorView.show(withText: "Please provide an email adress and a password!")
+                self.errorView.show(withText: "Please provide an email address and a password!")
                 return
             }
             if email == "" {
-                self.errorView.show(withText: "Please provide an email adress!")
+                self.errorView.show(withText: "Please provide an email address!")
                 return
             }
             if password == "" {
@@ -50,7 +39,7 @@ class LoginVC: UIViewController, IdentifiableVC {
                 if let error = error, let errorCode = FIRAuthErrorCode(rawValue: error._code) {
                     switch errorCode {
                     case .errorCodeUserNotFound:
-                        self.register()
+                        self.register(withEmail: email, withPassword: password)
                     case .errorCodeEmailAlreadyInUse:
                         self.errorView.show(withText: "Email is already in use")
                         break
@@ -70,7 +59,7 @@ class LoginVC: UIViewController, IdentifiableVC {
                         self.errorView.show(withText: "The password is too weak")
                         break
                     default:
-                        self.errorView.show(withText: "An unknown error occured")
+                        self.errorView.show(withText: "An unknown error occured 😟")
                         break
                     }
                 } else {
@@ -80,8 +69,14 @@ class LoginVC: UIViewController, IdentifiableVC {
         }
     }
     
-    func register() {
-        
+    func register(withEmail email: String, withPassword password: String) {
+        FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
+            if error != nil {
+                // TODO handle error
+            } else {
+                self.loginSuccesful()
+            }
+        }
     }
     
     func loginSuccesful() {
@@ -91,6 +86,10 @@ class LoginVC: UIViewController, IdentifiableVC {
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: animated)
         setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

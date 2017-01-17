@@ -7,8 +7,11 @@
 //
 
 import Foundation
+import FirebaseAuth
 
 struct User {
     
-    static var loggedIn = false
+    static var loggedIn: Bool {
+        return FIRAuth.auth()?.currentUser != nil
+    }
 }

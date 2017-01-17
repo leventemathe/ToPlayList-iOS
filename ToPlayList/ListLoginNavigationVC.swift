@@ -10,7 +10,7 @@ import UIKit
 
 class ListLoginNavigationVC: UINavigationController {
     
-    override func viewDidLoad() {
+    override func viewWillAppear(_ animated: Bool) {
         let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
         var vc: UIViewController
         if User.loggedIn {

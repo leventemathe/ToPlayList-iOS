@@ -293,14 +293,14 @@
                         <viewControllerLayoutGuide type="bottom" id="GHx-bX-eVv"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="5yO-fW-HqR">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_bg" translatesAutoresizingMaskIntoConstraints="NO" id="q32-dg-ukG">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="iXs-76-Udd">
-                                <rect key="frame" x="28" y="28" width="319" height="410"/>
+                                <rect key="frame" x="28" y="72" width="319" height="410"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gmJ-oo-xnq">
                                         <rect key="frame" x="0.0" y="0.0" width="319" height="200"/>
@@ -321,12 +321,14 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Hs9-tg-QgY">
                                         <rect key="frame" x="0.0" y="210" width="319" height="40"/>
                                         <subviews>
-                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3RO-W9-XT2" customClass="ErrorMessage" customModule="ToPlayList" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="319" height="40"/>
+                                            <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3RO-W9-XT2" customClass="ErrorMessage" customModule="ToPlayList" customModuleProvider="target">
+                                                <rect key="frame" x="-28" y="-282" width="0.0" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="oCU-Er-bh1"/>
+                                                </constraints>
                                             </view>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="3RO-W9-XT2" firstAttribute="centerY" secondItem="Hs9-tg-QgY" secondAttribute="centerY" id="Kgx-pP-ipD"/>
                                             <constraint firstAttribute="height" constant="40" id="uW2-eT-5sN"/>
                                         </constraints>
                                     </stackView>
@@ -410,7 +412,7 @@
             </objects>
             <point key="canvasLocation" x="1966.6666666666667" y="1684.2391304347827"/>
         </scene>
-        <!--ListVC-->
+        <!--List-->
         <scene sceneID="tZL-za-AC7">
             <objects>
                 <viewController restorationIdentifier="ListVC" storyboardIdentifier="ListVC" id="Ncq-W1-497" customClass="ListVC" customModule="ToPlayList" customModuleProvider="target" sceneMemberID="viewController">
@@ -419,11 +421,11 @@
                         <viewControllerLayoutGuide type="bottom" id="zCK-4h-43t"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" restorationIdentifier="List" id="MJu-JL-nvO">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jrb-Dl-xcM">
-                                <rect key="frame" x="174" y="323" width="27" height="21"/>
+                                <rect key="frame" x="174" y="298.5" width="27" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -435,11 +437,18 @@
                             <constraint firstItem="jrb-Dl-xcM" firstAttribute="centerY" secondItem="MJu-JL-nvO" secondAttribute="centerY" id="e3E-Px-zzi"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="s8v-2S-Lck"/>
+                    <navigationItem key="navigationItem" title="List" id="s8v-2S-Lck">
+                        <barButtonItem key="rightBarButtonItem" image="logout" id="ava-sZ-rhd">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="logoutClicked:" destination="Ncq-W1-497" id="QZJ-bu-569"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nX4-Lq-TDR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1968" y="2518"/>
+            <point key="canvasLocation" x="2764" y="1683.5082458770617"/>
         </scene>
         <!--Upcoming-->
         <scene sceneID="5l0-6m-Tuc">
@@ -471,15 +480,19 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="qTq-JX-w6Y" kind="relationship" relationship="rootViewController" id="ilr-Xt-lJO"/>
+                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pbq-Uu-v9u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1028" y="1710"/>
+            <point key="canvasLocation" x="1028" y="1684"/>
         </scene>
     </scenes>
     <resources>
         <image name="login_bg" width="768" height="512"/>
         <image name="logo" width="349" height="203"/>
+        <image name="logout" width="26" height="30"/>
         <image name="screenshot" width="1680" height="1050"/>
     </resources>
     <inferredMetricsTieBreakers>

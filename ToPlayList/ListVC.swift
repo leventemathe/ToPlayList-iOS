@@ -7,7 +7,20 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ListVC: UIViewController, IdentifiableVC {
     
+
+    @IBAction func logoutClicked(_ sender: UIBarButtonItem) {
+        
+        // TODO are you sure you want to log out
+        
+        do {
+            try FIRAuth.auth()?.signOut()
+        } catch let signOutError as NSError {
+            // TODO error handling
+            print ("Error signing out: %@", signOutError)
+        }
+    }
 }
