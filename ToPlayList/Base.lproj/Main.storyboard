@@ -321,8 +321,8 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Hs9-tg-QgY">
                                         <rect key="frame" x="0.0" y="210" width="319" height="40"/>
                                         <subviews>
-                                            <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3RO-W9-XT2" customClass="ErrorMessage" customModule="ToPlayList" customModuleProvider="target">
-                                                <rect key="frame" x="-28" y="-282" width="0.0" height="40"/>
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3RO-W9-XT2" customClass="ErrorMessage" customModule="ToPlayList" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="319" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="oCU-Er-bh1"/>
                                                 </constraints>
@@ -405,12 +405,12 @@
                         <outlet property="emailField" destination="mGM-fw-RsN" id="CQN-rs-8IV"/>
                         <outlet property="errorView" destination="3RO-W9-XT2" id="nhx-qH-xyn"/>
                         <outlet property="passwordField" destination="Ihb-2M-f6L" id="AQm-NQ-rzt"/>
-                        <segue destination="Ncq-W1-497" kind="show" identifier="LoginToList" id="PQG-J8-FgG"/>
+                        <segue destination="Ncq-W1-497" kind="show" identifier="LoginToList" id="d3v-Gf-G1f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qth-VT-qxu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1966.6666666666667" y="1684.2391304347827"/>
+            <point key="canvasLocation" x="1943" y="1684"/>
         </scene>
         <!--List-->
         <scene sceneID="tZL-za-AC7">
@@ -448,7 +448,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nX4-Lq-TDR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2764" y="1683.5082458770617"/>
+            <point key="canvasLocation" x="2820" y="1684"/>
         </scene>
         <!--Upcoming-->
         <scene sceneID="5l0-6m-Tuc">
@@ -481,7 +481,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="qTq-JX-w6Y" kind="relationship" relationship="rootViewController" id="ilr-Xt-lJO"/>
+                        <segue destination="qTq-JX-w6Y" kind="relationship" relationship="rootViewController" id="uV0-To-9wV"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pbq-Uu-v9u" userLabel="First Responder" sceneMemberID="firstResponder"/>

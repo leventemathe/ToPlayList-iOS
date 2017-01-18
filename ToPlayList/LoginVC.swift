@@ -71,8 +71,21 @@ class LoginVC: UIViewController, IdentifiableVC {
     
     func register(withEmail email: String, withPassword password: String) {
         FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
-            if error != nil {
-                // TODO handle error
+            if let error = error, let errorCode = FIRAuthErrorCode(rawValue: error._code) {
+                switch errorCode {
+                case .errorCodeEmailAlreadyInUse:
+                    self.errorView.show(withText: "Email is already in use")
+                    break
+                case .errorCodeNetworkError:
+                    // TODO alert
+                    break
+                case .errorCodeWeakPassword:
+                    self.errorView.show(withText: "The password is too weak")
+                    break
+                default:
+                    self.errorView.show(withText: "An unknown error occured 😟")
+                    break
+                }
             } else {
                 self.loginSuccesful()
             }

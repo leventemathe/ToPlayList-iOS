@@ -18,9 +18,14 @@ class ListVC: UIViewController, IdentifiableVC {
         
         do {
             try FIRAuth.auth()?.signOut()
+            _ = navigationController?.popToRootViewController(animated: true)
         } catch let signOutError as NSError {
             // TODO error handling
             print ("Error signing out: %@", signOutError)
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationItem.hidesBackButton = true
     }
 }
