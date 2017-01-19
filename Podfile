@@ -8,4 +8,8 @@ target 'ToPlayList' do
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
 
+  target 'ToPlayListUnitTests' do
+    inherit! :complete
+  end
+
 end
