@@ -32,15 +32,15 @@ class GameSection {
     static func buildGameSectionsForNewestGames(fromGames games: [Game], continuationOf prevGameSections: inout [GameSection]) {
         var tempGames = [Game]()
         
-        var prevGame = prevGameSections.last!.games.last!
+        var prevGame = prevGameSections.last?.games.last
         
         var j = 0
         while j < games.count {
             let game = games[j]
-            if game.firstReleaseDate == nil || prevGame.firstReleaseDate == nil {
+            if game.firstReleaseDate == nil || prevGame!.firstReleaseDate == nil {
                 tempGames.append(game)
             }
-            else if game.firstReleaseDate! < prevGame.firstReleaseDate! {
+            else if game.firstReleaseDate! < prevGame!.firstReleaseDate! {
                 prevGameSections[prevGameSections.count - 1].games.append(contentsOf: tempGames)
                 tempGames = [Game]()
                 tempGames.append(game)
@@ -64,7 +64,7 @@ class GameSection {
             j += 1
         }
         
-        buildGameSectionLoop(j, fromGames: games, intoGameSection: &prevGameSections, withTempGames: &tempGames, withPrevGame: &prevGame)
+        buildGameSectionLoop(j, fromGames: games, intoGameSection: &prevGameSections, withTempGames: &tempGames, withPrevGame: &prevGame!)
     }
     
     private static func buildGameSectionLoop(_ startIndex: Int, fromGames games: [Game], intoGameSection gameSections: inout [GameSection], withTempGames tempGames: inout [Game], withPrevGame prevGame: inout Game) {

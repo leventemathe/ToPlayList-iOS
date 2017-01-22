@@ -97,12 +97,9 @@ class LoginVC: UIViewController, IdentifiableVC {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        errorView.hide()
         navigationController?.setNavigationBarHidden(true, animated: animated)
         setNeedsStatusBarAppearanceUpdate()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

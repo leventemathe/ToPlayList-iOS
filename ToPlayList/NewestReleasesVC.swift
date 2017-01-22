@@ -145,7 +145,7 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         let position = scrollView.contentOffset.y
         let height = scrollView.contentSize.height
         
-        if position > height - scrollView.frame.size.height * 1.5 && !loadingMoreGames {
+        if position > height - scrollView.frame.size.height * 1.5 && !loadingMoreGames && _gameSections.count != 0 {
             loadingMoreGames = true
             loadMoreGames()
         }

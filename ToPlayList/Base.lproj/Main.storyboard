@@ -264,10 +264,10 @@
             </objects>
             <point key="canvasLocation" x="1029.375" y="36.971830985915496"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Main TabVC-->
         <scene sceneID="LUj-VQ-vFv">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="bhe-U8-59S" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="bhe-U8-59S" customClass="MainTabVC" customModule="ToPlayList" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="azi-DG-QA9">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -275,9 +275,9 @@
                         <color key="barTintColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
+                        <segue destination="FSF-44-oZj" kind="relationship" relationship="viewControllers" id="bcG-Lr-0CT"/>
                         <segue destination="gaI-Tc-Uxl" kind="relationship" relationship="viewControllers" id="Zvt-5d-Qc8"/>
                         <segue destination="sBD-RD-Qe6" kind="relationship" relationship="viewControllers" id="ugm-Kr-KMj"/>
-                        <segue destination="FSF-44-oZj" kind="relationship" relationship="viewControllers" id="bcG-Lr-0CT"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jaa-gG-gzA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -321,15 +321,12 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Hs9-tg-QgY">
                                         <rect key="frame" x="0.0" y="210" width="319" height="40"/>
                                         <subviews>
-                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3RO-W9-XT2" customClass="ErrorMessage" customModule="ToPlayList" customModuleProvider="target">
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y7h-Ih-Fwm" customClass="ErrorMessage" customModule="ToPlayList" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="319" height="40"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="oCU-Er-bh1"/>
-                                                </constraints>
                                             </view>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="uW2-eT-5sN"/>
+                                            <constraint firstAttribute="height" constant="40" id="C1c-rm-KFi"/>
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="5MM-ZO-bWg">
@@ -385,7 +382,6 @@
                                     <constraint firstItem="5MM-ZO-bWg" firstAttribute="leading" secondItem="iXs-76-Udd" secondAttribute="leading" id="Mlv-Dq-ntN"/>
                                     <constraint firstItem="Hs9-tg-QgY" firstAttribute="leading" secondItem="iXs-76-Udd" secondAttribute="leading" id="TGg-5C-cIr"/>
                                     <constraint firstAttribute="trailing" secondItem="gmJ-oo-xnq" secondAttribute="trailing" id="dRC-TT-cAn"/>
-                                    <constraint firstItem="gmJ-oo-xnq" firstAttribute="top" secondItem="iXs-76-Udd" secondAttribute="top" id="z39-zl-e5O"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -403,7 +399,7 @@
                     <navigationItem key="navigationItem" title="Login" id="dXs-RB-szK"/>
                     <connections>
                         <outlet property="emailField" destination="mGM-fw-RsN" id="CQN-rs-8IV"/>
-                        <outlet property="errorView" destination="3RO-W9-XT2" id="nhx-qH-xyn"/>
+                        <outlet property="errorView" destination="Y7h-Ih-Fwm" id="6T8-9e-oSe"/>
                         <outlet property="passwordField" destination="Ihb-2M-f6L" id="AQm-NQ-rzt"/>
                         <segue destination="Ncq-W1-497" kind="show" identifier="LoginToList" id="d3v-Gf-G1f"/>
                     </connections>
@@ -492,7 +488,7 @@
     <resources>
         <image name="login_bg" width="768" height="512"/>
         <image name="logo" width="349" height="203"/>
-        <image name="logout" width="26" height="30"/>
+        <image name="logout" width="22" height="22"/>
         <image name="screenshot" width="1680" height="1050"/>
     </resources>
     <inferredMetricsTieBreakers>

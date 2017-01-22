@@ -26,6 +26,7 @@ class ListVC: UIViewController, IdentifiableVC {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(false, animated: animated)
         navigationItem.hidesBackButton = true
     }
 }
