@@ -7,6 +7,7 @@ target 'ToPlayList' do
   pod 'Kingfisher', '~> 3.0'
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
+  pod 'Firebase/Database'
 
   target 'ToPlayListUnitTests' do
     inherit! :complete

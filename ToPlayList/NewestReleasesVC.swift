@@ -82,10 +82,10 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
             self.setListBackground()
             switch error {
             case .serverError, .urlError, .jsonError:
-                self.presentNetworkingError(withMessage: "There was an error with the server, please check back later!")
+                Alerts.alertWithOKButton(withMessage: Alerts.SERVER_ERROR, forVC: self)
                 break
             case .noInternetError:
-                self.presentNetworkingError(withMessage: "No internet connection!")
+                Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
                 break
             }
         }
@@ -104,13 +104,6 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     private func resetListBackground() {
         tableView.backgroundView = nil
         tableView.separatorStyle = UITableViewCellSeparatorStyle.singleLine
-    }
-
-    private func presentNetworkingError(withMessage message: String) {
-        let alert = UIAlertController(title: "Error 😟", message: message, preferredStyle: UIAlertControllerStyle.alert)
-        let okBtn = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
-        alert.addAction(okBtn)
-        present(alert, animated: true, completion: nil)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

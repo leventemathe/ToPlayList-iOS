@@ -66,7 +66,8 @@ class NewestReleases: XCTestCase {
         }
     }
     
-    func testGotAllRequestResults() {
+    // this doesn't really work, because the data on igdb is constantly changing
+    func gotAllRequestResults() {
         let exp = expectation(description: "Getting data from server to check data")
         
         let date = Double(1483633380)
@@ -90,7 +91,7 @@ class NewestReleases: XCTestCase {
                 }
                 let expGameID = expectedGameIDs[i]
                 let gameID = games[i].id
-                //print("expected: \(expGameID), real: \(gameID)")
+                print("expected: \(expGameID), real: \(gameID)")
                 XCTAssert(expGameID == gameID)
             }
         }

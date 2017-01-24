@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseDatabase
 
 class LoginVC: UIViewController, IdentifiableVC {
     
@@ -16,11 +17,12 @@ class LoginVC: UIViewController, IdentifiableVC {
     @IBOutlet weak var errorView: ErrorMessage!
 
     @IBAction func loginClicked(_ sender: LoginSceneButtonLogin) {
-        if let email = emailField.text, let password = passwordField.text {
+        self.errorView.hide()
+        
+        if var email = emailField.text, var password = passwordField.text {
             
-            self.errorView.hide()
-            
-            // TODO trim white space
+            email = email.trimmingCharacters(in: .whitespacesAndNewlines)
+            password = password.trimmingCharacters(in: .whitespacesAndNewlines)
             
             if email == "" && password == "" {
                 self.errorView.show(withText: "Please provide an email address and a password!")
@@ -47,7 +49,7 @@ class LoginVC: UIViewController, IdentifiableVC {
                         self.errorView.show(withText: "Invalid email adress")
                         break
                     case .errorCodeNetworkError:
-                        // TODO alert
+                        Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
                         break
                     case .errorCodeUserTokenExpired:
                         self.errorView.show(withText: "Session expired. Please log in again!")
@@ -69,7 +71,7 @@ class LoginVC: UIViewController, IdentifiableVC {
         }
     }
     
-    func register(withEmail email: String, withPassword password: String) {
+    private func register(withEmail email: String, withPassword password: String) {
         FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
             if let error = error, let errorCode = FIRAuthErrorCode(rawValue: error._code) {
                 switch errorCode {
@@ -77,7 +79,7 @@ class LoginVC: UIViewController, IdentifiableVC {
                     self.errorView.show(withText: "Email is already in use")
                     break
                 case .errorCodeNetworkError:
-                    // TODO alert
+                    Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
                     break
                 case .errorCodeWeakPassword:
                     self.errorView.show(withText: "The password is too weak")
@@ -87,12 +89,17 @@ class LoginVC: UIViewController, IdentifiableVC {
                     break
                 }
             } else {
-                self.loginSuccesful()
+                if let user = user {
+                    User.instance.createUser()
+                    self.loginSuccesful()
+                } else {
+                    Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_ERROR, forVC: self)
+                }
             }
         }
     }
     
-    func loginSuccesful() {
+    private func loginSuccesful() {
         performSegue(withIdentifier: "LoginToList", sender: self)
     }
     
