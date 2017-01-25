@@ -14,6 +14,7 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var genreLabel: UILabel!
     @IBOutlet weak var developerLabel: UILabel!
+    @IBOutlet weak var star: UIImageView!
     
     func update(_ game: Game) {
         titleLabel.text = game.name
@@ -27,6 +28,9 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
         }
         if let developer = game.developer {
             developerLabel.text = developer.name
+        }
+        if User.loggedIn {
+            star.isHidden = true
         }
     }
 }

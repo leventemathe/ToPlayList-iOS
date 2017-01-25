@@ -38,6 +38,7 @@
 		D76B47FD1E197CCD00D18DDF /* GameIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76B47FC1E197CCD00D18DDF /* GameIDs.swift */; };
 		D7898E7B1E131992008B7647 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7898E7A1E131992008B7647 /* ReusableView.swift */; };
 		D78ADCA61E3750EB008DE943 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78ADCA51E3750EB008DE943 /* List.swift */; };
+		D78B86731E38BC6200F1EA7C /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78B86721E38BC6200F1EA7C /* ListCollectionViewCell.swift */; };
 		D78C0E291E1465440088560F /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78C0E281E1465440088560F /* Identifiable.swift */; };
 		D795B00D1E1DB3D700776670 /* GameSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D795B00C1E1DB3D700776670 /* GameSection.swift */; };
 		D795B0101E1DBA5700776670 /* Dates.swift in Sources */ = {isa = PBXBuildFile; fileRef = D795B00F1E1DBA5700776670 /* Dates.swift */; };
@@ -102,6 +103,7 @@
 		D76B47FC1E197CCD00D18DDF /* GameIDs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameIDs.swift; sourceTree = "<group>"; };
 		D7898E7A1E131992008B7647 /* ReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		D78ADCA51E3750EB008DE943 /* List.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
+		D78B86721E38BC6200F1EA7C /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListCollectionViewCell.swift; sourceTree = "<group>"; };
 		D78C0E281E1465440088560F /* Identifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
 		D795B00C1E1DB3D700776670 /* GameSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSection.swift; sourceTree = "<group>"; };
 		D795B00F1E1DBA5700776670 /* Dates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dates.swift; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 				D76437E21E1E506D00B09C7E /* DateTableCellHeaderView.swift */,
 				D719812B1E26F89A005823C2 /* LoginScene.swift */,
 				D7B8C86A1E2D16C700656E64 /* ErrorMessage.swift */,
+				D78B86721E38BC6200F1EA7C /* ListCollectionViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -534,6 +537,7 @@
 				D726BC9B1E0AC7AA00D6C9CD /* NewestReleasesCell.swift in Sources */,
 				D7E1D63B1E37A162000F343A /* EndPoints.swift in Sources */,
 				D78C0E291E1465440088560F /* Identifiable.swift in Sources */,
+				D78B86731E38BC6200F1EA7C /* ListCollectionViewCell.swift in Sources */,
 				D71981261E26F253005823C2 /* Bordered.swift in Sources */,
 				D7FDC0991E34CCF8005FB1CF /* Alerts.swift in Sources */,
 				D7898E7B1E131992008B7647 /* ReusableView.swift in Sources */,

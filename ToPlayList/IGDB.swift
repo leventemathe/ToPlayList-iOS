@@ -74,6 +74,7 @@ struct IGDB {
                                       "offset": offset]
         
         Alamofire.request(url, parameters: parameters, headers: IGDB.HEADERS).validate().responseJSON { response in
+            //print(response.debugDescription)
             switch response.result {
             case .success(let value):
                 if let json = value as? JSON {
@@ -190,6 +191,7 @@ struct IGDB {
     
     private func get<T: IdentifiableObject>(_ onComplete: @escaping (IGDBResult<[T]>)->Void, withURL url: String, withParams parameters: Parameters, withHeaders headers: HTTPHeaders) {
         Alamofire.request(url, parameters: parameters, headers: headers).validate().responseJSON { response in
+            //print(response.debugDescription)
             switch response.result {
             case .success(let value):
                 if let json = value as? [Any] {

@@ -89,12 +89,8 @@ class LoginVC: UIViewController, IdentifiableVC {
                     break
                 }
             } else {
-                if let user = user {
-                    User.instance.createUser()
-                    self.loginSuccesful()
-                } else {
-                    Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_ERROR, forVC: self)
-                }
+                User.instance.createUser()
+                self.loginSuccesful()
             }
         }
     }

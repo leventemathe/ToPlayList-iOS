@@ -9,9 +9,12 @@
 import UIKit
 import FirebaseAuth
 
-class ListVC: UIViewController, IdentifiableVC {
+class ListVC: UIViewController, IdentifiableVC, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    private var _games = [Game]()
 
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     @IBAction func logoutClicked(_ sender: UIBarButtonItem) {
         
         // TODO are you sure you want to log out
@@ -28,5 +31,25 @@ class ListVC: UIViewController, IdentifiableVC {
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(false, animated: animated)
         navigationItem.hidesBackButton = true
+    }
+    
+    override func viewDidLoad() {
+        //TODO download games from firebase into array
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return _games.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCollectionViewCell.reuseIdentifier, for: indexPath) as? ListCollectionViewCell {
+            cell.update(_games[indexPath.row])
+            return cell
+        }
+        return ListCollectionViewCell()
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
     }
 }
