@@ -297,10 +297,10 @@
             </objects>
             <point key="canvasLocation" x="-107" y="621"/>
         </scene>
-        <!--Login-->
+        <!--Register/Login-->
         <scene sceneID="uq2-8n-flA">
             <objects>
-                <viewController restorationIdentifier="LoginVC" storyboardIdentifier="LoginVC" id="qTq-JX-w6Y" customClass="LoginVC" customModule="ToPlayList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="LoginVC" storyboardIdentifier="RegisterLoginVC" id="qTq-JX-w6Y" customClass="RegisterLoginVC" customModule="ToPlayList" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="D2V-wO-Ta6"/>
                         <viewControllerLayoutGuide type="bottom" id="GHx-bX-eVv"/>
@@ -313,15 +313,15 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="iXs-76-Udd">
-                                <rect key="frame" x="32" y="72" width="350" height="410"/>
+                                <rect key="frame" x="32" y="72" width="350" height="528"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gmJ-oo-xnq">
-                                        <rect key="frame" x="0.0" y="0.0" width="350" height="200"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="350" height="180"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="zTv-Dp-o2f">
-                                                <rect key="frame" x="0.0" y="0.0" width="350" height="200"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="350" height="180"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="200" id="aYg-Cf-qyh"/>
+                                                    <constraint firstAttribute="height" constant="180" id="aYg-Cf-qyh"/>
                                                 </constraints>
                                             </imageView>
                                         </subviews>
@@ -331,69 +331,41 @@
                                             <constraint firstItem="zTv-Dp-o2f" firstAttribute="top" secondItem="gmJ-oo-xnq" secondAttribute="top" id="w89-Od-IGE"/>
                                         </constraints>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Hs9-tg-QgY">
-                                        <rect key="frame" x="0.0" y="210" width="350" height="40"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="fye-pk-y5S">
+                                        <rect key="frame" x="0.0" y="190" width="350" height="28"/>
                                         <subviews>
-                                            <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y7h-Ih-Fwm" customClass="ErrorMessage" customModule="ToPlayList" customModuleProvider="target">
-                                                <rect key="frame" x="-16" y="-282" width="0.0" height="50"/>
-                                            </view>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="C1c-rm-KFi"/>
-                                        </constraints>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="5MM-ZO-bWg">
-                                        <rect key="frame" x="0.0" y="260" width="350" height="150"/>
-                                        <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mGM-fw-RsN" customClass="LoginSceneTextFieldEmail" customModule="ToPlayList" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="350" height="40"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="kDs-L4-XJL"/>
-                                                </constraints>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                                            </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ihb-2M-f6L" customClass="LoginSceneTextFieldPassword" customModule="ToPlayList" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="55" width="350" height="40"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="S2z-jM-658"/>
-                                                </constraints>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
-                                            </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n9v-Yp-JNA" customClass="LoginSceneButtonLogin" customModule="ToPlayList" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="110" width="350" height="40"/>
-                                                <color key="backgroundColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="2jX-H6-mXf"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="20"/>
-                                                <state key="normal" title="Login/Register">
-                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="1Lp-75-qir">
+                                                <rect key="frame" x="0.0" y="0.0" width="350" height="29"/>
+                                                <segments>
+                                                    <segment title="Register"/>
+                                                    <segment title="Login"/>
+                                                </segments>
+                                                <color key="tintColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <connections>
-                                                    <action selector="loginClicked:" destination="qTq-JX-w6Y" eventType="touchUpInside" id="wqW-zO-5WN"/>
+                                                    <action selector="segmentedConrolChanged:" destination="qTq-JX-w6Y" eventType="valueChanged" id="HSs-Fo-T6y"/>
                                                 </connections>
-                                            </button>
+                                            </segmentedControl>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="n9v-Yp-JNA" firstAttribute="leading" secondItem="5MM-ZO-bWg" secondAttribute="leading" id="Oem-OM-iRQ"/>
-                                            <constraint firstAttribute="trailing" secondItem="Ihb-2M-f6L" secondAttribute="trailing" id="ahd-kE-pQ4"/>
-                                            <constraint firstAttribute="trailing" secondItem="mGM-fw-RsN" secondAttribute="trailing" id="bFo-lR-Jyn"/>
-                                            <constraint firstItem="Ihb-2M-f6L" firstAttribute="leading" secondItem="5MM-ZO-bWg" secondAttribute="leading" id="mlK-mJ-dQX"/>
-                                            <constraint firstAttribute="trailing" secondItem="n9v-Yp-JNA" secondAttribute="trailing" id="xPG-6B-Mj7"/>
-                                            <constraint firstItem="mGM-fw-RsN" firstAttribute="leading" secondItem="5MM-ZO-bWg" secondAttribute="leading" id="y62-T1-s6l"/>
+                                            <constraint firstItem="1Lp-75-qir" firstAttribute="top" secondItem="fye-pk-y5S" secondAttribute="top" id="3k7-gY-xwT"/>
+                                            <constraint firstItem="1Lp-75-qir" firstAttribute="leading" secondItem="fye-pk-y5S" secondAttribute="leading" id="8Og-Qg-hfM"/>
+                                            <constraint firstAttribute="bottom" secondItem="1Lp-75-qir" secondAttribute="bottom" id="GOV-c0-u19"/>
+                                            <constraint firstAttribute="trailing" secondItem="1Lp-75-qir" secondAttribute="trailing" id="mzo-Nh-1mr"/>
                                         </constraints>
                                     </stackView>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pcw-c8-sZz">
+                                        <rect key="frame" x="0.0" y="228" width="350" height="300"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="300" id="deb-xL-3p3"/>
+                                        </constraints>
+                                    </containerView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="pcw-c8-sZz" firstAttribute="leading" secondItem="iXs-76-Udd" secondAttribute="leading" id="8L2-Do-Q2o"/>
+                                    <constraint firstAttribute="trailing" secondItem="pcw-c8-sZz" secondAttribute="trailing" id="CmK-9l-QvA"/>
                                     <constraint firstItem="gmJ-oo-xnq" firstAttribute="leading" secondItem="iXs-76-Udd" secondAttribute="leading" id="Cp4-Eb-2Hx"/>
-                                    <constraint firstAttribute="trailing" secondItem="Hs9-tg-QgY" secondAttribute="trailing" id="FZu-QX-Rxc"/>
-                                    <constraint firstAttribute="trailing" secondItem="5MM-ZO-bWg" secondAttribute="trailing" id="H4W-xt-een"/>
-                                    <constraint firstItem="5MM-ZO-bWg" firstAttribute="leading" secondItem="iXs-76-Udd" secondAttribute="leading" id="Mlv-Dq-ntN"/>
-                                    <constraint firstItem="Hs9-tg-QgY" firstAttribute="leading" secondItem="iXs-76-Udd" secondAttribute="leading" id="TGg-5C-cIr"/>
+                                    <constraint firstAttribute="trailing" secondItem="fye-pk-y5S" secondAttribute="trailing" id="EfZ-Fq-dOX"/>
+                                    <constraint firstItem="fye-pk-y5S" firstAttribute="leading" secondItem="iXs-76-Udd" secondAttribute="leading" id="Qka-SR-76S"/>
                                     <constraint firstAttribute="trailing" secondItem="gmJ-oo-xnq" secondAttribute="trailing" id="dRC-TT-cAn"/>
                                 </constraints>
                             </stackView>
@@ -409,11 +381,10 @@
                             <constraint firstItem="q32-dg-ukG" firstAttribute="top" secondItem="5yO-fW-HqR" secondAttribute="top" id="sgb-sQ-VDI"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Login" id="dXs-RB-szK"/>
+                    <navigationItem key="navigationItem" title="Register/Login" id="dXs-RB-szK"/>
                     <connections>
-                        <outlet property="emailField" destination="mGM-fw-RsN" id="CQN-rs-8IV"/>
-                        <outlet property="errorView" destination="Y7h-Ih-Fwm" id="6T8-9e-oSe"/>
-                        <outlet property="passwordField" destination="Ihb-2M-f6L" id="AQm-NQ-rzt"/>
+                        <outlet property="containerView" destination="pcw-c8-sZz" id="HSG-KD-GCy"/>
+                        <outlet property="segmentedControl" destination="1Lp-75-qir" id="zEG-BK-ThG"/>
                         <segue destination="Ncq-W1-497" kind="show" identifier="LoginToList" id="d3v-Gf-G1f"/>
                     </connections>
                 </viewController>
@@ -569,6 +540,213 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pbq-Uu-v9u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1028" y="1684"/>
+        </scene>
+        <!--LoginVC-->
+        <scene sceneID="Cn3-t8-WJ1">
+            <objects>
+                <viewController storyboardIdentifier="LoginVC" id="yAg-hE-DIv" customClass="LoginVC" customModule="ToPlayList" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2fR-mA-P1M"/>
+                        <viewControllerLayoutGuide type="bottom" id="t9X-tB-NDh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VJ8-Rd-K0t">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="afD-l7-iqh">
+                                <rect key="frame" x="0.0" y="20" width="414" height="190"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Vf8-mU-FaL">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LYZ-6y-1iu" customClass="ErrorMessage" customModule="ToPlayList" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="EXz-gS-gx4"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="1Dn-W9-79O">
+                                        <rect key="frame" x="0.0" y="40" width="414" height="150"/>
+                                        <subviews>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="orn-Kh-yoD" customClass="LoginSceneTextFieldEmail" customModule="ToPlayList" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="Ler-ri-SbF"/>
+                                                </constraints>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                            </textField>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xey-vP-XH2" customClass="LoginSceneTextFieldPassword" customModule="ToPlayList" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="55" width="414" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="1Tr-vB-yvD"/>
+                                                </constraints>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jqc-Jd-uZC" customClass="LoginSceneButtonLogin" customModule="ToPlayList" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="110" width="414" height="40"/>
+                                                <color key="backgroundColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="EcC-GH-2Xo"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="20"/>
+                                                <state key="normal" title="Login">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="loginClicked:" destination="yAg-hE-DIv" eventType="touchUpInside" id="aNx-gy-NcM"/>
+                                                    <action selector="loginClicked:" destination="qTq-JX-w6Y" eventType="touchUpInside" id="sI6-gY-08k"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="orn-Kh-yoD" secondAttribute="trailing" id="9jk-TI-1Ov"/>
+                                            <constraint firstAttribute="trailing" secondItem="Jqc-Jd-uZC" secondAttribute="trailing" id="As0-zT-ife"/>
+                                            <constraint firstItem="orn-Kh-yoD" firstAttribute="leading" secondItem="1Dn-W9-79O" secondAttribute="leading" id="EyQ-O1-Qji"/>
+                                            <constraint firstItem="Jqc-Jd-uZC" firstAttribute="leading" secondItem="1Dn-W9-79O" secondAttribute="leading" id="Vik-R1-A5a"/>
+                                            <constraint firstAttribute="trailing" secondItem="Xey-vP-XH2" secondAttribute="trailing" id="lPA-Ow-dzi"/>
+                                            <constraint firstItem="Xey-vP-XH2" firstAttribute="leading" secondItem="1Dn-W9-79O" secondAttribute="leading" id="tAw-za-3hs"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Vf8-mU-FaL" firstAttribute="leading" secondItem="afD-l7-iqh" secondAttribute="leading" id="Ljn-5x-H0j"/>
+                                    <constraint firstAttribute="trailing" secondItem="1Dn-W9-79O" secondAttribute="trailing" id="hlr-5J-Kq8"/>
+                                    <constraint firstItem="1Dn-W9-79O" firstAttribute="leading" secondItem="afD-l7-iqh" secondAttribute="leading" id="tZM-qx-Cjr"/>
+                                    <constraint firstAttribute="trailing" secondItem="Vf8-mU-FaL" secondAttribute="trailing" id="uEs-xN-9ds"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="afD-l7-iqh" firstAttribute="top" secondItem="2fR-mA-P1M" secondAttribute="bottom" id="Q8s-ug-3og"/>
+                            <constraint firstItem="afD-l7-iqh" firstAttribute="leading" secondItem="VJ8-Rd-K0t" secondAttribute="leading" id="VB2-US-B6J"/>
+                            <constraint firstAttribute="trailing" secondItem="afD-l7-iqh" secondAttribute="trailing" id="iCw-RX-guc"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="emailField" destination="orn-Kh-yoD" id="0UK-82-Ctw"/>
+                        <outlet property="errorView" destination="LYZ-6y-1iu" id="1sq-hl-ilV"/>
+                        <outlet property="passwordField" destination="Xey-vP-XH2" id="9I7-vi-Cyk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yml-ud-LVa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1683" y="2446"/>
+        </scene>
+        <!--RegisterVC-->
+        <scene sceneID="FbE-64-oVG">
+            <objects>
+                <viewController storyboardIdentifier="RegisterVC" id="6b1-1a-lew" customClass="RegisterVC" customModule="ToPlayList" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="P1n-cQ-b7r"/>
+                        <viewControllerLayoutGuide type="bottom" id="RxJ-1d-QtR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PDd-ef-id0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6e5-Lw-JPS">
+                                <rect key="frame" x="0.0" y="20" width="414" height="245"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="bc0-Me-mFC">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tob-bF-awH" customClass="ErrorMessage" customModule="ToPlayList" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="gOO-cr-UDd"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="J8x-j5-hPI">
+                                        <rect key="frame" x="0.0" y="40" width="414" height="205"/>
+                                        <subviews>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2vd-WL-Kmm" customClass="LoginSceneTextUsername" customModule="ToPlayList" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="q02-DU-u87"/>
+                                                </constraints>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                            </textField>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aQG-98-NAc" customClass="LoginSceneTextFieldEmail" customModule="ToPlayList" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="55" width="414" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="4lQ-ab-j23"/>
+                                                </constraints>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                            </textField>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="11A-vH-9fZ" customClass="LoginSceneTextFieldPassword" customModule="ToPlayList" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="110" width="414" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="ddo-d0-wfL"/>
+                                                </constraints>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3jh-Rl-RCb" customClass="LoginSceneButtonLogin" customModule="ToPlayList" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="165" width="414" height="40"/>
+                                                <color key="backgroundColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="90D-mh-8R9"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="20"/>
+                                                <state key="normal" title="Register">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="loginClicked:" destination="yAg-hE-DIv" eventType="touchUpInside" id="OJv-6v-jL8"/>
+                                                    <action selector="loginClicked:" destination="qTq-JX-w6Y" eventType="touchUpInside" id="WBF-vR-ymd"/>
+                                                    <action selector="registerClicked:" destination="6b1-1a-lew" eventType="touchUpInside" id="2Ty-ZU-Thd"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="3jh-Rl-RCb" secondAttribute="trailing" id="ASZ-OP-y9c"/>
+                                            <constraint firstItem="3jh-Rl-RCb" firstAttribute="leading" secondItem="J8x-j5-hPI" secondAttribute="leading" id="Cg5-hv-6p3"/>
+                                            <constraint firstItem="2vd-WL-Kmm" firstAttribute="leading" secondItem="J8x-j5-hPI" secondAttribute="leading" id="HLf-1T-HnN"/>
+                                            <constraint firstAttribute="trailing" secondItem="2vd-WL-Kmm" secondAttribute="trailing" id="Rit-nf-8vN"/>
+                                            <constraint firstAttribute="trailing" secondItem="aQG-98-NAc" secondAttribute="trailing" id="TYL-zw-YiM"/>
+                                            <constraint firstAttribute="trailing" secondItem="11A-vH-9fZ" secondAttribute="trailing" id="U1M-Pf-IHx"/>
+                                            <constraint firstItem="11A-vH-9fZ" firstAttribute="leading" secondItem="J8x-j5-hPI" secondAttribute="leading" id="dXk-3d-23S"/>
+                                            <constraint firstItem="aQG-98-NAc" firstAttribute="leading" secondItem="J8x-j5-hPI" secondAttribute="leading" id="pR7-hj-65v"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="bc0-Me-mFC" firstAttribute="leading" secondItem="6e5-Lw-JPS" secondAttribute="leading" id="45L-NZ-x6d"/>
+                                    <constraint firstAttribute="trailing" secondItem="bc0-Me-mFC" secondAttribute="trailing" id="AIX-1l-sTf"/>
+                                    <constraint firstItem="J8x-j5-hPI" firstAttribute="leading" secondItem="6e5-Lw-JPS" secondAttribute="leading" id="Ndx-FI-lkY"/>
+                                    <constraint firstAttribute="trailing" secondItem="J8x-j5-hPI" secondAttribute="trailing" id="vaV-q3-eHY"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="6e5-Lw-JPS" firstAttribute="leading" secondItem="PDd-ef-id0" secondAttribute="leading" id="Pta-Ea-wMl"/>
+                            <constraint firstAttribute="trailing" secondItem="6e5-Lw-JPS" secondAttribute="trailing" id="Ujz-mh-kOr"/>
+                            <constraint firstItem="6e5-Lw-JPS" firstAttribute="top" secondItem="P1n-cQ-b7r" secondAttribute="bottom" id="fJF-9E-FjK"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="emailField" destination="aQG-98-NAc" id="rDa-Ic-ADk"/>
+                        <outlet property="errorView" destination="tob-bF-awH" id="A7d-Nn-HhC"/>
+                        <outlet property="passwordField" destination="11A-vH-9fZ" id="Xsn-Fr-X3K"/>
+                        <outlet property="usernameField" destination="2vd-WL-Kmm" id="PU9-p7-CdE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ipL-J7-Nrr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2314" y="2447"/>
         </scene>
     </scenes>
     <resources>

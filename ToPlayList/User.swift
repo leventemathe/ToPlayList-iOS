@@ -15,19 +15,21 @@ struct User {
     
     private init() {}
     
-    func createUser() {
+    func createUser(_ onComplete: @escaping ()->(), withUsername username: String) {
         guard let uid = FIRAuth.auth()?.currentUser?.uid else {
             //TODO handle error
             return
         }
         
         let timestamp = Date().timeIntervalSince1970
-        let values = ["timestamp": timestamp]
+        let values: [String: Any] = ["username": username, "timestamp": timestamp]
         LISTS_DB_USERS.child(uid).updateChildValues(values) { (error, ref) in
             List.instance.createToPlayList { listID in
-                LISTS_DB_USERS.child(uid).updateChildValues(["to_play_list": listID])            }
-            List.instance.createPlayedList { listID in
-                LISTS_DB_USERS.child(uid).updateChildValues(["played_list": listID])
+                LISTS_DB_USERS.child(uid).updateChildValues(["to_play_list_id": listID])
+                List.instance.createPlayedList { listID in
+                    LISTS_DB_USERS.child(uid).updateChildValues(["played_list_id": listID])
+                    onComplete()
+                }
             }
         }
     }

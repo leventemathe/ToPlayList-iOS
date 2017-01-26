@@ -1,31 +1,36 @@
 //
-//  LoginVC.swift
+//  Register.swift
 //  ToPlayList
 //
-//  Created by Máthé Levente on 2017. 01. 11..
+//  Created by Máthé Levente on 2017. 01. 25..
 //  Copyright © 2017. Máthé Levente. All rights reserved.
 //
 
 import UIKit
 import FirebaseAuth
-import FirebaseDatabase
 
-class LoginVC: UIViewController, IdentifiableVC {
+class RegisterVC: UIViewController, IdentifiableVC {
     
+    @IBOutlet weak var usernameField: LoginSceneTextUsername!
     @IBOutlet weak var emailField: LoginSceneTextFieldEmail!
     @IBOutlet weak var passwordField: LoginSceneTextFieldPassword!
     @IBOutlet weak var errorView: ErrorMessage!
-
-    @IBAction func loginClicked(_ sender: LoginSceneButtonLogin) {
+    
+    @IBAction func registerClicked(_ sender: LoginSceneButtonLogin) {
         self.errorView.hide()
         
-        guard var email = emailField.text, var password = passwordField.text else {
+        guard var email = emailField.text, var password = passwordField.text, var username = usernameField.text else {
             return
         }
         
+        username = username.trimmingCharacters(in: .whitespacesAndNewlines)
         email = email.trimmingCharacters(in: .whitespacesAndNewlines)
         password = password.trimmingCharacters(in: .whitespacesAndNewlines)
 
+        if username == "" {
+            self.errorView.show(withText: "Please provide a username!")
+            return
+        }
         if email == "" {
             self.errorView.show(withText: "Please provide an email address!")
             return
@@ -35,27 +40,18 @@ class LoginVC: UIViewController, IdentifiableVC {
             return
         }
         
-        // TODO recheck error codes!
-        FIRAuth.auth()?.signIn(withEmail: email, password: password) { (user, error) in
+        // TODO recheck error codes
+        FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
             if let error = error, let errorCode = FIRAuthErrorCode(rawValue: error._code) {
                 switch errorCode {
-                case .errorCodeUserNotFound:
-                    self.errorView.show(withText: "User not found")
-                    break
                 case .errorCodeEmailAlreadyInUse:
                     self.errorView.show(withText: "Email is already in use")
                     break
                 case .errorCodeInvalidEmail:
-                    self.errorView.show(withText: "Invalid email adress")
+                    self.errorView.show(withText: "Invalid email")
                     break
                 case .errorCodeNetworkError:
                     Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
-                    break
-                case .errorCodeUserTokenExpired:
-                    self.errorView.show(withText: "Session expired. Please log in again!")
-                    break
-                case .errorCodeWrongPassword:
-                    self.errorView.show(withText: "Wrong password!")
                     break
                 case .errorCodeWeakPassword:
                     self.errorView.show(withText: "The password is too weak")
@@ -65,13 +61,15 @@ class LoginVC: UIViewController, IdentifiableVC {
                     break
                 }
             } else {
-                self.loginSuccesful()
+                self.registerSuccesful(username)
             }
         }
     }
     
-    private func loginSuccesful() {
-        parent!.performSegue(withIdentifier: "LoginToList", sender: self)
+    private func registerSuccesful(_ username: String) {
+        User.instance.createUser({
+            self.parent!.performSegue(withIdentifier: "LoginToList", sender: self)
+        }, withUsername: username)
     }
     
     override func viewWillAppear(_ animated: Bool) {

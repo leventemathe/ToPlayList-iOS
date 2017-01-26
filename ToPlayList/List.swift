@@ -29,7 +29,7 @@ struct List {
             return
         }
         let timestamp = Date().timeIntervalSince1970
-        let value = ["timestamp": String(timestamp), "type": type, "userid": uid]
+        let value: [String: Any] = ["timestamp": timestamp, "type": type, "userid": uid]
         LISTS_DB_LISTS.childByAutoId().updateChildValues(value) { (error, ref) in
             onComplete(ref.key)
         }

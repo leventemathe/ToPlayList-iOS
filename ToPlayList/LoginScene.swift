@@ -20,6 +20,14 @@ class LoginSceneTextField: UITextField, RoundedCorners, Bordered, TextFieldMargi
     }
 }
 
+class LoginSceneTextUsername: LoginSceneTextField, ColoredPlaceholderText {
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        changePlaceholderColor("username", toColor: LoginSceneTextField.PLACE_HOLDER_COLOR)
+    }
+}
+
 class LoginSceneTextFieldEmail: LoginSceneTextField, ColoredPlaceholderText {
     
     override func awakeFromNib() {
