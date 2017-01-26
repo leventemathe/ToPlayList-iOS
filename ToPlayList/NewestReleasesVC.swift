@@ -46,6 +46,12 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         reloadGames()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if gameSections.count > 0 {
+            tableView.reloadData()
+        }
+    }
 
     @objc private func refresh(_ sender: AnyObject) {
         reloadGames()

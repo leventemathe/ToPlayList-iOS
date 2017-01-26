@@ -46,7 +46,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="WX5-Co-KuW" userLabel="TextStack">
-                                                            <rect key="frame" x="74" y="0.0" width="287" height="52"/>
+                                                            <rect key="frame" x="74" y="0.0" width="292" height="52"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dark Souls" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5BH-5g-n5j" userLabel="Title">
                                                                     <rect key="frame" x="0.0" y="0.0" width="67.666666666666657" height="19.333333333333332"/>
@@ -69,16 +69,15 @@
                                                             </subviews>
                                                         </stackView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_list" translatesAutoresizingMaskIntoConstraints="NO" id="XgI-DY-NBf">
-                                                            <rect key="frame" x="365" y="0.0" width="33" height="70"/>
+                                                            <rect key="frame" x="370" y="0.0" width="28" height="70"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="33" id="XED-wY-Ikk"/>
+                                                                <constraint firstAttribute="width" priority="999" constant="28" id="XED-wY-Ikk"/>
                                                             </constraints>
                                                         </imageView>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="XgI-DY-NBf" firstAttribute="centerY" secondItem="e19-Ag-V0O" secondAttribute="centerY" id="1DZ-tD-4gc"/>
-                                                        <constraint firstAttribute="trailing" secondItem="XgI-DY-NBf" secondAttribute="trailing" id="bwB-tE-qMF"/>
-                                                        <constraint firstItem="XgI-DY-NBf" firstAttribute="leading" secondItem="WX5-Co-KuW" secondAttribute="trailing" constant="4" id="yIa-8Y-VW8"/>
+                                                        <constraint firstItem="XgI-DY-NBf" firstAttribute="centerY" secondItem="e19-Ag-V0O" secondAttribute="centerY" id="7Me-fx-14G"/>
+                                                        <constraint firstItem="XgI-DY-NBf" firstAttribute="leading" secondItem="WX5-Co-KuW" secondAttribute="trailing" priority="999" constant="4" id="yIa-8Y-VW8"/>
                                                     </constraints>
                                                 </stackView>
                                             </subviews>
@@ -334,7 +333,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="fye-pk-y5S">
                                         <rect key="frame" x="0.0" y="190" width="350" height="28"/>
                                         <subviews>
-                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="1Lp-75-qir">
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="1Lp-75-qir">
                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="29"/>
                                                 <segments>
                                                     <segment title="Register"/>
@@ -404,20 +403,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="o1g-ft-PLL">
-                                <rect key="frame" x="144.66666666666669" y="72" width="125.00000000000006" height="29"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="125" id="fc5-6S-W0w"/>
-                                    <constraint firstAttribute="height" constant="28" id="jOX-9E-KF1"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="ToPlay"/>
-                                    <segment title="Played"/>
-                                </segments>
-                                <color key="tintColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
-                            </segmentedControl>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ns6-AP-P1m">
-                                <rect key="frame" x="0.0" y="108" width="414" height="579"/>
+                                <rect key="frame" x="0.0" y="140" width="414" height="547"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="smP-VR-Yc0">
                                     <size key="itemSize" width="155" height="194"/>
@@ -473,15 +460,38 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WOa-04-8pa">
+                                <rect key="frame" x="28" y="72" width="358" height="24.666666666666671"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="p56-vr-fP8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="o1g-ft-PLL">
+                                <rect key="frame" x="152" y="104" width="111" height="29"/>
+                                <segments>
+                                    <segment title="ToPlay"/>
+                                    <segment title="Played"/>
+                                </segments>
+                                <color key="tintColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="segmentedChanged:" destination="Ncq-W1-497" eventType="valueChanged" id="2o4-eL-y35"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Ns6-AP-P1m" firstAttribute="top" secondItem="o1g-ft-PLL" secondAttribute="bottom" constant="8" id="LUY-CA-Sdz"/>
-                            <constraint firstItem="o1g-ft-PLL" firstAttribute="top" secondItem="2oc-jG-z9Z" secondAttribute="bottom" constant="8" id="WNe-ed-2Gs"/>
-                            <constraint firstItem="zCK-4h-43t" firstAttribute="top" secondItem="Ns6-AP-P1m" secondAttribute="bottom" id="hm6-4b-Sg6"/>
-                            <constraint firstAttribute="trailing" secondItem="Ns6-AP-P1m" secondAttribute="trailing" id="oE0-7H-CmC"/>
-                            <constraint firstItem="o1g-ft-PLL" firstAttribute="centerX" secondItem="MJu-JL-nvO" secondAttribute="centerX" id="oos-Ka-6g2"/>
-                            <constraint firstItem="Ns6-AP-P1m" firstAttribute="leading" secondItem="MJu-JL-nvO" secondAttribute="leading" id="p5F-SB-Kqf"/>
+                            <constraint firstItem="o1g-ft-PLL" firstAttribute="centerX" secondItem="MJu-JL-nvO" secondAttribute="centerX" id="0wz-7h-pRK"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="WOa-04-8pa" secondAttribute="trailing" constant="8" id="ANs-au-uc6"/>
+                            <constraint firstItem="WOa-04-8pa" firstAttribute="top" secondItem="2oc-jG-z9Z" secondAttribute="bottom" constant="8" id="Idi-1Y-96O"/>
+                            <constraint firstItem="o1g-ft-PLL" firstAttribute="top" secondItem="WOa-04-8pa" secondAttribute="bottom" constant="8" id="Uau-Vc-q0M"/>
+                            <constraint firstItem="WOa-04-8pa" firstAttribute="leading" secondItem="MJu-JL-nvO" secondAttribute="leadingMargin" constant="8" id="lHb-7f-nCX"/>
+                            <constraint firstItem="Ns6-AP-P1m" firstAttribute="leading" secondItem="MJu-JL-nvO" secondAttribute="leading" id="q4T-WM-Z7U"/>
+                            <constraint firstItem="Ns6-AP-P1m" firstAttribute="top" secondItem="o1g-ft-PLL" secondAttribute="bottom" constant="8" id="rUK-zB-EJL"/>
+                            <constraint firstAttribute="bottom" secondItem="Ns6-AP-P1m" secondAttribute="bottom" id="rUf-58-k0n"/>
+                            <constraint firstAttribute="trailing" secondItem="Ns6-AP-P1m" secondAttribute="trailing" id="zCJ-h9-too"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Lists" id="s8v-2S-Lck">
@@ -494,6 +504,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="Ns6-AP-P1m" id="ibo-jx-X6A"/>
+                        <outlet property="segmentedControl" destination="o1g-ft-PLL" id="Tfl-KU-dbl"/>
+                        <outlet property="welcomeLbl" destination="WOa-04-8pa" id="1rB-5n-9x9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nX4-Lq-TDR" userLabel="First Responder" sceneMemberID="firstResponder"/>

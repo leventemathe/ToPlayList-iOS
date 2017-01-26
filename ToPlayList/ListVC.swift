@@ -8,12 +8,21 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseDatabase
 
 class ListVC: UIViewController, IdentifiableVC, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    private static let WELCOME_MSG = "Welcome"
+    
     private var _games = [Game]()
 
+    @IBOutlet weak var welcomeLbl: UILabel!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    @IBAction func segmentedChanged(_ sender: UISegmentedControl) {
+    
+    }
     
     @IBAction func logoutClicked(_ sender: UIBarButtonItem) {
         
@@ -31,6 +40,16 @@ class ListVC: UIViewController, IdentifiableVC, UICollectionViewDelegate, UIColl
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(false, animated: animated)
         navigationItem.hidesBackButton = true
+        setupWelcomeMsg()
+    }
+    
+    func setupWelcomeMsg() {
+        welcomeLbl.text = "\(ListVC.WELCOME_MSG)!"
+        LISTS_DB_USERS.child((FIRAuth.auth()?.currentUser?.uid)!).observeSingleEvent(of: .value, with: { (snapshot) in
+            if let value = snapshot.value as? [String: Any], let username = value["username"] as? String {
+                self.welcomeLbl.text = "\(ListVC.WELCOME_MSG) \(username)!"
+            }
+        })
     }
     
     override func viewDidLoad() {

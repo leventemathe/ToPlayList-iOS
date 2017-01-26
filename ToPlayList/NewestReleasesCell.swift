@@ -30,6 +30,8 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
             developerLabel.text = developer.name
         }
         if User.loggedIn {
+            star.isHidden = false
+        } else {
             star.isHidden = true
         }
     }
