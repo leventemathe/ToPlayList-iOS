@@ -10,4 +10,5 @@ import FirebaseDatabase
 
 let LISTS_DB_BASE = FIRDatabase.database().reference()
 let LISTS_DB_USERS = LISTS_DB_BASE.child("users")
+let LISTS_DB_USERNAMES = LISTS_DB_BASE.child("usernames")
 let LISTS_DB_LISTS = LISTS_DB_BASE.child("lists")

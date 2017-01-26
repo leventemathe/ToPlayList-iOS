@@ -67,8 +67,21 @@ class RegisterVC: UIViewController, IdentifiableVC {
     }
     
     private func registerSuccesful(_ username: String) {
-        User.instance.createUser({
-            self.parent!.performSegue(withIdentifier: "LoginToList", sender: self)
+        User.instance.createUser({ result in
+            switch result {
+            case .succes:
+                self.parent!.performSegue(withIdentifier: "LoginToList", sender: self)
+            case .failure(let error):
+                switch error {
+                case .usernameAlreadyInUse:
+                    self.errorView.show(withText: "The username is already in use")
+                    FIRAuth.auth()?.currentUser?.delete{ error in
+                        // TODO what should i do here?
+                    }
+                case .unknownError:
+                    self.errorView.show(withText: "An unknown error occured 😟")
+                }
+            }
         }, withUsername: username)
     }
     
