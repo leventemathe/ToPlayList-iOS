@@ -8,6 +8,20 @@
 
 import UIKit
 
+extension UIViewController
+{
+    func hideKeyboard()
+    {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self,action: #selector(UIViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard()
+    {
+        view.endEditing(true)
+    }
+}
+
 class RegisterLoginVC: UIViewController {
     
     @IBOutlet weak var containerView: UIView!
@@ -61,6 +75,10 @@ class RegisterLoginVC: UIViewController {
     func clearLoginContainer() {
         loginVC.removeFromParentViewController()
         loginVC.view.removeFromSuperview()
+    }
+    
+    override func viewDidLoad() {
+        hideKeyboard()
     }
     
     override func viewWillAppear(_ animated: Bool) {
