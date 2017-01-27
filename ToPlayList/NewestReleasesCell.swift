@@ -45,6 +45,36 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
     @IBOutlet weak var contentTop: NSLayoutConstraint!
     @IBOutlet weak var contentBottom: NSLayoutConstraint!
     
+    private var panRecognizer: UIPanGestureRecognizer!
+    private var panStartPoint: CGPoint!
+    
+    override func awakeFromNib() {
+        panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(pan))
+        panRecognizer.delegate = self
+        content.addGestureRecognizer(panRecognizer)
+    }
+    
+    func pan() {
+        switch panRecognizer.state {
+        case .began:
+            panStartPoint = panRecognizer.translation(in: content)
+            print("began at \(panStartPoint)")
+        case .changed:
+            let currentPoint = panRecognizer.translation(in: content)
+            let deltaX = currentPoint.x - panStartPoint.x
+            print("moved \(deltaX)")
+        case .ended:
+            print("ended")
+        case .cancelled:
+            print("cancelled")
+        default:
+            break
+        }
+    }
+    
+    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
 }
 
 
