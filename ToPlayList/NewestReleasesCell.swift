@@ -35,4 +35,23 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
             star.isHidden = true
         }
     }
+    
+    @IBOutlet weak var content: UIView!
+    @IBOutlet weak var toPlay: UILabel!
+    @IBOutlet weak var played: UILabel!
+    
+    @IBOutlet weak var contentLeading: NSLayoutConstraint!
+    @IBOutlet weak var contentTrailing: NSLayoutConstraint!
+    @IBOutlet weak var contentTop: NSLayoutConstraint!
+    @IBOutlet weak var contentBottom: NSLayoutConstraint!
+    
 }
+
+
+
+
+
+
+
+
+
