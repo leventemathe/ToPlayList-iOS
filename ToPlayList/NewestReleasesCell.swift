@@ -8,6 +8,20 @@
 
 import UIKit
 
+typealias RGBAComponents = (r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat)
+
+extension UIColor {
+    
+    var RGBA: RGBAComponents {
+        var red: CGFloat = 0.0
+        var green: CGFloat = 0.0
+        var blue: CGFloat = 0.0
+        var alpha: CGFloat = 0.0
+        getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        return (r: red, g: green, b: blue, a: alpha)
+    }
+}
+
 class NewestReleasesCell: UITableViewCell, ReusableView {
 
     @IBOutlet weak var coverView: ListImageView!
@@ -42,13 +56,26 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
     
     @IBOutlet weak var contentLeading: NSLayoutConstraint!
     @IBOutlet weak var contentTrailing: NSLayoutConstraint!
-    @IBOutlet weak var contentTop: NSLayoutConstraint!
-    @IBOutlet weak var contentBottom: NSLayoutConstraint!
+    
+    private var contentLeadingStartingConstant: CGFloat!
+    private var contentTrailingStartingConstant: CGFloat!
+    
+    private var toPlayStartingColor: UIColor!
+    private var playedStartingColor: UIColor!
+    //FF9B40
+    private var toPlayTargetColor = UIColor(red: 1.00, green: 0.61, blue: 0.25, alpha: 1.0)
+    private var playedTargetColor = UIColor.blue
     
     private var panRecognizer: UIPanGestureRecognizer!
     private var panStartPoint: CGPoint!
     
     override func awakeFromNib() {
+        contentLeadingStartingConstant = contentLeading.constant
+        contentTrailingStartingConstant = contentTrailing.constant
+        
+        toPlayStartingColor = toPlay.backgroundColor
+        playedStartingColor = played.backgroundColor
+        
         panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(pan))
         panRecognizer.delegate = self
         content.addGestureRecognizer(panRecognizer)
@@ -57,19 +84,87 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
     func pan() {
         switch panRecognizer.state {
         case .began:
-            panStartPoint = panRecognizer.translation(in: content)
-            print("began at \(panStartPoint)")
+            panBegan()
         case .changed:
-            let currentPoint = panRecognizer.translation(in: content)
-            let deltaX = currentPoint.x - panStartPoint.x
-            print("moved \(deltaX)")
+            panChanged()
         case .ended:
-            print("ended")
+            panEnded()
         case .cancelled:
             print("cancelled")
         default:
             break
         }
+    }
+    
+    private func panBegan() {
+        panStartPoint = panRecognizer.translation(in: content)
+    }
+    
+    private func panChanged() {
+        let currentPoint = panRecognizer.translation(in: content)
+        let newPosX = currentPoint.x - panStartPoint.x
+        moveContent(newPosX)
+        
+        let progress: CGFloat = newPosX < 0.0 ? contentTrailing.constant / rightBackgroundEdge : contentLeading.constant / leftBackgroundEdge
+        changeColorLeft(progress)
+        changeColorRight(progress)
+    }
+    
+    private func panEnded() {
+        UIView.animate(withDuration: 0.1, animations: {
+            self.resetContent()
+            self.layoutIfNeeded()
+        }, completion: { completed in
+            if completed {
+                self.resetColorLeftRight()
+            }
+        })
+    }
+    
+    private var leftBackgroundEdge: CGFloat {
+        return toPlay.frame.size.width
+    }
+    
+    private var rightBackgroundEdge: CGFloat {
+        return played.frame.size.width
+    }
+    
+    private func moveContent(_ newPosX: CGFloat) {
+        var newPosX = newPosX
+        if newPosX > leftBackgroundEdge {
+            newPosX = leftBackgroundEdge
+        }
+        if -newPosX > rightBackgroundEdge  {
+            newPosX = -rightBackgroundEdge
+        }
+        contentLeading.constant = newPosX
+        contentTrailing.constant = -newPosX
+    }
+    
+    private func resetContent() {
+        self.contentLeading.constant = self.contentLeadingStartingConstant
+        self.contentTrailing.constant = self.contentTrailingStartingConstant
+    }
+    
+    private func changeColorLeft(_ progress: CGFloat) {
+        let start: RGBAComponents = toPlayStartingColor.RGBA
+        let target: RGBAComponents = toPlayTargetColor.RGBA
+        let new: RGBAComponents = (r: (1.0-progress)*start.r + progress*target.r, g: (1.0-progress)*start.g + progress*target.g, b: (1.0-progress)*start.b + progress*target.b, a: 1.0)
+        
+        toPlay.backgroundColor = UIColor(red: new.r, green: new.g, blue: new.b, alpha: new.a)
+    }
+    
+    private func changeColorRight(_ progress: CGFloat) {
+        let start: RGBAComponents = playedStartingColor.RGBA
+        let target: RGBAComponents = playedTargetColor.RGBA
+        let new: RGBAComponents = (r: (1.0-progress)*start.r + progress*target.r, g: (1.0-progress)*start.g + progress*target.g, b: (1.0-progress)*start.b + progress*target.b, a: 1.0)
+        
+        played.backgroundColor = UIColor(red: new.r, green: new.g, blue: new.b, alpha: new.a)
+    }
+    
+    private func resetColorLeftRight() {
+        toPlay.backgroundColor = toPlayStartingColor
+        played.backgroundColor = playedStartingColor
     }
     
     override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
