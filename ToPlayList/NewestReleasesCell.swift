@@ -62,12 +62,12 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
     
     private var toPlayStartingColor: UIColor!
     private var playedStartingColor: UIColor!
-    //FF9B40
-    private var toPlayTargetColor = UIColor(red: 1.00, green: 0.61, blue: 0.25, alpha: 1.0)
+    private var toPlayTargetColor = UIColor(red: 1.00, green: 0.61, blue: 0.25, alpha: 1.0) //FF9B40
     private var playedTargetColor = UIColor.blue
     
     private var panRecognizer: UIPanGestureRecognizer!
     private var panStartPoint: CGPoint!
+    private var shouldPan = false
     
     override func awakeFromNib() {
         contentLeadingStartingConstant = contentLeading.constant
@@ -97,10 +97,20 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
     }
     
     private func panBegan() {
+        let velocity = panRecognizer.velocity(in: self)
+        if abs(velocity.y) >= abs(velocity.x) {
+            shouldPan = false
+        } else {
+            shouldPan = true
+        }
         panStartPoint = panRecognizer.translation(in: content)
     }
     
     private func panChanged() {
+        if !shouldPan {
+            return
+        }
+        
         let currentPoint = panRecognizer.translation(in: content)
         let newPosX = currentPoint.x - panStartPoint.x
         moveContent(newPosX)
@@ -111,6 +121,7 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
     }
     
     private func panEnded() {
+        shouldPan = false
         UIView.animate(withDuration: 0.1, animations: {
             self.resetContent()
             self.layoutIfNeeded()
@@ -168,7 +179,7 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
     }
     
     override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
+        return !shouldPan
     }
 }
 
