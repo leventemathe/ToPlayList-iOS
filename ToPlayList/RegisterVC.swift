@@ -67,7 +67,7 @@ class RegisterVC: UIViewController, IdentifiableVC {
     }
     
     private func registerSuccesful(_ username: String) {
-        User.instance.createUser({ result in
+        ListsUser.instance.createUser({ result in
             switch result {
             case .succes:
                 self.parent!.performSegue(withIdentifier: "LoginToList", sender: self)

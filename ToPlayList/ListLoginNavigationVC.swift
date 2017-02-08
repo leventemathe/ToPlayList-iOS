@@ -11,7 +11,7 @@ import UIKit
 class ListLoginNavigationVC: UINavigationController {
     
     override func viewWillAppear(_ animated: Bool) {
-        if User.loggedIn {
+        if ListsUser.loggedIn {
             let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
             let listVC = storyBoard.instantiateViewController(withIdentifier: ListVC.id)
             pushViewController(listVC, animated: animated)

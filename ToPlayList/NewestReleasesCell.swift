@@ -47,7 +47,7 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
         if let developer = game.developer {
             developerLabel.text = developer.name
         }
-        if User.loggedIn {
+        if ListsUser.loggedIn {
             star.isHidden = false
         } else {
             star.isHidden = true
@@ -132,9 +132,9 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
     
     private func addGameToList() {
         if contentLeading.constant >= leftBackgroundEdge {
-            List.instance.addGameToToPlayList(game)
+            ListsList.instance.addGameToToPlayList(game)
         } else if contentTrailing.constant >= rightBackgroundEdge {
-            List.instance.addGameToPlayedList(game)
+            ListsList.instance.addGameToPlayedList(game)
         }
     }
     
