@@ -34,4 +34,16 @@ struct List {
             onComplete(ref.key)
         }
     }
+    
+    func addGameToToPlayList(_ game: Game) {
+        print("added game to ToPlay List")
+    }
+    
+    func addGameToPlayedList(_ game: Game) {
+        print("added game to Played List")
+    }
+    
+    private func addGameToList(_ game: Game, withType type: String) {
+        
+    }
 }

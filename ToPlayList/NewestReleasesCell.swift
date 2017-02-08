@@ -30,7 +30,11 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
     @IBOutlet weak var developerLabel: UILabel!
     @IBOutlet weak var star: UIImageView!
     
+    private weak var game: Game!
+    
     func update(_ game: Game) {
+        self.game = game
+        
         titleLabel.text = game.name
         if let coverURL = game.coverURL {
             coverView.kf.setImage(with: coverURL, placeholder: #imageLiteral(resourceName: "img_missing"))
@@ -122,6 +126,19 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
     
     private func panEnded() {
         shouldPan = false
+        addGameToList()
+        panEndedAnimation()
+    }
+    
+    private func addGameToList() {
+        if contentLeading.constant >= leftBackgroundEdge {
+            List.instance.addGameToToPlayList(game)
+        } else if contentTrailing.constant >= rightBackgroundEdge {
+            List.instance.addGameToPlayedList(game)
+        }
+    }
+    
+    private func panEndedAnimation() {
         UIView.animate(withDuration: 0.1, animations: {
             self.resetContent()
             self.layoutIfNeeded()
