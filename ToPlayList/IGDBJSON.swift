@@ -34,6 +34,8 @@ struct IGDBJSON {
         if let name = obj["name"] as? String, let id = obj["id"] as? Int {
             let game = Game(id, withName: name)
             
+            game.provider = IGDB.PROVIDER
+            
             if let coverURL = (obj["cover"] as? JSONPair)?["cloudinary_id"] as? String {
                 game.coverURL = URL(string: "\(IGDB.BASE_URL_IMG)\(IGDB.IMG_THUMB)/\(coverURL)")
             }

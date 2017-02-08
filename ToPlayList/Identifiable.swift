@@ -29,8 +29,8 @@ extension Identifiable {
 
 class IdentifiableObject: Identifiable {
     
-    let _id: Int
-    let _name: String
+    private let _id: Int
+    private let _name: String
     
     var id: Int { return _id }
     var name: String { return _name }

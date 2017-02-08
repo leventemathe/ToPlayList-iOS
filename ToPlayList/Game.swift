@@ -10,6 +10,8 @@ import Foundation
 
 class Game: IdentifiableObject {
     
+    var provider: String!
+    
     private var _coverURL: URL?
     
     private var _genres: [Genre]?

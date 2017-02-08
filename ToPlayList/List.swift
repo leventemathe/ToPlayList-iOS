@@ -118,7 +118,25 @@ struct ListsList {
 
 
 struct ListsGame {
+ 
+    static let instance = ListsGame()
     
+    private init() {}
+    
+    func createGame(_ onComplete: @escaping ()->(), fromGame game: Game) {
+        let timestamp = Date().timeIntervalSince1970
+        var genre = ""
+        var developer = ""
+        if game.genre != nil {
+            genre = game.genre!.name
+        }
+        if game.developer != nil {
+            developer = game.developer!.name
+        }
+        let value: [String: Any] = ["timestamp": timestamp, "provider": game.provider, "providerID": game.id, "name": game.name, "genre": genre, "developer": developer]
+        
+        //TODO add the values to firbase
+    }
 }
 
 

@@ -61,6 +61,8 @@ struct IGDB {
         return "/t_thumb"
     }
     
+    static let PROVIDER = "IGDB"
+    
     private static let HEADERS: HTTPHeaders = [
         IGDBKeys.BASE_KEY.key: IGDBKeys.BASE_KEY.value
     ]
