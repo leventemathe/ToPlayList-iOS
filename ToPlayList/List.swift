@@ -8,6 +8,7 @@
 
 import Foundation
 import FirebaseAuth
+import Firebase
 
 enum ListsUserResult {
     case succes
@@ -27,46 +28,40 @@ struct ListsUser {
     
     func createUser(_ onComplete: @escaping (ListsUserResult)->(), withUsername username: String) {
         guard let uid = FIRAuth.auth()?.currentUser?.uid, let providerid = FIRAuth.auth()?.currentUser?.providerID else {
-            //TODO handle error
+            onComplete(.failure(.unknownError))
             return
         }
         
         let timestamp = Date().timeIntervalSince1970
-        let values: [String: Any] = ["username": username, "timestamp": timestamp, "provider": providerid]
-        /*
-         LISTS_DB_USERS.child(uid).updateChildValues(values) { (error, ref) in
-         List.instance.createToPlayList { listID in
-         LISTS_DB_USERS.child(uid).updateChildValues(["to_play_list_id": listID])
-         List.instance.createPlayedList { listID in
-         LISTS_DB_USERS.child(uid).updateChildValues(["played_list_id": listID])
-         LISTS_DB_USERNAMES.child(username).updateChildValues(["userid": uid]) { (error, ref) in
-         if error != nil {
-         print(error.debugDescription)
-         } else {
-         onComplete()
-         }
-         }
-         }
-         }
-         }
-         */
-        LISTS_DB_USERS.child(uid).updateChildValues(values) { (error, ref) in
+        let userValues: [String: Any] = ["username": username, "timestamp": timestamp, "provider": providerid]
+        
+        LISTS_DB_USERS.child(uid).updateChildValues(userValues) { (error, ref) in
             if error != nil {
                 print(error.debugDescription)
                 onComplete(.failure(.usernameAlreadyInUse))
             } else {
-                LISTS_DB_USERNAMES.child(username).updateChildValues(["userid": uid]) { (error, ref) in
-                    if error != nil {
-                        print(error.debugDescription)
-                        onComplete(.failure(.unknownError))
-                    } else {
-                        onComplete(.succes)
-                    }
-                }
+                let usernameValues: [String: Any] = ["userid": uid, "timestamp": timestamp]
+                let toPlayListValues: [String: Any] = ["type": "to_play_list", "timestamp": timestamp, "userid": uid]
+                let playedListValues: [String: Any] = ["type": "played_list", "timestamp:": timestamp, "userid": uid]
+                let toPlayListID = LISTS_DB_LISTS.childByAutoId().key
+                let playedListID = LISTS_DB_LISTS.childByAutoId().key
                 
+                let values = ["usernames/\(username)": usernameValues, "lists/\(toPlayListID)": toPlayListValues, "lists/\(playedListID)": playedListValues]
+                
+                LISTS_DB_BASE.updateChildValues(values, withCompletionBlock: { (error, ref) in
+                    if error != nil {
+                        onComplete(.failure(.unknownError))
+                    }
+                    onComplete(.succes)
+                })
             }
         }
-        
+    }
+    
+    func deleteUserBeforeFullyCreated() {
+        FIRAuth.auth()?.currentUser?.delete { error in
+            // TODO what should i do here?
+        }
     }
     
     static var loggedIn: Bool {
@@ -76,67 +71,57 @@ struct ListsUser {
 
 
 
+enum ListsListResult {
+    case succesWithRef(String)
+    case failure(ListsListError)
+}
+
+enum ListsListError {
+    case unknownError
+}
+
 struct ListsList {
     
     static let instance = ListsList()
     
     private init() {}
     
-    func createToPlayList(_ onComplete: @escaping (String)->()) {
+    func createToPlayList(_ onComplete: @escaping (ListsListResult)->()) {
         createList(onComplete, withType: "to_play_list")
     }
     
-    func createPlayedList(_ onComplete: @escaping (String)->()) {
+    func createPlayedList(_ onComplete: @escaping (ListsListResult)->()) {
         createList(onComplete, withType: "played_list")
     }
     
-    private func createList(_ onComplete: @escaping (String)->(), withType type: String) {
+    private func createList(_ onComplete: @escaping (ListsListResult)->(), withType type: String) {
         guard let uid = FIRAuth.auth()?.currentUser?.uid else {
-            //TODO handle error
+            onComplete(.failure(.unknownError))
             return
         }
         let timestamp = Date().timeIntervalSince1970
         let value: [String: Any] = ["timestamp": timestamp, "type": type, "userid": uid]
         LISTS_DB_LISTS.childByAutoId().updateChildValues(value) { (error, ref) in
-            onComplete(ref.key)
+            if error != nil {
+                onComplete(.failure(.unknownError))
+            }
+            onComplete(.succesWithRef(ref.key))
         }
     }
     
     func addGameToToPlayList(_ game: Game) {
         print("added game to ToPlay List")
+        addGameToList(game, withType: "to_play_list")
     }
     
     func addGameToPlayedList(_ game: Game) {
         print("added game to Played List")
+        addGameToList(game, withType: "played_list")
     }
     
     private func addGameToList(_ game: Game, withType type: String) {
-        
+        //let provider = game.provider
+        //let providerID = game.id
     }
 }
-
-
-
-struct ListsGame {
- 
-    static let instance = ListsGame()
-    
-    private init() {}
-    
-    func createGame(_ onComplete: @escaping ()->(), fromGame game: Game) {
-        let timestamp = Date().timeIntervalSince1970
-        var genre = ""
-        var developer = ""
-        if game.genre != nil {
-            genre = game.genre!.name
-        }
-        if game.developer != nil {
-            developer = game.developer!.name
-        }
-        let value: [String: Any] = ["timestamp": timestamp, "provider": game.provider, "providerID": game.id, "name": game.name, "genre": genre, "developer": developer]
-        
-        //TODO add the values to firbase
-    }
-}
-
 

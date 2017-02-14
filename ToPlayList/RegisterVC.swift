@@ -75,9 +75,7 @@ class RegisterVC: UIViewController, IdentifiableVC {
                 switch error {
                 case .usernameAlreadyInUse:
                     self.errorView.show(withText: "The username is already in use")
-                    FIRAuth.auth()?.currentUser?.delete{ error in
-                        // TODO what should i do here?
-                    }
+                    ListsUser.instance.deleteUserBeforeFullyCreated()
                 case .unknownError:
                     self.errorView.show(withText: "An unknown error occured 😟")
                 }
