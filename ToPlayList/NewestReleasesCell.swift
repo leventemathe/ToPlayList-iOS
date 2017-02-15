@@ -132,9 +132,13 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
     
     private func addGameToList() {
         if contentLeading.constant >= leftBackgroundEdge {
-            ListsList.instance.addGameToToPlayList(game)
+            ListsList.instance.addGameToToPlayList({ error in
+            
+            }, thisGame: game)
         } else if contentTrailing.constant >= rightBackgroundEdge {
-            ListsList.instance.addGameToPlayedList(game)
+            ListsList.instance.addGameToPlayedList({ error in
+                
+            }, thisGame: game)
         }
     }
     

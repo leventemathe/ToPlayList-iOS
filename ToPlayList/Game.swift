@@ -10,7 +10,7 @@ import Foundation
 
 class Game: IdentifiableObject {
     
-    var provider: String!
+    var provider = ""
     
     private var _coverURL: URL?
     

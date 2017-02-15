@@ -67,16 +67,25 @@ struct ListsUser {
     static var loggedIn: Bool {
         return FIRAuth.auth()?.currentUser != nil
     }
+    
+    static var userid: String? {
+        if let uid = FIRAuth.auth()?.currentUser?.uid {
+            return uid
+        }
+        return nil
+    }
 }
 
 
 
 enum ListsListResult {
+    case succes
     case succesWithRef(String)
     case failure(ListsListError)
 }
 
 enum ListsListError {
+    case userLoggedOut
     case unknownError
 }
 
@@ -109,19 +118,65 @@ struct ListsList {
         }
     }
     
-    func addGameToToPlayList(_ game: Game) {
+    func addGameToToPlayList(_ onComplete: @escaping (ListsListResult)->(), thisGame game: Game) {
         print("added game to ToPlay List")
-        addGameToList(game, withType: "to_play_list")
+        addGameToListDeleteFromOther(onComplete, thisGame: game, withType: "to_play_list")
     }
     
-    func addGameToPlayedList(_ game: Game) {
+    func addGameToPlayedList(_ onComplete: @escaping (ListsListResult)->(), thisGame game: Game) {
         print("added game to Played List")
-        addGameToList(game, withType: "played_list")
+        addGameToListDeleteFromOther(onComplete, thisGame: game, withType: "played_list")
     }
     
-    private func addGameToList(_ game: Game, withType type: String) {
-        //let provider = game.provider
-        //let providerID = game.id
+    private func addGameToListDeleteFromOther(_ onComplete: @escaping (ListsListResult)->(), thisGame game: Game, withType type: String) {
+        guard let uid = ListsUser.userid else {
+            onComplete(.failure(.userLoggedOut))
+            return
+        }
+
+        LISTS_DB_LISTS.queryOrdered(byChild: "userid").queryEqual(toValue: uid).observeSingleEvent(of: .value, with: { snapshot in
+            
+            guard let values = snapshot.value as? [String: Any] else {
+                onComplete(.failure(.unknownError))
+                return
+            }
+            
+            //var addListID: String?
+            //var deleteListID: String?
+            
+            for value in values {
+                if let list = value.value as? [String: Any], let listType = list["type"] as? String {
+                    /*
+                    let listID = value.key
+                    if listType == type {
+                        addListID = listID
+                    } else {
+                        // TODO exclusive list data type
+                    }
+                    */
+                    
+                    
+                    if listType == type {
+                        
+                        let listID = value.key
+                        let timestamp = Date().timeIntervalSince1970
+                        let values: [String: Any] = ["provider": game.provider, "providerid": game.id, "timestamp": timestamp]
+                        let listItemID = "\(game.provider)\(game.id)"
+                        
+                        LISTS_DB_LISTS.child(listID).child("games").child(listItemID).updateChildValues(values, withCompletionBlock: { (error, ref) in
+                            if error != nil {
+                                onComplete(.failure(.unknownError))
+                            }
+                            onComplete(.succes)
+                        })
+                        
+                        break
+                    }
+                }
+            }
+        })
+        
+        
     }
 }
 
