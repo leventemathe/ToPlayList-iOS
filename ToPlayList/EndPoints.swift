@@ -8,8 +8,41 @@
 
 import FirebaseDatabase
 
-let LISTS_DB_BASE = FIRDatabase.database().reference()
-let LISTS_DB_USERS = LISTS_DB_BASE.child("users")
-let LISTS_DB_USERNAMES = LISTS_DB_BASE.child("usernames")
-let LISTS_DB_LISTS = LISTS_DB_BASE.child("lists")
-let LISTS_DB_GAMES = LISTS_DB_BASE.child("games")
+struct ListsEndpoints {
+
+    static let BASE = FIRDatabase.database().reference()
+    static let USERS = BASE.child("users")
+    static let USERNAMES = BASE.child("usernames")
+    static let LISTS = BASE.child("lists")
+    
+    struct Common {
+        static let TIMESTAMP = "timestamp"
+    }
+    
+    struct User {
+        static let USERS = "users"
+        static let PROVIDER = "provider"
+        static let USERNAME = "username"
+        static let LISTS = "lists"
+    }
+    
+    struct Username {
+        static let USERNAMES = "usernames"
+        static let USERID = "userid"
+    }
+    
+    struct List {
+        static let LISTS = "lists"
+        static let TYPE = "type"
+        static let USERID = "userid"
+        static let GAMES = "games"
+        
+        static let TO_PLAY_LIST = "toplay"
+        static let PLAYED_LIST = "played"
+    }
+    
+    struct Game {
+        static let PROVIDER = "provider"
+        static let PROVIDER_ID = "providerid"
+    }
+}

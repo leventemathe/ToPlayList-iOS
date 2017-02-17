@@ -33,22 +33,26 @@ struct ListsUser {
         }
         
         let timestamp = Date().timeIntervalSince1970
-        let userValues: [String: Any] = ["username": username, "timestamp": timestamp, "provider": providerid]
+        let userValues: [String: Any] = [ListsEndpoints.User.USERNAME: username, ListsEndpoints.Common.TIMESTAMP: timestamp, ListsEndpoints.User.PROVIDER: providerid]
         
-        LISTS_DB_USERS.child(uid).updateChildValues(userValues) { (error, ref) in
+        ListsEndpoints.USERS.child(uid).updateChildValues(userValues) { (error, ref) in
             if error != nil {
-                print(error.debugDescription)
                 onComplete(.failure(.usernameAlreadyInUse))
             } else {
-                let usernameValues: [String: Any] = ["userid": uid, "timestamp": timestamp]
-                let toPlayListValues: [String: Any] = ["type": "to_play_list", "timestamp": timestamp, "userid": uid]
-                let playedListValues: [String: Any] = ["type": "played_list", "timestamp:": timestamp, "userid": uid]
-                let toPlayListID = LISTS_DB_LISTS.childByAutoId().key
-                let playedListID = LISTS_DB_LISTS.childByAutoId().key
+                let toPlayListID = ListsEndpoints.LISTS.childByAutoId().key
+                let playedListID = ListsEndpoints.LISTS.childByAutoId().key
                 
-                let values = ["usernames/\(username)": usernameValues, "lists/\(toPlayListID)": toPlayListValues, "lists/\(playedListID)": playedListValues]
+                let userValues = [toPlayListID, playedListID]
+                let usernameValues: [String: Any] = [ListsEndpoints.Username.USERID: uid, ListsEndpoints.Common.TIMESTAMP: timestamp]
+                let toPlayListValues: [String: Any] = [ListsEndpoints.List.TYPE: ListsEndpoints.List.TO_PLAY_LIST, ListsEndpoints.Common.TIMESTAMP: timestamp, ListsEndpoints.List.USERID: uid]
+                let playedListValues: [String: Any] = [ListsEndpoints.List.TYPE: ListsEndpoints.List.PLAYED_LIST, ListsEndpoints.Common.TIMESTAMP: timestamp, ListsEndpoints.List.USERID: uid]
                 
-                LISTS_DB_BASE.updateChildValues(values, withCompletionBlock: { (error, ref) in
+                let values: [String: Any] = ["\(ListsEndpoints.User.USERS)/\(uid)/\(ListsEndpoints.List.LISTS)": userValues,
+                    "\(ListsEndpoints.Username.USERNAMES)/\(username)": usernameValues,
+                    "\(ListsEndpoints.List.LISTS)/\(toPlayListID)": toPlayListValues,
+                    "\(ListsEndpoints.List.LISTS)/\(playedListID)": playedListValues]
+                
+                ListsEndpoints.BASE.updateChildValues(values, withCompletionBlock: { (error, ref) in
                     if error != nil {
                         onComplete(.failure(.unknownError))
                     }
@@ -96,11 +100,11 @@ struct ListsList {
     private init() {}
     
     func createToPlayList(_ onComplete: @escaping (ListsListResult)->()) {
-        createList(onComplete, withType: "to_play_list")
+        createList(onComplete, withType: ListsEndpoints.List.TO_PLAY_LIST)
     }
     
     func createPlayedList(_ onComplete: @escaping (ListsListResult)->()) {
-        createList(onComplete, withType: "played_list")
+        createList(onComplete, withType: ListsEndpoints.List.PLAYED_LIST)
     }
     
     private func createList(_ onComplete: @escaping (ListsListResult)->(), withType type: String) {
@@ -109,8 +113,8 @@ struct ListsList {
             return
         }
         let timestamp = Date().timeIntervalSince1970
-        let value: [String: Any] = ["timestamp": timestamp, "type": type, "userid": uid]
-        LISTS_DB_LISTS.childByAutoId().updateChildValues(value) { (error, ref) in
+        let value: [String: Any] = [ListsEndpoints.Common.TIMESTAMP: timestamp, ListsEndpoints.List.TYPE: type, ListsEndpoints.List.USERID: uid]
+        ListsEndpoints.LISTS.childByAutoId().updateChildValues(value) { (error, ref) in
             if error != nil {
                 onComplete(.failure(.unknownError))
             }
@@ -119,13 +123,11 @@ struct ListsList {
     }
     
     func addGameToToPlayList(_ onComplete: @escaping (ListsListResult)->(), thisGame game: Game) {
-        print("added game to ToPlay List")
-        addGameToListDeleteFromOther(onComplete, thisGame: game, withType: "to_play_list")
+        addGameToListDeleteFromOther(onComplete, thisGame: game, withType: ListsEndpoints.List.TO_PLAY_LIST)
     }
     
     func addGameToPlayedList(_ onComplete: @escaping (ListsListResult)->(), thisGame game: Game) {
-        print("added game to Played List")
-        addGameToListDeleteFromOther(onComplete, thisGame: game, withType: "played_list")
+        addGameToListDeleteFromOther(onComplete, thisGame: game, withType: ListsEndpoints.List.PLAYED_LIST)
     }
     
     private func addGameToListDeleteFromOther(_ onComplete: @escaping (ListsListResult)->(), thisGame game: Game, withType type: String) {
@@ -134,7 +136,7 @@ struct ListsList {
             return
         }
 
-        LISTS_DB_LISTS.queryOrdered(byChild: "userid").queryEqual(toValue: uid).observeSingleEvent(of: .value, with: { snapshot in
+        ListsEndpoints.LISTS.queryOrdered(byChild: ListsEndpoints.List.USERID).queryEqual(toValue: uid).observeSingleEvent(of: .value, with: { snapshot in
             
             guard let values = snapshot.value as? [String: Any] else {
                 onComplete(.failure(.unknownError))
@@ -145,7 +147,7 @@ struct ListsList {
             //var deleteListID: String?
             
             for value in values {
-                if let list = value.value as? [String: Any], let listType = list["type"] as? String {
+                if let list = value.value as? [String: Any], let listType = list[ListsEndpoints.List.TYPE] as? String {
                     /*
                     let listID = value.key
                     if listType == type {
@@ -160,10 +162,10 @@ struct ListsList {
                         
                         let listID = value.key
                         let timestamp = Date().timeIntervalSince1970
-                        let values: [String: Any] = ["provider": game.provider, "providerid": game.id, "timestamp": timestamp]
+                        let values: [String: Any] = [ListsEndpoints.Game.PROVIDER: game.provider, ListsEndpoints.Game.PROVIDER_ID: game.id, ListsEndpoints.Common.TIMESTAMP: timestamp]
                         let listItemID = "\(game.provider)\(game.id)"
                         
-                        LISTS_DB_LISTS.child(listID).child("games").child(listItemID).updateChildValues(values, withCompletionBlock: { (error, ref) in
+                        ListsEndpoints.LISTS.child(listID).child(ListsEndpoints.List.GAMES).child(listItemID).updateChildValues(values, withCompletionBlock: { (error, ref) in
                             if error != nil {
                                 onComplete(.failure(.unknownError))
                             }
