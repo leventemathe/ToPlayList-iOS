@@ -142,28 +142,19 @@ struct ListsList {
                 onComplete(.failure(.unknownError))
                 return
             }
-            
-            //var addListID: String?
-            //var deleteListID: String?
+  
+            let addType = type
+            let deleteType = addType == ListsEndpoints.List.TO_PLAY_LIST ? ListsEndpoints.List.PLAYED_LIST : ListsEndpoints.List.TO_PLAY_LIST
             
             for value in values {
                 if let list = value.value as? [String: Any], let listType = list[ListsEndpoints.List.TYPE] as? String {
-                    /*
+                    
                     let listID = value.key
-                    if listType == type {
-                        addListID = listID
-                    } else {
-                        // TODO exclusive list data type
-                    }
-                    */
+                    let listItemID = "\(game.provider)\(game.id)"
                     
-                    
-                    if listType == type {
-                        
-                        let listID = value.key
+                    if listType == addType {
                         let timestamp = Date().timeIntervalSince1970
                         let values: [String: Any] = [ListsEndpoints.Game.PROVIDER: game.provider, ListsEndpoints.Game.PROVIDER_ID: game.id, ListsEndpoints.Common.TIMESTAMP: timestamp]
-                        let listItemID = "\(game.provider)\(game.id)"
                         
                         ListsEndpoints.LISTS.child(listID).child(ListsEndpoints.List.GAMES).child(listItemID).updateChildValues(values, withCompletionBlock: { (error, ref) in
                             if error != nil {
@@ -171,8 +162,8 @@ struct ListsList {
                             }
                             onComplete(.succes)
                         })
-                        
-                        break
+                    } else if listType == deleteType {
+                        //TODO delete from list
                     }
                 }
             }
