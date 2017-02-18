@@ -151,9 +151,9 @@ struct ListsList {
                     
                     let listID = value.key
                     let listItemID = "\(game.provider)\(game.id)"
+                    let timestamp = Date().timeIntervalSince1970
                     
                     if listType == addType {
-                        let timestamp = Date().timeIntervalSince1970
                         let values: [String: Any] = [ListsEndpoints.Game.PROVIDER: game.provider, ListsEndpoints.Game.PROVIDER_ID: game.id, ListsEndpoints.Common.TIMESTAMP: timestamp]
                         
                         ListsEndpoints.LISTS.child(listID).child(ListsEndpoints.List.GAMES).child(listItemID).updateChildValues(values, withCompletionBlock: { (error, ref) in
@@ -163,7 +163,7 @@ struct ListsList {
                             onComplete(.succes)
                         })
                     } else if listType == deleteType {
-                        //TODO delete from list
+                        ListsEndpoints.LISTS.child(listID).child(ListsEndpoints.List.GAMES).child(listItemID).removeValue()
                     }
                 }
             }
