@@ -11,7 +11,7 @@ import FirebaseAuth
 import Firebase
 
 enum ListsUserResult {
-    case succes
+    case success
     case failure(ListsUserError)
 }
 
@@ -56,7 +56,7 @@ struct ListsUser {
                     if error != nil {
                         onComplete(.failure(.unknownError))
                     }
-                    onComplete(.succes)
+                    onComplete(.success)
                 })
             }
         }
@@ -83,8 +83,7 @@ struct ListsUser {
 
 
 enum ListsListResult {
-    case succes
-    case succesWithRef(String)
+    case succes(String)
     case failure(ListsListError)
 }
 
@@ -118,7 +117,7 @@ struct ListsList {
             if error != nil {
                 onComplete(.failure(.unknownError))
             }
-            onComplete(.succesWithRef(ref.key))
+            onComplete(.succes(ref.key))
         }
     }
     
@@ -160,7 +159,7 @@ struct ListsList {
                             if error != nil {
                                 onComplete(.failure(.unknownError))
                             }
-                            onComplete(.succes)
+                            onComplete(.succes(""))
                         })
                     } else if listType == deleteType {
                         ListsEndpoints.LISTS.child(listID).child(ListsEndpoints.List.GAMES).child(listItemID).removeValue()

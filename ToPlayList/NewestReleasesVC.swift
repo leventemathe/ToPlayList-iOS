@@ -9,7 +9,7 @@
 import UIKit
 import Kingfisher
 
-class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, ErrorHandlerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -120,6 +120,7 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         if let cell = tableView.dequeueReusableCell(withIdentifier: NewestReleasesCell.reuseIdentifier, for: indexPath) as? NewestReleasesCell {
             let game = _gameSections[indexPath.section].games[indexPath.row]
             cell.update(game)
+            cell.networkErrorHandlerDelegate = self
             return cell
         }
         
@@ -157,6 +158,10 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                 destinationVC.game = game
             }
         }
+    }
+    
+    func handleError(_ message: String) {
+        Alerts.alertWithOKButton(withMessage: message, forVC: self)
     }
 }
 

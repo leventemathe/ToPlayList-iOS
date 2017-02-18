@@ -68,6 +68,8 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
     private var panStartPoint: CGPoint!
     private var shouldPan = false
     
+    var networkErrorHandlerDelegate: ErrorHandlerDelegate?
+    
     override func awakeFromNib() {
         contentLeadingStartingConstant = contentLeading.constant
         contentTrailingStartingConstant = contentTrailing.constant
@@ -127,13 +129,23 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
     
     private func addGameToList() {
         if contentLeading.constant >= leftBackgroundEdge {
-            ListsList.instance.addGameToToPlayList({ error in
-                self.setStarToToPlay()
+            ListsList.instance.addGameToToPlayList({ result in
+                switch result {
+                case .succes:
+                    self.setStarToToPlay()
+                case .failure(_):
+                    self.networkErrorHandlerDelegate?.handleError(Alerts.UNKNOWN_ERROR)
+                }
             }, thisGame: game)
             setStarToToPlay()
         } else if contentTrailing.constant >= rightBackgroundEdge {
-            ListsList.instance.addGameToPlayedList({ error in
-                self.setStarToPlayed()
+            ListsList.instance.addGameToPlayedList({ result in
+                switch result {
+                case .succes:
+                    self.setStarToPlayed()
+                case .failure(_):
+                    self.networkErrorHandlerDelegate?.handleError(Alerts.UNKNOWN_ERROR)
+                }
             }, thisGame: game)
             setStarToPlayed()
         }

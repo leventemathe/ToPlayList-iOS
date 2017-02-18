@@ -45,7 +45,11 @@ class ListVC: UIViewController, IdentifiableVC, UICollectionViewDelegate, UIColl
     
     func setupWelcomeMsg() {
         welcomeLbl.text = "\(ListVC.WELCOME_MSG)!"
-        ListsEndpoints.USERS.child((FIRAuth.auth()?.currentUser?.uid)!).observeSingleEvent(of: .value, with: { (snapshot) in
+        
+        guard let uid = ListsUser.userid else {
+            return
+        }
+        ListsEndpoints.USERS.child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
             if let value = snapshot.value as? [String: Any], let username = value["username"] as? String {
                 self.welcomeLbl.text = "\(ListVC.WELCOME_MSG) \(username)!"
             }
