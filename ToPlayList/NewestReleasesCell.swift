@@ -47,11 +47,6 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
         if let developer = game.developer {
             developerLabel.text = developer.name
         }
-        if ListsUser.loggedIn {
-            star.isHidden = false
-        } else {
-            star.isHidden = true
-        }
     }
     
     @IBOutlet weak var content: UIView!
@@ -133,13 +128,35 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
     private func addGameToList() {
         if contentLeading.constant >= leftBackgroundEdge {
             ListsList.instance.addGameToToPlayList({ error in
-            
+                self.setStarToToPlay()
             }, thisGame: game)
+            setStarToToPlay()
         } else if contentTrailing.constant >= rightBackgroundEdge {
             ListsList.instance.addGameToPlayedList({ error in
-                
+                self.setStarToPlayed()
             }, thisGame: game)
+            setStarToPlayed()
         }
+    }
+    
+    private func setStarToToPlay() {
+        if !isStarToPlay() {
+            star.image = #imageLiteral(resourceName: "star_to_play_list")
+        }
+    }
+    
+    private func setStarToPlayed() {
+        if !isStarPlayed() {
+            star.image = #imageLiteral(resourceName: "star_played_list")
+        }
+    }
+    
+    private func isStarToPlay() -> Bool {
+        return star.image == #imageLiteral(resourceName: "star_to_play_list")
+    }
+    
+    private func isStarPlayed() -> Bool {
+        return star.image == #imageLiteral(resourceName: "star_played_list")
     }
     
     private func panEndedAnimation() {
