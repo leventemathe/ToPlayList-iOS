@@ -8,7 +8,7 @@
 
 import Alamofire
 
-func createIDList<T: Sequence>(from ids: T) -> String where T.Iterator.Element == Int {
+func createIDList<T: Sequence>(from ids: T) -> String where T.Iterator.Element == UInt64 {
     var idsString = ""
     for id in ids {
         if idsString.characters.count > 1 {
@@ -129,8 +129,8 @@ struct IGDB {
         }, withIDs: self.buildDeveloperIDs(gameData))
     }
     
-    private func buildGenreIDs(_ gameData: GameData) -> Set<Int> {
-        var result = Set<Int>()
+    private func buildGenreIDs(_ gameData: GameData) -> Set<UInt64> {
+        var result = Set<UInt64>()
         for (_, ids) in gameData {
             if let genres = ids.genres {
                 for genre in genres {
@@ -141,8 +141,8 @@ struct IGDB {
         return result
     }
     
-    private func buildDeveloperIDs(_ gameData: GameData) -> Set<Int> {
-        var result = Set<Int>()
+    private func buildDeveloperIDs(_ gameData: GameData) -> Set<UInt64> {
+        var result = Set<UInt64>()
         for (_, ids) in gameData {
             if let devs = ids.developers {
                 for dev in devs {
@@ -211,7 +211,7 @@ struct IGDB {
         }
     }
     
-    public func getGenres(_ onComplete: @escaping (IGDBResult<[Genre]>)->Void, withIDs ids: Set<Int>) {
+    public func getGenres(_ onComplete: @escaping (IGDBResult<[Genre]>)->Void, withIDs ids: Set<UInt64>) {
         let idsString = createIDList(from: ids)
         let url = "\(IGDB.BASE_URL)\(IGDB.GENRES)\(idsString)/"
         let parameters = ["fields": "id,name"]
@@ -219,7 +219,7 @@ struct IGDB {
         get(onComplete, withURL: url, withParams: parameters, withHeaders: IGDB.HEADERS)
     }
     
-    public func getCompanies(_ onComplete: @escaping (IGDBResult<[Company]>)->Void, withIDs ids: Set<Int>) {
+    public func getCompanies(_ onComplete: @escaping (IGDBResult<[Company]>)->Void, withIDs ids: Set<UInt64>) {
         let idsString = createIDList(from: ids)
         let url = "\(IGDB.BASE_URL)\(IGDB.COMPANIES)\(idsString)/"
         let parameters = ["fields": "id,name"]

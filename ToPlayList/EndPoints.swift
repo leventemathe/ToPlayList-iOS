@@ -44,5 +44,6 @@ struct ListsEndpoints {
     struct Game {
         static let PROVIDER = "provider"
         static let PROVIDER_ID = "providerid"
+        static let NAME = "name"
     }
 }

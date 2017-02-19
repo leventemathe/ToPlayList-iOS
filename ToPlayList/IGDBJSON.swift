@@ -31,7 +31,7 @@ struct IGDBJSON {
     }
     
     private func setGame(fromObj obj: JSONPair) -> Game? {
-        if let name = obj["name"] as? String, let id = obj["id"] as? Int {
+        if let name = obj["name"] as? String, let id = obj["id"] as? UInt64 {
             let game = Game(id, withName: name)
             
             game.provider = IGDB.PROVIDER
@@ -48,16 +48,16 @@ struct IGDBJSON {
         return nil
     }
     
-    private func setGameIDs(fromObj obj: JSONPair, withGameID gameID: Int) -> GameIDs {
+    private func setGameIDs(fromObj obj: JSONPair, withGameID gameID: UInt64) -> GameIDs {
         var gameIDs = GameIDs(gameID)
         
-        if let genreIDs = obj["genres"] as? [Int] {
+        if let genreIDs = obj["genres"] as? [UInt64] {
             gameIDs.genres = genreIDs
         }
-        if let developerIDs = obj["developers"] as? [Int] {
+        if let developerIDs = obj["developers"] as? [UInt64] {
             gameIDs.developers = developerIDs
         }
-        if let publisherIDs = obj["publishers"] as? [Int] {
+        if let publisherIDs = obj["publishers"] as? [UInt64] {
             gameIDs.publishers = publisherIDs
         }
         return gameIDs
@@ -66,7 +66,7 @@ struct IGDBJSON {
     func get<T: IdentifiableObject>(_ json: JSON) -> IGDBResult<[T]> {
         var ts = [T]()
         for any in json {
-            if let obj = any as? JSONPair, let id = obj["id"] as? Int, let name = obj["name"] as? String {
+            if let obj = any as? JSONPair, let id = obj["id"] as? UInt64, let name = obj["name"] as? String {
                 ts.append(T(id, withName: name))
             }
         }

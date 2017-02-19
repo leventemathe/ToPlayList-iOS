@@ -10,13 +10,13 @@ import Foundation
 
 struct GameIDs {
     
-    let id: Int
+    let id: UInt64
     
-    var developers: [Int]?
-    var publishers: [Int]?
-    var genres: [Int]?
+    var developers: [UInt64]?
+    var publishers: [UInt64]?
+    var genres: [UInt64]?
     
-    init(_ id: Int) {
+    init(_ id: UInt64) {
         self.id = id
     }
 }

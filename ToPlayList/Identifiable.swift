@@ -9,7 +9,7 @@
 import Foundation
 
 protocol Identifiable: Hashable, Equatable, CustomStringConvertible {
-    var id: Int { get }
+    var id: UInt64 { get }
     var name: String { get }
 }
 
@@ -19,7 +19,7 @@ extension Identifiable {
     }
     
     var hashValue: Int {
-        return id
+        return Int(id)
     }
     
     var description: String {
@@ -29,13 +29,13 @@ extension Identifiable {
 
 class IdentifiableObject: Identifiable {
     
-    private let _id: Int
+    private let _id: UInt64
     private let _name: String
     
-    var id: Int { return _id }
+    var id: UInt64 { return _id }
     var name: String { return _name }
     
-    required init(_ id: Int, withName name: String) {
+    required init(_ id: UInt64, withName name: String) {
         _id = id;
         _name = name
     }

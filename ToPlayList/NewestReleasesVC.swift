@@ -31,6 +31,9 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     private let paginationLimit = 10
     private var paginationOffset = 0
     
+    private var toPlayList: List?
+    private var playedList: List?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -50,6 +53,42 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     override func viewWillAppear(_ animated: Bool) {
         if gameSections.count > 0 {
             tableView.reloadData()
+        }
+        loadLists()
+    }
+    
+    // TODO make sure the results are in, when checking in cells if game is in list
+    // TODO call this on every reload
+    private func loadLists() {
+        loadToPlayList()
+        loadPlayedList()
+    }
+    
+    private func loadToPlayList() {
+        ListsList.instance.getToPlayList { result in
+            switch result {
+            case .failure(let error):
+                switch error {
+                default:
+                    Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_LISTS_ERROR, forVC: self)
+                }
+            case .succes(let list):
+                self.toPlayList = list
+            }
+        }
+    }
+    
+    private func loadPlayedList() {
+        ListsList.instance.getPlayedList { result in
+            switch result {
+            case .failure(let error):
+                switch error {
+                default:
+                    Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_LISTS_ERROR, forVC: self)
+                }
+            case .succes(let list):
+                self.playedList = list
+            }
         }
     }
 

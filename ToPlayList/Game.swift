@@ -20,6 +20,15 @@ class Game: IdentifiableObject {
     private var _firstReleaseDate: Double?
     private var _firstReleaseDateAsString: String?
     
+    required init(_ id: UInt64, withName name: String) {
+        super.init(id, withName: name)
+    }
+    
+    init(_ id: UInt64, withName name: String, withProvider provider: String) {
+        super.init(id, withName: name)
+        self.provider = provider
+    }
+    
     var coverURL: URL? {
         get { return _coverURL }
         set { _coverURL = newValue }

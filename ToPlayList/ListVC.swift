@@ -56,6 +56,7 @@ class ListVC: UIViewController, IdentifiableVC, UICollectionViewDelegate, UIColl
         })
     }
     
+    // TODO these functions
     override func viewDidLoad() {
         //TODO download games from firebase into array
     }
