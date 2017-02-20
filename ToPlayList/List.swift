@@ -11,27 +11,27 @@ import Foundation
 class List {
     
     var type: String!
-    private var _games = [Game]()
+    private var _games = Set<Game>()
     
     init(_ type: String) {
         self.type = type
     }
     
     func add(_ game: Game) {
-        _games.append(game)
+        _games.insert(game)
     }
     
-    func add(_ games: [Game]) {
-        _games.append(contentsOf: games)
+    func add(_ games: List) {
+        for game in games._games {
+            _games.insert(game)
+        }
     }
     
     func clear() {
         _games.removeAll()
     }
     
-    subscript(_ i: Int) -> Game {
-        get {
-            return _games[i]
-        }
+    func contains(_ game: Game) -> Bool {
+        return _games.contains(game)
     }
 }

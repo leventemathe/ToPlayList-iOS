@@ -9,7 +9,7 @@
 import UIKit
 import Kingfisher
 
-class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, ErrorHandlerDelegate {
+class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, ErrorHandlerDelegate, ListChangedDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -31,8 +31,8 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     private let paginationLimit = 10
     private var paginationOffset = 0
     
-    private var toPlayList: List?
-    private var playedList: List?
+    private var toPlayList = List(ListsEndpoints.List.TO_PLAY_LIST)
+    private var playedList = List(ListsEndpoints.List.PLAYED_LIST)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,23 +48,35 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         tableView.addSubview(refreshVC)
         
         reloadGames()
+        loadLists {
+            self.tableView.reloadData()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         if gameSections.count > 0 {
             tableView.reloadData()
         }
-        loadLists()
     }
     
-    // TODO make sure the results are in, when checking in cells if game is in list
-    // TODO call this on every reload
-    private func loadLists() {
-        loadToPlayList()
-        loadPlayedList()
+    private func loadLists(_ onComplete: @escaping ()->()) {
+        var toplayListLoaded = false
+        var playedListLoaded = false
+        loadToPlayList {
+            toplayListLoaded = true
+            if playedListLoaded {
+                onComplete()
+            }
+        }
+        loadPlayedList {
+            playedListLoaded = true
+            if toplayListLoaded {
+                onComplete()
+            }
+        }
     }
     
-    private func loadToPlayList() {
+    private func loadToPlayList(_ onComplete: @escaping ()->()) {
         ListsList.instance.getToPlayList { result in
             switch result {
             case .failure(let error):
@@ -73,12 +85,13 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                     Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_LISTS_ERROR, forVC: self)
                 }
             case .succes(let list):
-                self.toPlayList = list
+                self.toPlayList.add(list)
+                onComplete()
             }
         }
     }
     
-    private func loadPlayedList() {
+    private func loadPlayedList(_ onComplete: @escaping ()->()) {
         ListsList.instance.getPlayedList { result in
             switch result {
             case .failure(let error):
@@ -87,7 +100,8 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                     Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_LISTS_ERROR, forVC: self)
                 }
             case .succes(let list):
-                self.playedList = list
+                self.playedList.add(list)
+                onComplete()
             }
         }
     }
@@ -157,13 +171,24 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: NewestReleasesCell.reuseIdentifier, for: indexPath) as? NewestReleasesCell {
+            cell.networkErrorHandlerDelegate = self
+            cell.listChangedDelegate = self
             let game = _gameSections[indexPath.section].games[indexPath.row]
             cell.update(game)
-            cell.networkErrorHandlerDelegate = self
+            cell.updateStar(gameIsInList(game))
             return cell
         }
         
         return UITableViewCell()
+    }
+    
+    func gameIsInList(_ game: Game) -> StarState {
+        if toPlayList.contains(game) {
+            return .toPlay
+        } else if playedList.contains(game) {
+            return .played
+        }
+        return .none
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -201,6 +226,17 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     func handleError(_ message: String) {
         Alerts.alertWithOKButton(withMessage: message, forVC: self)
+    }
+    
+    func listChanged(_ starState: StarState, forGame game: Game) {
+        switch starState {
+        case .toPlay:
+            toPlayList.add(game)
+        case .played:
+            playedList.add(game)
+        default:
+            break
+        }
     }
 }
 

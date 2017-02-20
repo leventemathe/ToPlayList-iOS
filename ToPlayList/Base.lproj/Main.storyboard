@@ -484,7 +484,7 @@
                                                     <color key="textColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="to_play_list" translatesAutoresizingMaskIntoConstraints="NO" id="zQQ-dd-Rik">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star_to_play_list" translatesAutoresizingMaskIntoConstraints="NO" id="zQQ-dd-Rik">
                                                     <rect key="frame" x="114" y="8" width="33" height="33"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="33" id="MjS-rD-XD1"/>
@@ -570,7 +570,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sBD-RD-Qe6" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Upcoming" id="QVx-Lx-zhY"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="KAn-qY-Vvm">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="KAn-qY-Vvm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -589,7 +589,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FSF-44-oZj" customClass="ListLoginNavigationVC" customModule="ToPlayList" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="List" id="z0L-I2-9bM"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="Tdb-OY-NWI">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="Tdb-OY-NWI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
@@ -818,7 +818,7 @@
         <image name="logo" width="349" height="203"/>
         <image name="logout" width="22" height="22"/>
         <image name="screenshot" width="1680" height="1050"/>
-        <image name="to_play_list" width="33" height="30"/>
+        <image name="star_to_play_list" width="33" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="a7x-K3-wKb"/>

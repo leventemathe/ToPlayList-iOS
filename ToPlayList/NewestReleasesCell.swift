@@ -22,6 +22,12 @@ extension UIColor {
     }
 }
 
+enum StarState {
+    case none
+    case toPlay
+    case played
+}
+
 class NewestReleasesCell: UITableViewCell, ReusableView {
 
     @IBOutlet weak var coverView: ListImageView!
@@ -49,6 +55,17 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
         }
     }
     
+    func updateStar(_ startState: StarState) {
+        switch startState {
+        case .none:
+            star.image = nil
+        case .toPlay:
+            star.image = #imageLiteral(resourceName: "star_to_play_list")
+        case .played:
+            star.image = #imageLiteral(resourceName: "star_played_list")
+        }
+    }
+    
     @IBOutlet weak var content: UIView!
     @IBOutlet weak var toPlay: UILabel!
     @IBOutlet weak var played: UILabel!
@@ -69,6 +86,7 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
     private var shouldPan = false
     
     var networkErrorHandlerDelegate: ErrorHandlerDelegate?
+    var listChangedDelegate: ListChangedDelegate?
     
     override func awakeFromNib() {
         contentLeadingStartingConstant = contentLeading.constant
@@ -129,26 +147,36 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
     
     private func addGameToList() {
         if contentLeading.constant >= leftBackgroundEdge {
-            ListsList.instance.addGameToToPlayList({ result in
-                switch result {
-                case .succes:
-                    self.setStarToToPlay()
-                case .failure(_):
-                    self.networkErrorHandlerDelegate?.handleError(Alerts.UNKNOWN_ERROR)
-                }
-            }, thisGame: game)
-            setStarToToPlay()
+            addGameToToPlayList()
         } else if contentTrailing.constant >= rightBackgroundEdge {
-            ListsList.instance.addGameToPlayedList({ result in
-                switch result {
-                case .succes:
-                    self.setStarToPlayed()
-                case .failure(_):
-                    self.networkErrorHandlerDelegate?.handleError(Alerts.UNKNOWN_ERROR)
-                }
-            }, thisGame: game)
-            setStarToPlayed()
+            addGameToPlayedList()
         }
+    }
+    
+    private func addGameToToPlayList() {
+        ListsList.instance.addGameToToPlayList({ result in
+            switch result {
+            case .succes:
+                self.setStarToToPlay()
+                self.listChangedDelegate?.listChanged(.toPlay, forGame: self.game)
+            case .failure(_):
+                self.networkErrorHandlerDelegate?.handleError(Alerts.UNKNOWN_ERROR)
+            }
+        }, thisGame: game)
+        setStarToToPlay()
+    }
+    
+    private func addGameToPlayedList() {
+        ListsList.instance.addGameToPlayedList({ result in
+            switch result {
+            case .succes:
+                self.setStarToPlayed()
+                self.listChangedDelegate?.listChanged(.played, forGame: self.game)
+            case .failure(_):
+                self.networkErrorHandlerDelegate?.handleError(Alerts.UNKNOWN_ERROR)
+            }
+        }, thisGame: game)
+        setStarToPlayed()
     }
     
     private func setStarToToPlay() {
