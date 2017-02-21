@@ -9,7 +9,7 @@
 import UIKit
 import Kingfisher
 
-class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, ErrorHandlerDelegate, ListChangedDelegate {
+class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, ErrorHandlerDelegate, ListChangedListener {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -172,7 +172,7 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: NewestReleasesCell.reuseIdentifier, for: indexPath) as? NewestReleasesCell {
             cell.networkErrorHandlerDelegate = self
-            cell.listChangedDelegate = self
+            cell.listChangedListeners.append(self)
             let game = _gameSections[indexPath.section].games[indexPath.row]
             cell.update(game)
             cell.updateStar(gameIsInList(game))

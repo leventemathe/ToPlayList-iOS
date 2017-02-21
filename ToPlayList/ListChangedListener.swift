@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ListChangedDelegate {
+protocol ListChangedListener {
     
     func listChanged(_ starState: StarState, forGame game: Game)
 }

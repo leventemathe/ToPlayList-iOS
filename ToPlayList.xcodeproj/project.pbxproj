@@ -45,7 +45,7 @@
 		D795B0101E1DBA5700776670 /* Dates.swift in Sources */ = {isa = PBXBuildFile; fileRef = D795B00F1E1DBA5700776670 /* Dates.swift */; };
 		D7975D081E586255003B64E6 /* ErrorHandlerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7975D071E586255003B64E6 /* ErrorHandlerDelegate.swift */; };
 		D79B28281E1D28D4002BE4AC /* IGDBKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79B28271E1D28D4002BE4AC /* IGDBKeys.swift */; };
-		D7B6357C1E5B2AF9003E149F /* ListChangedDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B6357B1E5B2AF9003E149F /* ListChangedDelegate.swift */; };
+		D7B6357C1E5B2AF9003E149F /* ListChangedListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B6357B1E5B2AF9003E149F /* ListChangedListener.swift */; };
 		D7B8C86B1E2D16C700656E64 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B8C86A1E2D16C700656E64 /* ErrorMessage.swift */; };
 		D7B8C86D1E2D16F100656E64 /* ErrorMessage.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7B8C86C1E2D16F100656E64 /* ErrorMessage.xib */; };
 		D7C3A1701E0DA2DF0091279C /* GameProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C3A16F1E0DA2DF0091279C /* GameProperties.swift */; };
@@ -114,7 +114,7 @@
 		D795B00F1E1DBA5700776670 /* Dates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dates.swift; sourceTree = "<group>"; };
 		D7975D071E586255003B64E6 /* ErrorHandlerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandlerDelegate.swift; sourceTree = "<group>"; };
 		D79B28271E1D28D4002BE4AC /* IGDBKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGDBKeys.swift; sourceTree = "<group>"; };
-		D7B6357B1E5B2AF9003E149F /* ListChangedDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListChangedDelegate.swift; sourceTree = "<group>"; };
+		D7B6357B1E5B2AF9003E149F /* ListChangedListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListChangedListener.swift; sourceTree = "<group>"; };
 		D7B8C86A1E2D16C700656E64 /* ErrorMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		D7B8C86C1E2D16F100656E64 /* ErrorMessage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ErrorMessage.xib; sourceTree = "<group>"; };
 		D7C3A16F1E0DA2DF0091279C /* GameProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameProperties.swift; sourceTree = "<group>"; };
@@ -313,7 +313,7 @@
 				D795B00F1E1DBA5700776670 /* Dates.swift */,
 				D7FDC0981E34CCF8005FB1CF /* Alerts.swift */,
 				D7975D071E586255003B64E6 /* ErrorHandlerDelegate.swift */,
-				D7B6357B1E5B2AF9003E149F /* ListChangedDelegate.swift */,
+				D7B6357B1E5B2AF9003E149F /* ListChangedListener.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -572,7 +572,7 @@
 				D74AC7DA1E3919B700C37A90 /* RegisterVC.swift in Sources */,
 				D7975D081E586255003B64E6 /* ErrorHandlerDelegate.swift in Sources */,
 				D719812C1E26F89A005823C2 /* LoginScene.swift in Sources */,
-				D7B6357C1E5B2AF9003E149F /* ListChangedDelegate.swift in Sources */,
+				D7B6357C1E5B2AF9003E149F /* ListChangedListener.swift in Sources */,
 				D76606FD1E13123400D5979C /* RoundedCorners.swift in Sources */,
 				D726D51B1E5A45870045AE8C /* List.swift in Sources */,
 			);
