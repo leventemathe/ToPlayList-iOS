@@ -59,25 +59,7 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     private func loadLists(_ onComplete: @escaping ()->()) {
-        var toplayListLoaded = false
-        var playedListLoaded = false
-        
-        loadToPlayList {
-            toplayListLoaded = true
-            if playedListLoaded {
-                onComplete()
-            }
-        }
-        loadPlayedList {
-            playedListLoaded = true
-            if toplayListLoaded {
-                onComplete()
-            }
-        }
-    }
-    
-    private func loadToPlayList(_ onComplete: @escaping ()->()) {
-        ListsList.instance.getToPlayList { result in
+        ListsList.instance.getToPlayAndPlayedList { result in
             switch result {
             case .failure(let error):
                 switch error {
@@ -85,22 +67,8 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                     Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_LISTS_ERROR, forVC: self)
                 }
             case .succes(let list):
-                self.toPlayList.add(list)
-            }
-            onComplete()
-        }
-    }
-    
-    private func loadPlayedList(_ onComplete: @escaping ()->()) {
-        ListsList.instance.getPlayedList { result in
-            switch result {
-            case .failure(let error):
-                switch error {
-                default:
-                    Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_LISTS_ERROR, forVC: self)
-                }
-            case .succes(let list):
-                self.playedList.add(list)
+                self.toPlayList.add(list.toPlay)
+                self.playedList.add(list.played)
             }
             onComplete()
         }

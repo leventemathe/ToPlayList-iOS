@@ -182,51 +182,102 @@ struct ListsList {
     func getList(_ type: String, withOnComplete onComplete: @escaping (ListsListResult<List>)->()) {
         guard let uid = ListsUser.userid else {
             onComplete(.failure(.unknownError))
-            print("couldn't get user")
             return
         }
         
-        let result = List(type)
         ListsEndpoints.LISTS.queryOrdered(byChild: ListsEndpoints.List.USERID).queryEqual(toValue: uid).observeSingleEvent(of: .value, with: { snapshot in
             guard let lists = snapshot.value as? [String: Any] else {
                 onComplete(.failure(.unknownError))
-                //print("couldn't get lists")
                 return
             }
             
             for list in lists {
                 if let list = list.value as? [String: Any], let listUID = list[ListsEndpoints.List.USERID] as? String {
-                    if let listType = list[ListsEndpoints.List.TYPE] as? String {
-                        if listType != type {
-                            continue
-                        }
+                    if !self.isListOfType(list, isType: type) {
+                        continue
                     }
-                    
                     if listUID != String(uid) {
                         onComplete(.failure(.unknownError))
-                        //print("a list with a wrong uid was fetched")
                     }
                     
-                    if let games = list[ListsEndpoints.List.GAMES] as? [String: Any] {
-                        for game in games {
-                            if let game = game.value as? [String: Any], let providerID = game[ListsEndpoints.Game.PROVIDER_ID] as? UInt64, let provider = game[ListsEndpoints.Game.PROVIDER] as? String, let name = game[ListsEndpoints.Game.NAME] as? String {
-                                
-                                let gameObj = Game(providerID, withName: name, withProvider: provider)
-                                result.add(gameObj)
-                            } else {
-                                onComplete(.failure(.unknownError))
-                                //print("couldn't deserialize game data")
-                            }
-                        }
-                        onComplete(.succes(result))
+                    let result = self.deserializeGames(type, fromList: list)
+                    if result != nil {
+                        onComplete(.succes(result!))
                     } else {
-                        onComplete(.succes(result))
-                        //print("empty list")
+                        onComplete(.failure(.unknownError))
                     }
                 } else {
                     onComplete(.failure(.unknownError))
-                    //print("couldn't deserialize list")
                 }
+            }
+        })
+    }
+    
+    private func isListOfType(_ list: [String: Any], isType type: String) -> Bool {
+        if let listType = list[ListsEndpoints.List.TYPE] as? String {
+            if listType != type {
+                return false
+            }
+        }
+        return true
+    }
+    
+    private func deserializeGames(_ type: String, fromList list: [String: Any]) -> List? {
+        let result = List(type)
+        if let games = list[ListsEndpoints.List.GAMES] as? [String: Any] {
+            for game in games {
+                if let game = game.value as? [String: Any], let providerID = game[ListsEndpoints.Game.PROVIDER_ID] as? UInt64, let provider = game[ListsEndpoints.Game.PROVIDER] as? String, let name = game[ListsEndpoints.Game.NAME] as? String {
+                    
+                    let gameObj = Game(providerID, withName: name, withProvider: provider)
+                    result.add(gameObj)
+                } else {
+                    return nil
+                }
+            }
+        }
+        return result
+    }
+    
+    typealias CombinedLists = (toPlay: List, played: List)
+    
+    func getToPlayAndPlayedList(_ onComplete: @escaping (ListsListResult<CombinedLists>)->()) {
+        guard let uid = ListsUser.userid else {
+            onComplete(.failure(.unknownError))
+            return
+        }
+        
+        ListsEndpoints.LISTS.queryOrdered(byChild: ListsEndpoints.List.USERID).queryEqual(toValue: uid).observeSingleEvent(of: .value, with: { snapshot in
+            guard let lists = snapshot.value as? [String: Any] else {
+                onComplete(.failure(.unknownError))
+                return
+            }
+
+            var toPlayList = List(ListsEndpoints.List.TO_PLAY_LIST)
+            var playedList = List(ListsEndpoints.List.PLAYED_LIST)
+            for list in lists {
+                if let list = list.value as? [String: Any], let listUID = list[ListsEndpoints.List.USERID] as? String {
+                    if listUID != String(uid) {
+                        onComplete(.failure(.unknownError))
+                    }
+                    
+                    if self.isListOfType(list, isType: ListsEndpoints.List.TO_PLAY_LIST) {
+                        let games = self.deserializeGames(ListsEndpoints.List.TO_PLAY_LIST, fromList: list)
+                        if games == nil {
+                            onComplete(.failure(.unknownError))
+                        }
+                        toPlayList = games!
+                    }
+                    if self.isListOfType(list, isType: ListsEndpoints.List.PLAYED_LIST) {
+                        let games = self.deserializeGames(ListsEndpoints.List.PLAYED_LIST, fromList: list)
+                        if games == nil {
+                            onComplete(.failure(.unknownError))
+                        }
+                        playedList = games!
+                    }
+                } else {
+                    onComplete(.failure(.unknownError))
+                }
+                onComplete(.succes((toPlay: toPlayList, played: playedList)))
             }
         })
     }
