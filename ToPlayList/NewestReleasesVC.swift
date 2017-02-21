@@ -47,9 +47,8 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         refreshVC.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         tableView.addSubview(refreshVC)
         
-        reloadGames()
         loadLists {
-            self.tableView.reloadData()
+            self.reloadGames()
         }
     }
     
@@ -62,6 +61,7 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     private func loadLists(_ onComplete: @escaping ()->()) {
         var toplayListLoaded = false
         var playedListLoaded = false
+        
         loadToPlayList {
             toplayListLoaded = true
             if playedListLoaded {
@@ -86,8 +86,8 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                 }
             case .succes(let list):
                 self.toPlayList.add(list)
-                onComplete()
             }
+            onComplete()
         }
     }
     
@@ -101,8 +101,8 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                 }
             case .succes(let list):
                 self.playedList.add(list)
-                onComplete()
             }
+            onComplete()
         }
     }
 
