@@ -98,6 +98,14 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
         panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(pan))
         panRecognizer.delegate = self
         content.addGestureRecognizer(panRecognizer)
+        
+        star.isUserInteractionEnabled = true
+        let starTap = UITapGestureRecognizer(target: self, action: #selector(starTapped))
+        star.addGestureRecognizer(starTap)
+    }
+    
+    func starTapped() {
+        removeGameFromList()
     }
     
     func pan() {
@@ -179,6 +187,19 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
         setStarToPlayed()
     }
     
+    private func removeGameFromList() {
+        ListsList.instance.removeGameFromToPlayAndPlayedList({result in
+            switch result {
+            case .succes:
+                self.setStarToNone()
+                self.listChangedListeners.execute(.none, forGame: self.game)
+            case .failure(_):
+                self.networkErrorHandlerDelegate?.handleError(Alerts.UNKNOWN_ERROR)
+            }
+        }, thisGame: game)
+        setStarToNone()
+    }
+    
     private func setStarToToPlay() {
         if !isStarToPlay() {
             star.image = #imageLiteral(resourceName: "star_to_play_list")
@@ -189,6 +210,10 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
         if !isStarPlayed() {
             star.image = #imageLiteral(resourceName: "star_played_list")
         }
+    }
+    
+    private func setStarToNone() {
+        star.image = nil
     }
     
     private func isStarToPlay() -> Bool {

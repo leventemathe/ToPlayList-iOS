@@ -204,8 +204,9 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         case .played:
             toPlayList.remove(game)
             playedList.add(game)
-        default:
-            break
+        case .none:
+            toPlayList.remove(game)
+            playedList.remove(game)
         }
     }
     

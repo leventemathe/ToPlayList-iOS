@@ -281,5 +281,74 @@ struct ListsList {
             }
         })
     }
+    
+    func removeGameFromToPlayList(_ game: Game, withOnComplete onComplete: @escaping (ListsListResult<String>)->()) {
+        removeGameFromList(onComplete, thisGame: game, withType: ListsEndpoints.List.TO_PLAY_LIST)
+    }
+    
+    func removeGameFromPlayedList(_ game: Game, withOnComplete onComplete: @escaping (ListsListResult<String>)->()) {
+        removeGameFromList(onComplete, thisGame: game, withType: ListsEndpoints.List.PLAYED_LIST)
+    }
+    
+    func removeGameFromList(_ onComplete: @escaping (ListsListResult<String>)->(), thisGame game: Game, withType type: String) {
+        guard let uid = ListsUser.userid else {
+            onComplete(.failure(.userLoggedOut))
+            return
+        }
+        
+        ListsEndpoints.LISTS.queryOrdered(byChild: ListsEndpoints.List.USERID).queryEqual(toValue: uid).observeSingleEvent(of: .value, with: { snapshot in
+            
+            guard let values = snapshot.value as? [String: Any] else {
+                onComplete(.failure(.unknownError))
+                return
+            }
+            
+            for value in values {
+                if let list = value.value as? [String: Any], let listType = list[ListsEndpoints.List.TYPE] as? String {
+                    if listType == type {
+                        let listID = value.key
+                        let listItemID = "\(game.provider)\(game.id)"
+                        ListsEndpoints.LISTS.child(listID).child(ListsEndpoints.List.GAMES).child(listItemID).removeValue()
+                        onComplete(.succes(""))
+                    }
+                }
+            }
+            onComplete(.failure(.unknownError))
+        })
+    }
+    
+    func removeGameFromToPlayAndPlayedList(_ onComplete: @escaping (ListsListResult<String>)->(), thisGame game: Game) {
+        guard let uid = ListsUser.userid else {
+            onComplete(.failure(.userLoggedOut))
+            return
+        }
+        
+        ListsEndpoints.LISTS.queryOrdered(byChild: ListsEndpoints.List.USERID).queryEqual(toValue: uid).observeSingleEvent(of: .value, with: { snapshot in
+            
+            guard let values = snapshot.value as? [String: Any] else {
+                onComplete(.failure(.unknownError))
+                return
+            }
+            
+            for value in values {
+                if let list = value.value as? [String: Any], let listType = list[ListsEndpoints.List.TYPE] as? String {
+                    if listType == ListsEndpoints.List.TO_PLAY_LIST {
+                        let listID = value.key
+                        let listItemID = "\(game.provider)\(game.id)"
+                        ListsEndpoints.LISTS.child(listID).child(ListsEndpoints.List.GAMES).child(listItemID).removeValue()
+                    }
+                    if listType == ListsEndpoints.List.PLAYED_LIST {
+                        let listID = value.key
+                        let listItemID = "\(game.provider)\(game.id)"
+                        ListsEndpoints.LISTS.child(listID).child(ListsEndpoints.List.GAMES).child(listItemID).removeValue()
+                    }
+                } else {
+                    onComplete(.failure(.unknownError))
+                    return
+                }
+            }
+            onComplete(.succes(""))
+        })
+    }
 }
 
