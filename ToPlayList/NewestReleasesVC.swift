@@ -172,7 +172,7 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: NewestReleasesCell.reuseIdentifier, for: indexPath) as? NewestReleasesCell {
             cell.networkErrorHandlerDelegate = self
-            cell.listChangedListeners.append(self)
+            cell.listChangedListeners.add(self)
             let game = _gameSections[indexPath.section].games[indexPath.row]
             cell.update(game)
             cell.updateStar(gameIsInList(game))
@@ -231,12 +231,18 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     func listChanged(_ starState: StarState, forGame game: Game) {
         switch starState {
         case .toPlay:
+            playedList.remove(game)
             toPlayList.add(game)
         case .played:
+            toPlayList.remove(game)
             playedList.add(game)
         default:
             break
         }
+    }
+    
+    func hashValue() -> Int {
+        return 1
     }
 }
 

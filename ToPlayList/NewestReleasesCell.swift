@@ -86,7 +86,7 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
     private var shouldPan = false
     
     var networkErrorHandlerDelegate: ErrorHandlerDelegate?
-    var listChangedListeners = [ListChangedListener]()
+    var listChangedListeners = ListChangedListeners()
     
     override func awakeFromNib() {
         contentLeadingStartingConstant = contentLeading.constant
@@ -158,9 +158,7 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
             switch result {
             case .succes:
                 self.setStarToToPlay()
-                for listChangedListener in self.listChangedListeners {
-                    listChangedListener.listChanged(.toPlay, forGame: self.game)
-                }
+                self.listChangedListeners.execute(.toPlay, forGame: self.game)
             case .failure(_):
                 self.networkErrorHandlerDelegate?.handleError(Alerts.UNKNOWN_ERROR)
             }
@@ -173,9 +171,7 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
             switch result {
             case .succes:
                 self.setStarToPlayed()
-                for listChangedListener in self.listChangedListeners {
-                    listChangedListener.listChanged(.played, forGame: self.game)
-                }
+                self.listChangedListeners.execute(.played, forGame: self.game)
             case .failure(_):
                 self.networkErrorHandlerDelegate?.handleError(Alerts.UNKNOWN_ERROR)
             }
