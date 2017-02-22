@@ -22,12 +22,6 @@ extension UIColor {
     }
 }
 
-enum StarState {
-    case none
-    case toPlay
-    case played
-}
-
 class NewestReleasesCell: UITableViewCell, ReusableView {
 
     @IBOutlet weak var coverView: ListImageView!
@@ -55,17 +49,6 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
         }
     }
     
-    func updateStar(_ startState: StarState) {
-        switch startState {
-        case .none:
-            star.image = nil
-        case .toPlay:
-            star.image = #imageLiteral(resourceName: "star_to_play_list")
-        case .played:
-            star.image = #imageLiteral(resourceName: "star_played_list")
-        }
-    }
-    
     @IBOutlet weak var content: UIView!
     @IBOutlet weak var toPlay: UILabel!
     @IBOutlet weak var played: UILabel!
@@ -86,7 +69,6 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
     private var shouldPan = false
     
     var networkErrorHandlerDelegate: ErrorHandlerDelegate?
-    var listChangedListeners = ListChangedListeners()
     
     override func awakeFromNib() {
         contentLeadingStartingConstant = contentLeading.constant
@@ -165,39 +147,33 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
         ListsList.instance.addGameToToPlayList({ result in
             switch result {
             case .succes:
-                self.setStarToToPlay()
-                self.listChangedListeners.execute(.toPlay, forGame: self.game)
+                break
             case .failure(_):
                 self.networkErrorHandlerDelegate?.handleError(Alerts.UNKNOWN_ERROR)
             }
         }, thisGame: game)
-        setStarToToPlay()
     }
     
     private func addGameToPlayedList() {
         ListsList.instance.addGameToPlayedList({ result in
             switch result {
             case .succes:
-                self.setStarToPlayed()
-                self.listChangedListeners.execute(.played, forGame: self.game)
+                break
             case .failure(_):
                 self.networkErrorHandlerDelegate?.handleError(Alerts.UNKNOWN_ERROR)
             }
         }, thisGame: game)
-        setStarToPlayed()
     }
     
     private func removeGameFromList() {
         ListsList.instance.removeGameFromToPlayAndPlayedList({result in
             switch result {
             case .succes:
-                self.setStarToNone()
-                self.listChangedListeners.execute(.none, forGame: self.game)
+                break
             case .failure(_):
                 self.networkErrorHandlerDelegate?.handleError(Alerts.UNKNOWN_ERROR)
             }
         }, thisGame: game)
-        setStarToNone()
     }
     
     private func setStarToToPlay() {
@@ -222,6 +198,10 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
     
     private func isStarPlayed() -> Bool {
         return star.image == #imageLiteral(resourceName: "star_played_list")
+    }
+    
+    private func isStarNone() -> Bool {
+        return star.image == nil
     }
     
     private func panEndedAnimation() {

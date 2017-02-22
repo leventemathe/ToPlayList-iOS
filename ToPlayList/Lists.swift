@@ -9,6 +9,7 @@
 import Foundation
 import FirebaseAuth
 import Firebase
+import FirebaseDatabase
 
 enum ListsUserResult {
     case success
@@ -90,6 +91,25 @@ enum ListsListResult<T> {
 enum ListsListError {
     case userLoggedOut
     case unknownError
+}
+
+typealias ListAction = (list: ListsWhichList, action: ListsListAction)
+
+struct ListsGameChanged {
+    
+    let game: Game
+    let listActions: [ListAction]
+}
+
+enum ListsWhichList {
+    case toPlayList
+    case playedList
+    case other
+}
+
+enum ListsListAction {
+    case added
+    case removed
 }
 
 struct ListsList {
@@ -209,6 +229,39 @@ struct ListsList {
                 } else {
                     onComplete(.failure(.unknownError))
                 }
+            }
+        })
+    }
+    
+    func getToPlayListID(onComplete: @escaping (ListsListResult<String>)->()) {
+        getListID(ListsEndpoints.List.TO_PLAY_LIST, withOnComplete: onComplete)
+    }
+    
+    func getPlayedListID(onComplete: @escaping (ListsListResult<String>)->()) {
+        getListID(ListsEndpoints.List.PLAYED_LIST, withOnComplete: onComplete)
+    }
+    
+    func getListID(_ type: String, withOnComplete onComplete: @escaping (ListsListResult<String>)->()) {
+        guard let uid = ListsUser.userid else {
+            onComplete(.failure(.unknownError))
+            return
+        }
+        
+        ListsEndpoints.LISTS.queryOrdered(byChild: ListsEndpoints.List.USERID).queryEqual(toValue: uid).observeSingleEvent(of: .value, with: { snapshot in
+            if let lists = snapshot.value as? [String: Any] {
+                for (key, value) in lists {
+                    if let value = value as? [String: Any], let valueType = value[ListsEndpoints.List.TYPE] as? String, let valueUid = value[ListsEndpoints.List.USERID] as? String {
+                        if valueType == type && valueUid == uid {
+                            let listID = key
+                            onComplete(.succes(listID))
+                            return
+                        }
+                    } else {
+                        onComplete(.failure(.unknownError))
+                    }
+                }
+            } else {
+                onComplete(.failure(.unknownError))
             }
         })
     }
@@ -349,6 +402,54 @@ struct ListsList {
             }
             onComplete(.succes(""))
         })
+    }
+    
+    //TODO add separate onComplte to check if attaching observer was succesful
+    //TODO somehow pass a reference so observer can be removed later
+    func listenToToplayList(_ onChange: @escaping (ListsListResult<Game>)->()) {
+        print("getting list id...")
+        getToPlayListID { result in
+            switch result {
+            case .failure(let error):
+                switch error {
+                default:
+                    print("error while getting toplay list id")
+                    onChange(.failure(.unknownError))
+                }
+            case .succes(let id):
+                print("got toplay list id: \(id)")
+                self.listenToToplayList(id, withOnChange: onChange)
+            }
+        }
+    }
+    
+    private func listenToToplayList(_ listID: String, withOnChange onChange: @escaping (ListsListResult<Game>)->()) {
+        print("attaching listener to list with id: \(listID)")
+        let ref = ListsEndpoints.LISTS.child(listID).child(ListsEndpoints.List.GAMES)
+        let handle = ref.observe(.childAdded, with: { snapshot in
+            if let game = snapshot.value as? [String: Any], let gameID = game[ListsEndpoints.Game.PROVIDER_ID] as? UInt64, let gameName = game[ListsEndpoints.Game.NAME] as? String, let gameProvider = game[ListsEndpoints.Game.PROVIDER] as? String {
+                let gameObj = Game(gameID, withName: gameName, withProvider: gameProvider)
+                onChange(.succes(gameObj))
+            } else {
+                onChange(.failure(.unknownError))
+                print("deserializing inner game failed")
+            }
+        })
+    }
+}
+
+struct ListsListenerReference {
+    
+    private let handle: FIRDatabaseHandle
+    private let reference: FIRDatabaseReference
+    
+    func removeObserver() {
+        reference.removeObserver(withHandle: handle)
+    }
+    
+    init(_ handle: FIRDatabaseHandle, forReference reference: FIRDatabaseReference) {
+        self.handle = handle
+        self.reference = reference
     }
 }
 
