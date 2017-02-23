@@ -74,13 +74,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/NewestReleasesVC.swift"
-            timestampString = "509473855.685655"
+            timestampString = "509537120.281392"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "NewestReleasesVC"
-            landmarkType = "3">
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "listenToLists()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/Lists.swift"
-            timestampString = "509473087.493925"
+            timestampString = "509537120.281392"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "214"
-            endingLineNumber = "214"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
             landmarkName = "getList(_:withOnComplete:)"
             landmarkType = "7">
          </BreakpointContent>

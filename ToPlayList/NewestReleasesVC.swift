@@ -24,6 +24,9 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
     }
     
+    private var toPlayListListener: ListsListenerReference?
+    private var playedListListener: ListsListenerReference?
+    
     public var gameSections: [GameSection] {
         return _gameSections
     }
@@ -51,19 +54,71 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         if gameSections.count > 0 {
             tableView.reloadData()
         }
-        ListsList.instance.listenToToplayList { result in
+        listenToLists()
+    }
+
+    private func listenToLists() {
+        listenToToPlayListAdd()
+        listenToPlayedListAdd()
+    }
+    
+    private func listenToToPlayListAdd() {
+        ListsList.instance.listenToToplayListAdd({ result in
             switch result {
-            case .succes(let game):
-                print("added \(game.name) while listening")
+            case .succes(let ref):
+                self.toPlayListListener = ref
             case .failure(let error):
                 switch error {
                 default:
-                    print("unknown error while listening to toplay list")
+                    Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_LISTS_ERROR, forVC: self)
                 }
             }
-        }
+        }, withOnChange: { result in
+            switch result {
+            case .succes(let game):
+                print("added \(game.name) to toplay list while listening")
+            case .failure(let error):
+                switch error {
+                default:
+                    Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_LISTS_ERROR, forVC: self)
+                }
+            }
+        })
     }
-
+    
+    private func listenToPlayedListAdd() {
+        ListsList.instance.listenToPlayedListAdd({ result in
+            switch result {
+            case .succes(let ref):
+                self.playedListListener = ref
+            case .failure(let error):
+                switch error {
+                default:
+                    Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_LISTS_ERROR, forVC: self)
+                }
+            }
+        }, withOnChange: { result in
+            switch result {
+            case .succes(let game):
+                print("added \(game.name) to played list while listening")
+            case .failure(let error):
+                switch error {
+                default:
+                    Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_LISTS_ERROR, forVC: self)
+                }
+            }
+        })
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        removeListListeners()
+    }
+    
+    private func removeListListeners() {
+        toPlayListListener?.removeListener()
+        playedListListener?.removeListener()
+    }
+    
     @objc private func refresh(_ sender: AnyObject) {
         reloadGames()
     }

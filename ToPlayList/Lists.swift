@@ -90,26 +90,8 @@ enum ListsListResult<T> {
 
 enum ListsListError {
     case userLoggedOut
+    case failedGettingListID
     case unknownError
-}
-
-typealias ListAction = (list: ListsWhichList, action: ListsListAction)
-
-struct ListsGameChanged {
-    
-    let game: Game
-    let listActions: [ListAction]
-}
-
-enum ListsWhichList {
-    case toPlayList
-    case playedList
-    case other
-}
-
-enum ListsListAction {
-    case added
-    case removed
 }
 
 struct ListsList {
@@ -404,29 +386,37 @@ struct ListsList {
         })
     }
     
-    //TODO add separate onComplte to check if attaching observer was succesful
-    //TODO somehow pass a reference so observer can be removed later
-    func listenToToplayList(_ onChange: @escaping (ListsListResult<Game>)->()) {
+    func listenToToplayListAdd(_ listenerAttached: @escaping (ListsListResult<ListsListenerReference>)->(), withOnChange onChange: @escaping (ListsListResult<Game>)->()) {
+        listenToList(ListsEndpoints.List.TO_PLAY_LIST, withAction: .add, withListenerAttached: listenerAttached, withOnChange: onChange)
+    }
+    
+    func listenToPlayedListAdd(_ listenerAttached: @escaping (ListsListResult<ListsListenerReference>)->(), withOnChange onChange: @escaping (ListsListResult<Game>)->()) {
+        listenToList(ListsEndpoints.List.PLAYED_LIST, withAction: .add, withListenerAttached: listenerAttached, withOnChange: onChange)
+    }
+    
+    // Get list id then call method that attaches observer
+    func listenToList(_ type: String, withAction action: ListsListenerAction, withListenerAttached listenerAttached: @escaping (ListsListResult<ListsListenerReference>)->(), withOnChange onChange: @escaping (ListsListResult<Game>)->()) {
         print("getting list id...")
-        getToPlayListID { result in
+        getListID(type, withOnComplete: { result in
             switch result {
             case .failure(let error):
                 switch error {
                 default:
                     print("error while getting toplay list id")
-                    onChange(.failure(.unknownError))
+                    listenerAttached(.failure(.failedGettingListID))
                 }
             case .succes(let id):
                 print("got toplay list id: \(id)")
-                self.listenToToplayList(id, withOnChange: onChange)
+                self.listenToList(listenerAttached, withListID: id, withAction: action, withOnChange: onChange)
             }
-        }
+        })
     }
     
-    private func listenToToplayList(_ listID: String, withOnChange onChange: @escaping (ListsListResult<Game>)->()) {
+    // Attaches the observer, after list id was found
+    private func listenToList(_ listenerAttached: @escaping (ListsListResult<ListsListenerReference>)->(), withListID listID: String, withAction action: ListsListenerAction, withOnChange onChange: @escaping (ListsListResult<Game>)->()) {
         print("attaching listener to list with id: \(listID)")
         let ref = ListsEndpoints.LISTS.child(listID).child(ListsEndpoints.List.GAMES)
-        let handle = ref.observe(.childAdded, with: { snapshot in
+        let handle = ref.observe(getEventType(action), with: { snapshot in
             if let game = snapshot.value as? [String: Any], let gameID = game[ListsEndpoints.Game.PROVIDER_ID] as? UInt64, let gameName = game[ListsEndpoints.Game.NAME] as? String, let gameProvider = game[ListsEndpoints.Game.PROVIDER] as? String {
                 let gameObj = Game(gameID, withName: gameName, withProvider: gameProvider)
                 onChange(.succes(gameObj))
@@ -435,7 +425,22 @@ struct ListsList {
                 print("deserializing inner game failed")
             }
         })
+        listenerAttached(.succes(ListsListenerReference(handle, forReference: ref)))
     }
+    
+    private func getEventType(_ action: ListsListenerAction) -> FIRDataEventType {
+        switch action {
+        case .add:
+            return .childAdded
+        case .remove:
+            return .childRemoved
+        }
+    }
+}
+
+enum ListsListenerAction {
+    case add
+    case remove
 }
 
 struct ListsListenerReference {
@@ -443,7 +448,7 @@ struct ListsListenerReference {
     private let handle: FIRDatabaseHandle
     private let reference: FIRDatabaseReference
     
-    func removeObserver() {
+    func removeListener() {
         reference.removeObserver(withHandle: handle)
     }
     
