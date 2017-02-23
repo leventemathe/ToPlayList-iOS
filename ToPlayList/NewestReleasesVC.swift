@@ -21,6 +21,7 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     private var _gameSections = [GameSection]() {
         didSet {
             tableView.reloadData()
+            print("reloading data because gameSections was set")
         }
     }
     
@@ -30,6 +31,14 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     private let paginationLimit = 10
     private var paginationOffset = 0
+    
+    private var toPlayListListenerAdd: ListsListenerReference?
+    private var playedListListenerAdd: ListsListenerReference?
+    private var toPlayListListenerRemove: ListsListenerReference?
+    private var playedListListenerRemove: ListsListenerReference?
+    
+    private var toPlayList = List(ListsEndpoints.List.TO_PLAY_LIST)
+    private var playedList = List(ListsEndpoints.List.PLAYED_LIST)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,12 +53,132 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         refreshVC.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         tableView.addSubview(refreshVC)
         
-        reloadGames()
+        getGamesInLists {
+            self.reloadGames()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if gameSections.count > 0 {
-            tableView.reloadData()
+        getGamesInLists {
+            self.attachListListeners()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        removeListListeners()
+    }
+    
+    private func getGamesInLists(_ onComplete: @escaping ()->()) {
+        ListsList.instance.getToPlayAndPlayedList { result in
+            switch result {
+            case .failure:
+                Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_LISTS_ERROR, forVC: self)
+            case .succes(let lists):
+                self.toPlayList.add(lists.toPlay)
+                self.playedList.add(lists.played)
+            }
+            onComplete()
+        }
+    }
+    
+    private func attachListListeners() {
+        listenToToPlayListAdd()
+        listenToPlayedListAdd()
+        listenToToPlayListRemove()
+        listenToPlayedListRemove()
+    }
+    
+    private func removeListListeners() {
+        toPlayListListenerAdd?.removeListener()
+        playedListListenerAdd?.removeListener()
+        toPlayListListenerRemove?.removeListener()
+        playedListListenerRemove?.removeListener()
+    }
+    
+    private func listenToToPlayListAdd() {
+        listenToList(ListsEndpoints.List.TO_PLAY_LIST, withAction: .add) { game in
+            print("added \(game) to toPlay list")
+            if self.toPlayList.add(game) {
+                self.tableView.reloadData()
+                print("reloading table data because toplay list add")
+            }
+        }
+    }
+    
+    private func listenToPlayedListAdd() {
+        listenToList(ListsEndpoints.List.PLAYED_LIST, withAction: .add) { game in
+            print("added \(game) to played list")
+            if self.playedList.add(game) {
+                self.tableView.reloadData()
+                print("reloading table data because played list add")
+            }
+        }
+    }
+    
+    private func listenToToPlayListRemove() {
+        listenToList(ListsEndpoints.List.TO_PLAY_LIST, withAction: .remove) { game in
+            print("removed \(game) from toPlay list")
+            self.toPlayList.remove(game)
+            print("reloading table data")
+        }
+    }
+    
+    private func listenToPlayedListRemove() {
+        listenToList(ListsEndpoints.List.PLAYED_LIST, withAction: .remove) { game in
+            print("removed \(game) from played list")
+            self.playedList.remove(game)
+            print("reloading table data")
+        }
+    }
+
+    private func listenToList(_ list: String, withAction action: ListsListenerAction, withOnChange onChange: @escaping (Game)->()) {
+        ListsList.instance.listenToList(list, withAction: action, withListenerAttached: { result in
+            switch result {
+            case .succes(let ref):
+                self.listListenerAttachmentSuccesful(list, withAction: action, forReference: ref)
+            case .failure(let error):
+                switch error {
+                default:
+                    Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_LISTS_ERROR, forVC: self)
+                }
+            }
+        }, withOnChange: { result in
+            switch result {
+            case .succes(let game):
+                onChange(game)
+            case .failure(let error):
+                switch error {
+                default:
+                    Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_LISTS_ERROR, forVC: self)
+                }
+            }
+        })
+    }
+    
+    private func listListenerAttachmentSuccesful(_ list: String, withAction action: ListsListenerAction, forReference ref: ListsListenerReference) {
+        switch action {
+        case .add:
+            if list == ListsEndpoints.List.TO_PLAY_LIST {
+                self.toPlayListListenerAdd = ref
+            } else if list == ListsEndpoints.List.PLAYED_LIST {
+                self.playedListListenerAdd = ref
+            }
+        case .remove:
+            if list == ListsEndpoints.List.TO_PLAY_LIST {
+                self.toPlayListListenerRemove = ref
+            } else if list == ListsEndpoints.List.PLAYED_LIST {
+                self.playedListListenerRemove = ref
+            }
+        }
+    }
+    
+    private func getStarState(_ game: Game) -> StarState {
+        if toPlayList.contains(game) {
+            return .toPlay
+        } else if playedList.contains(game) {
+            return .played
+        } else {
+            return .none
         }
     }
         
@@ -120,7 +249,10 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         if let cell = tableView.dequeueReusableCell(withIdentifier: NewestReleasesCell.reuseIdentifier, for: indexPath) as? NewestReleasesCell {
             cell.networkErrorHandlerDelegate = self
             let game = _gameSections[indexPath.section].games[indexPath.row]
-            cell.update(game)
+            if game != cell.game {
+                cell.update(game)
+            }
+            cell.updateStar(getStarState(game))
             return cell
         }
         
@@ -139,18 +271,6 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return _gameSections[section].games.count
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if let cell = cell as? NewestReleasesCell {
-            cell.attachListListeners()
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if let cell = cell as? NewestReleasesCell {
-            cell.removeListListeners()
-        }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

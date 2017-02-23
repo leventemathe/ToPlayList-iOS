@@ -39,6 +39,7 @@ struct ListsUser {
         ListsEndpoints.USERS.child(uid).updateChildValues(userValues) { (error, ref) in
             if error != nil {
                 onComplete(.failure(.usernameAlreadyInUse))
+                return
             } else {
                 let toPlayListID = ListsEndpoints.LISTS.childByAutoId().key
                 let playedListID = ListsEndpoints.LISTS.childByAutoId().key
@@ -56,8 +57,10 @@ struct ListsUser {
                 ListsEndpoints.BASE.updateChildValues(values, withCompletionBlock: { (error, ref) in
                     if error != nil {
                         onComplete(.failure(.unknownError))
+                        return
                     }
                     onComplete(.success)
+                    return
                 })
             }
         }
@@ -118,8 +121,10 @@ struct ListsList {
         ListsEndpoints.LISTS.childByAutoId().updateChildValues(value) { (error, ref) in
             if error != nil {
                 onComplete(.failure(.unknownError))
+                return
             }
             onComplete(.succes(ref.key))
+            return
         }
     }
     
@@ -160,14 +165,17 @@ struct ListsList {
                         ListsEndpoints.LISTS.child(listID).child(ListsEndpoints.List.GAMES).child(listItemID).updateChildValues(values, withCompletionBlock: { (error, ref) in
                             if error != nil {
                                 onComplete(.failure(.unknownError))
+                                return
                             }
                             onComplete(.succes(""))
+                            return
                         })
                     } else if listType == deleteType {
                         ListsEndpoints.LISTS.child(listID).child(ListsEndpoints.List.GAMES).child(listItemID).removeValue()
                     }
                 } else {
                     onComplete(.failure(.unknownError))
+                    return
                 }
             }
         })
@@ -200,16 +208,20 @@ struct ListsList {
                     }
                     if listUID != String(uid) {
                         onComplete(.failure(.unknownError))
+                        return
                     }
                     
                     let result = self.deserializeGames(type, fromList: list)
                     if result != nil {
                         onComplete(.succes(result!))
+                        return
                     } else {
                         onComplete(.failure(.unknownError))
+                        return
                     }
                 } else {
                     onComplete(.failure(.unknownError))
+                    return
                 }
             }
         })
@@ -240,10 +252,12 @@ struct ListsList {
                         }
                     } else {
                         onComplete(.failure(.unknownError))
+                        return
                     }
                 }
             } else {
                 onComplete(.failure(.unknownError))
+                return
             }
         })
     }
@@ -264,7 +278,7 @@ struct ListsList {
                 if let game = game.value as? [String: Any], let providerID = game[ListsEndpoints.Game.PROVIDER_ID] as? UInt64, let provider = game[ListsEndpoints.Game.PROVIDER] as? String, let name = game[ListsEndpoints.Game.NAME] as? String {
                     
                     let gameObj = Game(providerID, withName: name, withProvider: provider)
-                    result.add(gameObj)
+                    _ = result.add(gameObj)
                 } else {
                     return nil
                 }
@@ -293,12 +307,14 @@ struct ListsList {
                 if let list = list.value as? [String: Any], let listUID = list[ListsEndpoints.List.USERID] as? String {
                     if listUID != String(uid) {
                         onComplete(.failure(.unknownError))
+                        return
                     }
                     
                     if self.isListOfType(list, isType: ListsEndpoints.List.TO_PLAY_LIST) {
                         let games = self.deserializeGames(ListsEndpoints.List.TO_PLAY_LIST, fromList: list)
                         if games == nil {
                             onComplete(.failure(.unknownError))
+                            return
                         }
                         toPlayList = games!
                     }
@@ -306,14 +322,17 @@ struct ListsList {
                         let games = self.deserializeGames(ListsEndpoints.List.PLAYED_LIST, fromList: list)
                         if games == nil {
                             onComplete(.failure(.unknownError))
+                            return
                         }
                         playedList = games!
                     }
                 } else {
                     onComplete(.failure(.unknownError))
+                    return
                 }
-                onComplete(.succes((toPlay: toPlayList, played: playedList)))
             }
+            onComplete(.succes((toPlay: toPlayList, played: playedList)))
+            return
         })
     }
     
@@ -345,10 +364,12 @@ struct ListsList {
                         let listItemID = "\(game.provider)\(game.id)"
                         ListsEndpoints.LISTS.child(listID).child(ListsEndpoints.List.GAMES).child(listItemID).removeValue()
                         onComplete(.succes(""))
+                        return
                     }
                 }
             }
             onComplete(.failure(.unknownError))
+            return
         })
     }
     
@@ -383,6 +404,7 @@ struct ListsList {
                 }
             }
             onComplete(.succes(""))
+            return
         })
     }
     

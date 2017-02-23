@@ -20,9 +20,10 @@ class List: Hashable, Equatable {
     var count: Int {
         return _games.count
     }
-    
-    func add(_ game: Game) {
-        _games.insert(game)
+
+    func add(_ game: Game) -> Bool{
+        let result = _games.insert(game)
+        return result.inserted
     }
     
     func add(_ games: List) {
