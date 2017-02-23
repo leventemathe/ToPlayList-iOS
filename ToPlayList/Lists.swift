@@ -394,6 +394,14 @@ struct ListsList {
         listenToList(ListsEndpoints.List.PLAYED_LIST, withAction: .add, withListenerAttached: listenerAttached, withOnChange: onChange)
     }
     
+    func listenToToplayListRemove(_ listenerAttached: @escaping (ListsListResult<ListsListenerReference>)->(), withOnChange onChange: @escaping (ListsListResult<Game>)->()) {
+        listenToList(ListsEndpoints.List.TO_PLAY_LIST, withAction: .remove, withListenerAttached: listenerAttached, withOnChange: onChange)
+    }
+    
+    func listenToPlayedListRemove(_ listenerAttached: @escaping (ListsListResult<ListsListenerReference>)->(), withOnChange onChange: @escaping (ListsListResult<Game>)->()) {
+        listenToList(ListsEndpoints.List.PLAYED_LIST, withAction: .remove, withListenerAttached: listenerAttached, withOnChange: onChange)
+    }
+    
     // Get list id then call method that attaches observer
     func listenToList(_ type: String, withAction action: ListsListenerAction, withListenerAttached listenerAttached: @escaping (ListsListResult<ListsListenerReference>)->(), withOnChange onChange: @escaping (ListsListResult<Game>)->()) {
         print("getting list id...")

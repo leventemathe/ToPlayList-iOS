@@ -24,8 +24,10 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
     }
     
-    private var toPlayListListener: ListsListenerReference?
-    private var playedListListener: ListsListenerReference?
+    private var toPlayListListenerAdd: ListsListenerReference?
+    private var playedListListenerAdd: ListsListenerReference?
+    private var toPlayListListenerRemove: ListsListenerReference?
+    private var playedListListenerRemove: ListsListenerReference?
     
     public var gameSections: [GameSection] {
         return _gameSections
@@ -60,13 +62,39 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     private func listenToLists() {
         listenToToPlayListAdd()
         listenToPlayedListAdd()
+        listenToToPlayListRemove()
+        listenToPlayedListRemove()
     }
     
     private func listenToToPlayListAdd() {
-        ListsList.instance.listenToToplayListAdd({ result in
+        listenToList(ListsEndpoints.List.TO_PLAY_LIST, withAction: .add) { game in
+            print("added \(game) to toplay list")
+        }
+    }
+    
+    private func listenToPlayedListAdd() {
+        listenToList(ListsEndpoints.List.PLAYED_LIST, withAction: .add) { game in
+            print("added \(game) to played list")
+        }
+    }
+    
+    private func listenToToPlayListRemove() {
+        listenToList(ListsEndpoints.List.TO_PLAY_LIST, withAction: .remove) { game in
+            print("removed \(game) from toplay list")
+        }
+    }
+    
+    private func listenToPlayedListRemove() {
+        listenToList(ListsEndpoints.List.PLAYED_LIST, withAction: .remove) { game in
+            print("removed \(game) from played list")
+        }
+    }
+    
+    private func listenToList(_ list: String, withAction action: ListsListenerAction, withOnChange onChange: @escaping (Game)->()) {
+        ListsList.instance.listenToList(list, withAction: action, withListenerAttached: { result in
             switch result {
             case .succes(let ref):
-                self.toPlayListListener = ref
+                self.listListenerAttachmentSuccesful(list, withAction: action, forReference: ref)
             case .failure(let error):
                 switch error {
                 default:
@@ -76,7 +104,7 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         }, withOnChange: { result in
             switch result {
             case .succes(let game):
-                print("added \(game.name) to toplay list while listening")
+                onChange(game)
             case .failure(let error):
                 switch error {
                 default:
@@ -86,28 +114,21 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         })
     }
     
-    private func listenToPlayedListAdd() {
-        ListsList.instance.listenToPlayedListAdd({ result in
-            switch result {
-            case .succes(let ref):
-                self.playedListListener = ref
-            case .failure(let error):
-                switch error {
-                default:
-                    Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_LISTS_ERROR, forVC: self)
-                }
+    private func listListenerAttachmentSuccesful(_ list: String, withAction action: ListsListenerAction, forReference ref: ListsListenerReference) {
+        switch action {
+        case .add:
+            if list == ListsEndpoints.List.TO_PLAY_LIST {
+                self.toPlayListListenerAdd = ref
+            } else if list == ListsEndpoints.List.PLAYED_LIST {
+                self.playedListListenerAdd = ref
             }
-        }, withOnChange: { result in
-            switch result {
-            case .succes(let game):
-                print("added \(game.name) to played list while listening")
-            case .failure(let error):
-                switch error {
-                default:
-                    Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_LISTS_ERROR, forVC: self)
-                }
+        case .remove:
+            if list == ListsEndpoints.List.TO_PLAY_LIST {
+                self.toPlayListListenerRemove = ref
+            } else if list == ListsEndpoints.List.PLAYED_LIST {
+                self.playedListListenerRemove = ref
             }
-        })
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -115,8 +136,10 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     private func removeListListeners() {
-        toPlayListListener?.removeListener()
-        playedListListener?.removeListener()
+        toPlayListListenerAdd?.removeListener()
+        playedListListenerAdd?.removeListener()
+        toPlayListListenerRemove?.removeListener()
+        playedListListenerRemove?.removeListener()
     }
     
     @objc private func refresh(_ sender: AnyObject) {

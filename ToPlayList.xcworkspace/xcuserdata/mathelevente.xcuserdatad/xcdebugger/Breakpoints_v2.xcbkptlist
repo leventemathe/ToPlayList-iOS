@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/NewestReleasesVC.swift"
-            timestampString = "509537120.281392"
+            timestampString = "509539712.148995"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
             landmarkName = "listenToLists()"
             landmarkType = "7">
          </BreakpointContent>
