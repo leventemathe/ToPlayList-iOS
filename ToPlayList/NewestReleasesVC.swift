@@ -24,11 +24,6 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
     }
     
-    private var toPlayListListenerAdd: ListsListenerReference?
-    private var playedListListenerAdd: ListsListenerReference?
-    private var toPlayListListenerRemove: ListsListenerReference?
-    private var playedListListenerRemove: ListsListenerReference?
-    
     public var gameSections: [GameSection] {
         return _gameSections
     }
@@ -56,92 +51,8 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         if gameSections.count > 0 {
             tableView.reloadData()
         }
-        listenToLists()
     }
-
-    private func listenToLists() {
-        listenToToPlayListAdd()
-        listenToPlayedListAdd()
-        listenToToPlayListRemove()
-        listenToPlayedListRemove()
-    }
-    
-    private func listenToToPlayListAdd() {
-        listenToList(ListsEndpoints.List.TO_PLAY_LIST, withAction: .add) { game in
-            print("added \(game) to toplay list")
-        }
-    }
-    
-    private func listenToPlayedListAdd() {
-        listenToList(ListsEndpoints.List.PLAYED_LIST, withAction: .add) { game in
-            print("added \(game) to played list")
-        }
-    }
-    
-    private func listenToToPlayListRemove() {
-        listenToList(ListsEndpoints.List.TO_PLAY_LIST, withAction: .remove) { game in
-            print("removed \(game) from toplay list")
-        }
-    }
-    
-    private func listenToPlayedListRemove() {
-        listenToList(ListsEndpoints.List.PLAYED_LIST, withAction: .remove) { game in
-            print("removed \(game) from played list")
-        }
-    }
-    
-    private func listenToList(_ list: String, withAction action: ListsListenerAction, withOnChange onChange: @escaping (Game)->()) {
-        ListsList.instance.listenToList(list, withAction: action, withListenerAttached: { result in
-            switch result {
-            case .succes(let ref):
-                self.listListenerAttachmentSuccesful(list, withAction: action, forReference: ref)
-            case .failure(let error):
-                switch error {
-                default:
-                    Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_LISTS_ERROR, forVC: self)
-                }
-            }
-        }, withOnChange: { result in
-            switch result {
-            case .succes(let game):
-                onChange(game)
-            case .failure(let error):
-                switch error {
-                default:
-                    Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_LISTS_ERROR, forVC: self)
-                }
-            }
-        })
-    }
-    
-    private func listListenerAttachmentSuccesful(_ list: String, withAction action: ListsListenerAction, forReference ref: ListsListenerReference) {
-        switch action {
-        case .add:
-            if list == ListsEndpoints.List.TO_PLAY_LIST {
-                self.toPlayListListenerAdd = ref
-            } else if list == ListsEndpoints.List.PLAYED_LIST {
-                self.playedListListenerAdd = ref
-            }
-        case .remove:
-            if list == ListsEndpoints.List.TO_PLAY_LIST {
-                self.toPlayListListenerRemove = ref
-            } else if list == ListsEndpoints.List.PLAYED_LIST {
-                self.playedListListenerRemove = ref
-            }
-        }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        removeListListeners()
-    }
-    
-    private func removeListListeners() {
-        toPlayListListenerAdd?.removeListener()
-        playedListListenerAdd?.removeListener()
-        toPlayListListenerRemove?.removeListener()
-        playedListListenerRemove?.removeListener()
-    }
-    
+        
     @objc private func refresh(_ sender: AnyObject) {
         reloadGames()
     }
@@ -228,6 +139,18 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return _gameSections[section].games.count
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if let cell = cell as? NewestReleasesCell {
+            cell.attachListListeners()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if let cell = cell as? NewestReleasesCell {
+            cell.removeListListeners()
+        }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

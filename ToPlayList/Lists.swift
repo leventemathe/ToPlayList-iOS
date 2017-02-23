@@ -404,17 +404,14 @@ struct ListsList {
     
     // Get list id then call method that attaches observer
     func listenToList(_ type: String, withAction action: ListsListenerAction, withListenerAttached listenerAttached: @escaping (ListsListResult<ListsListenerReference>)->(), withOnChange onChange: @escaping (ListsListResult<Game>)->()) {
-        print("getting list id...")
         getListID(type, withOnComplete: { result in
             switch result {
             case .failure(let error):
                 switch error {
                 default:
-                    print("error while getting toplay list id")
                     listenerAttached(.failure(.failedGettingListID))
                 }
             case .succes(let id):
-                print("got toplay list id: \(id)")
                 self.listenToList(listenerAttached, withListID: id, withAction: action, withOnChange: onChange)
             }
         })
@@ -422,7 +419,6 @@ struct ListsList {
     
     // Attaches the observer, after list id was found
     private func listenToList(_ listenerAttached: @escaping (ListsListResult<ListsListenerReference>)->(), withListID listID: String, withAction action: ListsListenerAction, withOnChange onChange: @escaping (ListsListResult<Game>)->()) {
-        print("attaching listener to list with id: \(listID)")
         let ref = ListsEndpoints.LISTS.child(listID).child(ListsEndpoints.List.GAMES)
         let handle = ref.observe(getEventType(action), with: { snapshot in
             if let game = snapshot.value as? [String: Any], let gameID = game[ListsEndpoints.Game.PROVIDER_ID] as? UInt64, let gameName = game[ListsEndpoints.Game.NAME] as? String, let gameProvider = game[ListsEndpoints.Game.PROVIDER] as? String {
@@ -430,7 +426,6 @@ struct ListsList {
                 onChange(.succes(gameObj))
             } else {
                 onChange(.failure(.unknownError))
-                print("deserializing inner game failed")
             }
         })
         listenerAttached(.succes(ListsListenerReference(handle, forReference: ref)))
