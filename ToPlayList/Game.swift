@@ -34,6 +34,13 @@ class Game: IdentifiableObject {
         set { _coverURL = newValue }
     }
     
+    var coverURLAsString: String? {
+        if coverURL != nil {
+            return coverURL!.absoluteString
+        }
+        return nil
+    }
+    
     var genre: Genre? {
         if let genre = _genres?[0] {
             return genre

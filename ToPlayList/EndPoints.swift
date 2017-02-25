@@ -45,5 +45,6 @@ struct ListsEndpoints {
         static let PROVIDER = "provider"
         static let PROVIDER_ID = "providerid"
         static let NAME = "name"
+        static let COVER_URL = "coverurl"
     }
 }

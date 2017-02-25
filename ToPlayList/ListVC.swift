@@ -13,9 +13,6 @@ import FirebaseDatabase
 class ListVC: UIViewController, IdentifiableVC {
     
     private static let WELCOME_MSG = "Welcome"
-    
-    private var toPlayList = List(ListsEndpoints.List.TO_PLAY_LIST)
-    private var playedList = List(ListsEndpoints.List.PLAYED_LIST)
 
     @IBOutlet weak var welcomeLbl: UILabel!
     @IBOutlet weak var segmentedControl: UISegmentedControl!

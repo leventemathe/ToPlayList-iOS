@@ -160,7 +160,7 @@ struct ListsList {
                     let timestamp = Date().timeIntervalSince1970
                     
                     if listType == addType {
-                        let values: [String: Any] = [ListsEndpoints.Game.PROVIDER: game.provider, ListsEndpoints.Game.PROVIDER_ID: game.id, ListsEndpoints.Game.NAME: game.name, ListsEndpoints.Common.TIMESTAMP: timestamp]
+                        let values: [String: Any] = [ListsEndpoints.Game.PROVIDER: game.provider, ListsEndpoints.Game.PROVIDER_ID: game.id, ListsEndpoints.Game.NAME: game.name, ListsEndpoints.Game.COVER_URL: game.coverURLAsString as Any, ListsEndpoints.Common.TIMESTAMP: timestamp]
                         
                         ListsEndpoints.LISTS.child(listID).child(ListsEndpoints.List.GAMES).child(listItemID).updateChildValues(values, withCompletionBlock: { (error, ref) in
                             if error != nil {
@@ -278,6 +278,9 @@ struct ListsList {
                 if let game = game.value as? [String: Any], let providerID = game[ListsEndpoints.Game.PROVIDER_ID] as? UInt64, let provider = game[ListsEndpoints.Game.PROVIDER] as? String, let name = game[ListsEndpoints.Game.NAME] as? String {
                     
                     let gameObj = Game(providerID, withName: name, withProvider: provider)
+                    if let coverURL = game[ListsEndpoints.Game.COVER_URL] as? String {
+                        gameObj.coverURL = URL(string: coverURL)
+                    }
                     _ = result.add(gameObj)
                 } else {
                     return nil

@@ -11,7 +11,7 @@ import Foundation
 class List: Hashable, Equatable {
     
     var type: String!
-    private var _games = Set<Game>()
+    private var _games = [Game]()
     
     init(_ type: String) {
         self.type = type
@@ -22,18 +22,24 @@ class List: Hashable, Equatable {
     }
 
     func add(_ game: Game) -> Bool{
-        let result = _games.insert(game)
-        return result.inserted
+        if _games.contains(game) {
+            return false
+        }
+        _games.append(game)
+        return true
     }
     
     func add(_ games: List) {
         for game in games._games {
-            _games.insert(game)
+            if  _games.contains(game) {
+                continue
+            }
+            _games.append(game)
         }
     }
     
     func remove(_ game: Game) {
-        _games.remove(game)
+        _games = _games.filter { $0 != game }
     }
     
     func clear() {
@@ -50,5 +56,9 @@ class List: Hashable, Equatable {
     
     static func ==(lhs: List, rhs: List) -> Bool {
         return lhs._games == rhs._games
+    }
+    
+    subscript(_ i: Int) -> Game? {
+        return _games[i]
     }
 }

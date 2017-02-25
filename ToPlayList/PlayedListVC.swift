@@ -10,4 +10,5 @@ import UIKit
 
 class PlayedListVC: UIViewController, IdentifiableVC {
     
+    private var playedList = List(ListsEndpoints.List.PLAYED_LIST)
 }
