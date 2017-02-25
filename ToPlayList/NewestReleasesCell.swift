@@ -205,16 +205,19 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
         if !isStarToPlay() {
             star.image = #imageLiteral(resourceName: "star_to_play_list")
         }
+        star.isHidden = false
     }
     
     private func setStarToPlayed() {
         if !isStarPlayed() {
             star.image = #imageLiteral(resourceName: "star_played_list")
         }
+        star.isHidden = false
     }
     
     private func setStarToNone() {
         star.image = nil
+        star.isHidden = true
     }
     
     private func isStarToPlay() -> Bool {

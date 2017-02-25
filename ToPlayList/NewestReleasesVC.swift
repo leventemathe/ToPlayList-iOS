@@ -119,6 +119,7 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         listenToList(ListsEndpoints.List.TO_PLAY_LIST, withAction: .remove) { game in
             print("removed \(game) from toPlay list")
             self.toPlayList.remove(game)
+            self.tableView.reloadData()
             print("reloading table data")
         }
     }
@@ -127,6 +128,7 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         listenToList(ListsEndpoints.List.PLAYED_LIST, withAction: .remove) { game in
             print("removed \(game) from played list")
             self.playedList.remove(game)
+            self.tableView.reloadData()
             print("reloading table data")
         }
     }
