@@ -10,18 +10,64 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 
-class ListVC: UIViewController, IdentifiableVC, UICollectionViewDelegate, UICollectionViewDataSource {
+class ListVC: UIViewController, IdentifiableVC {
     
     private static let WELCOME_MSG = "Welcome"
     
-    private var _games = [Game]()
+    private var toPlayList = List(ListsEndpoints.List.TO_PLAY_LIST)
+    private var playedList = List(ListsEndpoints.List.PLAYED_LIST)
 
     @IBOutlet weak var welcomeLbl: UILabel!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var listContainerView: UIView!
     
     @IBAction func segmentedChanged(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            setToPLayListContainer()
+        case 1:
+            setPlayedListContainer()
+        default:
+            break
+        }
+    }
     
+    private lazy var toPLayListVC: ToPLayListVC = {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let toPlayListVC = storyboard.instantiateViewController(withIdentifier: ToPLayListVC.id) as! ToPLayListVC
+        return toPlayListVC
+    }()
+    
+    private lazy var playedListVC: PlayedListVC = {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let playedListVC = storyboard.instantiateViewController(withIdentifier: PlayedListVC.id) as! PlayedListVC
+        return playedListVC
+    }()
+    
+    func setToPLayListContainer() {
+        clearPlayedListnContainer()
+        addChildViewController(toPLayListVC)
+        toPLayListVC.view.frame.size = listContainerView.frame.size
+        listContainerView.addSubview(toPLayListVC.view)
+        toPLayListVC.didMove(toParentViewController: self)
+    }
+    
+    func setPlayedListContainer() {
+        clearToPlayListContainer()
+        addChildViewController(playedListVC)
+        playedListVC.view.frame.size = listContainerView.frame.size
+        listContainerView.addSubview(playedListVC.view)
+        playedListVC.didMove(toParentViewController: self)
+    }
+    
+    func clearToPlayListContainer() {
+        toPLayListVC.removeFromParentViewController()
+        toPLayListVC.view.removeFromSuperview()
+    }
+    
+    func clearPlayedListnContainer() {
+        playedListVC.removeFromParentViewController()
+        playedListVC.view.removeFromSuperview()
     }
     
     @IBAction func logoutClicked(_ sender: UIBarButtonItem) {
@@ -41,6 +87,7 @@ class ListVC: UIViewController, IdentifiableVC, UICollectionViewDelegate, UIColl
         navigationController?.setNavigationBarHidden(false, animated: animated)
         navigationItem.hidesBackButton = true
         setupWelcomeMsg()
+        setupSegmentedView()
     }
     
     func setupWelcomeMsg() {
@@ -56,24 +103,14 @@ class ListVC: UIViewController, IdentifiableVC, UICollectionViewDelegate, UIColl
         })
     }
     
-    // TODO these functions
-    override func viewDidLoad() {
-        //TODO download games from firebase into array
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return _games.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCollectionViewCell.reuseIdentifier, for: indexPath) as? ListCollectionViewCell {
-            cell.update(_games[indexPath.row])
-            return cell
+    func setupSegmentedView() {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            setToPLayListContainer()
+        case 1:
+            setPlayedListContainer()
+        default:
+            break
         }
-        return ListCollectionViewCell()
-    }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
     }
 }
