@@ -791,40 +791,31 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Eo7-s0-5pc">
-                                                    <rect key="frame" x="0.0" y="0.0" width="155" height="155"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="Eo7-s0-5pc" secondAttribute="height" multiplier="1:1" id="py9-c7-BXY"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="0.0" y="0.0" width="155" height="194"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dark Souls" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h24-vv-DPG">
-                                                    <rect key="frame" x="0.0" y="155" width="155" height="39"/>
-                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
-                                                    <color key="textColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <rect key="frame" x="0.0" y="164" width="155" height="30"/>
+                                                    <color key="backgroundColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="A6Y-Jc-Pvq"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star_to_play_list" translatesAutoresizingMaskIntoConstraints="NO" id="R5a-yn-1od">
-                                                    <rect key="frame" x="114" y="8" width="33" height="33"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="33" id="3vL-38-AIg"/>
-                                                        <constraint firstAttribute="width" constant="33" id="mJl-XF-sax"/>
-                                                    </constraints>
-                                                </imageView>
                                             </subviews>
                                         </view>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="R5a-yn-1od" secondAttribute="trailing" constant="8" id="1f9-0K-hoq"/>
                                             <constraint firstItem="Eo7-s0-5pc" firstAttribute="leading" secondItem="CwR-rL-JQC" secondAttribute="leading" id="9Ny-QM-sg2"/>
-                                            <constraint firstAttribute="bottom" secondItem="h24-vv-DPG" secondAttribute="bottom" id="Dwc-gw-V7t"/>
-                                            <constraint firstItem="h24-vv-DPG" firstAttribute="leading" secondItem="CwR-rL-JQC" secondAttribute="leading" id="GCj-ce-ma3"/>
+                                            <constraint firstItem="h24-vv-DPG" firstAttribute="leading" secondItem="CwR-rL-JQC" secondAttribute="leading" id="IpJ-7g-cFU"/>
                                             <constraint firstAttribute="trailing" secondItem="Eo7-s0-5pc" secondAttribute="trailing" id="KIz-gB-aux"/>
-                                            <constraint firstItem="R5a-yn-1od" firstAttribute="top" secondItem="CwR-rL-JQC" secondAttribute="top" constant="8" id="goO-gC-J5B"/>
+                                            <constraint firstAttribute="bottom" secondItem="Eo7-s0-5pc" secondAttribute="bottom" id="avw-fg-sfA"/>
+                                            <constraint firstAttribute="trailing" secondItem="h24-vv-DPG" secondAttribute="trailing" id="j14-89-yIY"/>
                                             <constraint firstItem="Eo7-s0-5pc" firstAttribute="top" secondItem="CwR-rL-JQC" secondAttribute="top" id="kSQ-Tn-EQm"/>
-                                            <constraint firstAttribute="trailing" secondItem="h24-vv-DPG" secondAttribute="trailing" id="ooF-aR-C6S"/>
-                                            <constraint firstItem="h24-vv-DPG" firstAttribute="top" secondItem="Eo7-s0-5pc" secondAttribute="bottom" id="yyg-9E-kV1"/>
+                                            <constraint firstAttribute="bottom" secondItem="h24-vv-DPG" secondAttribute="bottom" id="rPx-sz-2Ei"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="coverImg" destination="Eo7-s0-5pc" id="TsO-1c-xpf"/>
-                                            <outlet property="star" destination="R5a-yn-1od" id="rAS-rR-XJ2"/>
                                             <outlet property="titleLbl" destination="h24-vv-DPG" id="VKf-uK-DeE"/>
                                         </connections>
                                     </collectionViewCell>

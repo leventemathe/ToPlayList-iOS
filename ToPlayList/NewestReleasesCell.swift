@@ -48,8 +48,8 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
         self._game = game
         
         titleLabel.text = game.name
-        if let coverURL = game.coverURL {
-            coverView.kf.setImage(with: coverURL, placeholder: #imageLiteral(resourceName: "img_missing"))
+        if let thumbnailURL = game.thumbnailURL {
+            coverView.kf.setImage(with: thumbnailURL, placeholder: #imageLiteral(resourceName: "img_missing"))
         } else {
             coverView.image = #imageLiteral(resourceName: "img_missing")
         }

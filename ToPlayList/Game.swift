@@ -12,7 +12,9 @@ class Game: IdentifiableObject {
     
     var provider = ""
     
-    private var _coverURL: URL?
+    var thumbnailURL: URL?
+    var coverSmallURL: URL?
+    var coverBigURL: URL?
     
     private var _genres: [Genre]?
     private var _developers: [Company]?
@@ -29,14 +31,16 @@ class Game: IdentifiableObject {
         self.provider = provider
     }
     
-    var coverURL: URL? {
-        get { return _coverURL }
-        set { _coverURL = newValue }
+    var coverSmallURLAsString: String? {
+        if coverSmallURL != nil {
+            return coverSmallURL!.absoluteString
+        }
+        return nil
     }
     
-    var coverURLAsString: String? {
-        if coverURL != nil {
-            return coverURL!.absoluteString
+    var coverBigURLAsString: String? {
+        if coverBigURL != nil {
+            return coverBigURL!.absoluteString
         }
         return nil
     }

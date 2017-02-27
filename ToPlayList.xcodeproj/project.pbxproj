@@ -34,6 +34,7 @@
 		D74AC7DA1E3919B700C37A90 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74AC7D91E3919B700C37A90 /* RegisterVC.swift */; };
 		D75150281E34BB9F00EDA802 /* MainTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75150271E34BB9F00EDA802 /* MainTabVC.swift */; };
 		D75A41161E241FC600E91514 /* ToPlayListUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75A41151E241FC600E91514 /* ToPlayListUnitTests.swift */; };
+		D75F4EA21E643A9E00CB2875 /* DropShadowed.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75F4EA11E643A9E00CB2875 /* DropShadowed.swift */; };
 		D76437E11E1E4E7300B09C7E /* slkscr.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D76437E01E1E4E7300B09C7E /* slkscr.ttf */; };
 		D76437E41E1E506D00B09C7E /* DateTableCellHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76437E21E1E506D00B09C7E /* DateTableCellHeaderView.swift */; };
 		D76437E51E1E506D00B09C7E /* DateTableCellHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D76437E31E1E506D00B09C7E /* DateTableCellHeaderView.xib */; };
@@ -104,6 +105,7 @@
 		D75A41131E241FC600E91514 /* ToPlayListUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToPlayListUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D75A41151E241FC600E91514 /* ToPlayListUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToPlayListUnitTests.swift; sourceTree = "<group>"; };
 		D75A41171E241FC600E91514 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D75F4EA11E643A9E00CB2875 /* DropShadowed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropShadowed.swift; sourceTree = "<group>"; };
 		D76437E01E1E4E7300B09C7E /* slkscr.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = slkscr.ttf; sourceTree = "<group>"; };
 		D76437E21E1E506D00B09C7E /* DateTableCellHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTableCellHeaderView.swift; sourceTree = "<group>"; };
 		D76437E31E1E506D00B09C7E /* DateTableCellHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DateTableCellHeaderView.xib; sourceTree = "<group>"; };
@@ -181,13 +183,14 @@
 		D71981231E26F206005823C2 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				D76606FC1E13123400D5979C /* RoundedCorners.swift */,
 				D7F131941E2BE242004D1704 /* IdentifiableVC.swift */,
 				D7898E7A1E131992008B7647 /* ReusableView.swift */,
+				D76606FC1E13123400D5979C /* RoundedCorners.swift */,
 				D71981251E26F253005823C2 /* Bordered.swift */,
 				D71981291E26F7AC005823C2 /* ColoredPlaceholderText.swift */,
 				D7E5AA871E2AD51A00EA1456 /* TextFieldMargin.swift */,
 				D7E5AA891E2AD60300EA1456 /* CustomClearButton.swift */,
+				D75F4EA11E643A9E00CB2875 /* DropShadowed.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -541,6 +544,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D78ADCA61E3750EB008DE943 /* Lists.swift in Sources */,
+				D75F4EA21E643A9E00CB2875 /* DropShadowed.swift in Sources */,
 				D719811B1E26A389005823C2 /* ListVC.swift in Sources */,
 				D7E5AA8A1E2AD60300EA1456 /* CustomClearButton.swift in Sources */,
 				D726BC881E0ABDD800D6C9CD /* NewestReleasesVC.swift in Sources */,

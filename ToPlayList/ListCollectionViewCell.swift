@@ -8,16 +8,24 @@
 
 import UIKit
 
-class ListCollectionViewCell: UICollectionViewCell, ReusableView {
+class ListCollectionViewCell: UICollectionViewCell, ReusableView, DropShadowed {
     
     
-    @IBOutlet weak var coverImg: UIImageView!
+    @IBOutlet weak var coverImg: UIImageView! {
+        didSet {
+            coverImg.clipsToBounds = true
+        }
+    }
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var star: UIImageView!
     
+    override func awakeFromNib() {
+        addDropShadow()
+    }
+    
     func update(_ game: Game) {
         titleLbl.text = game.name
-        if let coverURL = game.coverURL {
+        if let coverURL = game.coverSmallURL {
             coverImg.kf.setImage(with: coverURL, placeholder: #imageLiteral(resourceName: "img_missing"))
         } else {
             coverImg.image = #imageLiteral(resourceName: "img_missing")
