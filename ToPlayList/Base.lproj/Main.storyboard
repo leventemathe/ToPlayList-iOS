@@ -361,7 +361,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_bg" translatesAutoresizingMaskIntoConstraints="NO" id="q32-dg-ukG">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
+                                <rect key="frame" x="-60" y="-60" width="534" height="807"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="iXs-76-Udd">
                                 <rect key="frame" x="32" y="72" width="350" height="528"/>
@@ -425,15 +425,16 @@
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="iXs-76-Udd" secondAttribute="trailing" constant="12" id="GJX-nD-GpS"/>
                             <constraint firstItem="iXs-76-Udd" firstAttribute="leading" secondItem="5yO-fW-HqR" secondAttribute="leadingMargin" constant="12" id="Tpo-h2-oLr"/>
-                            <constraint firstAttribute="trailing" secondItem="q32-dg-ukG" secondAttribute="trailing" id="UmS-qp-poQ"/>
-                            <constraint firstItem="q32-dg-ukG" firstAttribute="leading" secondItem="5yO-fW-HqR" secondAttribute="leading" id="jGe-8Y-15r"/>
+                            <constraint firstAttribute="trailing" secondItem="q32-dg-ukG" secondAttribute="trailing" constant="-60" id="UmS-qp-poQ"/>
+                            <constraint firstItem="q32-dg-ukG" firstAttribute="leading" secondItem="5yO-fW-HqR" secondAttribute="leading" constant="-60" id="jGe-8Y-15r"/>
                             <constraint firstItem="iXs-76-Udd" firstAttribute="top" secondItem="D2V-wO-Ta6" secondAttribute="bottom" constant="8" id="nFD-uQ-4nD"/>
-                            <constraint firstItem="GHx-bX-eVv" firstAttribute="top" secondItem="q32-dg-ukG" secondAttribute="bottom" id="phk-gU-OxV"/>
-                            <constraint firstItem="q32-dg-ukG" firstAttribute="top" secondItem="5yO-fW-HqR" secondAttribute="top" id="sgb-sQ-VDI"/>
+                            <constraint firstItem="GHx-bX-eVv" firstAttribute="top" secondItem="q32-dg-ukG" secondAttribute="bottom" constant="-60" id="phk-gU-OxV"/>
+                            <constraint firstItem="q32-dg-ukG" firstAttribute="top" secondItem="5yO-fW-HqR" secondAttribute="top" constant="-60" id="sgb-sQ-VDI"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Register/Login" id="dXs-RB-szK"/>
                     <connections>
+                        <outlet property="backgroundImageView" destination="q32-dg-ukG" id="2lw-c5-i4S"/>
                         <outlet property="containerView" destination="pcw-c8-sZz" id="HSG-KD-GCy"/>
                         <outlet property="segmentedControl" destination="1Lp-75-qir" id="zEG-BK-ThG"/>
                         <segue destination="Ncq-W1-497" kind="show" identifier="LoginToList" id="d3v-Gf-G1f"/>
@@ -455,8 +456,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" alpha="0.10000000000000001" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="to_play_list_bg" translatesAutoresizingMaskIntoConstraints="NO" id="Rtj-xj-A9Z">
-                                <rect key="frame" x="0.0" y="64" width="414" height="623"/>
+                            <imageView userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="to_play_list_bg" translatesAutoresizingMaskIntoConstraints="NO" id="Rtj-xj-A9Z">
+                                <rect key="frame" x="-60" y="4" width="534" height="743"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WOa-04-8pa">
                                 <rect key="frame" x="28" y="72" width="358" height="24.666666666666671"/>
@@ -487,15 +488,15 @@
                             <constraint firstItem="o1g-ft-PLL" firstAttribute="centerX" secondItem="MJu-JL-nvO" secondAttribute="centerX" id="0wz-7h-pRK"/>
                             <constraint firstAttribute="trailingMargin" secondItem="WOa-04-8pa" secondAttribute="trailing" constant="8" id="ANs-au-uc6"/>
                             <constraint firstItem="zCK-4h-43t" firstAttribute="top" secondItem="65Q-Zg-Uje" secondAttribute="bottom" id="Cf7-Jx-3Tu"/>
-                            <constraint firstItem="Rtj-xj-A9Z" firstAttribute="leading" secondItem="MJu-JL-nvO" secondAttribute="leading" id="Gsr-0K-WjZ"/>
+                            <constraint firstItem="Rtj-xj-A9Z" firstAttribute="leading" secondItem="MJu-JL-nvO" secondAttribute="leading" constant="-60" id="Gsr-0K-WjZ"/>
                             <constraint firstItem="WOa-04-8pa" firstAttribute="top" secondItem="2oc-jG-z9Z" secondAttribute="bottom" constant="8" id="Idi-1Y-96O"/>
                             <constraint firstItem="o1g-ft-PLL" firstAttribute="top" secondItem="WOa-04-8pa" secondAttribute="bottom" constant="8" id="Uau-Vc-q0M"/>
                             <constraint firstItem="65Q-Zg-Uje" firstAttribute="leading" secondItem="MJu-JL-nvO" secondAttribute="leading" id="VfA-4Q-CXf"/>
-                            <constraint firstAttribute="trailing" secondItem="Rtj-xj-A9Z" secondAttribute="trailing" id="XkO-t6-hKg"/>
-                            <constraint firstItem="zCK-4h-43t" firstAttribute="top" secondItem="Rtj-xj-A9Z" secondAttribute="bottom" id="esH-P8-uUq"/>
+                            <constraint firstAttribute="trailing" secondItem="Rtj-xj-A9Z" secondAttribute="trailing" constant="-60" id="XkO-t6-hKg"/>
+                            <constraint firstItem="zCK-4h-43t" firstAttribute="top" secondItem="Rtj-xj-A9Z" secondAttribute="bottom" constant="-60" id="esH-P8-uUq"/>
                             <constraint firstItem="WOa-04-8pa" firstAttribute="leading" secondItem="MJu-JL-nvO" secondAttribute="leadingMargin" constant="8" id="lHb-7f-nCX"/>
                             <constraint firstItem="65Q-Zg-Uje" firstAttribute="top" secondItem="o1g-ft-PLL" secondAttribute="bottom" constant="20" id="qiM-n9-3AO"/>
-                            <constraint firstItem="Rtj-xj-A9Z" firstAttribute="top" secondItem="2oc-jG-z9Z" secondAttribute="bottom" id="wA0-gG-HKz"/>
+                            <constraint firstItem="Rtj-xj-A9Z" firstAttribute="top" secondItem="2oc-jG-z9Z" secondAttribute="bottom" constant="-60" id="wA0-gG-HKz"/>
                             <constraint firstAttribute="trailing" secondItem="65Q-Zg-Uje" secondAttribute="trailing" id="wts-S8-ZO6"/>
                         </constraints>
                     </view>

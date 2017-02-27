@@ -24,6 +24,7 @@ extension UIViewController
 
 class RegisterLoginVC: UIViewController {
     
+    @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var containerView: UIView!
     
     private lazy var loginVC: LoginVC = {
@@ -84,6 +85,11 @@ class RegisterLoginVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: animated)
         setNeedsStatusBarAppearanceUpdate()
+        setupSegmentedView()
+        setupTiltingBackground()
+    }
+    
+    private func setupSegmentedView() {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
             setRegisterContainer()
@@ -94,6 +100,21 @@ class RegisterLoginVC: UIViewController {
         }
     }
     
+    private func setupTiltingBackground() {
+        let amount = 50
+        
+        let horizontalMotion = UIInterpolatingMotionEffect(keyPath: "center.x", type: .tiltAlongHorizontalAxis)
+        horizontalMotion.minimumRelativeValue = -amount
+        horizontalMotion.maximumRelativeValue = amount
+        
+        let verticalMotion = UIInterpolatingMotionEffect(keyPath: "center.y", type: .tiltAlongVerticalAxis)
+        verticalMotion.minimumRelativeValue = -amount
+        verticalMotion.maximumRelativeValue = amount
+        
+        backgroundImageView.addMotionEffect(horizontalMotion)
+        backgroundImageView.addMotionEffect(verticalMotion)
+    }
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
     }

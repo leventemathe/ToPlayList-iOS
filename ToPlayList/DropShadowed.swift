@@ -14,10 +14,10 @@ protocol DropShadowed {
 
 extension DropShadowed where Self: UIView {
     
-    func addDropShadow(_ radius: CGFloat = 1.0, withOffset offset: CGSize = CGSize.zero) {
+    func addDropShadow(_ radius: CGFloat = 2.0, withOffset offset: CGSize = CGSize.zero) {
         layer.masksToBounds = false
         layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOpacity = 1.0
+        layer.shadowOpacity = 0.6
         layer.shadowOffset = offset
         layer.shadowRadius = radius
     }

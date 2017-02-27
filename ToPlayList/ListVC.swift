@@ -101,6 +101,7 @@ class ListVC: UIViewController, IdentifiableVC {
         navigationItem.hidesBackButton = true
         setupWelcomeMsg()
         setupSegmentedView()
+        setupTiltingBackground()
     }
     
     func setupWelcomeMsg() {
@@ -125,5 +126,20 @@ class ListVC: UIViewController, IdentifiableVC {
         default:
             break
         }
+    }
+    
+    func setupTiltingBackground() {
+        let amount = 50
+        
+        let horizontalMotion = UIInterpolatingMotionEffect(keyPath: "center.x", type: .tiltAlongHorizontalAxis)
+        horizontalMotion.minimumRelativeValue = -amount
+        horizontalMotion.maximumRelativeValue = amount
+        
+        let verticalMotion = UIInterpolatingMotionEffect(keyPath: "center.y", type: .tiltAlongVerticalAxis)
+        verticalMotion.minimumRelativeValue = -amount
+        verticalMotion.maximumRelativeValue = amount
+        
+        backgroundStarImageView.addMotionEffect(horizontalMotion)
+        backgroundStarImageView.addMotionEffect(verticalMotion)
     }
 }
