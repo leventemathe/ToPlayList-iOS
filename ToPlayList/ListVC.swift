@@ -18,20 +18,36 @@ class ListVC: UIViewController, IdentifiableVC {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var listContainerView: UIView!
     
+    @IBOutlet weak var backgroundStarImageView: UIImageView!
+    
     @IBAction func segmentedChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
             setToPLayListContainer()
+            setBackgroundToToPlayList()
         case 1:
             setPlayedListContainer()
+            setBackgroundToPlayedList()
         default:
             break
         }
     }
     
-    private lazy var toPLayListVC: ToPLayListVC = {
+    private func setBackgroundToToPlayList() {
+        UIView.transition(with: backgroundStarImageView, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            self.backgroundStarImageView.image = #imageLiteral(resourceName: "to_play_list_bg")
+        })
+    }
+    
+    private func setBackgroundToPlayedList() {
+        UIView.transition(with: backgroundStarImageView, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            self.backgroundStarImageView.image = #imageLiteral(resourceName: "played_list_bg")
+        })
+    }
+    
+    private lazy var toPLayListVC: ToPlayListVC = {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let toPlayListVC = storyboard.instantiateViewController(withIdentifier: ToPLayListVC.id) as! ToPLayListVC
+        let toPlayListVC = storyboard.instantiateViewController(withIdentifier: ToPlayListVC.id) as! ToPlayListVC
         return toPlayListVC
     }()
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ToPLayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+class ToPlayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
  
     @IBOutlet weak var collectionView: UICollectionView!
     
