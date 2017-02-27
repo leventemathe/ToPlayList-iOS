@@ -19,6 +19,7 @@ class ToPLayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFl
     private var cellHeight: CGFloat!
     private var cellInsetMargin: CGFloat!
     private var cellInterItemMargin: CGFloat!
+    private var cellVerticalInterItemMargin: CGFloat!
     
     private var toPlayList = List(ListsEndpoints.List.TO_PLAY_LIST) {
         didSet {
@@ -85,10 +86,15 @@ class ToPLayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFl
         return cellInterItemMargin
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return cellVerticalInterItemMargin
+    }
+    
     private func setupCellSizes() {
         collectionViewWidth = collectionView.bounds.size.width
         cellInsetMargin = 20.0
-        cellInterItemMargin = cellInsetMargin / 2.0
+        cellInterItemMargin = (cellInsetMargin + 10.0) / 2.0
+        cellVerticalInterItemMargin = cellInterItemMargin * 2.0
         cellWidth = collectionViewWidth / CELLS_PER_COLUMNS - (CELLS_PER_COLUMNS-1) * cellInterItemMargin - (2.0 * cellInsetMargin) / CELLS_PER_COLUMNS
         cellHeight = cellWidth * CELL_ASPECT_RATIO
     }
