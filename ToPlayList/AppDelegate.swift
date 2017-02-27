@@ -9,6 +9,13 @@
 import UIKit
 import Firebase
 
+extension UIColor {
+    
+    static func myOrange() -> UIColor {
+        return UIColor(red: 255.0/255.0, green: 255.0/155.0, blue: 255.0/64.0, alpha: 1.0)
+    }
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -17,6 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {        
         FIRApp.configure()
+        
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.orange], for: .selected)
+        
         return true
     }
 
