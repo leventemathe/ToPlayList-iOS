@@ -14,7 +14,7 @@ extension UIColor {
     struct MyCustomColors {
         
         static var orange: UIColor {
-            return UIColor(red: 1.00, green: 0.61, blue: 0.25, alpha: 1.0)
+            return UIColor(red: 255.0/255.0, green: 155.0/255.0, blue: 64.0/255.0, alpha: 1.0)
         }
     }
     

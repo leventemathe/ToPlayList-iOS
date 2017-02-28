@@ -335,6 +335,7 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" barStyle="black" id="azi-DG-QA9">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="selectedImageTintColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="FSF-44-oZj" kind="relationship" relationship="viewControllers" id="bcG-Lr-0CT"/>
@@ -540,7 +541,7 @@
         <scene sceneID="Vum-Jw-mqa">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FSF-44-oZj" customClass="ListLoginNavigationVC" customModule="ToPlayList" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="List" image="tab_bar_icon_lists" selectedImage="tab_bar_icon_lists_selected" id="z0L-I2-9bM"/>
+                    <tabBarItem key="tabBarItem" title="List" image="tab_bar_icon_lists" selectedImage="tab_bar_icon_upcoming_selected" id="z0L-I2-9bM"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="Tdb-OY-NWI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -931,12 +932,11 @@
         <image name="logout" width="22" height="22"/>
         <image name="screenshot" width="1680" height="1050"/>
         <image name="star_to_play_list" width="33" height="30"/>
-        <image name="tab_bar_icon_lists" width="27" height="30"/>
-        <image name="tab_bar_icon_lists_selected" width="27" height="30"/>
-        <image name="tab_bar_icon_newest" width="30" height="29"/>
-        <image name="tab_bar_icon_newest_selected" width="30" height="29"/>
-        <image name="tab_bar_icon_upcoming" width="30" height="29"/>
-        <image name="tab_bar_icon_upcoming_selected" width="30" height="29"/>
+        <image name="tab_bar_icon_lists" width="18" height="20"/>
+        <image name="tab_bar_icon_newest" width="21" height="20"/>
+        <image name="tab_bar_icon_newest_selected" width="21" height="20"/>
+        <image name="tab_bar_icon_upcoming" width="21" height="20"/>
+        <image name="tab_bar_icon_upcoming_selected" width="21" height="20"/>
         <image name="to_play_list_bg" width="689" height="712"/>
     </resources>
     <inferredMetricsTieBreakers>
