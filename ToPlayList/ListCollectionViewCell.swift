@@ -26,9 +26,9 @@ class ListCollectionViewCell: UICollectionViewCell, ReusableView, DropShadowed {
     func update(_ game: Game) {
         titleLbl.text = game.name
         if let coverURL = game.coverSmallURL {
-            coverImg.kf.setImage(with: coverURL, placeholder: #imageLiteral(resourceName: "img_missing"))
+            coverImg.kf.setImage(with: coverURL, placeholder: #imageLiteral(resourceName: "img_missing_cover"))
         } else {
-            coverImg.image = #imageLiteral(resourceName: "img_missing")
+            coverImg.image = #imageLiteral(resourceName: "img_missing_cover")
         }
     }
 }
