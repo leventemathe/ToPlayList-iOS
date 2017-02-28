@@ -9,10 +9,13 @@
 import UIKit
 import FirebaseAuth
 import FirebaseDatabase
+import NVActivityIndicatorView
 
-class ListVC: UIViewController, IdentifiableVC {
+class ListVC: UIViewController, IdentifiableVC, LoadingAnimationDelegate {
     
     private static let WELCOME_MSG = "Welcome"
+    
+    var loadingAnimationView: NVActivityIndicatorView!
 
     @IBOutlet weak var welcomeLbl: UILabel!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
@@ -63,6 +66,7 @@ class ListVC: UIViewController, IdentifiableVC {
         toPLayListVC.view.frame.size = listContainerView.frame.size
         listContainerView.addSubview(toPLayListVC.view)
         toPLayListVC.didMove(toParentViewController: self)
+        toPLayListVC.loadingAnimationDelegate = self
     }
     
     func setPlayedListContainer() {
@@ -71,16 +75,19 @@ class ListVC: UIViewController, IdentifiableVC {
         playedListVC.view.frame.size = listContainerView.frame.size
         listContainerView.addSubview(playedListVC.view)
         playedListVC.didMove(toParentViewController: self)
+        //TODO set loading animation delegate
     }
     
     func clearToPlayListContainer() {
         toPLayListVC.removeFromParentViewController()
         toPLayListVC.view.removeFromSuperview()
+        toPLayListVC.loadingAnimationDelegate = nil
     }
     
     func clearPlayedListnContainer() {
         playedListVC.removeFromParentViewController()
         playedListVC.view.removeFromSuperview()
+        //TODO unset loading animation delegate
     }
     
     @IBAction func logoutClicked(_ sender: UIBarButtonItem) {
@@ -99,12 +106,14 @@ class ListVC: UIViewController, IdentifiableVC {
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(false, animated: animated)
         navigationItem.hidesBackButton = true
+        setupLoadingAnimation()
+        loadingAnimationView.startAnimating()
         setupWelcomeMsg()
         setupSegmentedView()
         setupTiltingBackground()
     }
     
-    func setupWelcomeMsg() {
+    private func setupWelcomeMsg() {
         welcomeLbl.text = "\(ListVC.WELCOME_MSG)!"
         
         guard let uid = ListsUser.userid else {
@@ -117,7 +126,7 @@ class ListVC: UIViewController, IdentifiableVC {
         })
     }
     
-    func setupSegmentedView() {
+    private func setupSegmentedView() {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
             setToPLayListContainer()
@@ -128,7 +137,7 @@ class ListVC: UIViewController, IdentifiableVC {
         }
     }
     
-    func setupTiltingBackground() {
+    private func setupTiltingBackground() {
         let amount = 50
         
         let horizontalMotion = UIInterpolatingMotionEffect(keyPath: "center.x", type: .tiltAlongHorizontalAxis)
@@ -141,5 +150,28 @@ class ListVC: UIViewController, IdentifiableVC {
         
         backgroundStarImageView.addMotionEffect(horizontalMotion)
         backgroundStarImageView.addMotionEffect(verticalMotion)
+    }
+    
+    private func setupLoadingAnimation() {
+        let width: CGFloat = 80.0
+        let height: CGFloat = width
+        
+        let x = UIScreen.main.bounds.size.width / 2.0 - width / 2.0
+        let y = UIScreen.main.bounds.size.height / 2.0 - height / 2.0
+        
+        let frame = CGRect(x: x, y: y, width: width, height: height)
+        
+        loadingAnimationView = NVActivityIndicatorView(frame: frame, type: .ballClipRotate, color: UIColor.MyCustomColors.orange, padding: 0.0)
+        view.addSubview(loadingAnimationView)
+    }
+    
+    func startAnimating() {
+        print("startanimating called")
+        loadingAnimationView.startAnimating()
+    }
+    
+    func stopAnimating() {
+        print("stopanimating called")
+        loadingAnimationView.stopAnimating()
     }
 }

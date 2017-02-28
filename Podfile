@@ -8,6 +8,7 @@ target 'ToPlayList' do
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
+  pod 'NVActivityIndicatorView'
 
   target 'ToPlayListUnitTests' do
     inherit! :complete

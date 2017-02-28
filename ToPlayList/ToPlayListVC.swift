@@ -21,6 +21,8 @@ class ToPlayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFl
     private var cellInterItemMargin: CGFloat!
     private var cellVerticalInterItemMargin: CGFloat!
     
+    var loadingAnimationDelegate: LoadingAnimationDelegate?
+    
     private var toPlayList = List(ListsEndpoints.List.TO_PLAY_LIST) {
         didSet {
             collectionView.reloadData()
@@ -40,6 +42,7 @@ class ToPlayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFl
     
     private func getToPlayList() {
         ListsList.instance.getToPlayList { result in
+            self.loadingAnimationDelegate?.stopAnimating()
             switch result {
             case .failure(let error):
                 switch error {
