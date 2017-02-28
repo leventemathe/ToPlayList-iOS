@@ -43,6 +43,7 @@ class ToPlayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFl
     private func getToPlayList() {
         ListsList.instance.getToPlayList { result in
             self.loadingAnimationDelegate?.stopAnimating()
+            
             switch result {
             case .failure(let error):
                 switch error {
@@ -53,7 +54,16 @@ class ToPlayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFl
                 self.toPlayList = list
                 print("dowloaded toPlayList")
             }
+            
+            self.animateCollectionView()
         }
+    }
+    
+    private func animateCollectionView() {
+        collectionView.alpha = 0.0
+        UIView.animate(withDuration: 0.4, animations: {
+            self.collectionView.alpha = 1.0
+        })
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -91,6 +101,15 @@ class ToPlayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFl
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return cellVerticalInterItemMargin
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        /*
+        cell.alpha = 0.0
+        UIView.animate(withDuration: 0.4) {
+            cell.alpha = 1.0
+        }
+        */
     }
     
     private func setupCellSizes() {
