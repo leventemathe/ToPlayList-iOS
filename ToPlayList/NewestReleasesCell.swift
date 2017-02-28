@@ -10,18 +10,6 @@ import UIKit
 
 typealias RGBAComponents = (r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat)
 
-extension UIColor {
-    
-    var RGBA: RGBAComponents {
-        var red: CGFloat = 0.0
-        var green: CGFloat = 0.0
-        var blue: CGFloat = 0.0
-        var alpha: CGFloat = 0.0
-        getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-        return (r: red, g: green, b: blue, a: alpha)
-    }
-}
-
 enum StarState {
     case none
     case toPlay
@@ -86,7 +74,7 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
     
     private var toPlayStartingColor: UIColor!
     private var playedStartingColor: UIColor!
-    private var toPlayTargetColor = UIColor(red: 1.00, green: 0.61, blue: 0.25, alpha: 1.0) //FF9B40
+    private var toPlayTargetColor = UIColor.MyCustomColors.orange
     private var playedTargetColor = UIColor.blue
     
     private var panRecognizer: UIPanGestureRecognizer!

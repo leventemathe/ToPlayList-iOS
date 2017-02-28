@@ -308,7 +308,7 @@
         <scene sceneID="fFL-jC-ijf">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gaI-Tc-Uxl" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Newest" id="PZM-gt-7Be"/>
+                    <tabBarItem key="tabBarItem" title="Newest" image="tab_bar_icon_newest" selectedImage="tab_bar_icon_newest_selected" id="PZM-gt-7Be"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="H9z-Bw-GSh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -521,7 +521,7 @@
         <scene sceneID="5l0-6m-Tuc">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sBD-RD-Qe6" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Upcoming" id="QVx-Lx-zhY"/>
+                    <tabBarItem key="tabBarItem" title="Upcoming" image="tab_bar_icon_upcoming" selectedImage="tab_bar_icon_upcoming_selected" id="QVx-Lx-zhY"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="KAn-qY-Vvm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -540,7 +540,7 @@
         <scene sceneID="Vum-Jw-mqa">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FSF-44-oZj" customClass="ListLoginNavigationVC" customModule="ToPlayList" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="List" id="z0L-I2-9bM"/>
+                    <tabBarItem key="tabBarItem" title="List" image="tab_bar_icon_lists" selectedImage="tab_bar_icon_lists_selected" id="z0L-I2-9bM"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="Tdb-OY-NWI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -763,7 +763,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ipL-J7-Nrr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2289" y="2502"/>
+            <point key="canvasLocation" x="2448" y="2502"/>
         </scene>
         <!--To Play ListVC-->
         <scene sceneID="ZhV-Qo-6J9">
@@ -931,6 +931,12 @@
         <image name="logout" width="22" height="22"/>
         <image name="screenshot" width="1680" height="1050"/>
         <image name="star_to_play_list" width="33" height="30"/>
+        <image name="tab_bar_icon_lists" width="27" height="30"/>
+        <image name="tab_bar_icon_lists_selected" width="27" height="30"/>
+        <image name="tab_bar_icon_newest" width="30" height="29"/>
+        <image name="tab_bar_icon_newest_selected" width="30" height="29"/>
+        <image name="tab_bar_icon_upcoming" width="30" height="29"/>
+        <image name="tab_bar_icon_upcoming_selected" width="30" height="29"/>
         <image name="to_play_list_bg" width="689" height="712"/>
     </resources>
     <inferredMetricsTieBreakers>

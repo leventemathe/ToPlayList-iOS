@@ -11,8 +11,20 @@ import Firebase
 
 extension UIColor {
     
-    static func myOrange() -> UIColor {
-        return UIColor(red: 255.0/255.0, green: 255.0/155.0, blue: 255.0/64.0, alpha: 1.0)
+    struct MyCustomColors {
+        
+        static var orange: UIColor {
+            return UIColor(red: 1.00, green: 0.61, blue: 0.25, alpha: 1.0)
+        }
+    }
+    
+    var RGBA: RGBAComponents {
+        var red: CGFloat = 0.0
+        var green: CGFloat = 0.0
+        var blue: CGFloat = 0.0
+        var alpha: CGFloat = 0.0
+        getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        return (r: red, g: green, b: blue, a: alpha)
     }
 }
 
@@ -26,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRApp.configure()
         
         UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: .normal)
-        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.orange], for: .selected)
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.MyCustomColors.orange], for: .selected)
         
         return true
     }
