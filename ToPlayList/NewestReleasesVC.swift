@@ -89,7 +89,13 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         if gameSections.count < 1 && tableView.backgroundView != noDataLbl {
             loadingAnimationView.startAnimating()
         }
+        if !ListsUser.loggedIn && (toPlayList.count > 0 || playedList.count > 0) {
+            toPlayList.clear()
+            playedList.clear()
+            tableView.reloadData()
+        }
         getGamesInLists {
+            self.tableView.reloadData()
             self.attachListListeners()
         }
     }
@@ -99,6 +105,10 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     private func getGamesInLists(_ onComplete: @escaping ()->()) {
+        if !ListsUser.loggedIn {
+            onComplete()
+            return
+        }
         ListsList.instance.getToPlayAndPlayedList { result in
             switch result {
             case .failure:
@@ -112,6 +122,9 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     private func attachListListeners() {
+        if !ListsUser.loggedIn {
+            return
+        }
         listenToToPlayListAdd()
         listenToPlayedListAdd()
         listenToToPlayListRemove()
@@ -213,6 +226,10 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
             return .none
         }
     }
+    
+    private func shouldSwipeOnCells() -> Bool {
+        return ListsUser.loggedIn
+    }
         
     @objc private func refresh(_ sender: AnyObject) {
         reloadGames()
@@ -305,6 +322,7 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                 cell.update(game)
             }
             cell.updateStar(getStarState(game))
+            cell.updateSwipeable(shouldSwipeOnCells())
             return cell
         }
         

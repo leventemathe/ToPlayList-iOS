@@ -60,7 +60,17 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
         }
     }
     
+    func updateSwipeable(_ shouldSwipe: Bool) {
+        self.shouldSwipe = shouldSwipe
+    }
+    
     // SWIPING
+    
+    // set from outside - wether swiping should be allowed or not
+    private var shouldSwipe = false
+    
+    // set from inside - wether panning or scrolling should happen
+    private var shouldPan = false
     
     @IBOutlet weak var content: UIView!
     @IBOutlet weak var toPlay: UILabel!
@@ -79,7 +89,6 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
     
     private var panRecognizer: UIPanGestureRecognizer!
     private var panStartPoint: CGPoint!
-    private var shouldPan = false
     
     var networkErrorHandlerDelegate: ErrorHandlerDelegate?
     
@@ -130,6 +139,9 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
     
     private func panChanged() {
         if !shouldPan {
+            return
+        }
+        if !shouldSwipe {
             return
         }
         
@@ -278,7 +290,7 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
     }
     
     override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return !shouldPan
+        return !shouldPan || !shouldSwipe
     }
 }
 
