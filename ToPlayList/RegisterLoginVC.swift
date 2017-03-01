@@ -10,7 +10,7 @@ import UIKit
 
 extension UIViewController
 {
-    func hideKeyboard()
+    func addTapGestureToHideKeyboard()
     {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self,action: #selector(UIViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -22,7 +22,7 @@ extension UIViewController
     }
 }
 
-class RegisterLoginVC: UIViewController {
+class RegisterLoginVC: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var containerView: UIView!
@@ -79,7 +79,18 @@ class RegisterLoginVC: UIViewController {
     }
     
     override func viewDidLoad() {
-        hideKeyboard()
+        addTapGestureToHideKeyboard()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if let touchView = touch.view {
+            if touchView.isDescendant(of: self.view) {
+                return false
+            }
+        }
+        return true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,6 +98,7 @@ class RegisterLoginVC: UIViewController {
         setNeedsStatusBarAppearanceUpdate()
         setupSegmentedView()
         setupTiltingBackground()
+        setupStackViewAnimation()
     }
     
     private func setupSegmentedView() {
@@ -118,4 +130,41 @@ class RegisterLoginVC: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
     }
+    
+    @IBOutlet weak var stackViewTopConstraint: NSLayoutConstraint!
+    private var topStartingConst: CGFloat!
+    private var topAnimatedConst: CGFloat!
+    
+    private func setupStackViewAnimation() {
+        topStartingConst = stackViewTopConstraint.constant
+        topAnimatedConst = -150.0
+    }
+    
+    private func animateStackViewUp() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.stackViewTopConstraint.constant = self.topAnimatedConst
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    private func animateStackViewDown() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.stackViewTopConstraint.constant = self.topStartingConst
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    func keyboardWillAppear() {
+        animateStackViewUp()
+    }
+    
+    func keyboardWillDisappear() {
+        animateStackViewDown()
+    }
 }
+
+
+
+
+
+

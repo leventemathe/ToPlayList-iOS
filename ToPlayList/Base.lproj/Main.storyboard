@@ -441,6 +441,7 @@
                         <outlet property="backgroundImageView" destination="q32-dg-ukG" id="2lw-c5-i4S"/>
                         <outlet property="containerView" destination="pcw-c8-sZz" id="HSG-KD-GCy"/>
                         <outlet property="segmentedControl" destination="1Lp-75-qir" id="zEG-BK-ThG"/>
+                        <outlet property="stackViewTopConstraint" destination="nFD-uQ-4nD" id="C9J-0X-Tmz"/>
                         <segue destination="Ncq-W1-497" kind="show" identifier="LoginToList" id="d3v-Gf-G1f"/>
                     </connections>
                 </viewController>
@@ -600,7 +601,7 @@
                                                 </constraints>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xey-vP-XH2" customClass="LoginSceneTextFieldPassword" customModule="ToPlayList" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="55" width="375" height="40"/>
@@ -609,7 +610,7 @@
                                                 </constraints>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" secureTextEntry="YES"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jqc-Jd-uZC" customClass="LoginSceneButtonLogin" customModule="ToPlayList" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="110" width="375" height="40"/>
@@ -697,7 +698,7 @@
                                                 </constraints>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aQG-98-NAc" customClass="LoginSceneTextFieldEmail" customModule="ToPlayList" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="55" width="375" height="40"/>
@@ -706,7 +707,7 @@
                                                 </constraints>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="11A-vH-9fZ" customClass="LoginSceneTextFieldPassword" customModule="ToPlayList" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="110" width="375" height="40"/>
@@ -715,7 +716,7 @@
                                                 </constraints>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" secureTextEntry="YES"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3jh-Rl-RCb" customClass="LoginSceneButtonLogin" customModule="ToPlayList" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="165" width="375" height="40"/>
