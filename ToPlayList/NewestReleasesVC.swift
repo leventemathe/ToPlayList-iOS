@@ -8,12 +8,14 @@
 
 import UIKit
 import Kingfisher
+import NVActivityIndicatorView
 
 class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, ErrorHandlerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
     private var noDataLbl = UILabel()
+    private var loadingAnimationView: NVActivityIndicatorView!
     private var refreshVC = UIRefreshControl()
     
     private var loadingMoreGames = true
@@ -42,23 +44,51 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        noDataLbl.bounds = CGRect(x: 0.0, y: 0.0, width: tableView.bounds.width, height: tableView.bounds.height)
-        noDataLbl.text = "No data. Pull to refresh!"
-        noDataLbl.textAlignment = NSTextAlignment.center
-        noDataLbl.sizeToFit()
-        
-        refreshVC.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
-        tableView.addSubview(refreshVC)
+        setupDelegates()
+        setupNoDataLabel()
+        setupRefreshVC()
+        setupLoadingAnimation()
         
         getGamesInLists {
-            self.reloadGames()
+            self.initialLoadGames()
         }
     }
     
+    private func setupDelegates() {
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+    
+    private func setupNoDataLabel() {
+        noDataLbl.bounds = CGRect(x: 0.0, y: 0.0, width: tableView.bounds.width, height: tableView.bounds.height)
+        noDataLbl.text = "No data. Pull to refresh!"
+        noDataLbl.font = UIFont(name: "Avenir", size: 22)
+        noDataLbl.textAlignment = NSTextAlignment.center
+        noDataLbl.sizeToFit()
+    }
+    
+    private func setupRefreshVC() {
+        refreshVC.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+        tableView.addSubview(refreshVC)
+    }
+    
+    private func setupLoadingAnimation() {
+        let width: CGFloat = 80.0
+        let height: CGFloat = width
+        
+        let x = UIScreen.main.bounds.size.width / 2.0 - width / 2.0
+        let y = UIScreen.main.bounds.size.height / 2.0 - height / 2.0
+        
+        let frame = CGRect(x: x, y: y, width: width, height: height)
+        
+        loadingAnimationView = NVActivityIndicatorView(frame: frame, type: .ballClipRotate, color: UIColor.MyCustomColors.orange, padding: 0.0)
+        view.addSubview(loadingAnimationView)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
+        if gameSections.count < 1 && tableView.backgroundView != noDataLbl {
+            loadingAnimationView.startAnimating()
+        }
         getGamesInLists {
             self.attachListListeners()
         }
@@ -186,6 +216,26 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         
     @objc private func refresh(_ sender: AnyObject) {
         reloadGames()
+    }
+    
+    func initialLoadGames() {
+        IGDB.instance.getGamesList({ result in
+            self.handleLoadingGames(fromResult: result, withResultPacker: self.initialLoadGamesResultPacker)
+        }, withLimit: paginationLimit)
+    }
+    
+    private func initialLoadGamesResultPacker(_ games: [Game]) {
+        _gameSections = GameSection.buildGameSectionsForNewestGames(fromGames: games)
+        paginationOffset = 0
+        loadingAnimationView.stopAnimating()
+        animateTableViewAppearance()
+    }
+    
+    private func animateTableViewAppearance() {
+        tableView.alpha = 0.0
+        UIView.animate(withDuration: 0.4, animations: {
+            self.tableView.alpha = 1.0
+        })
     }
     
     func reloadGames() {
