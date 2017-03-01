@@ -11,6 +11,7 @@ import UIKit
 class ToPlayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
  
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var listEmptyLabels: UIStackView!
     
     private let CELLS_PER_COLUMNS: CGFloat = 2.0
     private let CELL_ASPECT_RATIO: CGFloat = 1.42
@@ -27,6 +28,9 @@ class ToPlayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFl
         didSet {
             collectionView.reloadData()
             print("reloading collection view becasue didSet")
+            if toPlayList.count > 0 {
+                listEmptyLabels.isHidden = true
+            }
         }
     }
     
@@ -55,7 +59,11 @@ class ToPlayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFl
                 print("dowloaded toPlayList")
             }
             
-            self.animateCollectionView()
+            if self.toPlayList.count > 0 {
+                self.animateCollectionView()
+            } else {
+                self.listEmptyLabels.isHidden = false
+            }
         }
     }
     
