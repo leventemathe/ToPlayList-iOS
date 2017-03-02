@@ -80,6 +80,13 @@ class RegisterLoginVC: UIViewController, UIGestureRecognizerDelegate, Identifiab
     
     override func viewDidLoad() {
         addTapGestureToHideKeyboard()
+        setupKeyboardNotifications()
+        setupSegmentedView()
+        setupTiltingBackground()
+        setupStackViewAnimation()
+    }
+    
+    private func setupKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
@@ -96,9 +103,6 @@ class RegisterLoginVC: UIViewController, UIGestureRecognizerDelegate, Identifiab
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: animated)
         setNeedsStatusBarAppearanceUpdate()
-        setupSegmentedView()
-        setupTiltingBackground()
-        setupStackViewAnimation()
     }
     
     private func setupSegmentedView() {
