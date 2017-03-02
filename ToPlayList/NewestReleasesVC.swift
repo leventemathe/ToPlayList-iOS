@@ -48,10 +48,8 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         setupNoDataLabel()
         setupRefreshVC()
         setupLoadingAnimation()
-        
-        getGamesInLists {
-            self.initialLoadGames()
-        }
+        initialLoadGames()
+        loadingAnimationView.startAnimating()
     }
     
     private func setupDelegates() {
@@ -86,18 +84,17 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if gameSections.count < 1 && tableView.backgroundView != noDataLbl {
-            loadingAnimationView.startAnimating()
-        }
-        if !ListsUser.loggedIn && (toPlayList.count > 0 || playedList.count > 0) {
-            toPlayList.clear()
-            playedList.clear()
-            tableView.reloadData()
-        }
+        clearStars()
         getGamesInLists {
             self.tableView.reloadData()
             self.attachListListeners()
         }
+    }
+    
+    private func clearStars() {
+        toPlayList.clear()
+        playedList.clear()
+        tableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
