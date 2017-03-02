@@ -443,6 +443,7 @@
                         <outlet property="segmentedControl" destination="1Lp-75-qir" id="zEG-BK-ThG"/>
                         <outlet property="stackViewTopConstraint" destination="nFD-uQ-4nD" id="C9J-0X-Tmz"/>
                         <segue destination="Ncq-W1-497" kind="show" identifier="LoginToList" id="d3v-Gf-G1f"/>
+                        <segue destination="Ncq-W1-497" kind="show" identifier="LoginToListSkip" animates="NO" id="FhM-4C-LJm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qth-VT-qxu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -973,6 +974,7 @@
         <image name="to_play_list_bg" width="689" height="712"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="FhM-4C-LJm"/>
         <segue reference="a7x-K3-wKb"/>
     </inferredMetricsTieBreakers>
 </document>

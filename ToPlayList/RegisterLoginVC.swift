@@ -22,7 +22,7 @@ extension UIViewController
     }
 }
 
-class RegisterLoginVC: UIViewController, UIGestureRecognizerDelegate {
+class RegisterLoginVC: UIViewController, UIGestureRecognizerDelegate, IdentifiableVC {
     
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var containerView: UIView!

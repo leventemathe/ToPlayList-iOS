@@ -103,14 +103,21 @@ class ListVC: UIViewController, IdentifiableVC, LoadingAnimationDelegate {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(false, animated: animated)
-        navigationItem.hidesBackButton = true
-        setupLoadingAnimation()
-        loadingAnimationView.startAnimating()
+    override func viewDidLoad() {
         setupWelcomeMsg()
         setupSegmentedView()
         setupTiltingBackground()
+        setupLoadingAnimation()
+        loadingAnimationView.startAnimating()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setupNavBar(animated)
+    }
+    
+    private func setupNavBar(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+        navigationItem.hidesBackButton = true
     }
     
     private func setupWelcomeMsg() {

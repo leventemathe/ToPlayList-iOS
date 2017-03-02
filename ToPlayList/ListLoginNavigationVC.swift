@@ -10,15 +10,13 @@ import UIKit
 
 class ListLoginNavigationVC: UINavigationController {
     
-    override func viewWillAppear(_ animated: Bool) {
-        pickVC(animated)
+    override func viewDidLoad() {
+        pickVC()
     }
     
-    private func pickVC(_ animated: Bool) {
+    private func pickVC() {
         if ListsUser.loggedIn {
-            let storyBoard = UIStoryboard.init(name: "Main", bundle: nil)
-            let listVC = storyBoard.instantiateViewController(withIdentifier: ListVC.id)
-            pushViewController(listVC, animated: animated)
+            viewControllers[0].performSegue(withIdentifier: "LoginToListSkip", sender: self)
         }
     }
 }
