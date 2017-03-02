@@ -655,6 +655,7 @@
                     <connections>
                         <outlet property="emailField" destination="orn-Kh-yoD" id="0UK-82-Ctw"/>
                         <outlet property="errorView" destination="LYZ-6y-1iu" id="1sq-hl-ilV"/>
+                        <outlet property="loginBtn" destination="Jqc-Jd-uZC" id="Hft-Fb-yxt"/>
                         <outlet property="passwordField" destination="Xey-vP-XH2" id="9I7-vi-Cyk"/>
                     </connections>
                 </viewController>
@@ -765,6 +766,7 @@
                         <outlet property="emailField" destination="aQG-98-NAc" id="rDa-Ic-ADk"/>
                         <outlet property="errorView" destination="tob-bF-awH" id="A7d-Nn-HhC"/>
                         <outlet property="passwordField" destination="11A-vH-9fZ" id="Xsn-Fr-X3K"/>
+                        <outlet property="registerBtn" destination="3jh-Rl-RCb" id="KOs-sT-CGL"/>
                         <outlet property="usernameField" destination="2vd-WL-Kmm" id="PU9-p7-CdE"/>
                     </connections>
                 </viewController>

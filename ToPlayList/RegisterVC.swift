@@ -16,6 +16,8 @@ class RegisterVC: UIViewController, IdentifiableVC {
     @IBOutlet weak var passwordField: LoginSceneTextFieldPassword!
     @IBOutlet weak var errorView: ErrorMessage!
     
+    @IBOutlet weak var registerBtn: LoginSceneButtonLogin!
+    
     @IBAction func registerClicked(_ sender: LoginSceneButtonLogin) {
         self.errorView.hide()
         
@@ -40,6 +42,8 @@ class RegisterVC: UIViewController, IdentifiableVC {
             return
         }
         
+        registerBtn.startLoadingAnimation()
+        
         // TODO recheck error codes
         FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
             if let error = error, let errorCode = FIRAuthErrorCode(rawValue: error._code) {
@@ -63,6 +67,7 @@ class RegisterVC: UIViewController, IdentifiableVC {
             } else {
                 self.registerSuccesful(username)
             }
+            self.registerBtn.stopLoadingAnimation()
         }
     }
     

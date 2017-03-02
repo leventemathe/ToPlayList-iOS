@@ -111,15 +111,6 @@ class ToPlayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFl
         return cellVerticalInterItemMargin
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        /*
-        cell.alpha = 0.0
-        UIView.animate(withDuration: 0.4) {
-            cell.alpha = 1.0
-        }
-        */
-    }
-    
     private func setupCellSizes() {
         collectionViewWidth = collectionView.bounds.size.width
         cellInsetMargin = 20.0

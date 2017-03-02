@@ -15,7 +15,9 @@ class LoginVC: UIViewController, IdentifiableVC {
     @IBOutlet weak var emailField: LoginSceneTextFieldEmail!
     @IBOutlet weak var passwordField: LoginSceneTextFieldPassword!
     @IBOutlet weak var errorView: ErrorMessage!
-
+    
+    @IBOutlet weak var loginBtn: LoginSceneButtonLogin!
+    
     @IBAction func loginClicked(_ sender: LoginSceneButtonLogin) {
         self.errorView.hide()
         
@@ -34,6 +36,8 @@ class LoginVC: UIViewController, IdentifiableVC {
             self.errorView.show(withText: "Please provide a password!")
             return
         }
+        
+        loginBtn.startLoadingAnimation()
         
         // TODO recheck error codes!
         FIRAuth.auth()?.signIn(withEmail: email, password: password) { (user, error) in
@@ -67,6 +71,8 @@ class LoginVC: UIViewController, IdentifiableVC {
             } else {
                 self.loginSuccesful()
             }
+            
+            self.loginBtn.stopLoadingAnimation()
         }
     }
     

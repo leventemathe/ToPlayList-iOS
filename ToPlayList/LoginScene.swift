@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 class LoginSceneTextField: UITextField, RoundedCorners, Bordered, TextFieldMargin, CustomClearButton {
     
@@ -46,7 +47,45 @@ class LoginSceneTextFieldPassword: LoginSceneTextField, ColoredPlaceholderText {
 
 class LoginSceneButtonLogin: UIButton, RoundedCorners {
     
+    private var loadingAnimationView: NVActivityIndicatorView?
+    
     override func awakeFromNib() {
         addRoundedCorners(frame.height / 2.0)
     }
+    
+    private func setupLoadingAnimation() {
+        let width: CGFloat = 20.0
+        let height: CGFloat = width
+        
+        let x: CGFloat = (self.frame.size.width / 2.0) - (width / 2.0)
+        let y: CGFloat = (self.frame.size.height / 2.0) - (height / 2.0)
+        
+        let frame = CGRect(x: x, y: y, width: width, height: height)
+        
+        loadingAnimationView = NVActivityIndicatorView(frame: frame, type: .ballClipRotate, color: UIColor.white, padding: 0.0)
+        
+        addSubview(loadingAnimationView!)
+    }
+    
+    func startLoadingAnimation() {
+        if loadingAnimationView == nil {
+            setupLoadingAnimation()
+        }
+        titleLabel?.removeFromSuperview()
+        loadingAnimationView?.startAnimating()
+    }
+    
+    func stopLoadingAnimation() {
+        if loadingAnimationView == nil {
+            setupLoadingAnimation()
+        }
+        addSubview(titleLabel!)
+        loadingAnimationView?.stopAnimating()
+    }
 }
+
+
+
+
+
+
