@@ -24,19 +24,13 @@ class ToPlayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFl
     
     var loadingAnimationDelegate: LoadingAnimationDelegate?
     
-    private var toPlayList = List(ListsEndpoints.List.TO_PLAY_LIST) {
-        didSet {
-            collectionView.reloadData()
-            print("reloading collection view becasue didSet")
-            if toPlayList.count > 0 {
-                listEmptyLabels.isHidden = true
-            }
-        }
-    }
+    private var toPlayList = List(ListsEndpoints.List.TO_PLAY_LIST)
+    
+    private var toPlayListListenerAdd: ListsListenerReference?
+    private var toPlayListListenerRemove: ListsListenerReference?
     
     override func viewDidLoad() {
         setupDelegates()
-        getToPlayList()
     }
     
     private func setupDelegates() {
@@ -44,7 +38,67 @@ class ToPlayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFl
         collectionView.dataSource = self
     }
     
-    private func getToPlayList() {
+    override func viewWillAppear(_ animated: Bool) {
+        getToPlayList {
+            self.attachListeners()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        removeListeners()
+    }
+    
+    private func attachListeners() {
+        listenToToPlayList(.add, withOnChange: { game in
+            if self.toPlayList.add(game) {
+                self.setContent()
+            }
+        })
+        listenToToPlayList(.remove, withOnChange: { game in
+            self.toPlayList.remove(game)
+            self.setContent()
+        })
+    }
+    
+    private func listenToToPlayList(_ action: ListsListenerAction, withOnChange onChange: @escaping (Game)->()) {
+        ListsList.instance.listenToList(ListsEndpoints.List.TO_PLAY_LIST, withAction: action, withListenerAttached: { result in
+            switch result {
+            case .succes(let ref):
+                self.listListenerAttachmentSuccesful(action, forReference: ref)
+            case .failure(let error):
+                switch error {
+                default:
+                    Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_LISTS_ERROR, forVC: self)
+                }
+            }
+        }, withOnChange: { result in
+            switch result {
+            case .succes(let game):
+                onChange(game)
+            case .failure(let error):
+                switch error {
+                default:
+                    Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_LISTS_ERROR, forVC: self)
+                }
+            }
+        })
+    }
+    
+    private func listListenerAttachmentSuccesful(_ action: ListsListenerAction, forReference ref: ListsListenerReference) {
+        switch action {
+        case .add:
+            self.toPlayListListenerAdd = ref
+        case .remove:
+            self.toPlayListListenerRemove = ref
+        }
+    }
+    
+    private func removeListeners() {
+        toPlayListListenerAdd?.removeListener()
+        toPlayListListenerRemove?.removeListener()
+    }
+    
+    private func getToPlayList(_ onComplete: @escaping ()->()) {
         ListsList.instance.getToPlayList { result in
             self.loadingAnimationDelegate?.stopAnimating()
             
@@ -56,21 +110,64 @@ class ToPlayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFl
                 }
             case .succes(let list):
                 self.toPlayList = list
-                print("dowloaded toPlayList")
             }
-            
-            if self.toPlayList.count > 0 {
-                self.animateCollectionView()
-            } else {
-                self.listEmptyLabels.isHidden = false
+            self.setContent()
+            onComplete()
+        }
+    }
+    
+    private func setContent() {
+        collectionView.reloadData()
+        if toPlayList.count < 1 {
+            if listEmptyLabels.isHidden {
+                swapToListEmptyLabels()
+            }
+        } else {
+            if !listEmptyLabels.isHidden {
+                swapToCollectionView()
             }
         }
     }
     
-    private func animateCollectionView() {
+    private func swapToListEmptyLabels() {
+        animateCollectionViewDisappearance()
+        animateListEmptyLabelsAppearance()
+    }
+    
+    private func swapToCollectionView() {
+        animateListEmptyLabelsDisappearance()
+        animateCollectionViewAppearance()
+    }
+    
+    private func animateListEmptyLabelsAppearance() {
+        listEmptyLabels.isHidden = false
+        listEmptyLabels.alpha = 0.0
+        UIView.animate(withDuration: 0.4, animations: {
+            self.listEmptyLabels.alpha = 1.0
+        })
+    }
+    
+    private func animateCollectionViewAppearance() {
+        collectionView.isHidden = false
         collectionView.alpha = 0.0
         UIView.animate(withDuration: 0.4, animations: {
             self.collectionView.alpha = 1.0
+        })
+    }
+    
+    private func animateListEmptyLabelsDisappearance() {
+        UIView.animate(withDuration: 0.4, animations: {
+            self.listEmptyLabels.alpha = 0.0
+        }, completion: { success in
+            self.listEmptyLabels.isHidden = true
+        })
+    }
+    
+    private func animateCollectionViewDisappearance() {
+        UIView.animate(withDuration: 0.4, animations: {
+            self.collectionView.alpha = 0.0
+        }, completion: { success in
+            self.collectionView.isHidden = true
         })
     }
     
