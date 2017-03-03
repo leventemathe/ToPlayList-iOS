@@ -38,6 +38,11 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     private var toPlayListListenerRemove: ListsListenerReference?
     private var playedListListenerRemove: ListsListenerReference?
     
+    private var shouldRemoveToPlayListListenerAdd = 0
+    private var shouldRemoveToPlayListListenerRemove = 0
+    private var shouldRemovePlayedListListenerAdd = 0
+    private var shouldRemovePlayedListListenerRemove = 0
+    
     private var toPlayList = List(ListsEndpoints.List.TO_PLAY_LIST)
     private var playedList = List(ListsEndpoints.List.PLAYED_LIST)
     
@@ -96,7 +101,7 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         tableView.reloadData()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         removeListListeners()
     }
     
@@ -128,10 +133,33 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     private func removeListListeners() {
-        toPlayListListenerAdd?.removeListener()
-        playedListListenerAdd?.removeListener()
-        toPlayListListenerRemove?.removeListener()
-        playedListListenerRemove?.removeListener()
+        if toPlayListListenerAdd != nil {
+            toPlayListListenerAdd!.removeListener()
+            toPlayListListenerAdd = nil
+        } else {
+            shouldRemoveToPlayListListenerAdd += 1
+        }
+        
+        if playedListListenerAdd != nil {
+            playedListListenerAdd!.removeListener()
+            playedListListenerAdd = nil
+        } else {
+            shouldRemovePlayedListListenerAdd += 1
+        }
+        
+        if toPlayListListenerRemove != nil {
+            toPlayListListenerRemove!.removeListener()
+            toPlayListListenerRemove = nil
+        } else {
+            shouldRemoveToPlayListListenerRemove += 1
+        }
+        
+        if playedListListenerRemove != nil {
+            playedListListenerRemove!.removeListener()
+            playedListListenerRemove = nil
+        } else {
+            shouldRemovePlayedListListenerRemove += 1
+        }
     }
     
     private func listenToToPlayListAdd() {
@@ -139,6 +167,7 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
             if self.toPlayList.add(game) {
                 self.tableView.reloadData()
             }
+            print("set content newest releases")
         }
     }
     
@@ -147,6 +176,7 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
             if self.playedList.add(game) {
                 self.tableView.reloadData()
             }
+            print("set content newest releases")
         }
     }
     
@@ -154,6 +184,7 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         listenToList(ListsEndpoints.List.TO_PLAY_LIST, withAction: .remove) { game in
             self.toPlayList.remove(game)
             self.tableView.reloadData()
+            print("set content newest releases")
         }
     }
     
@@ -161,6 +192,7 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         listenToList(ListsEndpoints.List.PLAYED_LIST, withAction: .remove) { game in
             self.playedList.remove(game)
             self.tableView.reloadData()
+            print("set content newest releases")
         }
     }
 
@@ -193,14 +225,34 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         case .add:
             if list == ListsEndpoints.List.TO_PLAY_LIST {
                 self.toPlayListListenerAdd = ref
+                if self.shouldRemoveToPlayListListenerAdd > 0 {
+                    self.toPlayListListenerAdd!.removeListener()
+                    self.toPlayListListenerAdd = nil
+                    self.shouldRemoveToPlayListListenerAdd -= 1
+                }
             } else if list == ListsEndpoints.List.PLAYED_LIST {
                 self.playedListListenerAdd = ref
+                if self.shouldRemovePlayedListListenerAdd > 0 {
+                    self.playedListListenerAdd!.removeListener()
+                    self.playedListListenerAdd = nil
+                    self.shouldRemovePlayedListListenerAdd -= 1
+                }
             }
         case .remove:
             if list == ListsEndpoints.List.TO_PLAY_LIST {
                 self.toPlayListListenerRemove = ref
+                if self.shouldRemoveToPlayListListenerRemove > 0 {
+                    self.toPlayListListenerRemove!.removeListener()
+                    self.toPlayListListenerRemove = nil
+                    self.shouldRemoveToPlayListListenerRemove -= 1
+                }
             } else if list == ListsEndpoints.List.PLAYED_LIST {
                 self.playedListListenerRemove = ref
+                if self.shouldRemovePlayedListListenerRemove > 0 {
+                    self.playedListListenerRemove!.removeListener()
+                    self.playedListListenerRemove = nil
+                    self.shouldRemovePlayedListListenerRemove -= 1
+                }
             }
         }
     }
