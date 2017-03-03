@@ -173,12 +173,10 @@ class ListVC: UIViewController, IdentifiableVC, LoadingAnimationDelegate {
     }
     
     func startAnimating() {
-        print("startanimating called")
         loadingAnimationView.startAnimating()
     }
     
     func stopAnimating() {
-        print("stopanimating called")
         loadingAnimationView.stopAnimating()
     }
 }

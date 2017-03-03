@@ -23,7 +23,6 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     private var _gameSections = [GameSection]() {
         didSet {
             tableView.reloadData()
-            print("reloading data because gameSections was set")
         }
     }
     
@@ -137,39 +136,31 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     private func listenToToPlayListAdd() {
         listenToList(ListsEndpoints.List.TO_PLAY_LIST, withAction: .add) { game in
-            print("added \(game) to toPlay list")
             if self.toPlayList.add(game) {
                 self.tableView.reloadData()
-                print("reloading table data because toplay list add")
             }
         }
     }
     
     private func listenToPlayedListAdd() {
         listenToList(ListsEndpoints.List.PLAYED_LIST, withAction: .add) { game in
-            print("added \(game) to played list")
             if self.playedList.add(game) {
                 self.tableView.reloadData()
-                print("reloading table data because played list add")
             }
         }
     }
     
     private func listenToToPlayListRemove() {
         listenToList(ListsEndpoints.List.TO_PLAY_LIST, withAction: .remove) { game in
-            print("removed \(game) from toPlay list")
             self.toPlayList.remove(game)
             self.tableView.reloadData()
-            print("reloading table data")
         }
     }
     
     private func listenToPlayedListRemove() {
         listenToList(ListsEndpoints.List.PLAYED_LIST, withAction: .remove) { game in
-            print("removed \(game) from played list")
             self.playedList.remove(game)
             self.tableView.reloadData()
-            print("reloading table data")
         }
     }
 

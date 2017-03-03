@@ -29,6 +29,9 @@ class ToPlayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFl
     private var toPlayListListenerAdd: ListsListenerReference?
     private var toPlayListListenerRemove: ListsListenerReference?
     
+    private var shouldRemoveToPlayListListenerAdd = 0
+    private var shouldRemoveToPlayListListenerRemove = 0
+    
     override func viewDidLoad() {
         setupDelegates()
     }
@@ -39,16 +42,19 @@ class ToPlayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFl
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        //print("view will appear")
         getToPlayList {
             self.attachListeners()
         }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
+        //print("view did disappear")
         removeListeners()
     }
     
     private func attachListeners() {
+        //print("attaching listeners")
         listenToToPlayList(.add, withOnChange: { game in
             if self.toPlayList.add(game) {
                 self.setContent()
@@ -88,14 +94,36 @@ class ToPlayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFl
         switch action {
         case .add:
             self.toPlayListListenerAdd = ref
+            if self.shouldRemoveToPlayListListenerAdd > 0 {
+                self.toPlayListListenerAdd!.removeListener()
+                self.toPlayListListenerAdd = nil
+                self.shouldRemoveToPlayListListenerAdd -= 1
+            }
         case .remove:
             self.toPlayListListenerRemove = ref
+            if self.shouldRemoveToPlayListListenerRemove > 0 {
+                self.toPlayListListenerRemove!.removeListener()
+                self.toPlayListListenerRemove = nil
+                self.shouldRemoveToPlayListListenerRemove -= 1
+            }
         }
     }
     
     private func removeListeners() {
-        toPlayListListenerAdd?.removeListener()
-        toPlayListListenerRemove?.removeListener()
+        //print("removing listeners")
+        if toPlayListListenerAdd != nil {
+            toPlayListListenerAdd!.removeListener()
+            toPlayListListenerAdd = nil
+        } else {
+            shouldRemoveToPlayListListenerAdd += 1
+        }
+        
+        if toPlayListListenerRemove != nil {
+            toPlayListListenerRemove!.removeListener()
+            toPlayListListenerRemove = nil
+        } else {
+            shouldRemoveToPlayListListenerRemove += 1
+        }
     }
     
     private func getToPlayList(_ onComplete: @escaping ()->()) {
@@ -116,25 +144,32 @@ class ToPlayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFl
         }
     }
     
+    private var listWasEmptyLastTime = true
+    
     private func setContent() {
+        print("set content")
         collectionView.reloadData()
         if toPlayList.count < 1 {
-            if listEmptyLabels.isHidden {
+            if !listWasEmptyLastTime {
                 swapToListEmptyLabels()
             }
+            listWasEmptyLastTime = true
         } else {
-            if !listEmptyLabels.isHidden {
+            if listWasEmptyLastTime {
                 swapToCollectionView()
             }
+            listWasEmptyLastTime = false
         }
     }
     
     private func swapToListEmptyLabels() {
+        print("swapping to list empty")
         animateCollectionViewDisappearance()
         animateListEmptyLabelsAppearance()
     }
     
     private func swapToCollectionView() {
+        print("swapping to collection view")
         animateListEmptyLabelsDisappearance()
         animateCollectionViewAppearance()
     }
@@ -159,15 +194,19 @@ class ToPlayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFl
         UIView.animate(withDuration: 0.4, animations: {
             self.listEmptyLabels.alpha = 0.0
         }, completion: { success in
-            self.listEmptyLabels.isHidden = true
+            if success {
+                self.listEmptyLabels.isHidden = true
+            }
         })
     }
     
     private func animateCollectionViewDisappearance() {
-        UIView.animate(withDuration: 0.4, animations: {
+        UIView.animate(withDuration: 3.0, animations: {
             self.collectionView.alpha = 0.0
         }, completion: { success in
-            self.collectionView.isHidden = true
+            if success {
+                self.collectionView.isHidden = true
+            }
         })
     }
     

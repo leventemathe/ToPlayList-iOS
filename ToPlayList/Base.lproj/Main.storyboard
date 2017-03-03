@@ -857,12 +857,12 @@
                             </stackView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="dMS-vq-yuX" secondAttribute="trailing" id="Et0-oD-tCW"/>
-                            <constraint firstItem="GWh-hN-FcO" firstAttribute="top" secondItem="dMS-vq-yuX" secondAttribute="bottom" id="FC9-Of-bTM"/>
-                            <constraint firstItem="dMS-vq-yuX" firstAttribute="top" secondItem="vE8-A5-wpx" secondAttribute="bottom" id="Kok-aI-etV"/>
+                            <constraint firstAttribute="trailing" secondItem="dMS-vq-yuX" secondAttribute="trailing" priority="999" id="Et0-oD-tCW"/>
+                            <constraint firstItem="GWh-hN-FcO" firstAttribute="top" secondItem="dMS-vq-yuX" secondAttribute="bottom" priority="999" id="FC9-Of-bTM"/>
+                            <constraint firstItem="dMS-vq-yuX" firstAttribute="top" secondItem="vE8-A5-wpx" secondAttribute="bottom" priority="999" id="Kok-aI-etV"/>
                             <constraint firstItem="ugs-81-o8s" firstAttribute="centerY" secondItem="s7f-6Y-Epz" secondAttribute="centerY" priority="999" id="OUH-TN-4YB"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ugs-81-o8s" secondAttribute="trailing" priority="999" constant="32" id="Qbq-P4-7C7"/>
-                            <constraint firstItem="dMS-vq-yuX" firstAttribute="leading" secondItem="s7f-6Y-Epz" secondAttribute="leading" id="VcI-Kj-3ns"/>
+                            <constraint firstItem="dMS-vq-yuX" firstAttribute="leading" secondItem="s7f-6Y-Epz" secondAttribute="leading" priority="999" id="VcI-Kj-3ns"/>
                             <constraint firstItem="ugs-81-o8s" firstAttribute="leading" secondItem="s7f-6Y-Epz" secondAttribute="leadingMargin" priority="999" constant="32" id="cA0-oq-dUy"/>
                         </constraints>
                     </view>

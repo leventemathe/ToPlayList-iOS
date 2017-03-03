@@ -11,7 +11,7 @@
 		4A1CC3C7C0A5B8E8CC4E8767 /* Pods_ToPlayList_ToPlayListUnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87CF1429DC57C621EF42890E /* Pods_ToPlayList_ToPlayListUnitTests.framework */; };
 		D70B03231E0C1F9500F67E7A /* IGDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70B03221E0C1F9500F67E7A /* IGDB.swift */; };
 		D71981151E264D31005823C2 /* ListLoginNavigationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71981141E264D31005823C2 /* ListLoginNavigationVC.swift */; };
-		D71981171E26A2A5005823C2 /* UpcomingReleases.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71981161E26A2A5005823C2 /* UpcomingReleases.swift */; };
+		D71981171E26A2A5005823C2 /* UpcomingReleasesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71981161E26A2A5005823C2 /* UpcomingReleasesVC.swift */; };
 		D71981191E26A337005823C2 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71981181E26A337005823C2 /* LoginVC.swift */; };
 		D719811B1E26A389005823C2 /* ListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D719811A1E26A389005823C2 /* ListVC.swift */; };
 		D719811D1E26AB3F005823C2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D719811C1E26AB3F005823C2 /* GoogleService-Info.plist */; };
@@ -80,7 +80,7 @@
 		CE1015AB877BDCDC510C82BC /* Pods_ToPlayList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ToPlayList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D70B03221E0C1F9500F67E7A /* IGDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGDB.swift; sourceTree = "<group>"; };
 		D71981141E264D31005823C2 /* ListLoginNavigationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListLoginNavigationVC.swift; sourceTree = "<group>"; };
-		D71981161E26A2A5005823C2 /* UpcomingReleases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpcomingReleases.swift; sourceTree = "<group>"; };
+		D71981161E26A2A5005823C2 /* UpcomingReleasesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpcomingReleasesVC.swift; sourceTree = "<group>"; };
 		D71981181E26A337005823C2 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		D719811A1E26A389005823C2 /* ListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListVC.swift; sourceTree = "<group>"; };
 		D719811C1E26AB3F005823C2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -246,7 +246,7 @@
 			children = (
 				D75150271E34BB9F00EDA802 /* MainTabVC.swift */,
 				D726BC871E0ABDD800D6C9CD /* NewestReleasesVC.swift */,
-				D71981161E26A2A5005823C2 /* UpcomingReleases.swift */,
+				D71981161E26A2A5005823C2 /* UpcomingReleasesVC.swift */,
 				D795B00C1E1DB3D700776670 /* GameSection.swift */,
 				D71E51561E257BF100C7F920 /* GameDetailsVC.swift */,
 				D71981141E264D31005823C2 /* ListLoginNavigationVC.swift */,
@@ -576,7 +576,7 @@
 				D76B47FD1E197CCD00D18DDF /* GameIDs.swift in Sources */,
 				D795B00D1E1DB3D700776670 /* GameSection.swift in Sources */,
 				D7A6F04E1E65CD2900ED66E5 /* LoadingAnimationDelegate.swift in Sources */,
-				D71981171E26A2A5005823C2 /* UpcomingReleases.swift in Sources */,
+				D71981171E26A2A5005823C2 /* UpcomingReleasesVC.swift in Sources */,
 				D719812A1E26F7AC005823C2 /* ColoredPlaceholderText.swift in Sources */,
 				D7CC7D0E1E3913E60027BE6F /* RegisterLoginVC.swift in Sources */,
 				D7B8C86B1E2D16C700656E64 /* ErrorMessage.swift in Sources */,
