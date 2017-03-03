@@ -94,30 +94,45 @@ class ToPlayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFl
         switch action {
         case .add:
             self.toPlayListListenerAdd = ref
-            if self.shouldRemoveToPlayListListenerAdd > 0 {
-                self.toPlayListListenerAdd!.removeListener()
-                self.toPlayListListenerAdd = nil
-                self.shouldRemoveToPlayListListenerAdd -= 1
-            }
+            self.removeLateToPlayListListenerAdd()
         case .remove:
             self.toPlayListListenerRemove = ref
-            if self.shouldRemoveToPlayListListenerRemove > 0 {
-                self.toPlayListListenerRemove!.removeListener()
-                self.toPlayListListenerRemove = nil
-                self.shouldRemoveToPlayListListenerRemove -= 1
-            }
+            self.removeLatePlayedListListenerRemove()
+        }
+    }
+    
+    private func removeLateToPlayListListenerAdd() {
+        if shouldRemoveToPlayListListenerAdd > 0 {
+            toPlayListListenerAdd!.removeListener()
+            toPlayListListenerAdd = nil
+            shouldRemoveToPlayListListenerAdd -= 1
+        }
+    }
+    
+    private func removeLatePlayedListListenerRemove() {
+        if shouldRemoveToPlayListListenerRemove > 0 {
+            toPlayListListenerRemove!.removeListener()
+            toPlayListListenerRemove = nil
+            shouldRemoveToPlayListListenerRemove -= 1
         }
     }
     
     private func removeListeners() {
         //print("removing listeners")
+        removeToPlayListListenerAdd()
+        removeToPlayListListenerRemove()
+    }
+    
+    private func removeToPlayListListenerAdd() {
         if toPlayListListenerAdd != nil {
             toPlayListListenerAdd!.removeListener()
             toPlayListListenerAdd = nil
         } else {
             shouldRemoveToPlayListListenerAdd += 1
         }
-        
+    }
+    
+    private func removeToPlayListListenerRemove() {
         if toPlayListListenerRemove != nil {
             toPlayListListenerRemove!.removeListener()
             toPlayListListenerRemove = nil

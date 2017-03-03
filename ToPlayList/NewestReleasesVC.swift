@@ -133,27 +133,40 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     private func removeListListeners() {
+        removeToPlayListListenerAdd()
+        removePlayedListListenerAdd()
+        removeToPlayListListenerRemove()
+        removePlayedListListenerRemove()
+    }
+    
+    func removeToPlayListListenerAdd() {
         if toPlayListListenerAdd != nil {
             toPlayListListenerAdd!.removeListener()
             toPlayListListenerAdd = nil
         } else {
             shouldRemoveToPlayListListenerAdd += 1
         }
-        
+    }
+    
+    func removePlayedListListenerAdd() {
         if playedListListenerAdd != nil {
             playedListListenerAdd!.removeListener()
             playedListListenerAdd = nil
         } else {
             shouldRemovePlayedListListenerAdd += 1
         }
-        
+    }
+    
+    func removeToPlayListListenerRemove() {
         if toPlayListListenerRemove != nil {
             toPlayListListenerRemove!.removeListener()
             toPlayListListenerRemove = nil
         } else {
             shouldRemoveToPlayListListenerRemove += 1
         }
-        
+    }
+    
+    func removePlayedListListenerRemove() {
         if playedListListenerRemove != nil {
             playedListListenerRemove!.removeListener()
             playedListListenerRemove = nil
@@ -225,35 +238,51 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         case .add:
             if list == ListsEndpoints.List.TO_PLAY_LIST {
                 self.toPlayListListenerAdd = ref
-                if self.shouldRemoveToPlayListListenerAdd > 0 {
-                    self.toPlayListListenerAdd!.removeListener()
-                    self.toPlayListListenerAdd = nil
-                    self.shouldRemoveToPlayListListenerAdd -= 1
-                }
+                self.removeLateToPlayListListenerAdd()
             } else if list == ListsEndpoints.List.PLAYED_LIST {
                 self.playedListListenerAdd = ref
-                if self.shouldRemovePlayedListListenerAdd > 0 {
-                    self.playedListListenerAdd!.removeListener()
-                    self.playedListListenerAdd = nil
-                    self.shouldRemovePlayedListListenerAdd -= 1
-                }
+                self.removeLatePlayedListListenerAdd()
             }
         case .remove:
             if list == ListsEndpoints.List.TO_PLAY_LIST {
                 self.toPlayListListenerRemove = ref
-                if self.shouldRemoveToPlayListListenerRemove > 0 {
-                    self.toPlayListListenerRemove!.removeListener()
-                    self.toPlayListListenerRemove = nil
-                    self.shouldRemoveToPlayListListenerRemove -= 1
-                }
+                self.removeLateToPlayListListenerRemove()
             } else if list == ListsEndpoints.List.PLAYED_LIST {
                 self.playedListListenerRemove = ref
-                if self.shouldRemovePlayedListListenerRemove > 0 {
-                    self.playedListListenerRemove!.removeListener()
-                    self.playedListListenerRemove = nil
-                    self.shouldRemovePlayedListListenerRemove -= 1
-                }
+                self.removeLatePlayedListListenerRemove()
             }
+        }
+    }
+    
+    private func removeLateToPlayListListenerAdd() {
+        if shouldRemoveToPlayListListenerAdd > 0 {
+            toPlayListListenerAdd!.removeListener()
+            toPlayListListenerAdd = nil
+            shouldRemoveToPlayListListenerAdd -= 1
+        }
+    }
+    
+    private func removeLatePlayedListListenerAdd() {
+        if shouldRemovePlayedListListenerAdd > 0 {
+            playedListListenerAdd!.removeListener()
+            playedListListenerAdd = nil
+            shouldRemovePlayedListListenerAdd -= 1
+        }
+    }
+    
+    private func removeLateToPlayListListenerRemove() {
+        if shouldRemoveToPlayListListenerRemove > 0 {
+            toPlayListListenerRemove!.removeListener()
+            toPlayListListenerRemove = nil
+            shouldRemoveToPlayListListenerRemove -= 1
+        }
+    }
+    
+    private func removeLatePlayedListListenerRemove() {
+        if shouldRemovePlayedListListenerRemove > 0 {
+            playedListListenerRemove!.removeListener()
+            playedListListenerRemove = nil
+            shouldRemovePlayedListListenerRemove -= 1
         }
     }
     
