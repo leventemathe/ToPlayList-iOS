@@ -159,18 +159,18 @@ class ToPlayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFl
         }
     }
     
-    private var listWasEmptyLastTime = true
+    private var listWasEmptyLastTime: Bool?
     
     private func setContent() {
         print("set content in toPlay list")
         collectionView.reloadData()
         if toPlayList.count < 1 {
-            if !listWasEmptyLastTime {
+            if listWasEmptyLastTime == nil || !listWasEmptyLastTime!{
                 swapToListEmptyLabels()
             }
             listWasEmptyLastTime = true
         } else {
-            if listWasEmptyLastTime {
+            if listWasEmptyLastTime == nil || listWasEmptyLastTime! {
                 swapToCollectionView()
             }
             listWasEmptyLastTime = false
