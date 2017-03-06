@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ToPlayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+class ToPlayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, ErrorHandlerDelegate {
  
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var listEmptyLabels: UIStackView!
@@ -238,6 +238,7 @@ class ToPlayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFl
             if let game = toPlayList[indexPath.row] {
                 cell.update(game)
             }
+            cell.networkErrorHandlerDelegate = self
             return cell
         }
         return UICollectionViewCell()
@@ -270,4 +271,15 @@ class ToPlayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFl
         cellWidth = collectionViewWidth / CELLS_PER_COLUMNS - (CELLS_PER_COLUMNS-1) * cellInterItemMargin - (2.0 * cellInsetMargin) / CELLS_PER_COLUMNS
         cellHeight = cellWidth * CELL_ASPECT_RATIO
     }
+    
+    func handleError(_ message: String) {
+        Alerts.alertWithOKButton(withMessage: message, forVC: self)
+    }
 }
+
+
+
+
+
+
+
