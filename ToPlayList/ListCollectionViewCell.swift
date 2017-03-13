@@ -43,8 +43,12 @@ class ListCollectionViewCell: UICollectionViewCell, ReusableView, UIGestureRecog
     // This masked view contains Content, and masks swiping while allowing drop shadows for the cell
     @IBOutlet weak var maskedView: UIView!
     
-    @IBOutlet weak var backgroundViewText: UILabel!
-    @IBOutlet weak var backgroundViewView: UIView!
+    @IBOutlet weak var backgroundPlayedViewText: UILabel!
+    @IBOutlet weak var backgroundPlayedViewView: UIView!
+    
+    @IBOutlet weak var backgroundDeleteViewView: UIView!
+    
+    @IBOutlet weak var backgroundDeleteViewText: UILabel!
     
     @IBOutlet weak var content: UIView!
     @IBOutlet weak var contentLeftConstraint: NSLayoutConstraint!
@@ -53,10 +57,15 @@ class ListCollectionViewCell: UICollectionViewCell, ReusableView, UIGestureRecog
     private var contentLeftConstant: CGFloat!
     private var contentRightConstant: CGFloat!
     
-    private var backgroundViewStartingColor: UIColor!
-    private var backgroundViewTargetColor = UIColor.MyCustomColors.orange
-    private var backgroundTextStartingColor: UIColor!
-    private var backgroundTextTargetColor = UIColor.white
+    private var backgroundViewPlayedStartingColor: UIColor!
+    private var backgroundViewPlayedTargetColor = UIColor.MyCustomColors.orange
+    private var backgroundTextPlayedStartingColor: UIColor!
+    private var backgroundTextPlayedTargetColor = UIColor.white
+    
+    private var backgroundViewDeleteStartingColor: UIColor!
+    private var backgroundViewDeleteTargetColor = UIColor.MyCustomColors.red
+    private var backgroundTextDeleteStartingColor: UIColor!
+    private var backgroundTextDeleteTargetColor = UIColor.white
     
     private var panRecognizer: UIPanGestureRecognizer!
     private var panStartPoint: CGPoint!
@@ -77,8 +86,10 @@ class ListCollectionViewCell: UICollectionViewCell, ReusableView, UIGestureRecog
     private func setupStartingValues() {
         contentLeftConstant = contentLeftConstraint.constant
         contentRightConstant = contentRightConstraint.constant
-        backgroundViewStartingColor = backgroundViewView.backgroundColor!
-        backgroundTextStartingColor = backgroundViewText.textColor!
+        backgroundViewPlayedStartingColor = backgroundPlayedViewView.backgroundColor!
+        backgroundTextPlayedStartingColor = backgroundPlayedViewText.textColor!
+        backgroundViewDeleteStartingColor = backgroundDeleteViewView.backgroundColor!
+        backgroundTextDeleteStartingColor = backgroundDeleteViewText.textColor!
     }
     
     private func setupPanRecognizer() {
@@ -125,29 +136,46 @@ class ListCollectionViewCell: UICollectionViewCell, ReusableView, UIGestureRecog
         let newPosX = currentPoint.x - panStartPoint.x
         moveContent(newPosX)
         
-        let progress: CGFloat = contentLeftConstraint.constant / backgroundEdge
+        //TODO set progress depending on which direction the user is swiping
+        let progress: CGFloat = contentLeftConstraint.constant / backgroundPlayedEdge
         changeColorView(progress)
         changeColorText(progress)
     }
     
     private func panEnded() {
         shouldPan = false
-        if contentLeftConstraint.constant >= backgroundEdge {
-            addGameToOtherList()
-        }
+        doNetworking()
         panEndedAnimation()
     }
     
-    private var backgroundEdge: CGFloat {
-        return backgroundViewView.bounds.size.width
+    private var backgroundPlayedEdge: CGFloat {
+        return backgroundPlayedViewView.bounds.size.width
+    }
+    
+    private var backgroundDeleteEdge: CGFloat {
+        return backgroundDeleteViewView.bounds.size.width
     }
     
     private func moveContent(_ position: CGFloat) {
-        let position = position > backgroundEdge ? backgroundEdge : position
-        
-        if position <= backgroundEdge && position > contentLeftConstant {
-            contentLeftConstraint.constant = position
-            contentRightConstraint.constant = -position
+        //let position = position > backgroundPlayedEdge ? backgroundPlayedEdge : position
+        var position = position
+        if position > backgroundPlayedEdge {
+            position = backgroundPlayedEdge
+        } else if -position > backgroundDeleteEdge {
+            position = -backgroundDeleteEdge
+        }
+        showHideNeededBackground(position)
+        contentLeftConstraint.constant = position
+        contentRightConstraint.constant = -position
+    }
+    
+    private func showHideNeededBackground(_ position: CGFloat) {
+        if position > 0 && backgroundPlayedViewView.isHidden {
+            backgroundPlayedViewView.isHidden = false
+            backgroundDeleteViewView.isHidden = true
+        } else if position < 0 && backgroundDeleteViewView.isHidden {
+            backgroundPlayedViewView.isHidden = true
+            backgroundDeleteViewView.isHidden = false
         }
     }
     
@@ -167,6 +195,14 @@ class ListCollectionViewCell: UICollectionViewCell, ReusableView, UIGestureRecog
         })
     }
     
+    private func doNetworking() {
+        if contentLeftConstraint.constant >= backgroundPlayedEdge {
+            addGameToOtherList()
+        } else if contentRightConstraint.constant >= backgroundDeleteEdge {
+            deleteGameFromToPlayList()
+        }
+    }
+    
     private func addGameToOtherList() {
         ListsList.instance.addGameToPlayedList({ result in
             switch result {
@@ -175,7 +211,20 @@ class ListCollectionViewCell: UICollectionViewCell, ReusableView, UIGestureRecog
             case .succes(_):
                 break
             }
+            print("added, yay")
         }, thisGame: _game)
+    }
+    
+    private func deleteGameFromToPlayList() {
+        ListsList.instance.removeGameFromToPlayList(_game) { result in
+            switch result {
+            case .failure(_):
+                self.networkErrorHandlerDelegate?.handleError(Alerts.UNKNOWN_ERROR)
+            case .succes(_):
+                break
+            }
+            print("deleted, yay")
+        }
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {

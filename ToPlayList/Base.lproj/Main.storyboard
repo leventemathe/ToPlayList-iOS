@@ -807,6 +807,24 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OOl-Me-3d5">
                                                     <rect key="frame" x="0.0" y="0.0" width="155" height="194"/>
                                                     <subviews>
+                                                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8xd-f6-Ntv">
+                                                            <rect key="frame" x="55" y="0.0" width="100" height="194"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delete" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eNt-yZ-Ggl">
+                                                                    <rect key="frame" x="20.5" y="8" width="60" height="178"/>
+                                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
+                                                                    <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" priority="999" constant="100" id="1Vs-dK-np1"/>
+                                                                <constraint firstItem="eNt-yZ-Ggl" firstAttribute="centerX" secondItem="8xd-f6-Ntv" secondAttribute="centerX" id="AKx-wh-Inx"/>
+                                                                <constraint firstAttribute="bottom" secondItem="eNt-yZ-Ggl" secondAttribute="bottom" constant="8" id="eVH-r0-Rb1"/>
+                                                                <constraint firstItem="eNt-yZ-Ggl" firstAttribute="top" secondItem="8xd-f6-Ntv" secondAttribute="top" constant="8" id="ieX-7Q-kjG"/>
+                                                            </constraints>
+                                                        </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HTo-Sy-RaI">
                                                             <rect key="frame" x="0.0" y="0.0" width="100" height="194"/>
                                                             <subviews>
@@ -821,16 +839,15 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="trailing" secondItem="tiA-7v-c1X" secondAttribute="trailing" constant="8" id="0lA-oU-feJ"/>
                                                                 <constraint firstItem="tiA-7v-c1X" firstAttribute="centerY" secondItem="HTo-Sy-RaI" secondAttribute="centerY" id="DgE-BJ-a8O"/>
-                                                                <constraint firstAttribute="width" constant="100" id="lPA-wC-nYe"/>
+                                                                <constraint firstAttribute="width" priority="999" constant="100" id="lPA-wC-nYe"/>
                                                                 <constraint firstItem="tiA-7v-c1X" firstAttribute="leading" secondItem="HTo-Sy-RaI" secondAttribute="leading" constant="8" id="lhM-sd-1eC"/>
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rxd-8M-oRX">
                                                             <rect key="frame" x="0.0" y="0.0" width="155" height="194"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eo7-s0-5pc">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="155" height="194"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Eo7-s0-5pc">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="155" height="164"/>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dark Souls" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h24-vv-DPG">
                                                                     <rect key="frame" x="0.0" y="164" width="155" height="30"/>
@@ -845,9 +862,13 @@
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
+                                                                <constraint firstItem="Eo7-s0-5pc" firstAttribute="leading" secondItem="rxd-8M-oRX" secondAttribute="leading" id="8cY-I1-XvY"/>
                                                                 <constraint firstAttribute="bottom" secondItem="h24-vv-DPG" secondAttribute="bottom" id="GfL-C1-hoc"/>
+                                                                <constraint firstAttribute="bottom" secondItem="Eo7-s0-5pc" secondAttribute="bottom" constant="30" id="OfW-Fv-3Ub"/>
                                                                 <constraint firstItem="h24-vv-DPG" firstAttribute="leading" secondItem="rxd-8M-oRX" secondAttribute="leading" id="Wdw-1S-R82"/>
                                                                 <constraint firstAttribute="trailing" secondItem="h24-vv-DPG" secondAttribute="trailing" id="e2W-rr-yuZ"/>
+                                                                <constraint firstItem="Eo7-s0-5pc" firstAttribute="top" secondItem="rxd-8M-oRX" secondAttribute="top" id="jvb-ZI-uPQ"/>
+                                                                <constraint firstAttribute="trailing" secondItem="Eo7-s0-5pc" secondAttribute="trailing" id="mba-Oe-cxG"/>
                                                             </constraints>
                                                         </view>
                                                     </subviews>
@@ -855,11 +876,14 @@
                                                     <constraints>
                                                         <constraint firstItem="rxd-8M-oRX" firstAttribute="leading" secondItem="OOl-Me-3d5" secondAttribute="leading" id="9bu-01-q0t"/>
                                                         <constraint firstAttribute="bottom" secondItem="rxd-8M-oRX" secondAttribute="bottom" id="Env-QO-Lkl"/>
-                                                        <constraint firstAttribute="bottom" secondItem="HTo-Sy-RaI" secondAttribute="bottom" id="HM6-4t-MSb"/>
-                                                        <constraint firstItem="HTo-Sy-RaI" firstAttribute="top" secondItem="OOl-Me-3d5" secondAttribute="top" id="UBW-VP-854"/>
+                                                        <constraint firstAttribute="bottom" secondItem="HTo-Sy-RaI" secondAttribute="bottom" priority="999" id="HM6-4t-MSb"/>
+                                                        <constraint firstItem="HTo-Sy-RaI" firstAttribute="top" secondItem="OOl-Me-3d5" secondAttribute="top" priority="999" id="UBW-VP-854"/>
                                                         <constraint firstItem="rxd-8M-oRX" firstAttribute="top" secondItem="OOl-Me-3d5" secondAttribute="top" id="YNW-D7-wlZ"/>
+                                                        <constraint firstItem="8xd-f6-Ntv" firstAttribute="top" secondItem="OOl-Me-3d5" secondAttribute="top" priority="999" id="YjK-SD-vGP"/>
+                                                        <constraint firstAttribute="bottom" secondItem="8xd-f6-Ntv" secondAttribute="bottom" priority="999" id="bc5-jM-OpC"/>
+                                                        <constraint firstAttribute="trailing" secondItem="8xd-f6-Ntv" secondAttribute="trailing" priority="999" id="cdU-EE-Svd"/>
                                                         <constraint firstAttribute="trailing" secondItem="rxd-8M-oRX" secondAttribute="trailing" id="h25-ua-ngZ"/>
-                                                        <constraint firstItem="HTo-Sy-RaI" firstAttribute="leading" secondItem="OOl-Me-3d5" secondAttribute="leading" id="y5a-E1-3WZ"/>
+                                                        <constraint firstItem="HTo-Sy-RaI" firstAttribute="leading" secondItem="OOl-Me-3d5" secondAttribute="leading" priority="999" id="y5a-E1-3WZ"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -871,8 +895,10 @@
                                             <constraint firstAttribute="bottom" secondItem="OOl-Me-3d5" secondAttribute="bottom" id="ju8-VZ-LEk"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="backgroundViewText" destination="tiA-7v-c1X" id="ce9-pj-0pB"/>
-                                            <outlet property="backgroundViewView" destination="HTo-Sy-RaI" id="UP4-77-STt"/>
+                                            <outlet property="backgroundDeleteViewText" destination="eNt-yZ-Ggl" id="P2y-4s-xXt"/>
+                                            <outlet property="backgroundDeleteViewView" destination="8xd-f6-Ntv" id="wnA-X8-B8K"/>
+                                            <outlet property="backgroundPlayedViewText" destination="tiA-7v-c1X" id="11v-1t-GhN"/>
+                                            <outlet property="backgroundPlayedViewView" destination="HTo-Sy-RaI" id="FG9-eH-kfM"/>
                                             <outlet property="content" destination="rxd-8M-oRX" id="ejT-gS-8th"/>
                                             <outlet property="contentLeftConstraint" destination="9bu-01-q0t" id="yH2-5W-VGF"/>
                                             <outlet property="contentRightConstraint" destination="h25-ua-ngZ" id="OSG-sy-4kB"/>

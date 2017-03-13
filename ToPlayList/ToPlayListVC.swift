@@ -15,6 +15,7 @@ class ToPlayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFl
     
     private let CELLS_PER_COLUMNS: CGFloat = 2.0
     private let CELL_ASPECT_RATIO: CGFloat = 1.42
+    private let CELL_TITLE_HEIGHT: CGFloat = 30.0
     private var collectionViewWidth: CGFloat!
     private var cellWidth: CGFloat!
     private var cellHeight: CGFloat!
@@ -269,7 +270,7 @@ class ToPlayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFl
         cellInterItemMargin = (cellInsetMargin + 10.0) / 2.0
         cellVerticalInterItemMargin = cellInterItemMargin * 2.0
         cellWidth = collectionViewWidth / CELLS_PER_COLUMNS - (CELLS_PER_COLUMNS-1) * cellInterItemMargin - (2.0 * cellInsetMargin) / CELLS_PER_COLUMNS
-        cellHeight = cellWidth * CELL_ASPECT_RATIO
+        cellHeight = cellWidth * CELL_ASPECT_RATIO + CELL_TITLE_HEIGHT
     }
     
     func handleError(_ message: String) {
