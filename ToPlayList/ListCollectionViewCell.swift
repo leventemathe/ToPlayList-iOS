@@ -67,6 +67,17 @@ class ListCollectionViewCell: UICollectionViewCell, ReusableView, UIGestureRecog
     private var backgroundTextDeleteStartingColor: UIColor!
     private var backgroundTextDeleteTargetColor = UIColor.white
     
+    private var backgroundPlayedEdge: CGFloat {
+        return backgroundPlayedViewView.bounds.size.width
+    }
+    
+    private var backgroundDeleteEdge: CGFloat {
+        return backgroundDeleteViewView.bounds.size.width
+    }
+    
+    private var doTresholdLeft: CGFloat!
+    private var doTresholdRight: CGFloat!
+    
     private var panRecognizer: UIPanGestureRecognizer!
     private var panStartPoint: CGPoint!
     
@@ -90,6 +101,8 @@ class ListCollectionViewCell: UICollectionViewCell, ReusableView, UIGestureRecog
         backgroundTextPlayedStartingColor = backgroundPlayedViewText.textColor!
         backgroundViewDeleteStartingColor = backgroundDeleteViewView.backgroundColor!
         backgroundTextDeleteStartingColor = backgroundDeleteViewText.textColor!
+        doTresholdLeft = backgroundPlayedEdge * 0.75
+        doTresholdRight = backgroundDeleteEdge * 0.75
     }
     
     private func setupPanRecognizer() {
@@ -135,25 +148,13 @@ class ListCollectionViewCell: UICollectionViewCell, ReusableView, UIGestureRecog
         let currentPoint = panRecognizer.translation(in: content)
         let newPosX = currentPoint.x - panStartPoint.x
         moveContent(newPosX)
-        
-        //TODO set progress depending on which direction the user is swiping
-        let progress: CGFloat = contentLeftConstraint.constant / backgroundPlayedEdge
-        changeColorView(progress)
-        changeColorText(progress)
+        animateColor(newPosX)
     }
     
     private func panEnded() {
         shouldPan = false
         doNetworking()
         panEndedAnimation()
-    }
-    
-    private var backgroundPlayedEdge: CGFloat {
-        return backgroundPlayedViewView.bounds.size.width
-    }
-    
-    private var backgroundDeleteEdge: CGFloat {
-        return backgroundDeleteViewView.bounds.size.width
     }
     
     private func moveContent(_ position: CGFloat) {
@@ -179,26 +180,98 @@ class ListCollectionViewCell: UICollectionViewCell, ReusableView, UIGestureRecog
         }
     }
     
-    private func changeColorView(_ progress: CGFloat) {
-        
+    private enum ColorState {
+        case to
+        case from
     }
     
-    private func changeColorText(_ progress: CGFloat) {
-        
+    private var colorStateLeft = ColorState.to
+    private var colorStateRight = ColorState.to
+    
+    private func animateColor(_ newPosX: CGFloat) {
+        if newPosX < 0 {
+            animateColorRight()
+        } else if newPosX > 0 {
+            animateColorLeft()
+        }
+    }
+    
+    private func animateColorLeft() {
+        if contentLeftConstraint.constant >= doTresholdLeft {
+            if case .to = colorStateLeft {
+                animateColorToTargetLeft()
+                colorStateLeft = .from
+            }
+        } else if contentLeftConstraint.constant <= doTresholdLeft {
+            if case .from = colorStateLeft {
+                animateColorFromTargetLeft()
+                colorStateLeft = .to
+            }
+        }
+    }
+    
+    private func animateColorRight() {
+        if contentRightConstraint.constant >= doTresholdRight {
+            if case .to = colorStateRight {
+                animateColorToTargetRight()
+                colorStateRight = .from
+            }
+        } else if contentRightConstraint.constant <= doTresholdRight {
+            if case .from = colorStateRight {
+                animateColorFromTargetRight()
+                colorStateRight = .to
+            }
+        }
+    }
+    
+    private func animateColorToTargetLeft() {
+        UIView.animate(withDuration: 0.4, animations: {
+            self.backgroundPlayedViewView.backgroundColor = self.backgroundViewPlayedTargetColor
+            self.backgroundPlayedViewText.textColor = self.backgroundTextPlayedTargetColor
+        })
+    }
+    
+    private func animateColorFromTargetLeft() {
+        UIView.animate(withDuration: 0.4, animations: {
+            self.backgroundPlayedViewView.backgroundColor = self.backgroundViewPlayedStartingColor
+            self.backgroundPlayedViewText.textColor = self.backgroundTextPlayedStartingColor
+        })
+    }
+    
+    private func animateColorToTargetRight() {
+        UIView.animate(withDuration: 0.4, animations: {
+            self.backgroundDeleteViewView.backgroundColor = self.backgroundViewDeleteTargetColor
+            self.backgroundDeleteViewText.textColor = self.backgroundTextDeleteTargetColor
+        })
+    }
+    
+    private func animateColorFromTargetRight() {
+        UIView.animate(withDuration: 0.4, animations: {
+            self.backgroundDeleteViewView.backgroundColor = self.backgroundViewDeleteStartingColor
+            self.backgroundDeleteViewText.textColor = self.backgroundTextDeleteStartingColor
+        })
     }
     
     private func panEndedAnimation() {
         UIView.animate(withDuration: 0.1, animations: {
             self.contentLeftConstraint.constant = self.contentLeftConstant
             self.contentRightConstraint.constant = self.contentRightConstant
+            if case .from = self.colorStateLeft {
+                self.backgroundPlayedViewView.backgroundColor = self.backgroundViewPlayedStartingColor
+                self.backgroundPlayedViewText.textColor = self.backgroundTextPlayedStartingColor
+            }
+            if case .from = self.colorStateRight {
+                self.backgroundDeleteViewView.backgroundColor = self.backgroundViewDeleteStartingColor
+                self.backgroundDeleteViewText.textColor = self.backgroundTextDeleteStartingColor
+            }
             self.layoutIfNeeded()
         })
     }
     
     private func doNetworking() {
-        if contentLeftConstraint.constant >= backgroundPlayedEdge {
+        if contentLeftConstraint.constant >= doTresholdLeft {
             addGameToOtherList()
-        } else if contentRightConstraint.constant >= backgroundDeleteEdge {
+        } else if contentRightConstraint.constant >= doTresholdRight {
             deleteGameFromToPlayList()
         }
     }
@@ -211,7 +284,6 @@ class ListCollectionViewCell: UICollectionViewCell, ReusableView, UIGestureRecog
             case .succes(_):
                 break
             }
-            print("added, yay")
         }, thisGame: _game)
     }
     
@@ -223,7 +295,6 @@ class ListCollectionViewCell: UICollectionViewCell, ReusableView, UIGestureRecog
             case .succes(_):
                 break
             }
-            print("deleted, yay")
         }
     }
     
