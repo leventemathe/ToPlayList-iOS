@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum ColorState {
+    case to
+    case from
+}
+
 class ListCollectionViewCell: UICollectionViewCell, ReusableView, UIGestureRecognizerDelegate, DropShadowed {
     
     
@@ -180,11 +185,6 @@ class ListCollectionViewCell: UICollectionViewCell, ReusableView, UIGestureRecog
         }
     }
     
-    private enum ColorState {
-        case to
-        case from
-    }
-    
     private var colorStateLeft = ColorState.to
     private var colorStateRight = ColorState.to
     
@@ -256,14 +256,6 @@ class ListCollectionViewCell: UICollectionViewCell, ReusableView, UIGestureRecog
         UIView.animate(withDuration: 0.1, animations: {
             self.contentLeftConstraint.constant = self.contentLeftConstant
             self.contentRightConstraint.constant = self.contentRightConstant
-            if case .from = self.colorStateLeft {
-                self.backgroundPlayedViewView.backgroundColor = self.backgroundViewPlayedStartingColor
-                self.backgroundPlayedViewText.textColor = self.backgroundTextPlayedStartingColor
-            }
-            if case .from = self.colorStateRight {
-                self.backgroundDeleteViewView.backgroundColor = self.backgroundViewDeleteStartingColor
-                self.backgroundDeleteViewText.textColor = self.backgroundTextDeleteStartingColor
-            }
             self.layoutIfNeeded()
         })
     }

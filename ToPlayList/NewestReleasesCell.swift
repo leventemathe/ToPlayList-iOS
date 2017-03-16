@@ -73,8 +73,10 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
     private var shouldPan = false
     
     @IBOutlet weak var content: UIView!
-    @IBOutlet weak var toPlay: UILabel!
-    @IBOutlet weak var played: UILabel!
+    @IBOutlet weak var toPlayView: UIView!
+    @IBOutlet weak var toPlayText: UILabel!
+    @IBOutlet weak var playedView: UIView!
+    @IBOutlet weak var playedText: UILabel!
     
     @IBOutlet weak var contentLeading: NSLayoutConstraint!
     @IBOutlet weak var contentTrailing: NSLayoutConstraint!
@@ -82,10 +84,28 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
     private var contentLeadingStartingConstant: CGFloat!
     private var contentTrailingStartingConstant: CGFloat!
     
-    private var toPlayStartingColor: UIColor!
-    private var playedStartingColor: UIColor!
-    private var toPlayTargetColor = UIColor.MyCustomColors.orange
-    private var playedTargetColor = UIColor.blue
+    private var toPlayViewStartingColor: UIColor!
+    private var playedViewStartingColor: UIColor!
+    private var toPlayViewTargetColor = UIColor.white
+    private var playedViewTargetColor = UIColor.MyCustomColors.orange
+    private var toPlayTextStartingColor: UIColor!
+    private var playedTextStartingColor: UIColor!
+    private var toPlayTextTargetColor = UIColor.MyCustomColors.orange
+    private var playedTextTargetColor = UIColor.white
+    
+    private var leftBackgroundEdge: CGFloat {
+        return playedView.frame.size.width
+    }
+    
+    private var rightBackgroundEdge: CGFloat {
+        return toPlayView.frame.size.width
+    }
+    
+    private var doTresholdLeft: CGFloat!
+    private var doTresholdRight: CGFloat!
+    
+    private var colorStateLeft = ColorState.to
+    private var colorStateRight = ColorState.to
     
     private var panRecognizer: UIPanGestureRecognizer!
     private var panStartPoint: CGPoint!
@@ -93,12 +113,27 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
     var networkErrorHandlerDelegate: ErrorHandlerDelegate?
     
     override func awakeFromNib() {
+        setupConstraints()
+        setupStartingValues()
+        setupGestureRecognizer()
+    }
+    
+    private func setupConstraints() {
         contentLeadingStartingConstant = contentLeading.constant
         contentTrailingStartingConstant = contentTrailing.constant
+    }
+    
+    private func setupStartingValues() {
+        toPlayViewStartingColor = toPlayView.backgroundColor
+        playedViewStartingColor = playedView.backgroundColor
+        toPlayTextStartingColor = toPlayText.textColor
+        playedTextStartingColor = playedText.textColor
         
-        toPlayStartingColor = toPlay.backgroundColor
-        playedStartingColor = played.backgroundColor
-        
+        doTresholdLeft = leftBackgroundEdge * 0.75
+        doTresholdRight = rightBackgroundEdge * 0.75
+    }
+    
+    private func setupGestureRecognizer() {
         panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(pan))
         panRecognizer.delegate = self
         content.addGestureRecognizer(panRecognizer)
@@ -148,10 +183,7 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
         let currentPoint = panRecognizer.translation(in: content)
         let newPosX = currentPoint.x - panStartPoint.x
         moveContent(newPosX)
-        
-        let progress: CGFloat = newPosX < 0.0 ? contentTrailing.constant / rightBackgroundEdge : contentLeading.constant / leftBackgroundEdge
-        changeColorLeft(progress)
-        changeColorRight(progress)
+        animateColor(newPosX)
     }
     
     private func panEnded() {
@@ -161,10 +193,10 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
     }
     
     private func addGameToList() {
-        if contentLeading.constant >= leftBackgroundEdge {
-            addGameToToPlayList()
-        } else if contentTrailing.constant >= rightBackgroundEdge {
+        if contentLeading.constant >= doTresholdLeft {
             addGameToPlayedList()
+        } else if contentTrailing.constant >= doTresholdRight {
+            addGameToToPlayList()
         }
     }
     
@@ -236,19 +268,7 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
         UIView.animate(withDuration: 0.1, animations: {
             self.resetContent()
             self.layoutIfNeeded()
-        }, completion: { completed in
-            if completed {
-                self.resetColorLeftRight()
-            }
         })
-    }
-    
-    private var leftBackgroundEdge: CGFloat {
-        return toPlay.frame.size.width
-    }
-    
-    private var rightBackgroundEdge: CGFloat {
-        return played.frame.size.width
     }
     
     private func moveContent(_ newPosX: CGFloat) {
@@ -268,25 +288,68 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
         self.contentTrailing.constant = self.contentTrailingStartingConstant
     }
     
-    private func changeColorLeft(_ progress: CGFloat) {
-        let start: RGBAComponents = toPlayStartingColor.RGBA
-        let target: RGBAComponents = toPlayTargetColor.RGBA
-        let new: RGBAComponents = (r: (1.0-progress)*start.r + progress*target.r, g: (1.0-progress)*start.g + progress*target.g, b: (1.0-progress)*start.b + progress*target.b, a: 1.0)
-        
-        toPlay.backgroundColor = UIColor(red: new.r, green: new.g, blue: new.b, alpha: new.a)
+    private func animateColor(_ newPosX: CGFloat) {
+        if newPosX < 0 {
+            animateColorRight()
+        } else if newPosX > 0 {
+            animateColorLeft()
+        }
     }
     
-    private func changeColorRight(_ progress: CGFloat) {
-        let start: RGBAComponents = playedStartingColor.RGBA
-        let target: RGBAComponents = playedTargetColor.RGBA
-        let new: RGBAComponents = (r: (1.0-progress)*start.r + progress*target.r, g: (1.0-progress)*start.g + progress*target.g, b: (1.0-progress)*start.b + progress*target.b, a: 1.0)
-        
-        played.backgroundColor = UIColor(red: new.r, green: new.g, blue: new.b, alpha: new.a)
+    private func animateColorLeft() {
+        if contentLeading.constant >= doTresholdLeft {
+            if case .to = colorStateLeft {
+                animateColorLeftToTarget()
+                colorStateLeft = .from
+            }
+        } else if contentLeading.constant <= doTresholdLeft {
+            if case .from = colorStateLeft {
+                animateColorLeftFromTarget()
+                colorStateLeft = .to
+            }
+        }
     }
     
-    private func resetColorLeftRight() {
-        toPlay.backgroundColor = toPlayStartingColor
-        played.backgroundColor = playedStartingColor
+    private func  animateColorRight() {
+        if contentTrailing.constant >= doTresholdRight {
+            if case .to = colorStateRight {
+                animateColorRightToTarget()
+                colorStateRight = .from
+            }
+        } else if contentTrailing.constant <= doTresholdRight {
+            if case .from = colorStateRight {
+                animateColorRightFromTarget()
+                colorStateRight = .to
+            }
+        }
+    }
+    
+    private func animateColorLeftToTarget() {
+        UIView.animate(withDuration: 0.4, animations: {
+            self.playedView.backgroundColor = self.playedViewTargetColor
+            self.playedText.textColor = self.playedTextTargetColor
+        })
+    }
+    
+    private func animateColorLeftFromTarget() {
+        UIView.animate(withDuration: 0.4, animations: {
+            self.playedView.backgroundColor = self.playedViewStartingColor
+            self.playedText.textColor = self.playedTextStartingColor
+        })
+    }
+    
+    private func animateColorRightToTarget() {
+        UIView.animate(withDuration: 0.4, animations: {
+            self.toPlayView.backgroundColor = self.toPlayViewTargetColor
+            self.toPlayText.textColor = self.toPlayTextTargetColor
+        })
+    }
+    
+    private func animateColorRightFromTarget() {
+        UIView.animate(withDuration: 0.4, animations: {
+            self.toPlayView.backgroundColor = self.toPlayViewStartingColor
+            self.toPlayText.textColor = self.toPlayTextStartingColor
+        })
     }
     
     override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
