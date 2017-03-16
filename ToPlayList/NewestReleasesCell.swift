@@ -53,10 +53,13 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
         switch starState {
         case .toPlay:
             setStarToToPlay()
+            setupToPlayBackground()
         case .played:
             setStarToPlayed()
+            setupPlayedBackground()
         case .none:
             setStarToNone()
+            resetBackgrounds()
         }
     }
     
@@ -84,12 +87,18 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
     private var contentLeadingStartingConstant: CGFloat!
     private var contentTrailingStartingConstant: CGFloat!
     
+    private var toPlayViewBaseStartingColor = UIColor.lightGray
+    private var toPlayTextBaseStartingColor = UIColor.white
+    private var playedViewBaseStartingColor = UIColor.white
+    private var playedTextBaseStartingColor = UIColor.lightGray
+    
     private var toPlayViewStartingColor: UIColor!
     private var playedViewStartingColor: UIColor!
-    private var toPlayViewTargetColor = UIColor.white
-    private var playedViewTargetColor = UIColor.MyCustomColors.orange
     private var toPlayTextStartingColor: UIColor!
     private var playedTextStartingColor: UIColor!
+    
+    private var toPlayViewTargetColor = UIColor.white
+    private var playedViewTargetColor = UIColor.MyCustomColors.orange
     private var toPlayTextTargetColor = UIColor.MyCustomColors.orange
     private var playedTextTargetColor = UIColor.white
     
@@ -124,13 +133,46 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
     }
     
     private func setupStartingValues() {
-        toPlayViewStartingColor = toPlayView.backgroundColor
-        playedViewStartingColor = playedView.backgroundColor
-        toPlayTextStartingColor = toPlayText.textColor
-        playedTextStartingColor = playedText.textColor
+        resetBackgrounds()
         
         doTresholdLeft = leftBackgroundEdge * 0.75
         doTresholdRight = rightBackgroundEdge * 0.75
+    }
+    
+    private func setupToPlayBackground() {
+        toPlayViewStartingColor = toPlayViewTargetColor
+        toPlayTextStartingColor = toPlayTextTargetColor
+        toPlayView.backgroundColor = toPlayViewStartingColor
+        toPlayText.textColor = toPlayTextStartingColor
+        
+        playedViewStartingColor = playedViewBaseStartingColor
+        playedTextStartingColor = playedTextBaseStartingColor
+        playedView.backgroundColor = playedViewStartingColor
+        playedText.textColor = playedTextStartingColor
+    }
+    
+    private func setupPlayedBackground() {
+        playedViewStartingColor = playedViewTargetColor
+        playedTextStartingColor = playedTextTargetColor
+        playedView.backgroundColor = playedViewStartingColor
+        playedText.textColor = playedTextStartingColor
+        
+        toPlayViewStartingColor = toPlayViewBaseStartingColor
+        toPlayTextStartingColor = toPlayTextBaseStartingColor
+        toPlayView.backgroundColor = toPlayViewStartingColor
+        toPlayText.textColor = toPlayTextStartingColor
+    }
+    
+    private func resetBackgrounds() {
+        toPlayViewStartingColor = toPlayViewBaseStartingColor
+        toPlayTextStartingColor = toPlayTextBaseStartingColor
+        playedTextStartingColor = playedTextBaseStartingColor
+        playedViewStartingColor = playedViewBaseStartingColor
+        
+        toPlayView.backgroundColor = toPlayViewStartingColor
+        toPlayText.textColor = toPlayTextStartingColor
+        playedView.backgroundColor = playedViewStartingColor
+        playedText.textColor = playedTextStartingColor
     }
     
     private func setupGestureRecognizer() {
