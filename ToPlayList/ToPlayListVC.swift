@@ -235,7 +235,7 @@ class ToPlayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFl
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCollectionViewCell.reuseIdentifier, for: indexPath) as? ListCollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ToPlayListCell.reuseIdentifier, for: indexPath) as? ToPlayListCell {
             if let game = toPlayList[indexPath.row] {
                 cell.update(game)
             }

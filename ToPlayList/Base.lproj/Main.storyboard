@@ -819,7 +819,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ListCollectionViewCell" id="CwR-rL-JQC" customClass="ListCollectionViewCell" customModule="ToPlayList" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ToPlayListCell" id="CwR-rL-JQC" customClass="ToPlayListCell" customModule="ToPlayList" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="155" height="194"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -917,16 +917,16 @@
                                             <constraint firstAttribute="bottom" secondItem="OOl-Me-3d5" secondAttribute="bottom" id="ju8-VZ-LEk"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="backgroundDeleteViewText" destination="eNt-yZ-Ggl" id="P2y-4s-xXt"/>
-                                            <outlet property="backgroundDeleteViewView" destination="8xd-f6-Ntv" id="wnA-X8-B8K"/>
-                                            <outlet property="backgroundPlayedViewText" destination="tiA-7v-c1X" id="11v-1t-GhN"/>
-                                            <outlet property="backgroundPlayedViewView" destination="HTo-Sy-RaI" id="FG9-eH-kfM"/>
-                                            <outlet property="content" destination="rxd-8M-oRX" id="ejT-gS-8th"/>
-                                            <outlet property="contentLeftConstraint" destination="9bu-01-q0t" id="yH2-5W-VGF"/>
-                                            <outlet property="contentRightConstraint" destination="h25-ua-ngZ" id="OSG-sy-4kB"/>
-                                            <outlet property="coverImg" destination="Eo7-s0-5pc" id="TsO-1c-xpf"/>
-                                            <outlet property="maskedView" destination="OOl-Me-3d5" id="htz-96-ytm"/>
-                                            <outlet property="titleLbl" destination="h24-vv-DPG" id="VKf-uK-DeE"/>
+                                            <outlet property="backgroundDeleteViewText" destination="eNt-yZ-Ggl" id="qcx-Km-IYa"/>
+                                            <outlet property="backgroundDeleteViewView" destination="8xd-f6-Ntv" id="O8G-GU-bnS"/>
+                                            <outlet property="backgroundPlayedViewText" destination="tiA-7v-c1X" id="uIg-de-Ol2"/>
+                                            <outlet property="backgroundPlayedViewView" destination="HTo-Sy-RaI" id="k8q-ZR-ETp"/>
+                                            <outlet property="content" destination="rxd-8M-oRX" id="CZV-KE-O4f"/>
+                                            <outlet property="contentLeftConstraint" destination="9bu-01-q0t" id="EgQ-eo-9HB"/>
+                                            <outlet property="contentRightConstraint" destination="h25-ua-ngZ" id="cF7-Ta-4sL"/>
+                                            <outlet property="coverImg" destination="Eo7-s0-5pc" id="lGt-jw-tpQ"/>
+                                            <outlet property="maskedView" destination="OOl-Me-3d5" id="cTF-8E-I2t"/>
+                                            <outlet property="titleLbl" destination="h24-vv-DPG" id="L5g-Na-IoT"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
