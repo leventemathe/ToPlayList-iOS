@@ -151,6 +151,14 @@ class ToPlayListCell: ListCollectionViewCell, OnPanDelegate {
         UIView.animate(withDuration: 0.1, animations: {
             self.contentLeftConstraint.constant = self.contentLeftConstant
             self.contentRightConstraint.constant = self.contentRightConstant
+            if case .from = self.colorStateLeft {
+                self.backgroundPlayedViewView.backgroundColor = self.backgroundViewPlayedStartingColor
+                self.backgroundPlayedViewText.textColor = self.backgroundTextPlayedStartingColor
+            }
+            if case .from = self.colorStateRight {
+                self.backgroundDeleteViewView.backgroundColor = self.backgroundViewDeleteStartingColor
+                self.backgroundDeleteViewText.textColor = self.backgroundTextDeleteStartingColor
+            }
             self.layoutIfNeeded()
         })
     }
