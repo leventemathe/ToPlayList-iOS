@@ -8,22 +8,7 @@
 
 import UIKit
 
-class ToPlayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, ErrorHandlerDelegate {
- 
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var listEmptyLabels: UIStackView!
-    
-    private let CELLS_PER_COLUMNS: CGFloat = 2.0
-    private let CELL_ASPECT_RATIO: CGFloat = 1.42
-    private let CELL_TITLE_HEIGHT: CGFloat = 30.0
-    private var collectionViewWidth: CGFloat!
-    private var cellWidth: CGFloat!
-    private var cellHeight: CGFloat!
-    private var cellInsetMargin: CGFloat!
-    private var cellInterItemMargin: CGFloat!
-    private var cellVerticalInterItemMargin: CGFloat!
-    
-    var loadingAnimationDelegate: LoadingAnimationDelegate?
+class ToPlayListVC: SubListVC {
     
     private var toPlayList = List(ListsEndpoints.List.TO_PLAY_LIST)
     
@@ -33,29 +18,17 @@ class ToPlayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFl
     private var shouldRemoveToPlayListListenerAdd = 0
     private var shouldRemoveToPlayListListenerRemove = 0
     
-    override func viewDidLoad() {
-        setupDelegates()
-    }
-    
-    private func setupDelegates() {
-        collectionView.delegate = self
-        collectionView.dataSource = self
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
-        //print("view will appear")
         getToPlayList {
             self.attachListeners()
         }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        //print("view did disappear")
         removeListeners()
     }
     
     private func attachListeners() {
-        //print("attaching listeners")
         listenToToPlayList(.add, withOnChange: { game in
             if self.toPlayList.add(game) {
                 self.setContent()
@@ -119,7 +92,6 @@ class ToPlayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFl
     }
     
     private func removeListeners() {
-        //print("removing listeners")
         removeToPlayListListenerAdd()
         removeToPlayListListenerRemove()
     }
@@ -178,63 +150,11 @@ class ToPlayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFl
         }
     }
     
-    private func swapToListEmptyLabels() {
-        //print("swapping to list empty")
-        animateCollectionViewDisappearance()
-        animateListEmptyLabelsAppearance()
-    }
-    
-    private func swapToCollectionView() {
-        //print("swapping to collection view")
-        animateListEmptyLabelsDisappearance()
-        animateCollectionViewAppearance()
-    }
-    
-    private func animateListEmptyLabelsAppearance() {
-        listEmptyLabels.isHidden = false
-        listEmptyLabels.alpha = 0.0
-        UIView.animate(withDuration: 0.4, animations: {
-            self.listEmptyLabels.alpha = 1.0
-        })
-    }
-    
-    private func animateCollectionViewAppearance() {
-        collectionView.isHidden = false
-        collectionView.alpha = 0.0
-        UIView.animate(withDuration: 0.4, animations: {
-            self.collectionView.alpha = 1.0
-        })
-    }
-    
-    private func animateListEmptyLabelsDisappearance() {
-        UIView.animate(withDuration: 0.4, animations: {
-            self.listEmptyLabels.alpha = 0.0
-        }, completion: { success in
-            if success {
-                self.listEmptyLabels.isHidden = true
-            }
-        })
-    }
-    
-    private func animateCollectionViewDisappearance() {
-        UIView.animate(withDuration: 3.0, animations: {
-            self.collectionView.alpha = 0.0
-        }, completion: { success in
-            if success {
-                self.collectionView.isHidden = true
-            }
-        })
-    }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return toPlayList.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ToPlayListCell.reuseIdentifier, for: indexPath) as? ToPlayListCell {
             if let game = toPlayList[indexPath.row] {
                 cell.update(game)
@@ -243,38 +163,6 @@ class ToPlayListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFl
             return cell
         }
         return UICollectionViewCell()
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        setupCellSizes()
-        return CGSize(width: cellWidth, height: cellHeight)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        setupCellSizes()
-        return UIEdgeInsets(top: cellInsetMargin, left: cellInsetMargin, bottom: cellInsetMargin, right: cellInsetMargin)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        setupCellSizes()
-        return cellInterItemMargin
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return cellVerticalInterItemMargin
-    }
-    
-    private func setupCellSizes() {
-        collectionViewWidth = collectionView.bounds.size.width
-        cellInsetMargin = 20.0
-        cellInterItemMargin = (cellInsetMargin + 10.0) / 2.0
-        cellVerticalInterItemMargin = cellInterItemMargin * 2.0
-        cellWidth = collectionViewWidth / CELLS_PER_COLUMNS - (CELLS_PER_COLUMNS-1) * cellInterItemMargin - (2.0 * cellInsetMargin) / CELLS_PER_COLUMNS
-        cellHeight = cellWidth * CELL_ASPECT_RATIO + CELL_TITLE_HEIGHT
-    }
-    
-    func handleError(_ message: String) {
-        Alerts.alertWithOKButton(withMessage: message, forVC: self)
     }
 }
 

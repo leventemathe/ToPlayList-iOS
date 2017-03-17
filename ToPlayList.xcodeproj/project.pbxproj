@@ -51,6 +51,7 @@
 		D7A0E6FD1E7BDDCD00A70989 /* ToPlayListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A0E6FC1E7BDDCD00A70989 /* ToPlayListCell.swift */; };
 		D7A0E6FF1E7BDDDC00A70989 /* PlayedListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A0E6FE1E7BDDDC00A70989 /* PlayedListCell.swift */; };
 		D7A0E7011E7BE82800A70989 /* OnPanDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A0E7001E7BE82800A70989 /* OnPanDelegate.swift */; };
+		D7A0E7031E7BEA8A00A70989 /* SubListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A0E7021E7BEA8A00A70989 /* SubListVC.swift */; };
 		D7A6F04E1E65CD2900ED66E5 /* LoadingAnimationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A6F04D1E65CD2900ED66E5 /* LoadingAnimationDelegate.swift */; };
 		D7B8C86B1E2D16C700656E64 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B8C86A1E2D16C700656E64 /* ErrorMessage.swift */; };
 		D7B8C86D1E2D16F100656E64 /* ErrorMessage.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7B8C86C1E2D16F100656E64 /* ErrorMessage.xib */; };
@@ -126,6 +127,7 @@
 		D7A0E6FC1E7BDDCD00A70989 /* ToPlayListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToPlayListCell.swift; sourceTree = "<group>"; };
 		D7A0E6FE1E7BDDDC00A70989 /* PlayedListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayedListCell.swift; sourceTree = "<group>"; };
 		D7A0E7001E7BE82800A70989 /* OnPanDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnPanDelegate.swift; sourceTree = "<group>"; };
+		D7A0E7021E7BEA8A00A70989 /* SubListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubListVC.swift; sourceTree = "<group>"; };
 		D7A6F04D1E65CD2900ED66E5 /* LoadingAnimationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingAnimationDelegate.swift; sourceTree = "<group>"; };
 		D7B8C86A1E2D16C700656E64 /* ErrorMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		D7B8C86C1E2D16F100656E64 /* ErrorMessage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ErrorMessage.xib; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 				D74AC7D91E3919B700C37A90 /* RegisterVC.swift */,
 				D71981181E26A337005823C2 /* LoginVC.swift */,
 				D719811A1E26A389005823C2 /* ListVC.swift */,
+				D7A0E7021E7BEA8A00A70989 /* SubListVC.swift */,
 				D72E66B61E619D0800BED388 /* ToPlayListVC.swift */,
 				D72E66B91E619D2100BED388 /* PlayedListVC.swift */,
 			);
@@ -593,6 +596,7 @@
 				D7CC7D0E1E3913E60027BE6F /* RegisterLoginVC.swift in Sources */,
 				D7B8C86B1E2D16C700656E64 /* ErrorMessage.swift in Sources */,
 				D74AC7DA1E3919B700C37A90 /* RegisterVC.swift in Sources */,
+				D7A0E7031E7BEA8A00A70989 /* SubListVC.swift in Sources */,
 				D72E66BA1E619D2100BED388 /* PlayedListVC.swift in Sources */,
 				D7975D081E586255003B64E6 /* ErrorHandlerDelegate.swift in Sources */,
 				D719812C1E26F89A005823C2 /* LoginScene.swift in Sources */,
