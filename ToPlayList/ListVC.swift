@@ -11,12 +11,10 @@ import FirebaseAuth
 import FirebaseDatabase
 import NVActivityIndicatorView
 
-class ListVC: UIViewController, IdentifiableVC, LoadingAnimationDelegate {
+class ListVC: UIViewController, IdentifiableVC {
     
     private static let WELCOME_MSG = "Welcome"
     
-    var loadingAnimationView: NVActivityIndicatorView!
-
     @IBOutlet weak var welcomeLbl: UILabel!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var listContainerView: UIView!
@@ -66,7 +64,6 @@ class ListVC: UIViewController, IdentifiableVC, LoadingAnimationDelegate {
         toPLayListVC.view.frame.size = listContainerView.frame.size
         listContainerView.addSubview(toPLayListVC.view)
         toPLayListVC.didMove(toParentViewController: self)
-        toPLayListVC.loadingAnimationDelegate = self
     }
     
     func setPlayedListContainer() {
@@ -81,13 +78,11 @@ class ListVC: UIViewController, IdentifiableVC, LoadingAnimationDelegate {
     func clearToPlayListContainer() {
         toPLayListVC.removeFromParentViewController()
         toPLayListVC.view.removeFromSuperview()
-        toPLayListVC.loadingAnimationDelegate = nil
     }
     
     func clearPlayedListnContainer() {
         playedListVC.removeFromParentViewController()
         playedListVC.view.removeFromSuperview()
-        //TODO unset loading animation delegate
     }
     
     @IBAction func logoutClicked(_ sender: UIBarButtonItem) {
@@ -107,8 +102,6 @@ class ListVC: UIViewController, IdentifiableVC, LoadingAnimationDelegate {
         setupWelcomeMsg()
         setupSegmentedView()
         setupTiltingBackground()
-        setupLoadingAnimation()
-        loadingAnimationView.startAnimating()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -157,26 +150,5 @@ class ListVC: UIViewController, IdentifiableVC, LoadingAnimationDelegate {
         
         backgroundStarImageView.addMotionEffect(horizontalMotion)
         backgroundStarImageView.addMotionEffect(verticalMotion)
-    }
-    
-    private func setupLoadingAnimation() {
-        let width: CGFloat = 80.0
-        let height: CGFloat = width
-        
-        let x = UIScreen.main.bounds.size.width / 2.0 - width / 2.0
-        let y = UIScreen.main.bounds.size.height / 2.0 - height / 2.0
-        
-        let frame = CGRect(x: x, y: y, width: width, height: height)
-        
-        loadingAnimationView = NVActivityIndicatorView(frame: frame, type: .ballClipRotate, color: UIColor.MyCustomColors.orange, padding: 0.0)
-        view.addSubview(loadingAnimationView)
-    }
-    
-    func startAnimating() {
-        loadingAnimationView.startAnimating()
-    }
-    
-    func stopAnimating() {
-        loadingAnimationView.stopAnimating()
     }
 }

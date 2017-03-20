@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 class SubListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, ErrorHandlerDelegate {
 
@@ -23,10 +24,22 @@ class SubListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFlowL
     private var cellInterItemMargin: CGFloat!
     private var cellVerticalInterItemMargin: CGFloat!
     
-    var loadingAnimationDelegate: LoadingAnimationDelegate?
+    var loadingAnimationView: NVActivityIndicatorView!
+    var appeared = false
     
     override func viewDidLoad() {
         setupDelegates()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        setupLoadingAnimation()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if !appeared {
+            loadingAnimationView.startAnimating()
+        }
+        appeared = true
     }
     
     private func setupDelegates() {
@@ -34,14 +47,25 @@ class SubListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFlowL
         collectionView.dataSource = self
     }
     
+    private func setupLoadingAnimation() {
+        let width: CGFloat = 80.0
+        let height: CGFloat = width
+        
+        let x = view.bounds.size.width / 2.0 - width / 2.0
+        let y = view.bounds.size.height / 2.0 - height / 2.0 - 50.0
+        
+        let frame = CGRect(x: x, y: y, width: width, height: height)
+        
+        loadingAnimationView = NVActivityIndicatorView(frame: frame, type: .ballClipRotate, color: UIColor.MyCustomColors.orange, padding: 0.0)
+        view.addSubview(loadingAnimationView)
+    }
+    
     func swapToListEmptyLabels() {
-        //print("swapping to list empty")
         animateCollectionViewDisappearance()
         animateListEmptyLabelsAppearance()
     }
     
     func swapToCollectionView() {
-        //print("swapping to collection view")
         animateListEmptyLabelsDisappearance()
         animateCollectionViewAppearance()
     }

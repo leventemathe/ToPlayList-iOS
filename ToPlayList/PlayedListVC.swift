@@ -116,7 +116,7 @@ class PlayedListVC: SubListVC {
     
     private func getPlayedList(_ onComplete: @escaping ()->()) {
         ListsList.instance.getPlayedList { result in
-            self.loadingAnimationDelegate?.stopAnimating()
+            self.loadingAnimationView.stopAnimating()
             
             switch result {
             case .failure(let error):
