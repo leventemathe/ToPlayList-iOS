@@ -27,7 +27,7 @@ struct ListsUser {
     
     private init() {}
     
-    func createUser(_ onComplete: @escaping (ListsUserResult)->(), withUsername username: String) {
+    func createUserFromAuthenticated(_ onComplete: @escaping (ListsUserResult)->(), withUsername username: String) {
         guard let uid = FIRAuth.auth()?.currentUser?.uid, let providerid = FIRAuth.auth()?.currentUser?.providerID else {
             onComplete(.failure(.unknownError))
             return
@@ -66,10 +66,37 @@ struct ListsUser {
         }
     }
     
-    func deleteUserBeforeFullyCreated() {
+    func removeUser(_ uid: String?) {
+        if let uid = uid {
+            ListsEndpoints.USERS.child(uid).removeValue()
+        }
+    }
+    
+    func removeUsername(_ username: String) {
+        ListsEndpoints.USERNAMES.child(username).removeValue()
+    }
+    
+    func removeUsername(_ uid: String?) {
+        if let uid = uid, let username = ListsEndpoints.USERS.child(uid).value(forKey: ListsEndpoints.User.USERNAME) as? String {
+            ListsEndpoints.USERNAMES.child(username).removeValue()
+        }
+    }
+    
+    func removeLists(_ uid: String?) {
+        if let uid = uid, let listIDs = ListsEndpoints.USERS.child(uid).value(forKey: ListsEndpoints.User.LISTS) as? [String] {
+            for listID in listIDs {
+                ListsEndpoints.LISTS.child(listID).removeValue()
+            }
+        }
+    }
+    
+    func deleteUserCompletely() {
+        removeUser(FIRAuth.auth()?.currentUser?.uid)
+        removeUsername(FIRAuth.auth()?.currentUser?.uid)
         FIRAuth.auth()?.currentUser?.delete { error in
             // TODO what should i do here?
         }
+        
     }
     
     static var loggedIn: Bool {

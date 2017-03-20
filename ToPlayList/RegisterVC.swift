@@ -72,17 +72,17 @@ class RegisterVC: UIViewController, IdentifiableVC {
     }
     
     private func registerSuccesful(_ username: String) {
-        ListsUser.instance.createUser({ result in
+        ListsUser.instance.createUserFromAuthenticated({ result in
             switch result {
             case .success:
                 self.parent!.performSegue(withIdentifier: "LoginToList", sender: self)
             case .failure(let error):
+                ListsUser.instance.deleteUserCompletely()
                 switch error {
                 case .usernameAlreadyInUse:
                     self.errorView.show(withText: "The username is already in use")
-                    ListsUser.instance.deleteUserBeforeFullyCreated()
                 case .unknownError:
-                    self.errorView.show(withText: "An unknown error occured 😟")
+                    self.errorView.show(withText: "An unknown error occured")
                 }
             }
         }, withUsername: username)
