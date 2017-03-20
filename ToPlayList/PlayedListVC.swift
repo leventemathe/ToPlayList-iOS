@@ -19,6 +19,7 @@ class PlayedListVC: SubListVC {
     private var shouldRemovePlayedListListenerRemove = 0
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         getPlayedList {
             self.attachListeners()
         }
@@ -117,6 +118,7 @@ class PlayedListVC: SubListVC {
     private func getPlayedList(_ onComplete: @escaping ()->()) {
         ListsList.instance.getPlayedList { result in
             self.loadingAnimationView.stopAnimating()
+            self.appeared = true
             
             switch result {
             case .failure(let error):

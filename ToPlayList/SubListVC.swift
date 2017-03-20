@@ -58,6 +58,7 @@ class SubListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFlowL
         
         loadingAnimationView = NVActivityIndicatorView(frame: frame, type: .ballClipRotate, color: UIColor.MyCustomColors.orange, padding: 0.0)
         view.addSubview(loadingAnimationView)
+        loadingAnimationView.stopAnimating()
     }
     
     func swapToListEmptyLabels() {
