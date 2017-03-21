@@ -11,6 +11,13 @@ import FirebaseAuth
 
 class RegisterVC: UIViewController, IdentifiableVC {
     
+    static let ERROR_EMAIL_ALREADY_IN_USE = "Email already in use"
+    static let ERROR_USERNAME_ALREADY_IN_USE = "Username already in use"
+    static let ERROR_INVALID_EMAIL = "Invalid email"
+    static let ERROR_NO_INTERNET = "No internet"
+    static let ERROR_WEAK_PASSWORD = "Password is too weak"
+    static let ERROR_UNKNOWN = "Unknown error"
+    
     @IBOutlet weak var usernameField: LoginSceneTextUsername!
     @IBOutlet weak var emailField: LoginSceneTextFieldEmail!
     @IBOutlet weak var passwordField: LoginSceneTextFieldPassword!
@@ -18,77 +25,68 @@ class RegisterVC: UIViewController, IdentifiableVC {
     
     @IBOutlet weak var registerBtn: LoginSceneButtonLogin!
     
+    override func viewWillAppear(_ animated: Bool) {
+        errorView.hide()
+    }
+    
     @IBAction func registerClicked(_ sender: LoginSceneButtonLogin) {
         self.errorView.hide()
         
+        if let userData = validate() {
+            registerBtn.startLoadingAnimation()
+            register(userData.email, withPassword: userData.password, withUsername: userData.username)
+        }
+    }
+    
+    private func validate() -> (email: String, password: String, username: String)? {
         guard var email = emailField.text, var password = passwordField.text, var username = usernameField.text else {
-            return
+            return nil
         }
         
         username = username.trimmingCharacters(in: .whitespacesAndNewlines)
         email = email.trimmingCharacters(in: .whitespacesAndNewlines)
         password = password.trimmingCharacters(in: .whitespacesAndNewlines)
-
+        
         if username == "" {
             self.errorView.show(withText: "Please provide a username!")
-            return
+            return nil
         }
         if email == "" {
             self.errorView.show(withText: "Please provide an email address!")
-            return
+            return nil
         }
         if password == "" {
             self.errorView.show(withText: "Please provide a password!")
-            return
+            return nil
         }
         
-        registerBtn.startLoadingAnimation()
-        
-        // TODO recheck error codes
-        FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
-            if let error = error, let errorCode = FIRAuthErrorCode(rawValue: error._code) {
-                switch errorCode {
-                case .errorCodeEmailAlreadyInUse:
-                    self.errorView.show(withText: "Email is already in use")
-                    break
-                case .errorCodeInvalidEmail:
-                    self.errorView.show(withText: "Invalid email")
-                    break
-                case .errorCodeNetworkError:
-                    Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
-                    break
-                case .errorCodeWeakPassword:
-                    self.errorView.show(withText: "The password is too weak")
-                    break
-                default:
-                    self.errorView.show(withText: "An unknown error occured 😟")
-                    break
-                }
-            } else {
-                self.registerSuccesful(username)
-            }
-            self.registerBtn.stopLoadingAnimation()
-        }
+        return (email: email, password: password, username: username)
     }
     
-    private func registerSuccesful(_ username: String) {
-        ListsUser.instance.createUserFromAuthenticated({ result in
+    private func register(_ email: String, withPassword password: String, withUsername username: String) {
+        RegisterService.instance.register(withEmail: email, withPassword: password, withUsername: username) { result in
+            self.registerBtn.stopLoadingAnimation()
+            
             switch result {
             case .success:
                 self.parent!.performSegue(withIdentifier: "LoginToList", sender: self)
             case .failure(let error):
-                ListsUser.instance.deleteUserCompletely()
                 switch error {
+                case .emailAlreadyInUse:
+                    self.errorView.show(withText: RegisterVC.ERROR_EMAIL_ALREADY_IN_USE)
+                case .invalidEmail:
+                    self.errorView.show(withText: RegisterVC.ERROR_INVALID_EMAIL)
+                case .noInternet:
+                    Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
+                case .passwordTooWeak:
+                    self.errorView.show(withText: RegisterVC.ERROR_WEAK_PASSWORD)
                 case .usernameAlreadyInUse:
-                    self.errorView.show(withText: "The username is already in use")
-                case .unknownError:
-                    self.errorView.show(withText: "An unknown error occured")
+                    self.errorView.show(withText: RegisterVC.ERROR_USERNAME_ALREADY_IN_USE)
+                case .unknown:
+                    self.errorView.show(withText: RegisterVC.ERROR_UNKNOWN)
                 }
+                break
             }
-        }, withUsername: username)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        errorView.hide()
+        }
     }
 }

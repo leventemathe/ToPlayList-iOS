@@ -66,37 +66,67 @@ struct ListsUser {
         }
     }
     
-    func removeUser(_ uid: String?) {
-        if let uid = uid {
-            ListsEndpoints.USERS.child(uid).removeValue()
+    func removeUser(_ uid: String, withOnComplete onComplete: @escaping ()->()) {
+        ListsEndpoints.USERS.child(uid).removeValue { (error, ref) in
+            onComplete()
         }
     }
     
-    func removeUsername(_ username: String) {
-        ListsEndpoints.USERNAMES.child(username).removeValue()
-    }
-    
-    func removeUsername(_ uid: String?) {
-        if let uid = uid, let username = ListsEndpoints.USERS.child(uid).value(forKey: ListsEndpoints.User.USERNAME) as? String {
-            ListsEndpoints.USERNAMES.child(username).removeValue()
+    func removeUsername(_ username: String, withOnComplete onComplete: @escaping ()->()) {
+        ListsEndpoints.USERNAMES.child(username).removeValue { (error, ref) in
+            onComplete()
         }
     }
     
-    func removeLists(_ uid: String?) {
-        if let uid = uid, let listIDs = ListsEndpoints.USERS.child(uid).value(forKey: ListsEndpoints.User.LISTS) as? [String] {
-            for listID in listIDs {
-                ListsEndpoints.LISTS.child(listID).removeValue()
+    func removeLists(_ uid: String, withOnComplete onComplete: @escaping ()->()) {
+        var listIDs = [String]()
+        
+        ListsEndpoints.LISTS.queryOrdered(byChild: ListsEndpoints.List.USERID).queryEqual(toValue: uid).observeSingleEvent(of: .value, with: { snapshot in
+            if let values = snapshot.value as? [String: Any] {
+                for value in values {
+                    if let list = value.value as? [String: Any], let listUid = list[ListsEndpoints.List.USERID] as? String {
+                        if listUid == uid {
+                            listIDs.append(value.key)
+                        }
+                    }
+                }
+                let listValues = self.buildListIDDictionary(listIDs)
+                ListsEndpoints.BASE.updateChildValues(listValues) { (error, ref) in
+                    onComplete()
+                }
+            }
+            })
+    }
+    
+    private func buildListIDDictionary(_ listIDs: [String]) -> [String: Any?] {
+        var result = [String: Any?]()
+        for listID in listIDs {
+            let appendString = "\(ListsEndpoints.List.LISTS)/\(listID)"
+            result[appendString] = nil as Any?
+        }
+        return result
+    }
+    
+    func deleteLoggedInUserCompletely(_ userName: String, withOnComplete onComplete: @escaping ()->()) {
+        guard let uid = FIRAuth.auth()?.currentUser?.uid else {
+            return
+        }
+        removeUser(uid) {
+            self.removeUsername(userName) {
+                self.removeLists(uid) {
+                    FIRAuth.auth()?.currentUser?.delete { error in
+                        // TODO what should i do here?
+                    }
+                    onComplete()
+                }
             }
         }
     }
     
-    func deleteUserCompletely() {
-        removeUser(FIRAuth.auth()?.currentUser?.uid)
-        removeUsername(FIRAuth.auth()?.currentUser?.uid)
+    func deleteLoggedInUserBeforeFullyCreated() {
         FIRAuth.auth()?.currentUser?.delete { error in
             // TODO what should i do here?
         }
-        
     }
     
     static var loggedIn: Bool {

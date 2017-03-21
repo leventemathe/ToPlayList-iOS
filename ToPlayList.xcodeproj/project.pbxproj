@@ -12,6 +12,7 @@
 		D70B03231E0C1F9500F67E7A /* IGDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70B03221E0C1F9500F67E7A /* IGDB.swift */; };
 		D70DC3171E803E430080DBAA /* Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70DC3161E803E430080DBAA /* Lists.swift */; };
 		D70DC31F1E8048DA0080DBAA /* Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70DC31E1E8048DA0080DBAA /* Lists.swift */; };
+		D71449D61E81214900C6A96D /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71449D51E81214900C6A96D /* Services.swift */; };
 		D71981151E264D31005823C2 /* ListLoginNavigationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71981141E264D31005823C2 /* ListLoginNavigationVC.swift */; };
 		D71981171E26A2A5005823C2 /* UpcomingReleasesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71981161E26A2A5005823C2 /* UpcomingReleasesVC.swift */; };
 		D71981191E26A337005823C2 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71981181E26A337005823C2 /* LoginVC.swift */; };
@@ -97,6 +98,7 @@
 		D70DC31C1E8048DA0080DBAA /* ToPlayListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToPlayListUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D70DC31E1E8048DA0080DBAA /* Lists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lists.swift; sourceTree = "<group>"; };
 		D70DC3201E8048DA0080DBAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D71449D51E81214900C6A96D /* Services.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		D71981141E264D31005823C2 /* ListLoginNavigationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListLoginNavigationVC.swift; sourceTree = "<group>"; };
 		D71981161E26A2A5005823C2 /* UpcomingReleasesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpcomingReleasesVC.swift; sourceTree = "<group>"; };
 		D71981181E26A337005823C2 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 			children = (
 				D7E1D63A1E37A162000F343A /* EndPoints.swift */,
 				D78ADCA51E3750EB008DE943 /* Lists.swift */,
+				D71449D51E81214900C6A96D /* Services.swift */,
 			);
 			name = Lists;
 			sourceTree = "<group>";
@@ -653,6 +656,7 @@
 				D7FDC0991E34CCF8005FB1CF /* Alerts.swift in Sources */,
 				D7898E7B1E131992008B7647 /* ReusableView.swift in Sources */,
 				D7F131951E2BE242004D1704 /* IdentifiableVC.swift in Sources */,
+				D71449D61E81214900C6A96D /* Services.swift in Sources */,
 				D75150281E34BB9F00EDA802 /* MainTabVC.swift in Sources */,
 				D71E51571E257BF100C7F920 /* GameDetailsVC.swift in Sources */,
 				D795B0101E1DBA5700776670 /* Dates.swift in Sources */,

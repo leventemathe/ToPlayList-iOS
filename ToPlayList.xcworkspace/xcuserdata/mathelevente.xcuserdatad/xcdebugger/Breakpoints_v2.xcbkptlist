@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/Lists.swift"
-            timestampString = "511722921.948906"
+            timestampString = "511786191.997292"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "231"
-            endingLineNumber = "231"
+            startingLineNumber = "261"
+            endingLineNumber = "261"
             landmarkName = "getList(_:withOnComplete:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/Lists.swift"
-            timestampString = "511722921.948906"
+            timestampString = "511786191.997292"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "362"
-            endingLineNumber = "362"
+            startingLineNumber = "392"
+            endingLineNumber = "392"
             landmarkName = "getToPlayAndPlayedList(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -341,46 +341,14 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ToPlayListUnitTests/Lists.swift"
-            timestampString = "511723432.554701"
+            filePath = "ToPlayList/Lists.swift"
+            timestampString = "511786272.286926"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "testRegister()"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
+            landmarkName = "removeLists(_:withOnComplete:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ToPlayListUnitTests.RegisterLogin.testRegister () -&gt; ()"
-                  moduleName = "ToPlayListUnitTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mathelevente/Desktop/ToPlayList/ToPlayListUnitTests/Lists.swift"
-                  timestampString = "511723317.389571"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "23"
-                  endingLineNumber = "23"
-                  offsetFromSymbolStart = "15">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ToPlayListUnitTests.RegisterLogin.(testRegister () -&gt; ()).(closure #1)"
-                  moduleName = "ToPlayListUnitTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mathelevente/Desktop/ToPlayList/ToPlayListUnitTests/Lists.swift"
-                  timestampString = "511723317.392945"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "26"
-                  endingLineNumber = "26"
-                  offsetFromSymbolStart = "23">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -389,46 +357,30 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ToPlayListUnitTests/Lists.swift"
-            timestampString = "511723432.554701"
+            filePath = "ToPlayList/Lists.swift"
+            timestampString = "511786275.481954"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
-            landmarkName = "testRegister()"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "removeLists(_:withOnComplete:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ToPlayListUnitTests.RegisterLogin.(testRegister () -&gt; ()).(closure #1)"
-                  moduleName = "ToPlayListUnitTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mathelevente/Desktop/ToPlayList/ToPlayListUnitTests/Lists.swift"
-                  timestampString = "511723317.401708"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "26"
-                  endingLineNumber = "26"
-                  offsetFromSymbolStart = "23">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ToPlayListUnitTests.RegisterLogin.(testRegister () -&gt; ()).(closure #1).(closure #1)"
-                  moduleName = "ToPlayListUnitTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mathelevente/Desktop/ToPlayList/ToPlayListUnitTests/Lists.swift"
-                  timestampString = "511723317.405506"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "28"
-                  endingLineNumber = "28"
-                  offsetFromSymbolStart = "10">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToPlayList/Lists.swift"
+            timestampString = "511786367.186285"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "buildListIDDictionary(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

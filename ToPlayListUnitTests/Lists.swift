@@ -10,9 +10,9 @@ import XCTest
 @testable import ToPlayList
 @testable import Firebase
 
-class RegisterLogin: XCTestCase {
+class Register: XCTestCase {
  
-    private let userData = ["username": "levi", "email": "levi@levi.com", "password": "levilevi"]
+    private let userData = (username: "levi", email: "levi@levi.com", password: "levilevi")
     
     override func setUp() {
         super.setUp()
@@ -20,25 +20,36 @@ class RegisterLogin: XCTestCase {
     }
     
     override func tearDown() {
-        //ListsUser.instance.deleteUserCompletely()
+        let deleteExp = expectation(description: "delete registered content")
+        ListsUser.instance.deleteLoggedInUserCompletely(userData.username) {
+            deleteExp.fulfill()
+        }
+        waitForExpectations(timeout: 15) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
         super.tearDown()
     }
     
-    func testRegister() {
-        FIRAuth.auth()?.createUser(withEmail: userData["email"]!, password: userData["password"]!, completion: { (user, error) in
-            //XCTAssertTrue(error == nil)
-            
-            ListsUser.instance.createUserFromAuthenticated({ result in
-                switch result {
-                case .failure(_):
-                    //XCTAssertTrue(false)
-                    break
-                case .success:
-                    //XCTAssertTrue(true)
-                    break
-                }
-            }, withUsername: self.userData["username"]!)
-        })
+    func testRegisterSuccesful() {
+        let registerExp = expectation(description: "register")
+        
+        RegisterService.instance.register(withEmail: userData.email, withPassword: userData.password, withUsername: userData.username) { result in
+            switch result {
+            case .success:
+                XCTAssertTrue(true, "Registration succesful")
+            case .failure(_):
+                XCTAssertTrue(false, "Registration failed")
+            }
+            registerExp.fulfill()
+        }
+        
+        waitForExpectations(timeout: 10) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
     }
 }
 
