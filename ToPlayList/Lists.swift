@@ -98,11 +98,12 @@ struct ListsUser {
             })
     }
     
-    private func buildListIDDictionary(_ listIDs: [String]) -> [String: Any?] {
-        var result = [String: Any?]()
+    private func buildListIDDictionary(_ listIDs: [String]) -> [String: Any] {
+        var result = [String: Any]()
         for listID in listIDs {
             let appendString = "\(ListsEndpoints.List.LISTS)/\(listID)"
-            result[appendString] = nil as Any?
+            // an ugly hack to avoid Any? to Any coerce warning, because Firebase wants Any
+            result[appendString] = Optional<String>.none as Any
         }
         return result
     }
