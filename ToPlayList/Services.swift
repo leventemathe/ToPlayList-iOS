@@ -10,7 +10,7 @@ import Foundation
 import Firebase
 
 enum RegisterServiceResult {
-    case success
+    case success(String)
     case failure(RegisterServiceError)
 }
 
@@ -51,16 +51,16 @@ class RegisterService {
                     break
                 }
             } else {
-                self.addUserDataToDatabase(username, withOnComplete: onComplete)
+                self.addUserDataToDatabase(user!.uid, withUsername: username, withOnComplete: onComplete)
             }
         }
     }
     
-    private func addUserDataToDatabase(_ username: String, withOnComplete onComplete: @escaping (RegisterServiceResult)->()) {
+    private func addUserDataToDatabase(_ uid: String, withUsername username: String, withOnComplete onComplete: @escaping (RegisterServiceResult)->()) {
         ListsUser.instance.createUserFromAuthenticated({ result in
             switch result {
             case .success:
-                onComplete(.success)
+                onComplete(.success(uid))
             case .failure(let error):
                 ListsUser.instance.deleteLoggedInUserBeforeFullyCreated()
                 switch error {

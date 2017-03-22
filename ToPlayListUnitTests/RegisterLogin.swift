@@ -10,6 +10,74 @@ import XCTest
 @testable import ToPlayList
 @testable import Firebase
 
+class LoggedInUserCleanup: XCTestCase {
+    
+    private let userData = (username: "levi", email: "levi@levi.com", password: "levilevi")
+    private var uid: String?
+    
+    override func setUp() {
+        super.setUp()
+        let registerExp = expectation(description: "register setup for testDeleteLoggedInUserCompletely")
+        RegisterService.instance.register(withEmail: userData.email, withPassword: userData.password, withUsername: userData.username) { result in
+            switch result {
+            case .success(let uid):
+                XCTAssertTrue(true, "Registration succesful")
+                self.uid = uid
+            case .failure(_):
+                XCTAssertTrue(false, "Registration failed")
+            }
+            registerExp.fulfill()
+        }
+        
+        waitForExpectations(timeout: 10) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func testDeleteLoggedInUserCompletely() {
+        guard let uid = self.uid else {
+            XCTAssertTrue(false, "testDeleteLoggedInUserCompletely failed, no user is logged in")
+            return
+        }
+        // delete the user
+        let deleteExp = expectation(description: "delete registered content for testDeleteLoggedInUserCompletely")
+        ListsUser.instance.deleteLoggedInUserCompletely(userData.username) {
+            deleteExp.fulfill()
+        }
+        waitForExpectations(timeout: 15) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+        
+        // check if deletion worked
+        let userExp = expectation(description: "trying to get user for testDeleteLoggedInUserCompletely")
+        let usernameExp = expectation(description: "trying to get username for testDeleteLoggedInUserCompletely")
+        let listsExp = expectation(description: "trying to get lists for testDeleteLoggedInUserCompletely")
+        
+        ListsEndpoints.USERS.child(uid).observeSingleEvent(of: .value, with: { snapshot in
+            XCTAssert(!snapshot.exists(), "user was nil for testDeleteLoggedInUserCompletely")
+            userExp.fulfill()
+        })
+        ListsEndpoints.USERNAMES.child(userData.username).observeSingleEvent(of: .value, with: { snapshot in
+            XCTAssert(!snapshot.exists(), "username was nil for testDeleteLoggedInUserCompletely")
+            usernameExp.fulfill()
+        })
+        ListsEndpoints.LISTS.queryOrdered(byChild: ListsEndpoints.List.USERID).queryEqual(toValue: uid).observeSingleEvent(of: .value, with: { snapshot in
+            XCTAssert(!snapshot.exists(), "lists were nil for testDeleteLoggedInUserCompletely")
+            listsExp.fulfill()
+        })
+        
+        waitForExpectations(timeout: 30) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+}
+
 class Register: XCTestCase {
  
     private let userData = (username: "levi", email: "levi@levi.com", password: "levilevi")
