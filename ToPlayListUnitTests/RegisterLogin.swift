@@ -78,7 +78,7 @@ class LoggedInUserCleanup: XCTestCase {
     }
 }
 
-class Register: XCTestCase {
+class RegisterSuccesful: XCTestCase {
  
     private let userData = (username: "levi", email: "levi@levi.com", password: "levilevi")
     
@@ -120,7 +120,200 @@ class Register: XCTestCase {
     }
 }
 
-class Login: XCTestCase {
+class RegisterFailing: XCTestCase {
+    
+    private let userDataNoUsername = (username: "", email: "levi@levi.com", password: "levilevi")
+    private let userDataNoEmail = (username: "levi", email: "", password: "levilevi")
+    private let userDataNoPassword = (username: "levi", email: "levi@levi.com", password: "")
+    private let userDataWrongEmail1 = (username: "levi", email: "levi@com", password: "levilevi")
+    private let userDataWrongEmail2 = (username: "levi", email: "levi.com", password: "levilevi")
+    private let userDataWrongEmail3 = (username: "levi", email: "levicom", password: "levilevi")
+    private let userDataWeakPassword = (username: "levi", email: "levi@levi.com", password: "levi")
+    
+    func testRegisterNoUsername() {
+        let registerExp = expectation(description: "register with no username")
+        
+        RegisterService.instance.register(withEmail: userDataNoUsername.email, withPassword: userDataNoUsername.password, withUsername: userDataNoUsername.username) { result in
+            switch result {
+            case .success:
+                XCTAssertTrue(false, "Registration succesful")
+            case .failure(let error):
+                switch error {
+                case .invalidUsername:
+                    XCTAssertTrue(true, "Registration failed with invalid username")
+                default:
+                    XCTAssertTrue(false, "Registration failed with wrong error")
+                }
+            }
+            registerExp.fulfill()
+        }
+        
+        waitForExpectations(timeout: 10) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func testRegisterNoEmail() {
+        let registerExp = expectation(description: "register with no email")
+        
+        RegisterService.instance.register(withEmail: userDataNoEmail.email, withPassword: userDataNoEmail.password, withUsername: userDataNoEmail.username) { result in
+            switch result {
+            case .success:
+                XCTAssertTrue(false, "Registration succesful")
+            case .failure(let error):
+                switch error {
+                case .invalidEmail:
+                    XCTAssertTrue(true, "Registration failed with invalid email")
+                default:
+                    XCTAssertTrue(false, "Registration failed with wrong error")
+                }
+            }
+            registerExp.fulfill()
+        }
+        
+        waitForExpectations(timeout: 10) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func testRegisterNoPassword() {
+        let registerExp = expectation(description: "register with no password")
+        
+        RegisterService.instance.register(withEmail: userDataNoPassword.email, withPassword: userDataNoPassword.password, withUsername: userDataNoPassword.username) { result in
+            switch result {
+            case .success:
+                XCTAssertTrue(false, "Registration succesful")
+            case .failure(let error):
+                switch error {
+                case .passwordTooWeak:
+                    XCTAssertTrue(true, "Registration failed with no password")
+                default:
+                    XCTAssertTrue(false, "Registration failed with wrong error")
+                }
+            }
+            registerExp.fulfill()
+        }
+        
+        waitForExpectations(timeout: 10) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func testRegisterWrongEmail1() {
+        let registerExp = expectation(description: "register with wrong email 1")
+        
+        RegisterService.instance.register(withEmail: userDataWrongEmail1.email, withPassword: userDataWrongEmail1.password, withUsername: userDataWrongEmail1.username) { result in
+            switch result {
+            case .success:
+                XCTAssertTrue(false, "Registration succesful")
+            case .failure(let error):
+                switch error {
+                case .invalidEmail:
+                    XCTAssertTrue(true, "Registration failed with invalid email 1")
+                default:
+                    XCTAssertTrue(false, "Registration failed with wrong error")
+                }
+            }
+            registerExp.fulfill()
+        }
+        
+        waitForExpectations(timeout: 10) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func testRegisterWrongEmail2() {
+        let registerExp = expectation(description: "register with wrong email 2")
+        
+        RegisterService.instance.register(withEmail: userDataWrongEmail2.email, withPassword: userDataWrongEmail2.password, withUsername: userDataWrongEmail2.username) { result in
+            switch result {
+            case .success:
+                XCTAssertTrue(false, "Registration succesful")
+            case .failure(let error):
+                switch error {
+                case .invalidEmail:
+                    XCTAssertTrue(true, "Registration failed with invalid email 2")
+                default:
+                    XCTAssertTrue(false, "Registration failed with wrong error")
+                }
+            }
+            registerExp.fulfill()
+        }
+        
+        waitForExpectations(timeout: 10) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func testRegisterWrongEmail3() {
+        let registerExp = expectation(description: "register with wrong email 3")
+        
+        RegisterService.instance.register(withEmail: userDataWrongEmail3.email, withPassword: userDataWrongEmail3.password, withUsername: userDataWrongEmail3.username) { result in
+            switch result {
+            case .success:
+                XCTAssertTrue(false, "Registration succesful")
+            case .failure(let error):
+                switch error {
+                case .invalidEmail:
+                    XCTAssertTrue(true, "Registration failed with invalid email 3")
+                default:
+                    XCTAssertTrue(false, "Registration failed with wrong error")
+                }
+            }
+            registerExp.fulfill()
+        }
+        
+        waitForExpectations(timeout: 10) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func testRegisterWeakPassword() {
+        let registerExp = expectation(description: "register with weak password")
+        
+        RegisterService.instance.register(withEmail: userDataWeakPassword.email, withPassword: userDataWeakPassword.password, withUsername: userDataWeakPassword.username) { result in
+            switch result {
+            case .success:
+                XCTAssertTrue(false, "Registration succesful")
+            case .failure(let error):
+                switch error {
+                case .passwordTooWeak:
+                    XCTAssertTrue(true, "Registration failed with weak password")
+                default:
+                    XCTAssertTrue(false, "Registration failed with wrong error")
+                }
+            }
+            registerExp.fulfill()
+        }
+        
+        waitForExpectations(timeout: 10) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+}
+
+
+
+class RegisterAlreadyExists: XCTestCase {
+    
+}
+
+
+class LoginSuccesful: XCTestCase {
     
     private let userData = (username: "levi", email: "levi@levi.com", password: "levilevi")
     

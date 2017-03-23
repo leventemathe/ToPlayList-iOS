@@ -14,6 +14,7 @@ class RegisterVC: UIViewController, IdentifiableVC {
     static let ERROR_EMAIL_ALREADY_IN_USE = "Email already in use"
     static let ERROR_USERNAME_ALREADY_IN_USE = "Username already in use"
     static let ERROR_INVALID_EMAIL = "Invalid email"
+    static let ERROR_INVALID_USERNAME = "Invalid username"
     static let ERROR_NO_INTERNET = "No internet"
     static let ERROR_WEAK_PASSWORD = "Password is too weak"
     static let ERROR_UNKNOWN = "Unknown error"
@@ -76,6 +77,8 @@ class RegisterVC: UIViewController, IdentifiableVC {
                     self.errorView.show(withText: RegisterVC.ERROR_EMAIL_ALREADY_IN_USE)
                 case .invalidEmail:
                     self.errorView.show(withText: RegisterVC.ERROR_INVALID_EMAIL)
+                case .invalidUsername:
+                    self.errorView.show(withText: RegisterVC.ERROR_INVALID_USERNAME)
                 case .noInternet:
                     Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
                 case .passwordTooWeak:

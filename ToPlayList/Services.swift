@@ -17,6 +17,7 @@ enum RegisterServiceResult {
 enum RegisterServiceError {
     case emailAlreadyInUse
     case usernameAlreadyInUse
+    case invalidUsername
     case invalidEmail
     case noInternet
     case passwordTooWeak
@@ -31,6 +32,14 @@ class RegisterService {
     private init() {}
     
     func register(withEmail email: String, withPassword password: String, withUsername username: String, withOnComplete onComplete: @escaping (RegisterServiceResult)->()) {
+        if username == "" {
+            onComplete(.failure(.invalidUsername))
+            return
+        }
+        if email == "" {
+            onComplete(.failure(.invalidEmail))
+            return
+        }
         FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
             if let error = error, let errorCode = FIRAuthErrorCode(rawValue: error._code) {
                 switch errorCode {
