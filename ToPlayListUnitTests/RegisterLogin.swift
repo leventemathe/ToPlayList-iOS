@@ -10,6 +10,8 @@ import XCTest
 @testable import ToPlayList
 @testable import Firebase
 
+typealias UserData = (username: String, email: String, password: String)
+
 class LoggedInUserCleanup: XCTestCase {
     
     private let userData = (username: "levi", email: "levi@levi.com", password: "levilevi")
@@ -100,23 +102,11 @@ class RegisterSuccesful: XCTestCase {
     }
     
     func testRegisterSuccesful() {
-        let registerExp = expectation(description: "register")
-        
-        RegisterService.instance.register(withEmail: userData.email, withPassword: userData.password, withUsername: userData.username) { result in
-            switch result {
-            case .success:
-                XCTAssertTrue(true, "Registration succesful")
-            case .failure(_):
-                XCTAssertTrue(false, "Registration failed")
-            }
-            registerExp.fulfill()
-        }
-        
-        waitForExpectations(timeout: 10) { error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
+        RegisterLoginTestHelper.register(userData, withOnSuccess: {
+            XCTAssertTrue(true, "Registration succesful")
+        }, withOnFailure: { error in
+            XCTAssertTrue(false, "Registration failed")
+        })
     }
 }
 
@@ -131,178 +121,94 @@ class RegisterFailing: XCTestCase {
     private let userDataWeakPassword = (username: "levi", email: "levi@levi.com", password: "levi")
     
     func testRegisterNoUsername() {
-        let registerExp = expectation(description: "register with no username")
-        
-        RegisterService.instance.register(withEmail: userDataNoUsername.email, withPassword: userDataNoUsername.password, withUsername: userDataNoUsername.username) { result in
-            switch result {
-            case .success:
-                XCTAssertTrue(false, "Registration succesful")
-            case .failure(let error):
-                switch error {
-                case .invalidUsername:
-                    XCTAssertTrue(true, "Registration failed with invalid username")
-                default:
-                    XCTAssertTrue(false, "Registration failed with wrong error")
-                }
+        RegisterLoginTestHelper.register(userDataNoUsername, withOnSuccess: {
+            XCTAssertTrue(false, "Registration succesful")
+        }, withOnFailure: { error in
+            switch error {
+            case .invalidUsername:
+                XCTAssertTrue(true, "Registration failed with no username")
+            default:
+                XCTAssertTrue(false, "Registration failed with wrong error")
             }
-            registerExp.fulfill()
-        }
-        
-        waitForExpectations(timeout: 10) { error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
+        })
     }
     
     func testRegisterNoEmail() {
-        let registerExp = expectation(description: "register with no email")
-        
-        RegisterService.instance.register(withEmail: userDataNoEmail.email, withPassword: userDataNoEmail.password, withUsername: userDataNoEmail.username) { result in
-            switch result {
-            case .success:
-                XCTAssertTrue(false, "Registration succesful")
-            case .failure(let error):
-                switch error {
-                case .invalidEmail:
-                    XCTAssertTrue(true, "Registration failed with invalid email")
-                default:
-                    XCTAssertTrue(false, "Registration failed with wrong error")
-                }
+        RegisterLoginTestHelper.register(userDataNoEmail, withOnSuccess: {
+            XCTAssertTrue(false, "Registration succesful")
+        }, withOnFailure: { error in
+            switch error {
+            case .invalidEmail:
+                XCTAssertTrue(true, "Registration failed with invalid email")
+            default:
+                XCTAssertTrue(false, "Registration failed with wrong error")
             }
-            registerExp.fulfill()
-        }
-        
-        waitForExpectations(timeout: 10) { error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
+        })
     }
     
     func testRegisterNoPassword() {
-        let registerExp = expectation(description: "register with no password")
-        
-        RegisterService.instance.register(withEmail: userDataNoPassword.email, withPassword: userDataNoPassword.password, withUsername: userDataNoPassword.username) { result in
-            switch result {
-            case .success:
-                XCTAssertTrue(false, "Registration succesful")
-            case .failure(let error):
-                switch error {
-                case .passwordTooWeak:
-                    XCTAssertTrue(true, "Registration failed with no password")
-                default:
-                    XCTAssertTrue(false, "Registration failed with wrong error")
-                }
+        RegisterLoginTestHelper.register(userDataWeakPassword, withOnSuccess: {
+            XCTAssertTrue(false, "Registration succesful")
+        }, withOnFailure: { error in
+            switch error {
+            case .passwordTooWeak:
+                XCTAssertTrue(true, "Registration failed with no password")
+            default:
+                XCTAssertTrue(false, "Registration failed with wrong error")
             }
-            registerExp.fulfill()
-        }
-        
-        waitForExpectations(timeout: 10) { error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
+        })
     }
     
     func testRegisterWrongEmail1() {
-        let registerExp = expectation(description: "register with wrong email 1")
-        
-        RegisterService.instance.register(withEmail: userDataWrongEmail1.email, withPassword: userDataWrongEmail1.password, withUsername: userDataWrongEmail1.username) { result in
-            switch result {
-            case .success:
-                XCTAssertTrue(false, "Registration succesful")
-            case .failure(let error):
-                switch error {
-                case .invalidEmail:
-                    XCTAssertTrue(true, "Registration failed with invalid email 1")
-                default:
-                    XCTAssertTrue(false, "Registration failed with wrong error")
-                }
+        RegisterLoginTestHelper.register(userDataWrongEmail1, withOnSuccess: {
+            XCTAssertTrue(false, "Registration succesful")
+        }, withOnFailure: { error in
+            switch error {
+            case .invalidEmail:
+                XCTAssertTrue(true, "Registration failed with invalid email")
+            default:
+                XCTAssertTrue(false, "Registration failed with wrong error")
             }
-            registerExp.fulfill()
-        }
-        
-        waitForExpectations(timeout: 10) { error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
+        })
     }
     
     func testRegisterWrongEmail2() {
-        let registerExp = expectation(description: "register with wrong email 2")
-        
-        RegisterService.instance.register(withEmail: userDataWrongEmail2.email, withPassword: userDataWrongEmail2.password, withUsername: userDataWrongEmail2.username) { result in
-            switch result {
-            case .success:
-                XCTAssertTrue(false, "Registration succesful")
-            case .failure(let error):
-                switch error {
-                case .invalidEmail:
-                    XCTAssertTrue(true, "Registration failed with invalid email 2")
-                default:
-                    XCTAssertTrue(false, "Registration failed with wrong error")
-                }
+        RegisterLoginTestHelper.register(userDataWrongEmail2, withOnSuccess: {
+            XCTAssertTrue(false, "Registration succesful")
+        }, withOnFailure: { error in
+            switch error {
+            case .invalidEmail:
+                XCTAssertTrue(true, "Registration failed with invalid email")
+            default:
+                XCTAssertTrue(false, "Registration failed with wrong error")
             }
-            registerExp.fulfill()
-        }
-        
-        waitForExpectations(timeout: 10) { error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
+        })
     }
     
     func testRegisterWrongEmail3() {
-        let registerExp = expectation(description: "register with wrong email 3")
-        
-        RegisterService.instance.register(withEmail: userDataWrongEmail3.email, withPassword: userDataWrongEmail3.password, withUsername: userDataWrongEmail3.username) { result in
-            switch result {
-            case .success:
-                XCTAssertTrue(false, "Registration succesful")
-            case .failure(let error):
-                switch error {
-                case .invalidEmail:
-                    XCTAssertTrue(true, "Registration failed with invalid email 3")
-                default:
-                    XCTAssertTrue(false, "Registration failed with wrong error")
-                }
+        RegisterLoginTestHelper.register(userDataWrongEmail3, withOnSuccess: {
+            XCTAssertTrue(false, "Registration succesful")
+        }, withOnFailure: { error in
+            switch error {
+            case .invalidEmail:
+                XCTAssertTrue(true, "Registration failed with invalid email")
+            default:
+                XCTAssertTrue(false, "Registration failed with wrong error")
             }
-            registerExp.fulfill()
-        }
-        
-        waitForExpectations(timeout: 10) { error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
+        })
     }
     
     func testRegisterWeakPassword() {
-        let registerExp = expectation(description: "register with weak password")
-        
-        RegisterService.instance.register(withEmail: userDataWeakPassword.email, withPassword: userDataWeakPassword.password, withUsername: userDataWeakPassword.username) { result in
-            switch result {
-            case .success:
-                XCTAssertTrue(false, "Registration succesful")
-            case .failure(let error):
-                switch error {
-                case .passwordTooWeak:
-                    XCTAssertTrue(true, "Registration failed with weak password")
-                default:
-                    XCTAssertTrue(false, "Registration failed with wrong error")
-                }
+        RegisterLoginTestHelper.register(userDataWeakPassword, withOnSuccess: {
+            XCTAssertTrue(false, "Registration succesful")
+        }, withOnFailure: { error in
+            switch error {
+            case .passwordTooWeak:
+                XCTAssertTrue(true, "Registration failed weak password")
+            default:
+                XCTAssertTrue(false, "Registration failed with wrong error")
             }
-            registerExp.fulfill()
-        }
-        
-        waitForExpectations(timeout: 10) { error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
+        })
     }
 }
 
@@ -311,6 +217,134 @@ class RegisterFailing: XCTestCase {
 class RegisterAlreadyExists: XCTestCase {
     
 }
+
+
+
+class LoginFailing: XCTestCase {
+    
+    private let userData = (username: "levi", email: "levi@levi.com", password: "levilevi")
+    
+    private let userDataNoEmail = (username: "levi", email: "", password: "levilevi")
+    private let userDataNoPassword = (username: "levi", email: "levi@levi.com", password: "")
+    private let userDataWrongEmail1 = (username: "levi", email: "levi@com", password: "levilevi")
+    private let userDataWrongEmail2 = (username: "levi", email: "levi.com", password: "levilevi")
+    private let userDataWrongEmail3 = (username: "levi", email: "levicom", password: "levilevi")
+    private let userDataWrongPassword = (username: "levi", email: "levi@levi.com", password: "levi")
+    
+    override func setUp() {
+        super.setUp()
+        let registerExp = expectation(description: "register setup for login")
+        RegisterService.instance.register(withEmail: userData.email, withPassword: userData.password, withUsername: userData.username) { result in
+            do {
+                try FIRAuth.auth()?.signOut()
+            } catch let signOutError as NSError {
+                print ("Error signing out: %@", signOutError)
+            }
+            registerExp.fulfill()
+        }
+        waitForExpectations(timeout: 15) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    override func tearDown() {
+        let deleteExp = expectation(description: "delete registered + logged in content")
+        ListsUser.instance.deleteLoggedInUserCompletely(userData.username) {
+            deleteExp.fulfill()
+        }
+        waitForExpectations(timeout: 15) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+        super.tearDown()
+    }
+    
+    func testLoginNoEmail() {
+        RegisterLoginTestHelper.login(userDataNoEmail, withOnSuccess: {
+            XCTAssertTrue(false, "Login Succesful")
+        }, withOnFailure: { error in
+            switch error {
+            case .invalidEmail:
+                XCTAssertTrue(true, "Login failed no email")
+            default:
+                XCTAssertTrue(false, "Login failed with wrong error")
+            }
+        })
+    }
+
+    func testLoginNoPassword() {
+        RegisterLoginTestHelper.login(userDataNoPassword, withOnSuccess: {
+            XCTAssertTrue(false, "Login Succesful")
+        }, withOnFailure: { error in
+            switch error {
+            case .invalidPassword:
+                XCTAssertTrue(true, "Login failed no password")
+            default:
+                XCTAssertTrue(false, "Login failed with wrong error")
+            }
+        })
+    }
+    
+    func testLoginWrongEmail1() {
+        RegisterLoginTestHelper.login(userDataWrongEmail1, withOnSuccess: {
+            XCTAssertTrue(false, "Login Succesful")
+        }, withOnFailure: { error in
+            switch error {
+            case .invalidEmail:
+                XCTAssertTrue(true, "Login failed wrong email")
+            case .userNotFound:
+                XCTAssertTrue(true, "Login failed no user found with email")
+            default:
+                XCTAssertTrue(false, "Login failed with wrong error")
+            }
+        })
+    }
+    
+    func testLoginWrongEmail2() {
+        RegisterLoginTestHelper.login(userDataWrongEmail2, withOnSuccess: {
+            XCTAssertTrue(false, "Login Succesful")
+        }, withOnFailure: { error in
+            switch error {
+            case .invalidEmail:
+                XCTAssertTrue(true, "Login failed wrong email")
+            default:
+                XCTAssertTrue(false, "Login failed with wrong error")
+            }
+        })
+    }
+    
+    func testLoginWrongEmail3() {
+        RegisterLoginTestHelper.login(userDataWrongEmail3, withOnSuccess: {
+            XCTAssertTrue(false, "Login Succesful")
+        }, withOnFailure: { error in
+            switch error {
+            case .invalidEmail:
+                XCTAssertTrue(true, "Login failed wrong email")
+            default:
+                XCTAssertTrue(false, "Login failed with wrong error")
+            }
+        })
+    }
+    
+    func testLoginWrongPassword() {
+        RegisterLoginTestHelper.login(userDataWrongPassword, withOnSuccess: {
+            XCTAssertTrue(false, "Login Succesful")
+        }, withOnFailure: { error in
+            switch error {
+            case .invalidPassword:
+                XCTAssertTrue(true, "Login failed wrong password")
+            default:
+                XCTAssertTrue(false, "Login failed with wrong error")
+            }
+        })
+    }
+    
+    //TODO add more failing login AND register tests
+}
+
 
 
 class LoginSuccesful: XCTestCase {
@@ -349,22 +383,59 @@ class LoginSuccesful: XCTestCase {
     }
     
     func testLoginSuccesful() {
-        let loginExp = expectation(description: "login")
+        RegisterLoginTestHelper.login(userData, withOnSuccess: {
+            XCTAssertTrue(true, "Logged in succesfully")
+        }, withOnFailure: { error in
+            XCTAssertTrue(false, "Login failed")
+        })
+    }
+}
+
+
+
+struct RegisterLoginTestHelper {
+    
+    static  let helperTestCase = XCTestCase()
+    
+    static func login(_ userData: UserData, withOnSuccess onSuccess: @escaping ()->(), withOnFailure onFailure: @escaping (LoginServiceError)->()) {
+        let loginExp = helperTestCase.expectation(description: "login")
         
         LoginService.instance.login(userData.email, withPassword: userData.password) { result in
             switch result {
             case .success:
-                XCTAssertTrue(true, "Login succesful")
-            case .failure(_):
-                XCTAssertTrue(false, "Login failed")
+                onSuccess()
+            case .failure(let error):
+                onFailure(error)
             }
             loginExp.fulfill()
         }
+    
+        helperTestCase.waitForExpectations(timeout: 10) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    static func register(_ userData: UserData, withOnSuccess onSuccess: @escaping ()->(), withOnFailure onFailure: @escaping (RegisterServiceError)->()) {
+        let registerExp = helperTestCase.expectation(description: "register")
         
-        waitForExpectations(timeout: 10) { error in
+        RegisterService.instance.register(withEmail: userData.email, withPassword: userData.password, withUsername: userData.username) { result in
+            switch result {
+            case .success:
+                onSuccess()
+            case .failure(let error):
+                onFailure(error)
+            }
+            registerExp.fulfill()
+        }
+        
+        helperTestCase.waitForExpectations(timeout: 10) { error in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
             }
         }
     }
 }
+
+
