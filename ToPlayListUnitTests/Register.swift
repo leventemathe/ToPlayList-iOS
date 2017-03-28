@@ -12,9 +12,82 @@ import XCTest
 
 //TODO Invalid key in object. Keys must be non-empty and cannot contain '.' '#' '$' '[' or ']''
 
+class RegisterValidationSuccessful: XCTestCase {
+    
+    private let userData: UserDataOptional = (email: "levi@levi.com", password: "levilevi", username: "levi")
+    
+    func testRegisterValidationSuccesful() {
+        let result = RegisterService.instance.validate(userData)
+        switch result {
+        case .success(_):
+            XCTAssertTrue(true, "validation successful")
+        case .failure(_):
+            XCTAssertTrue(false, "validation failed")
+        }
+    }
+}
+
+// tests app-level errors and security/validation rules
+class RegisterValidationFailed: XCTestCase {
+    
+    private let userDataNoUsername: UserDataOptional = (email: "levi@levi.com", password: "levilevi", username: "")
+    private let userDataNoEmail: UserDataOptional = (email: "", password: "levilevi", username: "levi")
+    private let userDataNoPassword: UserDataOptional = (email: "levi@levi.com", password: "", username: "levi")
+    private let userDataWrongEmail1: UserDataOptional = (email: "levi@com", password: "levilevi", username: "levi")
+    private let userDataWrongEmail2: UserDataOptional = (email: "levi.com", password: "levilevi", username: "levi")
+    private let userDataWrongEmail3: UserDataOptional = (email: "levicom", password: "levilevi", username: "levi")
+    private let userDataWeakPassword: UserDataOptional = (email: "levi@levi.com", password: "levi", username: "levi")
+    
+    func testRegisterValidationNoUsername() {
+        let result = RegisterService.instance.validate(userDataNoUsername)
+        switch result {
+        case .success(_):
+            XCTAssertTrue(false, "validation successful")
+        case .failure(let error):
+            switch error {
+            case .noUsername:
+                XCTAssertTrue(true, "validation failed no username")
+            default:
+                XCTAssertTrue(false, "validation failed other error")
+            }
+        }
+    }
+    
+    func testRegisterValidationNoEmail() {
+        let result = RegisterService.instance.validate(userDataNoEmail)
+        switch result {
+        case .success(_):
+            XCTAssertTrue(false, "validation successful")
+        case .failure(let error):
+            switch error {
+            case .noEmail:
+                XCTAssertTrue(true, "validation failed no email")
+            default:
+                XCTAssertTrue(false, "validation failed other error")
+            }
+        }
+    }
+    
+    func testRegisterValidationNoPassword() {
+        let result = RegisterService.instance.validate(userDataNoPassword)
+        switch result {
+        case .success(_):
+            XCTAssertTrue(false, "validation successful")
+        case .failure(let error):
+            switch error {
+            case .noPassword:
+                XCTAssertTrue(true, "validation failed no password")
+            default:
+                XCTAssertTrue(false, "validation failed other error")
+            }
+        }
+    }
+}
+
+// tests the cleanup function that removes the user data from firebase, that was used for the test
 class LoggedInUserCleanup: XCTestCase {
     
-    private let userData = (username: "levi", email: "levi@levi.com", password: "levilevi")
+    private let userData = (email: "levi@levi.com", password: "levilevi", username: "levi")
     private var uid: String!
     
     override func setUp() {
@@ -72,7 +145,7 @@ class LoggedInUserCleanup: XCTestCase {
 
 class RegisterSuccesful: XCTestCase {
  
-    private let userData = (username: "levi", email: "levi@levi.com", password: "levilevi")
+    private let userData = (email: "levi@levi.com", password: "levilevi", username: "levi")
     
     override func tearDown() {
         RegisterLoginTestHelper.deleteUserCompletely(userData)
@@ -88,15 +161,16 @@ class RegisterSuccesful: XCTestCase {
     }
 }
 
+// tests Firebase-level errors and security/validation rules
 class RegisterFailing: XCTestCase {
     
-    private let userDataNoUsername = (username: "", email: "levi@levi.com", password: "levilevi")
-    private let userDataNoEmail = (username: "levi", email: "", password: "levilevi")
-    private let userDataNoPassword = (username: "levi", email: "levi@levi.com", password: "")
-    private let userDataWrongEmail1 = (username: "levi", email: "levi@com", password: "levilevi")
-    private let userDataWrongEmail2 = (username: "levi", email: "levi.com", password: "levilevi")
-    private let userDataWrongEmail3 = (username: "levi", email: "levicom", password: "levilevi")
-    private let userDataWeakPassword = (username: "levi", email: "levi@levi.com", password: "levi")
+    private let userDataNoUsername = (email: "levi@levi.com", password: "levilevi", username: "")
+    private let userDataNoEmail = (email: "", password: "levilevi", username: "levi")
+    private let userDataNoPassword = (email: "levi@levi.com", password: "", username: "levi")
+    private let userDataWrongEmail1 = (email: "levi@com", password: "levilevi", username: "levi")
+    private let userDataWrongEmail2 = (email: "levi.com", password: "levilevi", username: "levi")
+    private let userDataWrongEmail3 = (email: "levicom", password: "levilevi", username: "levi")
+    private let userDataWeakPassword = (email: "levi@levi.com", password: "levi", username: "levi")
     
     func testRegisterNoUsername() {
         RegisterLoginTestHelper.register(userDataNoUsername, withOnSuccess: {_ in
@@ -190,12 +264,9 @@ class RegisterFailing: XCTestCase {
     }
 }
 
-
-
 class RegisterAlreadyExists: XCTestCase {
     
 }
-
 
 
 

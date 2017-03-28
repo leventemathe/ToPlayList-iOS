@@ -10,9 +10,50 @@ import XCTest
 @testable import ToPlayList
 @testable import Firebase
 
+class LoginValidationFailed: XCTestCase {
+    
+    private let userDataNoEmail: UserDataLoginOptional = (email: "", password: "levilevi")
+    private let userDataNoPassword: UserDataLoginOptional = (email: "levi@levi.com", password: "")
+    private let userDataWrongEmail1: UserDataLoginOptional = (email: "levi@com", password: "levilevi")
+    private let userDataWrongEmail2: UserDataLoginOptional = (email: "levi.com", password: "levilevi")
+    private let userDataWrongEmail3: UserDataLoginOptional = (email: "levicom", password: "levilevi")
+    private let userDataWeakPassword: UserDataLoginOptional = (email: "levi@levi.com", password: "levi")
+    
+    func testLoginValidationNoEmail() {
+        let result = LoginService.instance.validate(userDataNoEmail)
+        switch result {
+        case .success(_):
+            XCTAssertTrue(false, "validation successful")
+        case .failure(let error):
+            switch error {
+            case .noEmail:
+                XCTAssertTrue(true, "validation failed no email")
+            default:
+                XCTAssertTrue(false, "validation failed other error")
+            }
+        }
+    }
+    
+    func testLoginValidationNoPassword() {
+        let result = LoginService.instance.validate(userDataNoPassword)
+        switch result {
+        case .success(_):
+            XCTAssertTrue(false, "validation successful")
+        case .failure(let error):
+            switch error {
+            case .noPassword:
+                XCTAssertTrue(true, "validation failed no password")
+            default:
+                XCTAssertTrue(false, "validation failed other error")
+            }
+        }
+    }
+}
+
 class LoginSuccesful: XCTestCase {
     
-    private let userData = (username: "levi", email: "levi@levi.com", password: "levilevi")
+    private let userData = (email: "levi@levi.com", password: "levilevi", username: "levi")
+    private let userDataLogin = (email: "levi@levi.com", password: "levilevi")
     
     override func setUp() {
         super.setUp()
@@ -25,7 +66,7 @@ class LoginSuccesful: XCTestCase {
     }
     
     func testLoginSuccesful() {
-        RegisterLoginTestHelper.login(userData, withOnSuccess: {
+        RegisterLoginTestHelper.login(userDataLogin, withOnSuccess: {
             XCTAssertTrue(true, "Logged in succesfully")
         }, withOnFailure: { error in
             XCTAssertTrue(false, "Login failed")
@@ -39,14 +80,14 @@ class LoginAlreadyExists: XCTestCase {
 
 class LoginFailing: XCTestCase {
     
-    private let userData = (username: "levi", email: "levi@levi.com", password: "levilevi")
+    private let userData = (email: "levi@levi.com", password: "levilevi", username: "levi")
     
-    private let userDataNoEmail = (username: "levi", email: "", password: "levilevi")
-    private let userDataNoPassword = (username: "levi", email: "levi@levi.com", password: "")
-    private let userDataWrongEmail1 = (username: "levi", email: "levi@com", password: "levilevi")
-    private let userDataWrongEmail2 = (username: "levi", email: "levi.com", password: "levilevi")
-    private let userDataWrongEmail3 = (username: "levi", email: "levicom", password: "levilevi")
-    private let userDataWrongPassword = (username: "levi", email: "levi@levi.com", password: "levi")
+    private let userDataNoEmail = (email: "", password: "levilevi")
+    private let userDataNoPassword = (email: "levi@levi.com", password: "")
+    private let userDataWrongEmail1 = (email: "levi@com", password: "levilevi")
+    private let userDataWrongEmail2 = (email: "levi.com", password: "levilevi")
+    private let userDataWrongEmail3 = (email: "levicom", password: "levilevi")
+    private let userDataWrongPassword = (email: "levi@levi.com", password: "levi")
     
     override func setUp() {
         super.setUp()

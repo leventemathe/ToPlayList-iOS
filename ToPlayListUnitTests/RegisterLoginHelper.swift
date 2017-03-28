@@ -10,13 +10,17 @@ import XCTest
 @testable import ToPlayList
 @testable import Firebase
 
-typealias UserData = (username: String, email: String, password: String)
+typealias UserData = (email: String, password: String, username: String)
+typealias UserDataOptional = (email: String?, password: String?, username: String?)
+
+typealias UserDataLogin = (email: String, password: String)
+typealias UserDataLoginOptional = (email: String?, password: String?)
 
 struct RegisterLoginTestHelper {
     
     static  let helperTestCase = XCTestCase()
     
-    static func login(_ userData: UserData, withOnSuccess onSuccess: @escaping ()->(), withOnFailure onFailure: @escaping (LoginServiceError)->()) {
+    static func login(_ userData: UserDataLogin, withOnSuccess onSuccess: @escaping ()->(), withOnFailure onFailure: @escaping (LoginServiceError)->()) {
         let loginExp = helperTestCase.expectation(description: "login")
         
         LoginService.instance.login(userData.email, withPassword: userData.password) { result in
