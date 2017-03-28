@@ -9,6 +9,9 @@
 import Foundation
 import Firebase
 
+typealias OptionalUserData = (email: String?, password: String?, username: String?)
+typealias UserData = (email: String, password: String, username: String)
+
 enum RegisterServiceResult {
     case success(String)
     case failure(RegisterServiceError)
@@ -24,12 +27,50 @@ enum RegisterServiceError {
     case unknown
 }
 
+enum RegisterValidationResult {
+    case success(UserData)
+    case failure(RegisterValidationError)
+}
+
+enum RegisterValidationError {
+    case noUserData
+    case noUsername
+    case noEmail
+    case noPassword
+}
+
 // TODO recheck error codes
 class RegisterService {
     
     static let instance = RegisterService()
     
     private init() {}
+    
+    // TODO get rid of special chars, check type and length, sync with Firebase secu rules -> unit tests
+    func validate(_ userData: OptionalUserData) -> RegisterValidationResult {
+        guard var email = userData.email, var password = userData.password, var username = userData.username else {
+            return .failure(.noUserData)
+        }
+        
+        username = username.trimmingCharacters(in: .whitespacesAndNewlines)
+        email = email.trimmingCharacters(in: .whitespacesAndNewlines)
+        password = password.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if username == "" {
+            print("no username")
+            return .failure(.noUsername)
+        }
+        if email == "" {
+            print("no email")
+            return .failure(.noEmail)
+        }
+        if password == "" {
+            print("no password")
+            return .failure(.noPassword)
+        }
+        
+        return .success((email: email, password: password, username: username))
+    }
     
     func register(withEmail email: String, withPassword password: String, withUsername username: String, withOnComplete onComplete: @escaping (RegisterServiceResult)->()) {
         if username == "" {

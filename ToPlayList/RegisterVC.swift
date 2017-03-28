@@ -11,6 +11,11 @@ import FirebaseAuth
 
 class RegisterVC: UIViewController, IdentifiableVC {
     
+    static let VALIDATION_NO_USERDATA = "Please fill in the form below!"
+    static let VALIDATION_NO_EMAIL = "Please provide an email address!"
+    static let VALIDATION_NO_PASSWORD = "Please provide a password!"
+    static let VALIDATION_NO_USERNAME = "Please provide a username!"
+    
     static let ERROR_EMAIL_ALREADY_IN_USE = "Email already in use"
     static let ERROR_USERNAME_ALREADY_IN_USE = "Username already in use"
     static let ERROR_INVALID_EMAIL = "Invalid email"
@@ -33,35 +38,33 @@ class RegisterVC: UIViewController, IdentifiableVC {
     @IBAction func registerClicked(_ sender: LoginSceneButtonLogin) {
         self.errorView.hide()
         
-        if let userData = validate() {
+        if let userData = self.validate() {
             registerBtn.startLoadingAnimation()
             register(userData.email, withPassword: userData.password, withUsername: userData.username)
         }
     }
     
     private func validate() -> (email: String, password: String, username: String)? {
-        guard var email = emailField.text, var password = passwordField.text, var username = usernameField.text else {
+        switch RegisterService.instance.validate((email: emailField.text, password: passwordField.text, username: usernameField.text)) {
+        case .success(let result):
+            return result
+        case .failure(let error):
+            switch error {
+            case .noUserData:
+                print("vc no userdata")
+                errorView.show(withText: RegisterVC.VALIDATION_NO_USERDATA)
+            case .noEmail:
+                print("vc no email")
+                errorView.show(withText: RegisterVC.VALIDATION_NO_EMAIL)
+            case .noPassword:
+                print("vc no password")
+                errorView.show(withText: RegisterVC.VALIDATION_NO_PASSWORD)
+            case .noUsername:
+                print("vc no username")
+                errorView.show(withText: RegisterVC.VALIDATION_NO_USERNAME)
+            }
             return nil
         }
-        
-        username = username.trimmingCharacters(in: .whitespacesAndNewlines)
-        email = email.trimmingCharacters(in: .whitespacesAndNewlines)
-        password = password.trimmingCharacters(in: .whitespacesAndNewlines)
-        
-        if username == "" {
-            self.errorView.show(withText: "Please provide a username!")
-            return nil
-        }
-        if email == "" {
-            self.errorView.show(withText: "Please provide an email address!")
-            return nil
-        }
-        if password == "" {
-            self.errorView.show(withText: "Please provide a password!")
-            return nil
-        }
-        
-        return (email: email, password: password, username: username)
     }
     
     private func register(_ email: String, withPassword password: String, withUsername username: String) {
