@@ -12,30 +12,22 @@ import XCTest
 
 typealias UserData = (username: String, email: String, password: String)
 
+//TODO Invalid key in object. Keys must be non-empty and cannot contain '.' '#' '$' '[' or ']''
+
 class LoggedInUserCleanup: XCTestCase {
     
     private let userData = (username: "levi", email: "levi@levi.com", password: "levilevi")
-    private var uid: String?
+    private var uid: String!
     
     override func setUp() {
         super.setUp()
-        let registerExp = expectation(description: "register setup for testDeleteLoggedInUserCompletely")
-        RegisterService.instance.register(withEmail: userData.email, withPassword: userData.password, withUsername: userData.username) { result in
-            switch result {
-            case .success(let uid):
-                XCTAssertTrue(true, "Registration succesful")
-                self.uid = uid
-            case .failure(_):
-                XCTAssertTrue(false, "Registration failed")
-            }
-            registerExp.fulfill()
-        }
-        
-        waitForExpectations(timeout: 10) { error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
+        RegisterLoginTestHelper.register(userData, withOnSuccess: { result in
+            XCTAssertTrue(result != nil)
+            self.uid = result
+            XCTAssertTrue(true, "registration succesful")
+        }, withOnFailure: { error in
+            XCTAssertTrue(true, "registration failed")
+        })
     }
     
     func testDeleteLoggedInUserCompletely() {
@@ -84,25 +76,13 @@ class RegisterSuccesful: XCTestCase {
  
     private let userData = (username: "levi", email: "levi@levi.com", password: "levilevi")
     
-    override func setUp() {
-        super.setUp()
-    }
-    
     override func tearDown() {
-        let deleteExp = expectation(description: "delete registered content")
-        ListsUser.instance.deleteLoggedInUserCompletely(userData.username) {
-            deleteExp.fulfill()
-        }
-        waitForExpectations(timeout: 15) { error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
+        RegisterLoginTestHelper.deleteUserCompletely(userData)
         super.tearDown()
     }
     
     func testRegisterSuccesful() {
-        RegisterLoginTestHelper.register(userData, withOnSuccess: {
+        RegisterLoginTestHelper.register(userData, withOnSuccess: {_ in 
             XCTAssertTrue(true, "Registration succesful")
         }, withOnFailure: { error in
             XCTAssertTrue(false, "Registration failed")
@@ -121,7 +101,7 @@ class RegisterFailing: XCTestCase {
     private let userDataWeakPassword = (username: "levi", email: "levi@levi.com", password: "levi")
     
     func testRegisterNoUsername() {
-        RegisterLoginTestHelper.register(userDataNoUsername, withOnSuccess: {
+        RegisterLoginTestHelper.register(userDataNoUsername, withOnSuccess: {_ in
             XCTAssertTrue(false, "Registration succesful")
         }, withOnFailure: { error in
             switch error {
@@ -134,7 +114,7 @@ class RegisterFailing: XCTestCase {
     }
     
     func testRegisterNoEmail() {
-        RegisterLoginTestHelper.register(userDataNoEmail, withOnSuccess: {
+        RegisterLoginTestHelper.register(userDataNoEmail, withOnSuccess: {_ in
             XCTAssertTrue(false, "Registration succesful")
         }, withOnFailure: { error in
             switch error {
@@ -147,7 +127,7 @@ class RegisterFailing: XCTestCase {
     }
     
     func testRegisterNoPassword() {
-        RegisterLoginTestHelper.register(userDataWeakPassword, withOnSuccess: {
+        RegisterLoginTestHelper.register(userDataWeakPassword, withOnSuccess: {_ in
             XCTAssertTrue(false, "Registration succesful")
         }, withOnFailure: { error in
             switch error {
@@ -160,7 +140,7 @@ class RegisterFailing: XCTestCase {
     }
     
     func testRegisterWrongEmail1() {
-        RegisterLoginTestHelper.register(userDataWrongEmail1, withOnSuccess: {
+        RegisterLoginTestHelper.register(userDataWrongEmail1, withOnSuccess: {_ in
             XCTAssertTrue(false, "Registration succesful")
         }, withOnFailure: { error in
             switch error {
@@ -173,7 +153,7 @@ class RegisterFailing: XCTestCase {
     }
     
     func testRegisterWrongEmail2() {
-        RegisterLoginTestHelper.register(userDataWrongEmail2, withOnSuccess: {
+        RegisterLoginTestHelper.register(userDataWrongEmail2, withOnSuccess: {_ in
             XCTAssertTrue(false, "Registration succesful")
         }, withOnFailure: { error in
             switch error {
@@ -186,7 +166,7 @@ class RegisterFailing: XCTestCase {
     }
     
     func testRegisterWrongEmail3() {
-        RegisterLoginTestHelper.register(userDataWrongEmail3, withOnSuccess: {
+        RegisterLoginTestHelper.register(userDataWrongEmail3, withOnSuccess: {_ in
             XCTAssertTrue(false, "Registration succesful")
         }, withOnFailure: { error in
             switch error {
@@ -199,7 +179,7 @@ class RegisterFailing: XCTestCase {
     }
     
     func testRegisterWeakPassword() {
-        RegisterLoginTestHelper.register(userDataWeakPassword, withOnSuccess: {
+        RegisterLoginTestHelper.register(userDataWeakPassword, withOnSuccess: {_ in
             XCTAssertTrue(false, "Registration succesful")
         }, withOnFailure: { error in
             switch error {
@@ -233,32 +213,11 @@ class LoginFailing: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        let registerExp = expectation(description: "register setup for login")
-        RegisterService.instance.register(withEmail: userData.email, withPassword: userData.password, withUsername: userData.username) { result in
-            do {
-                try FIRAuth.auth()?.signOut()
-            } catch let signOutError as NSError {
-                print ("Error signing out: %@", signOutError)
-            }
-            registerExp.fulfill()
-        }
-        waitForExpectations(timeout: 15) { error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
+        RegisterLoginTestHelper.register(userData, withOnSuccess: { _ in }, withOnFailure: {_ in })
     }
     
     override func tearDown() {
-        let deleteExp = expectation(description: "delete registered + logged in content")
-        ListsUser.instance.deleteLoggedInUserCompletely(userData.username) {
-            deleteExp.fulfill()
-        }
-        waitForExpectations(timeout: 15) { error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
+        RegisterLoginTestHelper.deleteUserCompletely(userData)
         super.tearDown()
     }
     
@@ -341,8 +300,6 @@ class LoginFailing: XCTestCase {
             }
         })
     }
-    
-    //TODO add more failing login AND register tests
 }
 
 
@@ -353,32 +310,11 @@ class LoginSuccesful: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        let registerExp = expectation(description: "register setup for login")
-        RegisterService.instance.register(withEmail: userData.email, withPassword: userData.password, withUsername: userData.username) { result in
-            do {
-                try FIRAuth.auth()?.signOut()
-            } catch let signOutError as NSError {
-                print ("Error signing out: %@", signOutError)
-            }
-            registerExp.fulfill()
-        }
-        waitForExpectations(timeout: 15) { error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
+        RegisterLoginTestHelper.register(userData, withOnSuccess: { _ in }, withOnFailure: {_ in })
     }
     
     override func tearDown() {
-        let deleteExp = expectation(description: "delete registered + logged in content")
-        ListsUser.instance.deleteLoggedInUserCompletely(userData.username) {
-            deleteExp.fulfill()
-        }
-        waitForExpectations(timeout: 15) { error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
+        RegisterLoginTestHelper.deleteUserCompletely(userData)
         super.tearDown()
     }
     
@@ -417,13 +353,13 @@ struct RegisterLoginTestHelper {
         }
     }
     
-    static func register(_ userData: UserData, withOnSuccess onSuccess: @escaping ()->(), withOnFailure onFailure: @escaping (RegisterServiceError)->()) {
+    static func register(_ userData: UserData, withOnSuccess onSuccess: @escaping (String?)->(), withOnFailure onFailure: @escaping (RegisterServiceError)->()) {
         let registerExp = helperTestCase.expectation(description: "register")
         
         RegisterService.instance.register(withEmail: userData.email, withPassword: userData.password, withUsername: userData.username) { result in
             switch result {
-            case .success:
-                onSuccess()
+            case .success(let uid):
+                onSuccess(uid)
             case .failure(let error):
                 onFailure(error)
             }
@@ -431,6 +367,18 @@ struct RegisterLoginTestHelper {
         }
         
         helperTestCase.waitForExpectations(timeout: 10) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    static func deleteUserCompletely(_ userData: UserData) {
+        let deleteExp = helperTestCase.expectation(description: "delete user and all related content")
+        ListsUser.instance.deleteLoggedInUserCompletely(userData.username) {
+            deleteExp.fulfill()
+        }
+        helperTestCase.waitForExpectations(timeout: 15) { error in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
             }
