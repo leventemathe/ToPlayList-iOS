@@ -40,6 +40,14 @@ enum RegisterValidationError {
     case noUsername
     case noEmail
     case noPassword
+    case forbiddenCharacterInUsername(String)
+    case tooLongUsername
+    case tooLongEmail
+    case tooLongPassword
+    case tooShortPassword
+    case invalidEmail
+    case noNumberInPassword
+    case noCapitalInPassword
 }
 
 // TODO recheck error codes
@@ -48,6 +56,12 @@ class RegisterService {
     static let instance = RegisterService()
     
     private init() {}
+    
+    static let USERNAME_FORBIDDEN_CHARACTERS = [".", "#", "$", "[", "]"] //TODO add more?
+    static let USERNAME_MAX_LENGTH = 15
+    static let EMAIL_MAX_LENGTH = 254
+    static let PASSWORD_MIN_LENGTH = 6
+    static let PASSWORD_MAX_LENGTH = 254
     
     // TODO get rid of special chars, check type and length, sync with Firebase secu rules -> unit tests
     func validate(_ userData: OptionalUserData) -> RegisterValidationResult {
@@ -59,20 +73,78 @@ class RegisterService {
         email = email.trimmingCharacters(in: .whitespacesAndNewlines)
         password = password.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        if username == "" {
-            print("no username")
-            return .failure(.noUsername)
+        let usernameResult = validateUsername(username)
+        if usernameResult != nil {
+            return .failure(usernameResult!)
         }
-        if email == "" {
-            print("no email")
-            return .failure(.noEmail)
+        let emailResult = validateEmail(email)
+        if emailResult != nil {
+            return .failure(emailResult!)
         }
-        if password == "" {
-            print("no password")
-            return .failure(.noPassword)
+        let passwordResult = validatePassword(password)
+        if passwordResult != nil {
+            return .failure(passwordResult!)
         }
         
         return .success((email: email, password: password, username: username))
+    }
+    
+    private func validateUsername(_ username: String) -> RegisterValidationError? {
+        if username == "" {
+            return .noUsername
+        }
+        for forbiddenChar in RegisterService.USERNAME_FORBIDDEN_CHARACTERS {
+            if username.contains(forbiddenChar) {
+                return .forbiddenCharacterInUsername(forbiddenChar)
+            }
+        }
+        if username.characters.count > RegisterService.USERNAME_MAX_LENGTH {
+            return .tooLongUsername
+        }
+        return nil
+    }
+    
+    private func validateEmail(_ email: String) -> RegisterValidationError? {
+        if email == "" {
+            return .noEmail
+        }
+        if email.characters.count > RegisterService.EMAIL_MAX_LENGTH {
+            return .tooLongEmail
+        }
+        
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        if !emailTest.evaluate(with: email) {
+            return .invalidEmail
+        }
+        
+        return nil
+    }
+    
+    private func validatePassword(_ password: String) -> RegisterValidationError? {
+        if password == "" {
+            return .noPassword
+        }
+        if password.characters.count < RegisterService.PASSWORD_MIN_LENGTH {
+            return .tooShortPassword
+        }
+        if password.characters.count > RegisterService.PASSWORD_MAX_LENGTH {
+            return .tooLongPassword
+        }
+        
+        let numberRegEx  = ".*[0-9]+.*"
+        let passwordNumberTest = NSPredicate(format:"SELF MATCHES %@", numberRegEx)
+        if !passwordNumberTest.evaluate(with: password) {
+            return .noNumberInPassword
+        }
+        
+        let capitalRegEx  = ".*[A-Z]+.*"
+        let passwordCapitalTest = NSPredicate(format:"SELF MATCHES %@", capitalRegEx)
+        if !passwordCapitalTest.evaluate(with: password) {
+            return .noCapitalInPassword
+        }
+        
+        return nil
     }
     
     func register(withEmail email: String, withPassword password: String, withUsername username: String, withOnComplete onComplete: @escaping (RegisterServiceResult)->()) {

@@ -16,12 +16,12 @@ class LoginVC: UIViewController, IdentifiableVC {
     static let VALIDATION_NO_EMAIL = "Please provide an email address!"
     static let VALIDATION_NO_PASSWORD = "Please provide a password!"
     
-    static let ERROR_INVALID_EMAIL = "Invalid email"
-    static let ERROR_INVALID_PASSWORD = "Invalid password"
-    static let ERROR_USER_NOT_FOUND = "Invalid email or password"
-    static let ERROR_TOKEN_EXPIRED = "User token expired"
-    static let ERROR_NO_INTERNET = "No internet"
-    static let ERROR_UNKNOWN = "Unknown error"
+    static let ERROR_INVALID_EMAIL = "Invalid email!"
+    static let ERROR_INVALID_PASSWORD = "Invalid password!"
+    static let ERROR_USER_NOT_FOUND = "Invalid email or password!"
+    static let ERROR_TOKEN_EXPIRED = "User token expired!"
+    static let ERROR_NO_INTERNET = "No internet!"
+    static let ERROR_UNKNOWN = "Unknown error!"
     
     @IBOutlet weak var emailField: LoginSceneTextFieldEmail!
     @IBOutlet weak var passwordField: LoginSceneTextFieldPassword!

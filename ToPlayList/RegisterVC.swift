@@ -15,14 +15,22 @@ class RegisterVC: UIViewController, IdentifiableVC {
     static let VALIDATION_NO_EMAIL = "Please provide an email address!"
     static let VALIDATION_NO_PASSWORD = "Please provide a password!"
     static let VALIDATION_NO_USERNAME = "Please provide a username!"
+    static let VALIDATION_FORBIDDEN_CHAR_IN_USERNAME = "Forbidden character in username!"
+    static let VALIDATION_TOO_LONG_USERNAME = "Username is too long! (Max: \(RegisterService.USERNAME_MAX_LENGTH))"
+    static let VALIDATION_INVALID_EMAIL = "Invalid email!"
+    static let VALIDATION_TOO_LONG_EMAIL = "The email address is too long!"
+    static let VALIDATION_NO_CAPITAL_IN_PASSWORD = "The password has to contain a capital letter!"
+    static let VALIDATION_NO_NUMBER_IN_PASSWORD = "The password has to contain a number!"
+    static let VALIDATION_TOO_LONG_PASSWORD = "The password is too long!"
+    static let VALIDATION_TOO_SHORT_PASSWORD = "The password is too short!"
     
-    static let ERROR_EMAIL_ALREADY_IN_USE = "Email already in use"
-    static let ERROR_USERNAME_ALREADY_IN_USE = "Username already in use"
-    static let ERROR_INVALID_EMAIL = "Invalid email"
-    static let ERROR_INVALID_USERNAME = "Invalid username"
-    static let ERROR_NO_INTERNET = "No internet"
-    static let ERROR_WEAK_PASSWORD = "Password is too weak"
-    static let ERROR_UNKNOWN = "Unknown error"
+    static let ERROR_EMAIL_ALREADY_IN_USE = "Email already in use!"
+    static let ERROR_USERNAME_ALREADY_IN_USE = "Username already in use!"
+    static let ERROR_INVALID_EMAIL = "Invalid email!"
+    static let ERROR_INVALID_USERNAME = "Invalid username!"
+    static let ERROR_NO_INTERNET = "No internet!"
+    static let ERROR_WEAK_PASSWORD = "Password is too weak!"
+    static let ERROR_UNKNOWN = "Unknown error!"
     
     @IBOutlet weak var usernameField: LoginSceneTextUsername!
     @IBOutlet weak var emailField: LoginSceneTextFieldEmail!
@@ -53,12 +61,28 @@ class RegisterVC: UIViewController, IdentifiableVC {
             case .noUserData:
                 errorView.show(withText: RegisterVC.VALIDATION_NO_USERDATA)
             case .noEmail:
-                print("vc no email")
                 errorView.show(withText: RegisterVC.VALIDATION_NO_EMAIL)
             case .noPassword:
                 errorView.show(withText: RegisterVC.VALIDATION_NO_PASSWORD)
             case .noUsername:
                 errorView.show(withText: RegisterVC.VALIDATION_NO_USERNAME)
+            case .forbiddenCharacterInUsername(let forbiddenChar):
+                errorView.show(withText: RegisterVC.VALIDATION_FORBIDDEN_CHAR_IN_USERNAME + " \"\(forbiddenChar)\"")
+            case .tooLongUsername:
+                errorView.show(withText: RegisterVC.VALIDATION_TOO_LONG_USERNAME)
+            case .invalidEmail:
+                errorView.show(withText: RegisterVC.VALIDATION_INVALID_EMAIL)
+            case .tooLongEmail:
+                errorView.show(withText: RegisterVC.VALIDATION_TOO_LONG_EMAIL)
+            case .noCapitalInPassword:
+                errorView.show(withText: RegisterVC.VALIDATION_NO_CAPITAL_IN_PASSWORD)
+            case .noNumberInPassword:
+                errorView.show(withText: RegisterVC.VALIDATION_NO_NUMBER_IN_PASSWORD)
+            case .tooLongPassword:
+                errorView.show(withText: RegisterVC.VALIDATION_TOO_LONG_PASSWORD)
+            case .tooShortPassword:
+                errorView.show(withText: RegisterVC.VALIDATION_TOO_SHORT_PASSWORD)
+                
             }
             return nil
         }

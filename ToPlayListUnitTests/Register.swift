@@ -10,11 +10,11 @@ import XCTest
 @testable import ToPlayList
 @testable import Firebase
 
-//TODO Invalid key in object. Keys must be non-empty and cannot contain '.' '#' '$' '[' or ']''
+//TODO Invalid key in object. Keys must be non-empty and cannot contain '.' '#' '$' '[' or ']'
 
 class RegisterValidationSuccessful: XCTestCase {
     
-    private let userData: UserDataOptional = (email: "levi@levi.com", password: "levilevi", username: "levi")
+    private let userData: UserDataOptional = (email: "levi@levi.com", password: "Llevilevi1", username: "levi")
     
     func testRegisterValidationSuccesful() {
         let result = RegisterService.instance.validate(userData)
