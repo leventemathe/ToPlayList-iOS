@@ -44,23 +44,20 @@ class RegisterVC: UIViewController, IdentifiableVC {
         }
     }
     
-    private func validate() -> (email: String, password: String, username: String)? {
+    private func validate() -> UserData? {
         switch RegisterService.instance.validate((email: emailField.text, password: passwordField.text, username: usernameField.text)) {
         case .success(let result):
             return result
         case .failure(let error):
             switch error {
             case .noUserData:
-                print("vc no userdata")
                 errorView.show(withText: RegisterVC.VALIDATION_NO_USERDATA)
             case .noEmail:
                 print("vc no email")
                 errorView.show(withText: RegisterVC.VALIDATION_NO_EMAIL)
             case .noPassword:
-                print("vc no password")
                 errorView.show(withText: RegisterVC.VALIDATION_NO_PASSWORD)
             case .noUsername:
-                print("vc no username")
                 errorView.show(withText: RegisterVC.VALIDATION_NO_USERNAME)
             }
             return nil

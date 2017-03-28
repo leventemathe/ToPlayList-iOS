@@ -12,6 +12,9 @@ import Firebase
 typealias OptionalUserData = (email: String?, password: String?, username: String?)
 typealias UserData = (email: String, password: String, username: String)
 
+typealias OptionalUserDataLogin = (email: String?, password: String?)
+typealias UserDataLogin = (email: String, password: String)
+
 enum RegisterServiceResult {
     case success(String)
     case failure(RegisterServiceError)
@@ -140,12 +143,42 @@ enum LoginServiceError {
     case unknown
 }
 
+enum LoginValidationResult {
+    case success(UserDataLogin)
+    case failure(LoginValidationError)
+}
+
+enum LoginValidationError {
+    case noUserData
+    case noEmail
+    case noPassword
+}
+
 // TODO recheck error codes!
 class LoginService {
  
     static let instance = LoginService()
     
     private init() {}
+    
+    // TODO get rid of special chars, check type and length, sync with Firebase secu rules -> unit tests
+    func validate(_ userData: OptionalUserDataLogin) -> LoginValidationResult {
+        guard var email = userData.email, var password = userData.password else {
+            return .failure(.noUserData)
+        }
+        
+        email = email.trimmingCharacters(in: .whitespacesAndNewlines)
+        password = password.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if email == "" {
+            return .failure(.noEmail)
+        }
+        if password == "" {
+            return .failure(.noPassword)
+        }
+        
+        return .success((email: email, password: password))
+    }
     
     func login(_ email: String, withPassword password: String, withOnComplete onComplete: @escaping (LoginServiceResult)->()) {
         FIRAuth.auth()?.signIn(withEmail: email, password: password) { (user, error) in

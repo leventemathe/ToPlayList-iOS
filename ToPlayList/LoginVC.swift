@@ -12,9 +12,13 @@ import FirebaseDatabase
 
 class LoginVC: UIViewController, IdentifiableVC {
     
+    static let VALIDATION_NO_USERDATA = "Please fill in the form below!"
+    static let VALIDATION_NO_EMAIL = "Please provide an email address!"
+    static let VALIDATION_NO_PASSWORD = "Please provide a password!"
+    
     static let ERROR_INVALID_EMAIL = "Invalid email"
     static let ERROR_INVALID_PASSWORD = "Invalid password"
-    static let ERROR_USER_NOT_FOUND = "User not found"
+    static let ERROR_USER_NOT_FOUND = "Invalid email or password"
     static let ERROR_TOKEN_EXPIRED = "User token expired"
     static let ERROR_NO_INTERNET = "No internet"
     static let ERROR_UNKNOWN = "Unknown error"
@@ -37,24 +41,21 @@ class LoginVC: UIViewController, IdentifiableVC {
         }
     }
     
-    private func validate() -> (email: String, password: String)? {
-        guard var email = emailField.text, var password = passwordField.text else {
+    private func validate() -> UserDataLogin? {
+        switch LoginService.instance.validate((email: emailField.text, password: passwordField.text)) {
+        case .success(let result):
+            return result
+        case .failure(let error):
+            switch error {
+            case .noUserData:
+                errorView.show(withText: LoginVC.VALIDATION_NO_USERDATA)
+            case .noEmail:
+                errorView.show(withText: LoginVC.VALIDATION_NO_EMAIL)
+            case .noPassword:
+                errorView.show(withText: LoginVC.VALIDATION_NO_PASSWORD)
+            }
             return nil
         }
-        
-        email = email.trimmingCharacters(in: .whitespacesAndNewlines)
-        password = password.trimmingCharacters(in: .whitespacesAndNewlines)
-        
-        if email == "" {
-            self.errorView.show(withText: "Please provide an email address!")
-            return nil
-        }
-        if password == "" {
-            self.errorView.show(withText: "Please provide a password!")
-            return nil
-        }
-        
-        return (email: email, password: password)
     }
     
     private func login(_ email: String, withPassword password: String) {
