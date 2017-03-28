@@ -3,8 +3,8 @@ platform :ios, '9.0'
 target 'ToPlayList' do
   use_frameworks!
 
-  pod 'Alamofire', '~> 4.2'
-  pod 'Kingfisher', '~> 3.0'
+  pod 'Alamofire'
+  pod 'Kingfisher'
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
