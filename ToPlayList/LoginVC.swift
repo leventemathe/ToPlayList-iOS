@@ -16,8 +16,6 @@ class LoginVC: UIViewController, IdentifiableVC {
     static let VALIDATION_NO_EMAIL = "Please provide an email address!"
     static let VALIDATION_NO_PASSWORD = "Please provide a password!"
     
-    static let ERROR_INVALID_EMAIL = "Invalid email!"
-    static let ERROR_INVALID_PASSWORD = "Invalid password!"
     static let ERROR_USER_NOT_FOUND = "Invalid email or password!"
     static let ERROR_TOKEN_EXPIRED = "User token expired!"
     static let ERROR_NO_INTERNET = "No internet!"
@@ -67,18 +65,12 @@ class LoginVC: UIViewController, IdentifiableVC {
                 self.loginSuccesful()
             case .failure(let error):
                 switch error {
-                case .invalidEmail:
-                    self.errorView.show(withText: LoginVC.ERROR_INVALID_EMAIL)
-                case .invalidPassword:
-                    self.errorView.show(withText: LoginVC.ERROR_INVALID_PASSWORD)
                 case .noInternet:
                     Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
-                case .userNotFound:
-                    self.errorView.show(withText: LoginVC.ERROR_USER_NOT_FOUND)
-                case .userTokenExpired:
-                    self.errorView.show(withText: LoginVC.ERROR_TOKEN_EXPIRED)
                 case .unknown:
                     self.errorView.show(withText: LoginVC.ERROR_UNKNOWN)
+                default:
+                    self.errorView.show(withText: LoginVC.ERROR_USER_NOT_FOUND)
                 }
             }
         }

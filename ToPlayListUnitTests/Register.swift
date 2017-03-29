@@ -10,8 +10,6 @@ import XCTest
 @testable import ToPlayList
 @testable import Firebase
 
-//TODO gibberish in email?
-
 class RegisterValidationSuccessful: XCTestCase {
     
     private let userData: UserDataOptional = (email: "levi@levi.com", password: "Llevilevi1", username: "levi")

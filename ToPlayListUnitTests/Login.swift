@@ -14,10 +14,6 @@ class LoginValidationFailed: XCTestCase {
     
     private let userDataNoEmail: UserDataLoginOptional = (email: "", password: "levilevi")
     private let userDataNoPassword: UserDataLoginOptional = (email: "levi@levi.com", password: "")
-    private let userDataWrongEmail1: UserDataLoginOptional = (email: "levi@com", password: "levilevi")
-    private let userDataWrongEmail2: UserDataLoginOptional = (email: "levi.com", password: "levilevi")
-    private let userDataWrongEmail3: UserDataLoginOptional = (email: "levicom", password: "levilevi")
-    private let userDataWeakPassword: UserDataLoginOptional = (email: "levi@levi.com", password: "levi")
     
     func testLoginValidationNoEmail() {
         let result = LoginService.instance.validate(userDataNoEmail)
