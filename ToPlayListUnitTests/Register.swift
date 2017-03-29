@@ -10,14 +10,82 @@ import XCTest
 @testable import ToPlayList
 @testable import Firebase
 
-//TODO Invalid key in object. Keys must be non-empty and cannot contain '.' '#' '$' '[' or ']'
+//TODO gibberish in email?
 
 class RegisterValidationSuccessful: XCTestCase {
     
     private let userData: UserDataOptional = (email: "levi@levi.com", password: "Llevilevi1", username: "levi")
+    private let userData2: UserDataOptional = (email: "levi@levi.com", password: "Llevilevi1", username: "levi:) 😀🐴⚽️⏰")
+    private let userData3: UserDataOptional = (email: "levi@levi.com", password: "Llevilevi1", username: "éáú")
+    private let userData4: UserDataOptional = (email: "levi@levi.com", password: "LlevASDilevi123", username: "éáú")
+    
+    private let userDataSpacesInUsername: UserDataOptional = (email: "levi@levi.com", password: "LlevASDilevi123", username: "levi m")
+    private let userDataSpacesInPassword: UserDataOptional = (email: "levi@levi.com", password: "LlevASDilevi123", username: "levi m")
+    
+    private let userDataGibberishInPassword: UserDataOptional = (email: "levi@levi.com", password: "L#&😊🥝⊇Séálevi123", username: "levi m")
     
     func testRegisterValidationSuccesful() {
         let result = RegisterService.instance.validate(userData)
+        switch result {
+        case .success(_):
+            XCTAssertTrue(true, "validation successful")
+        case .failure(_):
+            XCTAssertTrue(false, "validation failed")
+        }
+    }
+    
+    func testRegisterValidationSuccesful2() {
+        let result = RegisterService.instance.validate(userData2)
+        switch result {
+        case .success(_):
+            XCTAssertTrue(true, "validation successful")
+        case .failure(_):
+            XCTAssertTrue(false, "validation failed")
+        }
+    }
+    
+    func testRegisterValidationSuccesful3() {
+        let result = RegisterService.instance.validate(userData3)
+        switch result {
+        case .success(_):
+            XCTAssertTrue(true, "validation successful")
+        case .failure(_):
+            XCTAssertTrue(false, "validation failed")
+        }
+    }
+    
+    func testRegisterValidationSuccesful4() {
+        let result = RegisterService.instance.validate(userData4)
+        switch result {
+        case .success(_):
+            XCTAssertTrue(true, "validation successful")
+        case .failure(_):
+            XCTAssertTrue(false, "validation failed")
+        }
+    }
+    
+    func testRegisterValidationSuccesfulSpacesInUsername() {
+        let result = RegisterService.instance.validate(userDataSpacesInUsername)
+        switch result {
+        case .success(_):
+            XCTAssertTrue(true, "validation successful")
+        case .failure(_):
+            XCTAssertTrue(false, "validation failed")
+        }
+    }
+    
+    func testRegisterValidationSuccesfulSpacesInPassword() {
+        let result = RegisterService.instance.validate(userDataSpacesInPassword)
+        switch result {
+        case .success(_):
+            XCTAssertTrue(true, "validation successful")
+        case .failure(_):
+            XCTAssertTrue(false, "validation failed")
+        }
+    }
+    
+    func testRegisterValidationSuccesfulGibberishInPassword() {
+        let result = RegisterService.instance.validate(userDataGibberishInPassword)
         switch result {
         case .success(_):
             XCTAssertTrue(true, "validation successful")
@@ -30,13 +98,33 @@ class RegisterValidationSuccessful: XCTestCase {
 // tests app-level errors and security/validation rules
 class RegisterValidationFailed: XCTestCase {
     
-    private let userDataNoUsername: UserDataOptional = (email: "levi@levi.com", password: "levilevi", username: "")
-    private let userDataNoEmail: UserDataOptional = (email: "", password: "levilevi", username: "levi")
+    private let userDataNoUsername: UserDataOptional = (email: "levi@levi.com", password: "Levilevi1", username: "")
+    private let userDataNoEmail: UserDataOptional = (email: "", password: "Levilevi1", username: "levi")
     private let userDataNoPassword: UserDataOptional = (email: "levi@levi.com", password: "", username: "levi")
-    private let userDataWrongEmail1: UserDataOptional = (email: "levi@com", password: "levilevi", username: "levi")
-    private let userDataWrongEmail2: UserDataOptional = (email: "levi.com", password: "levilevi", username: "levi")
-    private let userDataWrongEmail3: UserDataOptional = (email: "levicom", password: "levilevi", username: "levi")
+    
+    private let userDataWrongEmail1: UserDataOptional = (email: "levi@com", password: "Levilevi1", username: "levi")
+    private let userDataWrongEmail2: UserDataOptional = (email: "levi.com", password: "Levilevi1", username: "levi")
+    private let userDataWrongEmail3: UserDataOptional = (email: "levicom", password: "Levilevi1", username: "levi")
+    
     private let userDataWeakPassword: UserDataOptional = (email: "levi@levi.com", password: "levi", username: "levi")
+    
+    private let userDataForbiddenCharsInUsername: UserDataOptional = (email: "levi@levi.com", password: "Levilevi1", username: "levi[]")
+    private let userDataForbiddenCharsInUsername2: UserDataOptional = (email: "levi@levi.com", password: "Levilevi1", username: "levi#")
+    private let userDataForbiddenCharsInUsername3: UserDataOptional = (email: "levi@levi.com", password: "Levilevi1", username: "levi.")
+    private let userDataForbiddenCharsInUsername4: UserDataOptional = (email: "levi@levi.com", password: "Levilevi1", username: "levi$$$$")
+    
+    private let userDataForbiddenCharsInEmail: UserDataOptional = (email: "levi,asd@levi.com", password: "Levilevi1", username: "levi")
+    private let userDataForbiddenCharsInEmail2: UserDataOptional = (email: "leviéáasd@levi.com", password: "Levilevi1", username: "levi")
+    private let userDataForbiddenCharsInEmail3: UserDataOptional = (email: "levi❤️🏀sd@levi.com", password: "Levilevi1", username: "llevi")
+    private let userDataForbiddenCharsInEmail4: UserDataOptional = (email: "lev i@levi.com", password: "LlevASDilevi123", username: "llevi")
+    
+    private let userDataUsernameTooLong: UserDataOptional = (email: "levi@levi.com", password: "Levilevi1", username: "leviafsdgskjsaagjsfngbsfngbjsnbkjfsdnbjkdfnbkdbnkdnbkdnjbdnbkdnbkjsgfdsgdfghdghfghfjfhjhjgnbcvx")
+    private let userDataEmailTooLong: UserDataOptional = (email: "levileviafsdgskjsaagjsfngbsfngbjsnbkjfsdnbjkdfnbkdbnkdnbkdnjbdnbkdnbkjsgfdsgdfghdghfghfjfhjhjgnbcvxhfkjhfkhfknmkfmbdmbfgmbnkmbcvmvlshjjkbkbvklmbxnbxvlblevileviafsdgskjsaagjsfngbsfngbjsnbkjfsdnbjkdfnbkdbnkdnbkdnjbdnbkdnbkjsgfdsgdfghdghfghfjfhjhjgnbcvxhfkjhfkhfknmkfmbdmbfgmbnkmbcvmvlshjjkbkbvklmbxnbxvlblevileviafsdgskjsaagjsfngbsfngbjsnbkjfsdnbjkdfnbkdbnkdnbkdnjbdnbkdnbkjsgfdsgdfghdghfghfjfhjhjgnbcvxhfkjhfkhfknmkfmbdmbfgmbnkmbcvmvlshjjkbkbvklmbxnbxvlblevileviafsdgskjsaagjsfngbsfngbjsnbkjfsdnbjkdfnbkdbnkdnbkdnjbdnbkdnbkjsgfdsgdfghdghfghfjfhjhjgnbcvxhfkjhfkhfknmkfmbdmbfgmbnkmbcvmvlshjjkbkbvklmbxnbxvlb@levi.com", password: "Levilevi1", username: "levi")
+    private let userDataPasswordTooShort: UserDataOptional = (email: "leviasd@levi.com", password: "Li1", username: "levi")
+    private let userDataPasswordTooLong: UserDataOptional = (email: "leviasd@levi.com", password: "L1leviafgsfmgbdgjkbnmnbmnbjknbmcvnbmxbkjnnbcbcxvbvxcmcxnvmbblkhdjhgbdgjkbnmnbmnbjknbmcvnbmxbkjnnbcbcxvbvxcmcxnvmbblkhdjhL1leviafgsfmgbdgjkbnmnbmnbjknbmcvnbmxbkjnnbcbcxvbvxcmcxnvmbblkhdjhgbdgjkbnmnbmnbjknbmcvnbmxbkjnnbcbcxvbvxcmcxnvmbblkhdjhL1leviafgsfmgbdgjkbnmnbmnbjknbmcvnbmxbkjnnbcbcxvbvxcmcxnvmbblkhdjhgbdgjkbnmnbmnbjknbmcvnbmxbkjnnbcbcxvbvxcmcxnvmbblkhdjhL1leviafgsfmgbdgjkbnmnbmnbjknbmcvnbmxbkjnnbcbcxvbvxcmcxnvmbblkhdjhgbdgjkbnmnbmnbjknbmcvnbmxbkjnnbcbcxvbvxcmcxnvmbblkhdjh", username: "levi")
+    
+    private let userDataPasswordNoCapital: UserDataOptional = (email: "levi@levi.com", password: "levilevi1", username: "levi")
+    private let userDataPasswordNoNumber: UserDataOptional = (email: "levi@levi.com", password: "Levilevi", username: "levi")
     
     func testRegisterValidationNoUsername() {
         let result = RegisterService.instance.validate(userDataNoUsername)
@@ -77,6 +165,216 @@ class RegisterValidationFailed: XCTestCase {
             switch error {
             case .noPassword:
                 XCTAssertTrue(true, "validation failed no password")
+            default:
+                XCTAssertTrue(false, "validation failed other error")
+            }
+        }
+    }
+    
+    func testRegisterValidationForbiddenCharsInUsername() {
+        let result = RegisterService.instance.validate(userDataForbiddenCharsInUsername)
+        switch result {
+        case .success(_):
+            XCTAssertTrue(false, "validation successful")
+        case .failure(let error):
+            switch error {
+            case .forbiddenCharacterInUsername(_):
+                XCTAssertTrue(true, "validation failed forbidden char in username")
+            default:
+                XCTAssertTrue(false, "validation failed other error")
+            }
+        }
+    }
+    
+    func testRegisterValidationForbiddenCharsInUsername2() {
+        let result = RegisterService.instance.validate(userDataForbiddenCharsInUsername2)
+        switch result {
+        case .success(_):
+            XCTAssertTrue(false, "validation successful")
+        case .failure(let error):
+            switch error {
+            case .forbiddenCharacterInUsername(_):
+                XCTAssertTrue(true, "validation failed forbidden char in username")
+            default:
+                XCTAssertTrue(false, "validation failed other error")
+            }
+        }
+    }
+    
+    func testRegisterValidationForbiddenCharsInUsername3() {
+        let result = RegisterService.instance.validate(userDataForbiddenCharsInUsername3)
+        switch result {
+        case .success(_):
+            XCTAssertTrue(false, "validation successful")
+        case .failure(let error):
+            switch error {
+            case .forbiddenCharacterInUsername(_):
+                XCTAssertTrue(true, "validation failed forbidden char in username")
+            default:
+                XCTAssertTrue(false, "validation failed other error")
+            }
+        }
+    }
+    
+    func testRegisterValidationForbiddenCharsInUsername4() {
+        let result = RegisterService.instance.validate(userDataForbiddenCharsInUsername4)
+        switch result {
+        case .success(_):
+            XCTAssertTrue(false, "validation successful")
+        case .failure(let error):
+            switch error {
+            case .forbiddenCharacterInUsername(_):
+                XCTAssertTrue(true, "validation failed forbidden char in username")
+            default:
+                XCTAssertTrue(false, "validation failed other error")
+            }
+        }
+    }
+    
+    func testRegisterValidationForbiddenCharsInEmail() {
+        let result = RegisterService.instance.validate(userDataForbiddenCharsInEmail)
+        switch result {
+        case .success(_):
+            XCTAssertTrue(false, "validation successful")
+        case .failure(let error):
+            switch error {
+            case .invalidEmail(_):
+                XCTAssertTrue(true, "validation failed forbidden char in email")
+            default:
+                XCTAssertTrue(false, "validation failed other error")
+            }
+        }
+    }
+    
+    func testRegisterValidationForbiddenCharsInEmail2() {
+        let result = RegisterService.instance.validate(userDataForbiddenCharsInEmail2)
+        switch result {
+        case .success(_):
+            XCTAssertTrue(false, "validation successful")
+        case .failure(let error):
+            switch error {
+            case .invalidEmail(_):
+                XCTAssertTrue(true, "validation failed forbidden char in email")
+            default:
+                XCTAssertTrue(false, "validation failed other error")
+            }
+        }
+    }
+    
+    func testRegisterValidationForbiddenCharsInEmail3() {
+        let result = RegisterService.instance.validate(userDataForbiddenCharsInEmail3)
+        switch result {
+        case .success(_):
+            XCTAssertTrue(false, "validation successful")
+        case .failure(let error):
+            switch error {
+            case .invalidEmail(_):
+                XCTAssertTrue(true, "validation failed forbidden char in email")
+            default:
+                XCTAssertTrue(false, "validation failed other error")
+            }
+        }
+    }
+    
+    func testRegisterValidationForbiddenCharsInEmail4() {
+        let result = RegisterService.instance.validate(userDataForbiddenCharsInEmail4)
+        switch result {
+        case .success(_):
+            XCTAssertTrue(false, "validation successful")
+        case .failure(let error):
+            switch error {
+            case .invalidEmail(_):
+                XCTAssertTrue(true, "validation failed forbidden char in email")
+            default:
+                XCTAssertTrue(false, "validation failed other error")
+            }
+        }
+    }
+    
+    func testRegisterValidationUsernameTooLong() {
+        let result = RegisterService.instance.validate(userDataUsernameTooLong)
+        switch result {
+        case .success(_):
+            XCTAssertTrue(false, "validation successful")
+        case .failure(let error):
+            switch error {
+            case .tooLongUsername(_):
+                XCTAssertTrue(true, "validation failed username too long")
+            default:
+                XCTAssertTrue(false, "validation failed other error")
+            }
+        }
+    }
+    
+    func testRegisterValidationEmailTooLong() {
+        let result = RegisterService.instance.validate(userDataEmailTooLong)
+        switch result {
+        case .success(_):
+            XCTAssertTrue(false, "validation successful")
+        case .failure(let error):
+            switch error {
+            case .tooLongEmail(_):
+                XCTAssertTrue(true, "validation failed email too long")
+            default:
+                XCTAssertTrue(false, "validation failed other error")
+            }
+        }
+    }
+    
+    func testRegisterValidationPasswordTooLong() {
+        let result = RegisterService.instance.validate(userDataPasswordTooLong)
+        switch result {
+        case .success(_):
+            XCTAssertTrue(false, "validation successful")
+        case .failure(let error):
+            switch error {
+            case .tooLongPassword(_):
+                XCTAssertTrue(true, "validation failed password too long")
+            default:
+                XCTAssertTrue(false, "validation failed other error")
+            }
+        }
+    }
+    
+    func testRegisterValidationPasswordTooShort() {
+        let result = RegisterService.instance.validate(userDataPasswordTooShort)
+        switch result {
+        case .success(_):
+            XCTAssertTrue(false, "validation successful")
+        case .failure(let error):
+            switch error {
+            case .tooShortPassword(_):
+                XCTAssertTrue(true, "validation failed password too short")
+            default:
+                XCTAssertTrue(false, "validation failed other error")
+            }
+        }
+    }
+    
+    func testRegisterValidationPasswordNoCapital() {
+        let result = RegisterService.instance.validate(userDataPasswordNoCapital)
+        switch result {
+        case .success(_):
+            XCTAssertTrue(false, "validation successful")
+        case .failure(let error):
+            switch error {
+            case .noCapitalInPassword(_):
+                XCTAssertTrue(true, "validation failed no capital in password")
+            default:
+                XCTAssertTrue(false, "validation failed other error")
+            }
+        }
+    }
+    
+    func testRegisterValidationPasswordNoNumber() {
+        let result = RegisterService.instance.validate(userDataPasswordNoNumber)
+        switch result {
+        case .success(_):
+            XCTAssertTrue(false, "validation successful")
+        case .failure(let error):
+            switch error {
+            case .noNumberInPassword(_):
+                XCTAssertTrue(true, "validation failed no number in password")
             default:
                 XCTAssertTrue(false, "validation failed other error")
             }
