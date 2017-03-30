@@ -19,6 +19,10 @@ class LoginVC: UIViewController, IdentifiableVC {
     static let ERROR_USER_NOT_FOUND = "Invalid email or password!"
     static let ERROR_TOKEN_EXPIRED = "User token expired!"
     static let ERROR_NO_INTERNET = "No internet!"
+    static let ERROR_SERVER = "An error occured on the server. Sorry! 😞"
+    static let ERROR_TOO_MANY_REQUESTS = "Too many requests. Please slow down! 😉"
+    static let ERROR_USER_DISABLED = "User disabled."
+    static let ERROR_USER_TOKEN_EXPIRED = "User token expired. Please log in again!"
     static let ERROR_UNKNOWN = "Unknown error!"
     
     @IBOutlet weak var emailField: LoginSceneTextFieldEmail!
@@ -67,6 +71,16 @@ class LoginVC: UIViewController, IdentifiableVC {
                 switch error {
                 case .noInternet:
                     Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
+                case .firebaseError:
+                    Alerts.alertWithOKButton(withMessage: LoginVC.ERROR_SERVER, forVC: self)
+                case .invalidAPIKey:
+                    Alerts.alertWithOKButton(withMessage: LoginVC.ERROR_SERVER, forVC: self)
+                case .tooManyRequests:
+                    Alerts.alertWithOKButton(withMessage: LoginVC.ERROR_TOO_MANY_REQUESTS, forVC: self)
+                case .userDisabled:
+                    self.errorView.show(withText: LoginVC.ERROR_USER_DISABLED)
+                case .userTokenExpired:
+                    Alerts.alertWithOKButton(withMessage: LoginVC.ERROR_USER_TOKEN_EXPIRED, forVC: self)
                 case .unknown:
                     self.errorView.show(withText: LoginVC.ERROR_UNKNOWN)
                 default:

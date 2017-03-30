@@ -10,6 +10,7 @@ import XCTest
 @testable import ToPlayList
 @testable import Firebase
 
+// app level validation
 class RegisterValidationSuccessful: XCTestCase {
     
     private let userData: UserDataOptional = (email: "levi@levi.com", password: "Llevilevi1", username: "levi")
@@ -93,7 +94,6 @@ class RegisterValidationSuccessful: XCTestCase {
     }
 }
 
-// tests app-level errors and security/validation rules
 class RegisterValidationFailed: XCTestCase {
     
     private let userDataNoUsername: UserDataOptional = (email: "levi@levi.com", password: "Levilevi1", username: "")
@@ -439,6 +439,7 @@ class LoggedInUserCleanup: XCTestCase {
     }
 }
 
+// firebase level validation
 class RegisterSuccesful: XCTestCase {
  
     private let userData = (email: "levi@levi.com", password: "levilevi", username: "levi")
@@ -457,7 +458,6 @@ class RegisterSuccesful: XCTestCase {
     }
 }
 
-// tests Firebase-level errors and security/validation rules
 class RegisterFailing: XCTestCase {
     
     private let userDataNoUsername = (email: "levi@levi.com", password: "levilevi", username: "")

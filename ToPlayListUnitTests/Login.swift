@@ -10,6 +10,7 @@ import XCTest
 @testable import ToPlayList
 @testable import Firebase
 
+// app level validation
 class LoginValidationFailed: XCTestCase {
     
     private let userDataNoEmail: UserDataLoginOptional = (email: "", password: "levilevi")
@@ -46,6 +47,7 @@ class LoginValidationFailed: XCTestCase {
     }
 }
 
+// Firebase level validation
 class LoginSuccesful: XCTestCase {
     
     private let userData = (email: "levi@levi.com", password: "levilevi", username: "levi")
@@ -70,10 +72,6 @@ class LoginSuccesful: XCTestCase {
     }
 }
 
-class LoginAlreadyExists: XCTestCase {
-    
-}
-
 class LoginFailing: XCTestCase {
     
     private let userData = (email: "levi@levi.com", password: "levilevi", username: "levi")
@@ -84,6 +82,18 @@ class LoginFailing: XCTestCase {
     private let userDataWrongEmail2 = (email: "levi.com", password: "levilevi")
     private let userDataWrongEmail3 = (email: "levicom", password: "levilevi")
     private let userDataWrongPassword = (email: "levi@levi.com", password: "levi")
+
+    private let userDataForbiddenCharsInEmail: UserDataLogin = (email: "levi,asd@levi.com", password: "Levilevi1")
+    private let userDataForbiddenCharsInEmail2: UserDataLogin = (email: "leviéáasd@levi.com", password: "Levilevi1")
+    private let userDataForbiddenCharsInEmail3: UserDataLogin = (email: "levi❤️🏀sd@levi.com", password: "Levilevi1")
+    private let userDataForbiddenCharsInEmail4: UserDataLogin = (email: "lev i@levi.com", password: "LlevASDilevi123")
+
+    private let userDataEmailTooLong: UserDataLogin = (email: "levileviafsdgskjsaagjsfngbsfngbjsnbkjfsdnbjkdfnbkdbnkdnbkdnjbdnbkdnbkjsgfdsgdfghdghfghfjfhjhjgnbcvxhfkjhfkhfknmkfmbdmbfgmbnkmbcvmvlshjjkbkbvklmbxnbxvlblevileviafsdgskjsaagjsfngbsfngbjsnbkjfsdnbjkdfnbkdbnkdnbkdnjbdnbkdnbkjsgfdsgdfghdghfghfjfhjhjgnbcvxhfkjhfkhfknmkfmbdmbfgmbnkmbcvmvlshjjkbkbvklmbxnbxvlblevileviafsdgskjsaagjsfngbsfngbjsnbkjfsdnbjkdfnbkdbnkdnbkdnjbdnbkdnbkjsgfdsgdfghdghfghfjfhjhjgnbcvxhfkjhfkhfknmkfmbdmbfgmbnkmbcvmvlshjjkbkbvklmbxnbxvlblevileviafsdgskjsaagjsfngbsfngbjsnbkjfsdnbjkdfnbkdbnkdnbkdnjbdnbkdnbkjsgfdsgdfghdghfghfjfhjhjgnbcvxhfkjhfkhfknmkfmbdmbfgmbnkmbcvmvlshjjkbkbvklmbxnbxvlb@levi.com", password: "Levilevi1")
+    private let userDataPasswordTooShort: UserDataLogin = (email: "leviasd@levi.com", password: "Li1")
+    private let userDataPasswordTooLong: UserDataLogin = (email: "leviasd@levi.com", password: "L1leviafgsfmgbdgjkbnmnbmnbjknbmcvnbmxbkjnnbcbcxvbvxcmcxnvmbblkhdjhgbdgjkbnmnbmnbjknbmcvnbmxbkjnnbcbcxvbvxcmcxnvmbblkhdjhL1leviafgsfmgbdgjkbnmnbmnbjknbmcvnbmxbkjnnbcbcxvbvxcmcxnvmbblkhdjhgbdgjkbnmnbmnbjknbmcvnbmxbkjnnbcbcxvbvxcmcxnvmbblkhdjhL1leviafgsfmgbdgjkbnmnbmnbjknbmcvnbmxbkjnnbcbcxvbvxcmcxnvmbblkhdjhgbdgjkbnmnbmnbjknbmcvnbmxbkjnnbcbcxvbvxcmcxnvmbblkhdjhL1leviafgsfmgbdgjkbnmnbmnbjknbmcvnbmxbkjnnbcbcxvbvxcmcxnvmbblkhdjhgbdgjkbnmnbmnbjknbmcvnbmxbkjnnbcbcxvbvxcmcxnvmbblkhdjh")
+    
+    private let userDataPasswordNoCapital: UserDataLogin = (email: "levi@levi.com", password: "levilevi1")
+    private let userDataPasswordNoNumber: UserDataLogin = (email: "levi@levi.com", password: "Levilevi")
     
     override func setUp() {
         super.setUp()
@@ -113,7 +123,7 @@ class LoginFailing: XCTestCase {
             XCTAssertTrue(false, "Login Succesful")
         }, withOnFailure: { error in
             switch error {
-            case .invalidPassword:
+            case .userNotFound:
                 XCTAssertTrue(true, "Login failed no password")
             default:
                 XCTAssertTrue(false, "Login failed with wrong error")
@@ -167,8 +177,143 @@ class LoginFailing: XCTestCase {
             XCTAssertTrue(false, "Login Succesful")
         }, withOnFailure: { error in
             switch error {
-            case .invalidPassword:
+            case .userNotFound:
                 XCTAssertTrue(true, "Login failed wrong password")
+            default:
+                XCTAssertTrue(false, "Login failed with wrong error")
+            }
+        })
+    }
+
+    func testLoginForbiddenCharsInEmail() {
+        RegisterLoginTestHelper.login(userDataForbiddenCharsInEmail, withOnSuccess: {
+            XCTAssertTrue(false, "Login Succesful")
+        }, withOnFailure: { error in
+            switch error {
+            case .invalidEmail:
+                XCTAssertTrue(true, "Login failed wrong email")
+            case .tooManyRequests:
+                XCTAssertTrue(false, "Login failed with too many requests error")
+            default:
+                XCTAssertTrue(false, "Login failed with wrong error")
+            }
+        })
+    }
+    
+    func testLoginForbiddenCharsInEmail2() {
+        RegisterLoginTestHelper.login(userDataForbiddenCharsInEmail2, withOnSuccess: {
+            XCTAssertTrue(false, "Login Succesful")
+        }, withOnFailure: { error in
+            switch error {
+            case .userNotFound:
+                XCTAssertTrue(true, "Login failed wrong email")
+            case .tooManyRequests:
+                XCTAssertTrue(false, "Login failed with too many requests error")
+            default:
+                XCTAssertTrue(false, "Login failed with wrong error")
+            }
+        })
+    }
+    
+    func testLoginForbiddenCharsInEmail3() {
+        RegisterLoginTestHelper.login(userDataForbiddenCharsInEmail3, withOnSuccess: {
+            XCTAssertTrue(false, "Login Succesful")
+        }, withOnFailure: { error in
+            switch error {
+            case .userNotFound:
+                XCTAssertTrue(true, "Login failed wrong email")
+            case .tooManyRequests:
+                XCTAssertTrue(false, "Login failed with too many requests error")
+            default:
+                XCTAssertTrue(false, "Login failed with wrong error")
+            }
+        })
+    }
+    
+    func testLoginForbiddenCharsInEmail4() {
+        RegisterLoginTestHelper.login(userDataForbiddenCharsInEmail4, withOnSuccess: {
+            XCTAssertTrue(false, "Login Succesful")
+        }, withOnFailure: { error in
+            switch error {
+            case .invalidEmail:
+                XCTAssertTrue(true, "Login failed wrong email")
+            case .tooManyRequests:
+                XCTAssertTrue(false, "Login failed with too many requests error")
+            default:
+                XCTAssertTrue(false, "Login failed with wrong error")
+            }
+        })
+    }
+    
+    func testLoginEmailTooLong() {
+        RegisterLoginTestHelper.login(userDataEmailTooLong, withOnSuccess: {
+            XCTAssertTrue(false, "Login Succesful")
+        }, withOnFailure: { error in
+            switch error {
+            case .invalidEmail:
+                XCTAssertTrue(true, "Login failed email too long")
+            case .tooManyRequests:
+                XCTAssertTrue(false, "Login failed with too many requests error")
+            default:
+                XCTAssertTrue(false, "Login failed with wrong error")
+            }
+        })
+    }
+    
+    func testLoginPasswordTooLong() {
+        RegisterLoginTestHelper.login(userDataPasswordTooLong, withOnSuccess: {
+            XCTAssertTrue(false, "Login Succesful")
+        }, withOnFailure: { error in
+            switch error {
+            case .userNotFound:
+                XCTAssertTrue(true, "Login failed password too long")
+            case .tooManyRequests:
+                XCTAssertTrue(false, "Login failed with too many requests error")
+            default:
+                XCTAssertTrue(false, "Login failed with wrong error")
+            }
+        })
+    }
+    
+    func testLoginPasswordTooShort() {
+        RegisterLoginTestHelper.login(userDataPasswordTooShort, withOnSuccess: {
+            XCTAssertTrue(false, "Login Succesful")
+        }, withOnFailure: { error in
+            switch error {
+            case .userNotFound:
+                XCTAssertTrue(true, "Login failed password too short")
+            case .tooManyRequests:
+                XCTAssertTrue(false, "Login failed with too many requests error")
+            default:
+                XCTAssertTrue(false, "Login failed with wrong error")
+            }
+        })
+    }
+    
+    func testLoginNoCapitalInPassword() {
+        RegisterLoginTestHelper.login(userDataPasswordNoCapital, withOnSuccess: {
+            XCTAssertTrue(false, "Login Succesful")
+        }, withOnFailure: { error in
+            switch error {
+            case .userNotFound:
+                XCTAssertTrue(true, "Login failed no capital letter in password")
+            case .tooManyRequests:
+                XCTAssertTrue(false, "Login failed with too many requests error")
+            default:
+                XCTAssertTrue(false, "Login failed with wrong error")
+            }
+        })
+    }
+    
+    func testLoginNoNumberInPassword() {
+        RegisterLoginTestHelper.login(userDataPasswordNoNumber, withOnSuccess: {
+            XCTAssertTrue(false, "Login Succesful")
+        }, withOnFailure: { error in
+            switch error {
+            case .userNotFound:
+                XCTAssertTrue(true, "Login failed no number in password")
+            case .tooManyRequests:
+                XCTAssertTrue(false, "Login failed with too many requests error")
             default:
                 XCTAssertTrue(false, "Login failed with wrong error")
             }

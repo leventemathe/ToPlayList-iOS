@@ -208,10 +208,14 @@ enum LoginServiceResult {
 
 enum LoginServiceError {
     case userNotFound
+    case userDisabled
     case invalidEmail
     case invalidPassword
     case noInternet
     case userTokenExpired
+    case tooManyRequests
+    case invalidAPIKey
+    case firebaseError
     case unknown
 }
 
@@ -226,14 +230,12 @@ enum LoginValidationError {
     case noPassword
 }
 
-// TODO recheck error codes!
 class LoginService {
  
     static let instance = LoginService()
     
     private init() {}
     
-    // TODO get rid of special chars, check type and length, sync with Firebase secu rules -> unit tests
     func validate(_ userData: OptionalUserDataLogin) -> LoginValidationResult {
         guard var email = userData.email, var password = userData.password else {
             return .failure(.noUserData)
@@ -258,22 +260,30 @@ class LoginService {
                 switch errorCode {
                 case .errorCodeUserNotFound:
                     onComplete(.failure(.userNotFound))
-                    break
+                case .errorCodeUserDisabled:
+                    onComplete(.failure(.userDisabled))
+                case .errorCodeWrongPassword:
+                    onComplete(.failure(.userNotFound))
                 case .errorCodeInvalidEmail:
                     onComplete(.failure(.invalidEmail))
-                    break
                 case .errorCodeNetworkError:
                     onComplete(.failure(.noInternet))
-                    break
                 case .errorCodeUserTokenExpired:
                     onComplete(.failure(.userTokenExpired))
-                    break
                 case .errorCodeWrongPassword:
                     onComplete(.failure(.invalidPassword))
-                    break
+                case .errorCodeTooManyRequests:
+                    onComplete(.failure(.tooManyRequests))
+                case .errorCodeInvalidAPIKey:
+                    onComplete(.failure(.invalidAPIKey))
+                case .errorCodeAppNotAuthorized:
+                    onComplete(.failure(.invalidAPIKey))
+                case .errorCodeKeychainError:
+                    onComplete(.failure(.unknown))
+                case .errorCodeInternalError:
+                    onComplete(.failure(.firebaseError))
                 default:
                     onComplete(.failure(.unknown))
-                    break
                 }
             } else {
                 onComplete(.success)
