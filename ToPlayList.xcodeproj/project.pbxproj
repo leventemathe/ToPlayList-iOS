@@ -62,6 +62,8 @@
 		D7C3A1701E0DA2DF0091279C /* GameProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C3A16F1E0DA2DF0091279C /* GameProperties.swift */; };
 		D7C3A1721E0DD9120091279C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7C3A1711E0DD9120091279C /* Assets.xcassets */; };
 		D7CC7D0E1E3913E60027BE6F /* RegisterLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CC7D0D1E3913E60027BE6F /* RegisterLoginVC.swift */; };
+		D7DA82D21E93C6C500F9205E /* DetailsImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7DA82D11E93C6C500F9205E /* DetailsImages.swift */; };
+		D7DA82D41E93CAB200F9205E /* Blurred.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7DA82D31E93CAB200F9205E /* Blurred.swift */; };
 		D7E1D63B1E37A162000F343A /* EndPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E1D63A1E37A162000F343A /* EndPoints.swift */; };
 		D7E5AA881E2AD51A00EA1456 /* TextFieldMargin.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E5AA871E2AD51A00EA1456 /* TextFieldMargin.swift */; };
 		D7E5AA8A1E2AD60300EA1456 /* CustomClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E5AA891E2AD60300EA1456 /* CustomClearButton.swift */; };
@@ -152,6 +154,8 @@
 		D7C3A16F1E0DA2DF0091279C /* GameProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameProperties.swift; sourceTree = "<group>"; };
 		D7C3A1711E0DD9120091279C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D7CC7D0D1E3913E60027BE6F /* RegisterLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterLoginVC.swift; sourceTree = "<group>"; };
+		D7DA82D11E93C6C500F9205E /* DetailsImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsImages.swift; sourceTree = "<group>"; };
+		D7DA82D31E93CAB200F9205E /* Blurred.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Blurred.swift; sourceTree = "<group>"; };
 		D7E1D63A1E37A162000F343A /* EndPoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndPoints.swift; sourceTree = "<group>"; };
 		D7E5AA871E2AD51A00EA1456 /* TextFieldMargin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldMargin.swift; sourceTree = "<group>"; };
 		D7E5AA891E2AD60300EA1456 /* CustomClearButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomClearButton.swift; sourceTree = "<group>"; };
@@ -237,6 +241,7 @@
 				D7E5AA871E2AD51A00EA1456 /* TextFieldMargin.swift */,
 				D7E5AA891E2AD60300EA1456 /* CustomClearButton.swift */,
 				D75F4EA11E643A9E00CB2875 /* DropShadowed.swift */,
+				D7DA82D31E93CAB200F9205E /* Blurred.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -315,6 +320,7 @@
 				D71981211E26F1D3005823C2 /* ListImageView.swift */,
 				D726BC9A1E0AC7AA00D6C9CD /* NewestReleasesCell.swift */,
 				D76437E21E1E506D00B09C7E /* DateTableCellHeaderView.swift */,
+				D7DA82D11E93C6C500F9205E /* DetailsImages.swift */,
 				D719812B1E26F89A005823C2 /* LoginScene.swift */,
 				D7B8C86A1E2D16C700656E64 /* ErrorMessage.swift */,
 				D78B86721E38BC6200F1EA7C /* ListCollectionViewCell.swift */,
@@ -649,6 +655,7 @@
 				D72D4CA61E1479EC0070E013 /* IGDBJSON.swift in Sources */,
 				D7C3A1701E0DA2DF0091279C /* GameProperties.swift in Sources */,
 				D71981221E26F1D3005823C2 /* ListImageView.swift in Sources */,
+				D7DA82D41E93CAB200F9205E /* Blurred.swift in Sources */,
 				D7A0E6FD1E7BDDCD00A70989 /* ToPlayListCell.swift in Sources */,
 				D7A0E7011E7BE82800A70989 /* OnPanDelegate.swift in Sources */,
 				D7A0E6FF1E7BDDDC00A70989 /* PlayedListCell.swift in Sources */,
@@ -670,6 +677,7 @@
 				D79B28281E1D28D4002BE4AC /* IGDBKeys.swift in Sources */,
 				D726BC9D1E0ACF3900D6C9CD /* Game.swift in Sources */,
 				D726BC861E0ABDD800D6C9CD /* AppDelegate.swift in Sources */,
+				D7DA82D21E93C6C500F9205E /* DetailsImages.swift in Sources */,
 				D71981191E26A337005823C2 /* LoginVC.swift in Sources */,
 				D70B03231E0C1F9500F67E7A /* IGDB.swift in Sources */,
 				D76B47FD1E197CCD00D18DDF /* GameIDs.swift in Sources */,

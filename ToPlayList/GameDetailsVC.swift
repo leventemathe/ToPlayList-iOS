@@ -11,6 +11,8 @@ import UIKit
 class GameDetailsVC: UIViewController {
     
     @IBOutlet weak var titleLbl: UILabel!
+    @IBOutlet weak var genreLabel: UILabel!
+    @IBOutlet weak var developerLabel: UILabel!
     
     var game: Game?
     
