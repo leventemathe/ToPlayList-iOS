@@ -23,7 +23,7 @@ extension Identifiable {
     }
     
     var description: String {
-        return "\(id) \(name)"
+        return "\(name)"
     }
 }
 

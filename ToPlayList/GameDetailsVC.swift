@@ -10,6 +10,9 @@ import UIKit
 
 class GameDetailsVC: UIViewController {
     
+    static let MISSING_GENRE_DATA = "No genre data"
+    static let MISSING_DEVELOPER_DATA = "No developer data"
+    
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var genreLabel: UILabel!
     @IBOutlet weak var developerLabel: UILabel!
@@ -18,8 +21,14 @@ class GameDetailsVC: UIViewController {
     
     override func viewDidLoad() {
         addCustomBackButton()
+        addGameDataAlreadyDownloaded()
+    }
+    
+    private func addGameDataAlreadyDownloaded() {
         if let game = game {
             titleLbl.text = game.name
+            genreLabel.text = game.genre?.description ?? GameDetailsVC.MISSING_GENRE_DATA
+            developerLabel.text = game.developer?.description ?? GameDetailsVC.MISSING_DEVELOPER_DATA
         }
     }
     
