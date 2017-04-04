@@ -19,6 +19,7 @@ class ToPlayListVC: SubListVC {
     private var shouldRemoveToPlayListListenerRemove = 0
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         getToPlayList {
             self.attachListeners()
         }
@@ -164,6 +165,15 @@ class ToPlayListVC: SubListVC {
             return cell
         }
         return UICollectionViewCell()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationVC = segue.destination as? GameDetailsVC {
+            if let i = collectionView.indexPathsForSelectedItems?[0] {
+                let game = toPlayList[i.row]
+                destinationVC.game = game
+            }
+        }
     }
 }
 

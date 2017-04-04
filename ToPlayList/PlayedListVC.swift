@@ -166,4 +166,13 @@ class PlayedListVC: SubListVC {
         }
         return UICollectionViewCell()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationVC = segue.destination as? GameDetailsVC {
+            if let i = collectionView.indexPathsForSelectedItems?[0] {
+                let game = playedList[i.row]
+                destinationVC.game = game
+            }
+        }
+    }
 }

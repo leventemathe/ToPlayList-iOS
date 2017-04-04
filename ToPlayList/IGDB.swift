@@ -30,7 +30,7 @@ enum IGDBError: Error {
     case noInternetError
     case jsonError
     
-    static func generateError(from response: DataResponse<Any>) -> IGDBError {
+    static func generateError(fromResponse response: DataResponse<Any>) -> IGDBError {
         if let statuscode = response.response?.statusCode {
             if statuscode >= 400 && statuscode < 500 {
                 return .urlError
@@ -104,7 +104,7 @@ struct IGDB {
                     }
                 }
             case .failure(_):
-                onComplete(IGDBResult.failure(IGDBError.generateError(from: response)))
+                onComplete(IGDBResult.failure(IGDBError.generateError(fromResponse: response)))
             }
         }
     }
@@ -123,7 +123,7 @@ struct IGDB {
                 self.handleGenreResult(genres, forGameData: gameData)
                 genreLoaded = true
                 if genreLoaded && devLoaded {
-                    onComplete(IGDBResult.succes(self.getGames(gameData)))
+                    onComplete(IGDBResult.succes(self.getGames(fromGameData: gameData)))
                 }
             case .failure(let error):
                 onComplete(IGDBResult.failure(error))
@@ -136,7 +136,7 @@ struct IGDB {
                 self.handleDevelopersResult(devs, forGameData: gameData)
                 devLoaded = true
                 if genreLoaded && devLoaded {
-                    onComplete(IGDBResult.succes(self.getGames(gameData)))
+                    onComplete(IGDBResult.succes(self.getGames(fromGameData: gameData)))
                 }
             case .failure(let error):
                 onComplete(IGDBResult.failure(error))
@@ -168,7 +168,7 @@ struct IGDB {
         return result
     }
     
-    private func getGames(_ gameData: GameData) -> [Game] {
+    private func getGames(fromGameData gameData: GameData) -> [Game] {
         var result = [Game]()
         for (game, _) in gameData {
             result.append(game)
@@ -221,7 +221,7 @@ struct IGDB {
                     }
                 }
             case .failure(_):
-                onComplete(IGDBResult.failure(IGDBError.generateError(from: response)))
+                onComplete(IGDBResult.failure(IGDBError.generateError(fromResponse: response)))
             }
         }
     }

@@ -270,8 +270,6 @@ class LoginService {
                     onComplete(.failure(.noInternet))
                 case .errorCodeUserTokenExpired:
                     onComplete(.failure(.userTokenExpired))
-                case .errorCodeWrongPassword:
-                    onComplete(.failure(.invalidPassword))
                 case .errorCodeTooManyRequests:
                     onComplete(.failure(.tooManyRequests))
                 case .errorCodeInvalidAPIKey:

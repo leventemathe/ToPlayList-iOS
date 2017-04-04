@@ -33,8 +33,8 @@ PODS:
     - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
   - GTMSessionFetcher/Core (1.1.9)
-  - Kingfisher (3.6.0)
-  - NVActivityIndicatorView (3.5.2)
+  - Kingfisher (3.6.1)
+  - NVActivityIndicatorView (3.6.0)
 
 DEPENDENCIES:
   - Alamofire
@@ -54,8 +54,8 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 5c046c76a1f859bc9c187e918f18e4fc7bb57b5e
-  Kingfisher: 300035f9a40634dc9b452d946c9f22250688fecd
-  NVActivityIndicatorView: 8c10abd410a0657afd21aa853373e1a3cfc25e7f
+  Kingfisher: 2f31cb75f3e98d3d4c406cbdcd9b263e956cfa67
+  NVActivityIndicatorView: c7c1c4300b418bd9ed06459e78d4df859ddbe31f
 
 PODFILE CHECKSUM: 514456c1cd2c34fde67c8eb5a861edea4752b048
 

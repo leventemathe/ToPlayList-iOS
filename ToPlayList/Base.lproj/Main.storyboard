@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bhe-U8-59S">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bhe-U8-59S">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -328,7 +328,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dGx-UB-xEE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2981.5999999999999" y="36.431784107946029"/>
+            <point key="canvasLocation" x="4670" y="228"/>
         </scene>
         <!--Newest-->
         <scene sceneID="fFL-jC-ijf">
@@ -336,7 +336,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gaI-Tc-Uxl" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Newest" image="tab_bar_icon_newest" selectedImage="tab_bar_icon_newest_selected" id="PZM-gt-7Be"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="H9z-Bw-GSh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="H9z-Bw-GSh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -552,7 +552,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sBD-RD-Qe6" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Upcoming" image="tab_bar_icon_upcoming" selectedImage="tab_bar_icon_upcoming_selected" id="QVx-Lx-zhY"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="KAn-qY-Vvm">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="KAn-qY-Vvm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -571,7 +571,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FSF-44-oZj" customClass="ListLoginNavigationVC" customModule="ToPlayList" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="List" image="tab_bar_icon_lists" selectedImage="tab_bar_icon_lists_selected" id="z0L-I2-9bM"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="Tdb-OY-NWI">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="Tdb-OY-NWI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
@@ -926,6 +926,7 @@
                                             <outlet property="coverImg" destination="Eo7-s0-5pc" id="lGt-jw-tpQ"/>
                                             <outlet property="maskedView" destination="OOl-Me-3d5" id="cTF-8E-I2t"/>
                                             <outlet property="titleLbl" destination="h24-vv-DPG" id="L5g-Na-IoT"/>
+                                            <segue destination="js0-2B-ycQ" kind="show" id="6Wm-R3-zaj"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -934,13 +935,13 @@
                                 <rect key="frame" x="48" y="273.5" width="279" height="120"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This list is empty. " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V5c-z4-V1N">
-                                        <rect key="frame" x="60" y="0.0" width="159" height="40.5"/>
+                                        <rect key="frame" x="25" y="0.0" width="229" height="36"/>
                                         <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="20"/>
                                         <color key="textColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe left or right on a game or game cover to add it to a list!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="09O-Kn-A3U">
-                                        <rect key="frame" x="16.5" y="40.5" width="246" height="79.5"/>
+                                        <rect key="frame" x="16.5" y="36" width="246" height="84"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -968,7 +969,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yYQ-mY-UiN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3679.1999999999998" y="1682.608695652174"/>
+            <point key="canvasLocation" x="3678" y="1200"/>
         </scene>
         <!--Played ListVC-->
         <scene sceneID="CU3-BN-FTg">
@@ -1100,6 +1101,7 @@
                                             <outlet property="coverImg" destination="niJ-Ng-A9h" id="Znl-hI-1om"/>
                                             <outlet property="maskedView" destination="mfb-X5-FwR" id="Iff-LH-nO2"/>
                                             <outlet property="titleLbl" destination="170-hQ-Tzk" id="bZO-My-B7c"/>
+                                            <segue destination="js0-2B-ycQ" kind="show" id="OMc-yb-7M5"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -1142,7 +1144,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YvZ-W2-Scd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3679" y="2376"/>
+            <point key="canvasLocation" x="3678" y="1881"/>
         </scene>
     </scenes>
     <resources>
@@ -1159,7 +1161,7 @@
         <image name="to_play_list_bg" width="689" height="713"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="FhM-4C-LJm"/>
         <segue reference="a7x-K3-wKb"/>
+        <segue reference="FhM-4C-LJm"/>
     </inferredMetricsTieBreakers>
 </document>
