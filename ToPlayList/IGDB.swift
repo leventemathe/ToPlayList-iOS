@@ -64,6 +64,13 @@ struct IGDB {
     
     static var IMG_COVER_SMALL: String {
         if UIScreen.main.scale > 1.0 {
+            return "/t_cover_small_2x"
+        }
+        return "/t_cover_small"
+    }
+    
+    static var IMG_COVER_MED: String {
+        if UIScreen.main.scale > 1.0 {
             return "/t_cover_med_2x"
         }
         return "/t_cover_med"

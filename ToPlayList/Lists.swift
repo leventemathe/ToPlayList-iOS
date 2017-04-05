@@ -218,7 +218,7 @@ struct ListsList {
                     let timestamp = Date().timeIntervalSince1970
                     
                     if listType == addType {
-                        let values: [String: Any] = [ListsEndpoints.Game.PROVIDER: game.provider, ListsEndpoints.Game.PROVIDER_ID: game.id, ListsEndpoints.Game.NAME: game.name, ListsEndpoints.Game.COVER_URL: game.coverSmallURLAsString as Any, ListsEndpoints.Common.TIMESTAMP: timestamp]
+                        let values: [String: Any] = [ListsEndpoints.Game.PROVIDER: game.provider, ListsEndpoints.Game.PROVIDER_ID: game.id, ListsEndpoints.Game.NAME: game.name, ListsEndpoints.Game.COVER_URL: game.coverMedURLAsString as Any, ListsEndpoints.Common.TIMESTAMP: timestamp]
                         
                         ListsEndpoints.LISTS.child(listID).child(ListsEndpoints.List.GAMES).child(listItemID).updateChildValues(values, withCompletionBlock: { (error, ref) in
                             if error != nil {
