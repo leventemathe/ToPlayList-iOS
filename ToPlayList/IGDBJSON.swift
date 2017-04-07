@@ -12,7 +12,7 @@ typealias JSON = [Any]
 typealias JSONPair = [String: Any]
 typealias GameData = [(Game, GameIDs)]
 
-struct IGDBJSON {
+class IGDBJSON {
 
     static let instance = IGDBJSON()
     
@@ -27,7 +27,7 @@ struct IGDBJSON {
                 return IGDBResult.failure(IGDBError.jsonError)
             }
         }
-        return IGDBResult.succes(result)
+        return IGDBResult.success(result)
     }
     
     private func setGame(fromObj obj: JSONPair) -> Game? {
@@ -41,6 +41,7 @@ struct IGDBJSON {
                 game.coverSmallURL = URL(string: "\(IGDB.BASE_URL_IMG)\(IGDB.IMG_COVER_SMALL)/\(imgID)")
                 game.coverMedURL = URL(string: "\(IGDB.BASE_URL_IMG)\(IGDB.IMG_COVER_MED)/\(imgID)")
                 game.coverBigURL = URL(string: "\(IGDB.BASE_URL_IMG)\(IGDB.IMG_COVER_BIG)/\(imgID)")
+                game.screenshotBigURL = URL(string: "\(IGDB.BASE_URL_IMG)\(IGDB.IMG_SCREENSHOT_BIG)/\(imgID)")
             }
             if let firsReleaseDate = obj["first_release_date"] as? Double {
                 game.firstReleaseDate = firsReleaseDate / 1000.0
@@ -74,8 +75,15 @@ struct IGDBJSON {
             }
         }
         if(ts.count < 1) {
-            return IGDBResult.failure(IGDBError.jsonError)
+            return IGDBResult.failure(IGDBError.noDataError)
         }
-        return IGDBResult.succes(ts)
+        return IGDBResult.success(ts)
+    }
+    
+    func getGameIDs(_ json: JSON, forGame game: Game) -> IGDBResult<GameIDs> {
+        if let obj = json[0] as? JSONPair {
+            return .success(setGameIDs(fromObj: obj, withGameID: game.id))
+        }
+        return .failure(IGDBError.jsonError)
     }
 }

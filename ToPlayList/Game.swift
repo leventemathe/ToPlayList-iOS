@@ -16,6 +16,7 @@ class Game: IdentifiableObject {
     var coverSmallURL: URL?
     var coverMedURL: URL?
     var coverBigURL: URL?
+    var screenshotBigURL: URL?
     
     private var _genres: [Genre]?
     private var _developers: [Company]?
@@ -49,6 +50,13 @@ class Game: IdentifiableObject {
     var coverBigURLAsString: String? {
         if coverBigURL != nil {
             return coverBigURL!.absoluteString
+        }
+        return nil
+    }
+    
+    var screenshotBigURLAsString: String? {
+        if screenshotBigURL != nil {
+            return screenshotBigURL!.absoluteString
         }
         return nil
     }

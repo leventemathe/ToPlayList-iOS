@@ -11,7 +11,7 @@ import Alamofire
 func createIDList<T: Sequence>(from ids: T) -> String where T.Iterator.Element == UInt64 {
     var idsString = ""
     for id in ids {
-        if idsString.characters.count > 1 {
+        if idsString.characters.count > 0 {
             idsString.append(",")
         }
         idsString.append(String(describing: id))
@@ -20,7 +20,7 @@ func createIDList<T: Sequence>(from ids: T) -> String where T.Iterator.Element =
 }
 
 enum IGDBResult<T> {
-    case succes(T)
+    case success(T)
     case failure(IGDBError)
 }
 
@@ -29,6 +29,7 @@ enum IGDBError: Error {
     case serverError
     case noInternetError
     case jsonError
+    case noDataError
     
     static func generateError(fromResponse response: DataResponse<Any>) -> IGDBError {
         if let statuscode = response.response?.statusCode {
@@ -42,7 +43,22 @@ enum IGDBError: Error {
     }
 }
 
-struct IGDB {
+// used in case i want to add more apis later, this will make it easy to pick one based on
+// provider data in game object
+
+protocol GameAPI {
+
+    func getGamesList(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, withLimit limit: Int, withOffset offset: Int, withDate date: Double)
+    func getGamesList(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, withLimit limit: Int, withDate date: Double)
+    
+    func getGenres(_ onComplete: @escaping (IGDBResult<[Genre]>)->Void, withIDs ids: [UInt64])
+    func getCompanies(_ onComplete: @escaping (IGDBResult<[Company]>)->Void, withIDs ids: [UInt64])
+    
+    func getGenres(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[Genre]>)->Void)
+    func getDevelopers(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[Company]>)->Void)
+}
+
+class IGDB: GameAPI {
     
     static let instance = IGDB()
     
@@ -83,6 +99,13 @@ struct IGDB {
         return "/t_cover_big"
     }
     
+    static var IMG_SCREENSHOT_BIG: String {
+        if UIScreen.main.scale > 1.0 {
+            return "/t_screenshot_big_2x"
+        }
+        return "/t_screenshot_big"
+    }
+    
     static let PROVIDER = "IGDB"
     
     private static let HEADERS: HTTPHeaders = [
@@ -104,7 +127,7 @@ struct IGDB {
                 if let json = value as? JSON {
                     let result = IGDBJSON.instance.getNewestGameList(json)
                     switch result {
-                    case .succes(let gameData):
+                    case .success(let gameData):
                         self.loadFromGameIDs(onComplete, fromGameData: gameData)
                     case .failure(let error):
                         onComplete(IGDBResult.failure(error))
@@ -126,11 +149,11 @@ struct IGDB {
         
         self.getGenres({ result in
             switch result {
-            case .succes(let genres):
+            case .success(let genres):
                 self.handleGenreResult(genres, forGameData: gameData)
                 genreLoaded = true
                 if genreLoaded && devLoaded {
-                    onComplete(IGDBResult.succes(self.getGames(fromGameData: gameData)))
+                    onComplete(IGDBResult.success(self.getGames(fromGameData: gameData)))
                 }
             case .failure(let error):
                 onComplete(IGDBResult.failure(error))
@@ -139,11 +162,11 @@ struct IGDB {
         
         self.getCompanies({ result in
             switch result {
-            case .succes(let devs):
+            case .success(let devs):
                 self.handleDevelopersResult(devs, forGameData: gameData)
                 devLoaded = true
                 if genreLoaded && devLoaded {
-                    onComplete(IGDBResult.succes(self.getGames(fromGameData: gameData)))
+                    onComplete(IGDBResult.success(self.getGames(fromGameData: gameData)))
                 }
             case .failure(let error):
                 onComplete(IGDBResult.failure(error))
@@ -151,28 +174,28 @@ struct IGDB {
         }, withIDs: self.buildDeveloperIDs(gameData))
     }
     
-    private func buildGenreIDs(_ gameData: GameData) -> Set<UInt64> {
-        var result = Set<UInt64>()
+    private func buildGenreIDs(_ gameData: GameData) -> [UInt64] {
+        var set = Set<UInt64>()
         for (_, ids) in gameData {
             if let genres = ids.genres {
                 for genre in genres {
-                    result.insert(genre)
+                    set.insert(genre)
                 }
             }
         }
-        return result
+        return set.sorted()
     }
     
-    private func buildDeveloperIDs(_ gameData: GameData) -> Set<UInt64> {
-        var result = Set<UInt64>()
+    private func buildDeveloperIDs(_ gameData: GameData) -> [UInt64] {
+        var set = Set<UInt64>()
         for (_, ids) in gameData {
             if let devs = ids.developers {
                 for dev in devs {
-                    result.insert(dev)
+                    set.insert(dev)
                 }
             }
         }
-        return result
+        return set.sorted()
     }
     
     private func getGames(fromGameData gameData: GameData) -> [Game] {
@@ -221,11 +244,15 @@ struct IGDB {
                 if let json = value as? [Any] {
                     let result: IGDBResult<[T]> = IGDBJSON.instance.get(json)
                     switch result {
-                    case .succes(let ts):
-                        onComplete(IGDBResult.succes(ts))
+                    case .success(let ts):
+                        onComplete(IGDBResult.success(ts))
                     case .failure(let error) :
+                        print("getting T failed while jsoning inside")
                         onComplete(IGDBResult.failure(error))
                     }
+                } else {
+                    print("getting T failed while jsoning outside")
+                    onComplete(IGDBResult.failure(.jsonError))
                 }
             case .failure(_):
                 onComplete(IGDBResult.failure(IGDBError.generateError(fromResponse: response)))
@@ -233,7 +260,7 @@ struct IGDB {
         }
     }
     
-    public func getGenres(_ onComplete: @escaping (IGDBResult<[Genre]>)->Void, withIDs ids: Set<UInt64>) {
+    public func getGenres(_ onComplete: @escaping (IGDBResult<[Genre]>)->Void, withIDs ids: [UInt64]) {
         let idsString = createIDList(from: ids)
         let url = "\(IGDB.BASE_URL)\(IGDB.GENRES)\(idsString)/"
         let parameters = ["fields": "id,name"]
@@ -241,13 +268,78 @@ struct IGDB {
         get(onComplete, withURL: url, withParams: parameters, withHeaders: IGDB.HEADERS)
     }
     
-    public func getCompanies(_ onComplete: @escaping (IGDBResult<[Company]>)->Void, withIDs ids: Set<UInt64>) {
+    public func getCompanies(_ onComplete: @escaping (IGDBResult<[Company]>)->Void, withIDs ids: [UInt64]) {
         let idsString = createIDList(from: ids)
         let url = "\(IGDB.BASE_URL)\(IGDB.COMPANIES)\(idsString)/"
         let parameters = ["fields": "id,name"]
         
         get(onComplete, withURL: url, withParams: parameters, withHeaders: IGDB.HEADERS)
     }
+    
+    private var cachedGameIDs: GameIDs?
+    
+    private func refreshCachedGameIDs(forGame game: Game, withOnSuccess onSuccess: @escaping (GameIDs)->(), withOnFailure onFailure: @escaping (IGDBError)->()) {
+        if cachedGameIDs != nil && game.id == cachedGameIDs!.id {
+            onSuccess(cachedGameIDs!)
+            return
+        } else {
+            let url =  IGDB.BASE_URL + IGDB.GAMES + "\(game.id)"
+            let parameters: Parameters = ["fields": "first_release_date,release_dates,genres,developers,publishers"]
+            
+            Alamofire.request(url, parameters: parameters, headers: IGDB.HEADERS).validate().responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    if let json = value as? [Any] {
+                        let result = IGDBJSON.instance.getGameIDs(json, forGame: game)
+                        switch result {
+                        case .success(let gameIDs):
+                            self.cachedGameIDs = gameIDs
+                            onSuccess(self.cachedGameIDs!)
+                        case .failure(let error) :
+                            onFailure(error)
+                        }
+                    } else {
+                        onFailure(.jsonError)
+                        print("failed getting cahced game ids inside")
+                    }
+                case .failure(_):
+                    onFailure(IGDBError.generateError(fromResponse: response))
+                    print("failed getting cahced game ids")
+                }
+            }
+
+        }
+    }
+    
+    public func getGenres(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[Genre]>)->Void) {
+        refreshCachedGameIDs(forGame: game, withOnSuccess: { gameIDs in
+            if let genres = gameIDs.genres {
+                self.getGenres(onComplete, withIDs: genres)
+            } else {
+                print("no data error")
+                onComplete(.failure(.noDataError))
+            }
+        }, withOnFailure: { error in
+            print("failed getting cached game ids in getGenres")
+            onComplete(.failure(error))
+        })
+    }
+    
+    public func getDevelopers(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[Company]>)->Void) {
+        refreshCachedGameIDs(forGame: game, withOnSuccess: { gameIDs in
+            if let devs = gameIDs.developers {
+                self.getCompanies(onComplete, withIDs: devs)
+            } else {
+                print("no data error")
+                onComplete(.failure(.noDataError))
+            }
+        }, withOnFailure: { error in
+            print("failed getting cahced game ids in getdevs")
+            onComplete(.failure(error))
+        })
+    }
+    
+    // TODO add more get methods for game details
 }
 
 

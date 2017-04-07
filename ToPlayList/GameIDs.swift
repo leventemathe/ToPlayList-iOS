@@ -12,9 +12,23 @@ struct GameIDs {
     
     let id: UInt64
     
-    var developers: [UInt64]?
-    var publishers: [UInt64]?
-    var genres: [UInt64]?
+    var developers: [UInt64]? {
+        didSet {
+            developers = developers?.sorted()
+        }
+    }
+    
+    var publishers: [UInt64]? {
+        didSet {
+            publishers = publishers?.sorted()
+        }
+    }
+    
+    var genres: [UInt64]? {
+        didSet {
+            genres = genres?.sorted()
+        }
+    }
     
     init(_ id: UInt64) {
         self.id = id

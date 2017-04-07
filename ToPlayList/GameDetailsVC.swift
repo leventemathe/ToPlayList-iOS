@@ -18,11 +18,15 @@ class GameDetailsVC: UIViewController {
         
         static let COVER = "cover"
         static let BIG_SCREENSHOT = "bigScreenshot"
+        static let GENRE = "genre"
+        static let DEVELOPER = "developer"
         
         private var listener: OnFinishedListener
         
-        var loaded = [DetailsLoaded.COVER: false] {
-                      //DetailsLoaded.BIG_SCREENSHOT: false] {
+        var loaded = [DetailsLoaded.COVER: false,
+                      DetailsLoaded.BIG_SCREENSHOT: false,
+                      DetailsLoaded.DEVELOPER: false,
+                      DetailsLoaded.GENRE: false] {
             didSet {
                 if isFullyLoaded() {
                     listener()
@@ -60,12 +64,12 @@ class GameDetailsVC: UIViewController {
     
     var detailsLoaded: DetailsLoaded!
     
-    var game: Game?
+    var game: Game!
+    private var api: GameAPI!
     
     override func viewDidLoad() {
-        detailsLoaded = DetailsLoaded({ [unowned self] in
-            self.finishLoading()
-        })
+        setupGameAPI()
+        setupLoadingListener()
         setupAnimation()
         addCustomBackButton()
     }
@@ -74,6 +78,21 @@ class GameDetailsVC: UIViewController {
         startLoading()
         addGameDataAlreadyDownloaded()
         downloadGameData()
+    }
+    
+    private func setupLoadingListener() {
+        detailsLoaded = DetailsLoaded({ [unowned self] in
+            self.finishLoading()
+        })
+    }
+    
+    private func setupGameAPI() {
+        switch game.provider {
+        case "IGDB":
+            api = IGDB.instance
+        default:
+            api = IGDB.instance
+        }
     }
     
     private func setupAnimation() {
@@ -110,8 +129,78 @@ class GameDetailsVC: UIViewController {
     }
     
     private func downloadGameData() {
-        coverImg.kf.setImage(with: game?.coverSmallURL, placeholder: #imageLiteral(resourceName: "img_missing_cover"), options: nil, progressBlock: nil, completionHandler: { _ in
-                self.detailsLoaded.loaded[DetailsLoaded.COVER] = true
+        downloadCover()
+        downloadBigScreenshot()
+        downloadBasics()
+    }
+    
+    private func downloadCover() {
+        coverImg.kf.setImage(with: game.coverSmallURL, placeholder: #imageLiteral(resourceName: "img_missing_cover"), options: nil, progressBlock: nil, completionHandler: { _ in
+            self.detailsLoaded.loaded[DetailsLoaded.COVER] = true
+        })
+    }
+    
+    private func downloadBigScreenshot() {
+        bigScreenshot.kf.setImage(with: game.screenshotBigURL, placeholder: #imageLiteral(resourceName: "img_missing"), options: nil, progressBlock: nil, completionHandler: { _ in
+            self.detailsLoaded.loaded[DetailsLoaded.BIG_SCREENSHOT] = true
+        })
+    }
+    
+    private func downloadBasics() {
+        if genreLabel.text == GameDetailsVC.MISSING_GENRE_DATA {
+            downloadGenre()
+        } else {
+            self.detailsLoaded.loaded[DetailsLoaded.GENRE] = true
+        }
+        
+        if developerLabel.text == GameDetailsVC.MISSING_DEVELOPER_DATA {
+            downloadDeveloper()
+        } else {
+            self.detailsLoaded.loaded[DetailsLoaded.DEVELOPER] = true
+        }
+    }
+    
+    private func downloadGenre() {
+        api.getGenres(forGame: game, withOnComplete: { result in
+            switch result {
+            case .success(let genres):
+                self.game.genres = genres
+                self.genreLabel.text = self.game.genre!.description
+                self.detailsLoaded.loaded[DetailsLoaded.GENRE] = true
+            case .failure(let error):
+                switch error {
+                case .noInternetError:
+                    Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
+                case .serverError, .jsonError, .urlError:
+                    Alerts.alertWithOKButton(withMessage: Alerts.SERVER_ERROR, forVC: self)
+                    print("server error on genre")
+                case .noDataError:
+                    self.genreLabel.text = GameDetailsVC.MISSING_GENRE_DATA
+                    self.detailsLoaded.loaded[DetailsLoaded.GENRE] = true
+                }
+            }
+        })
+    }
+    
+    private func downloadDeveloper() {
+        api.getDevelopers(forGame: game, withOnComplete: { result in
+            switch result {
+            case .success(let devs):
+                self.game.developers = devs
+                self.developerLabel.text = self.game.developer!.description
+                self.detailsLoaded.loaded[DetailsLoaded.DEVELOPER] = true
+            case .failure(let error):
+                switch error {
+                case .noInternetError:
+                    Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
+                case .serverError, .jsonError, .urlError:
+                    Alerts.alertWithOKButton(withMessage: Alerts.SERVER_ERROR, forVC: self)
+                    print("server error on dev")
+                case .noDataError:
+                    self.developerLabel.text = GameDetailsVC.MISSING_DEVELOPER_DATA
+                    self.detailsLoaded.loaded[DetailsLoaded.DEVELOPER] = true
+                }
+            }
         })
     }
     

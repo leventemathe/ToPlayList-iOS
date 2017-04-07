@@ -43,9 +43,13 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
         }
         if let genre = game.genre {
             genreLabel.text = genre.name
+        } else {
+            genreLabel.text = "No genre data"
         }
         if let developer = game.developer {
             developerLabel.text = developer.name
+        } else {
+            developerLabel.text = "No developer data"
         }
     }
     

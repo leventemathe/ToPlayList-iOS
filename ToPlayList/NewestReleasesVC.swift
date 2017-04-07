@@ -348,7 +348,7 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     private func handleLoadingGames(fromResult result: IGDBResult<[Game]>, withResultPacker packer: ([Game])->Void) {
         switch result {
-        case .succes(let games):
+        case .success(let games):
             packer(games)
             self.resetListBackground()
         case .failure(let error):
@@ -356,10 +356,10 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
             switch error {
             case .serverError, .urlError, .jsonError:
                 Alerts.alertWithOKButton(withMessage: Alerts.SERVER_ERROR, forVC: self)
-                break
             case .noInternetError:
                 Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
-                break
+            default:
+                Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_ERROR, forVC: self)
             }
         }
         self.refreshVC.endRefreshing()
