@@ -41,7 +41,6 @@ class IGDBJSON {
                 game.coverSmallURL = URL(string: "\(IGDB.BASE_URL_IMG)\(IGDB.IMG_COVER_SMALL)/\(imgID)")
                 game.coverMedURL = URL(string: "\(IGDB.BASE_URL_IMG)\(IGDB.IMG_COVER_MED)/\(imgID)")
                 game.coverBigURL = URL(string: "\(IGDB.BASE_URL_IMG)\(IGDB.IMG_COVER_BIG)/\(imgID)")
-                game.screenshotBigURL = URL(string: "\(IGDB.BASE_URL_IMG)\(IGDB.IMG_SCREENSHOT_BIG)/\(imgID)")
             }
             if let firsReleaseDate = obj["first_release_date"] as? Double {
                 game.firstReleaseDate = firsReleaseDate / 1000.0
@@ -82,7 +81,17 @@ class IGDBJSON {
     
     func getGameIDs(_ json: JSON, forGame game: Game) -> IGDBResult<GameIDs> {
         if let obj = json[0] as? JSONPair {
-            return .success(setGameIDs(fromObj: obj, withGameID: game.id))
+            var gameIDs = setGameIDs(fromObj: obj, withGameID: game.id)
+            if let screenshots = obj["screenshots"] as? [[String: Any]] {
+                var screenshotIDs = [String]()
+                for screenshot in screenshots {
+                    if let screenshotID = screenshot["cloudinary_id"] as? String {
+                        screenshotIDs.append(screenshotID)
+                    }
+                }
+                gameIDs.screenshots = screenshotIDs
+            }
+            return .success(gameIDs)
         }
         return .failure(IGDBError.jsonError)
     }

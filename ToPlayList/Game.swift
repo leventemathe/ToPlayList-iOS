@@ -13,16 +13,18 @@ class Game: IdentifiableObject {
     var provider = ""
     
     var thumbnailURL: URL?
+    
     var coverSmallURL: URL?
     var coverMedURL: URL?
     var coverBigURL: URL?
-    var screenshotBigURL: URL?
     
-    private var _genres: [Genre]?
-    private var _developers: [Company]?
+    var screenshotSmallURLs: [URL]?
+    var screenshotBigURLs: [URL]?
     
-    private var _firstReleaseDate: Double?
-    private var _firstReleaseDateAsString: String?
+    var genres: [Genre]?
+    var developers: [Company]?
+    
+    var firstReleaseDate: Double?
     
     required init(_ id: UInt64, withName name: String) {
         super.init(id, withName: name)
@@ -54,6 +56,13 @@ class Game: IdentifiableObject {
         return nil
     }
     
+    var screenshotBigURL: URL? {
+        if screenshotBigURLs != nil && screenshotBigURLs!.count > 0 {
+            return screenshotBigURLs![0]
+        }
+        return nil
+    }
+    
     var screenshotBigURLAsString: String? {
         if screenshotBigURL != nil {
             return screenshotBigURL!.absoluteString
@@ -62,67 +71,37 @@ class Game: IdentifiableObject {
     }
     
     var genre: Genre? {
-        if let genre = _genres?[0] {
-            return genre
+        if genres != nil && genres!.count > 0 {
+            return genres![0]
         }
         return nil
     }
     
     var developer: Company? {
-        if let developer = _developers?[0] {
-            return developer
+        if developers != nil && developers!.count > 0 {
+            return developers![0]
         }
         return nil
     }
     
-    var genres: [Genre] {
-        get {
-            if _genres == nil {
-                _genres = [Genre]()
-            }
-            return _genres!
-        }
-        set {
-            _genres = newValue
-        }
-    }
-    
-    var developers: [Company] {
-        get {
-            if _developers == nil {
-                _developers = [Company]()
-            }
-            return _developers!
-        }
-        set {
-            _developers = newValue
-        }
-    }
-    
-    var firstReleaseDate: Double? {
-        get {
-            return _firstReleaseDate
-        }
-        set {
-            _firstReleaseDate = newValue
-        }
-    }
-    
     var firstReleaseDateAsString: String? {
-        if _firstReleaseDateAsString == nil {
-            if _firstReleaseDate == nil {
-                return nil
-            }
-            _firstReleaseDateAsString = Dates.dateFromUnixTime(_firstReleaseDate!)
+        if firstReleaseDate == nil {
+            return nil
         }
-        return _firstReleaseDateAsString
+        return Dates.dateFromUnixTime(firstReleaseDate!)
     }
     
     func addGenre(_ genre: Genre) {
-        genres.append(genre)
+        if genres == nil {
+            genres = [Genre]()
+        }
+        genres!.append(genre)
     }
     
     func addDeveloper(_ developer: Company) {
-        developers.append(developer)
+        if developers == nil {
+            developers = [Company]()
+        }
+        developers!.append(developer)
     }
 }

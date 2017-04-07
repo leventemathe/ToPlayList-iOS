@@ -56,6 +56,9 @@ protocol GameAPI {
     
     func getGenres(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[Genre]>)->Void)
     func getDevelopers(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[Company]>)->Void)
+    
+    func getScreenshotsSmall(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[URL]?>)->Void)
+    func getScreenshotsBig(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[URL]?>)->Void)
 }
 
 class IGDB: GameAPI {
@@ -97,6 +100,13 @@ class IGDB: GameAPI {
             return "/t_cover_big_2x"
         }
         return "/t_cover_big"
+    }
+    
+    static var IMG_SCREENSHOT_SMALL: String {
+        if UIScreen.main.scale > 1.0 {
+            return "/t_screenshot_small_2x"
+        }
+        return "/t_screenshot_small"
     }
     
     static var IMG_SCREENSHOT_BIG: String {
@@ -284,7 +294,7 @@ class IGDB: GameAPI {
             return
         } else {
             let url =  IGDB.BASE_URL + IGDB.GAMES + "\(game.id)"
-            let parameters: Parameters = ["fields": "first_release_date,release_dates,genres,developers,publishers"]
+            let parameters: Parameters = ["fields": "first_release_date,release_dates,genres,developers,publishers,screenshots"]
             
             Alamofire.request(url, parameters: parameters, headers: IGDB.HEADERS).validate().responseJSON { response in
                 switch response.result {
@@ -339,7 +349,57 @@ class IGDB: GameAPI {
         })
     }
     
-    // TODO add more get methods for game details
+    private enum ScreenshotSize {
+        case SMALL
+        case BIG
+    }
+    
+    // TODO maybe rewrite genres and devs with optional results too?
+    public func getScreenshotsSmall(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[URL]?>)->Void) {
+        refreshCachedGameIDs(forGame: game, withOnSuccess: { _ in
+            if self.cachedGameIDs!.screenshots != nil {
+                let urls = self.buildScreenshotURLs(.SMALL)
+                onComplete(.success(urls))
+            } else {
+                onComplete(.success(nil))
+            }
+        }, withOnFailure: { error in
+            onComplete(.failure(error))
+        })
+    }
+    
+    public func getScreenshotsBig(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[URL]?>)->Void) {
+        refreshCachedGameIDs(forGame: game, withOnSuccess: { _ in
+            if self.cachedGameIDs!.screenshots != nil {
+                let urls = self.buildScreenshotURLs(.BIG)
+                onComplete(.success(urls))
+            } else {
+                onComplete(.success(nil))
+            }
+        }, withOnFailure: { error in
+            onComplete(.failure(error))
+        })
+    }
+    
+    private func buildScreenshotURLs(_ size: ScreenshotSize) -> [URL] {
+        var urls = [URL]()
+        // changing this to optional, to set it later, makes the URL initializer return nil
+        var sizeString = IGDB.IMG_SCREENSHOT_BIG
+        
+        switch size {
+        case .SMALL:
+            sizeString = IGDB.IMG_SCREENSHOT_SMALL
+        case .BIG:
+            sizeString = IGDB.IMG_SCREENSHOT_BIG
+        }
+        
+        for id in cachedGameIDs!.screenshots! {
+            if let url = URL(string: "\(IGDB.BASE_URL_IMG)\(sizeString)/\(id)") {
+                urls.append(url)
+            }
+        }
+        return urls
+    }
 }
 
 

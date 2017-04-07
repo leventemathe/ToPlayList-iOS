@@ -129,21 +129,9 @@ class GameDetailsVC: UIViewController {
     }
     
     private func downloadGameData() {
-        downloadCover()
-        downloadBigScreenshot()
         downloadBasics()
-    }
-    
-    private func downloadCover() {
-        coverImg.kf.setImage(with: game.coverSmallURL, placeholder: #imageLiteral(resourceName: "img_missing_cover"), options: nil, progressBlock: nil, completionHandler: { _ in
-            self.detailsLoaded.loaded[DetailsLoaded.COVER] = true
-        })
-    }
-    
-    private func downloadBigScreenshot() {
-        bigScreenshot.kf.setImage(with: game.screenshotBigURL, placeholder: #imageLiteral(resourceName: "img_missing"), options: nil, progressBlock: nil, completionHandler: { _ in
-            self.detailsLoaded.loaded[DetailsLoaded.BIG_SCREENSHOT] = true
-        })
+        downloadCover()
+        downloadBigScreenshots()
     }
     
     private func downloadBasics() {
@@ -199,6 +187,38 @@ class GameDetailsVC: UIViewController {
                 case .noDataError:
                     self.developerLabel.text = GameDetailsVC.MISSING_DEVELOPER_DATA
                     self.detailsLoaded.loaded[DetailsLoaded.DEVELOPER] = true
+                }
+            }
+        })
+    }
+    
+    private func downloadCover() {
+        coverImg.kf.setImage(with: game.coverSmallURL, placeholder: #imageLiteral(resourceName: "img_missing_cover"), options: nil, progressBlock: nil, completionHandler: { _ in
+            self.detailsLoaded.loaded[DetailsLoaded.COVER] = true
+        })
+    }
+    
+    private func downloadBigScreenshots() {
+        api.getScreenshotsBig(forGame: game, withOnComplete: { result in
+            switch result {
+            case .success(let screenshots):
+                self.game.screenshotBigURLs = screenshots
+                if self.game.screenshotBigURLs != nil {
+                    self.bigScreenshot.kf.setImage(with: self.game.screenshotBigURL, placeholder: #imageLiteral(resourceName: "img_missing"), options: nil, progressBlock: nil, completionHandler: { _ in
+                        self.detailsLoaded.loaded[DetailsLoaded.BIG_SCREENSHOT] = true
+                    })
+                } else {
+                    self.bigScreenshot.image = #imageLiteral(resourceName: "img_missing")
+                    self.detailsLoaded.loaded[DetailsLoaded.BIG_SCREENSHOT] = true
+                }
+            case .failure(let error):
+                switch error {
+                case .noInternetError:
+                    Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
+                case .serverError, .jsonError, .urlError:
+                    Alerts.alertWithOKButton(withMessage: Alerts.SERVER_ERROR, forVC: self)
+                default:
+                    Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_ERROR, forVC: self)
                 }
             }
         })
