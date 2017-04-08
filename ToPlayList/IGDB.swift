@@ -56,6 +56,7 @@ protocol GameAPI {
     
     func getGenres(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[Genre]>)->Void)
     func getDevelopers(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[Company]>)->Void)
+    func getPublishers(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[Company]>)->Void)
     
     func getScreenshotsSmall(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[URL]>)->Void)
     func getScreenshotsBig(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[URL]>)->Void)
@@ -340,11 +341,22 @@ class IGDB: GameAPI {
             if let devs = gameIDs.developers {
                 self.getCompanies(onComplete, withIDs: devs)
             } else {
-                print("no data error")
                 onComplete(.failure(.noData))
             }
         }, withOnFailure: { error in
             print("failed getting cahced game ids in getdevs")
+            onComplete(.failure(error))
+        })
+    }
+    
+    public func getPublishers(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[Company]>)->Void) {
+        refreshCachedGameIDs(forGame: game, withOnSuccess: { gameIDs in
+            if let pubs = gameIDs.publishers {
+                self.getCompanies(onComplete, withIDs: pubs)
+            } else {
+                onComplete(.failure(.noData))
+            }
+        }, withOnFailure: { error in
             onComplete(.failure(error))
         })
     }

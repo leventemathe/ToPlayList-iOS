@@ -23,6 +23,7 @@ class Game: IdentifiableObject {
     
     var genres: [Genre]?
     var developers: [Company]?
+    var publishers: [Company]?
     
     var firstReleaseDate: Double?
     
@@ -80,6 +81,13 @@ class Game: IdentifiableObject {
     var developer: Company? {
         if developers != nil && developers!.count > 0 {
             return developers![0]
+        }
+        return nil
+    }
+    
+    var publisher: Company? {
+        if publishers != nil && publishers!.count > 0 {
+            return publishers![0]
         }
         return nil
     }

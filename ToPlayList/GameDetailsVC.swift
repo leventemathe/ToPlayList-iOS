@@ -20,13 +20,15 @@ class GameDetailsVC: UIViewController {
         static let BIG_SCREENSHOT = "bigScreenshot"
         static let GENRE = "genre"
         static let DEVELOPER = "developer"
+        static let PUBLISHER = "publisher"
         
         private var listener: OnFinishedListener
         
         var loaded = [DetailsLoaded.COVER: false,
                       DetailsLoaded.BIG_SCREENSHOT: false,
+                      DetailsLoaded.GENRE: false,
                       DetailsLoaded.DEVELOPER: false,
-                      DetailsLoaded.GENRE: false] {
+                      DetailsLoaded.PUBLISHER: false] {
             didSet {
                 if isFullyLoaded() {
                     listener()
@@ -50,6 +52,7 @@ class GameDetailsVC: UIViewController {
     
     static let MISSING_GENRE_DATA = "No genre data"
     static let MISSING_DEVELOPER_DATA = "No developer data"
+    static let MISSING_PUBLISHER_DATA = "No publisher data"
     
     private var loadingAnimationView: NVActivityIndicatorView!
     
@@ -58,6 +61,7 @@ class GameDetailsVC: UIViewController {
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var genreLabel: UILabel!
     @IBOutlet weak var developerLabel: UILabel!
+    @IBOutlet weak var publisherLabel: UILabel!
     
     @IBOutlet weak var coverImg: UIImageView!
     @IBOutlet weak var bigScreenshot: UIImageView!
@@ -69,13 +73,13 @@ class GameDetailsVC: UIViewController {
     
     override func viewDidLoad() {
         setupGameAPI()
+        setupAnimation()
+        startLoading()
         setupLoadingListener()
         addCustomBackButton()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        setupAnimation()
-        startLoading()
         addGameDataAlreadyDownloaded()
         downloadGameData()
     }
@@ -146,6 +150,12 @@ class GameDetailsVC: UIViewController {
         } else {
             self.detailsLoaded.loaded[DetailsLoaded.DEVELOPER] = true
         }
+        
+        if publisherLabel.text == GameDetailsVC.MISSING_PUBLISHER_DATA {
+            downloadPublisher()
+        } else {
+            self.detailsLoaded.loaded[DetailsLoaded.PUBLISHER] = true
+        }
     }
     
     private func downloadGenre() {
@@ -187,6 +197,27 @@ class GameDetailsVC: UIViewController {
                 case .noData:
                     self.developerLabel.text = GameDetailsVC.MISSING_DEVELOPER_DATA
                     self.detailsLoaded.loaded[DetailsLoaded.DEVELOPER] = true
+                }
+            }
+        })
+    }
+    
+    private func downloadPublisher() {
+        api.getPublishers(forGame: game, withOnComplete: { result in
+            switch result {
+            case .success(let pubs):
+                self.game.publishers = pubs
+                self.publisherLabel.text = self.game.publisher!.description
+                self.detailsLoaded.loaded[DetailsLoaded.PUBLISHER] = true
+            case .failure(let error):
+                switch error {
+                case .noInternet:
+                    Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
+                case .server, .json, .url:
+                    Alerts.alertWithOKButton(withMessage: Alerts.SERVER_ERROR, forVC: self)
+                case .noData:
+                    self.developerLabel.text = GameDetailsVC.MISSING_PUBLISHER_DATA
+                    self.detailsLoaded.loaded[DetailsLoaded.PUBLISHER] = true
                 }
             }
         })

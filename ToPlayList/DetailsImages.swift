@@ -9,8 +9,9 @@
 import UIKit
 
 class DetailsBigScreenshot: UIView, Gradiented {
-
-    override func awakeFromNib() {
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
         let fromColor = UIColor.clear.cgColor
         let midColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.4).cgColor
         let toColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.8).cgColor
