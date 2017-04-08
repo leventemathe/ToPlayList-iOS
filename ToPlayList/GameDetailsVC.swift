@@ -59,6 +59,8 @@ class GameDetailsVC: UIViewController {
     
     private var loadingAnimationView: NVActivityIndicatorView!
     
+    var detailsLoaded: DetailsLoaded!
+    
     @IBOutlet weak var dataView: UIView!
     
     @IBOutlet weak var titleLbl: UILabel!
@@ -69,9 +71,8 @@ class GameDetailsVC: UIViewController {
     @IBOutlet weak var coverImg: UIImageView!
     @IBOutlet weak var bigScreenshot: UIImageView!
     
-    var detailsLoaded: DetailsLoaded!
-    
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var showMoreDescriptionButton: UIButton!
     
     var game: Game!
     private var api: GameAPI!
@@ -282,6 +283,7 @@ class GameDetailsVC: UIViewController {
                 case .noData:
                     self.descriptionLabel.text = GameDetailsVC.MISSING_DESCRIPTION_DATA
                     self.detailsLoaded.loaded[DetailsLoaded.DESCRIPTION] = true
+                    self.showMoreDescriptionButton.isHidden = true
                 }
             }
         })
