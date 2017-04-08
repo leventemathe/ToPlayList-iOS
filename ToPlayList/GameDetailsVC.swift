@@ -70,11 +70,11 @@ class GameDetailsVC: UIViewController {
     override func viewDidLoad() {
         setupGameAPI()
         setupLoadingListener()
-        setupAnimation()
         addCustomBackButton()
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        setupAnimation()
         startLoading()
         addGameDataAlreadyDownloaded()
         downloadGameData()
@@ -100,7 +100,7 @@ class GameDetailsVC: UIViewController {
         let height: CGFloat = width
         
         let x = view.bounds.size.width / 2.0 - width / 2.0
-        let y = view.bounds.size.height / 2.0 - height / 2.0 - 50.0
+        let y = view.bounds.size.height / 2.0 - height / 2.0
         
         let frame = CGRect(x: x, y: y, width: width, height: height)
         
@@ -202,15 +202,7 @@ class GameDetailsVC: UIViewController {
         api.getScreenshotsBig(forGame: game, withOnComplete: { result in
             switch result {
             case .success(let screenshots):
-                self.game.screenshotBigURLs = screenshots
-                if self.game.screenshotBigURLs != nil {
-                    self.bigScreenshot.kf.setImage(with: self.game.screenshotBigURL, placeholder: #imageLiteral(resourceName: "img_missing"), options: nil, progressBlock: nil, completionHandler: { _ in
-                        self.detailsLoaded.loaded[DetailsLoaded.BIG_SCREENSHOT] = true
-                    })
-                } else {
-                    self.bigScreenshot.image = #imageLiteral(resourceName: "img_missing")
-                    self.detailsLoaded.loaded[DetailsLoaded.BIG_SCREENSHOT] = true
-                }
+                self.setBigScreenshot(screenshots)
             case .failure(let error):
                 switch error {
                 case .noInternetError:
@@ -222,6 +214,18 @@ class GameDetailsVC: UIViewController {
                 }
             }
         })
+    }
+    
+    private func setBigScreenshot(_ screenshots: [URL]?) {
+        self.game.screenshotBigURLs = screenshots
+        if self.game.screenshotBigURLs != nil {
+            self.bigScreenshot.kf.setImage(with: self.game.screenshotBigURL, placeholder: #imageLiteral(resourceName: "img_missing"), options: nil, progressBlock: nil, completionHandler: { _ in
+                self.detailsLoaded.loaded[DetailsLoaded.BIG_SCREENSHOT] = true
+            })
+        } else {
+            self.bigScreenshot.image = #imageLiteral(resourceName: "img_missing")
+            self.detailsLoaded.loaded[DetailsLoaded.BIG_SCREENSHOT] = true
+        }
     }
     
     private func addCustomBackButton() {
