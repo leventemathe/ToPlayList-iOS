@@ -157,12 +157,12 @@ class GameDetailsVC: UIViewController {
                 self.detailsLoaded.loaded[DetailsLoaded.GENRE] = true
             case .failure(let error):
                 switch error {
-                case .noInternetError:
+                case .noInternet:
                     Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
-                case .serverError, .jsonError, .urlError:
+                case .server, .json, .url:
                     Alerts.alertWithOKButton(withMessage: Alerts.SERVER_ERROR, forVC: self)
                     print("server error on genre")
-                case .noDataError:
+                case .noData:
                     self.genreLabel.text = GameDetailsVC.MISSING_GENRE_DATA
                     self.detailsLoaded.loaded[DetailsLoaded.GENRE] = true
                 }
@@ -179,12 +179,12 @@ class GameDetailsVC: UIViewController {
                 self.detailsLoaded.loaded[DetailsLoaded.DEVELOPER] = true
             case .failure(let error):
                 switch error {
-                case .noInternetError:
+                case .noInternet:
                     Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
-                case .serverError, .jsonError, .urlError:
+                case .server, .json, .url:
                     Alerts.alertWithOKButton(withMessage: Alerts.SERVER_ERROR, forVC: self)
                     print("server error on dev")
-                case .noDataError:
+                case .noData:
                     self.developerLabel.text = GameDetailsVC.MISSING_DEVELOPER_DATA
                     self.detailsLoaded.loaded[DetailsLoaded.DEVELOPER] = true
                 }
@@ -205,12 +205,13 @@ class GameDetailsVC: UIViewController {
                 self.setBigScreenshot(screenshots)
             case .failure(let error):
                 switch error {
-                case .noInternetError:
+                case .noInternet:
                     Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
-                case .serverError, .jsonError, .urlError:
+                case .server, .json, .url:
                     Alerts.alertWithOKButton(withMessage: Alerts.SERVER_ERROR, forVC: self)
-                default:
-                    Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_ERROR, forVC: self)
+                case .noData:
+                    self.bigScreenshot.image = #imageLiteral(resourceName: "img_missing")
+                    self.detailsLoaded.loaded[DetailsLoaded.BIG_SCREENSHOT] = true
                 }
             }
         })

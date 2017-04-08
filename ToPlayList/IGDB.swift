@@ -25,21 +25,21 @@ enum IGDBResult<T> {
 }
 
 enum IGDBError: Error {
-    case urlError
-    case serverError
-    case noInternetError
-    case jsonError
-    case noDataError
+    case url
+    case server
+    case noInternet
+    case json
+    case noData
     
     static func generateError(fromResponse response: DataResponse<Any>) -> IGDBError {
         if let statuscode = response.response?.statusCode {
             if statuscode >= 400 && statuscode < 500 {
-                return .urlError
+                return .url
             } else if statuscode >= 500 && statuscode < 600 {
-                return .serverError
+                return .server
             }
         }
-        return .noInternetError
+        return .noInternet
     }
 }
 
@@ -57,8 +57,8 @@ protocol GameAPI {
     func getGenres(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[Genre]>)->Void)
     func getDevelopers(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[Company]>)->Void)
     
-    func getScreenshotsSmall(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[URL]?>)->Void)
-    func getScreenshotsBig(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[URL]?>)->Void)
+    func getScreenshotsSmall(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[URL]>)->Void)
+    func getScreenshotsBig(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[URL]>)->Void)
 }
 
 class IGDB: GameAPI {
@@ -262,7 +262,7 @@ class IGDB: GameAPI {
                     }
                 } else {
                     print("getting T failed while jsoning outside")
-                    onComplete(IGDBResult.failure(.jsonError))
+                    onComplete(IGDBResult.failure(.json))
                 }
             case .failure(_):
                 onComplete(IGDBResult.failure(IGDBError.generateError(fromResponse: response)))
@@ -309,7 +309,7 @@ class IGDB: GameAPI {
                             onFailure(error)
                         }
                     } else {
-                        onFailure(.jsonError)
+                        onFailure(.json)
                         print("failed getting cahced game ids inside")
                     }
                 case .failure(_):
@@ -327,7 +327,7 @@ class IGDB: GameAPI {
                 self.getGenres(onComplete, withIDs: genres)
             } else {
                 print("no data error")
-                onComplete(.failure(.noDataError))
+                onComplete(.failure(.noData))
             }
         }, withOnFailure: { error in
             print("failed getting cached game ids in getGenres")
@@ -341,7 +341,7 @@ class IGDB: GameAPI {
                 self.getCompanies(onComplete, withIDs: devs)
             } else {
                 print("no data error")
-                onComplete(.failure(.noDataError))
+                onComplete(.failure(.noData))
             }
         }, withOnFailure: { error in
             print("failed getting cahced game ids in getdevs")
@@ -354,27 +354,26 @@ class IGDB: GameAPI {
         case BIG
     }
     
-    // TODO maybe rewrite genres and devs with optional results too?
-    public func getScreenshotsSmall(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[URL]?>)->Void) {
+    public func getScreenshotsSmall(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[URL]>)->Void) {
         refreshCachedGameIDs(forGame: game, withOnSuccess: { _ in
             if self.cachedGameIDs!.screenshots != nil {
                 let urls = self.buildScreenshotURLs(.SMALL)
                 onComplete(.success(urls))
             } else {
-                onComplete(.success(nil))
+                onComplete(.failure(.noData))
             }
         }, withOnFailure: { error in
             onComplete(.failure(error))
         })
     }
     
-    public func getScreenshotsBig(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[URL]?>)->Void) {
+    public func getScreenshotsBig(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[URL]>)->Void) {
         refreshCachedGameIDs(forGame: game, withOnSuccess: { _ in
             if self.cachedGameIDs!.screenshots != nil {
                 let urls = self.buildScreenshotURLs(.BIG)
                 onComplete(.success(urls))
             } else {
-                onComplete(.success(nil))
+                onComplete(.failure(.noData))
             }
         }, withOnFailure: { error in
             onComplete(.failure(error))

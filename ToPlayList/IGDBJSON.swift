@@ -24,7 +24,7 @@ class IGDBJSON {
             if let obj = any as? JSONPair, let game = setGame(fromObj: obj) {
                 result.append((game, setGameIDs(fromObj: obj, withGameID: game.id)))
             } else {
-                return IGDBResult.failure(IGDBError.jsonError)
+                return IGDBResult.failure(IGDBError.json)
             }
         }
         return IGDBResult.success(result)
@@ -74,7 +74,7 @@ class IGDBJSON {
             }
         }
         if(ts.count < 1) {
-            return IGDBResult.failure(IGDBError.noDataError)
+            return .failure(.noData)
         }
         return IGDBResult.success(ts)
     }
@@ -93,6 +93,6 @@ class IGDBJSON {
             }
             return .success(gameIDs)
         }
-        return .failure(IGDBError.jsonError)
+        return .failure(.json)
     }
 }

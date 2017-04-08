@@ -354,9 +354,9 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         case .failure(let error):
             self.setListBackground()
             switch error {
-            case .serverError, .urlError, .jsonError:
+            case .server, .url, .json:
                 Alerts.alertWithOKButton(withMessage: Alerts.SERVER_ERROR, forVC: self)
-            case .noInternetError:
+            case .noInternet:
                 Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
             default:
                 Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_ERROR, forVC: self)
