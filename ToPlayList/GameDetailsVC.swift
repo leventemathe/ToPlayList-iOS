@@ -210,7 +210,7 @@ class GameDetailsVC: UIViewController {
                 case .server, .json, .url:
                     Alerts.alertWithOKButton(withMessage: Alerts.SERVER_ERROR, forVC: self)
                 case .noData:
-                    self.bigScreenshot.image = #imageLiteral(resourceName: "img_missing")
+                    self.bigScreenshot.image = #imageLiteral(resourceName: "img_missing_screenshot_big")
                     self.detailsLoaded.loaded[DetailsLoaded.BIG_SCREENSHOT] = true
                 }
             }
@@ -220,11 +220,11 @@ class GameDetailsVC: UIViewController {
     private func setBigScreenshot(_ screenshots: [URL]?) {
         self.game.screenshotBigURLs = screenshots
         if self.game.screenshotBigURLs != nil {
-            self.bigScreenshot.kf.setImage(with: self.game.screenshotBigURL, placeholder: #imageLiteral(resourceName: "img_missing"), options: nil, progressBlock: nil, completionHandler: { _ in
+            self.bigScreenshot.kf.setImage(with: self.game.screenshotBigURL, placeholder: #imageLiteral(resourceName: "img_missing_screenshot_big"), options: nil, progressBlock: nil, completionHandler: { _ in
                 self.detailsLoaded.loaded[DetailsLoaded.BIG_SCREENSHOT] = true
             })
         } else {
-            self.bigScreenshot.image = #imageLiteral(resourceName: "img_missing")
+            self.bigScreenshot.image = #imageLiteral(resourceName: "img_missing_screenshot_big")
             self.detailsLoaded.loaded[DetailsLoaded.BIG_SCREENSHOT] = true
         }
     }
