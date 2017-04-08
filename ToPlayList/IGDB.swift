@@ -60,6 +60,8 @@ protocol GameAPI {
     
     func getScreenshotsSmall(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[URL]>)->Void)
     func getScreenshotsBig(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[URL]>)->Void)
+    
+    func getDescription(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<String>)->Void)
 }
 
 class IGDB: GameAPI {
@@ -295,7 +297,7 @@ class IGDB: GameAPI {
             return
         } else {
             let url =  IGDB.BASE_URL + IGDB.GAMES + "\(game.id)"
-            let parameters: Parameters = ["fields": "first_release_date,release_dates,genres,developers,publishers,screenshots"]
+            let parameters: Parameters = ["fields": "first_release_date,release_dates,genres,developers,publishers,screenshots,summary"]
             
             Alamofire.request(url, parameters: parameters, headers: IGDB.HEADERS).validate().responseJSON { response in
                 switch response.result {
@@ -410,6 +412,18 @@ class IGDB: GameAPI {
             }
         }
         return urls
+    }
+    
+    public func getDescription(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<String>)->Void) {
+        refreshCachedGameIDs(forGame: game, withOnSuccess: { gameIDs in
+            if let desc = gameIDs.description {
+                onComplete(.success(desc))
+            } else {
+                onComplete(.failure(.noData))
+            }
+        }, withOnFailure: { error in
+            onComplete(.failure(error))
+        })
     }
 }
 

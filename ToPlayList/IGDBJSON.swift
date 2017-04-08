@@ -82,6 +82,7 @@ class IGDBJSON {
     func getGameIDs(_ json: JSON, forGame game: Game) -> IGDBResult<GameIDs> {
         if let obj = json[0] as? JSONPair {
             var gameIDs = setGameIDs(fromObj: obj, withGameID: game.id)
+            
             if let screenshots = obj["screenshots"] as? [[String: Any]] {
                 var screenshotIDs = [String]()
                 for screenshot in screenshots {
@@ -90,6 +91,10 @@ class IGDBJSON {
                     }
                 }
                 gameIDs.screenshots = screenshotIDs
+            }
+            
+            if let desc = obj["summary"] as? String {
+                gameIDs.description = desc
             }
             return .success(gameIDs)
         }

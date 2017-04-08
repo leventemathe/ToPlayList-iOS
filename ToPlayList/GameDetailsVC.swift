@@ -21,6 +21,7 @@ class GameDetailsVC: UIViewController {
         static let GENRE = "genre"
         static let DEVELOPER = "developer"
         static let PUBLISHER = "publisher"
+        static let DESCRIPTION = "description"
         
         private var listener: OnFinishedListener
         
@@ -28,7 +29,8 @@ class GameDetailsVC: UIViewController {
                       DetailsLoaded.BIG_SCREENSHOT: false,
                       DetailsLoaded.GENRE: false,
                       DetailsLoaded.DEVELOPER: false,
-                      DetailsLoaded.PUBLISHER: false] {
+                      DetailsLoaded.PUBLISHER: false,
+                      DetailsLoaded.DESCRIPTION: false] {
             didSet {
                 if isFullyLoaded() {
                     listener()
@@ -53,6 +55,7 @@ class GameDetailsVC: UIViewController {
     static let MISSING_GENRE_DATA = "No genre data"
     static let MISSING_DEVELOPER_DATA = "No developer data"
     static let MISSING_PUBLISHER_DATA = "No publisher data"
+    static let MISSING_DESCRIPTION_DATA = "No description available. 😞"
     
     private var loadingAnimationView: NVActivityIndicatorView!
     
@@ -67,6 +70,8 @@ class GameDetailsVC: UIViewController {
     @IBOutlet weak var bigScreenshot: UIImageView!
     
     var detailsLoaded: DetailsLoaded!
+    
+    @IBOutlet weak var descriptionLabel: UILabel!
     
     var game: Game!
     private var api: GameAPI!
@@ -136,6 +141,7 @@ class GameDetailsVC: UIViewController {
         downloadBasics()
         downloadCover()
         downloadBigScreenshots()
+        downloadDescription()
     }
     
     private func downloadBasics() {
@@ -258,6 +264,27 @@ class GameDetailsVC: UIViewController {
             self.bigScreenshot.image = #imageLiteral(resourceName: "img_missing_screenshot_big")
             self.detailsLoaded.loaded[DetailsLoaded.BIG_SCREENSHOT] = true
         }
+    }
+    
+    private func downloadDescription() {
+        api.getDescription(forGame: game, withOnComplete: { result in
+            switch result {
+            case .success(let desc):
+                self.game.description = desc
+                self.descriptionLabel.text = self.game.description
+                self.detailsLoaded.loaded[DetailsLoaded.DESCRIPTION] = true
+            case .failure(let error):
+                switch error {
+                case .noInternet:
+                    Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
+                case .server, .json, .url:
+                    Alerts.alertWithOKButton(withMessage: Alerts.SERVER_ERROR, forVC: self)
+                case .noData:
+                    self.descriptionLabel.text = GameDetailsVC.MISSING_DESCRIPTION_DATA
+                    self.detailsLoaded.loaded[DetailsLoaded.DESCRIPTION] = true
+                }
+            }
+        })
     }
     
     private func addCustomBackButton() {

@@ -19,6 +19,8 @@ struct GameIDs {
     
     var screenshots: [String]?
     
+    var description: String?
+    
     init(_ id: UInt64) {
         self.id = id
     }

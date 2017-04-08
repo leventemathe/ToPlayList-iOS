@@ -415,21 +415,52 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="5YX-UL-7NP">
+                                        <rect key="frame" x="8" y="276" width="304" height="49.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="12" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B6e-9T-2Iw">
+                                                <rect key="frame" x="0.0" y="0.0" width="304" height="19.5"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yqb-Ft-MHO">
+                                                <rect key="frame" x="0.0" y="19.5" width="90" height="30"/>
+                                                <state key="normal" title="Show more..."/>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="B6e-9T-2Iw" firstAttribute="leading" secondItem="5YX-UL-7NP" secondAttribute="leading" id="6Fg-XD-YPC"/>
+                                            <constraint firstAttribute="trailing" secondItem="B6e-9T-2Iw" secondAttribute="trailing" id="fhy-Np-dsX"/>
+                                        </constraints>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CFP-5D-6eC">
+                                        <rect key="frame" x="8" y="253.5" width="304" height="14.5"/>
+                                        <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="14"/>
+                                        <color key="textColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="CFP-5D-6eC" secondAttribute="trailing" constant="8" id="0Xp-E4-fxg"/>
+                                    <constraint firstItem="CFP-5D-6eC" firstAttribute="top" secondItem="ThC-2J-B40" secondAttribute="bottom" constant="30" id="3MC-sA-H02"/>
                                     <constraint firstItem="ThC-2J-B40" firstAttribute="top" secondItem="efa-6i-V9F" secondAttribute="bottom" constant="8" id="Aui-Gm-iqu"/>
+                                    <constraint firstItem="5YX-UL-7NP" firstAttribute="top" secondItem="CFP-5D-6eC" secondAttribute="bottom" constant="8" id="GIT-hd-hly"/>
                                     <constraint firstItem="Aw5-Re-hAD" firstAttribute="bottom" secondItem="efa-6i-V9F" secondAttribute="bottom" constant="-8" id="PmG-iC-KYY"/>
                                     <constraint firstItem="efa-6i-V9F" firstAttribute="top" secondItem="AHD-U1-sds" secondAttribute="top" id="QO2-My-y4d"/>
                                     <constraint firstItem="ThC-2J-B40" firstAttribute="leading" secondItem="aZh-qp-tBT" secondAttribute="trailing" constant="8" id="UWp-B9-Oyu"/>
                                     <constraint firstAttribute="trailing" secondItem="Aw5-Re-hAD" secondAttribute="trailing" constant="8" id="Y2Y-pl-Olh"/>
                                     <constraint firstItem="aZh-qp-tBT" firstAttribute="leading" secondItem="AHD-U1-sds" secondAttribute="leading" constant="16" id="YQ0-Vl-zLz"/>
                                     <constraint firstAttribute="trailing" secondItem="efa-6i-V9F" secondAttribute="trailing" id="Z8r-lX-4jf"/>
+                                    <constraint firstItem="5YX-UL-7NP" firstAttribute="leading" secondItem="AHD-U1-sds" secondAttribute="leading" constant="8" id="anW-Cw-5OM"/>
                                     <constraint firstItem="efa-6i-V9F" firstAttribute="leading" secondItem="AHD-U1-sds" secondAttribute="leading" id="e0S-4M-vhS"/>
                                     <constraint firstAttribute="trailing" secondItem="ThC-2J-B40" secondAttribute="trailing" constant="8" id="hVf-h1-DKt"/>
+                                    <constraint firstItem="CFP-5D-6eC" firstAttribute="leading" secondItem="AHD-U1-sds" secondAttribute="leading" constant="8" id="jGS-pN-dsX"/>
                                     <constraint firstItem="aZh-qp-tBT" firstAttribute="top" secondItem="AHD-U1-sds" secondAttribute="top" constant="110" id="kij-2l-M5i"/>
                                     <constraint firstItem="Aw5-Re-hAD" firstAttribute="leading" secondItem="aZh-qp-tBT" secondAttribute="trailing" constant="8" id="nNh-A3-d3S"/>
                                     <constraint firstAttribute="trailing" secondItem="ThC-2J-B40" secondAttribute="trailing" constant="8" id="qhu-WV-jgg"/>
+                                    <constraint firstAttribute="trailing" secondItem="5YX-UL-7NP" secondAttribute="trailing" constant="8" id="rsg-fV-zqO"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -446,6 +477,7 @@
                         <outlet property="bigScreenshot" destination="rnH-6d-GnC" id="phi-Ht-Cj0"/>
                         <outlet property="coverImg" destination="c0v-Hc-uKc" id="Ft0-TO-kaC"/>
                         <outlet property="dataView" destination="AHD-U1-sds" id="KnK-7G-JJw"/>
+                        <outlet property="descriptionLabel" destination="B6e-9T-2Iw" id="gCz-8I-bTG"/>
                         <outlet property="developerLabel" destination="V0M-C8-Wlw" id="dbd-EF-YZl"/>
                         <outlet property="genreLabel" destination="QIo-lO-O0x" id="zDM-BZ-uIj"/>
                         <outlet property="publisherLabel" destination="Fdc-Ff-nY8" id="eTw-xt-eQ8"/>
@@ -1287,7 +1319,7 @@
         <image name="to_play_list_bg" width="689" height="713"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="a7x-K3-wKb"/>
         <segue reference="FhM-4C-LJm"/>
+        <segue reference="a7x-K3-wKb"/>
     </inferredMetricsTieBreakers>
 </document>
