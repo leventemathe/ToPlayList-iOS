@@ -324,6 +324,13 @@
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="screenshot" translatesAutoresizingMaskIntoConstraints="NO" id="c0v-Hc-uKc" userLabel="cover">
                                                 <rect key="frame" x="0.0" y="0.0" width="90" height="128"/>
                                             </imageView>
+                                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="enM-Of-KGA">
+                                                <rect key="frame" x="8" y="8" width="28" height="28"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="28" id="bPi-U7-s5M"/>
+                                                    <constraint firstAttribute="width" constant="28" id="cKU-yO-Fsf"/>
+                                                </constraints>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -331,7 +338,9 @@
                                             <constraint firstItem="c0v-Hc-uKc" firstAttribute="leading" secondItem="aZh-qp-tBT" secondAttribute="leading" id="FnC-0m-Vlz"/>
                                             <constraint firstAttribute="bottom" secondItem="c0v-Hc-uKc" secondAttribute="bottom" id="SjG-zO-qFo"/>
                                             <constraint firstAttribute="height" constant="128" id="gJs-fb-GuF"/>
+                                            <constraint firstItem="enM-Of-KGA" firstAttribute="leading" secondItem="aZh-qp-tBT" secondAttribute="leading" constant="8" id="m4i-kV-bj5"/>
                                             <constraint firstAttribute="trailing" secondItem="c0v-Hc-uKc" secondAttribute="trailing" id="p3q-6K-iQd"/>
+                                            <constraint firstItem="enM-Of-KGA" firstAttribute="top" secondItem="aZh-qp-tBT" secondAttribute="top" constant="8" id="sCh-3D-cdl"/>
                                             <constraint firstAttribute="width" constant="90" id="vLD-ea-oci"/>
                                         </constraints>
                                     </view>
@@ -492,12 +501,13 @@
                         <outlet property="genreLabel" destination="QIo-lO-O0x" id="zDM-BZ-uIj"/>
                         <outlet property="publisherLabel" destination="Fdc-Ff-nY8" id="eTw-xt-eQ8"/>
                         <outlet property="showMoreDescriptionButton" destination="yqb-Ft-MHO" id="T2a-h8-pNi"/>
+                        <outlet property="starImage" destination="enM-Of-KGA" id="BiT-iP-4fF"/>
                         <outlet property="titleLbl" destination="Aw5-Re-hAD" id="7ko-y9-BTN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dGx-UB-xEE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4669.6000000000004" y="227.13643178410797"/>
+            <point key="canvasLocation" x="4668.75" y="227.11267605633802"/>
         </scene>
         <!--Newest-->
         <scene sceneID="fFL-jC-ijf">

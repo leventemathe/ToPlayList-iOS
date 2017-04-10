@@ -31,6 +31,7 @@
 		D726BC9B1E0AC7AA00D6C9CD /* NewestReleasesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D726BC9A1E0AC7AA00D6C9CD /* NewestReleasesCell.swift */; };
 		D726BC9D1E0ACF3900D6C9CD /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = D726BC9C1E0ACF3900D6C9CD /* Game.swift */; };
 		D726D51B1E5A45870045AE8C /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = D726D51A1E5A45870045AE8C /* List.swift */; };
+		D727AFE41E9B7ACF00E1C93F /* ToPlayAndPlayedListListeners.swift in Sources */ = {isa = PBXBuildFile; fileRef = D727AFE31E9B7ACF00E1C93F /* ToPlayAndPlayedListListeners.swift */; };
 		D72D4CA61E1479EC0070E013 /* IGDBJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72D4CA51E1479EC0070E013 /* IGDBJSON.swift */; };
 		D72E66B71E619D0800BED388 /* ToPlayListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72E66B61E619D0800BED388 /* ToPlayListVC.swift */; };
 		D72E66BA1E619D2100BED388 /* PlayedListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72E66B91E619D2100BED388 /* PlayedListVC.swift */; };
@@ -124,6 +125,7 @@
 		D726BC9A1E0AC7AA00D6C9CD /* NewestReleasesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewestReleasesCell.swift; sourceTree = "<group>"; };
 		D726BC9C1E0ACF3900D6C9CD /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		D726D51A1E5A45870045AE8C /* List.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
+		D727AFE31E9B7ACF00E1C93F /* ToPlayAndPlayedListListeners.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToPlayAndPlayedListListeners.swift; sourceTree = "<group>"; };
 		D72D4CA51E1479EC0070E013 /* IGDBJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGDBJSON.swift; sourceTree = "<group>"; };
 		D72E66B61E619D0800BED388 /* ToPlayListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToPlayListVC.swift; sourceTree = "<group>"; };
 		D72E66B91E619D2100BED388 /* PlayedListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayedListVC.swift; sourceTree = "<group>"; };
@@ -389,6 +391,7 @@
 				D7975D071E586255003B64E6 /* ErrorHandlerDelegate.swift */,
 				D7A6F04D1E65CD2900ED66E5 /* LoadingAnimationDelegate.swift */,
 				D7A0E7001E7BE82800A70989 /* OnPanDelegate.swift */,
+				D727AFE31E9B7ACF00E1C93F /* ToPlayAndPlayedListListeners.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -695,6 +698,7 @@
 				D719812A1E26F7AC005823C2 /* ColoredPlaceholderText.swift in Sources */,
 				D7CC7D0E1E3913E60027BE6F /* RegisterLoginVC.swift in Sources */,
 				D7B8C86B1E2D16C700656E64 /* ErrorMessage.swift in Sources */,
+				D727AFE41E9B7ACF00E1C93F /* ToPlayAndPlayedListListeners.swift in Sources */,
 				D74AC7DA1E3919B700C37A90 /* RegisterVC.swift in Sources */,
 				D7A0E7031E7BEA8A00A70989 /* SubListVC.swift in Sources */,
 				D72E66BA1E619D2100BED388 /* PlayedListVC.swift in Sources */,

@@ -61,6 +61,13 @@ class GameDetailsVC: UIViewController {
     
     var detailsLoaded: DetailsLoaded!
     
+    @IBOutlet weak var starImage: UIImageView!
+    
+    private var toPlayListListenerAdd: ListsListenerReference?
+    private var playedListListenerAdd: ListsListenerReference?
+    private var toPlayListListenerRemove: ListsListenerReference?
+    private var playedListListenerRemove: ListsListenerReference?
+    
     @IBOutlet weak var dataView: UIView!
     
     @IBOutlet weak var titleLbl: UILabel!
@@ -83,6 +90,14 @@ class GameDetailsVC: UIViewController {
         startLoading()
         setupLoadingListener()
         addCustomBackButton()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        //setupListListener()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        //removeListListener()
     }
     
     override func viewDidAppear(_ animated: Bool) {
