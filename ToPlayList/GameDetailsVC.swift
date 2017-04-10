@@ -63,10 +63,17 @@ class GameDetailsVC: UIViewController {
     
     @IBOutlet weak var starImage: UIImageView!
     
-    private var toPlayListListenerAdd: ListsListenerReference?
-    private var playedListListenerAdd: ListsListenerReference?
-    private var toPlayListListenerRemove: ListsListenerReference?
-    private var playedListListenerRemove: ListsListenerReference?
+    private var listsListenerSystem = ToPlayAndPlayedListListeners()
+    private var inToPlayList = false {
+        didSet {
+            setStarImage()
+        }
+    }
+    private var inPlayedList = false {
+        didSet {
+            setStarImage()
+        }
+    }
     
     @IBOutlet weak var dataView: UIView!
     
@@ -90,14 +97,97 @@ class GameDetailsVC: UIViewController {
         startLoading()
         setupLoadingListener()
         addCustomBackButton()
+        self.setupStarImageTapRecognizer()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        //setupListListener()
+        updateStarState {
+            self.attachListListeners()
+        }
+    }
+    
+    private func setupStarImageTapRecognizer() {
+        starImage.isUserInteractionEnabled = true
+        let starTap = UITapGestureRecognizer(target: self, action: #selector(starTapped))
+        starImage.addGestureRecognizer(starTap)
+    }
+    
+    func starTapped() {
+        ListsList.instance.removeGameFromToPlayAndPlayedList({ result in
+            switch result {
+            case .succes(_):
+                self.starImage.isHidden = true
+                self.inToPlayList = false
+                self.inPlayedList = false
+            case .failure(_):
+                Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_LISTS_ERROR, forVC: self)
+            }
+        }, thisGame: game)
+    }
+    
+    private func attachListListeners() {
+        self.listsListenerSystem.attachListeners(withOnAddedToToPlayList: { game in
+            if game == self.game {
+                self.inToPlayList = true
+                print("set content in details view")
+            }
+        }, withOnRemovedFromToPlayList: { game in
+            if game == self.game {
+                self.inToPlayList = false
+                print("set content in details view")
+            }
+        }, withOnAddedToPlayedList: { game in
+            if game == self.game {
+                self.inPlayedList = true
+                print("set content in details view")
+            }
+        }, withOnRemovedFromPlayedList: { game in
+            if game == self.game {
+                self.inPlayedList = false
+                print("set content in details view")
+            }
+        })
+    }
+    
+    private func updateStarState(_ onComplete: @escaping ()->()) {
+        if !ListsUser.loggedIn {
+            self.inToPlayList = false
+            self.inPlayedList = false
+            onComplete()
+            return
+        }
+        ListsList.instance.getToPlayAndPlayedList { result in
+            switch result {
+            case .failure:
+                Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_LISTS_ERROR, forVC: self)
+            case .succes(let lists):
+                if lists.toPlay.contains(self.game) {
+                    self.inToPlayList = true
+                } else if lists.played.contains(self.game) {
+                    self.inPlayedList = true
+                } else {
+                    self.inToPlayList = false
+                    self.inPlayedList = false
+                }
+            }
+            onComplete()
+        }
+    }
+    
+    private func setStarImage() {
+        if inToPlayList {
+            starImage.isHidden = false
+            starImage.image = #imageLiteral(resourceName: "star_to_play_list")
+        } else if inPlayedList {
+            starImage.isHidden = false
+            starImage.image = #imageLiteral(resourceName: "star_played_list")
+        } else {
+            starImage.isHidden = true
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        //removeListListener()
+        listsListenerSystem.detachListeners()
     }
     
     override func viewDidAppear(_ animated: Bool) {
