@@ -16,6 +16,7 @@ class GameDetailsVC: UIViewController {
     
     struct DetailsLoaded {
         
+        static let LIST_STATE = "listState"
         static let COVER = "cover"
         static let BIG_SCREENSHOT = "bigScreenshot"
         static let GENRE = "genre"
@@ -25,7 +26,8 @@ class GameDetailsVC: UIViewController {
         
         private var listener: OnFinishedListener
         
-        var loaded = [DetailsLoaded.COVER: false,
+        var loaded = [DetailsLoaded.LIST_STATE: false,
+                      DetailsLoaded.COVER: false,
                       DetailsLoaded.BIG_SCREENSHOT: false,
                       DetailsLoaded.GENRE: false,
                       DetailsLoaded.DEVELOPER: false,
@@ -62,16 +64,22 @@ class GameDetailsVC: UIViewController {
     var detailsLoaded: DetailsLoaded!
     
     @IBOutlet weak var starImage: UIImageView!
+    @IBOutlet weak var starBanner: StarBanner!
+    @IBOutlet weak var starBannerLeftConstraint: NSLayoutConstraint!
+    @IBOutlet weak var starBannerRightConstraint: NSLayoutConstraint!
+    
+    private var starBannerConstraintStart: CGFloat = -100.0
+    private var starBannerConstraintTarget: CGFloat = 0.0
     
     private var listsListenerSystem = ToPlayAndPlayedListListeners()
     private var inToPlayList = false {
         didSet {
-            setStarImage()
+            setStar()
         }
     }
     private var inPlayedList = false {
         didSet {
-            setStarImage()
+            setStar()
         }
     }
     
@@ -102,6 +110,7 @@ class GameDetailsVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         updateStarState {
+            self.detailsLoaded.loaded[DetailsLoaded.LIST_STATE] = true
             self.attachListListeners()
         }
     }
@@ -174,16 +183,79 @@ class GameDetailsVC: UIViewController {
         }
     }
     
-    private func setStarImage() {
+    private func setStar() {
         if inToPlayList {
-            starImage.isHidden = false
-            starImage.image = #imageLiteral(resourceName: "star_to_play_list")
+            setStarToPlayList()
         } else if inPlayedList {
-            starImage.isHidden = false
+            setStarPlayedList()
+        } else {
+            setStarNone()
+        }
+    }
+    
+    private func setStarToPlayList() {
+        if starBanner.isHidden {
+            animateStarBannerShow {
+                self.animateStarImageShow(#imageLiteral(resourceName: "star_to_play_list"))
+            }
+        } else {
+            starImage.image = #imageLiteral(resourceName: "star_to_play_list")
+        }
+    }
+    
+    private func setStarPlayedList() {
+        if starBanner.isHidden {
+            animateStarBannerShow {
+                self.animateStarImageShow(#imageLiteral(resourceName: "star_played_list"))
+            }
+        } else {
             starImage.image = #imageLiteral(resourceName: "star_played_list")
+        }
+    }
+    
+    private func setStarNone() {
+        if !starBanner.isHidden {
+            self.animateStarImageHide {
+                self.animateStarBannerHide()
+            }
         } else {
             starImage.isHidden = true
         }
+    }
+    
+    private func animateStarBannerShow(_ onComplete: @escaping ()->()) {
+        starBannerLeftConstraint.constant = starBannerConstraintStart
+        starBannerRightConstraint.constant = starBannerConstraintStart
+        starBanner.isHidden = false
+        UIView.animate(withDuration: 0.3, animations: {
+            self.starBannerLeftConstraint.constant = self.starBannerConstraintTarget
+            self.starBannerRightConstraint.constant = self.starBannerConstraintTarget
+            self.view.layoutIfNeeded()
+        }, completion: { success in
+            onComplete()
+        })
+    }
+    
+    private func animateStarBannerHide() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.starBannerLeftConstraint.constant = self.starBannerConstraintStart
+            self.starBannerRightConstraint.constant = self.starBannerConstraintStart
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    private func animateStarImageShow(_ image: UIImage) {
+        self.starImage.alpha = 0.0
+        self.starImage.isHidden = false
+        self.starImage.image = image
+        UIView.animate(withDuration: 0.3, animations: {
+            self.starImage.alpha = 1.0
+        })
+    }
+    
+    private func animateStarImageHide(_ onComplete: @escaping ()->()) {
+        starImage.isHidden = true
+        onComplete()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

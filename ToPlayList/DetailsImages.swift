@@ -26,3 +26,19 @@ class DetailsCover: UIView, DropShadowed {
         addDropShadow()
     }
 }
+
+class StarBanner: UIImageView, DropShadowed {
+    
+    override func awakeFromNib() {
+        addDropShadow()
+    }
+}
+
+class StarImage: UIImageView, DropShadowed {
+    
+    override func awakeFromNib() {
+        addDropShadow(0.5, withOffset: CGSize.zero)
+    }
+}
+
+

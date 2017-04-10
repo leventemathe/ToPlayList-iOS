@@ -324,13 +324,6 @@
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="screenshot" translatesAutoresizingMaskIntoConstraints="NO" id="c0v-Hc-uKc" userLabel="cover">
                                                 <rect key="frame" x="0.0" y="0.0" width="90" height="128"/>
                                             </imageView>
-                                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="enM-Of-KGA">
-                                                <rect key="frame" x="8" y="8" width="28" height="28"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="28" id="bPi-U7-s5M"/>
-                                                    <constraint firstAttribute="width" constant="28" id="cKU-yO-Fsf"/>
-                                                </constraints>
-                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -338,9 +331,7 @@
                                             <constraint firstItem="c0v-Hc-uKc" firstAttribute="leading" secondItem="aZh-qp-tBT" secondAttribute="leading" id="FnC-0m-Vlz"/>
                                             <constraint firstAttribute="bottom" secondItem="c0v-Hc-uKc" secondAttribute="bottom" id="SjG-zO-qFo"/>
                                             <constraint firstAttribute="height" constant="128" id="gJs-fb-GuF"/>
-                                            <constraint firstItem="enM-Of-KGA" firstAttribute="leading" secondItem="aZh-qp-tBT" secondAttribute="leading" constant="8" id="m4i-kV-bj5"/>
                                             <constraint firstAttribute="trailing" secondItem="c0v-Hc-uKc" secondAttribute="trailing" id="p3q-6K-iQd"/>
-                                            <constraint firstItem="enM-Of-KGA" firstAttribute="top" secondItem="aZh-qp-tBT" secondAttribute="top" constant="8" id="sCh-3D-cdl"/>
                                             <constraint firstAttribute="width" constant="90" id="vLD-ea-oci"/>
                                         </constraints>
                                     </view>
@@ -459,12 +450,40 @@
                                         <color key="textColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D4C-dE-sQH">
+                                        <rect key="frame" x="0.0" y="90" width="60" height="40"/>
+                                        <subviews>
+                                            <imageView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="right" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner" translatesAutoresizingMaskIntoConstraints="NO" id="oZt-mw-jh0" customClass="StarBanner" customModule="ToPlayList" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="60" height="40"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </imageView>
+                                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="enM-Of-KGA" customClass="StarImage" customModule="ToPlayList" customModuleProvider="target">
+                                                <rect key="frame" x="10" y="6" width="28" height="28.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="28" id="bPi-U7-s5M"/>
+                                                    <constraint firstAttribute="width" constant="28" id="cKU-yO-Fsf"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="oZt-mw-jh0" secondAttribute="bottom" id="DVz-2K-zw9"/>
+                                            <constraint firstItem="oZt-mw-jh0" firstAttribute="leading" secondItem="D4C-dE-sQH" secondAttribute="leading" id="UPs-Ky-P6x"/>
+                                            <constraint firstItem="enM-Of-KGA" firstAttribute="leading" secondItem="D4C-dE-sQH" secondAttribute="leading" constant="10" id="WVI-aB-Bch"/>
+                                            <constraint firstAttribute="height" constant="40" id="kBo-YF-GqY"/>
+                                            <constraint firstAttribute="trailing" secondItem="oZt-mw-jh0" secondAttribute="trailing" id="mnc-JP-8MS"/>
+                                            <constraint firstItem="enM-Of-KGA" firstAttribute="centerY" secondItem="D4C-dE-sQH" secondAttribute="centerY" id="oHn-VK-OHL"/>
+                                            <constraint firstAttribute="width" constant="60" id="qJm-Nv-Smp"/>
+                                            <constraint firstItem="oZt-mw-jh0" firstAttribute="top" secondItem="D4C-dE-sQH" secondAttribute="top" id="tjD-VO-7NF"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="CFP-5D-6eC" secondAttribute="trailing" constant="8" id="0Xp-E4-fxg"/>
                                     <constraint firstItem="CFP-5D-6eC" firstAttribute="top" secondItem="ThC-2J-B40" secondAttribute="bottom" constant="30" id="3MC-sA-H02"/>
                                     <constraint firstItem="ThC-2J-B40" firstAttribute="top" secondItem="efa-6i-V9F" secondAttribute="bottom" constant="8" id="Aui-Gm-iqu"/>
+                                    <constraint firstItem="D4C-dE-sQH" firstAttribute="top" secondItem="AHD-U1-sds" secondAttribute="top" constant="90" id="ECI-6a-Gc4"/>
                                     <constraint firstItem="5YX-UL-7NP" firstAttribute="top" secondItem="CFP-5D-6eC" secondAttribute="bottom" constant="8" id="GIT-hd-hly"/>
                                     <constraint firstItem="Aw5-Re-hAD" firstAttribute="bottom" secondItem="efa-6i-V9F" secondAttribute="bottom" constant="-8" id="PmG-iC-KYY"/>
                                     <constraint firstItem="efa-6i-V9F" firstAttribute="top" secondItem="AHD-U1-sds" secondAttribute="top" id="QO2-My-y4d"/>
@@ -474,6 +493,7 @@
                                     <constraint firstAttribute="trailing" secondItem="efa-6i-V9F" secondAttribute="trailing" id="Z8r-lX-4jf"/>
                                     <constraint firstItem="5YX-UL-7NP" firstAttribute="leading" secondItem="AHD-U1-sds" secondAttribute="leading" constant="8" id="anW-Cw-5OM"/>
                                     <constraint firstItem="efa-6i-V9F" firstAttribute="leading" secondItem="AHD-U1-sds" secondAttribute="leading" id="e0S-4M-vhS"/>
+                                    <constraint firstItem="D4C-dE-sQH" firstAttribute="leading" secondItem="AHD-U1-sds" secondAttribute="leading" id="fc1-x8-7Pu"/>
                                     <constraint firstAttribute="trailing" secondItem="ThC-2J-B40" secondAttribute="trailing" constant="8" id="hVf-h1-DKt"/>
                                     <constraint firstItem="CFP-5D-6eC" firstAttribute="leading" secondItem="AHD-U1-sds" secondAttribute="leading" constant="8" id="jGS-pN-dsX"/>
                                     <constraint firstItem="aZh-qp-tBT" firstAttribute="top" secondItem="AHD-U1-sds" secondAttribute="top" constant="110" id="kij-2l-M5i"/>
@@ -501,6 +521,9 @@
                         <outlet property="genreLabel" destination="QIo-lO-O0x" id="zDM-BZ-uIj"/>
                         <outlet property="publisherLabel" destination="Fdc-Ff-nY8" id="eTw-xt-eQ8"/>
                         <outlet property="showMoreDescriptionButton" destination="yqb-Ft-MHO" id="T2a-h8-pNi"/>
+                        <outlet property="starBanner" destination="oZt-mw-jh0" id="ZhB-rf-lxV"/>
+                        <outlet property="starBannerLeftConstraint" destination="UPs-Ky-P6x" id="V1w-h7-356"/>
+                        <outlet property="starBannerRightConstraint" destination="mnc-JP-8MS" id="1VW-bG-UPD"/>
                         <outlet property="starImage" destination="enM-Of-KGA" id="BiT-iP-4fF"/>
                         <outlet property="titleLbl" destination="Aw5-Re-hAD" id="7ko-y9-BTN"/>
                     </connections>
@@ -1327,6 +1350,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="banner" width="60" height="40"/>
         <image name="login_bg" width="768" height="512"/>
         <image name="logo" width="349" height="203"/>
         <image name="logout" width="22" height="22"/>
