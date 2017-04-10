@@ -321,17 +321,55 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aZh-qp-tBT" customClass="DetailsCover" customModule="ToPlayList" customModuleProvider="target">
                                         <rect key="frame" x="16" y="110" width="90" height="128"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="screenshot" translatesAutoresizingMaskIntoConstraints="NO" id="c0v-Hc-uKc" userLabel="cover">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Played" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lXD-Yo-sDf">
+                                                <rect key="frame" x="0.0" y="0.0" width="40" height="128"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="VVu-rA-EWq"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                                <color key="textColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ToPlay" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g7O-kH-ARQ">
+                                                <rect key="frame" x="50" y="0.0" width="40" height="128"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="Gfc-ub-5mR"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cYX-ZK-lg2">
                                                 <rect key="frame" x="0.0" y="0.0" width="90" height="128"/>
-                                            </imageView>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="screenshot" translatesAutoresizingMaskIntoConstraints="NO" id="c0v-Hc-uKc" userLabel="cover">
+                                                        <rect key="frame" x="0.0" y="0.0" width="90" height="128"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="c0v-Hc-uKc" secondAttribute="trailing" id="PBi-BE-fSm"/>
+                                                    <constraint firstItem="c0v-Hc-uKc" firstAttribute="leading" secondItem="cYX-ZK-lg2" secondAttribute="leading" id="Qlq-N2-Xfh"/>
+                                                    <constraint firstAttribute="bottom" secondItem="c0v-Hc-uKc" secondAttribute="bottom" id="alr-Zb-jWM"/>
+                                                    <constraint firstItem="c0v-Hc-uKc" firstAttribute="top" secondItem="cYX-ZK-lg2" secondAttribute="top" id="zd9-Hu-3hh"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="c0v-Hc-uKc" firstAttribute="top" secondItem="aZh-qp-tBT" secondAttribute="top" id="7Hb-Qw-Uev"/>
-                                            <constraint firstItem="c0v-Hc-uKc" firstAttribute="leading" secondItem="aZh-qp-tBT" secondAttribute="leading" id="FnC-0m-Vlz"/>
-                                            <constraint firstAttribute="bottom" secondItem="c0v-Hc-uKc" secondAttribute="bottom" id="SjG-zO-qFo"/>
+                                            <constraint firstItem="lXD-Yo-sDf" firstAttribute="leading" secondItem="aZh-qp-tBT" secondAttribute="leading" id="5SX-je-pGe"/>
+                                            <constraint firstItem="g7O-kH-ARQ" firstAttribute="top" secondItem="aZh-qp-tBT" secondAttribute="top" id="Ebq-FT-nO8"/>
+                                            <constraint firstAttribute="bottom" secondItem="lXD-Yo-sDf" secondAttribute="bottom" id="Fa9-rx-axG"/>
+                                            <constraint firstItem="cYX-ZK-lg2" firstAttribute="top" secondItem="aZh-qp-tBT" secondAttribute="top" id="QXS-AW-h63"/>
+                                            <constraint firstAttribute="trailing" secondItem="cYX-ZK-lg2" secondAttribute="trailing" id="Ysq-Eh-ms8"/>
+                                            <constraint firstItem="cYX-ZK-lg2" firstAttribute="leading" secondItem="aZh-qp-tBT" secondAttribute="leading" id="Z6p-z5-gJq"/>
+                                            <constraint firstAttribute="bottom" secondItem="g7O-kH-ARQ" secondAttribute="bottom" id="bkP-lu-YKv"/>
+                                            <constraint firstAttribute="trailing" secondItem="g7O-kH-ARQ" secondAttribute="trailing" id="dr4-Bn-zTI"/>
+                                            <constraint firstAttribute="bottom" secondItem="cYX-ZK-lg2" secondAttribute="bottom" id="fF1-Py-QC6"/>
                                             <constraint firstAttribute="height" constant="128" id="gJs-fb-GuF"/>
-                                            <constraint firstAttribute="trailing" secondItem="c0v-Hc-uKc" secondAttribute="trailing" id="p3q-6K-iQd"/>
+                                            <constraint firstItem="lXD-Yo-sDf" firstAttribute="top" secondItem="aZh-qp-tBT" secondAttribute="top" id="nsu-j6-Ld7"/>
                                             <constraint firstAttribute="width" constant="90" id="vLD-ea-oci"/>
                                         </constraints>
                                     </view>
@@ -515,10 +553,13 @@
                     <connections>
                         <outlet property="bigScreenshot" destination="rnH-6d-GnC" id="phi-Ht-Cj0"/>
                         <outlet property="coverImg" destination="c0v-Hc-uKc" id="Ft0-TO-kaC"/>
+                        <outlet property="coverLeftConstraint" destination="Qlq-N2-Xfh" id="b0h-Ir-3TP"/>
+                        <outlet property="coverRightConstraint" destination="PBi-BE-fSm" id="bkV-HS-zcC"/>
                         <outlet property="dataView" destination="AHD-U1-sds" id="KnK-7G-JJw"/>
                         <outlet property="descriptionLabel" destination="B6e-9T-2Iw" id="gCz-8I-bTG"/>
                         <outlet property="developerLabel" destination="V0M-C8-Wlw" id="dbd-EF-YZl"/>
                         <outlet property="genreLabel" destination="QIo-lO-O0x" id="zDM-BZ-uIj"/>
+                        <outlet property="playedLabel" destination="lXD-Yo-sDf" id="SrQ-c3-00A"/>
                         <outlet property="publisherLabel" destination="Fdc-Ff-nY8" id="eTw-xt-eQ8"/>
                         <outlet property="showMoreDescriptionButton" destination="yqb-Ft-MHO" id="T2a-h8-pNi"/>
                         <outlet property="starBanner" destination="oZt-mw-jh0" id="ZhB-rf-lxV"/>
@@ -526,6 +567,7 @@
                         <outlet property="starBannerRightConstraint" destination="mnc-JP-8MS" id="1VW-bG-UPD"/>
                         <outlet property="starImage" destination="enM-Of-KGA" id="BiT-iP-4fF"/>
                         <outlet property="titleLbl" destination="Aw5-Re-hAD" id="7ko-y9-BTN"/>
+                        <outlet property="toPlayLabel" destination="g7O-kH-ARQ" id="vI9-2j-qgp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dGx-UB-xEE" userLabel="First Responder" sceneMemberID="firstResponder"/>

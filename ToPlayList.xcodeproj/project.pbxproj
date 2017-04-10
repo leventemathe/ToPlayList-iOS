@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2ECC62947C6D486DCF1C22BF /* Pods_ToPlayList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1015AB877BDCDC510C82BC /* Pods_ToPlayList.framework */; };
 		4A1CC3C7C0A5B8E8CC4E8767 /* Pods_ToPlayList_ToPlayListUnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87CF1429DC57C621EF42890E /* Pods_ToPlayList_ToPlayListUnitTests.framework */; };
+		D7063B751E9BFD11009DFEF1 /* ViewPanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7063B741E9BFD11009DFEF1 /* ViewPanner.swift */; };
 		D70B03231E0C1F9500F67E7A /* IGDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70B03221E0C1F9500F67E7A /* IGDB.swift */; };
 		D70DC3171E803E430080DBAA /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70DC3161E803E430080DBAA /* Register.swift */; };
 		D70DC31F1E8048DA0080DBAA /* Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70DC31E1E8048DA0080DBAA /* Lists.swift */; };
@@ -100,6 +101,7 @@
 		87CF1429DC57C621EF42890E /* Pods_ToPlayList_ToPlayListUnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ToPlayList_ToPlayListUnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B84B20D64D553B9B36723B6B /* Pods-ToPlayList-ToPlayListUnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToPlayList-ToPlayListUnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ToPlayList-ToPlayListUnitTests/Pods-ToPlayList-ToPlayListUnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CE1015AB877BDCDC510C82BC /* Pods_ToPlayList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ToPlayList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D7063B741E9BFD11009DFEF1 /* ViewPanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPanner.swift; sourceTree = "<group>"; };
 		D70B03221E0C1F9500F67E7A /* IGDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGDB.swift; sourceTree = "<group>"; };
 		D70DC3161E803E430080DBAA /* Register.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
 		D70DC31C1E8048DA0080DBAA /* ToPlayListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToPlayListUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -392,6 +394,7 @@
 				D7A6F04D1E65CD2900ED66E5 /* LoadingAnimationDelegate.swift */,
 				D7A0E7001E7BE82800A70989 /* OnPanDelegate.swift */,
 				D727AFE31E9B7ACF00E1C93F /* ToPlayAndPlayedListListeners.swift */,
+				D7063B741E9BFD11009DFEF1 /* ViewPanner.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -706,6 +709,7 @@
 				D719812C1E26F89A005823C2 /* LoginScene.swift in Sources */,
 				D76606FD1E13123400D5979C /* RoundedCorners.swift in Sources */,
 				D726D51B1E5A45870045AE8C /* List.swift in Sources */,
+				D7063B751E9BFD11009DFEF1 /* ViewPanner.swift in Sources */,
 				D72E66B71E619D0800BED388 /* ToPlayListVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

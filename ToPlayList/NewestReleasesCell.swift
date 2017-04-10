@@ -73,6 +73,16 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
     
     // SWIPING
     
+    private func setupTapGestureRecognizer() {
+        star.isUserInteractionEnabled = true
+        let starTap = UITapGestureRecognizer(target: self, action: #selector(starTapped))
+        star.addGestureRecognizer(starTap)
+    }
+    
+    func starTapped() {
+        removeGameFromList()
+    }
+    
     // set from outside - wether swiping should be allowed or not
     private var shouldSwipe = false
     
@@ -128,7 +138,8 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
     override func awakeFromNib() {
         setupConstraints()
         setupStartingValues()
-        setupGestureRecognizer()
+        setupSwipeGestureRecognizer()
+        setupTapGestureRecognizer()
     }
     
     private func setupConstraints() {
@@ -179,18 +190,10 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
         playedText.textColor = playedTextStartingColor
     }
     
-    private func setupGestureRecognizer() {
+    private func setupSwipeGestureRecognizer() {
         panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(pan))
         panRecognizer.delegate = self
         content.addGestureRecognizer(panRecognizer)
-        
-        star.isUserInteractionEnabled = true
-        let starTap = UITapGestureRecognizer(target: self, action: #selector(starTapped))
-        star.addGestureRecognizer(starTap)
-    }
-    
-    func starTapped() {
-        removeGameFromList()
     }
     
     func pan() {
