@@ -105,8 +105,7 @@ class GameDetailsVC: UIViewController {
         startLoading()
         setupLoadingListener()
         addCustomBackButton()
-        setupCoverSwiping()
-        setupStarImageTapRecognizer()
+        self.setupStarImageTapRecognizer()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -489,28 +488,4 @@ class GameDetailsVC: UIViewController {
         navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
         navigationController?.navigationBar.shadowImage = nil
     }
-    
-    // list adding
-    
-    @IBOutlet weak var playedLabel: UILabel!
-    @IBOutlet weak var toPlayLabel: UILabel!
-    @IBOutlet weak var coverLeftConstraint: NSLayoutConstraint!
-    @IBOutlet weak var coverRightConstraint: NSLayoutConstraint!
-    
-    private var  coverSwipeRecognizer: UIPanGestureRecognizer!
-    
-    private func setupCoverSwiping() {
-        
-    }
-    
-    private func coverPan() {
-        
-    }
 }
-
-
-
-
-
-
-
