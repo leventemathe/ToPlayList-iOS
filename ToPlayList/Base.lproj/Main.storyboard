@@ -321,17 +321,55 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aZh-qp-tBT" customClass="DetailsCover" customModule="ToPlayList" customModuleProvider="target">
                                         <rect key="frame" x="16" y="110" width="90" height="128"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="screenshot" translatesAutoresizingMaskIntoConstraints="NO" id="c0v-Hc-uKc" userLabel="cover">
+                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rva-nt-uR7">
                                                 <rect key="frame" x="0.0" y="0.0" width="90" height="128"/>
-                                            </imageView>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ToPlay" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SGN-vD-0xB">
+                                                        <rect key="frame" x="50" y="0.0" width="40" height="128"/>
+                                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="40" id="WnM-K9-pBz"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Played" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OXq-I6-0XD">
+                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="128"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="40" id="K53-Tb-cys"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="screenshot" translatesAutoresizingMaskIntoConstraints="NO" id="c0v-Hc-uKc" userLabel="cover">
+                                                        <rect key="frame" x="0.0" y="0.0" width="90" height="128"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstItem="OXq-I6-0XD" firstAttribute="top" secondItem="rva-nt-uR7" secondAttribute="top" id="6DU-tB-21B"/>
+                                                    <constraint firstAttribute="bottom" secondItem="c0v-Hc-uKc" secondAttribute="bottom" id="6ol-lI-wxf"/>
+                                                    <constraint firstItem="OXq-I6-0XD" firstAttribute="leading" secondItem="rva-nt-uR7" secondAttribute="leading" id="6q1-eB-AHJ"/>
+                                                    <constraint firstItem="SGN-vD-0xB" firstAttribute="top" secondItem="rva-nt-uR7" secondAttribute="top" id="7nh-eg-h8m"/>
+                                                    <constraint firstItem="c0v-Hc-uKc" firstAttribute="leading" secondItem="rva-nt-uR7" secondAttribute="leading" id="FOu-IH-tTG"/>
+                                                    <constraint firstAttribute="trailing" secondItem="SGN-vD-0xB" secondAttribute="trailing" id="LnL-HB-Usn"/>
+                                                    <constraint firstAttribute="bottom" secondItem="SGN-vD-0xB" secondAttribute="bottom" id="PJi-0x-zlB"/>
+                                                    <constraint firstAttribute="bottom" secondItem="OXq-I6-0XD" secondAttribute="bottom" id="WDm-Jt-Bpj"/>
+                                                    <constraint firstAttribute="trailing" secondItem="c0v-Hc-uKc" secondAttribute="trailing" id="kJL-YB-Vfc"/>
+                                                    <constraint firstItem="c0v-Hc-uKc" firstAttribute="top" secondItem="rva-nt-uR7" secondAttribute="top" id="mZX-XR-yAF"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="c0v-Hc-uKc" firstAttribute="top" secondItem="aZh-qp-tBT" secondAttribute="top" id="7Hb-Qw-Uev"/>
-                                            <constraint firstItem="c0v-Hc-uKc" firstAttribute="leading" secondItem="aZh-qp-tBT" secondAttribute="leading" id="FnC-0m-Vlz"/>
-                                            <constraint firstAttribute="bottom" secondItem="c0v-Hc-uKc" secondAttribute="bottom" id="SjG-zO-qFo"/>
+                                            <constraint firstItem="rva-nt-uR7" firstAttribute="leading" secondItem="aZh-qp-tBT" secondAttribute="leading" id="J7e-ei-wr7"/>
+                                            <constraint firstAttribute="bottom" secondItem="rva-nt-uR7" secondAttribute="bottom" id="O5Y-RT-Uk8"/>
+                                            <constraint firstItem="rva-nt-uR7" firstAttribute="top" secondItem="aZh-qp-tBT" secondAttribute="top" id="cTx-7B-G47"/>
+                                            <constraint firstAttribute="trailing" secondItem="rva-nt-uR7" secondAttribute="trailing" id="e08-XN-78E"/>
                                             <constraint firstAttribute="height" constant="128" id="gJs-fb-GuF"/>
-                                            <constraint firstAttribute="trailing" secondItem="c0v-Hc-uKc" secondAttribute="trailing" id="p3q-6K-iQd"/>
                                             <constraint firstAttribute="width" constant="90" id="vLD-ea-oci"/>
                                         </constraints>
                                     </view>
@@ -515,10 +553,13 @@
                     <connections>
                         <outlet property="bigScreenshot" destination="rnH-6d-GnC" id="phi-Ht-Cj0"/>
                         <outlet property="coverImg" destination="c0v-Hc-uKc" id="Ft0-TO-kaC"/>
+                        <outlet property="coverLeftConstraint" destination="FOu-IH-tTG" id="i3f-vk-puR"/>
+                        <outlet property="coverRightConstraint" destination="kJL-YB-Vfc" id="Ax6-Ng-UZf"/>
                         <outlet property="dataView" destination="AHD-U1-sds" id="KnK-7G-JJw"/>
                         <outlet property="descriptionLabel" destination="B6e-9T-2Iw" id="gCz-8I-bTG"/>
                         <outlet property="developerLabel" destination="V0M-C8-Wlw" id="dbd-EF-YZl"/>
                         <outlet property="genreLabel" destination="QIo-lO-O0x" id="zDM-BZ-uIj"/>
+                        <outlet property="playedLabel" destination="OXq-I6-0XD" id="CZY-TU-Hcq"/>
                         <outlet property="publisherLabel" destination="Fdc-Ff-nY8" id="eTw-xt-eQ8"/>
                         <outlet property="showMoreDescriptionButton" destination="yqb-Ft-MHO" id="T2a-h8-pNi"/>
                         <outlet property="starBanner" destination="oZt-mw-jh0" id="ZhB-rf-lxV"/>
@@ -526,6 +567,7 @@
                         <outlet property="starBannerRightConstraint" destination="mnc-JP-8MS" id="1VW-bG-UPD"/>
                         <outlet property="starImage" destination="enM-Of-KGA" id="BiT-iP-4fF"/>
                         <outlet property="titleLbl" destination="Aw5-Re-hAD" id="7ko-y9-BTN"/>
+                        <outlet property="toPlayLabel" destination="SGN-vD-0xB" id="LuU-DD-qSc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dGx-UB-xEE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1365,6 +1407,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="FhM-4C-LJm"/>
-        <segue reference="a7x-K3-wKb"/>
+        <segue reference="a3D-bg-gnu"/>
     </inferredMetricsTieBreakers>
 </document>

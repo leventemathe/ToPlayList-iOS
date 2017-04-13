@@ -488,4 +488,18 @@ class GameDetailsVC: UIViewController {
         navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
         navigationController?.navigationBar.shadowImage = nil
     }
+    
+    // SWIPING
+    
+    @IBOutlet weak var playedLabel: UILabel!
+    @IBOutlet weak var toPlayLabel: UILabel!
+    
+    @IBOutlet weak var coverLeftConstraint: NSLayoutConstraint!
+    @IBOutlet weak var coverRightConstraint: NSLayoutConstraint!
+    
 }
+
+
+
+
+
