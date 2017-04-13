@@ -167,7 +167,6 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     private func initialLoadGamesResultPacker(_ games: [Game]) {
         _gameSections = GameSection.buildGameSectionsForNewestGames(fromGames: games)
         paginationOffset = 0
-        loadingAnimationView.stopAnimating()
         animateTableViewAppearance()
     }
     
@@ -216,6 +215,7 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                 Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_ERROR, forVC: self)
             }
         }
+        loadingAnimationView.stopAnimating()
         self.refreshVC.endRefreshing()
         loadingMoreGames = false
     }

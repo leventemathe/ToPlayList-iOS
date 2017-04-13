@@ -10,8 +10,16 @@ import UIKit
 
 class DetailsBigScreenshot: UIView, Gradiented {
     
+    var gradient: CAGradientLayer?
+    
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        if gradient != nil {
+            gradient!.frame = self.frame
+            return
+        }
+        
         let fromColor = UIColor.clear.cgColor
         let midColors = [
             UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.2).cgColor,
@@ -20,7 +28,7 @@ class DetailsBigScreenshot: UIView, Gradiented {
         ]
         let toColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.8).cgColor
         
-        addGradient(fromColor: fromColor, midColors: midColors, toColor: toColor)
+        gradient = addGradient(fromColor: fromColor, midColors: midColors, toColor: toColor)
     }
 }
 

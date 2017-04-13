@@ -10,7 +10,7 @@ import UIKit
 import NVActivityIndicatorView
 import Kingfisher
 
-class GameDetailsVC: UIViewController {
+class GameDetailsVC: UIViewController, UIScrollViewDelegate {
     
     typealias OnFinishedListener = () -> ()
     
@@ -100,6 +100,7 @@ class GameDetailsVC: UIViewController {
     private var api: GameAPI!
     
     override func viewDidLoad() {
+        setupScrollView()
         setupGameAPI()
         setupAnimation()
         startLoading()
@@ -293,7 +294,6 @@ class GameDetailsVC: UIViewController {
         
         loadingAnimationView = NVActivityIndicatorView(frame: frame, type: .ballClipRotate, color: UIColor.MyCustomColors.orange, padding: 0.0)
         view.addSubview(loadingAnimationView)
-        loadingAnimationView.stopAnimating()
     }
     
     private func startLoading() {
@@ -353,9 +353,10 @@ class GameDetailsVC: UIViewController {
                 switch error {
                 case .noInternet:
                     Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
+                    self.loadingAnimationView.stopAnimating()
                 case .server, .json, .url:
                     Alerts.alertWithOKButton(withMessage: Alerts.SERVER_ERROR, forVC: self)
-                    print("server error on genre")
+                    self.loadingAnimationView.stopAnimating()
                 case .noData:
                     self.genreLabel.text = GameDetailsVC.MISSING_GENRE_DATA
                     self.detailsLoaded.loaded[DetailsLoaded.GENRE] = true
@@ -375,9 +376,10 @@ class GameDetailsVC: UIViewController {
                 switch error {
                 case .noInternet:
                     Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
+                    self.loadingAnimationView.stopAnimating()
                 case .server, .json, .url:
                     Alerts.alertWithOKButton(withMessage: Alerts.SERVER_ERROR, forVC: self)
-                    print("server error on dev")
+                    self.loadingAnimationView.stopAnimating()
                 case .noData:
                     self.developerLabel.text = GameDetailsVC.MISSING_DEVELOPER_DATA
                     self.detailsLoaded.loaded[DetailsLoaded.DEVELOPER] = true
@@ -397,8 +399,10 @@ class GameDetailsVC: UIViewController {
                 switch error {
                 case .noInternet:
                     Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
+                    self.loadingAnimationView.stopAnimating()
                 case .server, .json, .url:
                     Alerts.alertWithOKButton(withMessage: Alerts.SERVER_ERROR, forVC: self)
+                    self.loadingAnimationView.stopAnimating()
                 case .noData:
                     self.developerLabel.text = GameDetailsVC.MISSING_PUBLISHER_DATA
                     self.detailsLoaded.loaded[DetailsLoaded.PUBLISHER] = true
@@ -422,8 +426,10 @@ class GameDetailsVC: UIViewController {
                 switch error {
                 case .noInternet:
                     Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
+                    self.loadingAnimationView.stopAnimating()
                 case .server, .json, .url:
                     Alerts.alertWithOKButton(withMessage: Alerts.SERVER_ERROR, forVC: self)
+                    self.loadingAnimationView.stopAnimating()
                 case .noData:
                     self.bigScreenshot.image = #imageLiteral(resourceName: "img_missing_screenshot_big")
                     self.detailsLoaded.loaded[DetailsLoaded.BIG_SCREENSHOT] = true
@@ -455,8 +461,10 @@ class GameDetailsVC: UIViewController {
                 switch error {
                 case .noInternet:
                     Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
+                    self.loadingAnimationView.stopAnimating()
                 case .server, .json, .url:
                     Alerts.alertWithOKButton(withMessage: Alerts.SERVER_ERROR, forVC: self)
+                    self.loadingAnimationView.stopAnimating()
                 case .noData:
                     self.descriptionLabel.text = GameDetailsVC.MISSING_DESCRIPTION_DATA
                     self.detailsLoaded.loaded[DetailsLoaded.DESCRIPTION] = true
@@ -489,11 +497,64 @@ class GameDetailsVC: UIViewController {
         navigationController?.navigationBar.shadowImage = nil
     }
     
-    // SCROLLING
     
+    
+    // SCROLLING
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var scrollContentView: UIView!
+    
+    @IBOutlet weak var movingContentTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var movingContentHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var bigScreenShotHeightConstraint: NSLayoutConstraint!
+    
+    private var scrollViewPreviousContentOffset: CGFloat = 0.0
+    private var scrollViewContentOffsetUpTreshold: CGFloat = 40.0
+    private var scrollPosition: CGFloat = 0.0
+    
+    private func setupScrollView() {
+        scrollView.delegate = self
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y < 0 {
+            scrollPosition = 0.0
+            return
+        }
+        if scrollView.contentOffset.y + scrollView.bounds.size.height > scrollView.contentSize.height {
+            scrollPosition = scrollView.contentSize.height
+            return
+        }
+        
+        let delta = scrollView.contentOffset.y - scrollViewPreviousContentOffset
+        
+        if scrollPosition < scrollViewContentOffsetUpTreshold {
+            if delta > 0.0 {
+                scrollUp(delta)
+            } else if delta < 0.0 {
+                scrollDown(delta)
+            }
+            scrollView.contentOffset.y = scrollViewPreviousContentOffset
+        } else {
+            scrollViewPreviousContentOffset = scrollView.contentOffset.y
+        }
+        scrollPosition += delta
+    }
+    
+    private func scrollUp(_ delta: CGFloat) {
+        let delta = abs(delta)
+        print("scrolling up")
+        movingContentTopConstraint.constant -= delta
+        bigScreenShotHeightConstraint.constant -= delta
+    }
+    
+    private func scrollDown(_ delta: CGFloat) {
+        let delta = abs(delta)
+        print("scrolling down")
+        movingContentTopConstraint.constant += delta
+        bigScreenShotHeightConstraint.constant += delta
+    }
     
     
     // SWIPING
