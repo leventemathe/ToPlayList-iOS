@@ -489,6 +489,13 @@ class GameDetailsVC: UIViewController {
         navigationController?.navigationBar.shadowImage = nil
     }
     
+    // SCROLLING
+    
+    
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var scrollContentView: UIView!
+    
+    
     // SWIPING
     
     @IBOutlet weak var playedLabel: UILabel!
