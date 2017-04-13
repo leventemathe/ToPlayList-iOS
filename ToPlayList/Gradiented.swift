@@ -11,6 +11,7 @@ import UIKit
 protocol Gradiented {
     
     func addGradient(fromColor: CGColor, midColor: CGColor, toColor: CGColor)
+    func addGradient(fromColor: CGColor, midColors: [CGColor], toColor: CGColor)
 }
 
 extension Gradiented where Self: UIView {
