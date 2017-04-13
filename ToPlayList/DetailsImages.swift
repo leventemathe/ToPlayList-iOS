@@ -13,32 +13,41 @@ class DetailsBigScreenshot: UIView, Gradiented {
     override func layoutSubviews() {
         super.layoutSubviews()
         let fromColor = UIColor.clear.cgColor
-        let midColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.4).cgColor
+        let midColors = [
+            UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.2).cgColor,
+            UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.4).cgColor,
+            UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.6).cgColor
+        ]
         let toColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.8).cgColor
         
-        addGradient(fromColor: fromColor, midColor: midColor, toColor: toColor)
+        addGradient(fromColor: fromColor, midColors: midColors, toColor: toColor)
     }
 }
 
 class DetailsCover: UIView, DropShadowed {
     
     override func awakeFromNib() {
-        addDropShadow()
+        addDropShadow(1.0, withOffset: CGSize.zero)
     }
 }
 
 class StarBanner: UIImageView, DropShadowed {
     
     override func awakeFromNib() {
-        addDropShadow()
+        addDropShadow(0.5, withOffset:  CGSize.zero)
     }
 }
 
 class StarImage: UIImageView, DropShadowed {
     
     override func awakeFromNib() {
-        addDropShadow(0.5, withOffset: CGSize.zero)
+        //addDropShadow(0.5, withOffset: CGSize.zero)
     }
 }
 
-
+class ContainerView: UIView, DropShadowed {
+    
+    override func awakeFromNib() {
+        addDropShadow(0.5, withOffset: CGSize.zero)
+    }
+}
