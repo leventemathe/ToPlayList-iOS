@@ -504,48 +504,119 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var scrollContentView: UIView!
     
+    @IBOutlet weak var movingContent: UIView!
+    
     @IBOutlet weak var movingContentTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var movingContentHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var bigScreenShotHeightConstraint: NSLayoutConstraint!
     
     private let MOVEMENT: CGFloat = 40.0
+    private let MOVEMENT_HEIGHT: CGFloat = 80.0
     private var movingContentTopConstraintStart: CGFloat!
     private var movingContentTopConstraintTarget: CGFloat!
+    private var movingContentHeightConstraintStart: CGFloat!
+    private var movingContentHeightConstraintTarget: CGFloat!
     
     private var scrollViewPreviousContentOffset: CGFloat = 0.0
     
     private func setupScrollView() {
         scrollView.delegate = self
+        
         movingContentTopConstraintStart = movingContentTopConstraint.constant
         movingContentTopConstraintTarget = movingContentTopConstraintStart - MOVEMENT
+        
+        movingContentHeightConstraintStart = movingContentHeightConstraint.constant
+        movingContentHeightConstraintTarget = movingContentHeightConstraintStart - MOVEMENT_HEIGHT
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let scrollPos = scrollView.contentOffset.y
-        var delta = scrollPos - scrollViewPreviousContentOffset
+        let delta = scrollPos - scrollViewPreviousContentOffset
         
         if scrollPos > 0.0 && delta > 0.0 && movingContentTopConstraint.constant > movingContentTopConstraintTarget {
-            delta = min(delta, movingContentTopConstraint.constant - movingContentTopConstraintTarget)
-            doSpecialScrolling(delta)
+            moveContentUp(delta)
         } else if scrollPos < 0.0 && delta < 0.0 &&  movingContentTopConstraint.constant < movingContentTopConstraintStart {
-            delta = max(delta, -(movingContentTopConstraintStart - movingContentTopConstraint.constant))
-            doSpecialScrolling(delta)
+            moveContentDown(delta)
+        } else if scrollPos > 0.0 && delta > 0.0 && movingContentHeightConstraint.constant > movingContentHeightConstraintTarget {
+            decreaseContentHeight(delta)
+        } else if scrollPos < 0.0 && delta < 0.0 && movingContentHeightConstraint.constant < movingContentHeightConstraintStart {
+            increaseContentHeight(delta)
         } else {
             doRegularScrolling()
+            cleanupForTooFastMovement(scrollPos, delta)
         }
+    }
+    
+    private func moveContentUp(_ delta: CGFloat) {
+        let distance = movingContentTopConstraint.constant - movingContentTopConstraintTarget
+        let delta = min(delta, distance)
+        
+        movingContentTopConstraint.constant -= delta
+        bigScreenShotHeightConstraint.constant -= delta
+        
+        scrollView.contentOffset.y = scrollViewPreviousContentOffset
+    }
+    
+    private func moveContentDown(_ delta: CGFloat) {
+        let distance = movingContentTopConstraintStart - movingContentTopConstraint.constant
+        let delta = max(delta, -distance)
+        
+        movingContentTopConstraint.constant -= delta
+        bigScreenShotHeightConstraint.constant -= delta
+        
+        scrollView.contentOffset.y = scrollViewPreviousContentOffset
+    }
+    
+    private func increaseContentHeight(_ delta: CGFloat) {
+        let distance = movingContentHeightConstraintStart - movingContentHeightConstraint.constant
+        let delta = max(delta, -distance)
+        
+        movingContentHeightConstraint.constant -= delta
+        
+        if distance < MOVEMENT_HEIGHT / 3.0 && movingContent.alpha == 0.0 {
+            showMovingContent()
+        }
+        
+        scrollView.contentOffset.y = scrollViewPreviousContentOffset
+    }
+    
+    private func decreaseContentHeight(_ delta: CGFloat) {
+        let distance = movingContentHeightConstraint.constant - movingContentHeightConstraintTarget
+        let delta = min(delta, distance)
+        
+        movingContentHeightConstraint.constant -= delta
+        
+        if distance < MOVEMENT_HEIGHT - MOVEMENT_HEIGHT / 3.0 && movingContent.alpha == 1.0 {
+            hideMovingContent()
+        }
+        
+        scrollView.contentOffset.y = scrollViewPreviousContentOffset
     }
     
     private func doRegularScrolling() {
         scrollViewPreviousContentOffset = scrollView.contentOffset.y
     }
     
-    private func doSpecialScrolling(_ delta: CGFloat) {
-        movingContentTopConstraint.constant -= delta
-        bigScreenShotHeightConstraint.constant -= delta
-        scrollView.contentOffset.y = scrollViewPreviousContentOffset
+    private func cleanupForTooFastMovement(_ scrollPos: CGFloat, _ delta: CGFloat) {
+        if scrollPos > 0.0 && delta > 0.0 && movingContent.alpha == 1.0 {
+            hideMovingContent()
+        } else if scrollPos < 0.0 && delta < 0.0 && movingContent.alpha == 0.0 {
+            showMovingContent()
+        }
     }
     
+    private func hideMovingContent() {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.movingContent.alpha = 0.0
+        })
+    }
+    
+    private func showMovingContent() {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.movingContent.alpha = 1.0
+        })
+    }
     
     // SWIPING
     

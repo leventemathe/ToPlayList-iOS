@@ -599,6 +599,7 @@
                         <outlet property="descriptionLabel" destination="B6e-9T-2Iw" id="gCz-8I-bTG"/>
                         <outlet property="developerLabel" destination="V0M-C8-Wlw" id="dbd-EF-YZl"/>
                         <outlet property="genreLabel" destination="QIo-lO-O0x" id="zDM-BZ-uIj"/>
+                        <outlet property="movingContent" destination="2xt-nC-PKO" id="AhP-fH-1l3"/>
                         <outlet property="movingContentHeightConstraint" destination="Wa0-Lq-yfB" id="DJ6-zT-tDF"/>
                         <outlet property="movingContentTopConstraint" destination="BOV-nY-YE8" id="Ke6-WS-oJ2"/>
                         <outlet property="playedLabel" destination="OXq-I6-0XD" id="CZY-TU-Hcq"/>
