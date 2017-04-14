@@ -16,7 +16,7 @@ class DetailsBigScreenshot: UIView, Gradiented {
         super.layoutSubviews()
         
         if gradient != nil {
-            gradient!.frame = self.frame
+            //gradient!.frame = self.frame
             return
         }
         
