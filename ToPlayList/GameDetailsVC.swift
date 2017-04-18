@@ -490,6 +490,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate {
     private func makeNavbarTransparent() {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.topItem?.title = ""
     }
     
     private func resetNavbar() {
@@ -511,8 +512,10 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var bigScreenShotHeightConstraint: NSLayoutConstraint!
     
-    private let MOVEMENT: CGFloat = 40.0
-    private let MOVEMENT_HEIGHT: CGFloat = 80.0
+    @IBOutlet weak var centeredTitle: UILabel!
+    
+    private let MOVEMENT: CGFloat = 50.0
+    private let MOVEMENT_HEIGHT: CGFloat = 114.0
     private var movingContentTopConstraintStart: CGFloat!
     private var movingContentTopConstraintTarget: CGFloat!
     private var movingContentHeightConstraintStart: CGFloat!
@@ -609,12 +612,34 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate {
     private func hideMovingContent() {
         UIView.animate(withDuration: 0.2, animations: {
             self.movingContent.alpha = 0.0
+        }, completion: { success in
+            self.showCenteredTitle()
         })
     }
     
     private func showMovingContent() {
+        hideCenteredTitle {
+            UIView.animate(withDuration: 0.2, animations: {
+                self.movingContent.alpha = 1.0
+            })
+        }
+    }
+    
+    private func showCenteredTitle() {
+        centeredTitle.alpha = 0.0
+        centeredTitle.isHidden = false
+        centeredTitle.text = titleLbl.text
         UIView.animate(withDuration: 0.2, animations: {
-            self.movingContent.alpha = 1.0
+            self.centeredTitle.alpha = 1.0
+        })
+    }
+    
+    private func hideCenteredTitle(_ onComplete: @escaping ()->()) {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.centeredTitle.alpha = 0.0
+        }, completion: { success in
+            self.centeredTitle.isHidden = true
+            onComplete()
         })
     }
     
