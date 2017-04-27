@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bhe-U8-59S">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bhe-U8-59S">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -381,6 +381,13 @@
                                                     <constraint firstAttribute="height" constant="128" id="gJs-fb-GuF"/>
                                                     <constraint firstAttribute="width" constant="90" id="vLD-ea-oci"/>
                                                 </constraints>
+                                                <connections>
+                                                    <outlet property="contentLeadingConstraint" destination="FOu-IH-tTG" id="AdO-em-R6K"/>
+                                                    <outlet property="contentTrailingConstraint" destination="kJL-YB-Vfc" id="dDd-wE-KDx"/>
+                                                    <outlet property="coverImg" destination="c0v-Hc-uKc" id="bgX-IJ-bdV"/>
+                                                    <outlet property="playedLabel" destination="OXq-I6-0XD" id="G7P-H0-7bg"/>
+                                                    <outlet property="toPlayLabel" destination="SGN-vD-0xB" id="fwZ-YC-wQ8"/>
+                                                </connections>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="ThC-2J-B40">
                                                 <rect key="frame" x="114" y="98" width="198" height="55.5"/>
@@ -469,7 +476,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="60" height="40"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </imageView>
-                                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="enM-Of-KGA" customClass="StarImage" customModule="ToPlayList" customModuleProvider="target">
+                                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="enM-Of-KGA">
                                                         <rect key="frame" x="10" y="6" width="28" height="28"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="28" id="bPi-U7-s5M"/>
@@ -603,8 +610,6 @@
                         <outlet property="bigScreenshot" destination="rnH-6d-GnC" id="phi-Ht-Cj0"/>
                         <outlet property="centeredTitle" destination="8H2-nN-eDd" id="fCH-Cu-etD"/>
                         <outlet property="coverImg" destination="c0v-Hc-uKc" id="Ft0-TO-kaC"/>
-                        <outlet property="coverLeftConstraint" destination="FOu-IH-tTG" id="i3f-vk-puR"/>
-                        <outlet property="coverRightConstraint" destination="kJL-YB-Vfc" id="Ax6-Ng-UZf"/>
                         <outlet property="dataView" destination="AHD-U1-sds" id="KnK-7G-JJw"/>
                         <outlet property="descriptionLabel" destination="B6e-9T-2Iw" id="gCz-8I-bTG"/>
                         <outlet property="developerLabel" destination="V0M-C8-Wlw" id="dbd-EF-YZl"/>
@@ -612,17 +617,15 @@
                         <outlet property="movingContent" destination="2xt-nC-PKO" id="AhP-fH-1l3"/>
                         <outlet property="movingContentHeightConstraint" destination="Wa0-Lq-yfB" id="DJ6-zT-tDF"/>
                         <outlet property="movingContentTopConstraint" destination="BOV-nY-YE8" id="Ke6-WS-oJ2"/>
-                        <outlet property="playedLabel" destination="OXq-I6-0XD" id="CZY-TU-Hcq"/>
                         <outlet property="publisherLabel" destination="Fdc-Ff-nY8" id="eTw-xt-eQ8"/>
                         <outlet property="scrollContentView" destination="A8L-fO-z1X" id="3V6-sL-MUb"/>
                         <outlet property="scrollView" destination="8NQ-RT-MJ5" id="0HN-0S-he5"/>
                         <outlet property="showMoreDescriptionButton" destination="yqb-Ft-MHO" id="T2a-h8-pNi"/>
-                        <outlet property="starBanner" destination="oZt-mw-jh0" id="ZhB-rf-lxV"/>
-                        <outlet property="starBannerLeftConstraint" destination="UPs-Ky-P6x" id="V1w-h7-356"/>
-                        <outlet property="starBannerRightConstraint" destination="mnc-JP-8MS" id="1VW-bG-UPD"/>
+                        <outlet property="starBanner" destination="oZt-mw-jh0" id="Up5-Dt-Tdn"/>
+                        <outlet property="starBannerLeftConstraint" destination="B25-yT-Ymm" id="qZ9-p9-lyF"/>
                         <outlet property="starImage" destination="enM-Of-KGA" id="BiT-iP-4fF"/>
+                        <outlet property="swipeableDetailsCover" destination="aZh-qp-tBT" id="zpN-nb-N5W"/>
                         <outlet property="titleLbl" destination="Aw5-Re-hAD" id="7ko-y9-BTN"/>
-                        <outlet property="toPlayLabel" destination="SGN-vD-0xB" id="LuU-DD-qSc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dGx-UB-xEE" userLabel="First Responder" sceneMemberID="firstResponder"/>

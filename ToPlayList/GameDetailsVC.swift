@@ -10,7 +10,34 @@ import UIKit
 import NVActivityIndicatorView
 import Kingfisher
 
-class GameDetailsVC: UIViewController, UIScrollViewDelegate {
+struct GameInExclusiveLists {
+    
+    var inToPlayList = false {
+        didSet {
+            toPlaySet()
+        }
+    }
+    
+    var inPlayedList = false {
+        didSet {
+            playedSet()
+        }
+    }
+    
+    mutating private func toPlaySet() {
+        if inToPlayList == true {
+            inPlayedList = false
+        }
+    }
+    
+    mutating private func playedSet() {
+        if inPlayedList == true {
+            inToPlayList = false
+        }
+    }
+}
+
+class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizerDelegate, ErrorHandlerDelegate {
     
     typealias OnFinishedListener = () -> ()
     
@@ -66,18 +93,12 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var starImage: UIImageView!
     @IBOutlet weak var starBanner: StarBanner!
     @IBOutlet weak var starBannerLeftConstraint: NSLayoutConstraint!
-    @IBOutlet weak var starBannerRightConstraint: NSLayoutConstraint!
     
     private var starBannerConstraintStart: CGFloat = -100.0
     private var starBannerConstraintTarget: CGFloat = 0.0
     
     private var listsListenerSystem = ToPlayAndPlayedListListeners()
-    private var inToPlayList = false {
-        didSet {
-            setStar()
-        }
-    }
-    private var inPlayedList = false {
+    private var gameInExclusiveLists = GameInExclusiveLists() {
         didSet {
             setStar()
         }
@@ -90,6 +111,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var developerLabel: UILabel!
     @IBOutlet weak var publisherLabel: UILabel!
     
+    @IBOutlet weak var swipeableDetailsCover: DetailsCover!
     @IBOutlet weak var coverImg: UIImageView!
     @IBOutlet weak var bigScreenshot: UIImageView!
     
@@ -114,6 +136,12 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate {
             self.detailsLoaded.loaded[DetailsLoaded.LIST_STATE] = true
             self.attachListListeners()
         }
+        setupSwiping()
+    }
+    
+    private func setupSwiping() {
+        swipeableDetailsCover.game = game
+        swipeableDetailsCover.errorHandlerDelegate = self
     }
     
     private func setupStarImageTapRecognizer() {
@@ -126,9 +154,8 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate {
         ListsList.instance.removeGameFromToPlayAndPlayedList({ result in
             switch result {
             case .succes(_):
-                self.starImage.isHidden = true
-                self.inToPlayList = false
-                self.inPlayedList = false
+                self.gameInExclusiveLists.inToPlayList = false
+                self.gameInExclusiveLists.inPlayedList = false
             case .failure(_):
                 Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_LISTS_ERROR, forVC: self)
             }
@@ -138,22 +165,22 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate {
     private func attachListListeners() {
         self.listsListenerSystem.attachListeners(withOnAddedToToPlayList: { game in
             if game == self.game {
-                self.inToPlayList = true
+                self.gameInExclusiveLists.inToPlayList = true
                 print("set content in details view")
             }
         }, withOnRemovedFromToPlayList: { game in
             if game == self.game {
-                self.inToPlayList = false
+                self.gameInExclusiveLists.inToPlayList = false
                 print("set content in details view")
             }
         }, withOnAddedToPlayedList: { game in
             if game == self.game {
-                self.inPlayedList = true
+                self.gameInExclusiveLists.inPlayedList = true
                 print("set content in details view")
             }
         }, withOnRemovedFromPlayedList: { game in
             if game == self.game {
-                self.inPlayedList = false
+                self.gameInExclusiveLists.inPlayedList = false
                 print("set content in details view")
             }
         })
@@ -161,8 +188,8 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate {
     
     private func updateStarState(_ onComplete: @escaping ()->()) {
         if !ListsUser.loggedIn {
-            self.inToPlayList = false
-            self.inPlayedList = false
+            self.gameInExclusiveLists.inToPlayList = false
+            self.gameInExclusiveLists.inPlayedList = false
             onComplete()
             return
         }
@@ -172,12 +199,12 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate {
                 Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_LISTS_ERROR, forVC: self)
             case .succes(let lists):
                 if lists.toPlay.contains(self.game) {
-                    self.inToPlayList = true
+                    self.gameInExclusiveLists.inToPlayList = true
                 } else if lists.played.contains(self.game) {
-                    self.inPlayedList = true
+                    self.gameInExclusiveLists.inPlayedList = true
                 } else {
-                    self.inToPlayList = false
-                    self.inPlayedList = false
+                    self.gameInExclusiveLists.inToPlayList = false
+                    self.gameInExclusiveLists.inPlayedList = false
                 }
             }
             onComplete()
@@ -185,78 +212,25 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate {
     }
     
     private func setStar() {
-        if inToPlayList {
-            setStarToPlayList()
-        } else if inPlayedList {
-            setStarPlayedList()
-        } else {
-            setStarNone()
-        }
-    }
-    
-    private func setStarToPlayList() {
-        if starBanner.isHidden {
-            animateStarBannerShow {
-                self.animateStarImageShow(#imageLiteral(resourceName: "star_to_play_list"))
-            }
-        } else {
-            starImage.image = #imageLiteral(resourceName: "star_to_play_list")
-        }
-    }
-    
-    private func setStarPlayedList() {
-        if starBanner.isHidden {
-            animateStarBannerShow {
-                self.animateStarImageShow(#imageLiteral(resourceName: "star_played_list"))
-            }
-        } else {
+        if gameInExclusiveLists.inPlayedList {
+            showStar()
             starImage.image = #imageLiteral(resourceName: "star_played_list")
-        }
-    }
-    
-    private func setStarNone() {
-        if !starBanner.isHidden {
-            self.animateStarImageHide {
-                self.animateStarBannerHide()
-            }
+        } else if gameInExclusiveLists.inToPlayList {
+            showStar()
+            starImage.image = #imageLiteral(resourceName: "star_to_play_list")
         } else {
-            starImage.isHidden = true
+            hideStar()
         }
     }
     
-    private func animateStarBannerShow(_ onComplete: @escaping ()->()) {
-        starBannerLeftConstraint.constant = starBannerConstraintStart
-        starBannerRightConstraint.constant = starBannerConstraintStart
+    private func showStar() {
         starBanner.isHidden = false
-        UIView.animate(withDuration: 0.3, animations: {
-            self.starBannerLeftConstraint.constant = self.starBannerConstraintTarget
-            self.starBannerRightConstraint.constant = self.starBannerConstraintTarget
-            self.view.layoutIfNeeded()
-        }, completion: { success in
-            onComplete()
-        })
+        starImage.isHidden = false
     }
     
-    private func animateStarBannerHide() {
-        UIView.animate(withDuration: 0.3, animations: {
-            self.starBannerLeftConstraint.constant = self.starBannerConstraintStart
-            self.starBannerRightConstraint.constant = self.starBannerConstraintStart
-            self.view.layoutIfNeeded()
-        })
-    }
-    
-    private func animateStarImageShow(_ image: UIImage) {
-        self.starImage.alpha = 0.0
-        self.starImage.isHidden = false
-        self.starImage.image = image
-        UIView.animate(withDuration: 0.3, animations: {
-            self.starImage.alpha = 1.0
-        })
-    }
-    
-    private func animateStarImageHide(_ onComplete: @escaping ()->()) {
+    private func hideStar() {
+        starBanner.isHidden = true
         starImage.isHidden = true
-        onComplete()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -643,14 +617,9 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate {
         })
     }
     
-    // SWIPING
-    
-    @IBOutlet weak var playedLabel: UILabel!
-    @IBOutlet weak var toPlayLabel: UILabel!
-    
-    @IBOutlet weak var coverLeftConstraint: NSLayoutConstraint!
-    @IBOutlet weak var coverRightConstraint: NSLayoutConstraint!
-    
+    func handleError(_ message: String) {
+        Alerts.alertWithOKButton(withMessage: message, forVC: self)
+    }
 }
 
 
