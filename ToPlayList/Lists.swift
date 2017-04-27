@@ -337,7 +337,7 @@ struct ListsList {
                     
                     let gameObj = Game(providerID, withName: name, withProvider: provider)
                     if let coverURL = game[ListsEndpoints.Game.COVER_URL] as? String {
-                        gameObj.coverSmallURL = URL(string: coverURL)
+                        gameObj.coverMedURL = URL(string: coverURL)
                     }
                     _ = result.add(gameObj)
                 } else {
