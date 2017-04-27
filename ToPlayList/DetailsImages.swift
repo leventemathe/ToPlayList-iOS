@@ -44,8 +44,10 @@ class DetailsCover: UIView, DropShadowed {
     var errorHandlerDelegate: ErrorHandlerDelegate?
     
     @IBOutlet weak var coverImg: UIImageView!
-    @IBOutlet weak var playedLabel: UILabel!
-    @IBOutlet weak var toPlayLabel: UILabel!
+    @IBOutlet weak var playedView: UIView!
+    @IBOutlet weak var playedText: UILabel!
+    @IBOutlet weak var toPlayView: UIView!
+    @IBOutlet weak var toPlayText: UILabel!
     
     @IBOutlet weak var contentLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var contentTrailingConstraint: NSLayoutConstraint!
@@ -69,11 +71,11 @@ class DetailsCover: UIView, DropShadowed {
     private var playedTextTargetColor = UIColor.white
     
     private var leftBackgroundEdge: CGFloat {
-        return playedLabel.frame.size.width
+        return playedText.frame.size.width
     }
     
     private var rightBackgroundEdge: CGFloat {
-        return toPlayLabel.frame.size.width
+        return toPlayText.frame.size.width
     }
     
     private var doTresholdLeft: CGFloat!
@@ -103,40 +105,40 @@ class DetailsCover: UIView, DropShadowed {
         doTresholdRight = rightBackgroundEdge * 0.6
     }
     
-    private func setupToPlayBackground() {
+    func setupToPlayBackground() {
         toPlayViewStartingColor = toPlayViewTargetColor
         toPlayTextStartingColor = toPlayTextTargetColor
-        toPlayLabel.backgroundColor = toPlayViewStartingColor
-        toPlayLabel.textColor = toPlayTextStartingColor
+        toPlayView.backgroundColor = toPlayViewStartingColor
+        toPlayText.textColor = toPlayTextStartingColor
         
         playedViewStartingColor = playedViewBaseStartingColor
         playedTextStartingColor = playedTextBaseStartingColor
-        playedLabel.backgroundColor = playedViewStartingColor
-        playedLabel.textColor = playedTextStartingColor
+        playedView.backgroundColor = playedViewStartingColor
+        playedText.textColor = playedTextStartingColor
     }
     
-    private func setupPlayedBackground() {
+    func setupPlayedBackground() {
         playedViewStartingColor = playedViewTargetColor
         playedTextStartingColor = playedTextTargetColor
-        playedLabel.backgroundColor = playedViewStartingColor
-        playedLabel.textColor = playedTextStartingColor
+        playedView.backgroundColor = playedViewStartingColor
+        playedText.textColor = playedTextStartingColor
         
         toPlayViewStartingColor = toPlayViewBaseStartingColor
         toPlayTextStartingColor = toPlayTextBaseStartingColor
-        toPlayLabel.backgroundColor = toPlayViewStartingColor
-        toPlayLabel.textColor = toPlayTextStartingColor
+        toPlayView.backgroundColor = toPlayViewStartingColor
+        toPlayText.textColor = toPlayTextStartingColor
     }
     
-    private func resetBackgrounds() {
+    func resetBackgrounds() {
         toPlayViewStartingColor = toPlayViewBaseStartingColor
         toPlayTextStartingColor = toPlayTextBaseStartingColor
         playedTextStartingColor = playedTextBaseStartingColor
         playedViewStartingColor = playedViewBaseStartingColor
         
-        toPlayLabel.backgroundColor = toPlayViewStartingColor
-        toPlayLabel.textColor = toPlayTextStartingColor
-        playedLabel.backgroundColor = playedViewStartingColor
-        playedLabel.textColor = playedTextStartingColor
+        toPlayView.backgroundColor = toPlayViewStartingColor
+        toPlayText.textColor = toPlayTextStartingColor
+        playedView.backgroundColor = playedViewStartingColor
+        playedText.textColor = playedTextStartingColor
     }
     
     private func setupGestureRecognizer() {
@@ -278,31 +280,32 @@ class DetailsCover: UIView, DropShadowed {
     
     private func animateColorLeftToTarget() {
         UIView.animate(withDuration: 0.4, animations: {
-            self.playedLabel.backgroundColor = self.playedViewTargetColor
-            self.playedLabel.textColor = self.playedTextTargetColor
+            self.playedView.backgroundColor = self.playedViewTargetColor
+            self.playedText.textColor = self.playedTextTargetColor
         })
     }
     
     private func animateColorLeftFromTarget() {
         UIView.animate(withDuration: 0.4, animations: {
-            self.playedLabel.backgroundColor = self.playedViewStartingColor
-            self.playedLabel.textColor = self.playedTextStartingColor
+            self.playedView.backgroundColor = self.playedViewStartingColor
+            self.playedText.textColor = self.playedTextStartingColor
         })
     }
     
     private func animateColorRightToTarget() {
         UIView.animate(withDuration: 0.4, animations: {
-            self.toPlayLabel.backgroundColor = self.toPlayViewTargetColor
-            self.toPlayLabel.textColor = self.toPlayTextTargetColor
+            self.toPlayView.backgroundColor = self.toPlayViewTargetColor
+            self.toPlayText.textColor = self.toPlayTextTargetColor
         })
     }
     
     private func animateColorRightFromTarget() {
         UIView.animate(withDuration: 0.4, animations: {
-            self.toPlayLabel.backgroundColor = self.toPlayViewStartingColor
-            self.toPlayLabel.textColor = self.toPlayTextStartingColor
+            self.toPlayView.backgroundColor = self.toPlayViewStartingColor
+            self.toPlayText.textColor = self.toPlayTextStartingColor
         })
     }
+
 }
 
 class StarBanner: UIImageView, DropShadowed {

@@ -215,11 +215,14 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         if gameInExclusiveLists.inPlayedList {
             showStar()
             starImage.image = #imageLiteral(resourceName: "star_played_list")
+            swipeableDetailsCover.setupPlayedBackground()
         } else if gameInExclusiveLists.inToPlayList {
             showStar()
             starImage.image = #imageLiteral(resourceName: "star_to_play_list")
+            swipeableDetailsCover.setupToPlayBackground()
         } else {
             hideStar()
+            swipeableDetailsCover.resetBackgrounds()
         }
     }
     
