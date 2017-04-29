@@ -300,7 +300,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AHD-U1-sds">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="efa-6i-V9F" customClass="DetailsBigScreenshot" customModule="ToPlayList" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
@@ -373,6 +373,7 @@
                                                             </view>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="screenshot" translatesAutoresizingMaskIntoConstraints="NO" id="c0v-Hc-uKc" userLabel="cover">
                                                                 <rect key="frame" x="0.0" y="0.0" width="90" height="128"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             </imageView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -533,7 +534,7 @@
                                         </constraints>
                                     </view>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8NQ-RT-MJ5">
-                                        <rect key="frame" x="0.0" y="274" width="320" height="245"/>
+                                        <rect key="frame" x="0.0" y="274" width="320" height="294"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A8L-fO-z1X">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -1484,7 +1485,7 @@
         <image name="to_play_list_bg" width="689" height="713"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="OMc-yb-7M5"/>
         <segue reference="FhM-4C-LJm"/>
-        <segue reference="a7x-K3-wKb"/>
     </inferredMetricsTieBreakers>
 </document>
