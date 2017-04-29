@@ -96,6 +96,14 @@ class IGDBJSON {
             if let desc = obj["summary"] as? String {
                 gameIDs.description = desc
             }
+            
+            if let status = obj["status"] as? UInt64 {
+                gameIDs.status = status
+            }
+            if let category = obj["category"] as? UInt64 {
+                gameIDs.category = category
+            }
+            
             return .success(gameIDs)
         }
         return .failure(.json)

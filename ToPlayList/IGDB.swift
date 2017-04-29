@@ -62,6 +62,9 @@ protocol GameAPI {
     func getScreenshotsBig(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[URL]>)->Void)
     
     func getDescription(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<String>)->Void)
+    
+    func getStatus(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<Status>)->Void)
+    func getCategory(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<Category>)->Void)
 }
 
 class IGDB: GameAPI {
@@ -297,7 +300,7 @@ class IGDB: GameAPI {
             return
         } else {
             let url =  IGDB.BASE_URL + IGDB.GAMES + "\(game.id)"
-            let parameters: Parameters = ["fields": "first_release_date,release_dates,genres,developers,publishers,screenshots,summary"]
+            let parameters: Parameters = ["fields": "first_release_date,release_dates,genres,developers,publishers,screenshots,summary,status,category"]
             
             Alamofire.request(url, parameters: parameters, headers: IGDB.HEADERS).validate().responseJSON { response in
                 switch response.result {
@@ -418,6 +421,32 @@ class IGDB: GameAPI {
         refreshCachedGameIDs(forGame: game, withOnSuccess: { gameIDs in
             if let desc = gameIDs.description {
                 onComplete(.success(desc))
+            } else {
+                onComplete(.failure(.noData))
+            }
+        }, withOnFailure: { error in
+            onComplete(.failure(error))
+        })
+    }
+    
+    public func getStatus(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<Status>)->Void) {
+        refreshCachedGameIDs(forGame: game, withOnSuccess: { gameIDs in
+            if let statusID = gameIDs.status {
+                let status = Status(statusID, withName: IGDBStatus.getString(statusID))
+                onComplete(.success(status))
+            } else {
+                onComplete(.failure(.noData))
+            }
+        }, withOnFailure: { error in
+            onComplete(.failure(error))
+        })
+    }
+    
+    public func getCategory(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<Category>)->Void) {
+        refreshCachedGameIDs(forGame: game, withOnSuccess: { gameIDs in
+            if let catID = gameIDs.category {
+                let cat = Category(catID, withName: IGDBCategory.getString(catID))
+                onComplete(.success(cat))
             } else {
                 onComplete(.failure(.noData))
             }

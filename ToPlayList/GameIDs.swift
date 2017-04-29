@@ -21,6 +21,9 @@ struct GameIDs {
     
     var description: String?
     
+    var status: UInt64?
+    var category: UInt64?
+    
     init(_ id: UInt64) {
         self.id = id
     }

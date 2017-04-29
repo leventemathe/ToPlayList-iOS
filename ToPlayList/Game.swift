@@ -27,6 +27,9 @@ class Game: IdentifiableObject {
     
     var description: String?
     
+    var status: Status?
+    var category: Category?
+    
     var firstReleaseDate: Double?
     
     required init(_ id: UInt64, withName name: String) {

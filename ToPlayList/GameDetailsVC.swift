@@ -50,6 +50,8 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         static let DEVELOPER = "developer"
         static let PUBLISHER = "publisher"
         static let DESCRIPTION = "description"
+        static let STATUS = "status"
+        static let CATEGORY = "category"
         
         private var listener: OnFinishedListener
         
@@ -59,7 +61,9 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
                       DetailsLoaded.GENRE: false,
                       DetailsLoaded.DEVELOPER: false,
                       DetailsLoaded.PUBLISHER: false,
-                      DetailsLoaded.DESCRIPTION: false] {
+                      DetailsLoaded.DESCRIPTION: false,
+                      DetailsLoaded.STATUS: false,
+                      DetailsLoaded.CATEGORY: false] {
             didSet {
                 if isFullyLoaded() {
                     listener()
@@ -143,6 +147,8 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         swipeableDetailsCover.game = game
         swipeableDetailsCover.errorHandlerDelegate = self
     }
+    
+    // STAR AND LISTENERS
     
     private func setupStarImageTapRecognizer() {
         starImage.isUserInteractionEnabled = true
@@ -251,6 +257,8 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         })
     }
     
+    // DOWNLOADING GAME DATA
+    
     private func setupGameAPI() {
         switch game.provider {
         case "IGDB":
@@ -297,6 +305,8 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         downloadCover()
         downloadBigScreenshots()
         downloadDescription()
+        downloadStatus()
+        downloadCategory()
     }
     
     private func downloadBasics() {
@@ -329,11 +339,9 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
             case .failure(let error):
                 switch error {
                 case .noInternet:
-                    Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
-                    self.loadingAnimationView.stopAnimating()
+                    self.handleLoadingError(Alerts.NETWORK_ERROR)
                 case .server, .json, .url:
-                    Alerts.alertWithOKButton(withMessage: Alerts.SERVER_ERROR, forVC: self)
-                    self.loadingAnimationView.stopAnimating()
+                    self.handleLoadingError(Alerts.SERVER_ERROR)
                 case .noData:
                     self.genreLabel.text = GameDetailsVC.MISSING_GENRE_DATA
                     self.detailsLoaded.loaded[DetailsLoaded.GENRE] = true
@@ -352,11 +360,9 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
             case .failure(let error):
                 switch error {
                 case .noInternet:
-                    Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
-                    self.loadingAnimationView.stopAnimating()
+                    self.handleLoadingError(Alerts.NETWORK_ERROR)
                 case .server, .json, .url:
-                    Alerts.alertWithOKButton(withMessage: Alerts.SERVER_ERROR, forVC: self)
-                    self.loadingAnimationView.stopAnimating()
+                    self.handleLoadingError(Alerts.SERVER_ERROR)
                 case .noData:
                     self.developerLabel.text = GameDetailsVC.MISSING_DEVELOPER_DATA
                     self.detailsLoaded.loaded[DetailsLoaded.DEVELOPER] = true
@@ -375,11 +381,9 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
             case .failure(let error):
                 switch error {
                 case .noInternet:
-                    Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
-                    self.loadingAnimationView.stopAnimating()
+                    self.handleLoadingError(Alerts.NETWORK_ERROR)
                 case .server, .json, .url:
-                    Alerts.alertWithOKButton(withMessage: Alerts.SERVER_ERROR, forVC: self)
-                    self.loadingAnimationView.stopAnimating()
+                    self.handleLoadingError(Alerts.SERVER_ERROR)
                 case .noData:
                     self.developerLabel.text = GameDetailsVC.MISSING_PUBLISHER_DATA
                     self.detailsLoaded.loaded[DetailsLoaded.PUBLISHER] = true
@@ -402,11 +406,9 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
             case .failure(let error):
                 switch error {
                 case .noInternet:
-                    Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
-                    self.loadingAnimationView.stopAnimating()
+                    self.handleLoadingError(Alerts.NETWORK_ERROR)
                 case .server, .json, .url:
-                    Alerts.alertWithOKButton(withMessage: Alerts.SERVER_ERROR, forVC: self)
-                    self.loadingAnimationView.stopAnimating()
+                    self.handleLoadingError(Alerts.SERVER_ERROR)
                 case .noData:
                     self.bigScreenshot.image = #imageLiteral(resourceName: "img_missing_screenshot_big")
                     self.detailsLoaded.loaded[DetailsLoaded.BIG_SCREENSHOT] = true
@@ -437,11 +439,9 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
             case .failure(let error):
                 switch error {
                 case .noInternet:
-                    Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
-                    self.loadingAnimationView.stopAnimating()
+                    self.handleLoadingError(Alerts.NETWORK_ERROR)
                 case .server, .json, .url:
-                    Alerts.alertWithOKButton(withMessage: Alerts.SERVER_ERROR, forVC: self)
-                    self.loadingAnimationView.stopAnimating()
+                    self.handleLoadingError(Alerts.SERVER_ERROR)
                 case .noData:
                     self.descriptionLabel.text = GameDetailsVC.MISSING_DESCRIPTION_DATA
                     self.detailsLoaded.loaded[DetailsLoaded.DESCRIPTION] = true
@@ -450,6 +450,57 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
             }
         })
     }
+    
+    private func downloadStatus() {
+        api.getStatus(forGame: game, withOnComplete: { result in
+            switch result {
+            case .success(let status):
+                self.game.status = status
+                //TODO view update
+                self.detailsLoaded.loaded[DetailsLoaded.STATUS] = true
+            case .failure(let error):
+                switch error {
+                case .noInternet:
+                    self.handleLoadingError(Alerts.NETWORK_ERROR)
+                case .server, .json, .url:
+                    self.handleLoadingError(Alerts.SERVER_ERROR)
+                case .noData:
+                    //TODO view update
+                    self.detailsLoaded.loaded[DetailsLoaded.STATUS] = true
+                }
+            }
+        })
+    }
+    
+    private func downloadCategory() {
+        api.getCategory(forGame: game, withOnComplete: { result in
+            switch result {
+            case .success(let category):
+                self.game.category = category
+                //TODO view update
+                self.detailsLoaded.loaded[DetailsLoaded.CATEGORY] = true
+            case .failure(let error):
+                switch error {
+                case .noInternet:
+                    self.handleLoadingError(Alerts.NETWORK_ERROR)
+                case .server, .json, .url:
+                    self.handleLoadingError(Alerts.SERVER_ERROR)
+                case .noData:
+                    //TODO view update
+                    self.detailsLoaded.loaded[DetailsLoaded.CATEGORY] = true
+                }
+            }
+        })
+    }
+    
+    private func handleLoadingError(_ message: String) {
+        Alerts.alertWithOKButton(withMessage: message, forVC: self)
+        self.loadingAnimationView.stopAnimating()
+    }
+    
+    
+    
+    // BACK BUTTON
     
     private func addCustomBackButton() {
         self.navigationItem.hidesBackButton = true
