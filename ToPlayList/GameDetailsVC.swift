@@ -516,12 +516,12 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         
         if scrollPos > 0.0 && delta > 0.0 && movingContentTopConstraint.constant > movingContentTopConstraintTarget {
             moveContentUp(delta)
-        } else if scrollPos < 0.0 && delta < 0.0 &&  movingContentTopConstraint.constant < movingContentTopConstraintStart {
-            moveContentDown(delta)
         } else if scrollPos > 0.0 && delta > 0.0 && movingContentHeightConstraint.constant > movingContentHeightConstraintTarget {
             decreaseContentHeight(delta)
         } else if scrollPos < 0.0 && delta < 0.0 && movingContentHeightConstraint.constant < movingContentHeightConstraintStart {
             increaseContentHeight(delta)
+        } else if scrollPos < 0.0 && delta < 0.0 &&  movingContentTopConstraint.constant < movingContentTopConstraintStart {
+            moveContentDown(delta)
         } else {
             doRegularScrolling()
             cleanupForTooFastMovement(scrollPos, delta)
