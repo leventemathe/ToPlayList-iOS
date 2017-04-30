@@ -10,6 +10,8 @@ import Foundation
 
 class Status: IdentifiableObject {
     
+    static let RELEASED = "Released"
+    static let UNKNOWN = "Unknown status"
 }
 
 class IGDBStatus: Status {
@@ -17,7 +19,7 @@ class IGDBStatus: Status {
     static func getString(_ id: UInt64) -> String {
         switch id {
         case 0:
-            return "Released"
+            return Status.RELEASED
         case 2:
             return "Alpha"
         case 3:
@@ -29,7 +31,7 @@ class IGDBStatus: Status {
         case 6:
             return "Cancelled"
         default:
-            return "Unknown status"
+            return Status.UNKNOWN
         }
     }
 }

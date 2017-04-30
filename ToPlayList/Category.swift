@@ -10,6 +10,8 @@ import Foundation
 
 class Category: IdentifiableObject {
 
+    static let MAIN_GAME = "Main game"
+    static let UNKNOWN = "Unknown category"
 }
 
 class IGDBCategory: Category {
@@ -17,17 +19,17 @@ class IGDBCategory: Category {
     static func getString(_ id: UInt64) -> String {
         switch id {
         case 0:
-            return "Main game"
+            return Category.MAIN_GAME
         case 1:
-            return "DLC/Addon"
+            return "DLC"
         case 2:
             return "Expansion"
         case 3:
             return "Bundle"
         case 4:
-            return "Standalone expansion"
+            return "Expandalone"
         default:
-            return "Unknown category"
+            return Category.UNKNOWN
         }
     }
 }

@@ -539,52 +539,99 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A8L-fO-z1X">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="laR-nx-NpS" customClass="ContainerView" customModule="ToPlayList" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="8" width="320" height="86.5"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </view>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="5YX-UL-7NP" customClass="ReadMoreLabel" customModule="ToPlayList" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="8" width="320" height="86.5"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="mKa-wy-ZnB">
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="155"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CFP-5D-6eC">
-                                                                <rect key="frame" x="8" y="8" width="52" height="15"/>
-                                                                <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="15"/>
-                                                                <color key="textColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B6e-9T-2Iw">
-                                                                <rect key="frame" x="8" y="26" width="72" height="19.5"/>
-                                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yqb-Ft-MHO">
-                                                                <rect key="frame" x="8" y="48.5" width="77" height="30"/>
-                                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
-                                                                <state key="normal" title="Show more...">
-                                                                    <color key="titleColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                                </state>
-                                                                <connections>
-                                                                    <action selector="showMoreButtonClicked:" destination="5YX-UL-7NP" eventType="touchUpInside" id="3jM-J0-mxz"/>
-                                                                </connections>
-                                                            </button>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zv1-FT-UO3" customClass="ContainerView" customModule="ToPlayList" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="320" height="54"/>
+                                                                <subviews>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Gpj-NW-ABF">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="54"/>
+                                                                        <subviews>
+                                                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tHi-j2-Kkt" customClass="BadgeLabel" customModule="ToPlayList" customModuleProvider="target">
+                                                                                <rect key="frame" x="12" y="12" width="140" height="30"/>
+                                                                                <color key="backgroundColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="30" id="ySd-vm-UQ7"/>
+                                                                                </constraints>
+                                                                                <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="12"/>
+                                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9WF-eO-b8a" customClass="BadgeLabel" customModule="ToPlayList" customModuleProvider="target">
+                                                                                <rect key="frame" x="168" y="12" width="140" height="30"/>
+                                                                                <color key="backgroundColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="30" id="SwQ-MM-Un5"/>
+                                                                                </constraints>
+                                                                                <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="12"/>
+                                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                        </subviews>
+                                                                        <edgeInsets key="layoutMargins" top="12" left="12" bottom="12" right="12"/>
+                                                                    </stackView>
+                                                                </subviews>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <constraints>
+                                                                    <constraint firstItem="Gpj-NW-ABF" firstAttribute="top" secondItem="Zv1-FT-UO3" secondAttribute="top" priority="999" id="Xww-kO-Qbv"/>
+                                                                    <constraint firstAttribute="height" secondItem="Gpj-NW-ABF" secondAttribute="height" priority="999" id="YZw-oG-C2g"/>
+                                                                    <constraint firstItem="Gpj-NW-ABF" firstAttribute="leading" secondItem="Zv1-FT-UO3" secondAttribute="leading" priority="999" id="lsE-qp-0dh"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="Gpj-NW-ABF" secondAttribute="trailing" priority="999" id="pv8-x0-ew0"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="laR-nx-NpS" customClass="ContainerView" customModule="ToPlayList" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="66" width="320" height="89"/>
+                                                                <subviews>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="5YX-UL-7NP" customClass="ReadMoreLabel" customModule="ToPlayList" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="89"/>
+                                                                        <subviews>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CFP-5D-6eC">
+                                                                                <rect key="frame" x="8" y="8" width="52" height="15"/>
+                                                                                <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="15"/>
+                                                                                <color key="textColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B6e-9T-2Iw">
+                                                                                <rect key="frame" x="8" y="26" width="72" height="19.5"/>
+                                                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                                                <nil key="textColor"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yqb-Ft-MHO">
+                                                                                <rect key="frame" x="8" y="48.5" width="77" height="32.5"/>
+                                                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
+                                                                                <state key="normal" title="Show more...">
+                                                                                    <color key="titleColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                </state>
+                                                                                <connections>
+                                                                                    <action selector="showMoreButtonClicked:" destination="5YX-UL-7NP" eventType="touchUpInside" id="3jM-J0-mxz"/>
+                                                                                </connections>
+                                                                            </button>
+                                                                        </subviews>
+                                                                        <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                                                                        <connections>
+                                                                            <outlet property="descriptionLabel" destination="B6e-9T-2Iw" id="hfD-yQ-rIi"/>
+                                                                            <outlet property="showMoreButton" destination="yqb-Ft-MHO" id="ktC-Z8-6Jp"/>
+                                                                        </connections>
+                                                                    </stackView>
+                                                                </subviews>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <constraints>
+                                                                    <constraint firstItem="5YX-UL-7NP" firstAttribute="top" secondItem="laR-nx-NpS" secondAttribute="top" id="NqG-8m-7oa"/>
+                                                                    <constraint firstAttribute="height" secondItem="5YX-UL-7NP" secondAttribute="height" id="jP6-nP-0oa"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="5YX-UL-7NP" secondAttribute="trailing" id="kH6-hO-uek"/>
+                                                                    <constraint firstItem="5YX-UL-7NP" firstAttribute="leading" secondItem="laR-nx-NpS" secondAttribute="leading" id="xhY-xW-uHM"/>
+                                                                </constraints>
+                                                            </view>
                                                         </subviews>
-                                                        <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
-                                                        <connections>
-                                                            <outlet property="descriptionLabel" destination="B6e-9T-2Iw" id="hfD-yQ-rIi"/>
-                                                            <outlet property="showMoreButton" destination="yqb-Ft-MHO" id="ktC-Z8-6Jp"/>
-                                                        </connections>
                                                     </stackView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstItem="laR-nx-NpS" firstAttribute="top" secondItem="A8L-fO-z1X" secondAttribute="top" constant="8" id="7WH-bO-tmO"/>
-                                                    <constraint firstAttribute="trailing" secondItem="5YX-UL-7NP" secondAttribute="trailing" id="ERM-6K-8sT"/>
-                                                    <constraint firstItem="laR-nx-NpS" firstAttribute="height" secondItem="5YX-UL-7NP" secondAttribute="height" id="TFP-fa-DsG"/>
-                                                    <constraint firstItem="5YX-UL-7NP" firstAttribute="top" secondItem="A8L-fO-z1X" secondAttribute="top" constant="8" id="Zyh-EM-mBg"/>
-                                                    <constraint firstAttribute="trailing" secondItem="laR-nx-NpS" secondAttribute="trailing" id="an4-Gt-dgB"/>
-                                                    <constraint firstItem="5YX-UL-7NP" firstAttribute="leading" secondItem="A8L-fO-z1X" secondAttribute="leading" id="iXr-ET-D3t"/>
-                                                    <constraint firstItem="laR-nx-NpS" firstAttribute="leading" secondItem="A8L-fO-z1X" secondAttribute="leading" id="iac-M6-22v"/>
+                                                    <constraint firstAttribute="trailing" secondItem="mKa-wy-ZnB" secondAttribute="trailing" id="Gvp-Ya-9bB"/>
+                                                    <constraint firstItem="mKa-wy-ZnB" firstAttribute="top" secondItem="A8L-fO-z1X" secondAttribute="top" id="Sik-Bl-vob"/>
+                                                    <constraint firstItem="mKa-wy-ZnB" firstAttribute="leading" secondItem="A8L-fO-z1X" secondAttribute="leading" id="dQS-4B-bj0"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -627,8 +674,10 @@
                     </view>
                     <navigationItem key="navigationItem" title="Details" id="81I-mD-fOu"/>
                     <connections>
+                        <outlet property="badgesContainer" destination="Zv1-FT-UO3" id="hrQ-Cv-orM"/>
                         <outlet property="bigScreenShotHeightConstraint" destination="9QK-RS-XRL" id="8J9-I5-6bC"/>
                         <outlet property="bigScreenshot" destination="rnH-6d-GnC" id="phi-Ht-Cj0"/>
+                        <outlet property="categoryLabel" destination="9WF-eO-b8a" id="4uW-Dl-0m3"/>
                         <outlet property="centeredTitle" destination="8H2-nN-eDd" id="fCH-Cu-etD"/>
                         <outlet property="coverImg" destination="c0v-Hc-uKc" id="Ft0-TO-kaC"/>
                         <outlet property="dataView" destination="AHD-U1-sds" id="KnK-7G-JJw"/>
@@ -645,6 +694,7 @@
                         <outlet property="starBanner" destination="oZt-mw-jh0" id="Up5-Dt-Tdn"/>
                         <outlet property="starBannerLeftConstraint" destination="B25-yT-Ymm" id="qZ9-p9-lyF"/>
                         <outlet property="starImage" destination="enM-Of-KGA" id="BiT-iP-4fF"/>
+                        <outlet property="statusLabel" destination="tHi-j2-Kkt" id="kUn-gv-4mc"/>
                         <outlet property="swipeableDetailsCover" destination="aZh-qp-tBT" id="zpN-nb-N5W"/>
                         <outlet property="titleLbl" destination="Aw5-Re-hAD" id="7ko-y9-BTN"/>
                     </connections>

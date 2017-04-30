@@ -122,6 +122,10 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var showMoreDescriptionButton: UIButton!
     
+    @IBOutlet weak var badgesContainer: ContainerView!
+    @IBOutlet weak var statusLabel: BadgeLabel!
+    @IBOutlet weak var categoryLabel: BadgeLabel!
+    
     var game: Game!
     private var api: GameAPI!
     
@@ -456,7 +460,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
             switch result {
             case .success(let status):
                 self.game.status = status
-                //TODO view update
+                self.setStatus()
                 self.detailsLoaded.loaded[DetailsLoaded.STATUS] = true
             case .failure(let error):
                 switch error {
@@ -465,7 +469,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
                 case .server, .json, .url:
                     self.handleLoadingError(Alerts.SERVER_ERROR)
                 case .noData:
-                    //TODO view update
+                    self.setStatus()
                     self.detailsLoaded.loaded[DetailsLoaded.STATUS] = true
                 }
             }
@@ -477,7 +481,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
             switch result {
             case .success(let category):
                 self.game.category = category
-                //TODO view update
+                self.setCategory()
                 self.detailsLoaded.loaded[DetailsLoaded.CATEGORY] = true
             case .failure(let error):
                 switch error {
@@ -486,11 +490,39 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
                 case .server, .json, .url:
                     self.handleLoadingError(Alerts.SERVER_ERROR)
                 case .noData:
-                    //TODO view update
+                    self.setCategory()
                     self.detailsLoaded.loaded[DetailsLoaded.CATEGORY] = true
                 }
             }
         })
+    }
+    
+    private var badgesRemaining = 2
+    
+    private func setStatus() {
+        if game.status == nil || game.status!.name == Status.UNKNOWN || game.status!.name == Status.RELEASED {
+            statusLabel.isHidden = true
+            badgesRemaining -= 1
+        } else {
+            statusLabel.text = game.status!.name
+        }
+        setBadgeContainer()
+    }
+    
+    private func setCategory() {
+        if game.category == nil || game.category!.name == Category.UNKNOWN {
+            categoryLabel.isHidden = true
+            badgesRemaining -= 1
+        } else {
+            categoryLabel.text = game.category!.name
+        }
+        setBadgeContainer()
+    }
+    
+    private func setBadgeContainer() {
+        if badgesRemaining <= 0 {
+            badgesContainer.isHidden = true
+        }
     }
     
     private func handleLoadingError(_ message: String) {
@@ -599,13 +631,15 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         scrollView.contentOffset.y = scrollViewPreviousContentOffset
     }
     
+    private let CONTENT_DISAPPEARS_TRESHOLD: CGFloat = 5.0
+    
     private func increaseContentHeight(_ delta: CGFloat) {
         let distance = movingContentHeightConstraintStart - movingContentHeightConstraint.constant
         let delta = max(delta, -distance)
         
         movingContentHeightConstraint.constant -= delta
         
-        if distance < MOVEMENT_HEIGHT / 3.0 && movingContent.alpha == 0.0 {
+        if distance < MOVEMENT_HEIGHT / CONTENT_DISAPPEARS_TRESHOLD && movingContent.alpha == 0.0 {
             showMovingContent()
         }
         
@@ -618,7 +652,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         
         movingContentHeightConstraint.constant -= delta
         
-        if distance < MOVEMENT_HEIGHT - MOVEMENT_HEIGHT / 3.0 && movingContent.alpha == 1.0 {
+        if distance < MOVEMENT_HEIGHT - MOVEMENT_HEIGHT / CONTENT_DISAPPEARS_TRESHOLD && movingContent.alpha == 1.0 {
             hideMovingContent()
         }
         
@@ -638,7 +672,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     }
     
     private func hideMovingContent() {
-        UIView.animate(withDuration: 0.2, animations: {
+        UIView.animate(withDuration: 0.1, delay: 0.0, options: .curveEaseIn, animations: {
             self.movingContent.alpha = 0.0
         }, completion: { success in
             self.showCenteredTitle()
@@ -647,7 +681,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     
     private func showMovingContent() {
         hideCenteredTitle {
-            UIView.animate(withDuration: 0.2, animations: {
+            UIView.animate(withDuration: 0.1, delay: 0.0, options: .curveEaseIn, animations: {
                 self.movingContent.alpha = 1.0
             })
         }
@@ -657,13 +691,13 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         centeredTitle.alpha = 0.0
         centeredTitle.isHidden = false
         centeredTitle.text = titleLbl.text
-        UIView.animate(withDuration: 0.2, animations: {
+        UIView.animate(withDuration: 0.1, delay: 0.0, options: .curveEaseIn, animations: {
             self.centeredTitle.alpha = 1.0
         })
     }
     
     private func hideCenteredTitle(_ onComplete: @escaping ()->()) {
-        UIView.animate(withDuration: 0.2, animations: {
+        UIView.animate(withDuration: 0.1, delay: 0.0, options: .curveEaseIn, animations: {
             self.centeredTitle.alpha = 0.0
         }, completion: { success in
             self.centeredTitle.isHidden = true
