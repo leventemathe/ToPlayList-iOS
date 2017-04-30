@@ -52,6 +52,8 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         static let DESCRIPTION = "description"
         static let STATUS = "status"
         static let CATEGORY = "category"
+        static let FRANCHISE = "franchise"
+        static let COLLECTION = "collection"
         
         private var listener: OnFinishedListener
         
@@ -63,7 +65,9 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
                       DetailsLoaded.PUBLISHER: false,
                       DetailsLoaded.DESCRIPTION: false,
                       DetailsLoaded.STATUS: false,
-                      DetailsLoaded.CATEGORY: false] {
+                      DetailsLoaded.CATEGORY: false,
+                      DetailsLoaded.FRANCHISE: false,
+                      DetailsLoaded.COLLECTION: false] {
             didSet {
                 if isFullyLoaded() {
                     listener()
@@ -311,6 +315,8 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         downloadDescription()
         downloadStatus()
         downloadCategory()
+        downloadFranchise()
+        downloadCollection()
     }
     
     private func downloadBasics() {
@@ -523,6 +529,56 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         if badgesRemaining <= 0 {
             badgesContainer.isHidden = true
         }
+    }
+    
+    private func downloadFranchise() {
+        api.getFranchise(forGame: game, withOnComplete: { result in
+            switch result {
+            case .success(let franchise):
+                self.game.franchise = franchise
+                self.setFranchise()
+                self.detailsLoaded.loaded[DetailsLoaded.FRANCHISE] = true
+            case .failure(let error):
+                switch error {
+                case .noInternet:
+                    self.handleLoadingError(Alerts.NETWORK_ERROR)
+                case .server, .json, .url:
+                    self.handleLoadingError(Alerts.SERVER_ERROR)
+                case .noData:
+                    self.setFranchise()
+                    self.detailsLoaded.loaded[DetailsLoaded.FRANCHISE] = true
+                }
+            }
+        })
+    }
+    
+    private func downloadCollection() {
+        api.getCollection(forGame: game, withOnComplete: { result in
+            switch result {
+            case .success(let collection):
+                self.game.collection = collection
+                self.setCollection()
+                self.detailsLoaded.loaded[DetailsLoaded.COLLECTION] = true
+            case .failure(let error):
+                switch error {
+                case .noInternet:
+                    self.handleLoadingError(Alerts.NETWORK_ERROR)
+                case .server, .json, .url:
+                    self.handleLoadingError(Alerts.SERVER_ERROR)
+                case .noData:
+                    self.setCollection()
+                    self.detailsLoaded.loaded[DetailsLoaded.COLLECTION] = true
+                }
+            }
+        })
+    }
+    
+    private func setFranchise() {
+        //TODO set view
+    }
+    
+    private func setCollection() {
+        //TODO set view
     }
     
     private func handleLoadingError(_ message: String) {

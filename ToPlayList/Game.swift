@@ -30,6 +30,9 @@ class Game: IdentifiableObject {
     var status: Status?
     var category: Category?
     
+    var franchise: Franchise?
+    var collection: Collection?
+    
     var firstReleaseDate: Double?
     
     required init(_ id: UInt64, withName name: String) {

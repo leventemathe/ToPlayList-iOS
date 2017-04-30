@@ -104,6 +104,13 @@ class IGDBJSON {
                 gameIDs.category = category
             }
             
+            if let franchise = obj["franchise"] as? UInt64 {
+                gameIDs.franchise = franchise
+            }
+            if let collection = obj["collection"] as? UInt64 {
+                gameIDs.collection = collection
+            }
+            
             return .success(gameIDs)
         }
         return .failure(.json)

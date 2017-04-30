@@ -9,3 +9,7 @@
 class Genre: IdentifiableObject { }
 
 class Company: IdentifiableObject { }
+
+class Franchise: IdentifiableObject { }
+
+class Collection: IdentifiableObject { }

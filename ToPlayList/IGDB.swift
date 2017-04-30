@@ -53,6 +53,8 @@ protocol GameAPI {
     
     func getGenres(_ onComplete: @escaping (IGDBResult<[Genre]>)->Void, withIDs ids: [UInt64])
     func getCompanies(_ onComplete: @escaping (IGDBResult<[Company]>)->Void, withIDs ids: [UInt64])
+    func getFranchises(_ onComplete: @escaping (IGDBResult<[Franchise]>)->Void, withIDs ids: [UInt64])
+    func getCollections(_ onComplete: @escaping (IGDBResult<[Collection]>)->Void, withIDs ids: [UInt64])
     
     func getGenres(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[Genre]>)->Void)
     func getDevelopers(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[Company]>)->Void)
@@ -65,6 +67,9 @@ protocol GameAPI {
     
     func getStatus(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<Status>)->Void)
     func getCategory(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<Category>)->Void)
+    
+    func getFranchise(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<Franchise>)->Void)
+    func getCollection(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<Collection>)->Void)
 }
 
 class IGDB: GameAPI {
@@ -77,6 +82,8 @@ class IGDB: GameAPI {
     static let GAMES = "/games/"
     static let GENRES = "/genres/"
     static let COMPANIES = "/companies/"
+    static let FRANCHISES = "/franchises/"
+    static let COLLECTIONS = "/collections/"
     
     static let BASE_URL_IMG = "https://images.igdb.com/igdb/image/upload"
     
@@ -292,6 +299,22 @@ class IGDB: GameAPI {
         get(onComplete, withURL: url, withParams: parameters, withHeaders: IGDB.HEADERS)
     }
     
+    public func getFranchises(_ onComplete: @escaping (IGDBResult<[Franchise]>)->Void, withIDs ids: [UInt64]) {
+        let idsString = createIDList(from: ids)
+        let url = "\(IGDB.BASE_URL)\(IGDB.FRANCHISES)\(idsString)/"
+        let parameters = ["fields": "id,name"]
+        
+        get(onComplete, withURL: url, withParams: parameters, withHeaders: IGDB.HEADERS)
+    }
+    
+    public func getCollections(_ onComplete: @escaping (IGDBResult<[Collection]>)->Void, withIDs ids: [UInt64]) {
+        let idsString = createIDList(from: ids)
+        let url = "\(IGDB.BASE_URL)\(IGDB.COLLECTIONS)\(idsString)/"
+        let parameters = ["fields": "id,name"]
+        
+        get(onComplete, withURL: url, withParams: parameters, withHeaders: IGDB.HEADERS)
+    }
+    
     private var cachedGameIDs: GameIDs?
     
     private func refreshCachedGameIDs(forGame game: Game, withOnSuccess onSuccess: @escaping (GameIDs)->(), withOnFailure onFailure: @escaping (IGDBError)->()) {
@@ -300,7 +323,7 @@ class IGDB: GameAPI {
             return
         } else {
             let url =  IGDB.BASE_URL + IGDB.GAMES + "\(game.id)"
-            let parameters: Parameters = ["fields": "first_release_date,release_dates,genres,developers,publishers,screenshots,summary,status,category"]
+            let parameters: Parameters = ["fields": "first_release_date,release_dates,genres,developers,publishers,screenshots,summary,status,category,franchise,collection"]
             
             Alamofire.request(url, parameters: parameters, headers: IGDB.HEADERS).validate().responseJSON { response in
                 switch response.result {
@@ -447,6 +470,52 @@ class IGDB: GameAPI {
             if let catID = gameIDs.category {
                 let cat = Category(catID, withName: IGDBCategory.getString(catID))
                 onComplete(.success(cat))
+            } else {
+                onComplete(.failure(.noData))
+            }
+        }, withOnFailure: { error in
+            onComplete(.failure(error))
+        })
+    }
+    
+    public func getFranchise(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<Franchise>)->Void) {
+        refreshCachedGameIDs(forGame: game, withOnSuccess: { gameIDs in
+            if let franchise = gameIDs.franchise {
+                self.getFranchises({ result in
+                    switch result {
+                    case .failure(let error):
+                        onComplete(.failure(error))
+                    case .success(let result):
+                        if result.count > 0 {
+                            onComplete(.success(result[0]))
+                        } else {
+                            onComplete(.failure(.server))
+                        }
+                    }
+                }, withIDs: [franchise])
+            } else {
+                onComplete(.failure(.noData))
+            }
+        }, withOnFailure: { error in
+            onComplete(.failure(error))
+        })
+    }
+    
+    public func getCollection(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<Collection>)->Void) {
+        refreshCachedGameIDs(forGame: game, withOnSuccess: { gameIDs in
+            if let collection = gameIDs.collection {
+                self.getCollections({ result in
+                    switch result {
+                    case .failure(let error):
+                        onComplete(.failure(error))
+                    case .success(let result):
+                        if result.count > 0 {
+                            onComplete(.success(result[0]))
+                        } else {
+                            onComplete(.failure(.server))
+                        }
+                    }
+                }, withIDs: [collection])
             } else {
                 onComplete(.failure(.noData))
             }
