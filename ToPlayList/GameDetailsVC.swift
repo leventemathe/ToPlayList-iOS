@@ -131,11 +131,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     @IBOutlet weak var categoryLabel: BadgeLabel!
     
     @IBOutlet weak var badgeVCContainer: UIView!
-    private lazy var badgeVC: BadgeVC = {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let badgeVC = storyboard.instantiateViewController(withIdentifier: BadgeVC.id) as! BadgeVC
-        return badgeVC
-    }()
+    private var badgeVC: BadgeVC?
     
     var game: Game!
     private var api: GameAPI!
@@ -156,11 +152,20 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
             self.attachListListeners()
         }
         setupSwiping()
+        setupBadgeVC()
     }
     
     private func setupSwiping() {
         swipeableDetailsCover.game = game
         swipeableDetailsCover.errorHandlerDelegate = self
+    }
+    
+    private func setupBadgeVC() {
+        for vc in childViewControllers {
+            if let bVC = vc as? BadgeVC {
+                self.badgeVC = bVC
+            }
+        }
     }
     
     // STAR AND LISTENERS
@@ -582,13 +587,13 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     
     private func setFranchise() {
         if let string = game.franchise?.name {
-            badgeVC.add(string: string)
+            badgeVC?.add(string: string)
         }
     }
     
     private func setCollection() {
         if let string = game.collection?.name {
-            badgeVC.add(string: string)
+            badgeVC?.add(string: string)
         }
     }
     

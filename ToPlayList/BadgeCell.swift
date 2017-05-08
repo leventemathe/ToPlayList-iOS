@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BadgeCell: UICollectionViewCell {
+class BadgeCell: UICollectionViewCell, ReusableView {
     
     @IBOutlet weak var label: BadgeLabel!
     

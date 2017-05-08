@@ -10,9 +10,31 @@ import UIKit
 
 class BadgeVC: UICollectionViewController, IdentifiableVC {
 
-    private var strings = [String]()
+    private var strings = [String]() {
+        didSet {
+            collectionView?.reloadData()
+        }
+    }
     
     func add(string: String) {
         strings.append(string)
     }
+
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return strings.count
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let badgeCell = collectionView.dequeueReusableCell(withReuseIdentifier: BadgeCell.reuseIdentifier, for: indexPath) as? BadgeCell {
+            badgeCell.update(strings[indexPath.row])
+            return badgeCell
+        }
+        return UICollectionViewCell()
+    }
+    
+    //TODO sizing methods here
 }
