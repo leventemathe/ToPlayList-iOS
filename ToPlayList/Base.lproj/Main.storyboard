@@ -537,10 +537,10 @@
                                         <rect key="frame" x="0.0" y="274" width="320" height="294"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A8L-fO-z1X">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="800"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="mKa-wy-ZnB">
-                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="155"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="247"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zv1-FT-UO3" customClass="ContainerView" customModule="ToPlayList" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="54"/>
@@ -624,6 +624,28 @@
                                                                     <constraint firstItem="5YX-UL-7NP" firstAttribute="leading" secondItem="laR-nx-NpS" secondAttribute="leading" id="xhY-xW-uHM"/>
                                                                 </constraints>
                                                             </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lKc-C6-CVP" customClass="ContainerView" customModule="ToPlayList" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="167" width="320" height="80"/>
+                                                                <subviews>
+                                                                    <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dpq-g9-ur6">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="80" id="nro-CC-U6R"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <segue destination="Jo4-WI-j2r" kind="embed" id="XZI-P6-2Ix"/>
+                                                                        </connections>
+                                                                    </containerView>
+                                                                </subviews>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <constraints>
+                                                                    <constraint firstItem="Dpq-g9-ur6" firstAttribute="top" secondItem="lKc-C6-CVP" secondAttribute="top" id="D2h-yD-i8l"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="Dpq-g9-ur6" secondAttribute="trailing" id="Stj-Ea-0Ti"/>
+                                                                    <constraint firstItem="Dpq-g9-ur6" firstAttribute="leading" secondItem="lKc-C6-CVP" secondAttribute="leading" id="T2S-As-iZ7"/>
+                                                                    <constraint firstAttribute="height" constant="80" id="cFY-oe-cbJ"/>
+                                                                </constraints>
+                                                            </view>
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
@@ -631,6 +653,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="mKa-wy-ZnB" secondAttribute="trailing" id="Gvp-Ya-9bB"/>
                                                     <constraint firstItem="mKa-wy-ZnB" firstAttribute="top" secondItem="A8L-fO-z1X" secondAttribute="top" id="Sik-Bl-vob"/>
+                                                    <constraint firstAttribute="height" constant="800" id="W21-pE-202"/>
                                                     <constraint firstItem="mKa-wy-ZnB" firstAttribute="leading" secondItem="A8L-fO-z1X" secondAttribute="leading" id="dQS-4B-bj0"/>
                                                 </constraints>
                                             </view>
@@ -664,7 +687,6 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="A8L-fO-z1X" firstAttribute="height" secondItem="hiL-3d-IEc" secondAttribute="height" id="1y4-bl-QiK"/>
                             <constraint firstItem="AHD-U1-sds" firstAttribute="leading" secondItem="hiL-3d-IEc" secondAttribute="leading" id="3zD-Kf-S8I"/>
                             <constraint firstItem="A8L-fO-z1X" firstAttribute="width" secondItem="hiL-3d-IEc" secondAttribute="width" id="B2J-gt-Cq7"/>
                             <constraint firstAttribute="trailing" secondItem="AHD-U1-sds" secondAttribute="trailing" id="UMj-jn-ueM"/>
@@ -674,6 +696,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Details" id="81I-mD-fOu"/>
                     <connections>
+                        <outlet property="badgeVCContainer" destination="Dpq-g9-ur6" id="eVK-3O-vhl"/>
                         <outlet property="badgesContainer" destination="Zv1-FT-UO3" id="hrQ-Cv-orM"/>
                         <outlet property="bigScreenShotHeightConstraint" destination="9QK-RS-XRL" id="8J9-I5-6bC"/>
                         <outlet property="bigScreenshot" destination="rnH-6d-GnC" id="phi-Ht-Cj0"/>
@@ -1518,6 +1541,51 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YvZ-W2-Scd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3678" y="1881"/>
+        </scene>
+        <!--BadgeVC-->
+        <scene sceneID="5gX-Eg-LJU">
+            <objects>
+                <viewController restorationIdentifier="BadgeVC" storyboardIdentifier="BadgeVC" id="Jo4-WI-j2r" customClass="BadgeVC" customModule="ToPlayList" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Byp-Vd-fhv">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="OcQ-cb-F5F">
+                            <size key="itemSize" width="133" height="61"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="BadgeCell" id="rQh-HT-Kmx" customClass="BadgeCell" customModule="ToPlayList" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="133" height="61"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="133" height="61"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Status" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b4O-cf-22z" customClass="BadgeLabel" customModule="ToPlayList" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="133" height="61"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="12"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </view>
+                                <connections>
+                                    <outlet property="label" destination="b4O-cf-22z" id="X0q-J5-Jom"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                    </collectionView>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="80"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="git-Tq-sbi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4668.75" y="735.21126760563379"/>
         </scene>
     </scenes>
     <resources>

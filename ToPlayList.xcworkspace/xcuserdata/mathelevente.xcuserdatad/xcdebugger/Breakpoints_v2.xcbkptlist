@@ -662,11 +662,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/GameDetailsVC.swift"
-            timestampString = "515237892.55588"
+            timestampString = "515941649.47616"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "229"
-            endingLineNumber = "229"
+            startingLineNumber = "236"
+            endingLineNumber = "236"
             landmarkName = "setStar()"
             landmarkType = "7">
          </BreakpointContent>
@@ -674,7 +674,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/GameDetailsVC.swift"
@@ -710,11 +710,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/GameDetailsVC.swift"
-            timestampString = "515238385.648538"
+            timestampString = "515941649.47616"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "570"
-            endingLineNumber = "570"
+            startingLineNumber = "577"
+            endingLineNumber = "577"
             landmarkName = "downloadCollection()"
             landmarkType = "7">
          </BreakpointContent>

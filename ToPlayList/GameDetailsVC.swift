@@ -130,6 +130,13 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     @IBOutlet weak var statusLabel: BadgeLabel!
     @IBOutlet weak var categoryLabel: BadgeLabel!
     
+    @IBOutlet weak var badgeVCContainer: UIView!
+    private lazy var badgeVC: BadgeVC = {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let badgeVC = storyboard.instantiateViewController(withIdentifier: BadgeVC.id) as! BadgeVC
+        return badgeVC
+    }()
+    
     var game: Game!
     private var api: GameAPI!
     
@@ -140,7 +147,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         startLoading()
         setupLoadingListener()
         addCustomBackButton()
-        self.setupStarImageTapRecognizer()
+        setupStarImageTapRecognizer()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -574,11 +581,15 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     }
     
     private func setFranchise() {
-        //TODO set view
+        if let string = game.franchise?.name {
+            badgeVC.add(string: string)
+        }
     }
     
     private func setCollection() {
-        //TODO set view
+        if let string = game.collection?.name {
+            badgeVC.add(string: string)
+        }
     }
     
     private func handleLoadingError(_ message: String) {
