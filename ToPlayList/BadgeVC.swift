@@ -10,7 +10,7 @@ import UIKit
 
 class BadgeVC: UICollectionViewController, IdentifiableVC, UICollectionViewDelegateFlowLayout {
 
-    var constraintsSetDelegate: CollectionViewSizeDidSetDelegate?
+    weak var constraintsSetDelegate: CollectionViewSizeDidSetDelegate?
     
     private var strings = [String]() {
         didSet {

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol CollectionViewSizeDidSetDelegate {
+protocol CollectionViewSizeDidSetDelegate: class {
 
     func didSet(numberOfItems: Int, sizeOfItems: CGSize)
 }
