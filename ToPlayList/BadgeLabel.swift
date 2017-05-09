@@ -10,7 +10,8 @@ import UIKit
 
 class BadgeLabel: UILabel, RoundedCorners {
     
-    override func awakeFromNib() {
+    override func layoutSubviews() {
+        super.layoutSubviews()
         addRoundedCorners(frame.height / 2.0)
     }
 }

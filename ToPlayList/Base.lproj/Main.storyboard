@@ -540,48 +540,10 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="800"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="mKa-wy-ZnB">
-                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="247"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="287"/>
                                                         <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zv1-FT-UO3" customClass="ContainerView" customModule="ToPlayList" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="320" height="54"/>
-                                                                <subviews>
-                                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Gpj-NW-ABF">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="54"/>
-                                                                        <subviews>
-                                                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tHi-j2-Kkt" customClass="BadgeLabel" customModule="ToPlayList" customModuleProvider="target">
-                                                                                <rect key="frame" x="12" y="12" width="140" height="30"/>
-                                                                                <color key="backgroundColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                                                <constraints>
-                                                                                    <constraint firstAttribute="height" constant="30" id="ySd-vm-UQ7"/>
-                                                                                </constraints>
-                                                                                <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="12"/>
-                                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                                <nil key="highlightedColor"/>
-                                                                            </label>
-                                                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9WF-eO-b8a" customClass="BadgeLabel" customModule="ToPlayList" customModuleProvider="target">
-                                                                                <rect key="frame" x="168" y="12" width="140" height="30"/>
-                                                                                <color key="backgroundColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                                                <constraints>
-                                                                                    <constraint firstAttribute="height" constant="30" id="SwQ-MM-Un5"/>
-                                                                                </constraints>
-                                                                                <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="12"/>
-                                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                                <nil key="highlightedColor"/>
-                                                                            </label>
-                                                                        </subviews>
-                                                                        <edgeInsets key="layoutMargins" top="12" left="12" bottom="12" right="12"/>
-                                                                    </stackView>
-                                                                </subviews>
-                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                <constraints>
-                                                                    <constraint firstItem="Gpj-NW-ABF" firstAttribute="top" secondItem="Zv1-FT-UO3" secondAttribute="top" priority="999" id="Xww-kO-Qbv"/>
-                                                                    <constraint firstAttribute="height" secondItem="Gpj-NW-ABF" secondAttribute="height" priority="999" id="YZw-oG-C2g"/>
-                                                                    <constraint firstItem="Gpj-NW-ABF" firstAttribute="leading" secondItem="Zv1-FT-UO3" secondAttribute="leading" priority="999" id="lsE-qp-0dh"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="Gpj-NW-ABF" secondAttribute="trailing" priority="999" id="pv8-x0-ew0"/>
-                                                                </constraints>
-                                                            </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="laR-nx-NpS" customClass="ContainerView" customModule="ToPlayList" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="66" width="320" height="89"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="320" height="89"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="5YX-UL-7NP" customClass="ReadMoreLabel" customModule="ToPlayList" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="89"/>
@@ -625,25 +587,67 @@
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lKc-C6-CVP" customClass="ContainerView" customModule="ToPlayList" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="167" width="320" height="80"/>
+                                                                <rect key="frame" x="0.0" y="101" width="320" height="119"/>
                                                                 <subviews>
-                                                                    <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dpq-g9-ur6">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
-                                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="height" constant="80" id="nro-CC-U6R"/>
-                                                                        </constraints>
-                                                                        <connections>
-                                                                            <segue destination="Jo4-WI-j2r" kind="embed" id="XZI-P6-2Ix"/>
-                                                                        </connections>
-                                                                    </containerView>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="rhd-gk-bU0">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="119"/>
+                                                                        <subviews>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Useful tags" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jDG-yx-KEB">
+                                                                                <rect key="frame" x="8" y="8" width="304" height="15"/>
+                                                                                <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="15"/>
+                                                                                <color key="textColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dpq-g9-ur6">
+                                                                                <rect key="frame" x="8" y="31" width="304" height="80"/>
+                                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="80" id="0MI-wB-DNx"/>
+                                                                                </constraints>
+                                                                                <connections>
+                                                                                    <segue destination="Jo4-WI-j2r" kind="embed" id="XZI-P6-2Ix"/>
+                                                                                </connections>
+                                                                            </containerView>
+                                                                        </subviews>
+                                                                        <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                                                                    </stackView>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <constraints>
-                                                                    <constraint firstItem="Dpq-g9-ur6" firstAttribute="top" secondItem="lKc-C6-CVP" secondAttribute="top" id="D2h-yD-i8l"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="Dpq-g9-ur6" secondAttribute="trailing" id="Stj-Ea-0Ti"/>
-                                                                    <constraint firstItem="Dpq-g9-ur6" firstAttribute="leading" secondItem="lKc-C6-CVP" secondAttribute="leading" id="T2S-As-iZ7"/>
-                                                                    <constraint firstAttribute="height" constant="80" id="cFY-oe-cbJ"/>
+                                                                    <constraint firstItem="rhd-gk-bU0" firstAttribute="top" secondItem="lKc-C6-CVP" secondAttribute="top" id="DwW-Bl-iNR"/>
+                                                                    <constraint firstAttribute="height" secondItem="rhd-gk-bU0" secondAttribute="height" id="ioJ-cx-ip9"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="rhd-gk-bU0" secondAttribute="trailing" id="mFd-bo-B8J"/>
+                                                                    <constraint firstItem="rhd-gk-bU0" firstAttribute="leading" secondItem="lKc-C6-CVP" secondAttribute="leading" id="t28-c2-9RP"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8ol-Q6-CjN" customClass="ContainerView" customModule="ToPlayList" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="232" width="320" height="55"/>
+                                                                <subviews>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="rzw-Pc-eRs">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
+                                                                        <subviews>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Part of collection/franchise:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OWP-Kd-sz2">
+                                                                                <rect key="frame" x="8" y="8" width="304" height="19.5"/>
+                                                                                <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="15"/>
+                                                                                <color key="textColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lgm-Ra-DOI">
+                                                                                <rect key="frame" x="8" y="27.5" width="304" height="19.5"/>
+                                                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                                                <nil key="textColor"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                        </subviews>
+                                                                        <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                                                                    </stackView>
+                                                                </subviews>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="trailing" secondItem="rzw-Pc-eRs" secondAttribute="trailing" priority="999" id="6sI-aa-GPZ"/>
+                                                                    <constraint firstItem="rzw-Pc-eRs" firstAttribute="leading" secondItem="8ol-Q6-CjN" secondAttribute="leading" priority="999" id="DtM-bI-S1r"/>
+                                                                    <constraint firstItem="rzw-Pc-eRs" firstAttribute="top" secondItem="8ol-Q6-CjN" secondAttribute="top" priority="999" id="QOz-RC-RWV"/>
+                                                                    <constraint firstAttribute="height" secondItem="rzw-Pc-eRs" secondAttribute="height" priority="999" id="ZHG-Wi-2Xk"/>
                                                                 </constraints>
                                                             </view>
                                                         </subviews>
@@ -697,15 +701,16 @@
                     <navigationItem key="navigationItem" title="Details" id="81I-mD-fOu"/>
                     <connections>
                         <outlet property="badgeVCContainer" destination="Dpq-g9-ur6" id="eVK-3O-vhl"/>
-                        <outlet property="badgesContainer" destination="Zv1-FT-UO3" id="hrQ-Cv-orM"/>
+                        <outlet property="badgeVCHeightConstraint" destination="0MI-wB-DNx" id="H4J-1s-8fI"/>
                         <outlet property="bigScreenShotHeightConstraint" destination="9QK-RS-XRL" id="8J9-I5-6bC"/>
                         <outlet property="bigScreenshot" destination="rnH-6d-GnC" id="phi-Ht-Cj0"/>
-                        <outlet property="categoryLabel" destination="9WF-eO-b8a" id="4uW-Dl-0m3"/>
                         <outlet property="centeredTitle" destination="8H2-nN-eDd" id="fCH-Cu-etD"/>
                         <outlet property="coverImg" destination="c0v-Hc-uKc" id="Ft0-TO-kaC"/>
                         <outlet property="dataView" destination="AHD-U1-sds" id="KnK-7G-JJw"/>
                         <outlet property="descriptionLabel" destination="B6e-9T-2Iw" id="gCz-8I-bTG"/>
                         <outlet property="developerLabel" destination="V0M-C8-Wlw" id="dbd-EF-YZl"/>
+                        <outlet property="franchiseCollectionContainer" destination="8ol-Q6-CjN" id="9X7-zd-K1I"/>
+                        <outlet property="franchiseCollectionLabel" destination="Lgm-Ra-DOI" id="MVf-Y8-NYl"/>
                         <outlet property="genreLabel" destination="QIo-lO-O0x" id="zDM-BZ-uIj"/>
                         <outlet property="movingContent" destination="2xt-nC-PKO" id="AhP-fH-1l3"/>
                         <outlet property="movingContentHeightConstraint" destination="Wa0-Lq-yfB" id="DJ6-zT-tDF"/>
@@ -717,7 +722,6 @@
                         <outlet property="starBanner" destination="oZt-mw-jh0" id="Up5-Dt-Tdn"/>
                         <outlet property="starBannerLeftConstraint" destination="B25-yT-Ymm" id="qZ9-p9-lyF"/>
                         <outlet property="starImage" destination="enM-Of-KGA" id="BiT-iP-4fF"/>
-                        <outlet property="statusLabel" destination="tHi-j2-Kkt" id="kUn-gv-4mc"/>
                         <outlet property="swipeableDetailsCover" destination="aZh-qp-tBT" id="zpN-nb-N5W"/>
                         <outlet property="titleLbl" destination="Aw5-Re-hAD" id="7ko-y9-BTN"/>
                     </connections>
@@ -1564,9 +1568,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="133" height="61"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Status" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b4O-cf-22z" customClass="BadgeLabel" customModule="ToPlayList" customModuleProvider="target">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b4O-cf-22z" customClass="BadgeLabel" customModule="ToPlayList" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="133" height="61"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="12"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1574,6 +1577,12 @@
                                         </label>
                                     </subviews>
                                 </view>
+                                <constraints>
+                                    <constraint firstItem="b4O-cf-22z" firstAttribute="leading" secondItem="rQh-HT-Kmx" secondAttribute="leading" id="5lU-eJ-azi"/>
+                                    <constraint firstAttribute="trailing" secondItem="b4O-cf-22z" secondAttribute="trailing" id="IcC-FT-Qld"/>
+                                    <constraint firstAttribute="bottom" secondItem="b4O-cf-22z" secondAttribute="bottom" id="ln2-Wa-S2l"/>
+                                    <constraint firstItem="b4O-cf-22z" firstAttribute="top" secondItem="rQh-HT-Kmx" secondAttribute="top" id="xqc-kd-00V"/>
+                                </constraints>
                                 <connections>
                                     <outlet property="label" destination="b4O-cf-22z" id="X0q-J5-Jom"/>
                                 </connections>

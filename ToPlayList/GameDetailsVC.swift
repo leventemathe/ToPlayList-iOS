@@ -126,12 +126,13 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var showMoreDescriptionButton: UIButton!
     
-    @IBOutlet weak var badgesContainer: ContainerView!
-    @IBOutlet weak var statusLabel: BadgeLabel!
-    @IBOutlet weak var categoryLabel: BadgeLabel!
-    
     @IBOutlet weak var badgeVCContainer: UIView!
+    @IBOutlet weak var badgeVCHeightConstraint: NSLayoutConstraint!
     private var badgeVC: BadgeVC?
+    
+    
+    @IBOutlet weak var franchiseCollectionContainer: ContainerView!
+    @IBOutlet weak var franchiseCollectionLabel: UILabel!
     
     var game: Game!
     private var api: GameAPI!
@@ -515,31 +516,15 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         })
     }
     
-    private var badgesRemaining = 2
-    
     private func setStatus() {
-        if game.status == nil || game.status!.name == Status.UNKNOWN || game.status!.name == Status.RELEASED {
-            statusLabel.isHidden = true
-            badgesRemaining -= 1
-        } else {
-            statusLabel.text = game.status!.name
+        if let string = game.status?.name {
+            badgeVC?.add(string: string)
         }
-        setBadgeContainer()
     }
     
     private func setCategory() {
-        if game.category == nil || game.category!.name == Category.UNKNOWN {
-            categoryLabel.isHidden = true
-            badgesRemaining -= 1
-        } else {
-            categoryLabel.text = game.category!.name
-        }
-        setBadgeContainer()
-    }
-    
-    private func setBadgeContainer() {
-        if badgesRemaining <= 0 {
-            badgesContainer.isHidden = true
+        if let string = game.category?.name {
+            badgeVC?.add(string: string)
         }
     }
     
@@ -585,15 +570,32 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         })
     }
     
+    private var franchiseCollectionString: String? {
+        didSet {
+            franchiseCollectionContainer.isHidden = false
+            franchiseCollectionLabel.text = franchiseCollectionString
+        }
+    }
+    
+    private func buildFranchiseCollectionString(_ string: String) {
+        if franchiseCollectionString == nil {
+            franchiseCollectionString = string
+        } else if franchiseCollectionString != nil && franchiseCollectionString!.characters.count > 0 {
+            franchiseCollectionString!.append(", ")
+        } else if franchiseCollectionString != nil {
+            franchiseCollectionString = string
+        }
+    }
+    
     private func setFranchise() {
         if let string = game.franchise?.name {
-            badgeVC?.add(string: string)
+            buildFranchiseCollectionString(string)
         }
     }
     
     private func setCollection() {
         if let string = game.collection?.name {
-            badgeVC?.add(string: string)
+            buildFranchiseCollectionString(string)
         }
     }
     
