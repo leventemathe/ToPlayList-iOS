@@ -58,7 +58,7 @@ class BadgeVC: UICollectionViewController, IdentifiableVC, UICollectionViewDeleg
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         setupCellMargins()
         setupCellSize()
-        constraintsSetDelegate?.didSet(numberOfItems: strings.count, sizeOfItems: CGSize(width: cellWidth, height: CELL_HEIGHT))
+        constraintsSetDelegate?.didSetSize(numberOfItems: strings.count, numberOfRows: Int(ceil(CGFloat(strings.count) / CELLS_PER_COLUMN)), sizeOfItems: CGSize(width: cellWidth, height: CELL_HEIGHT))
         return CGSize(width: cellWidth, height: CELL_HEIGHT)
     }
     

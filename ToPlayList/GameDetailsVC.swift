@@ -37,7 +37,7 @@ struct GameInExclusiveLists {
     }
 }
 
-class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizerDelegate, ErrorHandlerDelegate {
+class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizerDelegate, ErrorHandlerDelegate, CollectionViewSizeDidSetDelegate {
     
     typealias OnFinishedListener = () -> ()
     
@@ -167,6 +167,12 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
                 self.badgeVC = bVC
             }
         }
+        badgeVC?.constraintsSetDelegate = self
+    }
+    
+    func didSetSize(numberOfItems: Int, numberOfRows: Int, sizeOfItems: CGSize) {
+        let height = sizeOfItems.height * CGFloat(numberOfRows)
+        badgeVCHeightConstraint.constant = height
     }
     
     // STAR AND LISTENERS
