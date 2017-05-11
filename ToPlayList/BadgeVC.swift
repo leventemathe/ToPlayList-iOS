@@ -22,6 +22,10 @@ class BadgeVC: UICollectionViewController, IdentifiableVC, UICollectionViewDeleg
         strings.append(string)
     }
     
+    func add(strings: [String]) {
+        self.strings.append(contentsOf: strings)
+    }
+    
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -46,19 +50,21 @@ class BadgeVC: UICollectionViewController, IdentifiableVC, UICollectionViewDeleg
     private var cellVerticalInterItemMargin: CGFloat!
     
     private func setupCellMargins() {
-        collectionViewWidth = collectionView?.bounds.size.width ?? UIScreen.main.bounds.size.width
-        cellHorizontalInterItemMargin = 12.0 / 2.0
-        cellVerticalInterItemMargin = cellHorizontalInterItemMargin
+        collectionViewWidth = collectionView?.frame.size.width ?? UIScreen.main.bounds.size.width
+        cellHorizontalInterItemMargin = 8.0 / 2.0
+        cellVerticalInterItemMargin = cellHorizontalInterItemMargin * 2.0
     }
     
     private func setupCellSize() {
-        cellWidth = collectionViewWidth / CELLS_PER_COLUMN - (CELLS_PER_COLUMN-1) * cellHorizontalInterItemMargin
+        cellWidth = collectionViewWidth / CELLS_PER_COLUMN - (CELLS_PER_COLUMN-1.0) * cellHorizontalInterItemMargin
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         setupCellMargins()
         setupCellSize()
-        constraintsSetDelegate?.didSetSize(numberOfItems: strings.count, numberOfRows: Int(ceil(CGFloat(strings.count) / CELLS_PER_COLUMN)), sizeOfItems: CGSize(width: cellWidth, height: CELL_HEIGHT))
+        
+        constraintsSetDelegate?.didSetSize(numberOfItems: strings.count, numberOfRows: Int(ceil(CGFloat(strings.count) / CELLS_PER_COLUMN)), sizeOfItems: CGSize(width: cellWidth, height: CELL_HEIGHT), sizeOfMargins: CGSize(width: cellHorizontalInterItemMargin, height: cellVerticalInterItemMargin))
+        
         return CGSize(width: cellWidth, height: CELL_HEIGHT)
     }
     

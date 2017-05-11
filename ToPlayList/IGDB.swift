@@ -55,6 +55,8 @@ protocol GameAPI {
     func getCompanies(_ onComplete: @escaping (IGDBResult<[Company]>)->Void, withIDs ids: [UInt64])
     func getFranchises(_ onComplete: @escaping (IGDBResult<[Franchise]>)->Void, withIDs ids: [UInt64])
     func getCollections(_ onComplete: @escaping (IGDBResult<[Collection]>)->Void, withIDs ids: [UInt64])
+    func getGameModes(_ onComplete: @escaping (IGDBResult<[GameMode]>)->Void, withIDs ids: [UInt64])
+    func getPlayerPerspectives(_ onComplete: @escaping (IGDBResult<[PlayerPerspective]>)->Void, withIDs ids: [UInt64])
     
     func getGenres(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[Genre]>)->Void)
     func getDevelopers(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[Company]>)->Void)
@@ -70,6 +72,9 @@ protocol GameAPI {
     
     func getFranchise(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<Franchise>)->Void)
     func getCollection(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<Collection>)->Void)
+    
+    func getGameModes(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[GameMode]>)->Void)
+    func getPlayerPerspectives(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[PlayerPerspective]>)->Void)
 }
 
 class IGDB: GameAPI {
@@ -84,6 +89,8 @@ class IGDB: GameAPI {
     static let COMPANIES = "/companies/"
     static let FRANCHISES = "/franchises/"
     static let COLLECTIONS = "/collections/"
+    static let GAME_MODES = "/game_modes/"
+    static let PLAYER_PERSPECTIVES = "/player_perspectives/"
     
     static let BASE_URL_IMG = "https://images.igdb.com/igdb/image/upload"
     
@@ -307,9 +314,26 @@ class IGDB: GameAPI {
         get(onComplete, withURL: url, withParams: parameters, withHeaders: IGDB.HEADERS)
     }
     
+    
     public func getCollections(_ onComplete: @escaping (IGDBResult<[Collection]>)->Void, withIDs ids: [UInt64]) {
         let idsString = createIDList(from: ids)
         let url = "\(IGDB.BASE_URL)\(IGDB.COLLECTIONS)\(idsString)/"
+        let parameters = ["fields": "id,name"]
+        
+        get(onComplete, withURL: url, withParams: parameters, withHeaders: IGDB.HEADERS)
+    }
+    
+    public func getGameModes(_ onComplete: @escaping (IGDBResult<[GameMode]>)->Void, withIDs ids: [UInt64]) {
+        let idsString = createIDList(from: ids)
+        let url = "\(IGDB.BASE_URL)\(IGDB.GAME_MODES)\(idsString)/"
+        let parameters = ["fields": "id,name"]
+        
+        get(onComplete, withURL: url, withParams: parameters, withHeaders: IGDB.HEADERS)
+    }
+    
+    public func getPlayerPerspectives(_ onComplete: @escaping (IGDBResult<[PlayerPerspective]>)->Void, withIDs ids: [UInt64]) {
+        let idsString = createIDList(from: ids)
+        let url = "\(IGDB.BASE_URL)\(IGDB.PLAYER_PERSPECTIVES)\(idsString)/"
         let parameters = ["fields": "id,name"]
         
         get(onComplete, withURL: url, withParams: parameters, withHeaders: IGDB.HEADERS)
@@ -323,7 +347,7 @@ class IGDB: GameAPI {
             return
         } else {
             let url =  IGDB.BASE_URL + IGDB.GAMES + "\(game.id)"
-            let parameters: Parameters = ["fields": "first_release_date,release_dates,genres,developers,publishers,screenshots,summary,status,category,franchise,collection"]
+            let parameters: Parameters = ["fields": "first_release_date,release_dates,genres,developers,publishers,screenshots,summary,status,category,franchise,collection,game_modes,player_perspectives"]
             
             Alamofire.request(url, parameters: parameters, headers: IGDB.HEADERS).validate().responseJSON { response in
                 switch response.result {
@@ -516,6 +540,30 @@ class IGDB: GameAPI {
                         }
                     }
                 }, withIDs: [collection])
+            } else {
+                onComplete(.failure(.noData))
+            }
+        }, withOnFailure: { error in
+            onComplete(.failure(error))
+        })
+    }
+    
+    public func getGameModes(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[GameMode]>)->Void) {
+        refreshCachedGameIDs(forGame: game, withOnSuccess: { gameIDs in
+            if let modes = gameIDs.gameModes {
+                self.getGameModes(onComplete, withIDs: modes)
+            } else {
+                onComplete(.failure(.noData))
+            }
+        }, withOnFailure: { error in
+            onComplete(.failure(error))
+        })
+    }
+    
+    public func getPlayerPerspectives(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[PlayerPerspective]>)->Void) {
+        refreshCachedGameIDs(forGame: game, withOnSuccess: { gameIDs in
+            if let perspectives = gameIDs.playerPerspectives {
+                self.getPlayerPerspectives(onComplete, withIDs: perspectives)
             } else {
                 onComplete(.failure(.noData))
             }

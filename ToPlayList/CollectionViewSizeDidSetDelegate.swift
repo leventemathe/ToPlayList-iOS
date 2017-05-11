@@ -11,5 +11,5 @@ import UIKit
 
 protocol CollectionViewSizeDidSetDelegate: class {
 
-    func didSetSize(numberOfItems: Int, numberOfRows: Int, sizeOfItems: CGSize)
+    func didSetSize(numberOfItems: Int, numberOfRows: Int, sizeOfItems: CGSize, sizeOfMargins: CGSize)
 }

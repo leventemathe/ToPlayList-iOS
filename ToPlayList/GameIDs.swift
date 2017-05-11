@@ -27,6 +27,9 @@ struct GameIDs {
     var franchise: UInt64?
     var collection: UInt64?
     
+    var gameModes: [UInt64]?
+    var playerPerspectives: [UInt64]?
+    
     init(_ id: UInt64) {
         self.id = id
     }

@@ -319,7 +319,7 @@
                                         </constraints>
                                     </view>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8H2-nN-eDd">
-                                        <rect key="frame" x="8" y="128.5" width="304" height="23.5"/>
+                                        <rect key="frame" x="8" y="132" width="304" height="20"/>
                                         <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -485,7 +485,7 @@
                                                 </constraints>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aw5-Re-hAD">
-                                                <rect key="frame" x="114" y="58.5" width="198" height="23.5"/>
+                                                <rect key="frame" x="114" y="62" width="198" height="20"/>
                                                 <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="20"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -549,19 +549,19 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="89"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CFP-5D-6eC">
-                                                                                <rect key="frame" x="8" y="8" width="40.5" height="17.5"/>
+                                                                                <rect key="frame" x="8" y="8" width="52" height="15"/>
                                                                                 <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="15"/>
                                                                                 <color key="textColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B6e-9T-2Iw">
-                                                                                <rect key="frame" x="8" y="28.5" width="72" height="19.5"/>
+                                                                                <rect key="frame" x="8" y="26" width="72" height="19.5"/>
                                                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yqb-Ft-MHO">
-                                                                                <rect key="frame" x="8" y="51" width="77" height="30"/>
+                                                                                <rect key="frame" x="8" y="48.5" width="77" height="32.5"/>
                                                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
                                                                                 <state key="normal" title="Show more...">
                                                                                     <color key="titleColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -598,14 +598,14 @@
                                                                                 <color key="textColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dpq-g9-ur6">
+                                                                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dpq-g9-ur6">
                                                                                 <rect key="frame" x="8" y="33.5" width="304" height="80"/>
                                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="80" id="0MI-wB-DNx"/>
                                                                                 </constraints>
                                                                                 <connections>
-                                                                                    <segue destination="Jo4-WI-j2r" kind="embed" id="XZI-P6-2Ix"/>
+                                                                                    <segue destination="Jo4-WI-j2r" kind="embed" id="9Ux-vf-sK9"/>
                                                                                 </connections>
                                                                             </containerView>
                                                                         </subviews>
@@ -896,7 +896,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="o1g-ft-PLL">
-                                <rect key="frame" x="105" y="105" width="111" height="29"/>
+                                <rect key="frame" x="104.5" y="105" width="111" height="29"/>
                                 <segments>
                                     <segment title="ToPlay"/>
                                     <segment title="Played"/>
@@ -1335,13 +1335,13 @@
                                 <rect key="frame" x="48" y="224" width="224" height="120"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This list is empty. " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V5c-z4-V1N">
-                                        <rect key="frame" x="32.5" y="0.0" width="159" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="224" height="26.5"/>
                                         <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="20"/>
                                         <color key="textColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe left or right on a game or game cover to add it to a list!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="09O-Kn-A3U">
-                                        <rect key="frame" x="0.0" y="30" width="224" height="90"/>
+                                        <rect key="frame" x="0.0" y="26.5" width="224" height="93.5"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -1549,12 +1549,13 @@
         <!--BadgeVC-->
         <scene sceneID="5gX-Eg-LJU">
             <objects>
-                <viewController restorationIdentifier="BadgeVC" storyboardIdentifier="BadgeVC" id="Jo4-WI-j2r" customClass="BadgeVC" customModule="ToPlayList" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Byp-Vd-fhv">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="git-Tq-sbi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController restorationIdentifier="BadgeVC" storyboardIdentifier="BadgeVC" automaticallyAdjustsScrollViewInsets="NO" id="Jo4-WI-j2r" customClass="BadgeVC" customModule="ToPlayList" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="Byp-Vd-fhv">
+                        <rect key="frame" x="0.0" y="0.0" width="304" height="80"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="OcQ-cb-F5F">
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="OcQ-cb-F5F">
                             <size key="itemSize" width="133" height="61"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -1589,12 +1590,9 @@
                             </collectionViewCell>
                         </cells>
                     </collectionView>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="80"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="git-Tq-sbi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4668.75" y="735.21126760563379"/>
+            <point key="canvasLocation" x="4669" y="726"/>
         </scene>
     </scenes>
     <resources>
@@ -1612,7 +1610,7 @@
         <image name="to_play_list_bg" width="689" height="713"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OMc-yb-7M5"/>
         <segue reference="FhM-4C-LJm"/>
+        <segue reference="6Wm-R3-zaj"/>
     </inferredMetricsTieBreakers>
 </document>

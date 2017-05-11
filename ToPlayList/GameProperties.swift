@@ -13,3 +13,7 @@ class Company: IdentifiableObject { }
 class Franchise: IdentifiableObject { }
 
 class Collection: IdentifiableObject { }
+
+class PlayerPerspective: IdentifiableObject { }
+
+class GameMode: IdentifiableObject { }

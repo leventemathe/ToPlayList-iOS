@@ -111,6 +111,13 @@ class IGDBJSON {
                 gameIDs.collection = collection
             }
             
+            if let gameModes = obj["game_modes"] as? [UInt64] {
+                gameIDs.gameModes = gameModes
+            }
+            if let playerPerspectives = obj["player_perspectives"] as? [UInt64] {
+                gameIDs.playerPerspectives = playerPerspectives
+            }
+            
             return .success(gameIDs)
         }
         return .failure(.json)

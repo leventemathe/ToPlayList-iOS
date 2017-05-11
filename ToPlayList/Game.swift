@@ -33,6 +33,9 @@ class Game: IdentifiableObject {
     var franchise: Franchise?
     var collection: Collection?
     
+    var playerPerspectives: [PlayerPerspective]?
+    var gameModes: [GameMode]?
+    
     var firstReleaseDate: Double?
     
     required init(_ id: UInt64, withName name: String) {
@@ -96,6 +99,20 @@ class Game: IdentifiableObject {
     var publisher: Company? {
         if publishers != nil && publishers!.count > 0 {
             return publishers![0]
+        }
+        return nil
+    }
+    
+    var gameMode: GameMode? {
+        if gameModes != nil && gameModes!.count > 0 {
+            return gameModes![0]
+        }
+        return nil
+    }
+    
+    var playerPerspective: PlayerPerspective? {
+        if playerPerspectives != nil && playerPerspectives!.count > 0 {
+            return playerPerspectives![0]
         }
         return nil
     }

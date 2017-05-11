@@ -54,6 +54,8 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         static let CATEGORY = "category"
         static let FRANCHISE = "franchise"
         static let COLLECTION = "collection"
+        static let GAME_MODES = "game_modes"
+        static let PLAYER_PERSPECTIVES = "player_perspectives"
         
         private var listener: OnFinishedListener
         
@@ -67,7 +69,9 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
                       DetailsLoaded.STATUS: false,
                       DetailsLoaded.CATEGORY: false,
                       DetailsLoaded.FRANCHISE: false,
-                      DetailsLoaded.COLLECTION: false] {
+                      DetailsLoaded.COLLECTION: false,
+                      DetailsLoaded.GAME_MODES: false,
+                      DetailsLoaded.PLAYER_PERSPECTIVES: false] {
             didSet {
                 if isFullyLoaded() {
                     listener()
@@ -170,9 +174,12 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         badgeVC?.constraintsSetDelegate = self
     }
     
-    func didSetSize(numberOfItems: Int, numberOfRows: Int, sizeOfItems: CGSize) {
-        let height = sizeOfItems.height * CGFloat(numberOfRows)
+    func didSetSize(numberOfItems: Int, numberOfRows: Int, sizeOfItems: CGSize, sizeOfMargins: CGSize) {
+        let height = sizeOfItems.height * CGFloat(numberOfRows) +
+                     sizeOfMargins.height * CGFloat(numberOfRows-1)
         badgeVCHeightConstraint.constant = height
+        print("details vc width and heigth: \(view.frame.width), \(view.frame.height)")
+        print("badge vc width and heigth: \(badgeVC!.view.frame.width), \(badgeVC!.view.frame.height)")
     }
     
     // STAR AND LISTENERS
@@ -336,6 +343,8 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         downloadCategory()
         downloadFranchise()
         downloadCollection()
+        downloadGameModes()
+        downloadPlayerPerspectives()
     }
     
     private func downloadBasics() {
@@ -602,6 +611,68 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     private func setCollection() {
         if let string = game.collection?.name {
             buildFranchiseCollectionString(string)
+        }
+    }
+    
+    private func downloadGameModes() {
+        api.getGameModes(forGame: game, withOnComplete: { result in
+            switch result {
+            case .success(let modes):
+                self.game.gameModes = modes
+                self.setGameModes()
+                self.detailsLoaded.loaded[DetailsLoaded.GAME_MODES] = true
+            case .failure(let error):
+                switch error {
+                case .noInternet:
+                    self.handleLoadingError(Alerts.NETWORK_ERROR)
+                case .server, .json, .url:
+                    self.handleLoadingError(Alerts.SERVER_ERROR)
+                case .noData:
+                    self.setGameModes()
+                    self.detailsLoaded.loaded[DetailsLoaded.GAME_MODES] = true
+                }
+            }
+        })
+    }
+    
+    private func downloadPlayerPerspectives() {
+        api.getPlayerPerspectives(forGame: game, withOnComplete: { result in
+            switch result {
+            case .success(let perspectives):
+                self.game.playerPerspectives = perspectives
+                self.setPlayerPerspectives()
+                self.detailsLoaded.loaded[DetailsLoaded.PLAYER_PERSPECTIVES] = true
+            case .failure(let error):
+                switch error {
+                case .noInternet:
+                    self.handleLoadingError(Alerts.NETWORK_ERROR)
+                case .server, .json, .url:
+                    self.handleLoadingError(Alerts.SERVER_ERROR)
+                case .noData:
+                    self.setPlayerPerspectives()
+                    self.detailsLoaded.loaded[DetailsLoaded.PLAYER_PERSPECTIVES] = true
+                }
+            }
+        })
+    }
+    
+    private func setGameModes() {
+        if game.gameModes != nil && game.gameModes!.count > 0 {
+            var strings = [String]()
+            for gameMode in game.gameModes! {
+                strings.append(gameMode.name)
+            }
+            badgeVC?.add(strings: strings)
+        }
+    }
+    
+    private func setPlayerPerspectives() {
+        if game.playerPerspectives != nil && game.playerPerspectives!.count > 0 {
+            var strings = [String]()
+            for perspective in game.playerPerspectives! {
+                strings.append(perspective.name)
+            }
+            badgeVC?.add(strings: strings)
         }
     }
     
