@@ -8,8 +8,10 @@
 
 import UIKit
 
-class BadgeVC: UICollectionViewController, IdentifiableVC, UICollectionViewDelegateFlowLayout {
+class BadgeVC: UIViewController, UICollectionViewDataSource, IdentifiableVC, UICollectionViewDelegateFlowLayout {
 
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     weak var constraintsSetDelegate: CollectionViewSizeDidSetDelegate?
     
     private var strings = [String]() {
@@ -26,15 +28,20 @@ class BadgeVC: UICollectionViewController, IdentifiableVC, UICollectionViewDeleg
         self.strings.append(contentsOf: strings)
     }
     
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+    override func viewDidLoad() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return strings.count
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let badgeCell = collectionView.dequeueReusableCell(withReuseIdentifier: BadgeCell.reuseIdentifier, for: indexPath) as? BadgeCell {
             badgeCell.update(strings[indexPath.row])
             return badgeCell

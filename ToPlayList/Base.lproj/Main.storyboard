@@ -605,7 +605,7 @@
                                                                                     <constraint firstAttribute="height" constant="80" id="0MI-wB-DNx"/>
                                                                                 </constraints>
                                                                                 <connections>
-                                                                                    <segue destination="Jo4-WI-j2r" kind="embed" id="9Ux-vf-sK9"/>
+                                                                                    <segue destination="eur-oR-AJr" kind="embed" id="wSV-ha-NiR"/>
                                                                                 </connections>
                                                                             </containerView>
                                                                         </subviews>
@@ -1371,6 +1371,73 @@
             </objects>
             <point key="canvasLocation" x="3678" y="1200"/>
         </scene>
+        <!--BadgeVC-->
+        <scene sceneID="PKs-2h-Mhg">
+            <objects>
+                <viewController restorationIdentifier="BadgeVC" storyboardIdentifier="BadgeVC" automaticallyAdjustsScrollViewInsets="NO" id="eur-oR-AJr" customClass="BadgeVC" customModule="ToPlayList" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cHx-r7-m8Z"/>
+                        <viewControllerLayoutGuide type="bottom" id="AV2-zn-Xkc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OGb-IX-8NG">
+                        <rect key="frame" x="0.0" y="0.0" width="304" height="80"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="mGS-n1-qTZ">
+                                <rect key="frame" x="0.0" y="0.0" width="304" height="80"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="9uq-BA-gBm">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="BadgeCell" id="Pa6-jc-fSg" customClass="BadgeCell" customModule="ToPlayList" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LbZ-aY-sNT" customClass="BadgeLabel" customModule="ToPlayList" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <color key="backgroundColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="12"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="LbZ-aY-sNT" secondAttribute="trailing" id="2vG-ug-IoL"/>
+                                            <constraint firstAttribute="bottom" secondItem="LbZ-aY-sNT" secondAttribute="bottom" id="GCb-O7-kld"/>
+                                            <constraint firstItem="LbZ-aY-sNT" firstAttribute="top" secondItem="Pa6-jc-fSg" secondAttribute="top" id="nq9-sS-bvW"/>
+                                            <constraint firstItem="LbZ-aY-sNT" firstAttribute="leading" secondItem="Pa6-jc-fSg" secondAttribute="leading" id="s7l-24-ZKv"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="label" destination="LbZ-aY-sNT" id="bue-6C-IRX"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="mGS-n1-qTZ" secondAttribute="trailing" id="5BY-je-rA1"/>
+                            <constraint firstItem="mGS-n1-qTZ" firstAttribute="leading" secondItem="OGb-IX-8NG" secondAttribute="leading" id="6uR-P3-tpa"/>
+                            <constraint firstItem="AV2-zn-Xkc" firstAttribute="top" secondItem="mGS-n1-qTZ" secondAttribute="bottom" id="CgF-Qh-xlR"/>
+                            <constraint firstItem="mGS-n1-qTZ" firstAttribute="top" secondItem="cHx-r7-m8Z" secondAttribute="bottom" id="O5E-jM-MQX"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="mGS-n1-qTZ" id="7RO-72-uNo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WsI-gO-wfd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4669" y="679"/>
+        </scene>
         <!--Played ListVC-->
         <scene sceneID="CU3-BN-FTg">
             <objects>
@@ -1545,54 +1612,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YvZ-W2-Scd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3678" y="1881"/>
-        </scene>
-        <!--BadgeVC-->
-        <scene sceneID="5gX-Eg-LJU">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="git-Tq-sbi" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController restorationIdentifier="BadgeVC" storyboardIdentifier="BadgeVC" automaticallyAdjustsScrollViewInsets="NO" id="Jo4-WI-j2r" customClass="BadgeVC" customModule="ToPlayList" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="Byp-Vd-fhv">
-                        <rect key="frame" x="0.0" y="0.0" width="304" height="80"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="OcQ-cb-F5F">
-                            <size key="itemSize" width="133" height="61"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="BadgeCell" id="rQh-HT-Kmx" customClass="BadgeCell" customModule="ToPlayList" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="133" height="61"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="133" height="61"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b4O-cf-22z" customClass="BadgeLabel" customModule="ToPlayList" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="133" height="61"/>
-                                            <color key="backgroundColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
-                                            <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="12"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </view>
-                                <constraints>
-                                    <constraint firstItem="b4O-cf-22z" firstAttribute="leading" secondItem="rQh-HT-Kmx" secondAttribute="leading" id="5lU-eJ-azi"/>
-                                    <constraint firstAttribute="trailing" secondItem="b4O-cf-22z" secondAttribute="trailing" id="IcC-FT-Qld"/>
-                                    <constraint firstAttribute="bottom" secondItem="b4O-cf-22z" secondAttribute="bottom" id="ln2-Wa-S2l"/>
-                                    <constraint firstItem="b4O-cf-22z" firstAttribute="top" secondItem="rQh-HT-Kmx" secondAttribute="top" id="xqc-kd-00V"/>
-                                </constraints>
-                                <connections>
-                                    <outlet property="label" destination="b4O-cf-22z" id="X0q-J5-Jom"/>
-                                </connections>
-                            </collectionViewCell>
-                        </cells>
-                    </collectionView>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="4669" y="726"/>
         </scene>
     </scenes>
     <resources>
