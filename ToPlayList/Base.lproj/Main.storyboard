@@ -15,6 +15,85 @@
         </array>
     </customFonts>
     <scenes>
+        <!--Search-->
+        <scene sceneID="H2H-iy-FR1">
+            <objects>
+                <navigationController id="Awp-TJ-ELN" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Search" id="TJk-wP-6ZP"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="h5p-O4-c0U">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="22"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="dPk-Dg-WJy" kind="relationship" relationship="rootViewController" id="XS7-5F-HBR"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z7w-k9-eH0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1033" y="-708"/>
+        </scene>
+        <!--Search-->
+        <scene sceneID="CZV-IG-ApD">
+            <objects>
+                <viewController restorationIdentifier="SearchVC" storyboardIdentifier="SearchVC" automaticallyAdjustsScrollViewInsets="NO" id="dPk-Dg-WJy" customClass="SearchVC" customModule="ToPlayList" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="NRq-nX-1ZJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="Qdd-2C-Q3B"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2WG-wW-Wfy">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="57" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jum-f4-590">
+                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search for games..." translucent="NO" id="dHg-MM-qlY">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="barTintColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <scopeButtonTitles>
+                                        <string>Title</string>
+                                        <string>Title</string>
+                                    </scopeButtonTitles>
+                                    <connections>
+                                        <outlet property="delegate" destination="jum-f4-590" id="84i-hN-Qai"/>
+                                    </connections>
+                                </searchBar>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchCell" rowHeight="57" id="Jpm-aW-tq2" customClass="SearchCell" customModule="ToPlayList" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="72" width="320" height="57"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jpm-aW-tq2" id="hLo-aL-FAj">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="56.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="jum-f4-590" secondAttribute="trailing" id="O31-DT-Vha"/>
+                            <constraint firstItem="jum-f4-590" firstAttribute="leading" secondItem="2WG-wW-Wfy" secondAttribute="leading" id="aMl-J3-LTD"/>
+                            <constraint firstItem="Qdd-2C-Q3B" firstAttribute="top" secondItem="jum-f4-590" secondAttribute="bottom" id="hSF-s5-H2Z"/>
+                            <constraint firstItem="jum-f4-590" firstAttribute="top" secondItem="NRq-nX-1ZJ" secondAttribute="bottom" id="nvb-C4-piw"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Search" id="XAV-pr-Duq"/>
+                    <connections>
+                        <outlet property="searchBar" destination="dHg-MM-qlY" id="15z-ct-d7O"/>
+                        <outlet property="tableView" destination="jum-f4-590" id="7H2-Wf-jZS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b8q-6p-89u" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1970.625" y="-713.02816901408448"/>
+        </scene>
         <!--Newest Releases VC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -300,7 +379,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AHD-U1-sds">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="efa-6i-V9F" customClass="DetailsBigScreenshot" customModule="ToPlayList" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
@@ -534,7 +613,7 @@
                                         </constraints>
                                     </view>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8NQ-RT-MJ5">
-                                        <rect key="frame" x="0.0" y="274" width="320" height="294"/>
+                                        <rect key="frame" x="0.0" y="274" width="320" height="245"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A8L-fO-z1X">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="800"/>
@@ -767,6 +846,7 @@
                         <segue destination="FSF-44-oZj" kind="relationship" relationship="viewControllers" id="bcG-Lr-0CT"/>
                         <segue destination="gaI-Tc-Uxl" kind="relationship" relationship="viewControllers" id="Zvt-5d-Qc8"/>
                         <segue destination="sBD-RD-Qe6" kind="relationship" relationship="viewControllers" id="ugm-Kr-KMj"/>
+                        <segue destination="Awp-TJ-ELN" kind="relationship" relationship="viewControllers" id="pks-GR-Hh8"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jaa-gG-gzA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1630,6 +1710,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="FhM-4C-LJm"/>
-        <segue reference="6Wm-R3-zaj"/>
+        <segue reference="a7x-K3-wKb"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2ECC62947C6D486DCF1C22BF /* Pods_ToPlayList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1015AB877BDCDC510C82BC /* Pods_ToPlayList.framework */; };
 		4A1CC3C7C0A5B8E8CC4E8767 /* Pods_ToPlayList_ToPlayListUnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87CF1429DC57C621EF42890E /* Pods_ToPlayList_ToPlayListUnitTests.framework */; };
+		D709009A1EC5B80600A316BE /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70900991EC5B80600A316BE /* SearchVC.swift */; };
+		D709009D1EC5B89D00A316BE /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D709009C1EC5B89D00A316BE /* SearchCell.swift */; };
 		D70B03231E0C1F9500F67E7A /* IGDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70B03221E0C1F9500F67E7A /* IGDB.swift */; };
 		D70DC3171E803E430080DBAA /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70DC3161E803E430080DBAA /* Register.swift */; };
 		D70DC31F1E8048DA0080DBAA /* Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70DC31E1E8048DA0080DBAA /* Lists.swift */; };
@@ -106,6 +108,8 @@
 		87CF1429DC57C621EF42890E /* Pods_ToPlayList_ToPlayListUnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ToPlayList_ToPlayListUnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B84B20D64D553B9B36723B6B /* Pods-ToPlayList-ToPlayListUnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToPlayList-ToPlayListUnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ToPlayList-ToPlayListUnitTests/Pods-ToPlayList-ToPlayListUnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CE1015AB877BDCDC510C82BC /* Pods_ToPlayList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ToPlayList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D70900991EC5B80600A316BE /* SearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
+		D709009C1EC5B89D00A316BE /* SearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		D70B03221E0C1F9500F67E7A /* IGDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGDB.swift; sourceTree = "<group>"; };
 		D70DC3161E803E430080DBAA /* Register.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
 		D70DC31C1E8048DA0080DBAA /* ToPlayListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToPlayListUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -230,6 +234,22 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		D70900981EC5B7DB00A316BE /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				D70900991EC5B80600A316BE /* SearchVC.swift */,
+			);
+			name = Search;
+			sourceTree = "<group>";
+		};
+		D709009B1EC5B87000A316BE /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				D709009C1EC5B89D00A316BE /* SearchCell.swift */,
+			);
+			name = Search;
+			sourceTree = "<group>";
+		};
 		D70B03211E0C1F8300F67E7A /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -314,6 +334,7 @@
 		D726BC971E0AC05B00D6C9CD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D70900981EC5B7DB00A316BE /* Search */,
 				D7FADEFC1EC09F0D0006B4E4 /* RegisterLogin */,
 				D7FADEFA1EC09EE80006B4E4 /* Releases */,
 				D7FADEFB1EC09EFD0006B4E4 /* Details */,
@@ -329,6 +350,7 @@
 			children = (
 				D71981241E26F21A005823C2 /* Nibs */,
 				D71981231E26F206005823C2 /* Protocols */,
+				D709009B1EC5B87000A316BE /* Search */,
 				D7FADEF81EC09E9C0006B4E4 /* RegisterLogin */,
 				D7FADEF61EC09E6C0006B4E4 /* Releases */,
 				D7FADEF71EC09E880006B4E4 /* Details */,
@@ -748,6 +770,7 @@
 				D7C3A1701E0DA2DF0091279C /* GameProperties.swift in Sources */,
 				D71981221E26F1D3005823C2 /* ListImageView.swift in Sources */,
 				D7DA82D41E93CAB200F9205E /* Blurred.swift in Sources */,
+				D709009A1EC5B80600A316BE /* SearchVC.swift in Sources */,
 				D7A0E6FD1E7BDDCD00A70989 /* ToPlayListCell.swift in Sources */,
 				D7A0E7011E7BE82800A70989 /* OnPanDelegate.swift in Sources */,
 				D7A0E6FF1E7BDDDC00A70989 /* PlayedListCell.swift in Sources */,
@@ -790,6 +813,7 @@
 				D74AC7DA1E3919B700C37A90 /* RegisterVC.swift in Sources */,
 				D7A0E7031E7BEA8A00A70989 /* SubListVC.swift in Sources */,
 				D72E66BA1E619D2100BED388 /* PlayedListVC.swift in Sources */,
+				D709009D1EC5B89D00A316BE /* SearchCell.swift in Sources */,
 				D7975D081E586255003B64E6 /* ErrorHandlerDelegate.swift in Sources */,
 				D719812C1E26F89A005823C2 /* LoginScene.swift in Sources */,
 				D76606FD1E13123400D5979C /* RoundedCorners.swift in Sources */,
