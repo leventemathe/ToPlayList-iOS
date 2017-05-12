@@ -15,6 +15,8 @@ class SearchVC: UIViewController, UISearchBarDelegate {
     
     override func viewDidLoad() {
         searchBar.delegate = self
+        searchBar.setImage(#imageLiteral(resourceName: "clear_default"), for: .clear, state: .normal)
+        searchBar.setImage(#imageLiteral(resourceName: "clear_default"), for: .clear, state: .highlighted)
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
