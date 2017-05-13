@@ -72,7 +72,6 @@ class ListVC: UIViewController, IdentifiableVC {
         playedListVC.view.frame.size = listContainerView.frame.size
         listContainerView.addSubview(playedListVC.view)
         playedListVC.didMove(toParentViewController: self)
-        //TODO set loading animation delegate
     }
     
     func clearToPlayListContainer() {

@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
+    
+    private var loadingAnimationView: NVActivityIndicatorView?
     
     private var api: GameAPI = IGDB.instance
     
@@ -22,8 +25,11 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
     }
     
     override func viewDidLoad() {
+        // this prevents empty cells being shown
+        tableView.tableFooterView = UIView()
         setupSearchBar()
         setupTableView()
+        setupLoadingAnimation()
     }
     
     private func setupSearchBar() {
@@ -35,6 +41,20 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    private func setupLoadingAnimation() {
+        let width: CGFloat = 80.0
+        let height: CGFloat = width
+        
+        let x = view.bounds.size.width / 2.0 - width / 2.0
+        let y = view.bounds.size.height / 2.0 - height / 2.0 - 50.0
+        
+        let frame = CGRect(x: x, y: y, width: width, height: height)
+        
+        loadingAnimationView = NVActivityIndicatorView(frame: frame, type: .ballClipRotate, color: UIColor.MyCustomColors.orange, padding: 0.0)
+        view.addSubview(loadingAnimationView!)
+        loadingAnimationView!.stopAnimating()
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -50,20 +70,27 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
             let searchString = string.replacingOccurrences(of: " ", with: "+")
             search(searchString)
         }
+        clearTableView()
         stepOut()
+        loadingAnimationView?.startAnimating()
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText == "" {
-            games = [Game]()
+            clearTableView()
         }
     }
     
+    private func clearTableView() {
+        games = [Game]()
+    }
+    
     private func search(_ string: String) {
-        api.getGames(bySearchString: string, withLimit: 10, withOnComplete: { result in
+        api.getGames(bySearchString: string, withLimit: 30, withOnComplete: { result in
             switch result {
             case .success(let games):
                 self.games = games
+                self.loadingAnimationView?.stopAnimating()
             case .failure(let error):
                 switch error {
                 case .json, .server, .url:
@@ -91,6 +118,11 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if games.count == 0 {
+            tableView.separatorStyle = .none
+        } else {
+            tableView.separatorStyle = .singleLine
+        }
         return games.count
     }
     
