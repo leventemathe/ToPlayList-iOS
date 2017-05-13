@@ -53,6 +53,12 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
         stepOut()
     }
     
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText == "" {
+            games = [Game]()
+        }
+    }
+    
     private func search(_ string: String) {
         api.getGames(bySearchString: string, withLimit: 10, withOnComplete: { result in
             switch result {
