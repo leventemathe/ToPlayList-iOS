@@ -21,11 +21,18 @@ class BadgeVC: UIViewController, UICollectionViewDataSource, IdentifiableVC, UIC
     }
     
     func add(string: String) {
+        if strings.contains(string) {
+            return
+        }
         strings.append(string)
     }
     
     func add(strings: [String]) {
-        self.strings.append(contentsOf: strings)
+        for string in strings {
+            if !self.strings.contains(string) {
+                self.strings.append(string)
+            }
+        }
     }
     
     override func viewDidLoad() {
