@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchCell: UITableViewCell {
+class SearchCell: UITableViewCell, ReusableView {
 
 
 }

@@ -18,6 +18,18 @@ class IGDBJSON {
     
     private init() {}
     
+    func getGamesBySearch(_ json: JSON) -> IGDBResult<[Game]> {
+        var games = [Game]()
+        for any in json {
+            if let obj = any as? JSONPair, let game = setGame(fromObj: obj) {
+                games.append(game)
+            } else {
+                return IGDBResult.failure(IGDBError.json)
+            }
+        }
+        return IGDBResult.success(games)
+    }
+    
     func getNewestGameList(_ json: JSON) -> IGDBResult<GameData> {
         var result = GameData()
         for any in json {

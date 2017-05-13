@@ -47,10 +47,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="57" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jum-f4-590">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eRQ-1R-hJZ">
                                 <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search for games..." translucent="NO" id="dHg-MM-qlY">
+                                <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search for games..." translucent="NO" id="1LR-O0-mUV">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -60,34 +60,34 @@
                                         <string>Title</string>
                                         <string>Title</string>
                                     </scopeButtonTitles>
-                                    <connections>
-                                        <outlet property="delegate" destination="jum-f4-590" id="84i-hN-Qai"/>
-                                    </connections>
                                 </searchBar>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchCell" rowHeight="57" id="Jpm-aW-tq2" customClass="SearchCell" customModule="ToPlayList" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="320" height="57"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchCell" id="Hgn-QR-XgW" customClass="SearchCell" customModule="ToPlayList" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="72" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jpm-aW-tq2" id="hLo-aL-FAj">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="56.5"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hgn-QR-XgW" id="atP-7a-oRe">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="js0-2B-ycQ" kind="show" id="v2d-kz-Jth"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="jum-f4-590" secondAttribute="trailing" id="O31-DT-Vha"/>
-                            <constraint firstItem="jum-f4-590" firstAttribute="leading" secondItem="2WG-wW-Wfy" secondAttribute="leading" id="aMl-J3-LTD"/>
-                            <constraint firstItem="Qdd-2C-Q3B" firstAttribute="top" secondItem="jum-f4-590" secondAttribute="bottom" id="hSF-s5-H2Z"/>
-                            <constraint firstItem="jum-f4-590" firstAttribute="top" secondItem="NRq-nX-1ZJ" secondAttribute="bottom" id="nvb-C4-piw"/>
+                            <constraint firstItem="eRQ-1R-hJZ" firstAttribute="leading" secondItem="2WG-wW-Wfy" secondAttribute="leading" id="437-9f-YkR"/>
+                            <constraint firstItem="eRQ-1R-hJZ" firstAttribute="top" secondItem="NRq-nX-1ZJ" secondAttribute="bottom" id="Hwf-pb-iGi"/>
+                            <constraint firstAttribute="trailing" secondItem="eRQ-1R-hJZ" secondAttribute="trailing" id="PYk-v3-Kms"/>
+                            <constraint firstItem="Qdd-2C-Q3B" firstAttribute="top" secondItem="eRQ-1R-hJZ" secondAttribute="bottom" id="Zb1-sq-Hbs"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Search" id="XAV-pr-Duq"/>
                     <connections>
-                        <outlet property="searchBar" destination="dHg-MM-qlY" id="15z-ct-d7O"/>
-                        <outlet property="tableView" destination="jum-f4-590" id="7H2-Wf-jZS"/>
+                        <outlet property="searchBar" destination="1LR-O0-mUV" id="VRw-i7-Edl"/>
+                        <outlet property="tableView" destination="eRQ-1R-hJZ" id="JcG-Xw-zlP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b8q-6p-89u" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1709,7 +1709,7 @@
         <image name="to_play_list_bg" width="689" height="713"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="v2d-kz-Jth"/>
         <segue reference="FhM-4C-LJm"/>
-        <segue reference="a7x-K3-wKb"/>
     </inferredMetricsTieBreakers>
 </document>

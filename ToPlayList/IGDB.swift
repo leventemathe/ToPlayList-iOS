@@ -48,6 +48,10 @@ enum IGDBError: Error {
 
 protocol GameAPI {
 
+    func getGames(bySearchString search: String, withLimit limit: Int, withOffset offset: Int, withOnComplete onComplete: @escaping (IGDBResult<[Game]>)->Void)
+    func getGames(bySearchString search: String, withLimit limit: Int, withOnComplete onComplete: @escaping (IGDBResult<[Game]>)->Void)
+    func getGames(bySearchString search: String, withOnComplete onComplete: @escaping (IGDBResult<[Game]>)->Void)
+
     func getGamesList(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, withLimit limit: Int, withOffset offset: Int, withDate date: Double)
     func getGamesList(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, withLimit limit: Int, withDate date: Double)
     
@@ -141,6 +145,39 @@ class IGDB: GameAPI {
     private static let HEADERS: HTTPHeaders = [
         IGDBKeys.BASE_KEY.key: IGDBKeys.BASE_KEY.value
     ]
+    
+    func getGames(bySearchString search: String, withLimit limit: Int, withOffset offset: Int, withOnComplete onComplete: @escaping (IGDBResult<[Game]>)->Void) {
+        let url =  IGDB.BASE_URL + IGDB.GAMES
+        let parameters: Parameters = ["fields": "id,name,first_release_date,cover",
+                                      "limit": limit,
+                                      "offset": offset,
+                                      "search": search]
+        
+        Alamofire.request(url, parameters: parameters, headers: IGDB.HEADERS).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                if let json = value as? JSON {
+                    let result = IGDBJSON.instance.getGamesBySearch(json)
+                    switch result {
+                    case .success(let games):
+                        onComplete(.success(games))
+                    case .failure(let error):
+                        onComplete(.failure(error))
+                    }
+                }
+            case .failure(_):
+                onComplete(IGDBResult.failure(IGDBError.generateError(fromResponse: response)))
+            }
+        }
+    }
+    
+    func getGames(bySearchString search: String, withLimit limit: Int, withOnComplete onComplete: @escaping (IGDBResult<[Game]>)->Void) {
+        getGames(bySearchString: search, withLimit: limit, withOffset: 0, withOnComplete: onComplete)
+    }
+    
+    func getGames(bySearchString search: String, withOnComplete onComplete: @escaping (IGDBResult<[Game]>)->Void) {
+        getGames(bySearchString: search, withLimit: 10, withOffset: 0, withOnComplete: onComplete)
+    }
     
     public func getGamesList(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, withLimit limit: Int, withOffset offset: Int, withDate date: Double = Date().timeIntervalSince1970) {
         let url =  IGDB.BASE_URL + IGDB.GAMES
