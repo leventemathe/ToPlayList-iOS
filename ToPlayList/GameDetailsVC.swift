@@ -9,6 +9,7 @@
 import UIKit
 import NVActivityIndicatorView
 import Kingfisher
+import NYTPhotoViewer
 
 struct GameInExclusiveLists {
     
@@ -45,6 +46,8 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         
         static let LIST_STATE = "listState"
         static let COVER = "cover"
+        static let BIG_SCREENSHOTS = "bigScreenshots"
+        static let SMALL_SCREENSHOTS = "smallScreenshots"
         static let BIG_SCREENSHOT = "bigScreenshot"
         static let GENRE = "genre"
         static let DEVELOPER = "developer"
@@ -61,6 +64,8 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         
         var loaded = [DetailsLoaded.LIST_STATE: false,
                       DetailsLoaded.COVER: false,
+                      DetailsLoaded.BIG_SCREENSHOTS: false,
+                      DetailsLoaded.SMALL_SCREENSHOTS: false,
                       DetailsLoaded.BIG_SCREENSHOT: false,
                       DetailsLoaded.GENRE: false,
                       DetailsLoaded.DEVELOPER: false,
@@ -132,17 +137,21 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     
     @IBOutlet weak var badgeVCContainer: UIView!
     @IBOutlet weak var badgeVCHeightConstraint: NSLayoutConstraint!
-    private var badgeVC: BadgeVC?
+    var badgeVC: BadgeVC?
     
     
     @IBOutlet weak var franchiseCollectionContainer: ContainerView!
     @IBOutlet weak var franchiseCollectionLabel: UILabel!
+    
+    @IBOutlet weak var screenshotsContainer: UIView!
+    var screenshotVC: NYTPhotosViewController?
     
     var game: Game!
     private var api: GameAPI!
     
     override func viewDidLoad() {
         setupScrollView()
+        setupScreenshotsVC()
         setupGameAPI()
         setupAnimation()
         startLoading()
@@ -174,12 +183,19 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         badgeVC?.constraintsSetDelegate = self
     }
     
+    private func setupScreenshotsVC() {
+        screenshotVC = NYTPhotosViewController()
+        
+        addChildViewController(screenshotVC!)
+        screenshotVC!.view.frame.size = screenshotsContainer.frame.size
+        screenshotsContainer.addSubview(screenshotVC!.view)
+        screenshotVC!.didMove(toParentViewController: self)
+    }
+    
     func didSetSize(numberOfItems: Int, numberOfRows: Int, sizeOfItems: CGSize, sizeOfMargins: CGSize) {
         let height = sizeOfItems.height * CGFloat(numberOfRows) +
                      sizeOfMargins.height * CGFloat(numberOfRows-1)
         badgeVCHeightConstraint.constant = height
-        print("details vc width and heigth: \(view.frame.width), \(view.frame.height)")
-        print("badge vc width and heigth: \(badgeVC!.view.frame.width), \(badgeVC!.view.frame.height)")
     }
     
     // STAR AND LISTENERS
@@ -337,7 +353,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     private func downloadGameData() {
         downloadBasics()
         downloadCover()
-        downloadBigScreenshots()
+        downloadScreenshotURLs()
         downloadDescription()
         downloadStatus()
         downloadCategory()
@@ -436,10 +452,17 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         })
     }
     
-    private func downloadBigScreenshots() {
+    private func downloadScreenshotURLs() {
+        downloadBigScreenshotURLs()
+        downloadSmallScreenshotURLs()
+    }
+    
+    private func downloadBigScreenshotURLs() {
         api.getScreenshotsBig(forGame: game, withOnComplete: { result in
             switch result {
             case .success(let screenshots):
+                self.detailsLoaded.loaded[DetailsLoaded.BIG_SCREENSHOTS] = true
+                self.game.screenshotBigURLs = screenshots
                 self.setBigScreenshot(screenshots)
             case .failure(let error):
                 switch error {
@@ -449,14 +472,35 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
                     self.handleLoadingError(Alerts.SERVER_ERROR)
                 case .noData:
                     self.bigScreenshot.image = #imageLiteral(resourceName: "img_missing_screenshot_big")
+                    self.detailsLoaded.loaded[DetailsLoaded.BIG_SCREENSHOTS] = true
                     self.detailsLoaded.loaded[DetailsLoaded.BIG_SCREENSHOT] = true
                 }
             }
         })
     }
     
+    private func downloadSmallScreenshotURLs() {
+        api.getScreenshotsSmall(forGame: game, withOnComplete: { result in
+            switch result {
+            case .success(let screenshots):
+                self.detailsLoaded.loaded[DetailsLoaded.SMALL_SCREENSHOTS] = true
+                self.game.screenshotBigURLs = screenshots
+                // TODO set screenshot carousel
+            case .failure(let error):
+                switch error {
+                case .noInternet:
+                    self.handleLoadingError(Alerts.NETWORK_ERROR)
+                case .server, .json, .url:
+                    self.handleLoadingError(Alerts.SERVER_ERROR)
+                case .noData:
+                    self.bigScreenshot.image = #imageLiteral(resourceName: "img_missing_screenshot_big")
+                    self.detailsLoaded.loaded[DetailsLoaded.SMALL_SCREENSHOTS] = true
+                }
+            }
+        })
+    }
+    
     private func setBigScreenshot(_ screenshots: [URL]?) {
-        self.game.screenshotBigURLs = screenshots
         if self.game.screenshotBigURLs != nil {
             self.bigScreenshot.kf.setImage(with: self.game.screenshotBigURL, placeholder: #imageLiteral(resourceName: "img_missing_screenshot_big"), options: nil, progressBlock: nil, completionHandler: { _ in
                 self.detailsLoaded.loaded[DetailsLoaded.BIG_SCREENSHOT] = true
@@ -681,6 +725,9 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         self.loadingAnimationView.stopAnimating()
     }
     
+    private func downloadScreenshots() {
+        
+    }
     
     
     // BACK BUTTON
