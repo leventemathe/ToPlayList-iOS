@@ -36,6 +36,16 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
         searchBar.delegate = self
         searchBar.setImage(#imageLiteral(resourceName: "clear_default"), for: .clear, state: .normal)
         searchBar.setImage(#imageLiteral(resourceName: "clear_default"), for: .clear, state: .highlighted)
+        setTextFieldTintColor(to: .lightGray, for: searchBar)
+    }
+    
+    func setTextFieldTintColor(to color: UIColor, for view: UIView) {
+        if view is UITextField {
+            view.tintColor = color
+        }
+        for subview in view.subviews {
+            setTextFieldTintColor(to: color, for: subview)
+        }
     }
     
     private func setupTableView() {
