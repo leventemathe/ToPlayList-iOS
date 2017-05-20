@@ -9,7 +9,6 @@
 import UIKit
 import NVActivityIndicatorView
 import Kingfisher
-import NYTPhotoViewer
 
 struct GameInExclusiveLists {
     
@@ -144,7 +143,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     @IBOutlet weak var franchiseCollectionLabel: UILabel!
     
     @IBOutlet weak var screenshotsContainer: UIView!
-    var screenshotVC: NYTPhotosViewController?
+    var screenshotVC: ImageCarousel?
     
     var game: Game!
     private var api: GameAPI!
@@ -184,7 +183,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     }
     
     private func setupScreenshotsVC() {
-        screenshotVC = NYTPhotosViewController()
+        screenshotVC = ImageViewerImageCarousel()
         
         addChildViewController(screenshotVC!)
         screenshotVC!.view.frame.size = screenshotsContainer.frame.size

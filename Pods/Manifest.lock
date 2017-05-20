@@ -23,7 +23,6 @@ PODS:
     - FirebaseAnalytics (~> 3.7)
   - FirebaseInstanceID (1.0.10):
     - FirebaseCore (~> 3.6)
-  - FLAnimatedImage (1.0.12)
   - GoogleToolboxForMac/DebugUtils (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
   - GoogleToolboxForMac/Defines (2.1.1)
@@ -35,24 +34,18 @@ PODS:
     - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
   - GTMSessionFetcher/Core (1.1.9)
+  - ImageViewer (4.1.0)
   - Kingfisher (3.9.1)
   - NVActivityIndicatorView (3.6.1)
-  - NYTPhotoViewer (1.1.0):
-    - NYTPhotoViewer/AnimatedGifSupport (= 1.1.0)
-    - NYTPhotoViewer/Core (= 1.1.0)
-  - NYTPhotoViewer/AnimatedGifSupport (1.1.0):
-    - FLAnimatedImage (~> 1.0.8)
-    - NYTPhotoViewer/Core
-  - NYTPhotoViewer/Core (1.1.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.4.0)
   - Firebase/Auth (~> 3.17.0)
   - Firebase/Core (~> 3.17.0)
   - Firebase/Database (~> 3.17.0)
+  - ImageViewer (~> 4.1.0)
   - Kingfisher (~> 3.9.1)
   - NVActivityIndicatorView (~> 3.6.1)
-  - NYTPhotoViewer (~> 1.1.0)
 
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
@@ -62,13 +55,12 @@ SPEC CHECKSUMS:
   FirebaseCore: 9691ee2ade70c098d7cf92440f4303f16d83ca75
   FirebaseDatabase: 05c96d7b43a7368dc91c07791adb49683e1738d1
   FirebaseInstanceID: b9eedd6846fb5e1f0f7279e1deaa7a7e4cf8392e
-  FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 5c046c76a1f859bc9c187e918f18e4fc7bb57b5e
+  ImageViewer: 163e5832e0a09e31a3e3482cce6e5e9029356174
   Kingfisher: 6729a0baaa458245bfb8cd5a1296c71c10d6eb6c
   NVActivityIndicatorView: 9f52a7f84bf5c6a798722c450fe3c198e01c56ed
-  NYTPhotoViewer: e80e8767f3780d2df37c6f72cbab15d6c7232911
 
-PODFILE CHECKSUM: a493563d57ae3f0e114cd0320f0341b8fad8d032
+PODFILE CHECKSUM: 4c43c833c13fb4f34e0a354df4c6f87477bf1e25
 
 COCOAPODS: 1.2.1
