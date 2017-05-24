@@ -143,14 +143,13 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     @IBOutlet weak var franchiseCollectionLabel: UILabel!
     
     @IBOutlet weak var screenshotsContainer: UIView!
-    var screenshotVC: ImageCarousel?
+    var imageCarouselVC: ImageCarouselVC?
     
     var game: Game!
     private var api: GameAPI!
     
     override func viewDidLoad() {
         setupScrollView()
-        setupScreenshotsVC()
         setupGameAPI()
         setupAnimation()
         startLoading()
@@ -166,6 +165,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         }
         setupSwiping()
         setupBadgeVC()
+        setupImageCarouselVC()
     }
     
     private func setupSwiping() {
@@ -182,13 +182,12 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         badgeVC?.constraintsSetDelegate = self
     }
     
-    private func setupScreenshotsVC() {
-        screenshotVC = ImageViewerImageCarousel()
-        
-        addChildViewController(screenshotVC!)
-        screenshotVC!.view.frame.size = screenshotsContainer.frame.size
-        screenshotsContainer.addSubview(screenshotVC!.view)
-        screenshotVC!.didMove(toParentViewController: self)
+    private func setupImageCarouselVC() {
+        for vc in childViewControllers {
+            if let iVC = vc as? ImageCarouselVC {
+                self.imageCarouselVC = iVC
+            }
+        }
     }
     
     func didSetSize(numberOfItems: Int, numberOfRows: Int, sizeOfItems: CGSize, sizeOfMargins: CGSize) {
@@ -462,7 +461,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
             case .success(let screenshots):
                 self.detailsLoaded.loaded[DetailsLoaded.BIG_SCREENSHOTS] = true
                 self.game.screenshotBigURLs = screenshots
-                self.setBigScreenshot(screenshots)
+                self.setBigScreenshot()
             case .failure(let error):
                 switch error {
                 case .noInternet:
@@ -483,8 +482,8 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
             switch result {
             case .success(let screenshots):
                 self.detailsLoaded.loaded[DetailsLoaded.SMALL_SCREENSHOTS] = true
-                self.game.screenshotBigURLs = screenshots
-                // TODO set screenshot carousel
+                self.game.screenshotSmallURLs = screenshots
+                self.setScreenshotCarousel()
             case .failure(let error):
                 switch error {
                 case .noInternet:
@@ -499,7 +498,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         })
     }
     
-    private func setBigScreenshot(_ screenshots: [URL]?) {
+    private func setBigScreenshot() {
         if self.game.screenshotBigURLs != nil {
             self.bigScreenshot.kf.setImage(with: self.game.screenshotBigURL, placeholder: #imageLiteral(resourceName: "img_missing_screenshot_big"), options: nil, progressBlock: nil, completionHandler: { _ in
                 self.detailsLoaded.loaded[DetailsLoaded.BIG_SCREENSHOT] = true
@@ -507,6 +506,12 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         } else {
             self.bigScreenshot.image = #imageLiteral(resourceName: "img_missing_screenshot_big")
             self.detailsLoaded.loaded[DetailsLoaded.BIG_SCREENSHOT] = true
+        }
+    }
+    
+    private func setScreenshotCarousel() {
+        if let urls = game.screenshotSmallURLs {
+            imageCarouselVC?.addImages(byUrls: urls)
         }
     }
     
