@@ -149,10 +149,6 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
             return .none
         }
     }
-    
-    private func shouldSwipeOnCells() -> Bool {
-        return ListsUser.loggedIn
-    }
         
     @objc private func refresh(_ sender: AnyObject) {
         reloadGames()
@@ -245,7 +241,7 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                 cell.update(game)
             }
             cell.updateStar(getStarState(game))
-            cell.updateSwipeable(shouldSwipeOnCells())
+            cell.loggedIn = ListsUser.loggedIn
             return cell
         }
         
@@ -273,6 +269,29 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         if position > height - scrollView.frame.size.height * 1.5 && !loadingMoreGames && _gameSections.count != 0 {
             loadingMoreGames = true
             loadMoreGames()
+        }
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        setCellScrollings(true)
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            setCellScrollings(false)
+        }
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        setCellScrollings(false)
+    }
+    
+    private func setCellScrollings(_ to: Bool) {
+        let cells = tableView.visibleCells
+        for cell in cells {
+            if let cell = cell as? NewestReleasesCell {
+                cell.scrolling = to
+            }
         }
     }
     

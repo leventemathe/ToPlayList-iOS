@@ -45,7 +45,8 @@ class ListCollectionViewCell: UICollectionViewCell, ReusableView, UIGestureRecog
     @IBOutlet weak var contentLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var contentRightConstraint: NSLayoutConstraint!
     
-    private var shouldPan = false
+    var shouldPan = false
+    var scrolling = false
     
     private var panRecognizer: UIPanGestureRecognizer!
     private var panStartPoint: CGPoint!
@@ -89,6 +90,11 @@ class ListCollectionViewCell: UICollectionViewCell, ReusableView, UIGestureRecog
     }
     
     private func setShouldPan() {
+        if scrolling {
+            shouldPan = false
+            return
+        }
+        
         let velocity = panRecognizer.velocity(in: self)
         if abs(velocity.y) >= abs(velocity.x) {
             shouldPan = false

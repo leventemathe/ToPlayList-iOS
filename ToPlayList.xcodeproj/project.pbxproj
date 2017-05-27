@@ -438,9 +438,9 @@
 		D7FADEF61EC09E6C0006B4E4 /* Releases */ = {
 			isa = PBXGroup;
 			children = (
+				D726BC9A1E0AC7AA00D6C9CD /* NewestReleasesCell.swift */,
 				D76437E21E1E506D00B09C7E /* DateTableCellHeaderView.swift */,
 				D71981211E26F1D3005823C2 /* ListImageView.swift */,
-				D726BC9A1E0AC7AA00D6C9CD /* NewestReleasesCell.swift */,
 			);
 			name = Releases;
 			sourceTree = "<group>";

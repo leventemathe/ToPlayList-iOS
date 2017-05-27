@@ -9,7 +9,7 @@
 import UIKit
 import NVActivityIndicatorView
 
-class SubListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, ErrorHandlerDelegate {
+class SubListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, ErrorHandlerDelegate, UIScrollViewDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var listEmptyLabels: UIStackView!
@@ -150,5 +150,28 @@ class SubListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFlowL
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return UICollectionViewCell()
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        setCellScrolling(true)
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            setCellScrolling(false)
+        }
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        setCellScrolling(false)
+    }
+    
+    private func setCellScrolling(_ to: Bool) {
+        let cells = collectionView.visibleCells
+        for cell in cells {
+            if let cell = cell as? ListCollectionViewCell {
+                cell.scrolling = to
+            }
+        }
     }
 }
