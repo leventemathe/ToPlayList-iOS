@@ -32,6 +32,7 @@ class ListCollectionViewCell: UICollectionViewCell, ReusableView, UIGestureRecog
         
         titleLbl.text = game.name
         if let coverURL = game.coverMedURL {
+            coverImg.image = nil
             coverImg.kf.setImage(with: coverURL, placeholder: #imageLiteral(resourceName: "img_missing_cover"))
         } else {
             coverImg.image = #imageLiteral(resourceName: "img_missing_cover")
