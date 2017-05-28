@@ -56,7 +56,7 @@ class ImageCarouselVC: UIViewController, UICollectionViewDataSource, UICollectio
     private var cellWidth: CGFloat!
     private var cellHeight: CGFloat!
     private let CELL_ASPECT_RATIO: CGFloat = 570.0 / 320.0
-    private let NUM_OF_VISIBLE_CELLS: CGFloat = 3.0
+    private let NUM_OF_VISIBLE_CELLS: CGFloat = 2.5
     private var collectionViewWidth: CGFloat!
     private var cellHorizontalInterItemMargin: CGFloat! = 8.0 / 2.0
     
