@@ -379,7 +379,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AHD-U1-sds">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="efa-6i-V9F" customClass="DetailsBigScreenshot" customModule="ToPlayList" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
@@ -613,7 +613,7 @@
                                         </constraints>
                                     </view>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8NQ-RT-MJ5">
-                                        <rect key="frame" x="0.0" y="274" width="320" height="245"/>
+                                        <rect key="frame" x="0.0" y="274" width="320" height="294"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A8L-fO-z1X">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="800"/>
@@ -757,10 +757,10 @@
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <constraints>
-                                                                    <constraint firstItem="uqw-af-6jC" firstAttribute="leading" secondItem="5zH-n9-enf" secondAttribute="leading" id="0CE-c0-CJS"/>
-                                                                    <constraint firstItem="uqw-af-6jC" firstAttribute="top" secondItem="5zH-n9-enf" secondAttribute="top" id="9Ot-BL-vYR"/>
-                                                                    <constraint firstAttribute="height" secondItem="uqw-af-6jC" secondAttribute="height" id="JxI-Uz-Zdb"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="uqw-af-6jC" secondAttribute="trailing" id="Tmg-Fj-ykw"/>
+                                                                    <constraint firstItem="uqw-af-6jC" firstAttribute="leading" secondItem="5zH-n9-enf" secondAttribute="leading" priority="999" id="0CE-c0-CJS"/>
+                                                                    <constraint firstItem="uqw-af-6jC" firstAttribute="top" secondItem="5zH-n9-enf" secondAttribute="top" priority="999" id="9Ot-BL-vYR"/>
+                                                                    <constraint firstAttribute="height" secondItem="uqw-af-6jC" secondAttribute="height" priority="999" id="JxI-Uz-Zdb"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="uqw-af-6jC" secondAttribute="trailing" priority="999" id="Tmg-Fj-ykw"/>
                                                                 </constraints>
                                                             </view>
                                                         </subviews>
@@ -825,11 +825,11 @@
                         <outlet property="franchiseCollectionContainer" destination="8ol-Q6-CjN" id="9X7-zd-K1I"/>
                         <outlet property="franchiseCollectionLabel" destination="Lgm-Ra-DOI" id="MVf-Y8-NYl"/>
                         <outlet property="genreLabel" destination="QIo-lO-O0x" id="zDM-BZ-uIj"/>
+                        <outlet property="imageCarouselContainer" destination="5zH-n9-enf" id="aq5-3k-FYR"/>
                         <outlet property="movingContent" destination="2xt-nC-PKO" id="AhP-fH-1l3"/>
                         <outlet property="movingContentHeightConstraint" destination="Wa0-Lq-yfB" id="DJ6-zT-tDF"/>
                         <outlet property="movingContentTopConstraint" destination="BOV-nY-YE8" id="Ke6-WS-oJ2"/>
                         <outlet property="publisherLabel" destination="Fdc-Ff-nY8" id="eTw-xt-eQ8"/>
-                        <outlet property="screenshotsContainer" destination="iio-uE-tHN" id="tqi-Wp-8oi"/>
                         <outlet property="scrollContentView" destination="A8L-fO-z1X" id="3V6-sL-MUb"/>
                         <outlet property="scrollView" destination="8NQ-RT-MJ5" id="0HN-0S-he5"/>
                         <outlet property="showMoreDescriptionButton" destination="yqb-Ft-MHO" id="T2a-h8-pNi"/>

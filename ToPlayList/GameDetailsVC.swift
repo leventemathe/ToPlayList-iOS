@@ -142,7 +142,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     @IBOutlet weak var franchiseCollectionContainer: ContainerView!
     @IBOutlet weak var franchiseCollectionLabel: UILabel!
     
-    @IBOutlet weak var screenshotsContainer: UIView!
+    @IBOutlet weak var imageCarouselContainer: UIView!
     var imageCarouselVC: ImageCarouselVC?
     
     var game: Game!
@@ -493,6 +493,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
                 case .noData:
                     self.bigScreenshot.image = #imageLiteral(resourceName: "img_missing_screenshot_big")
                     self.detailsLoaded.loaded[DetailsLoaded.SMALL_SCREENSHOTS] = true
+                    self.imageCarouselContainer.isHidden = true
                 }
             }
         })
@@ -512,6 +513,8 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     private func setScreenshotCarousel() {
         if let urls = game.screenshotSmallURLs {
             imageCarouselVC?.addImages(byUrls: urls)
+        } else {
+            imageCarouselContainer.isHidden = true
         }
     }
     
@@ -728,11 +731,6 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         Alerts.alertWithOKButton(withMessage: message, forVC: self)
         self.loadingAnimationView.stopAnimating()
     }
-    
-    private func downloadScreenshots() {
-        
-    }
-    
     
     // BACK BUTTON
     

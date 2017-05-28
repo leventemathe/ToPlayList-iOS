@@ -127,10 +127,8 @@ class IGDB: GameAPI {
     }
     
     static var IMG_SCREENSHOT_SMALL: String {
-        if UIScreen.main.scale > 1.0 {
-            return "/t_screenshot_small_2x"
-        }
-        return "/t_screenshot_small"
+        // Small doesn't exist on the api, so I'm using mid instead
+        return "/t_screenshot_med"
     }
     
     static var IMG_SCREENSHOT_BIG: String {
