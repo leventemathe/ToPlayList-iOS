@@ -30,6 +30,7 @@ enum IGDBError: Error {
     case noInternet
     case json
     case noData
+    case unknown
     
     static func generateError(fromResponse response: DataResponse<Any>) -> IGDBError {
         if let statuscode = response.response?.statusCode {
@@ -38,6 +39,7 @@ enum IGDBError: Error {
             } else if statuscode >= 500 && statuscode < 600 {
                 return .server
             }
+            return .unknown
         }
         return .noInternet
     }
@@ -97,6 +99,8 @@ class IGDB: GameAPI {
     static let PLAYER_PERSPECTIVES = "/player_perspectives/"
     
     static let BASE_URL_IMG = "https://images.igdb.com/igdb/image/upload"
+    
+    static let IMG_EXTENSION = ".jpg"
     
     static var IMG_THUMB: String {
         if UIScreen.main.scale > 1.0 {
@@ -186,7 +190,7 @@ class IGDB: GameAPI {
                                       "offset": offset]
         
         Alamofire.request(url, parameters: parameters, headers: IGDB.HEADERS).validate().responseJSON { response in
-            //print(response.debugDescription)
+            print(response.debugDescription)
             switch response.result {
             case .success(let value):
                 if let json = value as? JSON {
@@ -320,12 +324,17 @@ class IGDB: GameAPI {
                     onComplete(IGDBResult.failure(.json))
                 }
             case .failure(_):
+                //print(response.debugDescription)
                 onComplete(IGDBResult.failure(IGDBError.generateError(fromResponse: response)))
             }
         }
     }
     
     public func getGenres(_ onComplete: @escaping (IGDBResult<[Genre]>)->Void, withIDs ids: [UInt64]) {
+        if ids.count < 1 {
+            onComplete(.failure(.noData))
+            return
+        }
         let idsString = createIDList(from: ids)
         let url = "\(IGDB.BASE_URL)\(IGDB.GENRES)\(idsString)/"
         let parameters = ["fields": "id,name"]
@@ -334,6 +343,10 @@ class IGDB: GameAPI {
     }
     
     public func getCompanies(_ onComplete: @escaping (IGDBResult<[Company]>)->Void, withIDs ids: [UInt64]) {
+        if ids.count < 1 {
+            onComplete(.failure(.noData))
+            return
+        }
         let idsString = createIDList(from: ids)
         let url = "\(IGDB.BASE_URL)\(IGDB.COMPANIES)\(idsString)/"
         let parameters = ["fields": "id,name"]
@@ -342,6 +355,10 @@ class IGDB: GameAPI {
     }
     
     public func getFranchises(_ onComplete: @escaping (IGDBResult<[Franchise]>)->Void, withIDs ids: [UInt64]) {
+        if ids.count < 1 {
+            onComplete(.failure(.noData))
+            return
+        }
         let idsString = createIDList(from: ids)
         let url = "\(IGDB.BASE_URL)\(IGDB.FRANCHISES)\(idsString)/"
         let parameters = ["fields": "id,name"]
@@ -351,6 +368,10 @@ class IGDB: GameAPI {
     
     
     public func getCollections(_ onComplete: @escaping (IGDBResult<[Collection]>)->Void, withIDs ids: [UInt64]) {
+        if ids.count < 1 {
+            onComplete(.failure(.noData))
+            return
+        }
         let idsString = createIDList(from: ids)
         let url = "\(IGDB.BASE_URL)\(IGDB.COLLECTIONS)\(idsString)/"
         let parameters = ["fields": "id,name"]
@@ -359,6 +380,10 @@ class IGDB: GameAPI {
     }
     
     public func getGameModes(_ onComplete: @escaping (IGDBResult<[GameMode]>)->Void, withIDs ids: [UInt64]) {
+        if ids.count < 1 {
+            onComplete(.failure(.noData))
+            return
+        }
         let idsString = createIDList(from: ids)
         let url = "\(IGDB.BASE_URL)\(IGDB.GAME_MODES)\(idsString)/"
         let parameters = ["fields": "id,name"]
@@ -367,6 +392,10 @@ class IGDB: GameAPI {
     }
     
     public func getPlayerPerspectives(_ onComplete: @escaping (IGDBResult<[PlayerPerspective]>)->Void, withIDs ids: [UInt64]) {
+        if ids.count < 1 {
+            onComplete(.failure(.noData))
+            return
+        }
         let idsString = createIDList(from: ids)
         let url = "\(IGDB.BASE_URL)\(IGDB.PLAYER_PERSPECTIVES)\(idsString)/"
         let parameters = ["fields": "id,name"]
@@ -492,7 +521,7 @@ class IGDB: GameAPI {
         }
         
         for id in cachedGameIDs!.screenshots! {
-            if let url = URL(string: "\(IGDB.BASE_URL_IMG)\(sizeString)/\(id)") {
+            if let url = URL(string: "\(IGDB.BASE_URL_IMG)\(sizeString)/\(id)\(IGDB.IMG_EXTENSION)") {
                 urls.append(url)
             }
         }

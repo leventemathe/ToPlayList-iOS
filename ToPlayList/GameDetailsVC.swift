@@ -394,6 +394,8 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
                     self.handleLoadingError(Alerts.NETWORK_ERROR)
                 case .server, .json, .url:
                     self.handleLoadingError(Alerts.SERVER_ERROR)
+                case .unknown:
+                    self.handleLoadingError(Alerts.UNKNOWN_ERROR)
                 case .noData:
                     self.genreLabel.text = GameDetailsVC.MISSING_GENRE_DATA
                     self.detailsLoaded.loaded[DetailsLoaded.GENRE] = true
@@ -415,6 +417,8 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
                     self.handleLoadingError(Alerts.NETWORK_ERROR)
                 case .server, .json, .url:
                     self.handleLoadingError(Alerts.SERVER_ERROR)
+                case .unknown:
+                    self.handleLoadingError(Alerts.UNKNOWN_ERROR)
                 case .noData:
                     self.developerLabel.text = GameDetailsVC.MISSING_DEVELOPER_DATA
                     self.detailsLoaded.loaded[DetailsLoaded.DEVELOPER] = true
@@ -436,6 +440,8 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
                     self.handleLoadingError(Alerts.NETWORK_ERROR)
                 case .server, .json, .url:
                     self.handleLoadingError(Alerts.SERVER_ERROR)
+                case .unknown:
+                    self.handleLoadingError(Alerts.UNKNOWN_ERROR)
                 case .noData:
                     self.developerLabel.text = GameDetailsVC.MISSING_PUBLISHER_DATA
                     self.detailsLoaded.loaded[DetailsLoaded.PUBLISHER] = true
@@ -468,6 +474,8 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
                     self.handleLoadingError(Alerts.NETWORK_ERROR)
                 case .server, .json, .url:
                     self.handleLoadingError(Alerts.SERVER_ERROR)
+                case .unknown:
+                    self.handleLoadingError(Alerts.UNKNOWN_ERROR)
                 case .noData:
                     self.bigScreenshot.image = #imageLiteral(resourceName: "img_missing_screenshot_big")
                     self.detailsLoaded.loaded[DetailsLoaded.BIG_SCREENSHOTS] = true
@@ -490,6 +498,8 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
                     self.handleLoadingError(Alerts.NETWORK_ERROR)
                 case .server, .json, .url:
                     self.handleLoadingError(Alerts.SERVER_ERROR)
+                case .unknown:
+                    self.handleLoadingError(Alerts.UNKNOWN_ERROR)
                 case .noData:
                     self.bigScreenshot.image = #imageLiteral(resourceName: "img_missing_screenshot_big")
                     self.detailsLoaded.loaded[DetailsLoaded.SMALL_SCREENSHOTS] = true
@@ -531,6 +541,8 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
                     self.handleLoadingError(Alerts.NETWORK_ERROR)
                 case .server, .json, .url:
                     self.handleLoadingError(Alerts.SERVER_ERROR)
+                case .unknown:
+                    self.handleLoadingError(Alerts.UNKNOWN_ERROR)
                 case .noData:
                     self.descriptionLabel.text = GameDetailsVC.MISSING_DESCRIPTION_DATA
                     self.detailsLoaded.loaded[DetailsLoaded.DESCRIPTION] = true
@@ -553,6 +565,8 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
                     self.handleLoadingError(Alerts.NETWORK_ERROR)
                 case .server, .json, .url:
                     self.handleLoadingError(Alerts.SERVER_ERROR)
+                case .unknown:
+                    self.handleLoadingError(Alerts.UNKNOWN_ERROR)
                 case .noData:
                     self.setStatus()
                     self.detailsLoaded.loaded[DetailsLoaded.STATUS] = true
@@ -574,6 +588,8 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
                     self.handleLoadingError(Alerts.NETWORK_ERROR)
                 case .server, .json, .url:
                     self.handleLoadingError(Alerts.SERVER_ERROR)
+                case .unknown:
+                    self.handleLoadingError(Alerts.UNKNOWN_ERROR)
                 case .noData:
                     self.setCategory()
                     self.detailsLoaded.loaded[DetailsLoaded.CATEGORY] = true
@@ -607,6 +623,8 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
                     self.handleLoadingError(Alerts.NETWORK_ERROR)
                 case .server, .json, .url:
                     self.handleLoadingError(Alerts.SERVER_ERROR)
+                case .unknown:
+                    self.handleLoadingError(Alerts.UNKNOWN_ERROR)
                 case .noData:
                     self.setFranchise()
                     self.detailsLoaded.loaded[DetailsLoaded.FRANCHISE] = true
@@ -628,6 +646,8 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
                     self.handleLoadingError(Alerts.NETWORK_ERROR)
                 case .server, .json, .url:
                     self.handleLoadingError(Alerts.SERVER_ERROR)
+                case .unknown:
+                    self.handleLoadingError(Alerts.UNKNOWN_ERROR)
                 case .noData:
                     self.setCollection()
                     self.detailsLoaded.loaded[DetailsLoaded.COLLECTION] = true
@@ -678,6 +698,8 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
                     self.handleLoadingError(Alerts.NETWORK_ERROR)
                 case .server, .json, .url:
                     self.handleLoadingError(Alerts.SERVER_ERROR)
+                case .unknown:
+                    self.handleLoadingError(Alerts.UNKNOWN_ERROR)
                 case .noData:
                     self.setGameModes()
                     self.detailsLoaded.loaded[DetailsLoaded.GAME_MODES] = true
@@ -699,6 +721,8 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
                     self.handleLoadingError(Alerts.NETWORK_ERROR)
                 case .server, .json, .url:
                     self.handleLoadingError(Alerts.SERVER_ERROR)
+                case .unknown:
+                    self.handleLoadingError(Alerts.UNKNOWN_ERROR)
                 case .noData:
                     self.setPlayerPerspectives()
                     self.detailsLoaded.loaded[DetailsLoaded.PLAYER_PERSPECTIVES] = true

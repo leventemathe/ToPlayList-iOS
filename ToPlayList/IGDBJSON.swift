@@ -49,10 +49,10 @@ class IGDBJSON {
             game.provider = IGDB.PROVIDER
             
             if let imgID = (obj["cover"] as? JSONPair)?["cloudinary_id"] as? String {
-                game.thumbnailURL = URL(string: "\(IGDB.BASE_URL_IMG)\(IGDB.IMG_THUMB)/\(imgID)")
-                game.coverSmallURL = URL(string: "\(IGDB.BASE_URL_IMG)\(IGDB.IMG_COVER_SMALL)/\(imgID)")
-                game.coverMedURL = URL(string: "\(IGDB.BASE_URL_IMG)\(IGDB.IMG_COVER_MED)/\(imgID)")
-                game.coverBigURL = URL(string: "\(IGDB.BASE_URL_IMG)\(IGDB.IMG_COVER_BIG)/\(imgID)")
+                game.thumbnailURL = URL(string: "\(IGDB.BASE_URL_IMG)\(IGDB.IMG_THUMB)/\(imgID)\(IGDB.IMG_EXTENSION)")
+                game.coverSmallURL = URL(string: "\(IGDB.BASE_URL_IMG)\(IGDB.IMG_COVER_SMALL)/\(imgID)\(IGDB.IMG_EXTENSION)")
+                game.coverMedURL = URL(string: "\(IGDB.BASE_URL_IMG)\(IGDB.IMG_COVER_MED)/\(imgID)\(IGDB.IMG_EXTENSION)")
+                game.coverBigURL = URL(string: "\(IGDB.BASE_URL_IMG)\(IGDB.IMG_COVER_BIG)/\(imgID)\(IGDB.IMG_EXTENSION)")
             }
             if let firsReleaseDate = obj["first_release_date"] as? Double {
                 game.firstReleaseDate = firsReleaseDate / 1000.0

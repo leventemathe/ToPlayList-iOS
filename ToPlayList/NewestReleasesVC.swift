@@ -207,7 +207,9 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                 Alerts.alertWithOKButton(withMessage: Alerts.SERVER_ERROR, forVC: self)
             case .noInternet:
                 Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
-            default:
+            case .noData:
+                break
+            case .unknown:
                 Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_ERROR, forVC: self)
             }
         }

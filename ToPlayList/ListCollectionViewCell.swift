@@ -79,7 +79,7 @@ class ListCollectionViewCell: UICollectionViewCell, ReusableView, UIGestureRecog
         case .ended:
             panEnded()
         case .cancelled:
-            print("cancelled")
+            print("pan cancelled")
         default:
             break
         }
