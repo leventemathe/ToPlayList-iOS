@@ -176,7 +176,7 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="WX5-Co-KuW" userLabel="TextStack">
-                                                                    <rect key="frame" x="74" y="0.0" width="198" height="55"/>
+                                                                    <rect key="frame" x="74" y="0.0" width="230" height="55"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5BH-5g-n5j" userLabel="Title">
                                                                             <rect key="frame" x="0.0" y="0.0" width="32" height="22"/>
@@ -199,7 +199,7 @@
                                                                     </subviews>
                                                                 </stackView>
                                                                 <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XgI-DY-NBf">
-                                                                    <rect key="frame" x="276" y="0.0" width="28" height="70"/>
+                                                                    <rect key="frame" x="304" y="0.0" width="0.0" height="70"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" priority="999" constant="28" id="XED-wY-Ikk"/>
                                                                     </constraints>
@@ -619,7 +619,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="800"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="mKa-wy-ZnB">
-                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="423.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="356.5"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="laR-nx-NpS" customClass="ContainerView" customModule="ToPlayList" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="89"/>
@@ -700,19 +700,19 @@
                                                                 </constraints>
                                                             </view>
                                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8ol-Q6-CjN" customClass="ContainerView" customModule="ToPlayList" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="234.5" width="320" height="55"/>
+                                                                <rect key="frame" x="0.0" y="228.5" width="320" height="0.0"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="rzw-Pc-eRs">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="16"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Part of collection/franchise:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OWP-Kd-sz2">
-                                                                                <rect key="frame" x="8" y="8" width="304" height="19.5"/>
+                                                                                <rect key="frame" x="8" y="8" width="304" height="0.0"/>
                                                                                 <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="15"/>
                                                                                 <color key="textColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lgm-Ra-DOI">
-                                                                                <rect key="frame" x="8" y="27.5" width="304" height="19.5"/>
+                                                                                <rect key="frame" x="8" y="8" width="304" height="0.0"/>
                                                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
@@ -730,7 +730,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5zH-n9-enf" customClass="ContainerView" customModule="ToPlayList" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="301.5" width="320" height="122"/>
+                                                                <rect key="frame" x="0.0" y="234.5" width="320" height="122"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="uqw-af-6jC">
                                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="122"/>
@@ -904,60 +904,36 @@
                                 <rect key="frame" x="-60" y="-60" width="440" height="639"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="iXs-76-Udd">
-                                <rect key="frame" x="28" y="72" width="264" height="528"/>
+                                <rect key="frame" x="28" y="72" width="264" height="488"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gmJ-oo-xnq">
-                                        <rect key="frame" x="0.0" y="0.0" width="264" height="180"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="zTv-Dp-o2f">
-                                                <rect key="frame" x="0.0" y="0.0" width="264" height="180"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="180" id="aYg-Cf-qyh"/>
-                                                </constraints>
-                                            </imageView>
-                                        </subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="zTv-Dp-o2f">
+                                        <rect key="frame" x="0.0" y="0.0" width="264" height="203"/>
+                                    </imageView>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="1Lp-75-qir">
+                                        <rect key="frame" x="0.0" y="213" width="264" height="26"/>
                                         <constraints>
-                                            <constraint firstItem="zTv-Dp-o2f" firstAttribute="leading" secondItem="gmJ-oo-xnq" secondAttribute="leading" id="aco-mD-Z1o"/>
-                                            <constraint firstAttribute="trailing" secondItem="zTv-Dp-o2f" secondAttribute="trailing" id="ubz-P9-Y7g"/>
-                                            <constraint firstItem="zTv-Dp-o2f" firstAttribute="top" secondItem="gmJ-oo-xnq" secondAttribute="top" id="w89-Od-IGE"/>
+                                            <constraint firstAttribute="height" constant="25" id="fMK-K4-g2H"/>
                                         </constraints>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="fye-pk-y5S">
-                                        <rect key="frame" x="0.0" y="190" width="264" height="28"/>
-                                        <subviews>
-                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="1Lp-75-qir">
-                                                <rect key="frame" x="0.0" y="0.0" width="264" height="29"/>
-                                                <segments>
-                                                    <segment title="Register"/>
-                                                    <segment title="Login"/>
-                                                </segments>
-                                                <color key="tintColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                <connections>
-                                                    <action selector="segmentedConrolChanged:" destination="qTq-JX-w6Y" eventType="valueChanged" id="HSs-Fo-T6y"/>
-                                                </connections>
-                                            </segmentedControl>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="1Lp-75-qir" firstAttribute="top" secondItem="fye-pk-y5S" secondAttribute="top" id="3k7-gY-xwT"/>
-                                            <constraint firstItem="1Lp-75-qir" firstAttribute="leading" secondItem="fye-pk-y5S" secondAttribute="leading" id="8Og-Qg-hfM"/>
-                                            <constraint firstAttribute="bottom" secondItem="1Lp-75-qir" secondAttribute="bottom" id="GOV-c0-u19"/>
-                                            <constraint firstAttribute="trailing" secondItem="1Lp-75-qir" secondAttribute="trailing" id="mzo-Nh-1mr"/>
-                                        </constraints>
-                                    </stackView>
+                                        <segments>
+                                            <segment title="Register"/>
+                                            <segment title="Login"/>
+                                        </segments>
+                                        <color key="tintColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="segmentedConrolChanged:" destination="qTq-JX-w6Y" eventType="valueChanged" id="HSs-Fo-T6y"/>
+                                        </connections>
+                                    </segmentedControl>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pcw-c8-sZz">
-                                        <rect key="frame" x="0.0" y="228" width="264" height="300"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="300" id="deb-xL-3p3"/>
-                                        </constraints>
+                                        <rect key="frame" x="0.0" y="248" width="264" height="240"/>
                                     </containerView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="pcw-c8-sZz" firstAttribute="leading" secondItem="iXs-76-Udd" secondAttribute="leading" id="8L2-Do-Q2o"/>
+                                    <constraint firstItem="1Lp-75-qir" firstAttribute="leading" secondItem="iXs-76-Udd" secondAttribute="leading" id="BOS-yz-x13"/>
+                                    <constraint firstAttribute="trailing" secondItem="zTv-Dp-o2f" secondAttribute="trailing" id="C0S-Wr-O2t"/>
                                     <constraint firstAttribute="trailing" secondItem="pcw-c8-sZz" secondAttribute="trailing" id="CmK-9l-QvA"/>
-                                    <constraint firstItem="gmJ-oo-xnq" firstAttribute="leading" secondItem="iXs-76-Udd" secondAttribute="leading" id="Cp4-Eb-2Hx"/>
-                                    <constraint firstAttribute="trailing" secondItem="fye-pk-y5S" secondAttribute="trailing" id="EfZ-Fq-dOX"/>
-                                    <constraint firstItem="fye-pk-y5S" firstAttribute="leading" secondItem="iXs-76-Udd" secondAttribute="leading" id="Qka-SR-76S"/>
-                                    <constraint firstAttribute="trailing" secondItem="gmJ-oo-xnq" secondAttribute="trailing" id="dRC-TT-cAn"/>
+                                    <constraint firstAttribute="trailing" secondItem="1Lp-75-qir" secondAttribute="trailing" id="Tuw-xx-FJb"/>
+                                    <constraint firstItem="zTv-Dp-o2f" firstAttribute="leading" secondItem="iXs-76-Udd" secondAttribute="leading" id="jzM-IQ-W18"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -967,6 +943,7 @@
                             <constraint firstItem="iXs-76-Udd" firstAttribute="leading" secondItem="5yO-fW-HqR" secondAttribute="leadingMargin" constant="12" id="Tpo-h2-oLr"/>
                             <constraint firstAttribute="trailing" secondItem="q32-dg-ukG" secondAttribute="trailing" constant="-60" id="UmS-qp-poQ"/>
                             <constraint firstItem="q32-dg-ukG" firstAttribute="leading" secondItem="5yO-fW-HqR" secondAttribute="leading" constant="-60" id="jGe-8Y-15r"/>
+                            <constraint firstAttribute="bottom" secondItem="iXs-76-Udd" secondAttribute="bottom" constant="8" id="ldT-ke-sin"/>
                             <constraint firstItem="iXs-76-Udd" firstAttribute="top" secondItem="D2V-wO-Ta6" secondAttribute="bottom" constant="8" id="nFD-uQ-4nD"/>
                             <constraint firstItem="GHx-bX-eVv" firstAttribute="top" secondItem="q32-dg-ukG" secondAttribute="bottom" constant="-60" id="phk-gU-OxV"/>
                             <constraint firstItem="q32-dg-ukG" firstAttribute="top" secondItem="5yO-fW-HqR" secondAttribute="top" constant="-60" id="sgb-sQ-VDI"/>
@@ -984,7 +961,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qth-VT-qxu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1943" y="1684"/>
+            <point key="canvasLocation" x="1942.5" y="1683.8028169014085"/>
         </scene>
         <!--Lists-->
         <scene sceneID="tZL-za-AC7">
@@ -1118,21 +1095,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="afD-l7-iqh">
-                                <rect key="frame" x="0.0" y="20" width="320" height="190"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="182"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Vf8-mU-FaL">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="32"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LYZ-6y-1iu" customClass="ErrorMessage" customModule="ToPlayList" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="32"/>
                                             </view>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="EXz-gS-gx4"/>
+                                            <constraint firstAttribute="height" constant="32" id="EXz-gS-gx4"/>
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="1Dn-W9-79O">
-                                        <rect key="frame" x="0.0" y="40" width="320" height="150"/>
+                                        <rect key="frame" x="0.0" y="32" width="320" height="150"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="orn-Kh-yoD" customClass="LoginSceneTextFieldEmail" customModule="ToPlayList" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
@@ -1216,21 +1193,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6e5-Lw-JPS">
-                                <rect key="frame" x="0.0" y="20" width="320" height="245"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="237"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="bc0-Me-mFC">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="32"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tob-bF-awH" customClass="ErrorMessage" customModule="ToPlayList" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="32"/>
                                             </view>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="gOO-cr-UDd"/>
+                                            <constraint firstAttribute="height" constant="32" id="gOO-cr-UDd"/>
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="J8x-j5-hPI">
-                                        <rect key="frame" x="0.0" y="40" width="320" height="205"/>
+                                        <rect key="frame" x="0.0" y="32" width="320" height="205"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2vd-WL-Kmm" customClass="LoginSceneTextUsername" customModule="ToPlayList" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
