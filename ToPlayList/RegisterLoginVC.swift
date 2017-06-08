@@ -22,7 +22,7 @@ extension UIViewController
     }
 }
 
-class RegisterLoginVC: UIViewController, UIGestureRecognizerDelegate, IdentifiableVC {
+class RegisterLoginVC: UIViewController, IdentifiableVC {
     
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var containerView: UIView!
@@ -89,15 +89,6 @@ class RegisterLoginVC: UIViewController, UIGestureRecognizerDelegate, Identifiab
     private func setupKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-    }
-    
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        if let touchView = touch.view {
-            if touchView.isDescendant(of: self.view) {
-                return false
-            }
-        }
-        return true
     }
     
     override func viewWillAppear(_ animated: Bool) {
