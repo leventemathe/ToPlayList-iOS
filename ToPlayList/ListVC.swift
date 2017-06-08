@@ -90,10 +90,10 @@ class ListVC: UIViewController, IdentifiableVC {
         
         do {
             try FIRAuth.auth()?.signOut()
+            backgroundStarImageView.image = nil
             _ = navigationController?.popToRootViewController(animated: true)
-        } catch let signOutError as NSError {
-            // TODO error handling
-            print ("Error signing out: %@", signOutError)
+        } catch let _ as NSError {
+            Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_ERROR, forVC: self)
         }
     }
     

@@ -26,6 +26,7 @@ class ToPlayListVC: SubListVC {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         removeListeners()
     }
     
