@@ -84,17 +84,16 @@ class ListVC: UIViewController, IdentifiableVC {
         playedListVC.view.removeFromSuperview()
     }
     
-    @IBAction func logoutClicked(_ sender: UIBarButtonItem) {
-        
-        // TODO are you sure you want to log out
-        
-        do {
-            try FIRAuth.auth()?.signOut()
-            backgroundStarImageView.image = nil
-            _ = navigationController?.popToRootViewController(animated: true)
-        } catch _ as NSError {
-            Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_ERROR, forVC: self)
-        }
+    @IBAction func logoutClicked(_ sender: UIBarButtonItem) {        
+        Alerts.alertWithYesAndNoButtons(withTitle: "Log out", withMessage: "Are you sure, you want to log out?", forVC: self, withOnYes: {
+            do {
+                try FIRAuth.auth()?.signOut()
+                self.backgroundStarImageView.image = nil
+                _ = self.navigationController?.popToRootViewController(animated: true)
+            } catch _ as NSError {
+                Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_ERROR, forVC: self)
+            }
+        })
     }
     
     override func viewDidLoad() {
