@@ -116,13 +116,6 @@ class IGDB: GameAPI {
         return "/t_cover_small"
     }
     
-    static var IMG_COVER_MED: String {
-        if UIScreen.main.scale > 1.0 {
-            return "/t_cover_med_2x"
-        }
-        return "/t_cover_med"
-    }
-    
     static var IMG_COVER_BIG: String {
         if UIScreen.main.scale > 1.0 {
             return "/t_cover_big_2x"

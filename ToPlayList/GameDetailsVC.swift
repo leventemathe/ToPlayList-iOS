@@ -451,7 +451,8 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     }
     
     private func downloadCover() {
-        coverImg.kf.setImage(with: game.coverMedURL, placeholder: #imageLiteral(resourceName: "img_missing_cover"), options: nil, progressBlock: nil, completionHandler: { _ in
+        print(game.coverSmallURLAsString ?? "")
+        coverImg.kf.setImage(with: game.coverSmallURL, placeholder: #imageLiteral(resourceName: "img_missing_cover"), options: nil, progressBlock: nil, completionHandler: { _ in
             self.detailsLoaded.loaded[DetailsLoaded.COVER] = true
         })
     }
