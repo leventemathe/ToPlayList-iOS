@@ -451,10 +451,12 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     }
     
     private func downloadCover() {
-        print(game.coverSmallURLAsString ?? "")
-        coverImg.kf.setImage(with: game.coverSmallURL, placeholder: #imageLiteral(resourceName: "img_missing_cover"), options: nil, progressBlock: nil, completionHandler: { _ in
-            self.detailsLoaded.loaded[DetailsLoaded.COVER] = true
-        })
+        if let coverURL = game.coverSmallURL {
+            coverImg.kf.setImage(with: coverURL, placeholder: #imageLiteral(resourceName: "img_missing_cover"), options: nil, progressBlock: nil, completionHandler: { _ in
+                self.detailsLoaded.loaded[DetailsLoaded.COVER] = true
+            })
+        }
+        
     }
     
     private func downloadScreenshotURLs() {
