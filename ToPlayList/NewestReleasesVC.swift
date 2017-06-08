@@ -82,7 +82,6 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     override func viewWillAppear(_ animated: Bool) {
         clearStars()
         getGamesInLists {
-            self.tableView.reloadData()
             self.listsListenerSystem.errorHandlerDelegate = self
             self.attachListListeners()
         }
@@ -111,6 +110,7 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                 self.toPlayList.add(lists.toPlay)
                 self.playedList.add(lists.played)
             }
+            self.tableView.reloadData()
             onComplete()
         }
     }
