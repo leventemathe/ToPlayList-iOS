@@ -93,7 +93,7 @@ class PlayedListVC: SubListVC {
         }
     }
     
-    private func removeListeners() {
+    func removeListeners() {
         removePlayedListListenerAdd()
         removePlayedListListenerRemove()
     }

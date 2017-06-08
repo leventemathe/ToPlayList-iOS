@@ -90,6 +90,8 @@ class ListVC: UIViewController, IdentifiableVC {
                 try FIRAuth.auth()?.signOut()
                 self.backgroundStarImageView.image = nil
                 _ = self.navigationController?.popToRootViewController(animated: true)
+                self.toPLayListVC.removeListeners()
+                self.playedListVC.removeListeners()
             } catch _ as NSError {
                 Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_ERROR, forVC: self)
             }
