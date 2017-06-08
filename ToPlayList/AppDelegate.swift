@@ -13,8 +13,10 @@ extension UIColor {
     
     struct MyCustomColors {
         
+        // these rgb values are different from storyboard, because UIColor init uses sRGB from iOS 10
+        
         static var orange: UIColor {
-            return UIColor(red: 255.0/255.0, green: 155.0/255.0, blue: 64.0/255.0, alpha: 1.0)
+            return UIColor(red: 255.0/255.0, green: 171.0/255.0, blue: 80.0/255.0, alpha: 1.0)
         }
         
         static var red: UIColor {
