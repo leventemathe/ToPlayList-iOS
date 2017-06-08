@@ -51,6 +51,8 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     private func setupDelegates() {
         tableView.delegate = self
         tableView.dataSource = self
+        
+        listsListenerSystem.errorHandlerDelegate = self
     }
     
     private func setupNoDataLabel() {
@@ -82,7 +84,6 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     override func viewWillAppear(_ animated: Bool) {
         clearStars()
         getGamesInLists {
-            self.listsListenerSystem.errorHandlerDelegate = self
             self.attachListListeners()
         }
     }
