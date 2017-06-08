@@ -92,7 +92,7 @@ class ListVC: UIViewController, IdentifiableVC {
             try FIRAuth.auth()?.signOut()
             backgroundStarImageView.image = nil
             _ = navigationController?.popToRootViewController(animated: true)
-        } catch let _ as NSError {
+        } catch _ as NSError {
             Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_ERROR, forVC: self)
         }
     }
