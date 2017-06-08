@@ -91,6 +91,14 @@ class LoginVC: UIViewController, IdentifiableVC {
     }
     
     private func loginSuccesful() {
+        resetInput()
         parent!.performSegue(withIdentifier: "LoginToList", sender: self)
+    }
+    
+    private func resetInput() {
+        emailField.text = ""
+        passwordField.text = ""
+        errorView.isHidden = true
+        dismissKeyboard()
     }
 }

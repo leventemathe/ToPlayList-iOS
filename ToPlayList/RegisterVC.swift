@@ -94,7 +94,7 @@ class RegisterVC: UIViewController, IdentifiableVC {
             
             switch result {
             case .success:
-                self.parent!.performSegue(withIdentifier: "LoginToList", sender: self)
+                self.registerSuccesful()
             case .failure(let error):
                 switch error {
                 case .emailAlreadyInUse:
@@ -115,5 +115,18 @@ class RegisterVC: UIViewController, IdentifiableVC {
                 break
             }
         }
+    }
+    
+    private func registerSuccesful() {
+        resetInput()
+        self.parent!.performSegue(withIdentifier: "LoginToList", sender: self)
+    }
+    
+    private func resetInput() {
+        usernameField.text = ""
+        emailField.text = ""
+        passwordField.text = ""
+        errorView.isHidden = true
+        dismissKeyboard()
     }
 }
