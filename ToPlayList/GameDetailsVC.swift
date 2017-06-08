@@ -149,13 +149,19 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     private var api: GameAPI!
     
     override func viewDidLoad() {
-        setupScrollView()
         setupGameAPI()
-        setupAnimation()
-        startLoading()
         setupLoadingListener()
+        
+        setupAnimation()
+        
         addCustomBackButton()
+        setupScrollView()
         setupStarImageTapRecognizer()
+        setupSwiping()
+        setupBadgeVC()
+        setupImageCarouselVC()
+        
+        startLoading()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -163,9 +169,6 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
             self.detailsLoaded.loaded[DetailsLoaded.LIST_STATE] = true
             self.attachListListeners()
         }
-        setupSwiping()
-        setupBadgeVC()
-        setupImageCarouselVC()
     }
     
     private func setupSwiping() {
