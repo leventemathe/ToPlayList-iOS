@@ -120,6 +120,7 @@ class PlayedListVC: SubListVC {
         ListsList.instance.getPlayedList { result in
             self.loadingAnimationView.stopAnimating()
             self.appeared = true
+            var shouldSetContent = true
             
             switch result {
             case .failure(let error):
@@ -128,9 +129,15 @@ class PlayedListVC: SubListVC {
                     Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_LISTS_ERROR, forVC: self)
                 }
             case .succes(let list):
-                self.playedList = list
+                if self.playedList == list {
+                    shouldSetContent = false
+                } else {
+                    self.playedList = list
+                }
             }
-            self.setContent()
+            if shouldSetContent {
+                self.setContent()
+            }
             onComplete()
         }
     }
