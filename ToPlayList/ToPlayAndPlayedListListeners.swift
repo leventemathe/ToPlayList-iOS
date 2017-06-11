@@ -15,6 +15,8 @@ class ToPlayAndPlayedListListeners {
     private var toPlayListListenerRemove: ListsListenerReference?
     private var playedListListenerRemove: ListsListenerReference?
     
+    // these counters are needed, because the attachment of new listeners is async
+    // because of this, quickly calling attach and detach can result in more listeners attached, than detached
     private var shouldRemoveToPlayListListenerAdd = 0
     private var shouldRemoveToPlayListListenerRemove = 0
     private var shouldRemovePlayedListListenerAdd = 0
@@ -42,6 +44,10 @@ class ToPlayAndPlayedListListeners {
                          withOnRemovedFromToPlayList onRemovedFromToPlayList: @escaping (Game)->(),
                          withOnAddedToPlayedList onAddedToPlayedList: @escaping (Game)->(),
                          withOnRemovedFromPlayedList onRemovedFromPlayedList: @escaping (Game)->()) {
+        removeLateToPlayListListenerAdd()
+        removeLatePlayedListListenerAdd()
+        removeLateToPlayListListenerRemove()
+        removeLatePlayedListListenerRemove()
         listenToToPlayListAdd(onAddedToToPlayList)
         listenToPlayedListAdd(onAddedToPlayedList)
         listenToToPlayListRemove(onRemovedFromToPlayList)
@@ -101,24 +107,20 @@ class ToPlayAndPlayedListListeners {
         case .add:
             if list == ListsEndpoints.List.TO_PLAY_LIST {
                 self.toPlayListListenerAdd = ref
-                self.removeLateToPlayListListenerAdd()
             } else if list == ListsEndpoints.List.PLAYED_LIST {
                 self.playedListListenerAdd = ref
-                self.removeLatePlayedListListenerAdd()
             }
         case .remove:
             if list == ListsEndpoints.List.TO_PLAY_LIST {
                 self.toPlayListListenerRemove = ref
-                self.removeLateToPlayListListenerRemove()
             } else if list == ListsEndpoints.List.PLAYED_LIST {
                 self.playedListListenerRemove = ref
-                self.removeLatePlayedListListenerRemove()
             }
         }
     }
     
     private func removeLateToPlayListListenerAdd() {
-        if shouldRemoveToPlayListListenerAdd > 0 {
+        if shouldRemoveToPlayListListenerAdd > 0  && toPlayListListenerAdd != nil {
             toPlayListListenerAdd!.removeListener()
             toPlayListListenerAdd = nil
             shouldRemoveToPlayListListenerAdd -= 1
@@ -126,7 +128,7 @@ class ToPlayAndPlayedListListeners {
     }
     
     private func removeLatePlayedListListenerAdd() {
-        if shouldRemovePlayedListListenerAdd > 0 {
+        if shouldRemovePlayedListListenerAdd > 0 && playedListListenerAdd != nil {
             playedListListenerAdd!.removeListener()
             playedListListenerAdd = nil
             shouldRemovePlayedListListenerAdd -= 1
@@ -134,7 +136,7 @@ class ToPlayAndPlayedListListeners {
     }
     
     private func removeLateToPlayListListenerRemove() {
-        if shouldRemoveToPlayListListenerRemove > 0 {
+        if shouldRemoveToPlayListListenerRemove > 0 && toPlayListListenerRemove != nil {
             toPlayListListenerRemove!.removeListener()
             toPlayListListenerRemove = nil
             shouldRemoveToPlayListListenerRemove -= 1
@@ -142,7 +144,7 @@ class ToPlayAndPlayedListListeners {
     }
     
     private func removeLatePlayedListListenerRemove() {
-        if shouldRemovePlayedListListenerRemove > 0 {
+        if shouldRemovePlayedListListenerRemove > 0 && playedListListenerRemove != nil {
             playedListListenerRemove!.removeListener()
             playedListListenerRemove = nil
             shouldRemovePlayedListListenerRemove -= 1
