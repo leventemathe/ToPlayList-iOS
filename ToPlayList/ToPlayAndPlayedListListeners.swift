@@ -20,15 +20,28 @@ class ToPlayAndPlayedListListeners {
     private var shouldRemovePlayedListListenerAdd = 0
     private var shouldRemovePlayedListListenerRemove = 0
     
+    func isAttached() -> Bool {
+        if toPlayListListenerAdd == nil {
+            return false
+        }
+        if playedListListenerAdd == nil {
+            return false
+        }
+        if toPlayListListenerRemove == nil {
+            return false
+        }
+        if playedListListenerRemove == nil {
+            return false
+        }
+        return true
+    }
+    
     var errorHandlerDelegate: ErrorHandlerDelegate?
 
     func attachListeners(withOnAddedToToPlayList onAddedToToPlayList: @escaping (Game)->(),
                          withOnRemovedFromToPlayList onRemovedFromToPlayList: @escaping (Game)->(),
                          withOnAddedToPlayedList onAddedToPlayedList: @escaping (Game)->(),
                          withOnRemovedFromPlayedList onRemovedFromPlayedList: @escaping (Game)->()) {
-        if !ListsUser.loggedIn {
-            return
-        }
         listenToToPlayListAdd(onAddedToToPlayList)
         listenToPlayedListAdd(onAddedToPlayedList)
         listenToToPlayListRemove(onRemovedFromToPlayList)

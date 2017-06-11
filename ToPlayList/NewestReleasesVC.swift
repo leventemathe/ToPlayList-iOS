@@ -81,11 +81,22 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         view.addSubview(loadingAnimationView)
     }
     
+    private var loggedIn = false {
+        didSet {
+            tableView.reloadData()
+            if loggedIn && !listsListenerSystem.isAttached() {
+                getGamesInLists {
+                    self.attachListListeners()
+                }
+            }
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         clearStars()
-        getGamesInLists {
-            self.attachListListeners()
-        }
+        ListsUser.instance.listenToLoggedInState(onChange: { (userid, loggedIn) in
+            self.loggedIn = loggedIn
+        })
     }
     
     private func clearStars() {
@@ -96,13 +107,10 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     override func viewDidDisappear(_ animated: Bool) {
         self.listsListenerSystem.detachListeners()
+        ListsUser.instance.stopListeningToLoggedInState()
     }
     
     private func getGamesInLists(_ onComplete: @escaping ()->()) {
-        if !ListsUser.loggedIn {
-            onComplete()
-            return
-        }
         ListsList.instance.getToPlayAndPlayedList { result in
             switch result {
             case .failure:
@@ -117,14 +125,11 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     private func attachListListeners() {
-        if !ListsUser.loggedIn {
-            return
-        }
         listsListenerSystem.attachListeners(withOnAddedToToPlayList: { game in
             if self.toPlayList.add(game) {
                 self.tableView.reloadData()
+                print("set content newest releases")
             }
-            print("set content newest releases")
         }, withOnRemovedFromToPlayList: { game in
             self.toPlayList.remove(game)
             self.tableView.reloadData()
@@ -132,8 +137,8 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         }, withOnAddedToPlayedList: { game in
             if self.playedList.add(game) {
                 self.tableView.reloadData()
+                print("set content newest releases")
             }
-            print("set content newest releases")
         }, withOnRemovedFromPlayedList: { game in
             self.playedList.remove(game)
             self.tableView.reloadData()
@@ -244,7 +249,7 @@ class NewestReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
                 cell.update(game)
             }
             cell.updateStar(getStarState(game))
-            cell.loggedIn = ListsUser.loggedIn
+            cell.loggedIn = loggedIn
             return cell
         }
         

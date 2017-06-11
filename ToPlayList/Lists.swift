@@ -21,7 +21,7 @@ enum ListsUserError {
     case unknownError
 }
 
-struct ListsUser {
+class ListsUser {
     
     static let instance = ListsUser()
     
@@ -139,6 +139,24 @@ struct ListsUser {
             return uid
         }
         return nil
+    }
+    
+    private var listenerHandle: FIRAuthStateDidChangeListenerHandle?
+    
+    func listenToLoggedInState(onChange: @escaping ((userid: String?, loggedIn: Bool))->()) {
+        if let auth = FIRAuth.auth() {
+            listenerHandle = auth.addStateDidChangeListener { (auth, user) in
+                onChange((userid: user?.uid ?? nil, loggedIn: auth.currentUser != nil))
+            }
+        }
+    }
+    
+    func stopListeningToLoggedInState() {
+        if let handle = listenerHandle {
+            if let auth = FIRAuth.auth() {
+                auth.removeStateDidChangeListener(handle)
+            }
+        }
     }
 }
 
