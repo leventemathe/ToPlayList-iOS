@@ -162,6 +162,9 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         setupImageCarouselVC()
         
         startLoading()
+        
+        addGameDataAlreadyDownloaded()
+        downloadGameData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -295,11 +298,6 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     
     override func viewWillDisappear(_ animated: Bool) {
         listsListenerSystem.detachListeners()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        addGameDataAlreadyDownloaded()
-        downloadGameData()
     }
     
     private func setupLoadingListener() {
