@@ -10,6 +10,7 @@ import UIKit
 import NVActivityIndicatorView
 import Kingfisher
 
+// this is needed because the badge appears/disappears, and it could flicker if the game was moved from one list to another
 struct GameInExclusiveLists {
     
     var inToPlayList = false {
@@ -44,10 +45,6 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     struct DetailsLoaded {
         
         static let LIST_STATE = "listState"
-        static let COVER = "cover"
-        static let BIG_SCREENSHOTS = "bigScreenshots"
-        static let SMALL_SCREENSHOTS = "smallScreenshots"
-        static let BIG_SCREENSHOT = "bigScreenshot"
         static let GENRE = "genre"
         static let DEVELOPER = "developer"
         static let PUBLISHER = "publisher"
@@ -62,10 +59,6 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         private var listener: OnFinishedListener
         
         var loaded = [DetailsLoaded.LIST_STATE: false,
-                      DetailsLoaded.COVER: false,
-                      DetailsLoaded.BIG_SCREENSHOTS: false,
-                      DetailsLoaded.SMALL_SCREENSHOTS: false,
-                      DetailsLoaded.BIG_SCREENSHOT: false,
                       DetailsLoaded.GENRE: false,
                       DetailsLoaded.DEVELOPER: false,
                       DetailsLoaded.PUBLISHER: false,
@@ -453,8 +446,10 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     
     private func downloadCover() {
         if let coverURL = game.coverSmallURL {
-            coverImg.kf.setImage(with: coverURL, placeholder: #imageLiteral(resourceName: "img_missing_cover"), options: nil, progressBlock: nil, completionHandler: { _ in
-                self.detailsLoaded.loaded[DetailsLoaded.COVER] = true
+            coverImg.kf.setImage(with: coverURL, placeholder: #imageLiteral(resourceName: "img_missing_cover"), options: nil, progressBlock: nil, completionHandler: { (image, _, _, _) in
+                if image == nil && self.game.coverBigURL != nil {
+                    self.coverImg.kf.setImage(with: self.game.coverBigURL, placeholder: #imageLiteral(resourceName: "img_missing_cover"))
+                }
             })
         }
         
@@ -469,7 +464,6 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         api.getScreenshotsBig(forGame: game, withOnComplete: { result in
             switch result {
             case .success(let screenshots):
-                self.detailsLoaded.loaded[DetailsLoaded.BIG_SCREENSHOTS] = true
                 self.game.screenshotBigURLs = screenshots
                 self.setBigScreenshot()
             case .failure(let error):
@@ -482,8 +476,6 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
                     self.handleLoadingError(Alerts.UNKNOWN_ERROR)
                 case .noData:
                     self.bigScreenshot.image = #imageLiteral(resourceName: "img_missing_screenshot_big")
-                    self.detailsLoaded.loaded[DetailsLoaded.BIG_SCREENSHOTS] = true
-                    self.detailsLoaded.loaded[DetailsLoaded.BIG_SCREENSHOT] = true
                 }
             }
         })
@@ -493,7 +485,6 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         api.getScreenshotsSmall(forGame: game, withOnComplete: { result in
             switch result {
             case .success(let screenshots):
-                self.detailsLoaded.loaded[DetailsLoaded.SMALL_SCREENSHOTS] = true
                 self.game.screenshotSmallURLs = screenshots
                 self.setScreenshotCarousel()
             case .failure(let error):
@@ -506,7 +497,6 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
                     self.handleLoadingError(Alerts.UNKNOWN_ERROR)
                 case .noData:
                     self.bigScreenshot.image = #imageLiteral(resourceName: "img_missing_screenshot_big")
-                    self.detailsLoaded.loaded[DetailsLoaded.SMALL_SCREENSHOTS] = true
                     self.imageCarouselContainer.isHidden = true
                 }
             }
@@ -515,12 +505,13 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     
     private func setBigScreenshot() {
         if self.game.screenshotBigURLs != nil {
-            self.bigScreenshot.kf.setImage(with: self.game.screenshotBigURL, placeholder: #imageLiteral(resourceName: "img_missing_screenshot_big"), options: nil, progressBlock: nil, completionHandler: { _ in
-                self.detailsLoaded.loaded[DetailsLoaded.BIG_SCREENSHOT] = true
+            self.bigScreenshot.kf.setImage(with: self.game.screenshotBigURL, placeholder: #imageLiteral(resourceName: "img_missing_screenshot_big"), options: nil, progressBlock: nil, completionHandler: { (image, _, _, _) in
+                if image == nil && self.game.screenshotSmallURL != nil {
+                    self.bigScreenshot.kf.setImage(with: self.game.screenshotSmallURL, placeholder: #imageLiteral(resourceName: "img_missing_screenshot_big"))
+                }
             })
         } else {
             self.bigScreenshot.image = #imageLiteral(resourceName: "img_missing_screenshot_big")
-            self.detailsLoaded.loaded[DetailsLoaded.BIG_SCREENSHOT] = true
         }
     }
     

@@ -17,6 +17,7 @@ class ImageCarouselVC: UIViewController, UICollectionViewDataSource, UICollectio
         collectionView.dataSource = self
     }
     
+    // TODO add large urls too, and add loading of large images if small failed, when dequeing cell
     private var imageURLs = [URL]() {
         didSet {
             collectionView.reloadData()

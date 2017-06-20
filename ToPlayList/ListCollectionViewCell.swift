@@ -33,7 +33,11 @@ class ListCollectionViewCell: UICollectionViewCell, ReusableView, UIGestureRecog
         titleLbl.text = game.name
         if let coverURL = game.coverBigURL {
             coverImg.image = nil
-            coverImg.kf.setImage(with: coverURL, placeholder: #imageLiteral(resourceName: "img_missing_cover"))
+            coverImg.kf.setImage(with: coverURL, placeholder: #imageLiteral(resourceName: "img_missing_cover"), options: nil, progressBlock: nil, completionHandler: { (image, _, _, _) in
+                if image == nil && self.game.coverSmallURL != nil {
+                    self.coverImg.kf.setImage(with: self.game.coverSmallURL, placeholder: #imageLiteral(resourceName: "img_missing_cover"))
+                }
+            })
         } else {
             coverImg.image = #imageLiteral(resourceName: "img_missing_cover")
         }

@@ -34,7 +34,7 @@ class NewestReleases: XCTestCase {
         
         IGDB.instance.getGamesList({ result in
             switch result {
-            case .succes(let gamesResult):
+            case .success(let gamesResult):
                 games = gamesResult
                 exp.fulfill()
             default:
@@ -76,7 +76,7 @@ class NewestReleases: XCTestCase {
         
         IGDB.instance.getGamesList({ result in
             switch result {
-            case .succes(let gamesResult):
+            case .success(let gamesResult):
                 games = gamesResult
                 exp.fulfill()
             default:

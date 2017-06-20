@@ -152,6 +152,7 @@ class SubListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFlowL
         return UICollectionViewCell()
     }
     
+    // these scroll view delegates set the visible cells' scrolling field, so that the cells can decide if swiping left/right should be allowed or not
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         setCellScrolling(true)
     }
