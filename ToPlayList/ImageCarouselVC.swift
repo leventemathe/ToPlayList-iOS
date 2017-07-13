@@ -17,24 +17,31 @@ class ImageCarouselVC: UIViewController, UICollectionViewDataSource, UICollectio
         collectionView.dataSource = self
     }
     
+    typealias ImageURLPairs = [(small: URL, big: URL)]
+    
     // TODO add large urls too, and add loading of large images if small failed, when dequeing cell
-    private var imageURLs = [URL]() {
+    private var imageURLs = ImageURLPairs() {
         didSet {
             collectionView.reloadData()
         }
     }
     
-    func addImage(byUrl url: URL) {
-        if !imageURLs.contains(url) {
-            imageURLs.append(url)
+    func addImages(from game: Game) {
+        guard let smallURLs = game.screenshotSmallURLs, let bigURLs = game.screenshotBigURLs else {
+            return
         }
-    }
-    
-    func addImages(byUrls urls: [URL]) {
-        var newUrls = [URL]()
-        for url in urls {
-            if !imageURLs.contains(url) {
-                newUrls.append(url)
+        if smallURLs.count != bigURLs.count {
+            return
+        }
+        var newUrls = ImageURLPairs()
+        for i in 0..<smallURLs.count {
+            let smallURL = smallURLs[i]
+            let bigURL = bigURLs[i]
+            let urlPair = (small: smallURL, big: bigURL)
+            if !imageURLs.contains(where: {small, big in
+                return small == urlPair.small && big == urlPair.big
+            }) {
+                newUrls.append(urlPair)
             }
         }
         imageURLs.append(contentsOf: newUrls)
@@ -46,7 +53,7 @@ class ImageCarouselVC: UIViewController, UICollectionViewDataSource, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCarouselCell.reuseIdentifier, for: indexPath) as? ImageCarouselCell {
-            cell.update(imageURLs[indexPath.row])
+            cell.update(imageURLs[indexPath.row].small)
             return cell
         }
         return UICollectionViewCell()

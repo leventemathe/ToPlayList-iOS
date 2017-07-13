@@ -295,6 +295,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     
     private func setupLoadingListener() {
         detailsLoaded = DetailsLoaded({ [unowned self] in
+            self.setScreenshotCarousel()
             self.finishLoading()
         })
     }
@@ -486,7 +487,6 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
             switch result {
             case .success(let screenshots):
                 self.game.screenshotSmallURLs = screenshots
-                self.setScreenshotCarousel()
             case .failure(let error):
                 switch error {
                 case .noInternet:
@@ -516,8 +516,8 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     }
     
     private func setScreenshotCarousel() {
-        if let urls = game.screenshotSmallURLs {
-            imageCarouselVC?.addImages(byUrls: urls)
+        if game.screenshotSmallURLs != nil {
+            imageCarouselVC?.addImages(from: game)
         } else {
             imageCarouselContainer.isHidden = true
         }
