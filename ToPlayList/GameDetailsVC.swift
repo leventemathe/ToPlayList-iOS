@@ -181,10 +181,28 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         badgeVC?.constraintsSetDelegate = self
     }
     
+    class ImageLoadErrorHandler: ErrorHandlerDelegate {
+        
+        weak var imageCarouselContainer: UIView!
+        
+        init(imageCarouselContainer: UIView) {
+            self.imageCarouselContainer = imageCarouselContainer
+        }
+        
+        func handleError() {
+            imageCarouselContainer.isHidden = true
+        }
+        
+        func handleError(_ message: String) {
+            imageCarouselContainer.isHidden = true
+        }
+    }
+    
     private func setupImageCarouselVC() {
         for vc in childViewControllers {
             if let iVC = vc as? ImageCarouselVC {
                 self.imageCarouselVC = iVC
+                self.imageCarouselVC!.imageLoadErrorDelegate = ImageLoadErrorHandler(imageCarouselContainer: imageCarouselContainer)
             }
         }
     }

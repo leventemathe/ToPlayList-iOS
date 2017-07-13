@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ErrorHandlerDelegate {
+protocol ErrorHandlerDelegate: class {
     
     func handleError()
     func handleError(_ message: String)

@@ -7,10 +7,14 @@
 //
 
 import UIKit
+import ImageViewer
+import Kingfisher
 
-class ImageCarouselVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class ImageCarouselVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, GalleryItemsDataSource {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    weak var imageLoadErrorDelegate: ErrorHandlerDelegate?
     
     override func viewDidLoad() {
         collectionView.delegate = self
@@ -19,7 +23,6 @@ class ImageCarouselVC: UIViewController, UICollectionViewDataSource, UICollectio
     
     typealias ImageURLPairs = [(small: URL, big: URL)]
     
-    // TODO add large urls too, and add loading of large images if small failed, when dequeing cell
     private var imageURLs = ImageURLPairs() {
         didSet {
             collectionView.reloadData()
@@ -53,10 +56,18 @@ class ImageCarouselVC: UIViewController, UICollectionViewDataSource, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCarouselCell.reuseIdentifier, for: indexPath) as? ImageCarouselCell {
-            cell.update(imageURLs[indexPath.row].small)
+            cell.update(imageURLs[indexPath.row].small, withOnComplete: { result in
+                if !result {
+                    self.imageLoadErrorDelegate?.handleError()
+                }
+            })
             return cell
         }
         return UICollectionViewCell()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        presentImageGallery(GalleryViewController(startIndex: indexPath.row, itemsDataSource: self, configuration: [.deleteButtonMode(.none), .pagingMode(.carousel), .thumbnailsButtonMode(.none)]))
     }
     
     // SIZING
@@ -83,4 +94,27 @@ class ImageCarouselVC: UIViewController, UICollectionViewDataSource, UICollectio
         setupCellSizes()
         return cellHorizontalInterItemMargin
     }
+    
+    // GALLERY
+    func itemCount() -> Int {
+        return imageURLs.count
+    }
+    
+    func provideGalleryItem(_ index: Int) -> GalleryItem {
+        return GalleryItem.image(fetchImageBlock: { onComplete in
+            KingfisherManager.shared.retrieveImage(with: self.imageURLs[index].big, options: nil, progressBlock: nil, completionHandler: { (image, error, _, _) in
+                if error == nil {
+                    onComplete(image)
+                } else {
+                    print(error!)
+                    KingfisherManager.shared.retrieveImage(with: self.imageURLs[index].small, options: nil, progressBlock: nil, completionHandler: { (image, error, _, _) in
+                        // this doesn't seem to throw error if image is nil, the loading anim continues to spin
+                        // but it's pretty safe, because small is guaranteed to exist: the image carousel wouldn't be visible otherwise
+                        onComplete(image)
+                    })
+                }
+            })
+        })
+    }
 }
+
