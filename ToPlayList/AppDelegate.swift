@@ -15,6 +15,7 @@ extension UIColor {
         
         // these rgb values are different from storyboard, because UIColor init uses sRGB from iOS 10
         
+        // FD9B40
         static var orange: UIColor {
             return UIColor(red: 255.0/255.0, green: 171.0/255.0, blue: 80.0/255.0, alpha: 1.0)
         }

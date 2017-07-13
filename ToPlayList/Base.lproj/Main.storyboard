@@ -1367,7 +1367,7 @@
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dark Souls" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h24-vv-DPG">
                                                                     <rect key="frame" x="0.0" y="164" width="155" height="30"/>
-                                                                    <color key="backgroundColor" red="0.99211198091506958" green="0.60808348655700684" blue="0.25093927979469299" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <color key="backgroundColor" red="0.99215686274509807" green="0.60784313725490191" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="30" id="A6Y-Jc-Pvq"/>
                                                                     </constraints>

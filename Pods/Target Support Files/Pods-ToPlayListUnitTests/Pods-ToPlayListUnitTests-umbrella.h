@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_ToPlayList_ToPlayListUnitTestsVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_ToPlayList_ToPlayListUnitTestsVersionString[];
+FOUNDATION_EXPORT double Pods_ToPlayListUnitTestsVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_ToPlayListUnitTestsVersionString[];
 

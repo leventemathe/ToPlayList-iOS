@@ -34,12 +34,12 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-ToPlayList-ToPlayListUnitTests.xcscheme</key>
+		<key>Pods-ToPlayList.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-ToPlayList.xcscheme</key>
+		<key>Pods-ToPlayListUnitTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -62,6 +62,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>62E8DBA427397EECF650D66426D292B3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>83548DB259CDDAF1722C21C80CD1F343</key>
 		<dict>
 			<key>primary</key>
@@ -78,11 +83,6 @@
 			<true/>
 		</dict>
 		<key>C4944FEC314D1A66588651D006273ADE</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E698CD90DBA53938FC01516E6FB7CCC7</key>
 		<dict>
 			<key>primary</key>
 			<true/>

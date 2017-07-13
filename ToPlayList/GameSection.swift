@@ -84,9 +84,11 @@ class GameSection {
             } else {
                 tempGames.append(game)
                 if let lastGame = games.last {
-                    if game == lastGame && gameSections.count > 0 {
-                        if gameSections[gameSections.count - 1].header == game.firstReleaseDateAsString {
-                            gameSections[gameSections.count - 1].games.append(contentsOf: tempGames)
+                    if game == lastGame {
+                        if gameSections.last == nil {
+                            gameSections.append(GameSection(header: game.firstReleaseDateAsString!, games: tempGames))
+                        } else if gameSections.last!.header == game.firstReleaseDateAsString {
+                            gameSections.last!.games.append(contentsOf: tempGames)
                         } else {
                             gameSections.append(GameSection(header: game.firstReleaseDateAsString!, games: tempGames))
                         }

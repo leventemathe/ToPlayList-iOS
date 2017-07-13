@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2ECC62947C6D486DCF1C22BF /* Pods_ToPlayList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1015AB877BDCDC510C82BC /* Pods_ToPlayList.framework */; };
 		4A1CC3C7C0A5B8E8CC4E8767 /* Pods_ToPlayList_ToPlayListUnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87CF1429DC57C621EF42890E /* Pods_ToPlayList_ToPlayListUnitTests.framework */; };
+		776B411A9B30AAD0B34C82CC /* Pods_ToPlayListUnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DA6F271D10ACDF634516C75 /* Pods_ToPlayListUnitTests.framework */; };
 		D709009A1EC5B80600A316BE /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70900991EC5B80600A316BE /* SearchVC.swift */; };
 		D709009D1EC5B89D00A316BE /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D709009C1EC5B89D00A316BE /* SearchCell.swift */; };
 		D70B03231E0C1F9500F67E7A /* IGDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70B03221E0C1F9500F67E7A /* IGDB.swift */; };
@@ -104,11 +105,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1DA6F271D10ACDF634516C75 /* Pods_ToPlayListUnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ToPlayListUnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B9447719F1960C6A0B1D4F2 /* Pods-ToPlayList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToPlayList.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ToPlayList/Pods-ToPlayList.debug.xcconfig"; sourceTree = "<group>"; };
+		56AD1F62056EF3A7842609AC /* Pods-ToPlayListUnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToPlayListUnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ToPlayListUnitTests/Pods-ToPlayListUnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6145022A2978B0561A8DA46B /* Pods-ToPlayList-ToPlayListUnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToPlayList-ToPlayListUnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ToPlayList-ToPlayListUnitTests/Pods-ToPlayList-ToPlayListUnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		705E9608BAAFE73EB2D2C1A0 /* Pods-ToPlayList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToPlayList.release.xcconfig"; path = "Pods/Target Support Files/Pods-ToPlayList/Pods-ToPlayList.release.xcconfig"; sourceTree = "<group>"; };
 		87CF1429DC57C621EF42890E /* Pods_ToPlayList_ToPlayListUnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ToPlayList_ToPlayListUnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B84B20D64D553B9B36723B6B /* Pods-ToPlayList-ToPlayListUnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToPlayList-ToPlayListUnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ToPlayList-ToPlayListUnitTests/Pods-ToPlayList-ToPlayListUnitTests.debug.xcconfig"; sourceTree = "<group>"; };
+		BC37B2FC211DCF9DE8B1AAC2 /* Pods-ToPlayListUnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToPlayListUnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ToPlayListUnitTests/Pods-ToPlayListUnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		CE1015AB877BDCDC510C82BC /* Pods_ToPlayList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ToPlayList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D70900991EC5B80600A316BE /* SearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		D709009C1EC5B89D00A316BE /* SearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
@@ -212,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A1CC3C7C0A5B8E8CC4E8767 /* Pods_ToPlayList_ToPlayListUnitTests.framework in Frameworks */,
+				776B411A9B30AAD0B34C82CC /* Pods_ToPlayListUnitTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,6 +228,7 @@
 			children = (
 				CE1015AB877BDCDC510C82BC /* Pods_ToPlayList.framework */,
 				87CF1429DC57C621EF42890E /* Pods_ToPlayList_ToPlayListUnitTests.framework */,
+				1DA6F271D10ACDF634516C75 /* Pods_ToPlayListUnitTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -234,6 +240,8 @@
 				705E9608BAAFE73EB2D2C1A0 /* Pods-ToPlayList.release.xcconfig */,
 				B84B20D64D553B9B36723B6B /* Pods-ToPlayList-ToPlayListUnitTests.debug.xcconfig */,
 				6145022A2978B0561A8DA46B /* Pods-ToPlayList-ToPlayListUnitTests.release.xcconfig */,
+				56AD1F62056EF3A7842609AC /* Pods-ToPlayListUnitTests.debug.xcconfig */,
+				BC37B2FC211DCF9DE8B1AAC2 /* Pods-ToPlayListUnitTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -673,7 +681,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ToPlayList-ToPlayListUnitTests/Pods-ToPlayList-ToPlayListUnitTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ToPlayListUnitTests/Pods-ToPlayListUnitTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		344F677DE1972C63CE02C9CE /* [CP] Embed Pods Frameworks */ = {
@@ -703,7 +711,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ToPlayList-ToPlayListUnitTests/Pods-ToPlayList-ToPlayListUnitTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ToPlayListUnitTests/Pods-ToPlayListUnitTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9A699F2DA6B8B7366A894631 /* [CP] Copy Pods Resources */ = {
@@ -1029,10 +1037,21 @@
 		};
 		D75A411B1E241FC600E91514 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B84B20D64D553B9B36723B6B /* Pods-ToPlayList-ToPlayListUnitTests.debug.xcconfig */;
+			baseConfigurationReference = 56AD1F62056EF3A7842609AC /* Pods-ToPlayListUnitTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalytics\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAuth\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseCore\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseDatabase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseInstanceID\"",
+					"\"${PODS_ROOT}/Firebase/Core/Sources\"",
+				);
 				INFOPLIST_FILE = ToPlayListUnitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.levente.mathe.ToPlayListUnitTests;
@@ -1044,10 +1063,21 @@
 		};
 		D75A411C1E241FC600E91514 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6145022A2978B0561A8DA46B /* Pods-ToPlayList-ToPlayListUnitTests.release.xcconfig */;
+			baseConfigurationReference = BC37B2FC211DCF9DE8B1AAC2 /* Pods-ToPlayListUnitTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalytics\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAuth\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseCore\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseDatabase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseInstanceID\"",
+					"\"${PODS_ROOT}/Firebase/Core/Sources\"",
+				);
 				INFOPLIST_FILE = ToPlayListUnitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.levente.mathe.ToPlayListUnitTests;

@@ -12,7 +12,7 @@ target 'ToPlayList' do
   pod 'ImageViewer', '~> 4.1.0'
 
   target 'ToPlayListUnitTests' do
-    inherit! :complete
+    inherit! :search_paths
   end
 
 end

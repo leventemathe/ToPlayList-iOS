@@ -325,7 +325,7 @@ class IGDB: GameAPI {
     
     public func getGenres(_ onComplete: @escaping (IGDBResult<[Genre]>)->Void, withIDs ids: [UInt64]) {
         if ids.count < 1 {
-            onComplete(.failure(.noData))
+            onComplete(.success([Genre]()))
             return
         }
         let idsString = createIDList(from: ids)
@@ -337,7 +337,7 @@ class IGDB: GameAPI {
     
     public func getCompanies(_ onComplete: @escaping (IGDBResult<[Company]>)->Void, withIDs ids: [UInt64]) {
         if ids.count < 1 {
-            onComplete(.failure(.noData))
+            onComplete(.success([Company]()))
             return
         }
         let idsString = createIDList(from: ids)
@@ -349,7 +349,7 @@ class IGDB: GameAPI {
     
     public func getFranchises(_ onComplete: @escaping (IGDBResult<[Franchise]>)->Void, withIDs ids: [UInt64]) {
         if ids.count < 1 {
-            onComplete(.failure(.noData))
+            onComplete(.success([Franchise]()))
             return
         }
         let idsString = createIDList(from: ids)
@@ -362,7 +362,7 @@ class IGDB: GameAPI {
     
     public func getCollections(_ onComplete: @escaping (IGDBResult<[Collection]>)->Void, withIDs ids: [UInt64]) {
         if ids.count < 1 {
-            onComplete(.failure(.noData))
+            onComplete(.success([Collection]()))
             return
         }
         let idsString = createIDList(from: ids)
@@ -374,7 +374,7 @@ class IGDB: GameAPI {
     
     public func getGameModes(_ onComplete: @escaping (IGDBResult<[GameMode]>)->Void, withIDs ids: [UInt64]) {
         if ids.count < 1 {
-            onComplete(.failure(.noData))
+            onComplete(.success([GameMode]()))
             return
         }
         let idsString = createIDList(from: ids)
@@ -386,7 +386,7 @@ class IGDB: GameAPI {
     
     public func getPlayerPerspectives(_ onComplete: @escaping (IGDBResult<[PlayerPerspective]>)->Void, withIDs ids: [UInt64]) {
         if ids.count < 1 {
-            onComplete(.failure(.noData))
+            onComplete(.success([PlayerPerspective]()))
             return
         }
         let idsString = createIDList(from: ids)
