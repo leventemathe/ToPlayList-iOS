@@ -55,6 +55,8 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         static let COLLECTION = "collection"
         static let GAME_MODES = "game_modes"
         static let PLAYER_PERSPECTIVES = "player_perspectives"
+        static let SCREENSHOTS_SMALL = "screenshots_small"
+        static let SCREENSHOTS_BIG = "screenshots_big"
         static let VIDEOS = "videos"
         
         private var listener: OnFinishedListener
@@ -70,6 +72,8 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
                       DetailsLoaded.COLLECTION: false,
                       DetailsLoaded.GAME_MODES: false,
                       DetailsLoaded.PLAYER_PERSPECTIVES: false,
+                      DetailsLoaded.SCREENSHOTS_SMALL: false,
+                      DetailsLoaded.SCREENSHOTS_BIG: false,
                       DetailsLoaded.VIDEOS: false] {
             didSet {
                 if isFullyLoaded() {
@@ -318,7 +322,6 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     
     private func setupLoadingListener() {
         detailsLoaded = DetailsLoaded({ [unowned self] in
-            print(self.game.videoURLs)
             self.setScreenshotCarousel()
             self.finishLoading()
         })
@@ -491,6 +494,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
             switch result {
             case .success(let screenshots):
                 self.game.screenshotBigURLs = screenshots
+                self.detailsLoaded.loaded[DetailsLoaded.SCREENSHOTS_BIG] = true
                 self.setBigScreenshot()
             case .failure(let error):
                 switch error {
@@ -502,6 +506,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
                     self.handleLoadingError(Alerts.UNKNOWN_ERROR)
                 case .noData:
                     self.bigScreenshot.image = #imageLiteral(resourceName: "img_missing_screenshot_big")
+                    self.detailsLoaded.loaded[DetailsLoaded.SCREENSHOTS_BIG] = true
                 }
             }
         })
@@ -512,6 +517,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
             switch result {
             case .success(let screenshots):
                 self.game.screenshotSmallURLs = screenshots
+                self.detailsLoaded.loaded[DetailsLoaded.SCREENSHOTS_SMALL] = true
             case .failure(let error):
                 switch error {
                 case .noInternet:
@@ -522,6 +528,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
                     self.handleLoadingError(Alerts.UNKNOWN_ERROR)
                 case .noData:
                     self.bigScreenshot.image = #imageLiteral(resourceName: "img_missing_screenshot_big")
+                    self.detailsLoaded.loaded[DetailsLoaded.SCREENSHOTS_SMALL] = true
                 }
             }
         })
