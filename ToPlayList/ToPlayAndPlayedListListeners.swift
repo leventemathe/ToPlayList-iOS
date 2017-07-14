@@ -38,7 +38,7 @@ class ToPlayAndPlayedListListeners {
         return true
     }
     
-    var errorHandlerDelegate: ErrorHandlerDelegate?
+    weak var errorHandlerDelegate: ErrorHandlerDelegate?
 
     func attachListeners(withOnAddedToToPlayList onAddedToToPlayList: @escaping (Game)->(),
                          withOnRemovedFromToPlayList onRemovedFromToPlayList: @escaping (Game)->(),

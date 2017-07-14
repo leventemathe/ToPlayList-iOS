@@ -14,7 +14,7 @@ class ImageCarouselVC: UIViewController, UICollectionViewDataSource, UICollectio
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var imageLoadErrorDelegate: ErrorHandlerDelegate?
+    weak var imageLoadErrorDelegate: ErrorHandlerDelegate?
     
     override func viewDidLoad() {
         collectionView.delegate = self

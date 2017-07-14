@@ -25,7 +25,7 @@ class ListCollectionViewCell: UICollectionViewCell, ReusableView, UIGestureRecog
     
     var game: Game!
     
-    var networkErrorHandlerDelegate: ErrorHandlerDelegate?
+    weak var networkErrorHandlerDelegate: ErrorHandlerDelegate?
     
     func update(_ game: Game) {
         self.game = game
@@ -56,7 +56,7 @@ class ListCollectionViewCell: UICollectionViewCell, ReusableView, UIGestureRecog
     private var panRecognizer: UIPanGestureRecognizer!
     private var panStartPoint: CGPoint!
     
-    var onPanDelegate: OnPanDelegate?
+    weak var onPanDelegate: OnPanDelegate?
     
     override func awakeFromNib() {
         setupDropShadow()

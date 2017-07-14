@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol OnPanDelegate {
+protocol OnPanDelegate: class {
     
     func moveContent(_ position: CGFloat)
     func animateColor(_ position: CGFloat)

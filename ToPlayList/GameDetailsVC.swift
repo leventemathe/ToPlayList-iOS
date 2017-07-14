@@ -198,11 +198,14 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         }
     }
     
+    var imageCarouselImageLoadedErrorDelegate: ImageLoadErrorHandler?
+    
     private func setupImageCarouselVC() {
         for vc in childViewControllers {
             if let iVC = vc as? ImageCarouselVC {
                 self.imageCarouselVC = iVC
-                self.imageCarouselVC!.imageLoadErrorDelegate = ImageLoadErrorHandler(imageCarouselContainer: imageCarouselContainer)
+                imageCarouselImageLoadedErrorDelegate = ImageLoadErrorHandler(imageCarouselContainer: imageCarouselContainer)
+                self.imageCarouselVC!.imageLoadErrorDelegate = imageCarouselImageLoadedErrorDelegate
             }
         }
     }

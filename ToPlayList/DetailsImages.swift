@@ -41,7 +41,7 @@ class DetailsCover: UIView, DropShadowed {
     
     var game: Game!
     
-    var errorHandlerDelegate: ErrorHandlerDelegate?
+    weak var errorHandlerDelegate: ErrorHandlerDelegate?
     
     @IBOutlet weak var coverImg: UIImageView!
     @IBOutlet weak var playedView: UIView!

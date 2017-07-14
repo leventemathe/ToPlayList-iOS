@@ -120,7 +120,7 @@ class NewestReleasesCell: UITableViewCell, ReusableView {
     private var panRecognizer: UIPanGestureRecognizer!
     private var panStartPoint: CGPoint!
     
-    var networkErrorHandlerDelegate: ErrorHandlerDelegate?
+    weak var networkErrorHandlerDelegate: ErrorHandlerDelegate?
     
     override func awakeFromNib() {
         setupConstraints()
