@@ -74,7 +74,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
                       DetailsLoaded.PLAYER_PERSPECTIVES: false,
                       DetailsLoaded.SCREENSHOTS_SMALL: false,
                       DetailsLoaded.SCREENSHOTS_BIG: false,
-                      DetailsLoaded.VIDEOS: false] {
+                      DetailsLoaded.VIDEOS: true] { // not downloading video links for now, for legal reasons
             didSet {
                 if isFullyLoaded() {
                     listener()
@@ -374,7 +374,8 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         downloadBasics()
         downloadCover()
         downloadScreenshotURLs()
-        downloadVideoURLs()
+        // for legal reasons
+        //downloadVideoURLs()
         downloadDescription()
         downloadStatus()
         downloadCategory()
