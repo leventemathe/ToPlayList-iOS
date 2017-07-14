@@ -322,7 +322,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     
     private func setupLoadingListener() {
         detailsLoaded = DetailsLoaded({ [unowned self] in
-            self.setMediaCarousel()
+            self.setScreenshotCarousel()
             self.finishLoading()
         })
     }
@@ -567,15 +567,12 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         })
     }
     
-    private func setMediaCarousel() {
-        if game.screenshotSmallURL == nil && game.videoURLs == nil {
-            imageCarouselContainer.isHidden = true
-        }
-        
+    private func setScreenshotCarousel() {
         if game.screenshotSmallURLs != nil {
             imageCarouselVC?.addImages(from: game)
+        } else {
+            imageCarouselContainer.isHidden = true
         }
-        // TODO add video to media carousel
     }
     
     private func downloadDescription() {

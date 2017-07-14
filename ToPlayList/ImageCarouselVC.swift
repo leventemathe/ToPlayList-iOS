@@ -10,43 +10,6 @@ import UIKit
 import ImageViewer
 import Kingfisher
 
-enum CarouselContentType {
-    case image
-    case video
-}
-
-class AbstractCarouselContent {
-    
-}
-
-class ImageCarouselContent: AbstractCarouselContent {
-    
-    var small: URL
-    var big: URL
-    
-    init(smallURL: URL, bigURL: URL) {
-        small = smallURL
-        big = bigURL
-    }
-}
-
-class VideoCarouselContent: AbstractCarouselContent {
-    
-    var thumbnail: URL
-    var video: URL
-    
-    init(thumbnailURL: URL, videoURL: URL) {
-        thumbnail = thumbnailURL
-        video = videoURL
-    }
-}
-
-struct CarouselContentContainer {
-    
-    let type: CarouselContentType
-    let content: AbstractCarouselContent
-}
-
 class ImageCarouselVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, GalleryItemsDataSource {
     
     @IBOutlet weak var collectionView: UICollectionView!
