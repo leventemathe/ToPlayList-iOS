@@ -15,7 +15,7 @@ class ImageCarouselCell: UICollectionViewCell, ReusableView {
     
     func update(_ imageUrl: URL, withOnComplete onComplete: ((Bool) -> ())? = nil) {
         imageView.kf.setImage(with: imageUrl, placeholder: #imageLiteral(resourceName: "img_missing"), options: nil, progressBlock: nil, completionHandler: { (image, _, _, _) in
-            onComplete?(result != nil)
+            onComplete?(image != nil)
         })
     }
 }
