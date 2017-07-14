@@ -103,6 +103,15 @@ class IGDBJSON {
                 }
                 gameIDs.screenshots = screenshotIDs
             }
+            if let videos = obj["videos"] as? [[String: Any]] {
+                var videIDs = [String]()
+                for video in videos {
+                    if let id = video["video_id"] as? String {
+                        videIDs.append(id)
+                    }
+                }
+                gameIDs.videos = videIDs
+            }
             
             if let desc = obj["summary"] as? String {
                 gameIDs.description = desc

@@ -18,6 +18,7 @@ struct GameIDs {
     var genres: [UInt64]?
     
     var screenshots: [String]?
+    var videos: [String]?
     
     var description: String?
     

@@ -20,6 +20,8 @@ class Game: IdentifiableObject {
     var screenshotSmallURLs: [URL]?
     var screenshotBigURLs: [URL]?
     
+    var videoURLs: [Video]?
+    
     var genres: [Genre]?
     var developers: [Company]?
     var publishers: [Company]?

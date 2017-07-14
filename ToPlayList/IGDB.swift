@@ -45,6 +45,8 @@ enum IGDBError: Error {
     }
 }
 
+typealias Video = (thumb: URL, video: URL)
+
 // used in case i want to add more apis later, this will make it easy to pick one based on
 // provider data in game object
 
@@ -70,6 +72,8 @@ protocol GameAPI {
     
     func getScreenshotsSmall(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[URL]>)->Void)
     func getScreenshotsBig(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[URL]>)->Void)
+    
+    func getVideos(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[Video]>)->Void)
     
     func getDescription(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<String>)->Void)
     
@@ -132,6 +136,10 @@ class IGDB: GameAPI {
     static var IMG_SCREENSHOT_BIG: String {
         return "/t_screenshot_big"
     }
+    
+    static let YOUTUBE_THUMB_BASE = "https://img.youtube.com/vi/"   //vbGdIdHOO3I/hqdefault.jpg
+    static let YOUTUBE_THUMB_POSTFIX = "/hqdefault.jpg"
+    static let YOUTUBE_VIDEO_BASE = "https://www.youtube.com/watch?v="
     
     static let PROVIDER = "IGDB"
     
@@ -402,7 +410,7 @@ class IGDB: GameAPI {
             return
         } else {
             let url =  IGDB.BASE_URL + IGDB.GAMES + "\(game.id)"
-            let parameters: Parameters = ["fields": "first_release_date,release_dates,genres,developers,publishers,screenshots,summary,status,category,franchise,collection,game_modes,player_perspectives"]
+            let parameters: Parameters = ["fields": "first_release_date,release_dates,genres,developers,publishers,screenshots,videos,summary,status,category,franchise,collection,game_modes,player_perspectives"]
             
             Alamofire.request(url, parameters: parameters, headers: IGDB.HEADERS).validate().responseJSON { response in
                 switch response.result {
@@ -517,6 +525,31 @@ class IGDB: GameAPI {
             }
         }
         return urls
+    }
+    
+    public func getVideos(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[Video]>)->Void) {
+        refreshCachedGameIDs(forGame: game, withOnSuccess: { _ in
+            if self.cachedGameIDs!.videos != nil {
+                let urls = self.buildVideoURLs()
+                onComplete(.success(urls))
+            } else {
+                onComplete(.failure(.noData))
+            }
+        }, withOnFailure: { error in
+            onComplete(.failure(error))
+        })
+    }
+    
+    private func buildVideoURLs() -> [Video] {
+        var result = [Video]()
+        for id in cachedGameIDs!.videos!  {
+            if let thumbURL = URL(string: "\(IGDB.YOUTUBE_THUMB_BASE)\(id)\(IGDB.YOUTUBE_THUMB_POSTFIX)"),
+                let videoURL = URL(string: "\(IGDB.YOUTUBE_VIDEO_BASE)\(id)") {
+                
+                result.append((thumb: thumbURL, video: videoURL))
+            }
+        }
+        return result
     }
     
     public func getDescription(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<String>)->Void) {

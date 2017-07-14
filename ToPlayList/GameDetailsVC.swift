@@ -55,6 +55,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         static let COLLECTION = "collection"
         static let GAME_MODES = "game_modes"
         static let PLAYER_PERSPECTIVES = "player_perspectives"
+        static let VIDEOS = "videos"
         
         private var listener: OnFinishedListener
         
@@ -68,7 +69,8 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
                       DetailsLoaded.FRANCHISE: false,
                       DetailsLoaded.COLLECTION: false,
                       DetailsLoaded.GAME_MODES: false,
-                      DetailsLoaded.PLAYER_PERSPECTIVES: false] {
+                      DetailsLoaded.PLAYER_PERSPECTIVES: false,
+                      DetailsLoaded.VIDEOS: false] {
             didSet {
                 if isFullyLoaded() {
                     listener()
@@ -316,6 +318,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     
     private func setupLoadingListener() {
         detailsLoaded = DetailsLoaded({ [unowned self] in
+            print(self.game.videoURLs)
             self.setScreenshotCarousel()
             self.finishLoading()
         })
@@ -368,6 +371,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         downloadBasics()
         downloadCover()
         downloadScreenshotURLs()
+        downloadVideoURLs()
         downloadDescription()
         downloadStatus()
         downloadCategory()
@@ -518,7 +522,6 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
                     self.handleLoadingError(Alerts.UNKNOWN_ERROR)
                 case .noData:
                     self.bigScreenshot.image = #imageLiteral(resourceName: "img_missing_screenshot_big")
-                    self.imageCarouselContainer.isHidden = true
                 }
             }
         })
@@ -534,6 +537,27 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         } else {
             self.bigScreenshot.image = #imageLiteral(resourceName: "img_missing_screenshot_big")
         }
+    }
+    
+    private func downloadVideoURLs() {
+        api.getVideos(forGame: game, withOnComplete: { result in
+            switch result {
+            case .success(let videos):
+                self.game.videoURLs = videos
+                self.detailsLoaded.loaded[DetailsLoaded.VIDEOS] = true
+            case .failure(let error):
+                switch error {
+                case .noInternet:
+                    self.handleLoadingError(Alerts.NETWORK_ERROR)
+                case .server, .json, .url:
+                    self.handleLoadingError(Alerts.SERVER_ERROR)
+                case .unknown:
+                    self.handleLoadingError(Alerts.UNKNOWN_ERROR)
+                case .noData:
+                    self.detailsLoaded.loaded[DetailsLoaded.VIDEOS] = true
+                }
+            }
+        })
     }
     
     private func setScreenshotCarousel() {
