@@ -39,6 +39,8 @@ class Game: IdentifiableObject {
     
     var firstReleaseDate: Double?
     
+    var releaseDates: [ReleaseDate]?
+    
     required init(_ id: UInt64, withName name: String) {
         super.init(id, withName: name)
     }

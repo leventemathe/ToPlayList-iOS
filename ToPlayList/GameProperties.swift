@@ -17,3 +17,5 @@ class Collection: IdentifiableObject { }
 class PlayerPerspective: IdentifiableObject { }
 
 class GameMode: IdentifiableObject { }
+
+class Platform: IdentifiableObject { }

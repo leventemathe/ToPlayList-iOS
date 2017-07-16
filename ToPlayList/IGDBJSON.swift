@@ -137,6 +137,16 @@ class IGDBJSON {
             if let playerPerspectives = obj["player_perspectives"] as? [UInt64] {
                 gameIDs.playerPerspectives = playerPerspectives
             }
+            if let releaseDates = obj["release_dates"] as? [[String: Any]] {
+                var releaseDateIDs = [ReleaseDateID]()
+                for releaseDate in  releaseDates {
+                    if let date = releaseDate["date"] as? Double, let platform = releaseDate["platform"] as? UInt64 {
+                        let releaseDateID = ReleaseDateID(date: date, platformID: platform)
+                        releaseDateIDs.append(releaseDateID)
+                    }
+                }
+                gameIDs.releaseDateIDs = releaseDateIDs
+            }
             
             return .success(gameIDs)
         }

@@ -8,6 +8,11 @@
 
 import Foundation
 
+struct ReleaseDateID {
+    var date: Double
+    var platformID: UInt64
+}
+
 struct GameIDs {
     
     let id: UInt64
@@ -30,6 +35,8 @@ struct GameIDs {
     
     var gameModes: [UInt64]?
     var playerPerspectives: [UInt64]?
+    
+    var releaseDateIDs: [ReleaseDateID]?
     
     init(_ id: UInt64) {
         self.id = id

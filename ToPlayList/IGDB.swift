@@ -65,6 +65,7 @@ protocol GameAPI {
     func getCollections(_ onComplete: @escaping (IGDBResult<[Collection]>)->Void, withIDs ids: [UInt64])
     func getGameModes(_ onComplete: @escaping (IGDBResult<[GameMode]>)->Void, withIDs ids: [UInt64])
     func getPlayerPerspectives(_ onComplete: @escaping (IGDBResult<[PlayerPerspective]>)->Void, withIDs ids: [UInt64])
+    func getPlatforms(_ onComplete: @escaping (IGDBResult<[Platform]>)->Void, withIDs ids: [UInt64])
     
     func getGenres(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[Genre]>)->Void)
     func getDevelopers(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[Company]>)->Void)
@@ -85,6 +86,8 @@ protocol GameAPI {
     
     func getGameModes(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[GameMode]>)->Void)
     func getPlayerPerspectives(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[PlayerPerspective]>)->Void)
+    
+    func getReleaseDates(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[ReleaseDate]>)->Void)
 }
 
 class IGDB: GameAPI {
@@ -101,6 +104,7 @@ class IGDB: GameAPI {
     static let COLLECTIONS = "/collections/"
     static let GAME_MODES = "/game_modes/"
     static let PLAYER_PERSPECTIVES = "/player_perspectives/"
+    static let PLATFORMS = "/platforms/"
     
     static let BASE_URL_IMG = "https://images.igdb.com/igdb/image/upload"
     
@@ -180,7 +184,7 @@ class IGDB: GameAPI {
         getGames(bySearchString: search, withLimit: 10, withOffset: 0, withOnComplete: onComplete)
     }
     
-    public func getGamesList(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, withLimit limit: Int, withOffset offset: Int, withDate date: Double = Date().timeIntervalSince1970) {
+    func getGamesList(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, withLimit limit: Int, withOffset offset: Int, withDate date: Double = Date().timeIntervalSince1970) {
         let url =  IGDB.BASE_URL + IGDB.GAMES
         let parameters: Parameters = ["fields": "id,name,first_release_date,release_dates,genres,developers,cover",
                                       "order": "first_release_date:desc",
@@ -207,7 +211,7 @@ class IGDB: GameAPI {
         }
     }
     
-    public func getGamesList(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, withLimit limit: Int, withDate date: Double = Date().timeIntervalSince1970) {
+    func getGamesList(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, withLimit limit: Int, withDate date: Double = Date().timeIntervalSince1970) {
         getGamesList(onComplete, withLimit: limit, withOffset: 0, withDate: date)
     }
     
@@ -329,7 +333,7 @@ class IGDB: GameAPI {
         }
     }
     
-    public func getGenres(_ onComplete: @escaping (IGDBResult<[Genre]>)->Void, withIDs ids: [UInt64]) {
+    func getGenres(_ onComplete: @escaping (IGDBResult<[Genre]>)->Void, withIDs ids: [UInt64]) {
         if ids.count < 1 {
             onComplete(.success([Genre]()))
             return
@@ -341,7 +345,7 @@ class IGDB: GameAPI {
         get(onComplete, withURL: url, withParams: parameters, withHeaders: IGDB.HEADERS)
     }
     
-    public func getCompanies(_ onComplete: @escaping (IGDBResult<[Company]>)->Void, withIDs ids: [UInt64]) {
+    func getCompanies(_ onComplete: @escaping (IGDBResult<[Company]>)->Void, withIDs ids: [UInt64]) {
         if ids.count < 1 {
             onComplete(.success([Company]()))
             return
@@ -353,7 +357,7 @@ class IGDB: GameAPI {
         get(onComplete, withURL: url, withParams: parameters, withHeaders: IGDB.HEADERS)
     }
     
-    public func getFranchises(_ onComplete: @escaping (IGDBResult<[Franchise]>)->Void, withIDs ids: [UInt64]) {
+    func getFranchises(_ onComplete: @escaping (IGDBResult<[Franchise]>)->Void, withIDs ids: [UInt64]) {
         if ids.count < 1 {
             onComplete(.success([Franchise]()))
             return
@@ -366,7 +370,7 @@ class IGDB: GameAPI {
     }
     
     
-    public func getCollections(_ onComplete: @escaping (IGDBResult<[Collection]>)->Void, withIDs ids: [UInt64]) {
+    func getCollections(_ onComplete: @escaping (IGDBResult<[Collection]>)->Void, withIDs ids: [UInt64]) {
         if ids.count < 1 {
             onComplete(.success([Collection]()))
             return
@@ -378,7 +382,7 @@ class IGDB: GameAPI {
         get(onComplete, withURL: url, withParams: parameters, withHeaders: IGDB.HEADERS)
     }
     
-    public func getGameModes(_ onComplete: @escaping (IGDBResult<[GameMode]>)->Void, withIDs ids: [UInt64]) {
+    func getGameModes(_ onComplete: @escaping (IGDBResult<[GameMode]>)->Void, withIDs ids: [UInt64]) {
         if ids.count < 1 {
             onComplete(.success([GameMode]()))
             return
@@ -390,13 +394,25 @@ class IGDB: GameAPI {
         get(onComplete, withURL: url, withParams: parameters, withHeaders: IGDB.HEADERS)
     }
     
-    public func getPlayerPerspectives(_ onComplete: @escaping (IGDBResult<[PlayerPerspective]>)->Void, withIDs ids: [UInt64]) {
+    func getPlayerPerspectives(_ onComplete: @escaping (IGDBResult<[PlayerPerspective]>)->Void, withIDs ids: [UInt64]) {
         if ids.count < 1 {
             onComplete(.success([PlayerPerspective]()))
             return
         }
         let idsString = createIDList(from: ids)
         let url = "\(IGDB.BASE_URL)\(IGDB.PLAYER_PERSPECTIVES)\(idsString)/"
+        let parameters = ["fields": "id,name"]
+        
+        get(onComplete, withURL: url, withParams: parameters, withHeaders: IGDB.HEADERS)
+    }
+    
+    func getPlatforms(_ onComplete: @escaping (IGDBResult<[Platform]>)->Void, withIDs ids: [UInt64]) {
+        if ids.count < 1 {
+            onComplete(.success([Platform]()))
+            return
+        }
+        let idsString = createIDList(from: ids)
+        let url = "\(IGDB.BASE_URL)\(IGDB.PLATFORMS)\(idsString)/"
         let parameters = ["fields": "id,name"]
         
         get(onComplete, withURL: url, withParams: parameters, withHeaders: IGDB.HEADERS)
@@ -437,7 +453,7 @@ class IGDB: GameAPI {
         }
     }
     
-    public func getGenres(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[Genre]>)->Void) {
+    func getGenres(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[Genre]>)->Void) {
         refreshCachedGameIDs(forGame: game, withOnSuccess: { gameIDs in
             if let genres = gameIDs.genres {
                 self.getGenres(onComplete, withIDs: genres)
@@ -451,7 +467,7 @@ class IGDB: GameAPI {
         })
     }
     
-    public func getDevelopers(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[Company]>)->Void) {
+    func getDevelopers(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[Company]>)->Void) {
         refreshCachedGameIDs(forGame: game, withOnSuccess: { gameIDs in
             if let devs = gameIDs.developers {
                 self.getCompanies(onComplete, withIDs: devs)
@@ -464,7 +480,7 @@ class IGDB: GameAPI {
         })
     }
     
-    public func getPublishers(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[Company]>)->Void) {
+    func getPublishers(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[Company]>)->Void) {
         refreshCachedGameIDs(forGame: game, withOnSuccess: { gameIDs in
             if let pubs = gameIDs.publishers {
                 self.getCompanies(onComplete, withIDs: pubs)
@@ -481,7 +497,7 @@ class IGDB: GameAPI {
         case BIG
     }
     
-    public func getScreenshotsSmall(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[URL]>)->Void) {
+    func getScreenshotsSmall(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[URL]>)->Void) {
         refreshCachedGameIDs(forGame: game, withOnSuccess: { _ in
             if self.cachedGameIDs!.screenshots != nil {
                 let urls = self.buildScreenshotURLs(.SMALL)
@@ -494,7 +510,7 @@ class IGDB: GameAPI {
         })
     }
     
-    public func getScreenshotsBig(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[URL]>)->Void) {
+    func getScreenshotsBig(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[URL]>)->Void) {
         refreshCachedGameIDs(forGame: game, withOnSuccess: { _ in
             if self.cachedGameIDs!.screenshots != nil {
                 let urls = self.buildScreenshotURLs(.BIG)
@@ -527,7 +543,7 @@ class IGDB: GameAPI {
         return urls
     }
     
-    public func getVideos(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[Video]>)->Void) {
+    func getVideos(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[Video]>)->Void) {
         refreshCachedGameIDs(forGame: game, withOnSuccess: { _ in
             if self.cachedGameIDs!.videos != nil {
                 let urls = self.buildVideoURLs()
@@ -552,7 +568,7 @@ class IGDB: GameAPI {
         return result
     }
     
-    public func getDescription(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<String>)->Void) {
+    func getDescription(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<String>)->Void) {
         refreshCachedGameIDs(forGame: game, withOnSuccess: { gameIDs in
             if let desc = gameIDs.description {
                 onComplete(.success(desc))
@@ -564,7 +580,7 @@ class IGDB: GameAPI {
         })
     }
     
-    public func getStatus(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<Status>)->Void) {
+    func getStatus(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<Status>)->Void) {
         refreshCachedGameIDs(forGame: game, withOnSuccess: { gameIDs in
             if let statusID = gameIDs.status {
                 let status = Status(statusID, withName: IGDBStatus.getString(statusID))
@@ -577,7 +593,7 @@ class IGDB: GameAPI {
         })
     }
     
-    public func getCategory(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<Category>)->Void) {
+    func getCategory(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<Category>)->Void) {
         refreshCachedGameIDs(forGame: game, withOnSuccess: { gameIDs in
             if let catID = gameIDs.category {
                 let cat = Category(catID, withName: IGDBCategory.getString(catID))
@@ -590,7 +606,7 @@ class IGDB: GameAPI {
         })
     }
     
-    public func getFranchise(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<Franchise>)->Void) {
+    func getFranchise(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<Franchise>)->Void) {
         refreshCachedGameIDs(forGame: game, withOnSuccess: { gameIDs in
             if let franchise = gameIDs.franchise {
                 self.getFranchises({ result in
@@ -613,7 +629,7 @@ class IGDB: GameAPI {
         })
     }
     
-    public func getCollection(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<Collection>)->Void) {
+    func getCollection(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<Collection>)->Void) {
         refreshCachedGameIDs(forGame: game, withOnSuccess: { gameIDs in
             if let collection = gameIDs.collection {
                 self.getCollections({ result in
@@ -636,7 +652,7 @@ class IGDB: GameAPI {
         })
     }
     
-    public func getGameModes(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[GameMode]>)->Void) {
+    func getGameModes(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[GameMode]>)->Void) {
         refreshCachedGameIDs(forGame: game, withOnSuccess: { gameIDs in
             if let modes = gameIDs.gameModes {
                 self.getGameModes(onComplete, withIDs: modes)
@@ -648,7 +664,7 @@ class IGDB: GameAPI {
         })
     }
     
-    public func getPlayerPerspectives(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[PlayerPerspective]>)->Void) {
+    func getPlayerPerspectives(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[PlayerPerspective]>)->Void) {
         refreshCachedGameIDs(forGame: game, withOnSuccess: { gameIDs in
             if let perspectives = gameIDs.playerPerspectives {
                 self.getPlayerPerspectives(onComplete, withIDs: perspectives)
@@ -658,6 +674,38 @@ class IGDB: GameAPI {
         }, withOnFailure: { error in
             onComplete(.failure(error))
         })
+    }
+    
+    func getReleaseDates(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[ReleaseDate]>)->Void) {
+        refreshCachedGameIDs(forGame: game, withOnSuccess: { gameIDs in
+            if let releaseDateIDs = gameIDs.releaseDateIDs {
+                let platformIDs = releaseDateIDs.map({ $0.platformID })
+                self.getPlatforms({ result in
+                    switch result {
+                    case .success(let platforms):
+                        let releaseDates = self.buildReleaseDates(releaseDateIDs: releaseDateIDs, platforms: platforms)
+                        onComplete(.success(releaseDates))
+                    case .failure(let error):
+                        onComplete(.failure(error))
+                    }
+                }, withIDs: platformIDs)
+            } else {
+                onComplete(.failure(.noData))
+            }
+        }, withOnFailure: { error in
+            onComplete(.failure(error))
+        })
+    }
+    
+    // this function assumes one-to-one pairing of dates to platforms, as expected from the igdb api
+    private func buildReleaseDates(releaseDateIDs: [ReleaseDateID], platforms: [Platform]) -> [ReleaseDate] {
+        var result = [ReleaseDate]()
+        for id in releaseDateIDs {
+            let platform = platforms.filter({ $0.id == id.platformID })[0]
+            let releaseDate = ReleaseDate(platform: platform, date: id.date)
+            result.append(releaseDate)
+        }
+        return result
     }
 }
 
