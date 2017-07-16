@@ -19,5 +19,6 @@ class ReleaseDateCell: UITableViewCell, ReusableView {
         // TODO try image; if it doesn't exist, use text
         // or use both, and just hide image, if it doesn't exist
         platformLbl.text = releaseDate.platform.name
+        platformImg.isHidden = true
     }
 }
