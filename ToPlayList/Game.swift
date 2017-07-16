@@ -124,7 +124,7 @@ class Game: IdentifiableObject {
         if firstReleaseDate == nil {
             return nil
         }
-        return Dates.dateFromUnixTime(firstReleaseDate!)
+        return Dates.dateFromUnixTimeShort(firstReleaseDate!)
     }
     
     func addGenre(_ genre: Genre) {

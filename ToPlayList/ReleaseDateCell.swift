@@ -15,8 +15,9 @@ class ReleaseDateCell: UITableViewCell, ReusableView {
     @IBOutlet weak var dateLbl: UILabel!
     
     func update(_ releaseDate: ReleaseDate) {
-        dateLbl.text = Dates.dateFromUnixTime(releaseDate.date)
+        dateLbl.text = Dates.dateFromUnixTimeFull(releaseDate.date)
         // TODO try image; if it doesn't exist, use text
+        // or use both, and just hide image, if it doesn't exist
         platformLbl.text = releaseDate.platform.name
     }
 }

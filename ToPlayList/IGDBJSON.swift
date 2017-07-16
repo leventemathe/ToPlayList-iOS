@@ -54,6 +54,7 @@ class IGDBJSON {
                 game.coverBigURL = URL(string: "\(IGDB.BASE_URL_IMG)\(IGDB.IMG_COVER_BIG)/\(imgID)\(IGDB.IMG_EXTENSION)")
             }
             if let firsReleaseDate = obj["first_release_date"] as? Double {
+                // date needs to be divided by 1000, because IGDB isn't using standard unix time
                 game.firstReleaseDate = firsReleaseDate / 1000.0
             }
             
@@ -141,7 +142,8 @@ class IGDBJSON {
                 var releaseDateIDs = [ReleaseDateID]()
                 for releaseDate in  releaseDates {
                     if let date = releaseDate["date"] as? Double, let platform = releaseDate["platform"] as? UInt64 {
-                        let releaseDateID = ReleaseDateID(date: date, platformID: platform)
+                        // date needs to be divided by 1000, because IGDB isn't using standard unix time
+                        let releaseDateID = ReleaseDateID(date: date / 1000.0, platformID: platform)
                         releaseDateIDs.append(releaseDateID)
                     }
                 }
