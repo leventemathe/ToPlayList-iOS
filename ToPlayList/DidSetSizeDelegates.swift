@@ -13,3 +13,8 @@ protocol CollectionViewSizeDidSetDelegate: class {
 
     func didSetSize(numberOfItems: Int, numberOfRows: Int, sizeOfItems: CGSize, sizeOfMargins: CGSize)
 }
+
+protocol DidSetHeightDelegate: class {
+    
+    func didSet(height: CGFloat)
+}

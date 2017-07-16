@@ -12,9 +12,13 @@ class ReleaseDateVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     @IBOutlet weak var tableView: UITableView!
     
+    weak var didSetHeightDelegate: DidSetHeightDelegate?
+    
     var releaseDates = [ReleaseDate]() {
         didSet {
+            releaseDates.sort(by: { $0.date > $1.date })
             tableView.reloadData()
+            didSetHeightDelegate?.didSet(height: CGFloat(releaseDates.count) * tableView.rowHeight)
         }
     }
     

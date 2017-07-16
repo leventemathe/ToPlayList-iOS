@@ -619,7 +619,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="800"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="mKa-wy-ZnB">
-                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="550.5"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="laR-nx-NpS" customClass="ContainerView" customModule="ToPlayList" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="89"/>
@@ -764,19 +764,19 @@
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hyq-5D-X05" customClass="ContainerView" customModule="ToPlayList" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="437" width="320" height="111"/>
+                                                                <rect key="frame" x="0.0" y="437" width="320" height="113.5"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="CEp-Td-C48">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="111"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="113.5"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Release dates &amp; platforms" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4A-QB-2Am">
-                                                                                <rect key="frame" x="8" y="8" width="304" height="15"/>
+                                                                                <rect key="frame" x="8" y="8" width="304" height="17.5"/>
                                                                                 <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="15"/>
                                                                                 <color key="textColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w7g-A3-qj4">
-                                                                                <rect key="frame" x="8" y="23" width="304" height="80"/>
+                                                                                <rect key="frame" x="8" y="25.5" width="304" height="80"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="80" id="L26-Tf-kBX"/>
                                                                                 </constraints>
@@ -863,6 +863,7 @@
                         <outlet property="movingContentHeightConstraint" destination="Wa0-Lq-yfB" id="DJ6-zT-tDF"/>
                         <outlet property="movingContentTopConstraint" destination="BOV-nY-YE8" id="Ke6-WS-oJ2"/>
                         <outlet property="publisherLabel" destination="Fdc-Ff-nY8" id="eTw-xt-eQ8"/>
+                        <outlet property="releaseDateVCHeightConstraint" destination="L26-Tf-kBX" id="5IY-BQ-cc3"/>
                         <outlet property="releaseDatesContainer" destination="hyq-5D-X05" id="V9Q-ex-sOT"/>
                         <outlet property="scrollContentView" destination="A8L-fO-z1X" id="3V6-sL-MUb"/>
                         <outlet property="scrollView" destination="8NQ-RT-MJ5" id="0HN-0S-he5"/>
@@ -1808,8 +1809,11 @@
         <!--Release DateVC-->
         <scene sceneID="cMV-rG-VmD">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uCv-P3-EgY" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController restorationIdentifier="ReleaseDateVC" storyboardIdentifier="ReleaseDateVC" id="gOv-cZ-FNd" customClass="ReleaseDateVC" customModule="ToPlayList" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4M0-qP-C44"/>
+                        <viewControllerLayoutGuide type="bottom" id="J9s-md-LQX"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Lbq-Zq-U3b">
                         <rect key="frame" x="0.0" y="0.0" width="304" height="80"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1877,6 +1881,7 @@
                         <outlet property="tableView" destination="Mq4-dE-p0Z" id="rc5-36-doB"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uCv-P3-EgY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5501.25" y="482.74647887323943"/>
         </scene>

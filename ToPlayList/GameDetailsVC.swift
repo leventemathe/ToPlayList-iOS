@@ -146,6 +146,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     var imageCarouselVC: ImageCarouselVC?
     
     @IBOutlet weak var releaseDatesContainer: ContainerView!
+    @IBOutlet weak var releaseDateVCHeightConstraint: NSLayoutConstraint!
     var releaseDateVC: ReleaseDateVC?
     
     var game: Game!
@@ -209,7 +210,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         }
     }
     
-    var imageCarouselImageLoadedErrorDelegate: ImageLoadErrorHandler?
+    private var imageCarouselImageLoadedErrorDelegate: ImageLoadErrorHandler?
     
     private func setupImageCarouselVC() {
         for vc in childViewControllers {
@@ -221,10 +222,27 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         }
     }
     
+    class TableViewDidSetHeightDelegate: DidSetHeightDelegate {
+        
+        weak var releaseDatesVCHeightConstraint: NSLayoutConstraint!
+        
+        init(releaseDatesVCHeightConstraint: NSLayoutConstraint) {
+            self.releaseDatesVCHeightConstraint = releaseDatesVCHeightConstraint
+        }
+        
+        func didSet(height: CGFloat) {
+            releaseDatesVCHeightConstraint.constant = height
+        }
+    }
+    
+    private var releaseDateVCDidSetHeightDelegate: TableViewDidSetHeightDelegate?
+    
     private func setupReleaseDateVC() {
         for vc in childViewControllers {
             if let rdVC = vc as? ReleaseDateVC {
                 self.releaseDateVC = rdVC
+                releaseDateVCDidSetHeightDelegate = TableViewDidSetHeightDelegate(releaseDatesVCHeightConstraint: releaseDateVCHeightConstraint)
+                self.releaseDateVC!.didSetHeightDelegate = releaseDateVCDidSetHeightDelegate
             }
         }
     }
