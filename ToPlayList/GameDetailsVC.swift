@@ -139,12 +139,14 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     @IBOutlet weak var badgeVCHeightConstraint: NSLayoutConstraint!
     var badgeVC: BadgeVC?
     
-    
     @IBOutlet weak var franchiseCollectionContainer: ContainerView!
     @IBOutlet weak var franchiseCollectionLabel: UILabel!
     
     @IBOutlet weak var imageCarouselContainer: UIView!
     var imageCarouselVC: ImageCarouselVC?
+    
+    @IBOutlet weak var releaseDatesContainer: ContainerView!
+    var releaseDateVC: ReleaseDateVC?
     
     var game: Game!
     private var api: GameAPI!
@@ -161,6 +163,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         setupSwiping()
         setupBadgeVC()
         setupImageCarouselVC()
+        setupReleaseDateVC()
         
         startLoading()
         
@@ -214,6 +217,14 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
                 self.imageCarouselVC = iVC
                 imageCarouselImageLoadedErrorDelegate = ImageLoadErrorHandler(imageCarouselContainer: imageCarouselContainer)
                 self.imageCarouselVC!.imageLoadErrorDelegate = imageCarouselImageLoadedErrorDelegate
+            }
+        }
+    }
+    
+    private func setupReleaseDateVC() {
+        for vc in childViewControllers {
+            if let rdVC = vc as? ReleaseDateVC {
+                self.releaseDateVC = rdVC
             }
         }
     }
@@ -826,7 +837,9 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     }
     
     private func setReleaseDates() {
-        print(game.releaseDates!)
+        if let releaseDates = game.releaseDates {
+            releaseDateVC?.releaseDates = releaseDates
+        }
     }
     
     private func handleLoadingError(_ message: String) {

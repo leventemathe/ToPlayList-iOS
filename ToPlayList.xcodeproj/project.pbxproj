@@ -74,6 +74,8 @@
 		D7C3A1721E0DD9120091279C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7C3A1711E0DD9120091279C /* Assets.xcassets */; };
 		D7CC7D0E1E3913E60027BE6F /* RegisterLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CC7D0D1E3913E60027BE6F /* RegisterLoginVC.swift */; };
 		D7D0BCBF1F1B63FC00C2B071 /* ReleaseDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0BCBE1F1B63FC00C2B071 /* ReleaseDate.swift */; };
+		D7D0BCC11F1B8AF000C2B071 /* ReleaseDateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0BCC01F1B8AF000C2B071 /* ReleaseDateVC.swift */; };
+		D7D0BCC31F1B8CF900C2B071 /* ReleaseDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D0BCC21F1B8CF900C2B071 /* ReleaseDateCell.swift */; };
 		D7DA82D21E93C6C500F9205E /* DetailsImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7DA82D11E93C6C500F9205E /* DetailsImages.swift */; };
 		D7DA82D41E93CAB200F9205E /* Blurred.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7DA82D31E93CAB200F9205E /* Blurred.swift */; };
 		D7E1AEEB1EC1CECF00661D67 /* CollectionViewSizeDidSetDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E1AEEA1EC1CECF00661D67 /* CollectionViewSizeDidSetDelegate.swift */; };
@@ -183,6 +185,8 @@
 		D7C3A1711E0DD9120091279C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D7CC7D0D1E3913E60027BE6F /* RegisterLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterLoginVC.swift; sourceTree = "<group>"; };
 		D7D0BCBE1F1B63FC00C2B071 /* ReleaseDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReleaseDate.swift; sourceTree = "<group>"; };
+		D7D0BCC01F1B8AF000C2B071 /* ReleaseDateVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReleaseDateVC.swift; sourceTree = "<group>"; };
+		D7D0BCC21F1B8CF900C2B071 /* ReleaseDateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReleaseDateCell.swift; sourceTree = "<group>"; };
 		D7DA82D11E93C6C500F9205E /* DetailsImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsImages.swift; sourceTree = "<group>"; };
 		D7DA82D31E93CAB200F9205E /* Blurred.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Blurred.swift; sourceTree = "<group>"; };
 		D7E1AEEA1EC1CECF00661D67 /* CollectionViewSizeDidSetDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewSizeDidSetDelegate.swift; sourceTree = "<group>"; };
@@ -464,6 +468,7 @@
 				D7FADEF41EC09D4B0006B4E4 /* BadgeCell.swift */,
 				D7E212491E99389000D7F455 /* ReadMoreLabel.swift */,
 				D77F504D1ED6191000B40D0C /* ImageCarouselCell.swift */,
+				D7D0BCC21F1B8CF900C2B071 /* ReleaseDateCell.swift */,
 			);
 			name = Details;
 			sourceTree = "<group>";
@@ -503,6 +508,7 @@
 				D71E51561E257BF100C7F920 /* GameDetailsVC.swift */,
 				D78EA56B1EBC8E4C00CDB70E /* BadgeVC.swift */,
 				D77F504A1ED6186D00B40D0C /* ImageCarouselVC.swift */,
+				D7D0BCC01F1B8AF000C2B071 /* ReleaseDateVC.swift */,
 			);
 			name = Details;
 			sourceTree = "<group>";
@@ -816,6 +822,7 @@
 				D71981191E26A337005823C2 /* LoginVC.swift in Sources */,
 				D70B03231E0C1F9500F67E7A /* IGDB.swift in Sources */,
 				D72676511EB4BF8F004DC2E1 /* Category.swift in Sources */,
+				D7D0BCC11F1B8AF000C2B071 /* ReleaseDateVC.swift in Sources */,
 				D76B47FD1E197CCD00D18DDF /* GameIDs.swift in Sources */,
 				D795B00D1E1DB3D700776670 /* GameSection.swift in Sources */,
 				D7A6F04E1E65CD2900ED66E5 /* LoadingAnimationDelegate.swift in Sources */,
@@ -823,6 +830,7 @@
 				D71981171E26A2A5005823C2 /* UpcomingReleasesVC.swift in Sources */,
 				D719812A1E26F7AC005823C2 /* ColoredPlaceholderText.swift in Sources */,
 				D7CC7D0E1E3913E60027BE6F /* RegisterLoginVC.swift in Sources */,
+				D7D0BCC31F1B8CF900C2B071 /* ReleaseDateCell.swift in Sources */,
 				D7B8C86B1E2D16C700656E64 /* ErrorMessage.swift in Sources */,
 				D7D0BCBF1F1B63FC00C2B071 /* ReleaseDate.swift in Sources */,
 				D7E1AEEB1EC1CECF00661D67 /* CollectionViewSizeDidSetDelegate.swift in Sources */,
