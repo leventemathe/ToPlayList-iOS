@@ -57,6 +57,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         static let PLAYER_PERSPECTIVES = "player_perspectives"
         static let SCREENSHOTS_SMALL = "screenshots_small"
         static let SCREENSHOTS_BIG = "screenshots_big"
+        static let RELEASE_DATES = "release_dates"
         static let VIDEOS = "videos"
         
         private var listener: OnFinishedListener
@@ -74,6 +75,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
                       DetailsLoaded.PLAYER_PERSPECTIVES: false,
                       DetailsLoaded.SCREENSHOTS_SMALL: false,
                       DetailsLoaded.SCREENSHOTS_BIG: false,
+                      DetailsLoaded.RELEASE_DATES: false,
                       DetailsLoaded.VIDEOS: true] { // not downloading video links for now, for legal reasons
             didSet {
                 if isFullyLoaded() {
@@ -383,6 +385,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         downloadCollection()
         downloadGameModes()
         downloadPlayerPerspectives()
+        downloadReleaseDates()
     }
     
     private func downloadBasics() {
@@ -797,6 +800,33 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
             }
             badgeVC?.add(strings: strings)
         }
+    }
+    
+    private func downloadReleaseDates() {
+        api.getReleaseDates(forGame: game, withOnComplete: { result in
+            switch result {
+            case .success(let releaseDates):
+                self.game.releaseDates = releaseDates
+                self.setReleaseDates()
+                self.detailsLoaded.loaded[DetailsLoaded.RELEASE_DATES] = true
+            case .failure(let error):
+                switch error {
+                case .noInternet:
+                    self.handleLoadingError(Alerts.NETWORK_ERROR)
+                case .server, .json, .url:
+                    self.handleLoadingError(Alerts.SERVER_ERROR)
+                case .unknown:
+                    self.handleLoadingError(Alerts.UNKNOWN_ERROR)
+                case .noData:
+                    self.setReleaseDates()
+                    self.detailsLoaded.loaded[DetailsLoaded.RELEASE_DATES] = true
+                }
+            }
+        })
+    }
+    
+    private func setReleaseDates() {
+        print(game.releaseDates!)
     }
     
     private func handleLoadingError(_ message: String) {

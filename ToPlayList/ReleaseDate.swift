@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ReleaseDate {
+class ReleaseDate: CustomStringConvertible {
     
     var platform: Platform
     var date: Double
@@ -17,4 +17,6 @@ class ReleaseDate {
         self.platform = platform
         self.date = date
     }
+    
+    var description: String { return "date: \(date), platform: \(platform.name)" }
 }
