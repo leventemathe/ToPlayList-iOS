@@ -616,7 +616,7 @@
                                         <rect key="frame" x="0.0" y="274" width="320" height="294"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A8L-fO-z1X">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="800"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="550.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="mKa-wy-ZnB">
                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="550.5"/>
@@ -802,8 +802,8 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="mKa-wy-ZnB" secondAttribute="trailing" id="Gvp-Ya-9bB"/>
+                                                    <constraint firstAttribute="height" secondItem="mKa-wy-ZnB" secondAttribute="height" priority="999" id="SC5-66-bCq"/>
                                                     <constraint firstItem="mKa-wy-ZnB" firstAttribute="top" secondItem="A8L-fO-z1X" secondAttribute="top" id="Sik-Bl-vob"/>
-                                                    <constraint firstAttribute="height" constant="800" id="W21-pE-202"/>
                                                     <constraint firstItem="mKa-wy-ZnB" firstAttribute="leading" secondItem="A8L-fO-z1X" secondAttribute="leading" id="dQS-4B-bj0"/>
                                                 </constraints>
                                             </view>

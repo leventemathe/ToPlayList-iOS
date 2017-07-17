@@ -932,6 +932,32 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         let scrollPos = scrollView.contentOffset.y
         let delta = scrollPos - scrollViewPreviousContentOffset
         
+        let visibleScrollViewContentHeight = UIScreen.main.bounds.height - scrollView.frame.minY
+        let scrollViewContentHeight = scrollContentView.frame.size.height
+        print("visible: \(visibleScrollViewContentHeight)")
+        print("content: \(scrollViewContentHeight)")
+        
+        // this hack is needed, because of the 0 bottom constraint of scroll view content
+        // if the content is smaller than the visible content after moving constraints, the scroll view content
+        // can't move anymore
+        // because of this, it's height needs to be increased
+        // it's easier than moving its bottom constraint too
+        if scrollViewContentHeight - visibleScrollViewContentHeight < 5.0 {
+            print("interrupting")
+            // dangerous magic number, but there's no way to know this in advance:
+            // the size of the big screenshot after moving up would be OK, but we don't know it
+            // becuase the position of the cover is what determines the end of the movement of constraints, and not the size of the big screenshot
+            let amount = UIScreen.main.bounds.height - scrollViewContentHeight - 150
+            let newSize: CGFloat = scrollContentView.frame.size.height + CGFloat(amount)
+            for constraint in scrollContentView.constraints {
+                if case .height = constraint.firstAttribute {
+                    scrollContentView.removeConstraint(constraint)
+                }
+            }
+            let constraint = NSLayoutConstraint(item: scrollContentView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: newSize)
+            scrollContentView.addConstraint(constraint)
+        }
+        
         if scrollPos > 0.0 && delta > 0.0 && movingContentTopConstraint.constant > movingContentTopConstraintTarget {
             moveContentUp(delta)
         } else if scrollPos > 0.0 && delta > 0.0 && movingContentHeightConstraint.constant > movingContentHeightConstraintTarget {
