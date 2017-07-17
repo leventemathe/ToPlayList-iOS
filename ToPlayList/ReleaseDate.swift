@@ -12,16 +12,15 @@ class ReleaseDate: CustomStringConvertible {
     
     var platform: Platform
     var date: Double
-    var region: Region?
+    var region: Region
     
-    init(platform: Platform, date: Double, region: Region?) {
+    init(platform: Platform, date: Double, region: Region) {
         self.platform = platform
         self.date = date
         self.region = region
     }
     
     var description: String {
-        let regionString = region == nil ? "" : ", region: \(region!.name)"
-        return "date: \(date), platform: \(platform.name)\(regionString)"
+        return "date: \(date), platform: \(platform.name), region: \(region.name)"
     }
 }

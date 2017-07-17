@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DateTableCellHeaderView: UITableViewCell {
+class HeaderView: UITableViewCell, RoundedCorners {
 
-    @IBOutlet weak var dateLbl: UILabel!
+    @IBOutlet weak var label: UILabel!
 }

@@ -110,6 +110,10 @@ class IGDBRegion: Region, EnumarableProperty {
             return "Unknown region"
         }
     }
+    
+    static var defaultRegion: Region {
+        return Region(8, withName: "Worldwide")
+    }
 }
 
 

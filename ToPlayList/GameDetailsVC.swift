@@ -856,7 +856,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     
     private func setReleaseDates() {
         if let releaseDates = game.releaseDates {
-            releaseDateVC?.releaseDates = releaseDates
+            releaseDateVC?.setReleaseDates(releaseDates)
         } else {
             releaseDatesContainer.isHidden = true
         }

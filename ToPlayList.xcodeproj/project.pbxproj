@@ -46,8 +46,8 @@
 		D760344F1F17A5B600D71240 /* IGDBKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = D760344E1F17A5B600D71240 /* IGDBKeys.swift */; };
 		D761699F1E804C95008F6FBF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D719811C1E26AB3F005823C2 /* GoogleService-Info.plist */; };
 		D76437E11E1E4E7300B09C7E /* slkscr.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D76437E01E1E4E7300B09C7E /* slkscr.ttf */; };
-		D76437E41E1E506D00B09C7E /* DateTableCellHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76437E21E1E506D00B09C7E /* DateTableCellHeaderView.swift */; };
-		D76437E51E1E506D00B09C7E /* DateTableCellHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D76437E31E1E506D00B09C7E /* DateTableCellHeaderView.xib */; };
+		D76437E41E1E506D00B09C7E /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76437E21E1E506D00B09C7E /* HeaderView.swift */; };
+		D76437E51E1E506D00B09C7E /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D76437E31E1E506D00B09C7E /* HeaderView.xib */; };
 		D76606FD1E13123400D5979C /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76606FC1E13123400D5979C /* RoundedCorners.swift */; };
 		D76B47FD1E197CCD00D18DDF /* GameIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76B47FC1E197CCD00D18DDF /* GameIDs.swift */; };
 		D77F504B1ED6186D00B40D0C /* ImageCarouselVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77F504A1ED6186D00B40D0C /* ImageCarouselVC.swift */; };
@@ -155,8 +155,8 @@
 		D75F4EA11E643A9E00CB2875 /* DropShadowed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropShadowed.swift; sourceTree = "<group>"; };
 		D760344E1F17A5B600D71240 /* IGDBKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGDBKeys.swift; sourceTree = "<group>"; };
 		D76437E01E1E4E7300B09C7E /* slkscr.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = slkscr.ttf; sourceTree = "<group>"; };
-		D76437E21E1E506D00B09C7E /* DateTableCellHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTableCellHeaderView.swift; sourceTree = "<group>"; };
-		D76437E31E1E506D00B09C7E /* DateTableCellHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DateTableCellHeaderView.xib; sourceTree = "<group>"; };
+		D76437E21E1E506D00B09C7E /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		D76437E31E1E506D00B09C7E /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
 		D76606FC1E13123400D5979C /* RoundedCorners.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedCorners.swift; sourceTree = "<group>"; };
 		D76B47FC1E197CCD00D18DDF /* GameIDs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameIDs.swift; sourceTree = "<group>"; };
 		D77F504A1ED6186D00B40D0C /* ImageCarouselVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCarouselVC.swift; sourceTree = "<group>"; };
@@ -304,7 +304,7 @@
 			children = (
 				D726BC8E1E0ABDD800D6C9CD /* LaunchScreen.storyboard */,
 				D726BC891E0ABDD800D6C9CD /* Main.storyboard */,
-				D76437E31E1E506D00B09C7E /* DateTableCellHeaderView.xib */,
+				D76437E31E1E506D00B09C7E /* HeaderView.xib */,
 				D7B8C86C1E2D16F100656E64 /* ErrorMessage.xib */,
 			);
 			name = Nibs;
@@ -369,6 +369,7 @@
 				D7FADEF61EC09E6C0006B4E4 /* Releases */,
 				D7FADEF71EC09E880006B4E4 /* Details */,
 				D7FADEF91EC09EB70006B4E4 /* Lists */,
+				D76437E21E1E506D00B09C7E /* HeaderView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -448,7 +449,6 @@
 			isa = PBXGroup;
 			children = (
 				D726BC9A1E0AC7AA00D6C9CD /* NewestReleasesCell.swift */,
-				D76437E21E1E506D00B09C7E /* DateTableCellHeaderView.swift */,
 				D71981211E26F1D3005823C2 /* ListImageView.swift */,
 			);
 			name = Releases;
@@ -651,7 +651,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D76437E51E1E506D00B09C7E /* DateTableCellHeaderView.xib in Resources */,
+				D76437E51E1E506D00B09C7E /* HeaderView.xib in Resources */,
 				D76437E11E1E4E7300B09C7E /* slkscr.ttf in Resources */,
 				D726BC901E0ABDD800D6C9CD /* LaunchScreen.storyboard in Resources */,
 				D7C3A1721E0DD9120091279C /* Assets.xcassets in Resources */,
@@ -792,7 +792,7 @@
 				D7A0E6FF1E7BDDDC00A70989 /* PlayedListCell.swift in Sources */,
 				D7FADEF51EC09D4B0006B4E4 /* BadgeCell.swift in Sources */,
 				D7E5AA881E2AD51A00EA1456 /* TextFieldMargin.swift in Sources */,
-				D76437E41E1E506D00B09C7E /* DateTableCellHeaderView.swift in Sources */,
+				D76437E41E1E506D00B09C7E /* HeaderView.swift in Sources */,
 				D726BC9B1E0AC7AA00D6C9CD /* NewestReleasesCell.swift in Sources */,
 				D7E1D63B1E37A162000F343A /* EndPoints.swift in Sources */,
 				D78C0E291E1465440088560F /* Identifiable.swift in Sources */,

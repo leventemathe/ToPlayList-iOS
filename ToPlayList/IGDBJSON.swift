@@ -147,7 +147,7 @@ class IGDBJSON {
                         if let region = releaseDate["region"] as? UInt64 {
                             releaseDateID = ReleaseDateID(date: date / 1000.0, platformID: platform, regionID: region)
                         } else {
-                            releaseDateID = ReleaseDateID(date: date / 1000.0, platformID: platform, regionID: nil)
+                            releaseDateID = ReleaseDateID(date: date / 1000.0, platformID: platform, regionID: IGDBRegion.defaultRegion.id)
                         }
                         releaseDateIDs.append(releaseDateID)
                     }
