@@ -702,7 +702,11 @@ class IGDB: GameAPI {
         var result = [ReleaseDate]()
         for id in releaseDateIDs {
             let platform = platforms.filter({ $0.id == id.platformID })[0]
-            let releaseDate = ReleaseDate(platform: platform, date: id.date)
+            var region: Region?
+            if let regionID = id.regionID {
+                region = Region(regionID, withName: IGDBRegion.getString(regionID))
+            }
+            let releaseDate = ReleaseDate(platform: platform, date: id.date, region: region)
             result.append(releaseDate)
         }
         return result

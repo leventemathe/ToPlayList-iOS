@@ -11,6 +11,7 @@ import Foundation
 struct ReleaseDateID {
     var date: Double
     var platformID: UInt64
+    var regionID: UInt64?
 }
 
 struct GameIDs {

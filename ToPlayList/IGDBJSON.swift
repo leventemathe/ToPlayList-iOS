@@ -143,7 +143,12 @@ class IGDBJSON {
                 for releaseDate in  releaseDates {
                     if let date = releaseDate["date"] as? Double, let platform = releaseDate["platform"] as? UInt64 {
                         // date needs to be divided by 1000, because IGDB isn't using standard unix time
-                        let releaseDateID = ReleaseDateID(date: date / 1000.0, platformID: platform)
+                        var releaseDateID: ReleaseDateID!
+                        if let region = releaseDate["region"] as? UInt64 {
+                            releaseDateID = ReleaseDateID(date: date / 1000.0, platformID: platform, regionID: region)
+                        } else {
+                            releaseDateID = ReleaseDateID(date: date / 1000.0, platformID: platform, regionID: nil)
+                        }
                         releaseDateIDs.append(releaseDateID)
                     }
                 }
