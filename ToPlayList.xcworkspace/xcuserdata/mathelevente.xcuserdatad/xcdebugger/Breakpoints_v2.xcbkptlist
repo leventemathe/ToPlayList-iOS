@@ -646,12 +646,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/GameDetailsVC.swift"
-            timestampString = "521985011.874747"
+            timestampString = "522065130.28298"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "318"
-            endingLineNumber = "318"
-            landmarkName = "updateStarState(_:)"
+            startingLineNumber = "337"
+            endingLineNumber = "337"
+            landmarkName = "setStar()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -678,11 +678,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/ReadMoreLabel.swift"
-            timestampString = "515236168.436707"
+            timestampString = "522062424.757769"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "16"
-            endingLineNumber = "16"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
             landmarkName = "ButtonState"
             landmarkType = "13">
          </BreakpointContent>
@@ -694,12 +694,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/GameDetailsVC.swift"
-            timestampString = "521985011.874747"
+            timestampString = "522065130.28298"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "728"
-            endingLineNumber = "728"
-            landmarkName = "downloadCollection()"
+            startingLineNumber = "747"
+            endingLineNumber = "747"
+            landmarkName = "buildFranchiseCollectionString(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -838,12 +838,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/GameDetailsVC.swift"
-            timestampString = "521985011.874747"
+            timestampString = "522065130.28298"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "247"
-            endingLineNumber = "247"
-            landmarkName = "setupReleaseDateVC()"
+            startingLineNumber = "266"
+            endingLineNumber = "266"
+            landmarkName = "starTapped()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -950,12 +950,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/GameDetailsVC.swift"
-            timestampString = "521985011.874747"
+            timestampString = "522065130.28298"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "553"
-            endingLineNumber = "553"
-            landmarkName = "downloadSmallScreenshotURLs()"
+            startingLineNumber = "572"
+            endingLineNumber = "572"
+            landmarkName = "setBigScreenshot()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -966,12 +966,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/GameDetailsVC.swift"
-            timestampString = "521985011.874747"
+            timestampString = "522065130.28298"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "554"
-            endingLineNumber = "554"
-            landmarkName = "downloadSmallScreenshotURLs()"
+            startingLineNumber = "573"
+            endingLineNumber = "573"
+            landmarkName = "setBigScreenshot()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1062,12 +1062,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/GameDetailsVC.swift"
-            timestampString = "521985011.874747"
+            timestampString = "522065130.28298"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "564"
-            endingLineNumber = "564"
-            landmarkName = "downloadSmallScreenshotURLs()"
+            startingLineNumber = "583"
+            endingLineNumber = "583"
+            landmarkName = "downloadVideoURLs()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1542,12 +1542,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/GameDetailsVC.swift"
-            timestampString = "521985011.874747"
+            timestampString = "522065130.28298"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "510"
-            endingLineNumber = "510"
-            landmarkName = "downloadCover()"
+            startingLineNumber = "529"
+            endingLineNumber = "529"
+            landmarkName = "downloadBigScreenshotURLs()"
             landmarkType = "7">
             <Locations>
                <Location
@@ -1828,12 +1828,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/GameDetailsVC.swift"
-            timestampString = "521984081.65772"
+            timestampString = "522065130.28298"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "223"
-            endingLineNumber = "223"
-            landmarkName = "setupImageCarouselVC()"
+            startingLineNumber = "242"
+            endingLineNumber = "242"
+            landmarkName = "setupReleaseDateVC()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1860,12 +1860,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/GameDetailsVC.swift"
-            timestampString = "521985011.874747"
+            timestampString = "522065130.28298"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "858"
-            endingLineNumber = "858"
-            landmarkName = "setReleaseDates()"
+            startingLineNumber = "877"
+            endingLineNumber = "877"
+            landmarkName = "addCustomBackButton()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1940,12 +1940,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/GameDetailsVC.swift"
-            timestampString = "521985011.874747"
+            timestampString = "522065130.28298"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "391"
-            endingLineNumber = "391"
-            landmarkName = "finishLoading()"
+            startingLineNumber = "410"
+            endingLineNumber = "410"
+            landmarkName = "downloadGameData()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToPlayList/GameDetailsVC.swift"
+            timestampString = "522074166.51193"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "936"
+            endingLineNumber = "936"
+            landmarkName = "refreshScrollViewContentConstraints(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

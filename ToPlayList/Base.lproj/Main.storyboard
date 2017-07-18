@@ -865,6 +865,8 @@
                         <outlet property="publisherLabel" destination="Fdc-Ff-nY8" id="eTw-xt-eQ8"/>
                         <outlet property="releaseDateVCHeightConstraint" destination="L26-Tf-kBX" id="5IY-BQ-cc3"/>
                         <outlet property="releaseDatesContainer" destination="hyq-5D-X05" id="V9Q-ex-sOT"/>
+                        <outlet property="scrollContentBottomConstraint" destination="pBP-ep-jUF" id="GdZ-y9-L8d"/>
+                        <outlet property="scrollContentStackView" destination="mKa-wy-ZnB" id="TgP-tT-dzj"/>
                         <outlet property="scrollContentView" destination="A8L-fO-z1X" id="3V6-sL-MUb"/>
                         <outlet property="scrollView" destination="8NQ-RT-MJ5" id="0HN-0S-he5"/>
                         <outlet property="showMoreDescriptionButton" destination="yqb-Ft-MHO" id="T2a-h8-pNi"/>

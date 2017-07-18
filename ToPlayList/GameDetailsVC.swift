@@ -899,6 +899,8 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var scrollContentView: UIView!
+    @IBOutlet weak var scrollContentStackView: UIStackView!
+    @IBOutlet weak var scrollContentBottomConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var movingContent: UIView!
     
@@ -928,14 +930,49 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         movingContentHeightConstraintTarget = movingContentHeightConstraintStart - MOVEMENT_HEIGHT
     }
     
+    private func refreshScrollViewContentConstraints(_ newSize: CGFloat) {
+        for constraint in scrollContentView.constraints {
+            if case .height = constraint.firstAttribute {
+                scrollContentView.removeConstraint(constraint)
+            }
+        }
+        let constraint = NSLayoutConstraint(item: scrollContentView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: newSize)
+        scrollContentView.addConstraint(constraint)
+    }
+    
+    private func selectConstraint() {
+        var fixedHeight: CGFloat?
+        let stackHeight: CGFloat = scrollContentStackView.frame.size.height
+        var stackConstraint: NSLayoutConstraint?
+        
+        for constraint in scrollContentView.constraints {
+            if case .height = constraint.firstAttribute {
+                if constraint.secondItem == nil {
+                    fixedHeight = constraint.constant
+                } else if constraint.secondItem === scrollContentStackView {
+                    stackConstraint = constraint
+                }
+            }
+        }
+        
+        if stackConstraint != nil {
+            scrollContentView.removeConstraint(stackConstraint!)
+        }
+        
+        if fixedHeight != nil && stackHeight >= fixedHeight! {
+            let constraint = NSLayoutConstraint(item: scrollContentView, attribute: .height, relatedBy: .equal, toItem: scrollContentStackView, attribute: .height, multiplier: 1.0, constant: 0.0)
+            scrollContentView.addConstraint(constraint)
+        }
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let scrollPos = scrollView.contentOffset.y
         let delta = scrollPos - scrollViewPreviousContentOffset
         
         let visibleScrollViewContentHeight = UIScreen.main.bounds.height - scrollView.frame.minY
         let scrollViewContentHeight = scrollContentView.frame.size.height
-        print("visible: \(visibleScrollViewContentHeight)")
-        print("content: \(scrollViewContentHeight)")
+        //print("visible: \(visibleScrollViewContentHeight)")
+        //print("content: \(scrollViewContentHeight)")
         
         // this hack is needed, because of the 0 bottom constraint of scroll view content
         // if the content is smaller than the visible content after moving constraints, the scroll view content
@@ -943,20 +980,16 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         // because of this, it's height needs to be increased
         // it's easier than moving its bottom constraint too
         if scrollViewContentHeight - visibleScrollViewContentHeight < 5.0 {
-            print("interrupting")
+            //print("interrupting")
             // dangerous magic number, but there's no way to know this in advance:
             // the size of the big screenshot after moving up would be OK, but we don't know it
             // becuase the position of the cover is what determines the end of the movement of constraints, and not the size of the big screenshot
             let amount = UIScreen.main.bounds.height - scrollViewContentHeight - 150
             let newSize: CGFloat = scrollContentView.frame.size.height + CGFloat(amount)
-            for constraint in scrollContentView.constraints {
-                if case .height = constraint.firstAttribute {
-                    scrollContentView.removeConstraint(constraint)
-                }
-            }
-            let constraint = NSLayoutConstraint(item: scrollContentView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1.0, constant: newSize)
-            scrollContentView.addConstraint(constraint)
+            //refreshScrollViewContentConstraints(newSize)
         }
+        
+        //selectConstraint()
         
         if scrollPos > 0.0 && delta > 0.0 && movingContentTopConstraint.constant > movingContentTopConstraintTarget {
             moveContentUp(delta)
@@ -978,6 +1011,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         
         movingContentTopConstraint.constant -= delta
         bigScreenShotHeightConstraint.constant -= delta
+        scrollContentBottomConstraint.constant += delta
         
         scrollView.contentOffset.y = scrollViewPreviousContentOffset
     }
@@ -988,6 +1022,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         
         movingContentTopConstraint.constant -= delta
         bigScreenShotHeightConstraint.constant -= delta
+        scrollContentBottomConstraint.constant += delta
         
         scrollView.contentOffset.y = scrollViewPreviousContentOffset
     }
@@ -999,6 +1034,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         let delta = max(delta, -distance)
         
         movingContentHeightConstraint.constant -= delta
+        scrollContentBottomConstraint.constant += delta
         
         if distance < MOVEMENT_HEIGHT / CONTENT_DISAPPEARS_TRESHOLD && movingContent.alpha == 0.0 {
             showMovingContent()
@@ -1012,6 +1048,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         let delta = min(delta, distance)
         
         movingContentHeightConstraint.constant -= delta
+        scrollContentBottomConstraint.constant += delta
         
         if distance < MOVEMENT_HEIGHT - MOVEMENT_HEIGHT / CONTENT_DISAPPEARS_TRESHOLD && movingContent.alpha == 1.0 {
             hideMovingContent()
