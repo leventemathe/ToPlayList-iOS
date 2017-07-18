@@ -10,8 +10,8 @@ import Foundation
 
 struct Dates {
     
-    private static let DATE_FORMAT_SHORT = "dd. MMMM"
-    private static let DATE_FORMAT_FULL = "dd. MMMM y."
+    private static let DATE_FORMAT_SHORT = "dd. MMM."
+    private static let DATE_FORMAT_FULL = "dd. MMM. y."
     
     static func dateFromUnixTimeShort(_ time: Double) -> String {
         return dateFromUnixTime(time, withDateFormaf: DATE_FORMAT_SHORT)

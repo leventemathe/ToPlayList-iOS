@@ -18,7 +18,48 @@ class PlayerPerspective: IdentifiableObject { }
 
 class GameMode: IdentifiableObject { }
 
-class Platform: IdentifiableObject { }
+class Platform: IdentifiableObject {
+    
+    func getShorterVersion() -> String {
+        if name.range(of: "Windows") != nil {
+            return "Windows"
+        }
+        if name.range(of: "Nintendo Entertainment System (NES)") != nil {
+            return "NES"
+        }
+        if name.range(of: "Super Nintendo Entertainment System (SNES)") != nil {
+            return "SNES"
+        }
+        if name.range(of: "PlayStation Portable") != nil {
+            return "PSP"
+        }
+        if name.range(of: "3DO") != nil {
+            return "3DO"
+        }
+        if name.range(of: "Family Computer Disk System") != nil {
+            return "FDS/FCD"
+        }
+        if name.range(of: "Virtual Console (Nintendo)") != nil {
+            return "Nintendo VC"
+        }
+        if name.range(of: "Sega Mega Drive/Genesis") != nil {
+            return "Sega Genesis"
+        }
+        if name.range(of: "BBC Microcomputer System") != nil {
+            return "BBC Micro"
+        }
+        if name.range(of: "TurboGrafx-16/PC Engine") != nil {
+            return "TurboGrafx"
+        }
+        if name.range(of: "Neo Geo Pocket Color") != nil {
+            return "Neo Geo Pocket C"
+        }
+        if name.range(of: "Neo Geo Pocket Color") != nil {
+            return "Neo Geo Pocket C"
+        }
+        return name
+    }
+}
 
 
 protocol EnumarableProperty {
