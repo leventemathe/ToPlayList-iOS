@@ -6,6 +6,10 @@
 //  Copyright © 2016. Máthé Levente. All rights reserved.
 //
 
+protocol NameShortener: class {
+    func getShorterVersion() -> String
+}
+
 class Genre: IdentifiableObject { }
 
 class Company: IdentifiableObject { }
@@ -14,11 +18,30 @@ class Franchise: IdentifiableObject { }
 
 class Collection: IdentifiableObject { }
 
-class PlayerPerspective: IdentifiableObject { }
+class PlayerPerspective: IdentifiableObject, NameShortener {
+    
+    func getShorterVersion() -> String {
+        if name.range(of: "Virtual Reality") != nil {
+            return "VR"
+        }
+        if name.range(of: "Virtual Reality") != nil {
+            return "VR"
+        }
+        return name
+    }
+ }
 
-class GameMode: IdentifiableObject { }
+class GameMode: IdentifiableObject, NameShortener {
 
-class Platform: IdentifiableObject {
+    func getShorterVersion() -> String {
+        if name.range(of: "Massively Multiplayer") != nil {
+            return "MMO"
+        }
+        return name
+    }
+}
+
+class Platform: IdentifiableObject, NameShortener {
     
     func getShorterVersion() -> String {
         if name.range(of: "Windows") != nil {

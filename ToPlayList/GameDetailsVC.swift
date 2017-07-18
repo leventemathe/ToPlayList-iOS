@@ -815,7 +815,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         if game.gameModes != nil && game.gameModes!.count > 0 {
             var strings = [String]()
             for gameMode in game.gameModes! {
-                strings.append(gameMode.name)
+                strings.append(gameMode.getShorterVersion())
             }
             badgeVC?.add(strings: strings)
         }
@@ -825,7 +825,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         if game.playerPerspectives != nil && game.playerPerspectives!.count > 0 {
             var strings = [String]()
             for perspective in game.playerPerspectives! {
-                strings.append(perspective.name)
+                strings.append(perspective.getShorterVersion())
             }
             badgeVC?.add(strings: strings)
         }
