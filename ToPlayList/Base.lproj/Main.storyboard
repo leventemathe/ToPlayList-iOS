@@ -1834,15 +1834,8 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aiw-iF-cCY">
                                                     <rect key="frame" x="8" y="0.0" width="288" height="30"/>
                                                     <subviews>
-                                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3TK-wh-xVI">
-                                                            <rect key="frame" x="256" y="3.5" width="24" height="23.5"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="24" id="6Ee-mt-Bu9"/>
-                                                                <constraint firstAttribute="height" constant="24" id="Hti-Br-Rf3"/>
-                                                            </constraints>
-                                                        </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z8C-55-Led">
-                                                            <rect key="frame" x="8" y="4.5" width="240" height="20"/>
+                                                            <rect key="frame" x="8" y="4.5" width="30.5" height="20"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -1857,12 +1850,9 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstItem="z8C-55-Led" firstAttribute="centerY" secondItem="aiw-iF-cCY" secondAttribute="centerY" id="6ba-Ry-gCf"/>
-                                                        <constraint firstItem="3TK-wh-xVI" firstAttribute="centerY" secondItem="aiw-iF-cCY" secondAttribute="centerY" id="IXk-st-uy7"/>
                                                         <constraint firstItem="woS-PO-2RJ" firstAttribute="centerY" secondItem="aiw-iF-cCY" secondAttribute="centerY" id="RJL-P0-MCH"/>
                                                         <constraint firstItem="z8C-55-Led" firstAttribute="leading" secondItem="aiw-iF-cCY" secondAttribute="leadingMargin" id="fFK-rt-XTx"/>
-                                                        <constraint firstItem="z8C-55-Led" firstAttribute="trailing" secondItem="3TK-wh-xVI" secondAttribute="leading" constant="-8" id="mXi-XG-A6H"/>
                                                         <constraint firstAttribute="trailingMargin" secondItem="woS-PO-2RJ" secondAttribute="trailing" id="oHf-Ja-9Uw"/>
-                                                        <constraint firstAttribute="trailingMargin" secondItem="3TK-wh-xVI" secondAttribute="trailing" id="tnq-iJ-acb"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -1876,7 +1866,6 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="dateLbl" destination="z8C-55-Led" id="FMm-f9-3TQ"/>
-                                            <outlet property="platformImg" destination="3TK-wh-xVI" id="Jka-F4-2oN"/>
                                             <outlet property="platformLbl" destination="woS-PO-2RJ" id="Rdj-SL-62F"/>
                                         </connections>
                                     </tableViewCell>

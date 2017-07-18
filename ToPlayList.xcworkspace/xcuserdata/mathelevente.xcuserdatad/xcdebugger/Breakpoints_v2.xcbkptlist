@@ -1908,11 +1908,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/ReleaseDateCell.swift"
-            timestampString = "521902466.895199"
+            timestampString = "522077368.38524"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "18"
-            endingLineNumber = "18"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
             landmarkName = "update(_:)"
             landmarkType = "7">
          </BreakpointContent>
