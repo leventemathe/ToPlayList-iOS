@@ -14,6 +14,8 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
+    @IBOutlet weak var searchIconView: UIView!
+    
     private var loadingAnimationView: NVActivityIndicatorView?
     
     private var api: GameAPI = IGDB.instance
