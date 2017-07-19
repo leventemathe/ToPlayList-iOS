@@ -84,11 +84,13 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
         }
         clearTableView()
         stepOut()
+        resultWillAppear()
         loadingAnimationView?.startAnimating()
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText == "" {
+            resultWillDisappear()
             clearTableView()
         }
     }
@@ -123,6 +125,14 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
     
     private func stepIn() {
         searchBar.showsCancelButton = true
+    }
+    
+    private func resultWillAppear() {
+        searchIconView.isHidden = true
+    }
+    
+    private func resultWillDisappear() {
+        searchIconView.isHidden = false
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
