@@ -19,6 +19,7 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
     private var recentSearchesVC: RecentSearchesVC!
     
     private let RECENT_SEARCH_KEY = "recent_searches"
+    private let RECENT_SEARCHES_LIMIT = 8
     
     private var loadingAnimationView: NVActivityIndicatorView?
     
@@ -187,6 +188,9 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
         let userDefaults = UserDefaults.standard
         if var array = userDefaults.stringArray(forKey: RECENT_SEARCH_KEY) {
             if !array.contains(string) {
+                if array.count >= RECENT_SEARCHES_LIMIT {
+                    array = array.filter({ $0 != array[0] })
+                }
                 array.append(string)
             }
             userDefaults.set(array, forKey: RECENT_SEARCH_KEY)
