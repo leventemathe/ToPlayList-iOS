@@ -178,7 +178,9 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
     private func storeSearch(_ string: String) {
         let userDefaults = UserDefaults.standard
         if var array = userDefaults.stringArray(forKey: RECENT_SEARCH_KEY) {
-            array.append(string)
+            if !array.contains(string) {
+                array.append(string)
+            }
             userDefaults.set(array, forKey: RECENT_SEARCH_KEY)
         } else {
             userDefaults.set([string], forKey: RECENT_SEARCH_KEY)
