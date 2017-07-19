@@ -15,6 +15,8 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
     @IBOutlet weak var searchBar: UISearchBar!
     
     @IBOutlet weak var searchIconView: UIView!
+    @IBOutlet weak var recentSearchesView: UIView!
+    private var recentSearchesVC: RecentSearchesVC!
     
     private var loadingAnimationView: NVActivityIndicatorView?
     
@@ -32,6 +34,8 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
         setupSearchBar()
         setupTableView()
         setupLoadingAnimation()
+        setupRecentSearches()
+        setupPlaceHolderViews()
     }
     
     private func setupSearchBar() {
@@ -67,6 +71,26 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
         loadingAnimationView = NVActivityIndicatorView(frame: frame, type: .ballClipRotate, color: UIColor.MyCustomColors.orange, padding: 0.0)
         view.addSubview(loadingAnimationView!)
         loadingAnimationView!.stopAnimating()
+    }
+    
+    private func setupRecentSearches() {
+        for vc in childViewControllers {
+            if let rsVC = vc as? RecentSearchesVC {
+                self.recentSearchesVC = rsVC
+                break
+            }
+        }
+        // TODO get searches from storage and add the strings to recentSearchesVC
+    }
+    
+    private func setupPlaceHolderViews() {
+        if recentSearchesVC.isEmpty() {
+            recentSearchesView.isHidden = true
+            searchIconView.isHidden = false
+        } else {
+            recentSearchesView.isHidden = false
+            searchIconView.isHidden = true
+        }
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -128,11 +152,12 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
     }
     
     private func resultWillAppear() {
+        recentSearchesView.isHidden = true
         searchIconView.isHidden = true
     }
     
     private func resultWillDisappear() {
-        searchIconView.isHidden = false
+        setupPlaceHolderViews()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
