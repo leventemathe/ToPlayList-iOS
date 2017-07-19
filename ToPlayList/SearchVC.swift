@@ -23,6 +23,8 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
     
     private var loadingAnimationView: NVActivityIndicatorView?
     
+    private var noDataLabel = UILabel()
+    
     private var api: GameAPI = IGDB.instance
     
     var games = [Game]() {
@@ -159,8 +161,7 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
         api.getGames(bySearchString: string, withLimit: 30, withOnComplete: { result in
             switch result {
             case .success(let games):
-                self.games = games
-                self.loadingAnimationView?.stopAnimating()
+                self.handleSearchResult(games)
             case .failure(let error):
                 switch error {
                 case .json, .server, .url:
@@ -172,6 +173,29 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
                 }
             }
         })
+    }
+    
+    private func handleSearchResult(_ games: [Game]) {
+        self.games = games
+        self.loadingAnimationView?.stopAnimating()
+        
+        if self.games.count <= 0 {
+            if noDataLabel.text == nil || noDataLabel.text == "" {
+                setupNoDataLabel()
+            }
+            tableView.backgroundView = noDataLabel
+        } else {
+            tableView.backgroundView = nil
+        }
+    }
+    
+    private func setupNoDataLabel() {
+        noDataLabel.bounds = CGRect(x: 0.0, y: 0.0, width: tableView.bounds.width, height: tableView.bounds.height)
+        noDataLabel.text = "No results. 😞"
+        noDataLabel.font = UIFont(name: "Avenir", size: 22)
+        noDataLabel.textAlignment = NSTextAlignment.center
+        noDataLabel.sizeToFit()
+        
     }
     
     private func stepOut() {
