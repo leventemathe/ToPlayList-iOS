@@ -96,6 +96,11 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
             self?.clearRecentSearches()
             self?.setupPlaceHolderViews()
         }
+        recentSearchesVC.didSelectCellDelegate = { [weak self] string in
+            self?.searchBar.text = string
+            self?.willSearch()
+            self?.search(string)
+        }
     }
     
     private func setRecentSearches() {
@@ -129,6 +134,10 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
             search(searchString)
             storeSearch(string)
         }
+        willSearch()
+    }
+    
+    private func willSearch() {
         clearTableView()
         stepOut()
         resultWillAppear()

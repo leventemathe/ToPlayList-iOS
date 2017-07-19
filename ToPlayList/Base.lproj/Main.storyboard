@@ -1918,6 +1918,10 @@
         <scene sceneID="3c4-ZU-ch1">
             <objects>
                 <viewController id="xgB-mT-KKc" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5MW-L4-jL0"/>
+                        <viewControllerLayoutGuide type="bottom" id="jUv-28-mMB"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="QtR-E2-c1o">
                         <rect key="frame" x="0.0" y="0.0" width="240" height="240"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1943,6 +1947,10 @@
         <scene sceneID="0Xn-8S-ijg">
             <objects>
                 <viewController storyboardIdentifier="RecentSearchesVC" id="kgK-1y-gHU" customClass="RecentSearchesVC" customModule="ToPlayList" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="t4s-3y-SQg"/>
+                        <viewControllerLayoutGuide type="bottom" id="BIM-CN-Lpy"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="wml-WG-F7q">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="411"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1981,7 +1989,7 @@
                                 <rect key="frame" x="0.0" y="30" width="320" height="381"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="SearchCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchCell" id="V7w-wJ-PW6" customClass="SearchCell" customModule="ToPlayList" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="SearchCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="SearchCell" id="V7w-wJ-PW6" customClass="SearchCell" customModule="ToPlayList" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="V7w-wJ-PW6" id="Fcb-Mt-g8V">

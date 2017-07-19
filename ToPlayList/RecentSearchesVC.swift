@@ -17,6 +17,7 @@ class RecentSearchesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     var clearButtonClickedDelegate: (()->())?
+    var didSelectCellDelegate: ((String)->())?
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -50,5 +51,9 @@ class RecentSearchesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
             return cell
         }
         return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        didSelectCellDelegate?(strings[indexPath.row])
     }
 }
