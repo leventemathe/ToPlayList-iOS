@@ -352,21 +352,28 @@ struct ListsList {
         if let games = list[ListsEndpoints.List.GAMES] as? [String: Any] {
             for game in games {
                 if let game = game.value as? [String: Any], let providerID = game[ListsEndpoints.Game.PROVIDER_ID] as? UInt64, let provider = game[ListsEndpoints.Game.PROVIDER] as? String, let name = game[ListsEndpoints.Game.NAME] as? String {
-                    
-                    let gameObj = Game(providerID, withName: name, withProvider: provider)
-                    if let coverSmallURL = game[ListsEndpoints.Game.COVER_SMALL_URL] as? String {
-                        gameObj.coverSmallURL = URL(string: coverSmallURL)
-                    }
-                    if let coverBigURL = game[ListsEndpoints.Game.COVER_BIG_URL] as? String {
-                        gameObj.coverBigURL = URL(string: coverBigURL)
-                    }
-                    _ = result.add(gameObj)
+                    let gameObject = deserializeGame(game, withProviderID: providerID, withName: name, withProvider: provider)
+                    _ = result.add(gameObject)
                 } else {
                     return nil
                 }
             }
         }
         return result
+    }
+    
+    private func deserializeGame(_ game: [String: Any], withProviderID providerID: UInt64, withName name: String, withProvider provider: String) -> Game {
+        let gameObj = Game(providerID, withName: name, withProvider: provider)
+        if let coverSmallURL = game[ListsEndpoints.Game.COVER_SMALL_URL] as? String {
+            gameObj.coverSmallURL = URL(string: coverSmallURL)
+        }
+        if let coverBigURL = game[ListsEndpoints.Game.COVER_BIG_URL] as? String {
+            gameObj.coverBigURL = URL(string: coverBigURL)
+        }
+        if let timestamp = game[ListsEndpoints.Common.TIMESTAMP] as? Double {
+            gameObj.timestamp = timestamp
+        }
+        return gameObj
     }
     
     typealias CombinedLists = (toPlay: List, played: List)
@@ -525,8 +532,8 @@ struct ListsList {
     private func listenToList(_ listenerAttached: @escaping (ListsListResult<ListsListenerReference>)->(), withListID listID: String, withAction action: ListsListenerAction, withOnChange onChange: @escaping (ListsListResult<Game>)->()) {
         let ref = ListsEndpoints.LISTS.child(listID).child(ListsEndpoints.List.GAMES)
         let handle = ref.observe(getEventType(action), with: { snapshot in
-            if let game = snapshot.value as? [String: Any], let gameID = game[ListsEndpoints.Game.PROVIDER_ID] as? UInt64, let gameName = game[ListsEndpoints.Game.NAME] as? String, let gameProvider = game[ListsEndpoints.Game.PROVIDER] as? String {
-                let gameObj = Game(gameID, withName: gameName, withProvider: gameProvider)
+            if let game = snapshot.value as? [String: Any], let providerID = game[ListsEndpoints.Game.PROVIDER_ID] as? UInt64, let gameName = game[ListsEndpoints.Game.NAME] as? String, let gameProvider = game[ListsEndpoints.Game.PROVIDER] as? String {
+                let gameObj = self.deserializeGame(game, withProviderID: providerID, withName: gameName, withProvider: gameProvider)
                 onChange(.succes(gameObj))
             } else {
                 onChange(.failure(.unknownError))

@@ -11,6 +11,8 @@ import Foundation
 class Game: IdentifiableObject {
     
     var provider = ""
+    // this doesn't really belong here, but doing it this way is much easier than changing list
+    var timestamp: Double?
     
     var thumbnailURL: URL?
     
