@@ -1956,12 +1956,24 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gto-ma-gmV">
+                                        <rect key="frame" x="276" y="-1.5" width="36" height="33"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                        <state key="normal" title="Clear">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="clearButtonClicked:" destination="kgK-1y-gHU" eventType="touchUpInside" id="kmi-MZ-caT"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Gto-ma-gmV" secondAttribute="trailing" constant="8" id="KKf-4G-UUA"/>
                                     <constraint firstItem="e1l-ht-syg" firstAttribute="centerY" secondItem="o5a-MA-kww" secondAttribute="centerY" id="YAe-kh-wFI"/>
                                     <constraint firstItem="e1l-ht-syg" firstAttribute="leading" secondItem="o5a-MA-kww" secondAttribute="leading" constant="8" id="dyl-DQ-mwg"/>
                                     <constraint firstAttribute="trailing" secondItem="e1l-ht-syg" secondAttribute="trailing" id="eEo-IF-BtJ"/>
+                                    <constraint firstItem="Gto-ma-gmV" firstAttribute="centerY" secondItem="o5a-MA-kww" secondAttribute="centerY" id="iZV-pN-FtZ"/>
                                     <constraint firstAttribute="height" constant="30" id="piD-wc-Op9"/>
                                 </constraints>
                             </view>
@@ -1973,7 +1985,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="V7w-wJ-PW6" id="Fcb-Mt-g8V">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>

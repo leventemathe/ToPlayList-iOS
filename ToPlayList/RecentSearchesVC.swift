@@ -16,7 +16,14 @@ class RecentSearchesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
     }
     
+    var clearButtonClickedDelegate: (()->())?
+    
     @IBOutlet weak var tableView: UITableView!
+    
+    @IBAction func clearButtonClicked(_ sender: UIButton) {
+        strings = [String]()
+        clearButtonClickedDelegate?()
+    }
     
     override func viewDidLoad() {
         tableView.delegate = self

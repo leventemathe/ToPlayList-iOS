@@ -77,6 +77,7 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
     
     private func setupRecentSearches() {
         findRecentSearchesVC()
+        setupRecentSearchesDelegate()
         setRecentSearches()
     }
     
@@ -86,6 +87,13 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
                 self.recentSearchesVC = rsVC
                 break
             }
+        }
+    }
+    
+    private func setupRecentSearchesDelegate() {
+        recentSearchesVC.clearButtonClickedDelegate = { [weak self] in
+            self?.clearRecentSearches()
+            self?.setupPlaceHolderViews()
         }
     }
     
@@ -185,6 +193,11 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
         } else {
             userDefaults.set([string], forKey: RECENT_SEARCH_KEY)
         }
+    }
+    
+    private func clearRecentSearches() {
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(nil, forKey: RECENT_SEARCH_KEY)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
