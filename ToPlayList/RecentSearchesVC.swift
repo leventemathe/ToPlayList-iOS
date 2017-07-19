@@ -28,6 +28,8 @@ class RecentSearchesVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     override func viewDidLoad() {
         tableView.delegate = self
         tableView.dataSource = self
+        // this prevents empty cells being shown
+        tableView.tableFooterView = UIView()
     }
     
     func isEmpty() -> Bool {
