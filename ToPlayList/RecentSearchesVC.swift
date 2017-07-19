@@ -10,7 +10,11 @@ import UIKit
 
 class RecentSearchesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var strings = [String]()
+    var strings = [String]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     @IBOutlet weak var tableView: UITableView!
     

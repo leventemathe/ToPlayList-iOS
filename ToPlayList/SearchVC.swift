@@ -18,6 +18,8 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
     @IBOutlet weak var recentSearchesView: UIView!
     private var recentSearchesVC: RecentSearchesVC!
     
+    private let RECENT_SEARCH_KEY = "recent_searches"
+    
     private var loadingAnimationView: NVActivityIndicatorView?
     
     private var api: GameAPI = IGDB.instance
@@ -74,13 +76,24 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
     }
     
     private func setupRecentSearches() {
+        findRecentSearchesVC()
+        setRecentSearches()
+    }
+    
+    private func findRecentSearchesVC() {
         for vc in childViewControllers {
             if let rsVC = vc as? RecentSearchesVC {
                 self.recentSearchesVC = rsVC
                 break
             }
         }
-        // TODO get searches from storage and add the strings to recentSearchesVC
+    }
+    
+    private func setRecentSearches() {
+        let userDefaults = UserDefaults.standard
+        if let strings = userDefaults.stringArray(forKey: RECENT_SEARCH_KEY) {
+            recentSearchesVC.strings = strings
+        }
     }
     
     private func setupPlaceHolderViews() {
@@ -105,6 +118,7 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
         if let string = searchBar.text {
             let searchString = string.replacingOccurrences(of: " ", with: "+")
             search(searchString)
+            storeSearch(string)
         }
         clearTableView()
         stepOut()
@@ -157,7 +171,18 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
     }
     
     private func resultWillDisappear() {
+        setRecentSearches()
         setupPlaceHolderViews()
+    }
+    
+    private func storeSearch(_ string: String) {
+        let userDefaults = UserDefaults.standard
+        if var array = userDefaults.stringArray(forKey: RECENT_SEARCH_KEY) {
+            array.append(string)
+            userDefaults.set(array, forKey: RECENT_SEARCH_KEY)
+        } else {
+            userDefaults.set([string], forKey: RECENT_SEARCH_KEY)
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
