@@ -8,6 +8,6 @@
 
 import UIKit
 
-class UpcomingReleasesVC: UIViewController {
+class UpcomingReleasesVC: ReleasesVC {
     
 }

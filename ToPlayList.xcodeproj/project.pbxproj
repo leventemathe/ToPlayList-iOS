@@ -87,6 +87,7 @@
 		D7F1B4CB1E8A93B4006F3FA1 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F1B4CA1E8A93B4006F3FA1 /* Login.swift */; };
 		D7FADEF51EC09D4B0006B4E4 /* BadgeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FADEF41EC09D4B0006B4E4 /* BadgeCell.swift */; };
 		D7FDC0991E34CCF8005FB1CF /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FDC0981E34CCF8005FB1CF /* Alerts.swift */; };
+		D7FE54EF1F20CBA700F2E566 /* ReleasesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FE54EE1F20CBA700F2E566 /* ReleasesVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -197,6 +198,7 @@
 		D7F1B4CA1E8A93B4006F3FA1 /* Login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		D7FADEF41EC09D4B0006B4E4 /* BadgeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeCell.swift; sourceTree = "<group>"; };
 		D7FDC0981E34CCF8005FB1CF /* Alerts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
+		D7FE54EE1F20CBA700F2E566 /* ReleasesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReleasesVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -492,6 +494,7 @@
 		D7FADEFA1EC09EE80006B4E4 /* Releases */ = {
 			isa = PBXGroup;
 			children = (
+				D7FE54EE1F20CBA700F2E566 /* ReleasesVC.swift */,
 				D726BC871E0ABDD800D6C9CD /* NewestReleasesVC.swift */,
 				D71981161E26A2A5005823C2 /* UpcomingReleasesVC.swift */,
 				D795B00C1E1DB3D700776670 /* GameSection.swift */,
@@ -836,6 +839,7 @@
 				D727AFE41E9B7ACF00E1C93F /* ToPlayAndPlayedListListeners.swift in Sources */,
 				D74AC7DA1E3919B700C37A90 /* RegisterVC.swift in Sources */,
 				D7A0E7031E7BEA8A00A70989 /* SubListVC.swift in Sources */,
+				D7FE54EF1F20CBA700F2E566 /* ReleasesVC.swift in Sources */,
 				D72E66BA1E619D2100BED388 /* PlayedListVC.swift in Sources */,
 				D709009D1EC5B89D00A316BE /* SearchCell.swift in Sources */,
 				D7975D081E586255003B64E6 /* ErrorHandlerDelegate.swift in Sources */,
