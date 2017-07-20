@@ -11,7 +11,16 @@ import Foundation
 class List: Hashable, Equatable {
     
     var type: String!
-    private var _games = [Game]()
+    private var _games = [Game]() {
+        didSet {
+            _games.sort(by: {
+                if let time0 = $0.timestamp, let time1 = $1.timestamp {
+                    return time0 >= time1
+                }
+                return true
+            })
+        }
+    }
     
     init(_ type: String) {
         self.type = type
