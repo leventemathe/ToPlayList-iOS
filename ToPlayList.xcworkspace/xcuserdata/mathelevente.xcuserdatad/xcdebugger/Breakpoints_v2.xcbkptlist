@@ -26,13 +26,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/IGDB.swift"
-            timestampString = "521897143.676874"
+            timestampString = "521716632.10735"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "190"
-            endingLineNumber = "190"
-            landmarkName = "getGamesList(_:withLimit:withOffset:withDate:)"
-            landmarkType = "7">
+            startingLineNumber = "186"
+            endingLineNumber = "186"
+            landmarkName = "IGDB"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -74,13 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/NewestReleasesVC.swift"
-            timestampString = "518901975.799916"
+            timestampString = "522245717.695734"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
-            landmarkName = "getGamesInLists(_:)"
-            landmarkType = "7">
+            startingLineNumber = "127"
+            endingLineNumber = "127">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -90,11 +88,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/Lists.swift"
-            timestampString = "522172843.17832"
+            timestampString = "518899884.604903"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "421"
-            endingLineNumber = "421"
+            startingLineNumber = "414"
+            endingLineNumber = "414"
             landmarkName = "getToPlayAndPlayedList(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -154,13 +152,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/NewestReleasesVC.swift"
-            timestampString = "513509027.886462"
+            timestampString = "522245717.695734"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "NewestReleasesVC"
-            landmarkType = "3">
+            startingLineNumber = "42"
+            endingLineNumber = "42">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -232,13 +228,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/NewestReleasesVC.swift"
-            timestampString = "513509027.886462"
+            timestampString = "522245717.695734"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "NewestReleasesVC"
-            landmarkType = "3">
+            startingLineNumber = "43"
+            endingLineNumber = "43">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -358,11 +352,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/IGDBJSON.swift"
-            timestampString = "521903675.425857"
+            timestampString = "518604735.210523"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
             landmarkName = "get(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -374,11 +368,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/IGDBJSON.swift"
-            timestampString = "521972274.280876"
+            timestampString = "521716632.10735"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
             landmarkName = "getGameIDs(_:forGame:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -390,12 +384,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/IGDB.swift"
-            timestampString = "521897143.676874"
+            timestampString = "521716632.10735"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "431"
-            endingLineNumber = "431"
-            landmarkName = "refreshCachedGameIDs(forGame:withOnSuccess:withOnFailure:)"
+            startingLineNumber = "415"
+            endingLineNumber = "415"
+            landmarkName = "getPlatforms(_:withIDs:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -438,12 +432,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/IGDB.swift"
-            timestampString = "521897143.676874"
+            timestampString = "521716632.10735"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "432"
-            endingLineNumber = "432"
-            landmarkName = "refreshCachedGameIDs(forGame:withOnSuccess:withOnFailure:)"
+            startingLineNumber = "416"
+            endingLineNumber = "416"
+            landmarkName = "getPlatforms(_:withIDs:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -454,11 +448,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/IGDB.swift"
-            timestampString = "521897143.676874"
+            timestampString = "521716632.10735"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "439"
-            endingLineNumber = "439"
+            startingLineNumber = "423"
+            endingLineNumber = "423"
             landmarkName = "refreshCachedGameIDs(forGame:withOnSuccess:withOnFailure:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -470,11 +464,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/IGDBJSON.swift"
-            timestampString = "521903675.425857"
+            timestampString = "518604735.210523"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "get(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -486,11 +480,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/IGDB.swift"
-            timestampString = "521897143.676874"
+            timestampString = "521716632.10735"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "332"
-            endingLineNumber = "332"
+            startingLineNumber = "328"
+            endingLineNumber = "328"
             landmarkName = "get(_:withURL:withParams:withHeaders:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -502,11 +496,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/IGDB.swift"
-            timestampString = "521897143.676874"
+            timestampString = "521716632.10735"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "327"
-            endingLineNumber = "327"
+            startingLineNumber = "323"
+            endingLineNumber = "323"
             landmarkName = "get(_:withURL:withParams:withHeaders:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -518,12 +512,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/IGDB.swift"
-            timestampString = "521897143.676874"
+            timestampString = "521716632.10735"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "219"
-            endingLineNumber = "219"
-            landmarkName = "loadFromGameIDs(_:fromGameData:)"
+            startingLineNumber = "215"
+            endingLineNumber = "215"
+            landmarkName = "getGamesList(_:withLimit:withDate:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -534,11 +528,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/IGDB.swift"
-            timestampString = "521897143.676874"
+            timestampString = "521716632.10735"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "288"
-            endingLineNumber = "288"
+            startingLineNumber = "284"
+            endingLineNumber = "284"
             landmarkName = "handleGenreResult(_:forGameData:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -550,13 +544,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/IGDB.swift"
-            timestampString = "521897143.676874"
+            timestampString = "521716632.10735"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "299"
-            endingLineNumber = "299"
-            landmarkName = "handleDevelopersResult(_:forGameData:)"
-            landmarkType = "7">
+            startingLineNumber = "295"
+            endingLineNumber = "295"
+            landmarkName = "IGDB"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -566,11 +560,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/IGDB.swift"
-            timestampString = "521897143.676874"
+            timestampString = "521716632.10735"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "232"
-            endingLineNumber = "232"
+            startingLineNumber = "228"
+            endingLineNumber = "228"
             landmarkName = "loadFromGameIDs(_:fromGameData:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -582,11 +576,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/IGDB.swift"
-            timestampString = "521897143.676874"
+            timestampString = "521716632.10735"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "269"
-            endingLineNumber = "269"
+            startingLineNumber = "265"
+            endingLineNumber = "265"
             landmarkName = "buildDeveloperIDs(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -598,11 +592,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/IGDBJSON.swift"
-            timestampString = "521972274.280876"
+            timestampString = "521716632.10735"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "161"
-            endingLineNumber = "161"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
             landmarkName = "getGameIDs(_:forGame:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -614,13 +608,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/IGDB.swift"
-            timestampString = "521897143.676874"
+            timestampString = "521716632.10735"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "513"
-            endingLineNumber = "513"
-            landmarkName = "getScreenshotsBig(forGame:withOnComplete:)"
-            landmarkType = "7">
+            startingLineNumber = "497"
+            endingLineNumber = "497"
+            landmarkName = "ScreenshotSize"
+            landmarkType = "13">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -630,13 +624,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/IGDB.swift"
-            timestampString = "521897143.676874"
+            timestampString = "521716632.10735"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "512"
-            endingLineNumber = "512"
-            landmarkName = "IGDB"
-            landmarkType = "3">
+            startingLineNumber = "496"
+            endingLineNumber = "496"
+            landmarkName = "ScreenshotSize"
+            landmarkType = "13">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -646,11 +640,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/GameDetailsVC.swift"
-            timestampString = "522065130.28298"
+            timestampString = "521718652.491776"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "337"
-            endingLineNumber = "337"
+            startingLineNumber = "294"
+            endingLineNumber = "294"
             landmarkName = "setStar()"
             landmarkType = "7">
          </BreakpointContent>
@@ -662,11 +656,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/GameDetailsVC.swift"
-            timestampString = "521897143.676874"
+            timestampString = "521718652.491776"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
             landmarkName = "isFullyLoaded()"
             landmarkType = "7">
          </BreakpointContent>
@@ -678,11 +672,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/ReadMoreLabel.swift"
-            timestampString = "522062424.757769"
+            timestampString = "515236168.436707"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
             landmarkName = "ButtonState"
             landmarkType = "13">
          </BreakpointContent>
@@ -694,12 +688,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/GameDetailsVC.swift"
-            timestampString = "522065130.28298"
+            timestampString = "521735589.669347"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "747"
-            endingLineNumber = "747"
-            landmarkName = "buildFranchiseCollectionString(_:)"
+            startingLineNumber = "696"
+            endingLineNumber = "696"
+            landmarkName = "downloadCollection()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -838,12 +832,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/GameDetailsVC.swift"
-            timestampString = "522065130.28298"
+            timestampString = "521718652.491776"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "266"
-            endingLineNumber = "266"
-            landmarkName = "starTapped()"
+            startingLineNumber = "223"
+            endingLineNumber = "223"
+            landmarkName = "didSetSize(numberOfItems:numberOfRows:sizeOfItems:sizeOfMargins:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -870,11 +864,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/SearchVC.swift"
-            timestampString = "522233143.173495"
+            timestampString = "517004480.823536"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "268"
-            endingLineNumber = "268"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
             landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -886,11 +880,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/SearchVC.swift"
-            timestampString = "522233143.173495"
+            timestampString = "517004480.823536"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "265"
-            endingLineNumber = "265"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
             landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
             <Locations>
@@ -950,12 +944,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/GameDetailsVC.swift"
-            timestampString = "522065130.28298"
+            timestampString = "521718652.491776"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "572"
-            endingLineNumber = "572"
-            landmarkName = "setBigScreenshot()"
+            startingLineNumber = "521"
+            endingLineNumber = "521"
+            landmarkName = "downloadSmallScreenshotURLs()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -966,12 +960,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/GameDetailsVC.swift"
-            timestampString = "522065130.28298"
+            timestampString = "521718652.491776"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "573"
-            endingLineNumber = "573"
-            landmarkName = "setBigScreenshot()"
+            startingLineNumber = "522"
+            endingLineNumber = "522"
+            landmarkName = "downloadSmallScreenshotURLs()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1019,7 +1013,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "18"
             endingLineNumber = "18"
-            landmarkName = "update(_:withOnComplete:)"
+            landmarkName = "update(_:optionalImage:withOnComplete:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1062,12 +1056,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/GameDetailsVC.swift"
-            timestampString = "522065130.28298"
+            timestampString = "521718652.491776"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "583"
-            endingLineNumber = "583"
-            landmarkName = "downloadVideoURLs()"
+            startingLineNumber = "532"
+            endingLineNumber = "532"
+            landmarkName = "downloadSmallScreenshotURLs()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1078,13 +1072,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/NewestReleasesVC.swift"
-            timestampString = "518901975.799916"
+            timestampString = "522245717.695734"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "214"
-            endingLineNumber = "214"
-            landmarkName = "handleLoadingGames(fromResult:withResultPacker:)"
-            landmarkType = "7">
+            startingLineNumber = "218"
+            endingLineNumber = "218">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1110,11 +1102,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/IGDB.swift"
-            timestampString = "521897143.676874"
+            timestampString = "521716632.10735"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
             landmarkName = "getGames(bySearchString:withLimit:withOffset:withOnComplete:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1126,11 +1118,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/IGDB.swift"
-            timestampString = "521897143.676874"
+            timestampString = "521716632.10735"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "207"
-            endingLineNumber = "207"
+            startingLineNumber = "203"
+            endingLineNumber = "203"
             landmarkName = "getGamesList(_:withLimit:withOffset:withDate:)"
             landmarkType = "7">
             <Locations>
@@ -1174,11 +1166,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/IGDB.swift"
-            timestampString = "521897143.676874"
+            timestampString = "521716632.10735"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "203"
-            endingLineNumber = "203"
+            startingLineNumber = "199"
+            endingLineNumber = "199"
             landmarkName = "getGamesList(_:withLimit:withOffset:withDate:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1190,11 +1182,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/IGDB.swift"
-            timestampString = "521897143.676874"
+            timestampString = "521716632.10735"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "329"
-            endingLineNumber = "329"
+            startingLineNumber = "325"
+            endingLineNumber = "325"
             landmarkName = "get(_:withURL:withParams:withHeaders:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1222,13 +1214,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/NewestReleasesVC.swift"
-            timestampString = "518901975.799916"
+            timestampString = "522245717.695734"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
-            landmarkName = "loggedIn"
-            landmarkType = "24">
+            startingLineNumber = "93"
+            endingLineNumber = "93">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1238,13 +1228,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/NewestReleasesVC.swift"
-            timestampString = "518901975.799916"
+            timestampString = "522245717.695734"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
-            landmarkName = "attachListListeners()"
-            landmarkType = "7">
+            startingLineNumber = "132"
+            endingLineNumber = "132">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -1286,13 +1274,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/NewestReleasesVC.swift"
-            timestampString = "518901975.799916"
+            timestampString = "522245717.695734"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
-            landmarkName = "attachListListeners()"
-            landmarkType = "7">
+            startingLineNumber = "133"
+            endingLineNumber = "133">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1302,29 +1288,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/NewestReleasesVC.swift"
-            timestampString = "518901975.799916"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
-            landmarkName = "attachListListeners()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ToPlayList/NewestReleasesVC.swift"
-            timestampString = "518901975.799916"
+            timestampString = "522245717.695734"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "138"
-            endingLineNumber = "138"
-            landmarkName = "attachListListeners()"
-            landmarkType = "7">
+            endingLineNumber = "138">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1334,13 +1302,25 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/NewestReleasesVC.swift"
-            timestampString = "518901975.799916"
+            timestampString = "522245717.695734"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
-            landmarkName = "attachListListeners()"
-            landmarkType = "7">
+            startingLineNumber = "142"
+            endingLineNumber = "142">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToPlayList/NewestReleasesVC.swift"
+            timestampString = "522245717.695734"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "147"
+            endingLineNumber = "147">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1542,12 +1522,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/GameDetailsVC.swift"
-            timestampString = "522065130.28298"
+            timestampString = "521718652.491776"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "529"
-            endingLineNumber = "529"
-            landmarkName = "downloadBigScreenshotURLs()"
+            startingLineNumber = "478"
+            endingLineNumber = "478"
+            landmarkName = "downloadCover()"
             landmarkType = "7">
             <Locations>
                <Location
@@ -1590,13 +1570,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/NewestReleasesVC.swift"
-            timestampString = "521627728.342658"
+            timestampString = "522245717.695734"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "_gameSections"
-            landmarkType = "24">
+            startingLineNumber = "29"
+            endingLineNumber = "29">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1606,13 +1584,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/NewestReleasesVC.swift"
-            timestampString = "521627769.548664"
+            timestampString = "522245717.695734"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "170"
-            endingLineNumber = "170"
-            landmarkName = "initialLoadGamesResultPacker(_:)"
-            landmarkType = "7">
+            startingLineNumber = "174"
+            endingLineNumber = "174">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1622,13 +1598,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/NewestReleasesVC.swift"
-            timestampString = "521627784.602381"
+            timestampString = "522245717.695734"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
-            landmarkName = "relaodGamesResultPacker(_:)"
-            landmarkType = "7">
+            startingLineNumber = "193"
+            endingLineNumber = "193">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1638,13 +1612,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/NewestReleasesVC.swift"
-            timestampString = "521627811.910353"
+            timestampString = "522245717.695734"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "231"
-            endingLineNumber = "231"
-            landmarkName = "setListBackground()"
-            landmarkType = "7">
+            startingLineNumber = "235"
+            endingLineNumber = "235">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1654,13 +1626,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/NewestReleasesVC.swift"
-            timestampString = "521627895.45403"
+            timestampString = "522245717.695734"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "205"
-            endingLineNumber = "205"
-            landmarkName = "handleLoadingGames(fromResult:withResultPacker:)"
-            landmarkType = "7">
+            startingLineNumber = "209"
+            endingLineNumber = "209">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1670,11 +1640,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/IGDB.swift"
-            timestampString = "521897143.676874"
+            timestampString = "521716632.10735"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "201"
-            endingLineNumber = "201"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
             landmarkName = "getGamesList(_:withLimit:withOffset:withDate:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1686,11 +1656,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/IGDB.swift"
-            timestampString = "521897143.676874"
+            timestampString = "521716632.10735"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "223"
-            endingLineNumber = "223"
+            startingLineNumber = "219"
+            endingLineNumber = "219"
             landmarkName = "loadFromGameIDs(_:fromGameData:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1702,11 +1672,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/IGDB.swift"
-            timestampString = "521897143.676874"
+            timestampString = "521716632.10735"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "236"
-            endingLineNumber = "236"
+            startingLineNumber = "232"
+            endingLineNumber = "232"
             landmarkName = "loadFromGameIDs(_:fromGameData:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1828,172 +1798,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/GameDetailsVC.swift"
-            timestampString = "522065130.28298"
+            timestampString = "521718652.491776"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "242"
-            endingLineNumber = "242"
-            landmarkName = "setupReleaseDateVC()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ToPlayList/ReleaseDateVC.swift"
-            timestampString = "521973688.976956"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "releaseDateSections"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ToPlayList/GameDetailsVC.swift"
-            timestampString = "522065130.28298"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "877"
-            endingLineNumber = "877"
-            landmarkName = "addCustomBackButton()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ToPlayList/ReleaseDateVC.swift"
-            timestampString = "521978911.747078"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
-            landmarkName = "tableView(_:cellForRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ToPlayList/ReleaseDateVC.swift"
-            timestampString = "521978911.747078"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "tableView(_:cellForRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ToPlayList/ReleaseDateCell.swift"
-            timestampString = "522077368.38524"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "17"
-            endingLineNumber = "17"
-            landmarkName = "update(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ToPlayList/ReleaseDateVC.swift"
-            timestampString = "521979215.937818"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
-            landmarkName = "tableView(_:viewForHeaderInSection:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ToPlayList/GameDetailsVC.swift"
-            timestampString = "522065130.28298"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "410"
-            endingLineNumber = "410"
-            landmarkName = "downloadGameData()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ToPlayList/RecentSearchesVC.swift"
-            timestampString = "522167589.281106"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "tableView(_:cellForRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ToPlayList/RecentSearchesVC.swift"
-            timestampString = "522167615.113078"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
-            landmarkName = "tableView(_:didSelectRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ToPlayList/SearchVC.swift"
-            timestampString = "522233143.173495"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
-            landmarkName = "setupRecentSearchesDelegate()"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
+            landmarkName = "setupImageCarouselVC()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

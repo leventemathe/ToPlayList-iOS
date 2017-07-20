@@ -9,5 +9,9 @@
 import UIKit
 
 class UpcomingReleasesVC: ReleasesVC {
-    
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        print("upcoming")
+    }
 }

@@ -37,7 +37,6 @@ class ReleasesCell: UITableViewCell, ReusableView {
         
         titleLabel.text = game.name
         if let thumbnailURL = game.thumbnailURL {
-            print(thumbnailURL)
             coverView.image = nil
             coverView.kf.setImage(with: thumbnailURL, placeholder: #imageLiteral(resourceName: "img_missing"))
         } else {

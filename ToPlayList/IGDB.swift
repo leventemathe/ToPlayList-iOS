@@ -193,7 +193,7 @@ class IGDB: GameAPI {
                                       "offset": offset]
         
         Alamofire.request(url, parameters: parameters, headers: IGDB.HEADERS).validate().responseJSON { response in
-            print(response.debugDescription)
+            //print(response.debugDescription)
             switch response.result {
             case .success(let value):
                 if let json = value as? JSON {

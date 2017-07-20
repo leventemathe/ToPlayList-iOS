@@ -242,7 +242,7 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: NewestReleasesCell.reuseIdentifier, for: indexPath) as? NewestReleasesCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: ReleasesCell.reuseIdentifier, for: indexPath) as? ReleasesCell {
             cell.networkErrorHandlerDelegate = self
             let game = _gameSections[indexPath.section].games[indexPath.row]
             if game != cell.game {
@@ -297,7 +297,7 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     private func setCellScrollings(_ to: Bool) {
         let cells = tableView.visibleCells
         for cell in cells {
-            if let cell = cell as? NewestReleasesCell {
+            if let cell = cell as? ReleasesCell {
                 cell.scrolling = to
             }
         }

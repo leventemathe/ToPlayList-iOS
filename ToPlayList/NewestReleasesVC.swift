@@ -12,6 +12,10 @@ import NVActivityIndicatorView
 
 class NewestReleasesVC: ReleasesVC {
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        print("newest")
+    }
 }
 
 
