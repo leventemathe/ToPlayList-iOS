@@ -30,8 +30,8 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         return _gameSections
     }
     
-    private let paginationLimit = 10
-    private var paginationOffset = 0
+    let paginationLimit = 10
+    var paginationOffset = 0
     
     private var listsListenerSystem = ToPlayAndPlayedListListeners()
     
@@ -160,16 +160,24 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         reloadGames()
     }
     
-    func initialLoadGames() {
-        IGDB.instance.getGamesList({ result in
-            self.handleLoadingGames(fromResult: result, withResultPacker: self.initialLoadGamesResultPacker)
-        }, withLimit: paginationLimit)
-    }
+    // override these in newest and upcoming vcs
+    func initialLoadGames() {}
+    func loadMoreGames() {}
+    func reloadGames() {}
     
-    private func initialLoadGamesResultPacker(_ games: [Game]) {
+    func initialLoadGamesResultPacker(_ games: [Game]) {
         _gameSections = GameSection.buildGameSectionsForNewestGames(fromGames: games)
         paginationOffset = 0
         animateTableViewAppearance()
+    }
+    
+    func relaodGamesResultPacker(_ games: [Game]) {
+        self._gameSections = GameSection.buildGameSectionsForNewestGames(fromGames: games)
+        self.paginationOffset = 0
+    }
+    
+    func loadMoreGamesResultPacker(_ games: [Game]) {
+        GameSection.buildGameSectionsForNewestGames(fromGames: games, continuationOf: &self._gameSections)
     }
     
     private func animateTableViewAppearance() {
@@ -179,29 +187,7 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         })
     }
     
-    func reloadGames() {
-        IGDB.instance.getGamesList({ result in
-            self.handleLoadingGames(fromResult: result, withResultPacker: self.relaodGamesResultPacker)
-        }, withLimit: paginationLimit)
-    }
-    
-    private func relaodGamesResultPacker(_ games: [Game]) {
-        self._gameSections = GameSection.buildGameSectionsForNewestGames(fromGames: games)
-        self.paginationOffset = 0
-    }
-    
-    func loadMoreGames() {
-        paginationOffset += paginationLimit
-        IGDB.instance.getGamesList ({ result in
-            self.handleLoadingGames(fromResult: result, withResultPacker: self.loadMoreGamesResultPacker)
-        }, withLimit: paginationLimit, withOffset: paginationOffset)
-    }
-    
-    private func loadMoreGamesResultPacker(_ games: [Game]) {
-        GameSection.buildGameSectionsForNewestGames(fromGames: games, continuationOf: &self._gameSections)
-    }
-    
-    private func handleLoadingGames(fromResult result: IGDBResult<[Game]>, withResultPacker packer: ([Game])->Void) {
+    func handleLoadingGames(fromResult result: IGDBResult<[Game]>, withResultPacker packer: ([Game])->Void) {
         switch result {
         case .success(let games):
             packer(games)

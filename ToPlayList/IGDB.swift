@@ -56,8 +56,11 @@ protocol GameAPI {
     func getGames(bySearchString search: String, withLimit limit: Int, withOnComplete onComplete: @escaping (IGDBResult<[Game]>)->Void)
     func getGames(bySearchString search: String, withOnComplete onComplete: @escaping (IGDBResult<[Game]>)->Void)
 
-    func getGamesList(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, withLimit limit: Int, withOffset offset: Int, withDate date: Double)
-    func getGamesList(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, withLimit limit: Int, withDate date: Double)
+    func getNewestGames(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, withLimit limit: Int, withOffset offset: Int, withDate date: Double)
+    func getNewestGames(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, withLimit limit: Int, withDate date: Double)
+    
+    func getUpcomingGames(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, withLimit limit: Int, withOffset offset: Int, withDate date: Double)
+    func getUpcomingGames(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, withLimit limit: Int, withDate date: Double)
     
     func getGenres(_ onComplete: @escaping (IGDBResult<[Genre]>)->Void, withIDs ids: [UInt64])
     func getCompanies(_ onComplete: @escaping (IGDBResult<[Company]>)->Void, withIDs ids: [UInt64])
@@ -184,11 +187,38 @@ class IGDB: GameAPI {
         getGames(bySearchString: search, withLimit: 10, withOffset: 0, withOnComplete: onComplete)
     }
     
-    func getGamesList(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, withLimit limit: Int, withOffset offset: Int, withDate date: Double = Date().timeIntervalSince1970) {
+    private enum Relation {
+        case lessThan
+        case greaterThan
+    }
+    
+    private enum Order {
+        case ascending
+        case descending
+    }
+    
+    private func getGamesList(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, withLimit limit: Int, withOffset offset: Int, wihtRelation relation: Relation, inOrder order: Order, withDate date: Double = Date().timeIntervalSince1970) {
         let url =  IGDB.BASE_URL + IGDB.GAMES
+        
+        var relationString: String!
+        var orderString: String!
+        
+        switch relation {
+        case .lessThan:
+            relationString = "lt"
+        case .greaterThan:
+            relationString = "gt"
+        }
+        switch order {
+        case .ascending:
+            orderString = "asc"
+        case .descending:
+            orderString = "desc"
+        }
+        
         let parameters: Parameters = ["fields": "id,name,first_release_date,release_dates,genres,developers,cover",
-                                      "order": "first_release_date:desc",
-                                      "filter[first_release_date][lt]": Int64(date) * 1000,
+                                      "order": "first_release_date:\(orderString!)",
+                                      "filter[first_release_date][\(relationString!)]": Int64(date) * 1000,
                                       "limit": limit,
                                       "offset": offset]
         
@@ -211,8 +241,24 @@ class IGDB: GameAPI {
         }
     }
     
-    func getGamesList(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, withLimit limit: Int, withDate date: Double = Date().timeIntervalSince1970) {
-        getGamesList(onComplete, withLimit: limit, withOffset: 0, withDate: date)
+    private func getGamesList(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, withLimit limit: Int, wihtRelation relation: Relation, inOrder order: Order, withDate date: Double = Date().timeIntervalSince1970) {
+        getGamesList(onComplete, withLimit: limit, withOffset: 0, wihtRelation: relation, inOrder: order, withDate: date)
+    }
+    
+    func getNewestGames(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, withLimit limit: Int, withOffset offset: Int, withDate date: Double = Date().timeIntervalSince1970) {
+        getGamesList(onComplete, withLimit: limit, withOffset: offset, wihtRelation: .lessThan, inOrder: .descending)
+    }
+    
+    func getNewestGames(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, withLimit limit: Int, withDate date: Double = Date().timeIntervalSince1970) {
+        getNewestGames(onComplete, withLimit: limit, withOffset: 0, withDate: date)
+    }
+    
+    func getUpcomingGames(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, withLimit limit: Int, withOffset offset: Int, withDate date: Double = Date().timeIntervalSince1970) {
+        getGamesList(onComplete, withLimit: limit, withOffset: offset, wihtRelation: .greaterThan, inOrder: .ascending)
+    }
+    
+    func getUpcomingGames(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, withLimit limit: Int, withDate date: Double = Date().timeIntervalSince1970) {
+        getNewestGames(onComplete, withLimit: limit, withOffset: 0, withDate: date)
     }
     
     private func loadFromGameIDs(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, fromGameData gameData: GameData) {

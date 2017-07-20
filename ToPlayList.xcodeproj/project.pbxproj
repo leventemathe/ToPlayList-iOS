@@ -407,10 +407,10 @@
 		D78ADCA31E3750BD008DE943 /* IGDB */ = {
 			isa = PBXGroup;
 			children = (
+				D760344E1F17A5B600D71240 /* IGDBKeys.swift */,
 				D70B03221E0C1F9500F67E7A /* IGDB.swift */,
 				D72D4CA51E1479EC0070E013 /* IGDBJSON.swift */,
 				D76B47FC1E197CCD00D18DDF /* GameIDs.swift */,
-				D760344E1F17A5B600D71240 /* IGDBKeys.swift */,
 			);
 			name = IGDB;
 			sourceTree = "<group>";
