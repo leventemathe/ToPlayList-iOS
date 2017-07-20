@@ -19,7 +19,7 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
     private var recentSearchesVC: RecentSearchesVC!
     
     private let RECENT_SEARCH_KEY = "recent_searches"
-    private let RECENT_SEARCHES_LIMIT = 8
+    private let RECENT_SEARCHES_LIMIT = 20
     
     private var loadingAnimationView: NVActivityIndicatorView?
     
