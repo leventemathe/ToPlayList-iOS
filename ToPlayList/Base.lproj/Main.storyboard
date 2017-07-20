@@ -75,10 +75,10 @@
                                 </prototypes>
                             </tableView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yMg-bi-deP">
-                                <rect key="frame" x="40" y="164" width="240" height="240"/>
+                                <rect key="frame" x="70" y="194" width="180" height="180"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="240" id="lNk-rq-urR"/>
-                                    <constraint firstAttribute="width" constant="240" id="xhn-cr-beq"/>
+                                    <constraint firstAttribute="height" constant="180" id="lNk-rq-urR"/>
+                                    <constraint firstAttribute="width" constant="180" id="xhn-cr-beq"/>
                                 </constraints>
                                 <connections>
                                     <segue destination="xgB-mT-KKc" kind="embed" id="e7v-Ei-xg4"/>
@@ -202,7 +202,7 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="WX5-Co-KuW" userLabel="TextStack">
-                                                                    <rect key="frame" x="74" y="0.0" width="198" height="55"/>
+                                                                    <rect key="frame" x="74" y="0.0" width="198" height="62"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5BH-5g-n5j" userLabel="Title">
                                                                             <rect key="frame" x="0.0" y="0.0" width="32" height="22"/>
@@ -211,14 +211,14 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No genre data" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7lE-2o-AEK">
-                                                                            <rect key="frame" x="0.0" y="24" width="80.5" height="14.5"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                            <rect key="frame" x="0.0" y="24" width="85" height="18"/>
+                                                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
                                                                             <color key="textColor" red="0.36939936983676724" green="0.37305678934010156" blue="0.37305678934010156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No developer data" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MXM-qS-PKS">
-                                                                            <rect key="frame" x="0.0" y="40.5" width="104" height="14.5"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                            <rect key="frame" x="0.0" y="44" width="110" height="18"/>
+                                                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
                                                                             <color key="textColor" red="0.36939936979999999" green="0.37305678930000002" blue="0.37305678930000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
@@ -1561,7 +1561,7 @@
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LbZ-aY-sNT" customClass="BadgeLabel" customModule="ToPlayList" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                     <color key="backgroundColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="12"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1923,11 +1923,11 @@
                         <viewControllerLayoutGuide type="bottom" id="jUv-28-mMB"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="QtR-E2-c1o">
-                        <rect key="frame" x="0.0" y="0.0" width="240" height="240"/>
+                        <rect key="frame" x="0.0" y="0.0" width="180" height="180"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_big_icon" translatesAutoresizingMaskIntoConstraints="NO" id="43Y-Rd-YJz">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="240"/>
+                                <rect key="frame" x="0.0" y="0.0" width="180" height="180"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1959,8 +1959,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your recent searches" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e1l-ht-syg">
-                                        <rect key="frame" x="8" y="5" width="312" height="20.5"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                        <rect key="frame" x="8" y="8" width="312" height="15"/>
+                                        <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -2040,7 +2040,7 @@
         <image name="to_play_list_bg" width="689" height="713"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="v2d-kz-Jth"/>
         <segue reference="FhM-4C-LJm"/>
+        <segue reference="OMc-yb-7M5"/>
     </inferredMetricsTieBreakers>
 </document>

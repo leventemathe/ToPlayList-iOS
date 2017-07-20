@@ -47,15 +47,18 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
         searchBar.delegate = self
         searchBar.setImage(#imageLiteral(resourceName: "clear_default"), for: .clear, state: .normal)
         searchBar.setImage(#imageLiteral(resourceName: "clear_default"), for: .clear, state: .highlighted)
-        setTextFieldTintColor(to: .lightGray, for: searchBar)
+        setTextFieldStyle(color: .lightGray, font: UIFont(name: "Avenir", size: 14), for: searchBar)
     }
     
-    func setTextFieldTintColor(to color: UIColor, for view: UIView) {
-        if view is UITextField {
+    func setTextFieldStyle(color: UIColor, font: UIFont?, for view: UIView) {
+        if let view = view as? UITextField {
             view.tintColor = color
+            if let font = font {
+                view.font = font
+            }
         }
         for subview in view.subviews {
-            setTextFieldTintColor(to: color, for: subview)
+            setTextFieldStyle(color: color, font: font, for: subview)
         }
     }
     
@@ -192,7 +195,7 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
     private func setupNoDataLabel() {
         noDataLabel.bounds = CGRect(x: 0.0, y: 0.0, width: tableView.bounds.width, height: tableView.bounds.height)
         noDataLabel.text = "No results. 😞"
-        noDataLabel.font = UIFont(name: "Avenir", size: 22)
+        noDataLabel.font = UIFont.MyFonts.avenirDefault(size: 22)
         noDataLabel.textAlignment = NSTextAlignment.center
         noDataLabel.sizeToFit()
         
