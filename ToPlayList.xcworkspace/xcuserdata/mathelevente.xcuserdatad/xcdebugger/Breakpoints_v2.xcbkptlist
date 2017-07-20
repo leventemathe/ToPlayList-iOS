@@ -1693,7 +1693,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "76"
             endingLineNumber = "76"
-            landmarkName = "buildGameSectionLoop(_:fromGames:intoGameSection:withTempGames:withPrevGame:)"
+            landmarkName = "buildGameSectionsForNewestGamesLoop(_:fromGames:intoGameSection:withTempGames:withPrevGame:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1789,6 +1789,22 @@
             endingLineNumber = "214"
             landmarkName = "setupImageCarouselVC()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToPlayListUnitTests/NewestReleases.swift"
+            timestampString = "522255291.288612"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "12"
+            endingLineNumber = "12"
+            landmarkName = "NewestReleases"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

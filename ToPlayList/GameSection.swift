@@ -24,7 +24,7 @@ class GameSection {
         var prevGame = games[0]
         tempGames.append(prevGame)
 
-        buildGameSectionLoop(1, fromGames: games, intoGameSection: &gameSections, withTempGames: &tempGames, withPrevGame: &prevGame)
+        buildGameSectionsForNewestGamesLoop(1, fromGames: games, intoGameSection: &gameSections, withTempGames: &tempGames, withPrevGame: &prevGame)
         
         return gameSections
     }
@@ -64,10 +64,10 @@ class GameSection {
             j += 1
         }
         
-        buildGameSectionLoop(j, fromGames: games, intoGameSection: &prevGameSections, withTempGames: &tempGames, withPrevGame: &prevGame!)
+        buildGameSectionsForNewestGamesLoop(j, fromGames: games, intoGameSection: &prevGameSections, withTempGames: &tempGames, withPrevGame: &prevGame!)
     }
     
-    private static func buildGameSectionLoop(_ startIndex: Int, fromGames games: [Game], intoGameSection gameSections: inout [GameSection], withTempGames tempGames: inout [Game], withPrevGame prevGame: inout Game) {
+    private static func buildGameSectionsForNewestGamesLoop(_ startIndex: Int, fromGames games: [Game], intoGameSection gameSections: inout [GameSection], withTempGames tempGames: inout [Game], withPrevGame prevGame: inout Game) {
         for i in startIndex..<games.count {
             let game = games[i]
             if game.firstReleaseDate == nil || prevGame.firstReleaseDate == nil {

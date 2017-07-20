@@ -14,4 +14,23 @@ class UpcomingReleasesVC: ReleasesVC {
         super.viewDidLoad()
         print("upcoming")
     }
+    
+    override func initialLoadGames() {
+        IGDB.instance.getUpcomingGames({ result in
+            self.handleLoadingGames(fromResult: result, withResultPacker: self.initialLoadGamesResultPacker)
+        }, withLimit: paginationLimit)
+    }
+    
+    override func reloadGames() {
+        IGDB.instance.getUpcomingGames({ result in
+            self.handleLoadingGames(fromResult: result, withResultPacker: self.relaodGamesResultPacker)
+        }, withLimit: paginationLimit)
+    }
+    
+    override func loadMoreGames() {
+        paginationOffset += paginationLimit
+        IGDB.instance.getUpcomingGames({ result in
+            self.handleLoadingGames(fromResult: result, withResultPacker: self.loadMoreGamesResultPacker)
+        }, withLimit: paginationLimit, withOffset: paginationOffset)
+    }
 }

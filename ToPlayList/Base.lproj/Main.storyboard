@@ -2089,6 +2089,7 @@
                                             <outlet property="titleLabel" destination="7nu-7H-DMA" id="eZe-wy-Foe"/>
                                             <outlet property="toPlayText" destination="uvo-gz-9yq" id="7xV-Ye-4ZA"/>
                                             <outlet property="toPlayView" destination="kRt-Si-Wgg" id="Nrp-zF-YLA"/>
+                                            <segue destination="js0-2B-ycQ" kind="show" id="jAa-me-mvq"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -2134,7 +2135,7 @@
         <image name="to_play_list_bg" width="689" height="713"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="a7x-K3-wKb"/>
+        <segue reference="jAa-me-mvq"/>
         <segue reference="FhM-4C-LJm"/>
     </inferredMetricsTieBreakers>
 </document>

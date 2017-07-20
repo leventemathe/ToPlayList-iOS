@@ -32,7 +32,7 @@ class NewestReleases: XCTestCase {
         let iterations = 5
         let limit = iterations * increment
         
-        IGDB.instance.getGamesList({ result in
+        IGDB.instance.getNewestGames({ result in
             switch result {
             case .success(let gamesResult):
                 games = gamesResult
@@ -74,7 +74,7 @@ class NewestReleases: XCTestCase {
         let expectedGameIDs: [UInt64] = [26655, 26695, 26364, 26691, 18322, 19168, 1943, 18426, 20149, 15013, 13158, 22367, 24934, 25959, 26680, 26649, 26481, 26665, 26632, 26678, 26620, 26598, 26589, 26629, 26362, 26619, 2165, 19000, 11078, 26618, 26596, 26585, 26650, 26604, 26595, 26593, 26592, 26591, 13205, 16468, 26590, 26581, 26486, 26210, 19465, 23981, 23796, 26536, 26443, 26442]
         var games = [Game]()
         
-        IGDB.instance.getGamesList({ result in
+        IGDB.instance.getNewestGames({ result in
             switch result {
             case .success(let gamesResult):
                 games = gamesResult
