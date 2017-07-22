@@ -1,15 +1,15 @@
 //
-//  ToPlayListUnitTests.swift
-//  ToPlayListUnitTests
+//  UpcomingReleases.swift
+//  ToPlayList
 //
-//  Created by Máthé Levente on 2017. 01. 07..
+//  Created by Máthé Levente on 2017. 07. 22..
 //  Copyright © 2017. Máthé Levente. All rights reserved.
 //
 
 import XCTest
 @testable import ToPlayList
 
-class NewestReleases: XCTestCase {
+class UpcomingReleases: XCTestCase {
     
     private var games: [Game]!
     private let INCREMENT = 10
@@ -21,7 +21,7 @@ class NewestReleases: XCTestCase {
         
         let exp = expectation(description: "Getting data from server to check GameSection")
         
-        IGDB.instance.getNewestGames({ result in
+        IGDB.instance.getUpcomingGames({ result in
             switch result {
             case .success(let gamesResult):
                 self.games = gamesResult
@@ -34,10 +34,14 @@ class NewestReleases: XCTestCase {
         waitForExpectations(timeout: 10, handler: nil)
     }
     
+    override func tearDown() {
+        super.tearDown()
+    }
+    
     
     
     func testGameSectionCreator() {
-        check(gameSections: GameSection.buildGameSectionsForNewestGames(fromGames: games))
+        check(gameSections: GameSection.buildGameSectionsForUpcomingGames(fromGames: games))
     }
     
     func testGameSectionCreatorContinuation() {
@@ -55,7 +59,7 @@ class NewestReleases: XCTestCase {
         
         check(gameSections: gameSections)
     }
-
+    
     private func check(gameSections: [GameSection]) {
         for gameSection in gameSections {
             let header = gameSection.header
@@ -66,6 +70,7 @@ class NewestReleases: XCTestCase {
         }
     }
 }
+
 
 
 

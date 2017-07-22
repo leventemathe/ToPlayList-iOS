@@ -20,14 +20,10 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     private var loadingMoreGames = true
     
-    private var _gameSections = [GameSection]() {
+    var gameSections = [GameSection]() {
         didSet {
             tableView.reloadData()
         }
-    }
-    
-    public var gameSections: [GameSection] {
-        return _gameSections
     }
     
     let paginationLimit = 10
@@ -160,27 +156,18 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         reloadGames()
     }
     
-    // override these in newest and upcoming vcs
+    // override these empty methods in newest and upcoming vcs
     func initialLoadGames() {}
     func loadMoreGames() {}
     func reloadGames() {}
     
-    func initialLoadGamesResultPacker(_ games: [Game]) {
-        _gameSections = GameSection.buildGameSectionsForNewestGames(fromGames: games)
-        paginationOffset = 0
-        animateTableViewAppearance()
-    }
+    func initialLoadGamesResultPacker(_ games: [Game]) {}
+    func relaodGamesResultPacker(_ games: [Game]) {}
+    func loadMoreGamesResultPacker(_ games: [Game]) {}
     
-    func relaodGamesResultPacker(_ games: [Game]) {
-        self._gameSections = GameSection.buildGameSectionsForNewestGames(fromGames: games)
-        self.paginationOffset = 0
-    }
     
-    func loadMoreGamesResultPacker(_ games: [Game]) {
-        GameSection.buildGameSectionsForNewestGames(fromGames: games, continuationOf: &self._gameSections)
-    }
     
-    private func animateTableViewAppearance() {
+    func animateTableViewAppearance() {
         tableView.alpha = 0.0
         UIView.animate(withDuration: 0.4, animations: {
             self.tableView.alpha = 1.0
@@ -211,7 +198,7 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     }
     
     private func setListBackground() {
-        if(_gameSections.count > 0) {
+        if(gameSections.count > 0) {
             return
         }
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
@@ -224,13 +211,13 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return _gameSections.count
+        return gameSections.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: ReleasesCell.reuseIdentifier, for: indexPath) as? ReleasesCell {
             cell.networkErrorHandlerDelegate = self
-            let game = _gameSections[indexPath.section].games[indexPath.row]
+            let game = gameSections[indexPath.section].games[indexPath.row]
             if game != cell.game {
                 cell.update(game)
             }
@@ -248,19 +235,19 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = Bundle.main.loadNibNamed("HeaderView", owner: self, options: nil)?.first as! HeaderView
-        headerView.label.text = _gameSections[section].header
+        headerView.label.text = gameSections[section].header
         return headerView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return _gameSections[section].games.count
+        return gameSections[section].games.count
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let position = scrollView.contentOffset.y
         let height = scrollView.contentSize.height
         
-        if position > height - scrollView.frame.size.height * 1.5 && !loadingMoreGames && _gameSections.count != 0 {
+        if position > height - scrollView.frame.size.height * 1.5 && !loadingMoreGames && gameSections.count != 0 {
             loadingMoreGames = true
             loadMoreGames()
         }

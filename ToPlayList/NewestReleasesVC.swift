@@ -35,6 +35,21 @@ class NewestReleasesVC: ReleasesVC {
             self.handleLoadingGames(fromResult: result, withResultPacker: self.loadMoreGamesResultPacker)
         }, withLimit: paginationLimit, withOffset: paginationOffset)
     }
+    
+    override func initialLoadGamesResultPacker(_ games: [Game]) {
+        gameSections = GameSection.buildGameSectionsForNewestGames(fromGames: games)
+        paginationOffset = 0
+        animateTableViewAppearance()
+    }
+    
+    override func relaodGamesResultPacker(_ games: [Game]) {
+        gameSections = GameSection.buildGameSectionsForNewestGames(fromGames: games)
+        paginationOffset = 0
+    }
+    
+    override func loadMoreGamesResultPacker(_ games: [Game]) {
+        GameSection.buildGameSectionsForNewestGames(fromGames: games, continuationOf: &gameSections)
+    }
 }
 
 
