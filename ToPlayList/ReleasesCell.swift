@@ -36,12 +36,7 @@ class ReleasesCell: UITableViewCell, ReusableView {
         self._game = game
         
         titleLabel.text = game.name
-        if let thumbnailURL = game.thumbnailURL {
-            coverView.image = nil
-            coverView.kf.setImage(with: thumbnailURL, placeholder: #imageLiteral(resourceName: "img_missing"))
-        } else {
-            coverView.image = #imageLiteral(resourceName: "img_missing")
-        }
+        setImage()
         if let genre = game.genre {
             genreLabel.text = genre.name
         } else {
@@ -52,6 +47,26 @@ class ReleasesCell: UITableViewCell, ReusableView {
         } else {
             developerLabel.text = "No developer data"
         }
+    }
+    
+    private func setImage() {
+        coverView.kf.setImage(with: game?.thumbnailURL, placeholder: #imageLiteral(resourceName: "img_missing"), options: nil, progressBlock: nil, completionHandler: { (image, error, _, _) in
+            if image == nil {
+                self.coverView.kf.setImage(with: self.game?.coverSmallURL, placeholder: #imageLiteral(resourceName: "img_missing"), options: nil, progressBlock: nil, completionHandler: { (image, error, _, _) in
+                    if image == nil {
+                        self.coverView.kf.setImage(with: self.game?.coverBigURL, placeholder: #imageLiteral(resourceName: "img_missing"), options: nil, progressBlock: nil, completionHandler: { (image, error, _, _) in
+                            if image == nil {
+                                self.coverView.kf.setImage(with: self.game?.screenshotSmallURL, placeholder: #imageLiteral(resourceName: "img_missing"), options: nil, progressBlock: nil, completionHandler: { (image, error, _, _) in
+                                    if image == nil {
+                                        self.coverView.kf.setImage(with: self.game?.screenshotBigURL, placeholder: #imageLiteral(resourceName: "img_missing"))
+                                    }
+                                })
+                            }
+                        })
+                    }
+                })
+            }
+        })
     }
     
     func updateStar(_ starState: StarState) {

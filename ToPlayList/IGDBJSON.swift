@@ -30,7 +30,7 @@ class IGDBJSON {
         return IGDBResult.success(games)
     }
     
-    func getNewestGameList(_ json: JSON) -> IGDBResult<GameData> {
+    func getGameList(_ json: JSON) -> IGDBResult<GameData> {
         var result = GameData()
         for any in json {
             if let obj = any as? JSONPair, let game = setGame(fromObj: obj) {
@@ -52,6 +52,22 @@ class IGDBJSON {
                 game.thumbnailURL = URL(string: "\(IGDB.BASE_URL_IMG)\(IGDB.IMG_THUMB)/\(imgID)\(IGDB.IMG_EXTENSION)")
                 game.coverSmallURL = URL(string: "\(IGDB.BASE_URL_IMG)\(IGDB.IMG_COVER_SMALL)/\(imgID)\(IGDB.IMG_EXTENSION)")
                 game.coverBigURL = URL(string: "\(IGDB.BASE_URL_IMG)\(IGDB.IMG_COVER_BIG)/\(imgID)\(IGDB.IMG_EXTENSION)")
+            }
+            if let screenshots = obj["screenshots"] as? [[String: Any]] {
+                var screenshotSmallURLs = [URL]()
+                var screenshotBigURLs = [URL]()
+                for screenshot in screenshots {
+                    if let screenshotID = screenshot["cloudinary_id"] as? String {
+                        if let smallURL = URL(string: "\(IGDB.BASE_URL_IMG)\(IGDB.IMG_SCREENSHOT_SMALL)/\(screenshotID)\(IGDB.IMG_EXTENSION)") {
+                            screenshotSmallURLs.append(smallURL)
+                        }
+                        if let bigURL = URL(string: "\(IGDB.BASE_URL_IMG)\(IGDB.IMG_SCREENSHOT_BIG)/\(screenshotID)\(IGDB.IMG_EXTENSION)") {
+                            screenshotBigURLs.append(bigURL)
+                        }
+                    }
+                }
+                game.screenshotSmallURLs = screenshotSmallURLs
+                game.screenshotBigURLs = screenshotBigURLs
             }
             if let firsReleaseDate = obj["first_release_date"] as? Double {
                 // date needs to be divided by 1000, because IGDB isn't using standard unix time

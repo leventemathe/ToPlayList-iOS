@@ -216,7 +216,7 @@ class IGDB: GameAPI {
             orderString = "desc"
         }
         
-        let parameters: Parameters = ["fields": "id,name,first_release_date,release_dates,genres,developers,cover",
+        let parameters: Parameters = ["fields": "id,name,first_release_date,release_dates,genres,developers,cover,screenshots",
                                       "order": "first_release_date:\(orderString!)",
                                       "filter[first_release_date][\(relationString!)]": Int64(date) * 1000,
                                       "limit": limit,
@@ -227,7 +227,7 @@ class IGDB: GameAPI {
             switch response.result {
             case .success(let value):
                 if let json = value as? JSON {
-                    let result = IGDBJSON.instance.getNewestGameList(json)
+                    let result = IGDBJSON.instance.getGameList(json)
                     switch result {
                     case .success(let gameData):
                         self.loadFromGameIDs(onComplete, fromGameData: gameData)
