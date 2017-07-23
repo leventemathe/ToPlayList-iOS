@@ -236,7 +236,8 @@ struct ListsList {
                     let timestamp = Date().timeIntervalSince1970
                     
                     if listType == addType {
-                        let values: [String: Any] = [ListsEndpoints.Game.PROVIDER: game.provider, ListsEndpoints.Game.PROVIDER_ID: game.id, ListsEndpoints.Game.NAME: game.name, ListsEndpoints.Game.COVER_SMALL_URL: game.coverSmallURLAsString as Any, ListsEndpoints.Game.COVER_BIG_URL: game.coverBigURLAsString as Any, ListsEndpoints.Common.TIMESTAMP: timestamp]
+                        let covers = self.getCovers(game)
+                        let values: [String: Any] = [ListsEndpoints.Game.PROVIDER: game.provider, ListsEndpoints.Game.PROVIDER_ID: game.id, ListsEndpoints.Game.NAME: game.name, ListsEndpoints.Game.COVER_SMALL_URL: covers.small as Any, ListsEndpoints.Game.COVER_BIG_URL: covers.big as Any, ListsEndpoints.Common.TIMESTAMP: timestamp]
                         
                         ListsEndpoints.LISTS.child(listID).child(ListsEndpoints.List.GAMES).child(listItemID).updateChildValues(values, withCompletionBlock: { (error, ref) in
                             if error != nil {
@@ -255,6 +256,24 @@ struct ListsList {
                 }
             }
         })
+    }
+    
+    private func getCovers(_ game: Game) -> (small: String?, big: String?) {
+        var result: (small: String?, big: String?)
+        
+        if game.coverSmallURLAsString != nil {
+            result.small = game.coverSmallURLAsString
+        } else if game.screenshotSmallURLAsString != nil {
+            result.small = game.screenshotSmallURLAsString
+        }
+        
+        if game.coverBigURLAsString != nil {
+            result.big = game.coverBigURLAsString
+        } else if game.screenshotBigURLAsString != nil {
+            result.big = game.screenshotBigURLAsString
+        }
+        
+        return result
     }
     
     func getToPlayList(_ onComplete: @escaping (ListsListResult<List>)->()) {

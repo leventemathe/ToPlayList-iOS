@@ -94,9 +94,30 @@ class Game: IdentifiableObject {
         return nil
     }
     
+    var screenshotSmallURLAsString: String? {
+        if screenshotSmallURL != nil {
+            return screenshotSmallURL!.absoluteString
+        }
+        return nil
+    }
+    
     var screenshotBigURLAsString: String? {
         if screenshotBigURL != nil {
             return screenshotBigURL!.absoluteString
+        }
+        return nil
+    }
+    
+    var screenshotSmallURLAsString2: String? {
+        if screenshotSmallURL2 != nil {
+            return screenshotSmallURL2!.absoluteString
+        }
+        return nil
+    }
+    
+    var screenshotBigURLAsString2: String? {
+        if screenshotBigURL2 != nil {
+            return screenshotBigURL2!.absoluteString
         }
         return nil
     }
