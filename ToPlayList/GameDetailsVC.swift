@@ -353,6 +353,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     
     private func setupLoadingListener() {
         detailsLoaded = DetailsLoaded({ [unowned self] in
+            self.setImages()
             self.setScreenshotCarousel()
             self.finishLoading()
         })
@@ -403,7 +404,6 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     
     private func downloadGameData() {
         downloadBasics()
-        downloadCover()
         downloadScreenshotURLs()
         // for legal reasons
         //downloadVideoURLs()
@@ -505,18 +505,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
             }
         })
     }
-    
-    private func downloadCover() {
-        if let coverURL = game.coverSmallURL {
-            coverImg.kf.setImage(with: coverURL, placeholder: #imageLiteral(resourceName: "img_missing_cover"), options: nil, progressBlock: nil, completionHandler: { (image, _, _, _) in
-                if image == nil && self.game.coverBigURL != nil {
-                    self.coverImg.kf.setImage(with: self.game.coverBigURL, placeholder: #imageLiteral(resourceName: "img_missing_cover"))
-                }
-            })
-        }
-        
-    }
-    
+
     private func downloadScreenshotURLs() {
         downloadBigScreenshotURLs()
         downloadSmallScreenshotURLs()
@@ -528,7 +517,6 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
             case .success(let screenshots):
                 self.game.screenshotBigURLs = screenshots
                 self.detailsLoaded.loaded[DetailsLoaded.SCREENSHOTS_BIG] = true
-                self.setBigScreenshot()
             case .failure(let error):
                 switch error {
                 case .noInternet:
@@ -538,7 +526,6 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
                 case .unknown:
                     self.handleLoadingError(Alerts.UNKNOWN_ERROR)
                 case .noData:
-                    self.bigScreenshot.image = #imageLiteral(resourceName: "img_missing_screenshot_big")
                     self.detailsLoaded.loaded[DetailsLoaded.SCREENSHOTS_BIG] = true
                 }
             }
@@ -560,23 +547,51 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
                 case .unknown:
                     self.handleLoadingError(Alerts.UNKNOWN_ERROR)
                 case .noData:
-                    self.bigScreenshot.image = #imageLiteral(resourceName: "img_missing_screenshot_big")
                     self.detailsLoaded.loaded[DetailsLoaded.SCREENSHOTS_SMALL] = true
                 }
             }
         })
     }
     
+    private func setImages() {
+        setCover()
+        setBigScreenshot()
+    }
+    
+    private func setCover() {
+        self.coverImg.kf.setImage(with: self.game.coverSmallURL, placeholder: #imageLiteral(resourceName: "img_missing_cover"), options: nil, progressBlock: nil, completionHandler: { (image, error, _, _) in
+            if image == nil {
+                self.coverImg.kf.setImage(with: self.game.coverBigURL, placeholder: #imageLiteral(resourceName: "img_missing_cover"), options: nil, progressBlock: nil, completionHandler: { (image, error, _, _) in
+                    if image == nil {
+                        self.coverImg.kf.setImage(with: self.game.thumbnailURL, placeholder: #imageLiteral(resourceName: "img_missing_cover"), options: nil, progressBlock: nil, completionHandler: { (image, error, _, _) in
+                            if image == nil {
+                                self.coverImg.kf.setImage(with: self.game.screenshotSmallURL, placeholder: #imageLiteral(resourceName: "img_missing_cover"), options: nil, progressBlock: nil, completionHandler: { (image, error, _, _) in
+                                    if image == nil {
+                                        self.coverImg.kf.setImage(with: self.game.screenshotBigURL, placeholder: #imageLiteral(resourceName: "img_missing_cover"))
+                                    }
+                                })
+                            }
+                        })
+                    }
+                })
+            }
+        })
+    }
+    
     private func setBigScreenshot() {
-        if self.game.screenshotBigURLs != nil {
-            self.bigScreenshot.kf.setImage(with: self.game.screenshotBigURL, placeholder: #imageLiteral(resourceName: "img_missing_screenshot_big"), options: nil, progressBlock: nil, completionHandler: { (image, _, _, _) in
-                if image == nil && self.game.screenshotSmallURL != nil {
-                    self.bigScreenshot.kf.setImage(with: self.game.screenshotSmallURL, placeholder: #imageLiteral(resourceName: "img_missing_screenshot_big"))
-                }
-            })
-        } else {
-            self.bigScreenshot.image = #imageLiteral(resourceName: "img_missing_screenshot_big")
-        }
+        self.bigScreenshot.kf.setImage(with: self.game.screenshotBigURL2, placeholder: #imageLiteral(resourceName: "img_missing_screenshot_big") , options: nil, progressBlock: nil, completionHandler: { (image, error, _, _) in
+            if image == nil {
+                self.bigScreenshot.kf.setImage(with: self.game.screenshotBigURL, placeholder: #imageLiteral(resourceName: "img_missing_screenshot_big"), options: nil, progressBlock: nil, completionHandler: { (image, error, _, _) in
+                    if image == nil {
+                        self.bigScreenshot.kf.setImage(with: self.game.screenshotSmallURL2, placeholder: #imageLiteral(resourceName: "img_missing_screenshot_big"), options: nil, progressBlock: nil, completionHandler: { (image, error, _, _) in
+                            if image == nil {
+                                self.bigScreenshot.kf.setImage(with: self.game.screenshotSmallURL, placeholder: #imageLiteral(resourceName: "img_missing_screenshot_big"))
+                            }
+                        })
+                    }
+                })
+            }
+        })
     }
     
     private func downloadVideoURLs() {
