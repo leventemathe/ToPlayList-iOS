@@ -80,6 +80,20 @@ class Game: IdentifiableObject {
         return nil
     }
     
+    var screenshotBigURL2: URL? {
+        if screenshotBigURLs != nil && screenshotBigURLs!.count > 1 {
+            return screenshotBigURLs![1]
+        }
+        return nil
+    }
+    
+    var screenshotSmallURL2: URL? {
+        if screenshotSmallURLs != nil && screenshotSmallURLs!.count > 1 {
+            return screenshotSmallURLs![1]
+        }
+        return nil
+    }
+    
     var screenshotBigURLAsString: String? {
         if screenshotBigURL != nil {
             return screenshotBigURL!.absoluteString
