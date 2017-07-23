@@ -258,7 +258,7 @@ class IGDB: GameAPI {
     }
     
     func getUpcomingGames(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, withLimit limit: Int) {
-        getNewestGames(onComplete, withLimit: limit, withOffset: 0)
+        getUpcomingGames(onComplete, withLimit: limit, withOffset: 0)
     }
     
     private func loadFromGameIDs(_ onComplete: @escaping (IGDBResult<[Game]>)->Void, fromGameData gameData: GameData) {

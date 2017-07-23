@@ -14,10 +14,24 @@ struct Dates {
     private static let DATE_FORMAT_FULL = "dd. MMM. y."
     
     static func dateForNewestReleases() -> Double {
+        let calendar = Calendar.current
+        let startOfToday = calendar.startOfDay(for: Date())
+        
+        var components = DateComponents()
+        components.day = 1
+        components.second = -1
+        
+        if let date = calendar.date(byAdding: components, to: startOfToday) {
+            return date.timeIntervalSince1970
+        }
         return Date().timeIntervalSince1970
     }
     
     static func dateForUpcomingReleases() -> Double {
+        let calendar = Calendar.current
+        if let date = calendar.date(byAdding: .day, value: 1, to: calendar.startOfDay(for: Date())) {
+            return date.timeIntervalSince1970
+        }
         return Date().timeIntervalSince1970
     }
     
