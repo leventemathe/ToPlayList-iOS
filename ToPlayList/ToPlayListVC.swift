@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import UserNotifications
 
 class ToPlayListVC: SubListVC {
     
@@ -19,15 +18,19 @@ class ToPlayListVC: SubListVC {
     private var shouldRemoveToPlayListListenerAdd = 0
     private var shouldRemoveToPlayListListenerRemove = 0
     
+    // this is the perfect place for app wide notifications for to play list
+    // it's initialized after login/register or launching the app (if already logged in)
+    // it's deinitialized after logout
+    private var notifications: ToPlayListNotificationSystem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupReadyForNotifs()
-        setupNotifications()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getToPlayList {
+            self.setupNotifications()
             self.attachListeners()
         }
     }
@@ -35,6 +38,12 @@ class ToPlayListVC: SubListVC {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         removeListeners()
+    }
+    
+    private func setupNotifications() {
+        if notifications == nil {
+            notifications = ToPlayListNotificationSystem(toPlayList.copy() as! List)
+        }
     }
     
     private func attachListeners() {
@@ -144,8 +153,6 @@ class ToPlayListVC: SubListVC {
             }
             if shouldSetContent {
                 self.setContent()
-                // TODO this readds notifications, only add to newly added games
-                self.readyForNotifs.checks[ReadyForNotifications.GAMES_DOWNLOADED] = true
             }
             onComplete()
         }
@@ -167,91 +174,6 @@ class ToPlayListVC: SubListVC {
             }
             listWasEmptyLastTime = false
         }
-    }
-    
-    class ReadyForNotifications {
-        
-        static let PERMISSION_GRANTED = "permission_granted"
-        static let GAMES_DOWNLOADED = "games_downloaded"
-        
-        typealias AllReadyCallback = () -> ()
-        
-        var allReadyCallback: AllReadyCallback
-        
-        var checks = [PERMISSION_GRANTED: false, GAMES_DOWNLOADED: false] {
-            didSet {
-                if isAllDone() {
-                    allReadyCallback()
-                }
-            }
-        }
-        
-        init(allReadyCallback: @escaping AllReadyCallback) {
-            self.allReadyCallback = allReadyCallback
-        }
-        
-        private func isAllDone() -> Bool {
-            for (_, check) in checks {
-                if !check {
-                    return false
-                }
-            }
-            return true
-        }
-    }
-    
-    private var readyForNotifs: ReadyForNotifications!
-    
-    private func setupReadyForNotifs() {
-        readyForNotifs = ReadyForNotifications(allReadyCallback: {
-            print("All ready, let them notifs come!")
-            self.addNotifications()
-        })
-    }
-    
-    private func setupNotifications() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: { (granted, error) in
-            self.readyForNotifs.checks[ReadyForNotifications.PERMISSION_GRANTED] = true
-        })
-    }
-    
-    private func addNotifications() {
-        for game in toPlayList {
-            addNotification(forGame: game)
-        }
-    }
-    
-    private func addNotification(forGame game: Game) {
-        // if it has been released already, there's no need for a notification
-        if game.firstReleaseDate == nil || game.firstReleaseDate! < Dates.dateForNewestReleases() {
-            return
-        }
-        
-        let content = UNMutableNotificationContent()
-        content.title = "A game on your ToPlayList has been released!"
-        content.body = "(\(game.name) has been released today."
-        // TODO
-        content.badge = nil
-        // TODO sound
-        
-        let trigger = buildNotificationTrigger(forGame: game)
-        let request = UNNotificationRequest(identifier: "\(game.name) notification", content: content, trigger: trigger)
-        
-        UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { $0.forEach({ print($0.identifier) }) })
-        
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
-            if error != nil {
-                print(error!.localizedDescription)
-            } else {
-                print("added \(game.name) notif request yay")
-            }
-        })
-    }
-    
-    private func buildNotificationTrigger(forGame game: Game) -> UNCalendarNotificationTrigger {
-        let releaseDate = Date(timeIntervalSince1970: game.firstReleaseDate!)
-        let dateComponent = Calendar.current.dateComponents([.year, .month, .day], from: releaseDate)
-        return UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: false)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

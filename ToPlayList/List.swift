@@ -8,7 +8,7 @@
 
 import Foundation
 
-class List: Hashable, Equatable, Sequence {
+class List: Hashable, Equatable, Sequence, NSCopying {
     
     var type: String!
     private var _games = [Game]() {
@@ -73,5 +73,11 @@ class List: Hashable, Equatable, Sequence {
     
     func makeIterator() -> Array<Game>.Iterator {
         return _games.makeIterator()
+    }
+    
+    func copy(with zone: NSZone? = nil) -> Any {
+        let copy = List(type)
+        copy._games = _games
+        return copy
     }
 }
