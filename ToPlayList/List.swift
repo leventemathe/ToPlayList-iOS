@@ -8,7 +8,7 @@
 
 import Foundation
 
-class List: Hashable, Equatable {
+class List: Hashable, Equatable, Sequence {
     
     var type: String!
     private var _games = [Game]() {
@@ -69,5 +69,9 @@ class List: Hashable, Equatable {
     
     subscript(_ i: Int) -> Game? {
         return _games[i]
+    }
+    
+    func makeIterator() -> Array<Game>.Iterator {
+        return _games.makeIterator()
     }
 }

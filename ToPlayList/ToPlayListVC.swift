@@ -237,11 +237,13 @@ class ToPlayListVC: SubListVC {
     }
     
     private func addNotifications() {
-        
+        for game in toPlayList {
+            addNotification(forGame: game)
+        }
     }
     
     private func addNotification(forGame game: Game) {
-        
+        print(game)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
