@@ -124,21 +124,17 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         listsListenerSystem.attachListeners(withOnAddedToToPlayList: { game in
             if self.toPlayList.add(game) {
                 self.tableView.reloadData()
-                print("set content newest releases")
             }
         }, withOnRemovedFromToPlayList: { game in
             self.toPlayList.remove(game)
             self.tableView.reloadData()
-            print("set content newest releases")
         }, withOnAddedToPlayedList: { game in
             if self.playedList.add(game) {
                 self.tableView.reloadData()
-                print("set content newest releases")
             }
         }, withOnRemovedFromPlayedList: { game in
             self.playedList.remove(game)
             self.tableView.reloadData()
-            print("set content newest releases")
         })
     }
     

@@ -20,12 +20,12 @@ class ToPlayListVC: SubListVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setupNotifications()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getToPlayList {
-            self.setupNotifications()
             self.attachListeners()
         }
     }
@@ -157,7 +157,7 @@ class ToPlayListVC: SubListVC {
     private var listWasEmptyLastTime: Bool?
     
     private func setContent() {
-        print("set content in toPlay list")
+        //print("set content in toPlay list")
         collectionView.reloadData()
         if toPlayList.count < 1 {
             if listWasEmptyLastTime == nil || !listWasEmptyLastTime!{

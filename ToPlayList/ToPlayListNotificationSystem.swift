@@ -57,12 +57,12 @@ class ToPlayListNotificationSystem {
         print("attaching listeners")
         listenToToPlayList(.add, withOnChange: { game in
             if self.toPlayList.add(game) {
-                print("new game yay \(game.name)")
+                self.addNotification(forGame: game)
             }
         })
         listenToToPlayList(.remove, withOnChange: { game in
             self.toPlayList.remove(game)
-            print("oh no game removed: \(game.name)")
+            self.removeNotification(forGame: game)
         })
     }
     
@@ -174,8 +174,6 @@ class ToPlayListNotificationSystem {
     
     // not called yet anywhere
     func addNotifications() {
-        print("---------Notifications alreay added----------")
-        UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { $0.forEach({ print($0.identifier) }) })
         //UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         
         for game in toPlayList {
@@ -191,19 +189,28 @@ class ToPlayListNotificationSystem {
         
         let content = buildContent(forGame: game)
         let trigger = buildNotificationTrigger(forGame: game)
-        let request = UNNotificationRequest(identifier: "\(game.name) notification", content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: "\(game.name)", content: content, trigger: trigger)
         
         UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
             if error != nil {
                 print(error!.localizedDescription)
+            } else {
+                print("---------Notifications after adding----------")
+                UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { $0.forEach({ print($0.identifier) }) })
             }
         })
     }
     
+    private func removeNotification(forGame game: Game) {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [game.name])
+        print("---------Notifications after removing----------")
+        UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { $0.forEach({ print($0.identifier) }) })
+    }
+    
     private func buildContent(forGame game: Game) -> UNMutableNotificationContent {
         let content = UNMutableNotificationContent()
-        content.title = "A game on your ToPlayList has been released!"
-        content.body = "(\(game.name) has been released today."
+        content.title = "Fun times!"
+        content.body = "\(game.name) is released today."
         // TODO
         content.badge = nil
         // TODO sound
@@ -211,10 +218,10 @@ class ToPlayListNotificationSystem {
     }
     
     private func buildNotificationTrigger(forGame game: Game) -> UNCalendarNotificationTrigger {
-        let releaseDate = Date(timeIntervalSince1970: game.firstReleaseDate!)
-        // debug: let releaseDate = Date(timeIntervalSince1970: Date().timeIntervalSince1970 + 5)
-        // debug: let dateComponent = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: releaseDate)
-        let dateComponent = Calendar.current.dateComponents([.year, .month, .day, .hour], from: releaseDate)
+        //let releaseDate = Date(timeIntervalSince1970: game.firstReleaseDate!)
+        let releaseDate = Date(timeIntervalSince1970: Date().timeIntervalSince1970 + 10)
+        let dateComponent = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: releaseDate)
+        //let dateComponent = Calendar.current.dateComponents([.year, .month, .day, .hour], from: releaseDate)
         return UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: false)
     }
 }

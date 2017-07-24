@@ -145,7 +145,7 @@ class PlayedListVC: SubListVC {
     private var listWasEmptyLastTime: Bool?
     
     private func setContent() {
-        print("set content in played list")
+        //print("set content in played list")
         collectionView.reloadData()
         if playedList.count < 1 {
             if listWasEmptyLastTime == nil || !listWasEmptyLastTime!{
