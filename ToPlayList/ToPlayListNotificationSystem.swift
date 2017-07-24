@@ -141,7 +141,7 @@ class ToPlayListNotificationSystem {
         }
     }
     
-    func downloadToPlayList(_ onComplete: (()->())? = nil) {
+    func downloadToPlayList(_ onComplete: @escaping ()->()) {
         print("downloading games")
         ListsList.instance.getToPlayList({ result in
             switch result {
@@ -150,7 +150,7 @@ class ToPlayListNotificationSystem {
             case .failure(let error):
                 print(error)
             }
-            onComplete?()
+            onComplete()
         })
     }
     
@@ -164,8 +164,8 @@ class ToPlayListNotificationSystem {
             if granted {
                 self.permissionGranted = true
                 self.downloadToPlayList {
-                    self.addNotifications()
                     self.attachListeners()
+                    self.addNotifications()
                 }
             }
         })
@@ -173,7 +173,7 @@ class ToPlayListNotificationSystem {
     
     
     // not called yet anywhere
-    private func addNotifications() {
+    func addNotifications() {
         print("---------Notifications alreay added----------")
         UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { $0.forEach({ print($0.identifier) }) })
         //UNUserNotificationCenter.current().removeAllPendingNotificationRequests()

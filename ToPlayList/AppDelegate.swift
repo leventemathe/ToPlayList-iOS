@@ -104,11 +104,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("authorized")
                 if let granted = ToPlayListNotificationSystem.instance?.permissionGranted {
                     if !granted {
-                        ToPlayListNotificationSystem.instance?.downloadToPlayList()
+                        ToPlayListNotificationSystem.instance?.downloadToPlayList {
+                            ToPlayListNotificationSystem.instance?.attachListeners()
+                            ToPlayListNotificationSystem.instance?.addNotifications()
+                        }
+                    } else {
+                        ToPlayListNotificationSystem.instance?.attachListeners()
                     }
+                    ToPlayListNotificationSystem.instance?.permissionGranted = true
                 }
-                ToPlayListNotificationSystem.instance?.attachListeners()
-                ToPlayListNotificationSystem.instance?.permissionGranted = true
             case .denied:
                 print("denied")
                 ToPlayListNotificationSystem.instance?.permissionGranted = false
