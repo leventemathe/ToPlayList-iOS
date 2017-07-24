@@ -144,6 +144,7 @@ class ToPlayListVC: SubListVC {
             }
             if shouldSetContent {
                 self.setContent()
+                // TODO this readds notifications, only add to newly added games
                 self.readyForNotifs.checks[ReadyForNotifications.GAMES_DOWNLOADED] = true
             }
             onComplete()
@@ -235,6 +236,8 @@ class ToPlayListVC: SubListVC {
         
         let trigger = buildNotificationTrigger(forGame: game)
         let request = UNNotificationRequest(identifier: "\(game.name) notification", content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { $0.forEach({ print($0.identifier) }) })
         
         UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
             if error != nil {

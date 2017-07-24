@@ -47,5 +47,6 @@ struct ListsEndpoints {
         static let NAME = "name"
         static let COVER_SMALL_URL = "coversmallurl"
         static let COVER_BIG_URL = "coverbigurl"
+        static let FIRST_RELEASE_DATE = "first_release_date"
     }
 }
