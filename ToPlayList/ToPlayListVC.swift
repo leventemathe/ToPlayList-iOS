@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 class ToPlayListVC: SubListVC {
     
@@ -17,6 +18,11 @@ class ToPlayListVC: SubListVC {
     
     private var shouldRemoveToPlayListListenerAdd = 0
     private var shouldRemoveToPlayListListenerRemove = 0
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupNotifications()
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -161,7 +167,25 @@ class ToPlayListVC: SubListVC {
     }
     
     private func setupNotifications() {
+        let content = UNMutableNotificationContent()
+        content.title = "Title"
+        content.subtitle = "Subtitle"
+        content.badge = 1
+        content.body = "This is a notification"
+        //content.sound =
         
+        //let trigger = UNCalendarNotificationTrigger(dateMatching: <#T##DateComponents#>, repeats: <#T##Bool#>)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: "Notification", content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
+            if error != nil {
+                print(error!.localizedDescription)
+            } else {
+                print("added notif request yay")
+            }
+        })
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
