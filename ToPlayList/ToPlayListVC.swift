@@ -18,11 +18,6 @@ class ToPlayListVC: SubListVC {
     private var shouldRemoveToPlayListListenerAdd = 0
     private var shouldRemoveToPlayListListenerRemove = 0
     
-    // this is the perfect place for app wide notifications for to play list
-    // it's initialized after login/register or launching the app (if already logged in)
-    // it's deinitialized after logout
-    private var notifications: ToPlayListNotificationSystem!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -40,10 +35,11 @@ class ToPlayListVC: SubListVC {
         removeListeners()
     }
     
+    // this is the perfect place for app wide notifications initialization for to play list
+    // it's initialized after login/register or launching the app (if already logged in)
+    // it's deinitialized after logout
     private func setupNotifications() {
-        if notifications == nil {
-            notifications = ToPlayListNotificationSystem(toPlayList.copy() as! List)
-        }
+        ToPlayListNotificationSystem.initialize()
     }
     
     private func attachListeners() {
