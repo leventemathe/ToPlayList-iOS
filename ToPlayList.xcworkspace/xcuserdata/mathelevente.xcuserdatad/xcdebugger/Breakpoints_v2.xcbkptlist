@@ -72,11 +72,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/Lists.swift"
-            timestampString = "522510467.30322"
+            timestampString = "522584682.66056"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "433"
-            endingLineNumber = "433"
+            startingLineNumber = "436"
+            endingLineNumber = "436"
             landmarkName = "getToPlayAndPlayedList(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -88,13 +88,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/ToPlayListVC.swift"
-            timestampString = "518905975.046591"
+            timestampString = "522588482.073493"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "168"
-            endingLineNumber = "168"
-            landmarkName = "collectionView(_:cellForItemAt:)"
-            landmarkType = "7">
+            startingLineNumber = "262"
+            endingLineNumber = "262">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -104,13 +102,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/ToPlayListVC.swift"
-            timestampString = "518905975.046591"
+            timestampString = "522588482.073493"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "169"
-            endingLineNumber = "169"
-            landmarkName = "collectionView(_:cellForItemAt:)"
-            landmarkType = "7">
+            startingLineNumber = "263"
+            endingLineNumber = "263">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -288,11 +284,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/ToPlayListVC.swift"
-            timestampString = "518905975.046591"
+            timestampString = "522588282.976299"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
             landmarkName = "setContent()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1166,11 +1162,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/ToPlayListVC.swift"
-            timestampString = "518639283.835696"
+            timestampString = "522579499.8254"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
             landmarkName = "attachListeners()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1901,6 +1897,48 @@
                   offsetFromSymbolStart = "60">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToPlayList/ToPlayListVC.swift"
+            timestampString = "522588282.976299"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "219"
+            endingLineNumber = "219">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToPlayList/ToPlayListVC.swift"
+            timestampString = "522588282.976299"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "227"
+            endingLineNumber = "227">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToPlayList/ToPlayListVC.swift"
+            timestampString = "522588282.976299"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "226"
+            endingLineNumber = "226">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

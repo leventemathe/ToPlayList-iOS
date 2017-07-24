@@ -1,7 +1,7 @@
 .DS_Store
 
 build
-ToPlayList.xcworkspace/xcuserdata/mathelevente.xcuserdatad/UserInterfaceState.xcuserstate
+ToPlayList.xcworkspace/xcuserdata/*
 
 GoogleService-Info.plist
 IGDBKeys.swift
