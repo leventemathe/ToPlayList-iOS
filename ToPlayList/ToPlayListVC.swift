@@ -212,28 +212,6 @@ class ToPlayListVC: SubListVC {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: { (granted, error) in
             self.readyForNotifs.checks[ReadyForNotifications.PERMISSION_GRANTED] = true
         })
-        
-        /*
-        let content = UNMutableNotificationContent()
-        content.title = "Title"
-        content.subtitle = "Subtitle"
-        content.badge = 1
-        content.body = "This is a notification"
-        //content.sound =
-        
-        //let trigger = UNCalendarNotificationTrigger(dateMatching: <#T##DateComponents#>, repeats: <#T##Bool#>)
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-        
-        let request = UNNotificationRequest(identifier: "Notification", content: content, trigger: trigger)
-        
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
-            if error != nil {
-                print(error!.localizedDescription)
-            } else {
-                print("added notif request yay")
-            }
-        })
-         */
     }
     
     private func addNotifications() {
@@ -243,7 +221,34 @@ class ToPlayListVC: SubListVC {
     }
     
     private func addNotification(forGame game: Game) {
-        print(game)
+        // if it has been released already, there's no need for a notification
+        if game.firstReleaseDate == nil || game.firstReleaseDate! < Dates.dateForNewestReleases() {
+            return
+        }
+        
+        let content = UNMutableNotificationContent()
+        content.title = "A game on your ToPlayList has been released!"
+        content.body = "(\(game.name) has been released today."
+        // TODO
+        content.badge = nil
+        // TODO sound
+        
+        let trigger = buildNotificationTrigger(forGame: game)
+        let request = UNNotificationRequest(identifier: "\(game.name) notification", content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
+            if error != nil {
+                print(error!.localizedDescription)
+            } else {
+                print("added \(game.name) notif request yay")
+            }
+        })
+    }
+    
+    private func buildNotificationTrigger(forGame game: Game) -> UNCalendarNotificationTrigger {
+        let releaseDate = Date(timeIntervalSince1970: game.firstReleaseDate!)
+        let dateComponent = Calendar.current.dateComponents([.year, .month, .day], from: releaseDate)
+        return UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: false)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
