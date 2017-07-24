@@ -64,8 +64,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupSearchBarAppearance()
         setupSegmentedControlAppearance()
         
-        setupNotificationPermission()
-        
         return true
     }
     
@@ -80,12 +78,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func setupSegmentedControlAppearance() {
         UISegmentedControl.appearance().setTitleTextAttributes([NSFontAttributeName : UIFont.MyFonts.avenirDefault(size: 14)!], for: .normal)
-    }
-    
-    private func setupNotificationPermission() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: { (granted, error) in
-            // TODO Enable or disable features based on authorization.
-        })
     }
     
     

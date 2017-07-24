@@ -21,6 +21,7 @@ class ToPlayListVC: SubListVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupReadyForNotifs()
         setupNotifications()
     }
     
@@ -143,6 +144,7 @@ class ToPlayListVC: SubListVC {
             }
             if shouldSetContent {
                 self.setContent()
+                self.readyForNotifs.checks[ReadyForNotifications.GAMES_DOWNLOADED] = true
             }
             onComplete()
         }
@@ -166,7 +168,52 @@ class ToPlayListVC: SubListVC {
         }
     }
     
+    class ReadyForNotifications {
+        
+        static let PERMISSION_GRANTED = "permission_granted"
+        static let GAMES_DOWNLOADED = "games_downloaded"
+        
+        typealias AllReadyCallback = () -> ()
+        
+        var allReadyCallback: AllReadyCallback
+        
+        var checks = [PERMISSION_GRANTED: false, GAMES_DOWNLOADED: false] {
+            didSet {
+                if isAllDone() {
+                    allReadyCallback()
+                }
+            }
+        }
+        
+        init(allReadyCallback: @escaping AllReadyCallback) {
+            self.allReadyCallback = allReadyCallback
+        }
+        
+        private func isAllDone() -> Bool {
+            for (_, check) in checks {
+                if !check {
+                    return false
+                }
+            }
+            return true
+        }
+    }
+    
+    private var readyForNotifs: ReadyForNotifications!
+    
+    private func setupReadyForNotifs() {
+        readyForNotifs = ReadyForNotifications(allReadyCallback: {
+            print("All ready, let them notifs come!")
+            self.addNotifications()
+        })
+    }
+    
     private func setupNotifications() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: { (granted, error) in
+            self.readyForNotifs.checks[ReadyForNotifications.PERMISSION_GRANTED] = true
+        })
+        
+        /*
         let content = UNMutableNotificationContent()
         content.title = "Title"
         content.subtitle = "Subtitle"
@@ -186,6 +233,15 @@ class ToPlayListVC: SubListVC {
                 print("added notif request yay")
             }
         })
+         */
+    }
+    
+    private func addNotifications() {
+        
+    }
+    
+    private func addNotification(forGame game: Game) {
+        
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
