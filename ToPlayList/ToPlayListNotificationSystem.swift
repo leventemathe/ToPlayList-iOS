@@ -182,11 +182,14 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
         })
     }
     
+    private static let GAME_KEY = "game"
+    
     private func buildContent(forGame game: Game) -> UNMutableNotificationContent {
         let content = UNMutableNotificationContent()
         content.title = "Fun times!"
         content.body = "A game on your ToPlay list (\(game.name)) is released today."
         content.sound = UNNotificationSound.default()
+        //content.userInfo = [ToPlayListNotificationSystem.GAME_KEY: game]
         return content
     }
     
@@ -208,7 +211,14 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
         UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { $0.forEach({ print($0.identifier) }) })
     }
     
+    // this is called when a notification arrives while the app is in the foreground
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        // TODO
+        let options: UNNotificationPresentationOptions = [.alert, .sound]
+        completionHandler(options)
     }
 }
+
+
+
+
+
