@@ -97,11 +97,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         
-        print("-----------entering foreground-------------")
+        //print("-----------entering foreground-------------")
         UNUserNotificationCenter.current().getNotificationSettings(completionHandler: { settings in
             switch settings.authorizationStatus {
             case .authorized:
-                print("authorized")
+                //print("authorized")
                 if let granted = ToPlayListNotificationSystem.instance?.permissionGranted {
                     if !granted {
                         ToPlayListNotificationSystem.instance?.downloadToPlayList {
@@ -114,10 +114,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     ToPlayListNotificationSystem.instance?.permissionGranted = true
                 }
             case .denied:
-                print("denied")
+                //print("denied")
                 ToPlayListNotificationSystem.instance?.permissionGranted = false
             case .notDetermined:
-                print("not determined")
+                //print("not determined")
                 ToPlayListNotificationSystem.instance?.permissionGranted = false
                 break
             }

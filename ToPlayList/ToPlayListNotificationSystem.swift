@@ -40,12 +40,12 @@ class ToPlayListNotificationSystem {
     var permissionGranted = false
     
     private init() {
-        print("notification system initialized")
+        //print("notification system initialized")
         requestPermission()
     }
     
     deinit {
-        print("notification system deinitialized")
+        //print("notification system deinitialized")
         removeListeners()
     }
     
@@ -54,7 +54,7 @@ class ToPlayListNotificationSystem {
     // Listeners
     
     func attachListeners() {
-        print("attaching listeners")
+        //print("attaching listeners")
         listenToToPlayList(.add, withOnChange: { game in
             if self.toPlayList.add(game) {
                 self.addNotification(forGame: game)
@@ -118,7 +118,7 @@ class ToPlayListNotificationSystem {
     }
     
     func removeListeners() {
-        print("removing listeners")
+        //print("removing listeners")
         removeToPlayListListenerAdd()
         removeToPlayListListenerRemove()
     }
@@ -142,7 +142,7 @@ class ToPlayListNotificationSystem {
     }
     
     func downloadToPlayList(_ onComplete: @escaping ()->()) {
-        print("downloading games")
+        //print("downloading games")
         ListsList.instance.getToPlayList({ result in
             switch result {
             case .succes(let list):
@@ -160,7 +160,7 @@ class ToPlayListNotificationSystem {
     
     private func requestPermission() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: { (granted, error) in
-            print("Called request auth with result: \(granted)")
+            //print("Called request auth with result: \(granted)")
             if granted {
                 self.permissionGranted = true
                 self.downloadToPlayList {
@@ -174,8 +174,6 @@ class ToPlayListNotificationSystem {
     
     // not called yet anywhere
     func addNotifications() {
-        //UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-        
         for game in toPlayList {
             addNotification(forGame: game)
         }
@@ -195,16 +193,20 @@ class ToPlayListNotificationSystem {
             if error != nil {
                 print(error!.localizedDescription)
             } else {
-                print("---------Notifications after adding----------")
-                UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { $0.forEach({ print($0.identifier) }) })
+                //print("---------Notifications after adding----------")
+                //UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { $0.forEach({ print($0.identifier) }) })
             }
         })
     }
     
+    func removeNotifications() {
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+    }
+    
     private func removeNotification(forGame game: Game) {
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [game.name])
-        print("---------Notifications after removing----------")
-        UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { $0.forEach({ print($0.identifier) }) })
+        //print("---------Notifications after removing----------")
+        //UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { $0.forEach({ print($0.identifier) }) })
     }
     
     private func buildContent(forGame game: Game) -> UNMutableNotificationContent {
