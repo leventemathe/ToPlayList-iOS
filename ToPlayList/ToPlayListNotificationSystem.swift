@@ -29,6 +29,12 @@ class ToPlayListNotificationSystem {
         }
     }
     
+    static func deinitialize() {
+        ToPlayListNotificationSystem._instance?.removeListeners()
+        ToPlayListNotificationSystem._instance?.removeNotifications()
+        ToPlayListNotificationSystem._instance = nil
+    }
+    
     private var toPlayList = List(ListsEndpoints.List.TO_PLAY_LIST)
     
     private var toPlayListListenerAdd: ListsListenerReference?
@@ -74,7 +80,7 @@ class ToPlayListNotificationSystem {
             case .failure(let error):
                 switch error {
                 default:
-                    print(error)
+                    print("An error occured while trying to attach listeners for notifications: \(error)")
                 }
             }
         }, withOnChange: { result in
@@ -84,7 +90,7 @@ class ToPlayListNotificationSystem {
             case .failure(let error):
                 switch error {
                 default:
-                    print(error)
+                    print("An error occured while trying to attach listeners for notifications: \(error)")
                 }
             }
         })
@@ -191,7 +197,7 @@ class ToPlayListNotificationSystem {
         
         UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
             if error != nil {
-                print(error!.localizedDescription)
+                print("An error happened while request notification permission: \(error!.localizedDescription)")
             } else {
                 //print("---------Notifications after adding----------")
                 //UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { $0.forEach({ print($0.identifier) }) })

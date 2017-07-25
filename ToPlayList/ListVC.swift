@@ -87,11 +87,12 @@ class ListVC: UIViewController, IdentifiableVC {
     @IBAction func logoutClicked(_ sender: UIBarButtonItem) {        
         Alerts.alertWithYesAndNoButtons(withTitle: "Log out", withMessage: "Are you sure, you want to log out?", forVC: self, withOnYes: {
             do {
-                try FIRAuth.auth()?.signOut()
-                self.backgroundStarImageView.image = nil
-                _ = self.navigationController?.popToRootViewController(animated: true)
+                ToPlayListNotificationSystem.deinitialize()
                 self.toPLayListVC.removeListeners()
                 self.playedListVC.removeListeners()
+                try FIRAuth.auth()?.signOut()
+                self.backgroundStarImageView.image = nil // so that it doesn't bleed into login screen while removeing vc from stack
+                _ = self.navigationController?.popToRootViewController(animated: true)
             } catch _ as NSError {
                 Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_ERROR, forVC: self)
             }
