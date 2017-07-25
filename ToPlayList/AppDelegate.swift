@@ -124,7 +124,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         ToPlayListNotificationSystem.instance?.removeListeners()
     }
-
-
 }
 

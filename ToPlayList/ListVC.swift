@@ -87,7 +87,7 @@ class ListVC: UIViewController, IdentifiableVC {
     @IBAction func logoutClicked(_ sender: UIBarButtonItem) {        
         Alerts.alertWithYesAndNoButtons(withTitle: "Log out", withMessage: "Are you sure, you want to log out?", forVC: self, withOnYes: {
             do {
-                ToPlayListNotificationSystem.deinitialize()
+                ToPlayListNotificationSystem.teardown()
                 self.toPLayListVC.removeListeners()
                 self.playedListVC.removeListeners()
                 try FIRAuth.auth()?.signOut()

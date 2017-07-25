@@ -10,7 +10,7 @@ import Foundation
 import Firebase
 import UserNotifications
 
-class ToPlayListNotificationSystem {
+class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
     
     private static var _instance: ToPlayListNotificationSystem?
     static var instance: ToPlayListNotificationSystem? {
@@ -23,13 +23,13 @@ class ToPlayListNotificationSystem {
     // it uses the listeners after, to add/remove games
     // it's also a global singleton, so app delegate can easily reach it to attach/remove listeners as app closes/opens etc.
     
-    static func initialize() {
+    static func setup() {
         if ToPlayListNotificationSystem._instance == nil {
             ToPlayListNotificationSystem._instance = ToPlayListNotificationSystem()
         }
     }
     
-    static func deinitialize() {
+    static func teardown() {
         ToPlayListNotificationSystem._instance?.removeListeners()
         ToPlayListNotificationSystem._instance?.removeNotifications()
         ToPlayListNotificationSystem._instance = nil
@@ -43,8 +43,10 @@ class ToPlayListNotificationSystem {
     
     var permissionGranted = false
     
-    private init() {
+    private override init() {
+        super.init()
         print("notification system initialized")
+        UNUserNotificationCenter.current().delegate = self
         requestPermission()
     }
     
@@ -204,5 +206,9 @@ class ToPlayListNotificationSystem {
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [game.name])
         print("---------Notifications after removing----------")
         UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { $0.forEach({ print($0.identifier) }) })
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        // TODO
     }
 }

@@ -39,7 +39,7 @@ class ToPlayListVC: SubListVC {
     // it's initialized after login/register or launching the app (if already logged in)
     // it's deinitialized after logout
     private func setupNotifications() {
-        ToPlayListNotificationSystem.initialize()
+        ToPlayListNotificationSystem.setup()
     }
     
     private func attachListeners() {
