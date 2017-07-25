@@ -35,8 +35,6 @@ class ToPlayListNotificationSystem {
         ToPlayListNotificationSystem._instance = nil
     }
     
-    private var toPlayList = List(ListsEndpoints.List.TO_PLAY_LIST)
-    
     private var toPlayListListenerAdd: ListsListenerReference?
     private var toPlayListListenerRemove: ListsListenerReference?
     
@@ -62,12 +60,9 @@ class ToPlayListNotificationSystem {
     func attachListeners() {
         //print("attaching listeners")
         listenToToPlayList(.add, withOnChange: { game in
-            if self.toPlayList.add(game) {
-                self.addNotification(forGame: game)
-            }
+            self.addNotification(forGame: game)
         })
         listenToToPlayList(.remove, withOnChange: { game in
-            self.toPlayList.remove(game)
             self.removeNotification(forGame: game)
         })
     }
@@ -147,42 +142,18 @@ class ToPlayListNotificationSystem {
         }
     }
     
-    func downloadToPlayList(_ onComplete: @escaping ()->()) {
-        //print("downloading games")
-        ListsList.instance.getToPlayList({ result in
-            switch result {
-            case .succes(let list):
-                self.toPlayList = list
-            case .failure(let error):
-                print(error)
-            }
-            onComplete()
-        })
-    }
-    
     
     
     // Notifications
     
     private func requestPermission() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: { (granted, error) in
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound,], completionHandler: { (granted, error) in
             //print("Called request auth with result: \(granted)")
             if granted {
                 self.permissionGranted = true
-                self.downloadToPlayList {
-                    self.attachListeners()
-                    self.addNotifications()
-                }
+                self.attachListeners()
             }
         })
-    }
-    
-    
-    // not called yet anywhere
-    func addNotifications() {
-        for game in toPlayList {
-            addNotification(forGame: game)
-        }
     }
     
     private func addNotification(forGame game: Game) {
@@ -218,7 +189,7 @@ class ToPlayListNotificationSystem {
     private func buildContent(forGame game: Game) -> UNMutableNotificationContent {
         let content = UNMutableNotificationContent()
         content.title = "Fun times!"
-        content.body = "\(game.name) is released today."
+        content.body = "A game on your ToPlay list (\(game.name)) is released today."
         content.sound = UNNotificationSound.default()
         // TODO
         content.badge = nil
