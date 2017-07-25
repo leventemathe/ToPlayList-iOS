@@ -55,11 +55,18 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
         removeListeners()
     }
     
+    func listen() {
+        attachListeners()
+        handleDeliveredNotifications()
+    }
     
+    func unlisten() {
+        removeListeners()
+    }
     
     // Listeners
     
-    func attachListeners() {
+    private func attachListeners() {
         print("attaching listeners")
         removeLateToPlayListListenerAdd()
         removeLatePlayedListListenerRemove()
@@ -122,7 +129,7 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
         }
     }
     
-    func removeListeners() {
+    private func removeListeners() {
         print("removing listeners")
         removeToPlayListListenerAdd()
         removeToPlayListListenerRemove()
@@ -155,7 +162,7 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
             print("Called request auth with result: \(granted)")
             if granted {
                 self.permissionGranted = true
-                self.attachListeners()
+                self.listen()
             }
         })
     }
@@ -189,7 +196,7 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
         content.title = "Fun times!"
         content.body = "A game on your ToPlay list (\(game.name)) is released today."
         content.sound = UNNotificationSound.default()
-        //content.userInfo = [ToPlayListNotificationSystem.GAME_KEY: game]
+        content.userInfo = [ToPlayListNotificationSystem.GAME_KEY: game.name]
         return content
     }
     
@@ -211,10 +218,36 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
         UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { $0.forEach({ print($0.identifier) }) })
     }
     
+    // the listener interested in releases needs to be notified in two places:
+    // a. the notif is delivered while the app is in the foreground
+    // b. the notif was delivered while the app was closed/in the background
+    
+    var releaseListeners = [(String)->()]()
+    
     // this is called when a notification arrives while the app is in the foreground
+    // a.
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        // pass released games to listener
+        notifyReleaseListeners(notification)
+        
+        // show notif banner
         let options: UNNotificationPresentationOptions = [.alert, .sound]
         completionHandler(options)
+    }
+    
+    // b.
+    private func handleDeliveredNotifications() {
+        UNUserNotificationCenter.current().getDeliveredNotifications(completionHandler: { notifs in
+            for notif in notifs {
+                self.notifyReleaseListeners(notif)
+            }
+        })
+    }
+    
+    private func notifyReleaseListeners(_ notification: UNNotification) {
+        if let userInfo = notification.request.content.userInfo as? [String: String], let game = userInfo[ToPlayListNotificationSystem.GAME_KEY] {
+            releaseListeners.forEach({ $0(game) })
+        }
     }
 }
 
