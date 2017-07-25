@@ -88,11 +88,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/ToPlayListVC.swift"
-            timestampString = "522686772.535039"
+            timestampString = "522689626.318851"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "204"
-            endingLineNumber = "204"
+            startingLineNumber = "209"
+            endingLineNumber = "209"
             landmarkName = "collectionView(_:cellForItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -104,11 +104,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/ToPlayListVC.swift"
-            timestampString = "522686772.535039"
+            timestampString = "522689626.318851"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "205"
-            endingLineNumber = "205"
+            startingLineNumber = "210"
+            endingLineNumber = "210"
             landmarkName = "collectionView(_:cellForItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -288,11 +288,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/ToPlayListVC.swift"
-            timestampString = "522686772.535039"
+            timestampString = "522689626.318851"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
             landmarkName = "setContent()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1166,11 +1166,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ToPlayList/ToPlayListVC.swift"
-            timestampString = "522686772.535039"
+            timestampString = "522689626.318851"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
             landmarkName = "attachListeners()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1909,13 +1909,125 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ToPlayList/ToPlayListNotificationSystem.swift"
-            timestampString = "522683009.861323"
+            filePath = "ToPlayList/ToPlayListVC.swift"
+            timestampString = "522689626.318851"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "181"
-            endingLineNumber = "181"
-            landmarkName = "addNotification(forGame:)"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "setupNotifications()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ToPlayList.ToPlayListVC.((setupNotifications in _A58F2E56C8B2FBCB65200569761BA594) () -&gt; ()).(closure #2)"
+                  moduleName = "ToPlayList"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mathelevente/Desktop/toplaylistios/ToPlayList/ToPlayListVC.swift"
+                  timestampString = "522687355.493536"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "51"
+                  endingLineNumber = "51"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ToPlayList.ToPlayListVC.((setupNotifications in _A58F2E56C8B2FBCB65200569761BA594) () -&gt; ()).(closure #2)"
+                  moduleName = "ToPlayList"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mathelevente/Desktop/toplaylistios/ToPlayList/ToPlayListVC.swift"
+                  timestampString = "522687355.497268"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "51"
+                  endingLineNumber = "51"
+                  offsetFromSymbolStart = "316">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToPlayList/ToPlayListVC.swift"
+            timestampString = "522689626.318851"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "setupNotifications()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ToPlayList.ToPlayListVC.((setupNotifications in _A58F2E56C8B2FBCB65200569761BA594) () -&gt; ()).(closure #2)"
+                  moduleName = "ToPlayList"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mathelevente/Desktop/toplaylistios/ToPlayList/ToPlayListVC.swift"
+                  timestampString = "522687982.369521"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ToPlayList.ToPlayListVC.((setupNotifications in _A58F2E56C8B2FBCB65200569761BA594) () -&gt; ()).(closure #2)"
+                  moduleName = "ToPlayList"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mathelevente/Desktop/toplaylistios/ToPlayList/ToPlayListVC.swift"
+                  timestampString = "522687982.372888"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "316">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToPlayList/ToPlayListVC.swift"
+            timestampString = "522689626.318851"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "243"
+            endingLineNumber = "243"
+            landmarkName = "removeTabBarBadge()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ToPlayList/ToPlayListVC.swift"
+            timestampString = "522689626.318851"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "setupNotifications()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

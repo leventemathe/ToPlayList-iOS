@@ -44,8 +44,13 @@ class ToPlayListVC: SubListVC {
     private func setupNotifications() {
         ToPlayListNotificationSystem.setup()
         ToPlayListNotificationSystem.instance?.releaseListeners.append({ gameName in
+            print("game badge listener called")
             self.releasedGameNames.insert(gameName)
             self.handleGameReleaseNotifications()
+        })
+        ToPlayListNotificationSystem.instance?.releaseListeners.append({ _ in
+            print("tab bar badge listener called")
+            self.addTabBarBadge()
         })
     }
     
@@ -62,7 +67,7 @@ class ToPlayListVC: SubListVC {
             }
         }
         if count > 0 {
-            print("yaya some games were released alright")
+            //print("yaya some games were released alright")
         }
     }
     
@@ -204,11 +209,40 @@ class ToPlayListVC: SubListVC {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ToPlayListCell.reuseIdentifier, for: indexPath) as? ToPlayListCell {
             if let game = toPlayList[indexPath.row] {
                 cell.update(game)
+                if game.released != nil && game.released!{
+                    removeTabBarBadge()
+                }
             }
             cell.networkErrorHandlerDelegate = self
             return cell
         }
         return UICollectionViewCell()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let game = toPlayList[indexPath.row] {
+            if game.released != nil && game.released!{
+                removeTabBarBadge()
+            }
+        }
+    }
+    
+    private let TAB_BAR_INDEX = 0
+    
+    private func addTabBarBadge() {
+        if let tabItems = self.tabBarController?.tabBar.items {
+            if tabItems.count > self.TAB_BAR_INDEX {
+                tabItems[self.TAB_BAR_INDEX].badgeValue = "new"
+            }
+        }
+    }
+    
+    private func removeTabBarBadge() {
+        if let tabItems = self.tabBarController?.tabBar.items {
+            if tabItems.count > TAB_BAR_INDEX {
+                tabItems[TAB_BAR_INDEX].badgeValue = nil
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
