@@ -219,9 +219,9 @@ class ToPlayListNotificationSystem {
         let content = UNMutableNotificationContent()
         content.title = "Fun times!"
         content.body = "\(game.name) is released today."
+        content.sound = UNNotificationSound.default()
         // TODO
         content.badge = nil
-        // TODO sound
         return content
     }
     
