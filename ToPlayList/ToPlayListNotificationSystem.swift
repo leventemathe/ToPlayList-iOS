@@ -44,12 +44,12 @@ class ToPlayListNotificationSystem {
     var permissionGranted = false
     
     private init() {
-        //print("notification system initialized")
+        print("notification system initialized")
         requestPermission()
     }
     
     deinit {
-        //print("notification system deinitialized")
+        print("notification system deinitialized")
         removeListeners()
     }
     
@@ -58,11 +58,15 @@ class ToPlayListNotificationSystem {
     // Listeners
     
     func attachListeners() {
-        //print("attaching listeners")
+        print("attaching listeners")
+        removeLateToPlayListListenerAdd()
+        removeLatePlayedListListenerRemove()
         listenToToPlayList(.add, withOnChange: { game in
+            print("add listener fired for \(game.name)")
             self.addNotification(forGame: game)
         })
         listenToToPlayList(.remove, withOnChange: { game in
+            print("remove listener fired for \(game.name)")
             self.removeNotification(forGame: game)
         })
     }
@@ -95,16 +99,14 @@ class ToPlayListNotificationSystem {
         switch action {
         case .add:
             self.toPlayListListenerAdd = ref
-            self.removeLateToPlayListListenerAdd()
         case .remove:
             self.toPlayListListenerRemove = ref
-            self.removeLatePlayedListListenerRemove()
         }
     }
     
     private func removeLateToPlayListListenerAdd() {
         if shouldRemoveToPlayListListenerAdd > 0 {
-            toPlayListListenerAdd!.removeListener()
+            toPlayListListenerAdd?.removeListener()
             toPlayListListenerAdd = nil
             shouldRemoveToPlayListListenerAdd -= 1
         }
@@ -112,14 +114,14 @@ class ToPlayListNotificationSystem {
     
     private func removeLatePlayedListListenerRemove() {
         if shouldRemoveToPlayListListenerRemove > 0 {
-            toPlayListListenerRemove!.removeListener()
+            toPlayListListenerRemove?.removeListener()
             toPlayListListenerRemove = nil
             shouldRemoveToPlayListListenerRemove -= 1
         }
     }
     
     func removeListeners() {
-        //print("removing listeners")
+        print("removing listeners")
         removeToPlayListListenerAdd()
         removeToPlayListListenerRemove()
     }
@@ -147,8 +149,8 @@ class ToPlayListNotificationSystem {
     // Notifications
     
     private func requestPermission() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound,], completionHandler: { (granted, error) in
-            //print("Called request auth with result: \(granted)")
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound,], completionHandler: { (granted, error) in
+            print("Called request auth with result: \(granted)")
             if granted {
                 self.permissionGranted = true
                 self.attachListeners()
@@ -158,9 +160,11 @@ class ToPlayListNotificationSystem {
     
     private func addNotification(forGame game: Game) {
         // if the game has been released already, there's no need for a notification
+        print("add notif hasn't passed date test yet")
         if game.firstReleaseDate == nil || game.firstReleaseDate! < Dates.dateForNewestReleases() {
             return
         }
+        print("add notif passed date test")
         
         let content = buildContent(forGame: game)
         let trigger = buildNotificationTrigger(forGame: game)
@@ -170,20 +174,10 @@ class ToPlayListNotificationSystem {
             if error != nil {
                 print("An error happened while request notification permission: \(error!.localizedDescription)")
             } else {
-                //print("---------Notifications after adding----------")
-                //UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { $0.forEach({ print($0.identifier) }) })
+                print("---------Notifications after adding----------")
+                UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { $0.forEach({ print($0.identifier) }) })
             }
         })
-    }
-    
-    func removeNotifications() {
-        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
-    }
-    
-    private func removeNotification(forGame game: Game) {
-        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [game.name])
-        //print("---------Notifications after removing----------")
-        //UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { $0.forEach({ print($0.identifier) }) })
     }
     
     private func buildContent(forGame game: Game) -> UNMutableNotificationContent {
@@ -191,8 +185,6 @@ class ToPlayListNotificationSystem {
         content.title = "Fun times!"
         content.body = "A game on your ToPlay list (\(game.name)) is released today."
         content.sound = UNNotificationSound.default()
-        // TODO
-        content.badge = nil
         return content
     }
     
@@ -202,5 +194,15 @@ class ToPlayListNotificationSystem {
         let dateComponent = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: releaseDate)
         //let dateComponent = Calendar.current.dateComponents([.year, .month, .day, .hour], from: releaseDate)
         return UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: false)
+    }
+    
+    func removeNotifications() {
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+    }
+    
+    private func removeNotification(forGame game: Game) {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [game.name])
+        print("---------Notifications after removing----------")
+        UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { $0.forEach({ print($0.identifier) }) })
     }
 }
