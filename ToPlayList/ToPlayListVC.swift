@@ -27,6 +27,7 @@ class ToPlayListVC: SubListVC {
         super.viewWillAppear(animated)
         getToPlayList {
             self.attachListeners()
+            self.handleGameReleaseNotifications()
         }
     }
     
@@ -35,11 +36,34 @@ class ToPlayListVC: SubListVC {
         removeListeners()
     }
     
+    private var releasedGameNames = Set<String>()
+    
     // this is the perfect place for app wide notifications initialization for to play list
     // it's initialized after login/register or launching the app (if already logged in)
     // it's deinitialized after logout
     private func setupNotifications() {
         ToPlayListNotificationSystem.setup()
+        ToPlayListNotificationSystem.instance?.releaseListeners.append({ gameName in
+            self.releasedGameNames.insert(gameName)
+            self.handleGameReleaseNotifications()
+        })
+    }
+    
+    // this needs to be complicated like this, becuase it's not enough to just update games in the releaseListener
+    // the game list might be empty here, because the notif system is initialized before downloading the games list
+    // so this has to be called after games have downloaded in this vc too
+    private func handleGameReleaseNotifications() {
+        var count = 0
+        for releasedGameName in releasedGameNames {
+            if let game = toPlayList.get(whereGame: { $0.name == releasedGameName }) {
+                releasedGameNames.remove(releasedGameName)
+                game.released = true
+                count += 1
+            }
+        }
+        if count > 0 {
+            print("yaya some games were released alright")
+        }
     }
     
     private func attachListeners() {

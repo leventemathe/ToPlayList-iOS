@@ -71,6 +71,16 @@ class List: Hashable, Equatable, Sequence, NSCopying {
         return _games[i]
     }
     
+    func get(whereGame: (Game) -> Bool) -> Game? {
+        var result: Game?
+        _games.forEach({ game in
+            if whereGame(game) {
+                result = game
+            }
+        })
+        return result
+    }
+    
     func makeIterator() -> Array<Game>.Iterator {
         return _games.makeIterator()
     }

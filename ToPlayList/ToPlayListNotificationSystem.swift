@@ -247,6 +247,7 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
     private func notifyReleaseListeners(_ notification: UNNotification) {
         if let userInfo = notification.request.content.userInfo as? [String: String], let game = userInfo[ToPlayListNotificationSystem.GAME_KEY] {
             releaseListeners.forEach({ $0(game) })
+            UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [notification.request.identifier])
         }
     }
 }
