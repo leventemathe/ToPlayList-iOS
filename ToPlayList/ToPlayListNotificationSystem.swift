@@ -57,7 +57,6 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
     
     func listen() {
         attachListeners()
-        handleDeliveredNotifications()
     }
     
     func unlisten() {
@@ -220,7 +219,7 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
     
     // the listener interested in releases needs to be notified in two places:
     // a. the notif is delivered while the app is in the foreground
-    // b. the notif was delivered while the app was closed/in the background
+    // b. the notif was delivered while the app was closed/in the background and the user tapped it // TODO
     
     var releaseListeners = [(String)->()]()
     
@@ -235,19 +234,14 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
         completionHandler(options)
     }
     
-    // b.
-    private func handleDeliveredNotifications() {
-        UNUserNotificationCenter.current().getDeliveredNotifications(completionHandler: { notifs in
-            for notif in notifs {
-                self.notifyReleaseListeners(notif)
-            }
-        })
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        notifyReleaseListeners(response.notification)
+        completionHandler()
     }
     
     private func notifyReleaseListeners(_ notification: UNNotification) {
         if let userInfo = notification.request.content.userInfo as? [String: String], let game = userInfo[ToPlayListNotificationSystem.GAME_KEY] {
             releaseListeners.forEach({ $0(game) })
-            UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [notification.request.identifier])
         }
     }
 }
