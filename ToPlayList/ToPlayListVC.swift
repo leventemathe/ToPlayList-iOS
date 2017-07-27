@@ -29,6 +29,9 @@ class ToPlayListVC: SubListVC {
             self.attachListeners()
             self.handleGameReleaseNotifications()
             self.removeTabBarBadge()
+            if self.shouldNavigateToGame != nil {
+                self.navigateToGame(withName: self.shouldNavigateToGame!)
+            }
         }
     }
     
@@ -43,19 +46,22 @@ class ToPlayListVC: SubListVC {
     private func setupNotifications() {
         ToPlayListNotificationSystem.setup()
         
+        // add a badge to the game and the tab bar when a notif arrives in the foreground
         ToPlayListNotificationSystem.instance?.notifArrivedObservers.append({ gameName in
             self.releasedGameNames.insert(gameName)
             self.handleGameReleaseNotifications()
         })
         
+        ToPlayListNotificationSystem.instance?.notifArrivedObservers.append({ _ in
+            self.addTabBarBadge()
+        })
+        
+        // add a badge to the game and move to the list when the notif is tapped (either in foreground or background)
         ToPlayListNotificationSystem.instance?.notifTappedObservers.append({ gameName in
             self.releasedGameNames.insert(gameName)
             self.handleGameReleaseNotifications()
-            self.navigateToGame(gameName)
-        })
-        
-        ToPlayListNotificationSystem.instance?.notifArrivedObservers.append({ _ in
-            self.addTabBarBadge()
+            self.moveToListTab()
+            self.shouldNavigateToGame = gameName
         })
     }
     
@@ -74,12 +80,33 @@ class ToPlayListVC: SubListVC {
             }
         }
         if count > 0 {
-            //print("yaya some games were released alright")
+            releasedGameNames.forEach({ addReleasedBadgeTo(game: $0) })
         }
     }
     
-    private func navigateToGame(_ game: String) {
-        return
+    private func addReleasedBadgeTo(game: String) {
+        // TODO
+    }
+    
+    private func moveToListTab() {
+        tabBarController?.selectedIndex = TAB_BAR_INDEX
+    }
+    
+    private var shouldNavigateToGame: String? = nil
+    
+    private func navigateToGame(withName name: String) {
+        shouldNavigateToGame = nil
+        
+        var indexPath: IndexPath? = nil
+        for (index, game) in toPlayList.enumerated() {
+            if game.name == name {
+                indexPath = IndexPath(row: index, section: 0)
+                break
+            }
+        }
+        if let indexPath = indexPath {
+            collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+        }
     }
     
     private func attachListeners() {
