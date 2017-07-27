@@ -69,6 +69,7 @@
 		D7B8C86B1E2D16C700656E64 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B8C86A1E2D16C700656E64 /* ErrorMessage.swift */; };
 		D7B8C86D1E2D16F100656E64 /* ErrorMessage.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7B8C86C1E2D16F100656E64 /* ErrorMessage.xib */; };
 		D7C0F9471F26148C00556AA8 /* ToPlayListNotificationSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C0F9461F26148B00556AA8 /* ToPlayListNotificationSystem.swift */; };
+		D7C0F9491F2A285200556AA8 /* OutTodayBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C0F9481F2A285100556AA8 /* OutTodayBadge.swift */; };
 		D7C3A1701E0DA2DF0091279C /* GameProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C3A16F1E0DA2DF0091279C /* GameProperties.swift */; };
 		D7C3A1721E0DD9120091279C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7C3A1711E0DD9120091279C /* Assets.xcassets */; };
 		D7CC7D0E1E3913E60027BE6F /* RegisterLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CC7D0D1E3913E60027BE6F /* RegisterLoginVC.swift */; };
@@ -180,6 +181,7 @@
 		D7B8C86A1E2D16C700656E64 /* ErrorMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		D7B8C86C1E2D16F100656E64 /* ErrorMessage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ErrorMessage.xib; sourceTree = "<group>"; };
 		D7C0F9461F26148B00556AA8 /* ToPlayListNotificationSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToPlayListNotificationSystem.swift; sourceTree = "<group>"; };
+		D7C0F9481F2A285100556AA8 /* OutTodayBadge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutTodayBadge.swift; sourceTree = "<group>"; };
 		D7C3A16F1E0DA2DF0091279C /* GameProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameProperties.swift; sourceTree = "<group>"; };
 		D7C3A1711E0DD9120091279C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D7CC7D0D1E3913E60027BE6F /* RegisterLoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterLoginVC.swift; sourceTree = "<group>"; };
@@ -456,6 +458,7 @@
 			children = (
 				D78D87C51F20D2CA00C28C4E /* ReleasesCell.swift */,
 				D71981211E26F1D3005823C2 /* ListImageView.swift */,
+				D7C0F9481F2A285100556AA8 /* OutTodayBadge.swift */,
 			);
 			name = Releases;
 			sourceTree = "<group>";
@@ -843,6 +846,7 @@
 				D74AC7DA1E3919B700C37A90 /* RegisterVC.swift in Sources */,
 				D7A0E7031E7BEA8A00A70989 /* SubListVC.swift in Sources */,
 				D7FE54EF1F20CBA700F2E566 /* ReleasesVC.swift in Sources */,
+				D7C0F9491F2A285200556AA8 /* OutTodayBadge.swift in Sources */,
 				D72E66BA1E619D2100BED388 /* PlayedListVC.swift in Sources */,
 				D709009D1EC5B89D00A316BE /* SearchCell.swift in Sources */,
 				D7975D081E586255003B64E6 /* ErrorHandlerDelegate.swift in Sources */,

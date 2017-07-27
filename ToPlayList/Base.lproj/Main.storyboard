@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bhe-U8-59S">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bhe-U8-59S">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -314,7 +314,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AHD-U1-sds">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="efa-6i-V9F" customClass="DetailsBigScreenshot" customModule="ToPlayList" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
@@ -548,7 +548,7 @@
                                         </constraints>
                                     </view>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8NQ-RT-MJ5">
-                                        <rect key="frame" x="0.0" y="274" width="320" height="245"/>
+                                        <rect key="frame" x="0.0" y="274" width="320" height="294"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A8L-fO-z1X">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="550.5"/>
@@ -1374,13 +1374,26 @@
                                                         <constraint firstItem="HTo-Sy-RaI" firstAttribute="leading" secondItem="OOl-Me-3d5" secondAttribute="leading" priority="999" id="y5a-E1-3WZ"/>
                                                     </constraints>
                                                 </view>
+                                                <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="OutTodayBadge" text="Out today!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Up-Au-TRW" customClass="OutTodayBadge" customModule="ToPlayList" customModuleProvider="target">
+                                                    <rect key="frame" x="-8" y="-8" width="108" height="30"/>
+                                                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="108" id="O14-VK-3Lf"/>
+                                                        <constraint firstAttribute="height" constant="30" id="gVx-sx-QXN"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="14"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </view>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="OOl-Me-3d5" secondAttribute="trailing" id="0M0-wN-oW6"/>
                                             <constraint firstItem="OOl-Me-3d5" firstAttribute="top" secondItem="CwR-rL-JQC" secondAttribute="top" id="8Ip-rh-v0b"/>
+                                            <constraint firstItem="3Up-Au-TRW" firstAttribute="top" secondItem="CwR-rL-JQC" secondAttribute="topMargin" constant="-16" id="BfY-WI-hwr"/>
                                             <constraint firstItem="OOl-Me-3d5" firstAttribute="leading" secondItem="CwR-rL-JQC" secondAttribute="leading" id="Qaa-m4-gdN"/>
                                             <constraint firstAttribute="bottom" secondItem="OOl-Me-3d5" secondAttribute="bottom" id="ju8-VZ-LEk"/>
+                                            <constraint firstItem="3Up-Au-TRW" firstAttribute="leading" secondItem="CwR-rL-JQC" secondAttribute="leadingMargin" constant="-16" id="lVN-V2-fZf"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="backgroundDeleteViewText" destination="eNt-yZ-Ggl" id="qcx-Km-IYa"/>
@@ -1436,7 +1449,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yYQ-mY-UiN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3678" y="1200"/>
+            <point key="canvasLocation" x="3676.875" y="1200"/>
         </scene>
         <!--BadgeVC-->
         <scene sceneID="PKs-2h-Mhg">
@@ -2135,7 +2148,7 @@
         <image name="to_play_list_bg" width="689" height="713"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jAa-me-mvq"/>
         <segue reference="FhM-4C-LJm"/>
+        <segue reference="6Wm-R3-zaj"/>
     </inferredMetricsTieBreakers>
 </document>
