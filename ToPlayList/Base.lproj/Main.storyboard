@@ -314,7 +314,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AHD-U1-sds">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="efa-6i-V9F" customClass="DetailsBigScreenshot" customModule="ToPlayList" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
@@ -548,7 +548,7 @@
                                         </constraints>
                                     </view>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8NQ-RT-MJ5">
-                                        <rect key="frame" x="0.0" y="274" width="320" height="294"/>
+                                        <rect key="frame" x="0.0" y="274" width="320" height="245"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A8L-fO-z1X">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="550.5"/>
@@ -1405,6 +1405,7 @@
                                             <outlet property="contentRightConstraint" destination="h25-ua-ngZ" id="cF7-Ta-4sL"/>
                                             <outlet property="coverImg" destination="Eo7-s0-5pc" id="lGt-jw-tpQ"/>
                                             <outlet property="maskedView" destination="OOl-Me-3d5" id="cTF-8E-I2t"/>
+                                            <outlet property="outTodayBadge" destination="3Up-Au-TRW" id="9hX-jn-EGW"/>
                                             <outlet property="titleLbl" destination="h24-vv-DPG" id="L5g-Na-IoT"/>
                                             <segue destination="js0-2B-ycQ" kind="show" id="6Wm-R3-zaj"/>
                                         </connections>
@@ -1881,7 +1882,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your recent searches" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e1l-ht-syg">
-                                        <rect key="frame" x="8" y="8" width="312" height="15"/>
+                                        <rect key="frame" x="8" y="7.5" width="312" height="15"/>
                                         <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -2148,7 +2149,7 @@
         <image name="to_play_list_bg" width="689" height="713"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="jAa-me-mvq"/>
         <segue reference="FhM-4C-LJm"/>
-        <segue reference="6Wm-R3-zaj"/>
     </inferredMetricsTieBreakers>
 </document>

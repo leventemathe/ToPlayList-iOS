@@ -28,11 +28,11 @@ class ToPlayListVC: SubListVC {
         getToPlayList {
             self.attachListeners()
             self.removeTabBarBadge()
-            if self.shouldNavigateToGame != nil {
-                self.navigateToGame(withName: self.shouldNavigateToGame!)
-            }
             if self.releasedGames != nil {
                 self.addBadgeToReleasedGames()
+            }
+            if self.shouldNavigateToGame != nil {
+                self.navigateToGame(withName: self.shouldNavigateToGame!)
             }
         }
     }
@@ -95,7 +95,17 @@ class ToPlayListVC: SubListVC {
     }
     
     private func addBadgeToReleasedGame(withName name: String) {
-        // TODO
+        for game in toPlayList {
+            if game.name == name {
+                game.released = true
+                if let indexPath = getIndexPathForGame(withName: name) {
+                    if let cell = collectionView.cellForItem(at: indexPath) as? ToPlayListCell {
+                        cell.update(game)
+                    }
+                }
+                break
+            }
+        }
     }
     
     private func moveToListTab() {
@@ -107,6 +117,12 @@ class ToPlayListVC: SubListVC {
     private func navigateToGame(withName name: String) {
         shouldNavigateToGame = nil
         
+        if let indexPath = getIndexPathForGame(withName: name) {
+            collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+        }
+    }
+    
+    private func getIndexPathForGame(withName name: String) -> IndexPath? {
         var indexPath: IndexPath? = nil
         for (index, game) in toPlayList.enumerated() {
             if game.name == name {
@@ -114,9 +130,7 @@ class ToPlayListVC: SubListVC {
                 break
             }
         }
-        if let indexPath = indexPath {
-            collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
-        }
+        return indexPath
     }
     
     private func attachListeners() {
