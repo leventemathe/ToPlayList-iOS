@@ -31,6 +31,9 @@ class ToPlayListVC: SubListVC {
             if self.shouldNavigateToGame != nil {
                 self.navigateToGame(withName: self.shouldNavigateToGame!)
             }
+            if self.releasedGames != nil {
+                self.addBadgeToReleasedGames()
+            }
         }
     }
     
@@ -47,25 +50,52 @@ class ToPlayListVC: SubListVC {
         
         // add a badge to the game and the tab bar when a notif arrives in the foreground
         ToPlayListNotificationSystem.instance?.notifArrivedObservers.append({ gameName in
-            
-        })
-        
-        ToPlayListNotificationSystem.instance?.notifArrivedObservers.append({ _ in
+            self.setupAddBadgeToReleasedGame(withName: gameName)
             self.addTabBarBadge()
         })
         
         // add a badge to the game and move to the list when the notif is tapped (either in foreground or background)
         ToPlayListNotificationSystem.instance?.notifTappedObservers.append({ gameName in
-            guard let tabController = self.tabBarController else {
-                return
-            }
-            if tabController.selectedIndex == self.TAB_BAR_INDEX {
-                self.navigateToGame(withName: gameName)
-            } else {
-                self.moveToListTab()
-                self.shouldNavigateToGame = gameName
-            }
+            self.setupAddBadgeToReleasedGame(withName: gameName)
+            self.setupNavigationToGame(withName: gameName)
         })
+    }
+
+    private func setupAddBadgeToReleasedGame(withName gameName: String) {
+        guard let tabController = self.tabBarController else {
+            return
+        }
+        if tabController.selectedIndex == self.TAB_BAR_INDEX{
+            self.addBadgeToReleasedGame(withName: gameName)
+        } else {
+            if self.releasedGames == nil {
+                self.releasedGames = Set<String>()
+            }
+            self.releasedGames?.insert(gameName)
+        }
+    }
+    
+    private func setupNavigationToGame(withName gameName: String) {
+        guard let tabController = self.tabBarController else {
+            return
+        }
+        if tabController.selectedIndex == self.TAB_BAR_INDEX {
+            self.navigateToGame(withName: gameName)
+        } else {
+            self.moveToListTab()
+            self.shouldNavigateToGame = gameName
+        }
+    }
+    
+    private var releasedGames: Set<String>?
+    
+    private func addBadgeToReleasedGames() {
+        releasedGames?.forEach({ addBadgeToReleasedGame(withName: $0) })
+        releasedGames = nil
+    }
+    
+    private func addBadgeToReleasedGame(withName name: String) {
+        // TODO
     }
     
     private func moveToListTab() {
