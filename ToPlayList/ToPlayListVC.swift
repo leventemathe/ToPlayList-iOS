@@ -27,7 +27,6 @@ class ToPlayListVC: SubListVC {
         super.viewWillAppear(animated)
         getToPlayList {
             self.attachListeners()
-            self.handleGameReleaseNotifications()
             self.removeTabBarBadge()
             if self.shouldNavigateToGame != nil {
                 self.navigateToGame(withName: self.shouldNavigateToGame!)
@@ -48,8 +47,7 @@ class ToPlayListVC: SubListVC {
         
         // add a badge to the game and the tab bar when a notif arrives in the foreground
         ToPlayListNotificationSystem.instance?.notifArrivedObservers.append({ gameName in
-            self.releasedGameNames.insert(gameName)
-            self.handleGameReleaseNotifications()
+            
         })
         
         ToPlayListNotificationSystem.instance?.notifArrivedObservers.append({ _ in
@@ -58,34 +56,16 @@ class ToPlayListVC: SubListVC {
         
         // add a badge to the game and move to the list when the notif is tapped (either in foreground or background)
         ToPlayListNotificationSystem.instance?.notifTappedObservers.append({ gameName in
-            self.releasedGameNames.insert(gameName)
-            self.handleGameReleaseNotifications()
-            self.moveToListTab()
-            self.shouldNavigateToGame = gameName
-        })
-    }
-    
-    private var releasedGameNames = Set<String>()
-    
-    // this needs to be complicated like this, becuase it's not enough to just update games in the releaseListener
-    // the game list might be empty here, because the notif system is initialized before downloading the games list
-    // so this has to be called after games have downloaded in this vc too
-    private func handleGameReleaseNotifications() {
-        var count = 0
-        for releasedGameName in releasedGameNames {
-            if let game = toPlayList.get(whereGame: { $0.name == releasedGameName }) {
-                releasedGameNames.remove(releasedGameName)
-                game.released = true
-                count += 1
+            guard let tabController = self.tabBarController else {
+                return
             }
-        }
-        if count > 0 {
-            releasedGameNames.forEach({ addReleasedBadgeTo(game: $0) })
-        }
-    }
-    
-    private func addReleasedBadgeTo(game: String) {
-        // TODO
+            if tabController.selectedIndex == self.TAB_BAR_INDEX {
+                self.navigateToGame(withName: gameName)
+            } else {
+                self.moveToListTab()
+                self.shouldNavigateToGame = gameName
+            }
+        })
     }
     
     private func moveToListTab() {
