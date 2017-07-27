@@ -28,6 +28,7 @@ class ToPlayListVC: SubListVC {
         getToPlayList {
             self.attachListeners()
             self.handleGameReleaseNotifications()
+            self.removeTabBarBadge()
         }
     }
     
@@ -36,23 +37,29 @@ class ToPlayListVC: SubListVC {
         removeListeners()
     }
     
-    private var releasedGameNames = Set<String>()
-    
     // this is the perfect place for app wide notifications initialization for to play list
     // it's initialized after login/register or launching the app (if already logged in)
     // it's deinitialized after logout
     private func setupNotifications() {
         ToPlayListNotificationSystem.setup()
-        ToPlayListNotificationSystem.instance?.releaseListeners.append({ gameName in
-            print("game badge listener called")
+        
+        ToPlayListNotificationSystem.instance?.notifArrivedObservers.append({ gameName in
             self.releasedGameNames.insert(gameName)
             self.handleGameReleaseNotifications()
         })
-        ToPlayListNotificationSystem.instance?.releaseListeners.append({ _ in
-            print("tab bar badge listener called")
+        
+        ToPlayListNotificationSystem.instance?.notifTappedObservers.append({ gameName in
+            self.releasedGameNames.insert(gameName)
+            self.handleGameReleaseNotifications()
+            self.navigateToGame(gameName)
+        })
+        
+        ToPlayListNotificationSystem.instance?.notifArrivedObservers.append({ _ in
             self.addTabBarBadge()
         })
     }
+    
+    private var releasedGameNames = Set<String>()
     
     // this needs to be complicated like this, becuase it's not enough to just update games in the releaseListener
     // the game list might be empty here, because the notif system is initialized before downloading the games list
@@ -69,6 +76,10 @@ class ToPlayListVC: SubListVC {
         if count > 0 {
             //print("yaya some games were released alright")
         }
+    }
+    
+    private func navigateToGame(_ game: String) {
+        return
     }
     
     private func attachListeners() {
@@ -209,22 +220,11 @@ class ToPlayListVC: SubListVC {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ToPlayListCell.reuseIdentifier, for: indexPath) as? ToPlayListCell {
             if let game = toPlayList[indexPath.row] {
                 cell.update(game)
-                if game.released != nil && game.released!{
-                    removeTabBarBadge()
-                }
             }
             cell.networkErrorHandlerDelegate = self
             return cell
         }
         return UICollectionViewCell()
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let game = toPlayList[indexPath.row] {
-            if game.released != nil && game.released!{
-                removeTabBarBadge()
-            }
-        }
     }
     
     private let TAB_BAR_INDEX = 0

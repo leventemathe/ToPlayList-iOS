@@ -12,6 +12,8 @@ import UserNotifications
 
 class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
     
+    // SETUP AND TEARDOWN
+    
     private static var _instance: ToPlayListNotificationSystem?
     static var instance: ToPlayListNotificationSystem? {
         get {
@@ -35,13 +37,14 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
         ToPlayListNotificationSystem._instance = nil
     }
     
+    var permissionGranted = false
+    
     private var toPlayListListenerAdd: ListsListenerReference?
     private var toPlayListListenerRemove: ListsListenerReference?
     
     private var shouldRemoveToPlayListListenerAdd = 0
     private var shouldRemoveToPlayListListenerRemove = 0
     
-    var permissionGranted = false
     
     private override init() {
         super.init()
@@ -63,7 +66,7 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
         removeListeners()
     }
     
-    // Listeners
+    // DB LISTENERS
     
     private func attachListeners() {
         print("attaching listeners")
@@ -154,7 +157,7 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
     
     
     
-    // Notifications
+    // SHCEDULING/UNSCHEDULING NOTIFICATIONS
     
     private func requestPermission() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound,], completionHandler: { (granted, error) in
@@ -167,35 +170,50 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
     }
     
     private func addNotification(forGame game: Game) {
-        // if the game has been released already, there's no need for a notification
-        print("add notif hasn't passed date test yet")
-        if game.firstReleaseDate == nil || game.firstReleaseDate! < Dates.dateForNewestReleases() {
-            return
-        }
-        print("add notif passed date test")
-        
-        let content = buildContent(forGame: game)
-        let trigger = buildNotificationTrigger(forGame: game)
-        let request = UNNotificationRequest(identifier: "\(game.name)", content: content, trigger: trigger)
-        
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
-            if error != nil {
-                print("An error happened while request notification permission: \(error!.localizedDescription)")
+        shouldAddNotif(forGame: game, withOnComplete: { shouldAdd in
+            if shouldAdd {
+                let content = self.buildContent(forGame: game)
+                let trigger = self.buildNotificationTrigger(forGame: game)
+                let request = UNNotificationRequest(identifier: "\(game.name)", content: content, trigger: trigger)
+                
+                UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
+                    if error != nil {
+                        print("An error happened while request notification permission: \(error!.localizedDescription)")
+                    }
+                })
             } else {
-                print("---------Notifications after adding----------")
-                UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { $0.forEach({ print($0.identifier) }) })
+                print("Shouldn't add notif for \(game.name)")
             }
         })
     }
     
-    private static let GAME_KEY = "game"
+    private func shouldAddNotif(forGame game: Game, withOnComplete onComplete: @escaping (Bool)->()) {
+        // if the game has been released already, there's no need for a notification
+        if game.firstReleaseDate == nil || game.firstReleaseDate! < Dates.dateForNewestReleases() {
+            onComplete(false)
+            return
+        }
+        UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { notifs in
+            for notif in notifs {
+                if let notifGame = notif.content.userInfo[self.USER_INFO_GAME_KEY] as? String {
+                    if notifGame == game.name {
+                        onComplete(false)
+                        return
+                    }
+                }
+            }
+            onComplete(true)
+        })
+    }
+    
+    private let USER_INFO_GAME_KEY = "game"
     
     private func buildContent(forGame game: Game) -> UNMutableNotificationContent {
         let content = UNMutableNotificationContent()
         content.title = "Fun times!"
         content.body = "A game on your ToPlay list (\(game.name)) is released today."
         content.sound = UNNotificationSound.default()
-        content.userInfo = [ToPlayListNotificationSystem.GAME_KEY: game.name]
+        content.userInfo = [USER_INFO_GAME_KEY: game.name]
         return content
     }
     
@@ -213,36 +231,40 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
     
     private func removeNotification(forGame game: Game) {
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [game.name])
-        print("---------Notifications after removing----------")
-        UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { $0.forEach({ print($0.identifier) }) })
     }
     
-    // the listener interested in releases needs to be notified in two places:
-    // a. the notif is delivered while the app is in the foreground
-    // b. the notif was delivered while the app was closed/in the background and the user tapped it // TODO
     
-    var releaseListeners = [(String)->()]()
     
-    // this is called when a notification arrives while the app is in the foreground
-    // a.
+    // NOTIFICATION ARRIVED/TAPPED LISTENERS
+    
+    var notifArrivedObservers = [(String)->()]()
+    var notifTappedObservers = [(String)->()]()
+    
+    // the notif appeared while the app is in the foreground -> add badge to lists tab bar item, add badge to released game list item in list vc
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        // pass released games to listener
-        notifyReleaseListeners(notification)
+        if let game = notification.request.content.userInfo[USER_INFO_GAME_KEY] as? String {
+            notifyArrivedObservers(game)
+        }
         
-        // show notif banner
+        // show notif banner and play sound
         let options: UNNotificationPresentationOptions = [.alert, .sound]
         completionHandler(options)
     }
     
+    // the notif was tapped (either when the is in background or foreground) -> add badge to released game list item in list vc, go to list vc, then to details
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        notifyReleaseListeners(response.notification)
+        if let game = response.notification.request.content.userInfo[USER_INFO_GAME_KEY] as? String {
+            notifyTappedObservers(game)
+        }
         completionHandler()
     }
     
-    private func notifyReleaseListeners(_ notification: UNNotification) {
-        if let userInfo = notification.request.content.userInfo as? [String: String], let game = userInfo[ToPlayListNotificationSystem.GAME_KEY] {
-            releaseListeners.forEach({ $0(game) })
-        }
+    private func notifyArrivedObservers(_ game: String) {
+        notifArrivedObservers.forEach({ $0(game) })
+    }
+    
+    private func notifyTappedObservers(_ game: String) {
+        notifTappedObservers.forEach({ $0(game) })
     }
 }
 
