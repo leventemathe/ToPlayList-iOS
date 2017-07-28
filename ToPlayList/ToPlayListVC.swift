@@ -65,13 +65,15 @@ class ToPlayListVC: SubListVC {
         guard let tabController = self.tabBarController else {
             return
         }
-        if tabController.selectedIndex == self.TAB_BAR_INDEX{
-            self.addBadgeToReleasedGame(withName: gameName)
-        } else {
-            if self.releasedGames == nil {
-                self.releasedGames = Set<String>()
+        
+        if tabController.selectedIndex == self.TAB_BAR_INDEX {
+            if let _ = detailedVC() {
+                self.insertIntoReleasedGames(gameName)
+            } else {
+                self.addBadgeToReleasedGame(withName: gameName)
             }
-            self.releasedGames?.insert(gameName)
+        } else {
+            self.insertIntoReleasedGames(gameName)
         }
     }
     
@@ -97,6 +99,13 @@ class ToPlayListVC: SubListVC {
     }
     
     private var releasedGames: Set<String>?
+    
+    private func insertIntoReleasedGames(_ name: String) {
+        if releasedGames == nil {
+            releasedGames = Set<String>()
+        }
+        releasedGames?.insert(name)
+    }
     
     private func addBadgeToReleasedGames() {
         releasedGames?.forEach({ addBadgeToReleasedGame(withName: $0) })
