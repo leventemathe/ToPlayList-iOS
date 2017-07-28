@@ -49,18 +49,20 @@ class ToPlayListVC: SubListVC {
         ToPlayListNotificationSystem.setup()
         
         // add a badge to the game and the tab bar when a notif arrives in the foreground
-        ToPlayListNotificationSystem.instance?.notifArrivedObservers.append({ gameName in
+        ToPlayListNotificationSystem.instance?.addNotificationArrivedObserver({ gameName in
             self.setupAddBadgeToReleasedGame(withName: gameName)
             self.addTabBarBadge()
-        })
+        }, withName: "toPlayListBadge")
         
         // add a badge to the game and move to the list when the notif is tapped (either in foreground or background)
-        ToPlayListNotificationSystem.instance?.notifTappedObservers.append({ gameName in
+        ToPlayListNotificationSystem.instance?.addNotificationTappedObserver({ gameName in
             self.setupAddBadgeToReleasedGame(withName: gameName)
             self.setupNavigationToGame(withName: gameName)
-        })
+        }, withName: "toPlayListNavigation")
     }
 
+    // insertIntoReleasedGames and shouldNavigateToGame are needed, because the game is not necessarily in the to play list when the block is called
+    // this can happen for example if a game is added to a list, but the list is not visited before the notif arrives
     private func setupAddBadgeToReleasedGame(withName gameName: String) {
         guard let tabController = self.tabBarController else {
             return
@@ -71,6 +73,8 @@ class ToPlayListVC: SubListVC {
                 self.insertIntoReleasedGames(gameName)
             } else {
                 self.addBadgeToReleasedGame(withName: gameName)
+                // this is needed when the block is called before the list had downloaded: when the notif was tapped when the app wasn't running
+                self.insertIntoReleasedGames(gameName)
             }
         } else {
             self.insertIntoReleasedGames(gameName)

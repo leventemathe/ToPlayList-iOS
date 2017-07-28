@@ -47,7 +47,7 @@ extension UIFont {
 }
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
 
@@ -60,11 +60,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {        
         FIRApp.configure()
         
+        UNUserNotificationCenter.current().delegate = self
+        
         setupTabBarAppearance()
         setupSearchBarAppearance()
         setupSegmentedControlAppearance()
         
         return true
+    }
+    
+    static var appLaunchedWithNotifTappedForThisGame: String?
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        if let game = response.notification.request.content.userInfo[ToPlayListNotificationSystem.USER_INFO_GAME_KEY] as? String {
+            AppDelegate.appLaunchedWithNotifTappedForThisGame = game
+        }
+        completionHandler()
     }
     
     private func setupTabBarAppearance() {

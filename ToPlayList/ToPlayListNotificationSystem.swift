@@ -45,7 +45,6 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
     private var shouldRemoveToPlayListListenerAdd = 0
     private var shouldRemoveToPlayListListenerRemove = 0
     
-    
     private override init() {
         super.init()
         print("notification system initialized")
@@ -195,7 +194,7 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
         }
         UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { notifs in
             for notif in notifs {
-                if let notifGame = notif.content.userInfo[self.USER_INFO_GAME_KEY] as? String {
+                if let notifGame = notif.content.userInfo[ToPlayListNotificationSystem.USER_INFO_GAME_KEY] as? String {
                     if notifGame == game.name {
                         onComplete(false)
                         return
@@ -206,14 +205,14 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
         })
     }
     
-    private let USER_INFO_GAME_KEY = "game"
+    static let USER_INFO_GAME_KEY = "game"
     
     private func buildContent(forGame game: Game) -> UNMutableNotificationContent {
         let content = UNMutableNotificationContent()
         content.title = "Fun times!"
         content.body = "A game on your ToPlay list (\(game.name)) is released today."
         content.sound = UNNotificationSound.default()
-        content.userInfo = [USER_INFO_GAME_KEY: game.name]
+        content.userInfo = [ToPlayListNotificationSystem.USER_INFO_GAME_KEY: game.name]
         return content
     }
     
@@ -237,12 +236,31 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
     
     // NOTIFICATION ARRIVED/TAPPED LISTENERS
     
-    var notifArrivedObservers = [(String)->()]()
-    var notifTappedObservers = [(String)->()]()
+    private var notifArrivedObservers = [String: (String)->()]()
+    private var notifTappedObservers = [String: (String)->()]()
+    
+    func addNotificationArrivedObserver(_ observer: @escaping (String)->(), withName name: String) {
+        notifArrivedObservers[name] = observer
+    }
+    
+    func addNotificationTappedObserver(_ observer: @escaping (String)->(), withName name: String) {
+        notifTappedObservers[name] = observer
+        if let game = AppDelegate.appLaunchedWithNotifTappedForThisGame {
+            notifTappedObservers[name]!(game)
+        }
+    }
+    
+    func removeNotificationArrivedObserver(_ observer: @escaping (String)->(), withName name: String) {
+        notifArrivedObservers[name] = nil
+    }
+    
+    func removeNotificationTappedObserver(_ observer: (String)->(), withName name: String) {
+        notifTappedObservers[name] = nil
+    }
     
     // the notif appeared while the app is in the foreground -> add badge to lists tab bar item, add badge to released game list item in list vc
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        if let game = notification.request.content.userInfo[USER_INFO_GAME_KEY] as? String {
+        if let game = notification.request.content.userInfo[ToPlayListNotificationSystem.USER_INFO_GAME_KEY] as? String {
             notifyArrivedObservers(game)
         }
         
@@ -253,18 +271,18 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
     
     // the notif was tapped (either when the is in background or foreground) -> add badge to released game list item in list vc, go to list vc, then to details
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        if let game = response.notification.request.content.userInfo[USER_INFO_GAME_KEY] as? String {
+        if let game = response.notification.request.content.userInfo[ToPlayListNotificationSystem.USER_INFO_GAME_KEY] as? String {
             notifyTappedObservers(game)
         }
         completionHandler()
     }
     
     private func notifyArrivedObservers(_ game: String) {
-        notifArrivedObservers.forEach({ $0(game) })
+        notifArrivedObservers.forEach({ $0.value(game) })
     }
     
     private func notifyTappedObservers(_ game: String) {
-        notifTappedObservers.forEach({ $0(game) })
+        notifTappedObservers.forEach({ $0.value(game) })
     }
 }
 
