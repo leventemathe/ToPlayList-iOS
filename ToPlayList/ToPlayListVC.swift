@@ -79,11 +79,20 @@ class ToPlayListVC: SubListVC {
         guard let tabController = self.tabBarController else {
             return
         }
+        
         if tabController.selectedIndex == self.TAB_BAR_INDEX {
-            self.navigateToGame(withName: gameName)
+            if let detailedVC = detailedVC() {
+                self.shouldNavigateToGame = gameName
+                detailedVC.back(sender: nil)
+            } else {
+                self.navigateToGame(withName: gameName)
+            }
         } else {
-            self.moveToListTab()
             self.shouldNavigateToGame = gameName
+            if let detailedVC = detailedVC() {
+                detailedVC.back(sender: nil)
+            }
+            self.moveToListTab()
         }
     }
     
@@ -120,6 +129,17 @@ class ToPlayListVC: SubListVC {
         if let indexPath = getIndexPathForGame(withName: name) {
             collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
         }
+    }
+
+    private func detailedVC() -> GameDetailsVC? {
+        if let navVC = navigationController{
+            for vc in navVC.viewControllers {
+                if let detailsVC = vc as? GameDetailsVC {
+                    return detailsVC
+                }
+            }
+        }
+        return nil
     }
     
     private func getIndexPathForGame(withName name: String) -> IndexPath? {
