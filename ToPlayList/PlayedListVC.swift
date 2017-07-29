@@ -31,6 +31,8 @@ class PlayedListVC: SubListVC {
     }
     
     private func attachListeners() {
+        self.removeLatePlayedListListenerAdd()
+        self.removeLatePlayedListListenerRemove()
         listenToPlayedList(.add, withOnChange: { game in
             if self.playedList.add(game) {
                 self.setContent()
@@ -70,10 +72,8 @@ class PlayedListVC: SubListVC {
         switch action {
         case .add:
             self.playedListListenerAdd = ref
-            self.removeLatePlayedListListenerAdd()
         case .remove:
             self.playedListListenerRemove = ref
-            self.removeLatePlayedListListenerRemove()
         }
     }
     
