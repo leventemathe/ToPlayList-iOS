@@ -1839,10 +1839,10 @@
             </objects>
             <point key="canvasLocation" x="5501.25" y="482.74647887323943"/>
         </scene>
-        <!--View Controller-->
+        <!--Search IconVC-->
         <scene sceneID="3c4-ZU-ch1">
             <objects>
-                <viewController id="xgB-mT-KKc" sceneMemberID="viewController">
+                <viewController restorationIdentifier="SearchIconVC" storyboardIdentifier="SearchIconVC" id="xgB-mT-KKc" customClass="SearchIconVC" customModule="ToPlayList" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5MW-L4-jL0"/>
                         <viewControllerLayoutGuide type="bottom" id="jUv-28-mMB"/>
@@ -1863,6 +1863,9 @@
                             <constraint firstItem="43Y-Rd-YJz" firstAttribute="leading" secondItem="QtR-E2-c1o" secondAttribute="leading" id="fJK-yL-hWG"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="searchIcon" destination="43Y-Rd-YJz" id="ZjH-H7-2yE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Yv-WW-wW7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

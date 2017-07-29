@@ -68,6 +68,7 @@
 		D7A6F04E1E65CD2900ED66E5 /* LoadingAnimationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A6F04D1E65CD2900ED66E5 /* LoadingAnimationDelegate.swift */; };
 		D7B8C86B1E2D16C700656E64 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B8C86A1E2D16C700656E64 /* ErrorMessage.swift */; };
 		D7B8C86D1E2D16F100656E64 /* ErrorMessage.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7B8C86C1E2D16F100656E64 /* ErrorMessage.xib */; };
+		D7BC469B1F2CB085007F05DB /* SearchIconVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BC469A1F2CB085007F05DB /* SearchIconVC.swift */; };
 		D7C0F9471F26148C00556AA8 /* ToPlayListNotificationSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C0F9461F26148B00556AA8 /* ToPlayListNotificationSystem.swift */; };
 		D7C0F9491F2A285200556AA8 /* OutTodayBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C0F9481F2A285100556AA8 /* OutTodayBadge.swift */; };
 		D7C3A1701E0DA2DF0091279C /* GameProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C3A16F1E0DA2DF0091279C /* GameProperties.swift */; };
@@ -180,6 +181,7 @@
 		D7A6F04D1E65CD2900ED66E5 /* LoadingAnimationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingAnimationDelegate.swift; sourceTree = "<group>"; };
 		D7B8C86A1E2D16C700656E64 /* ErrorMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		D7B8C86C1E2D16F100656E64 /* ErrorMessage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ErrorMessage.xib; sourceTree = "<group>"; };
+		D7BC469A1F2CB085007F05DB /* SearchIconVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchIconVC.swift; sourceTree = "<group>"; };
 		D7C0F9461F26148B00556AA8 /* ToPlayListNotificationSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToPlayListNotificationSystem.swift; sourceTree = "<group>"; };
 		D7C0F9481F2A285100556AA8 /* OutTodayBadge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutTodayBadge.swift; sourceTree = "<group>"; };
 		D7C3A16F1E0DA2DF0091279C /* GameProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameProperties.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 			children = (
 				D70900991EC5B80600A316BE /* SearchVC.swift */,
 				D7D0BCC41F1F880800C2B071 /* RecentSearchesVC.swift */,
+				D7BC469A1F2CB085007F05DB /* SearchIconVC.swift */,
 			);
 			name = Search;
 			sourceTree = "<group>";
@@ -841,6 +844,7 @@
 				D7E1AEEB1EC1CECF00661D67 /* DidSetSizeDelegates.swift in Sources */,
 				D760344F1F17A5B600D71240 /* IGDBKeys.swift in Sources */,
 				D77F504B1ED6186D00B40D0C /* ImageCarouselVC.swift in Sources */,
+				D7BC469B1F2CB085007F05DB /* SearchIconVC.swift in Sources */,
 				D72676551EB50E7C004DC2E1 /* BadgeLabel.swift in Sources */,
 				D727AFE41E9B7ACF00E1C93F /* ToPlayAndPlayedListListeners.swift in Sources */,
 				D74AC7DA1E3919B700C37A90 /* RegisterVC.swift in Sources */,
