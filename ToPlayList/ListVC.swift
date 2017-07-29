@@ -15,7 +15,6 @@ class ListVC: UIViewController, IdentifiableVC {
     
     private static let WELCOME_MSG = "Welcome"
     
-    @IBOutlet weak var welcomeLbl: UILabel!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var listContainerView: UIView!
     
@@ -109,22 +108,68 @@ class ListVC: UIViewController, IdentifiableVC {
         setupNavBar(animated)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        welcomeMsgReadyForAnimation.viewAppeared = true
+    }
+    
     private func setupNavBar(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(false, animated: animated)
         navigationItem.hidesBackButton = true
     }
     
+    @IBOutlet weak var welcomLbl: UILabel!
+    
+    @IBOutlet weak var welcomeLblContainerLeadeingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var welcomeLblContainerTrailingConstraint: NSLayoutConstraint!
+    
+    private let WELCOME_LBL_STARTING_CONSTRAINT: CGFloat = 1000.0
+    private let WELCOME_LBL_FINAL_CONSTRAINT: CGFloat = 8.0
+    
+    private var welcomeMsgReadyForAnimation = (viewAppeared: false, userNameLoaded: false) {
+        didSet {
+            if welcomeMsgReadyForAnimation.viewAppeared && welcomeMsgReadyForAnimation.userNameLoaded {
+                animateWelcomeMsg()
+            }
+        }
+    }
+    
     private func setupWelcomeMsg() {
-        welcomeLbl.text = "\(ListVC.WELCOME_MSG)!"
+        let welcomeAttributes: [String: Any] = [
+            NSFontAttributeName : UIFont(name: "Silkscreen", size: 18) as Any,
+            NSForegroundColorAttributeName : UIColor.MyCustomColors.orange
+        ]
+        let userAttributes: [String: Any] = [
+            NSFontAttributeName : UIFont(name: "Avenir Book", size: 18) as Any,
+            NSForegroundColorAttributeName : UIColor.black
+        ]
+        
+        welcomLbl.attributedText = NSMutableAttributedString(string: "\(ListVC.WELCOME_MSG)!", attributes: welcomeAttributes)
+        
+        welcomeLblContainerLeadeingConstraint.constant = -WELCOME_LBL_STARTING_CONSTRAINT
+        welcomeLblContainerTrailingConstraint.constant = WELCOME_LBL_STARTING_CONSTRAINT
         
         guard let uid = ListsUser.userid else {
             return
         }
         ListsEndpoints.USERS.child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
             if let value = snapshot.value as? [String: Any], let username = value["username"] as? String {
-                self.welcomeLbl.text = "\(ListVC.WELCOME_MSG) \(username)!"
+                let welcomeText = NSMutableAttributedString(string: "\(ListVC.WELCOME_MSG)", attributes: welcomeAttributes)
+                let userText = NSMutableAttributedString(string: " \(username)", attributes: userAttributes)
+                let exclamationPoint = NSMutableAttributedString(string: " !", attributes: welcomeAttributes)
+                welcomeText.append(userText)
+                welcomeText.append(exclamationPoint)
+                self.welcomLbl.attributedText = welcomeText
             }
+            self.welcomeMsgReadyForAnimation.userNameLoaded = true
         })
+    }
+    
+    private func animateWelcomeMsg() {
+        UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.2, options: [], animations: {
+            self.welcomeLblContainerLeadeingConstraint.constant = self.WELCOME_LBL_FINAL_CONSTRAINT
+            self.welcomeLblContainerTrailingConstraint.constant = self.WELCOME_LBL_FINAL_CONSTRAINT
+            self.view.layoutIfNeeded()
+        }, completion: nil)
     }
     
     private func setupSegmentedView() {
