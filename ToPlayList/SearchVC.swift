@@ -131,6 +131,7 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         stepOut()
+        loadingAnimationView?.stopAnimating()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -153,6 +154,7 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
         if searchText == "" {
             resultWillDisappear()
             clearTableView()
+            loadingAnimationView?.stopAnimating()
         }
     }
     
