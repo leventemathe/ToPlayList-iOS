@@ -36,17 +36,18 @@ struct Dates {
     }
     
     static func dateFromUnixTimeShort(_ time: Double) -> String {
-        return dateFromUnixTime(time, withDateFormaf: DATE_FORMAT_SHORT)
+        return dateFromUnixTime(time, withDateFormat: DATE_FORMAT_SHORT)
     }
     
     static func dateFromUnixTimeFull(_ time: Double) -> String {
-        return dateFromUnixTime(time, withDateFormaf: DATE_FORMAT_FULL)
+        return dateFromUnixTime(time, withDateFormat: DATE_FORMAT_FULL)
     }
     
-    private static func dateFromUnixTime(_ time: Double, withDateFormaf format: String) -> String {
+    private static func dateFromUnixTime(_ time: Double, withDateFormat format: String) -> String {
         let date = Date(timeIntervalSince1970: time)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
+        dateFormatter.locale = Locale(identifier: "us")
         return dateFormatter.string(from: date)
     }
     
