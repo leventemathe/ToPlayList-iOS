@@ -20,7 +20,7 @@ class GameSection {
  
     private static func buildSortedNewestGames(fromGames games: [Game]) -> [Game] {
         var games = games.filter({ $0.firstReleaseDate != nil })
-        games = games.sorted(by: { $0.firstReleaseDate! >= $1.firstReleaseDate! })
+        games = games.sorted(by: { $0.firstReleaseDate! > $1.firstReleaseDate! })
         return games
     }
     
@@ -35,7 +35,7 @@ class GameSection {
     
     private static func buildSortedUpcomingGames(fromGames games: [Game]) -> [Game] {
         var games = games.filter({ $0.firstReleaseDate != nil })
-        games = games.sorted(by: { $0.firstReleaseDate! <= $1.firstReleaseDate! })
+        games = games.sorted(by: { $0.firstReleaseDate! < $1.firstReleaseDate! })
         return games
     }
     
