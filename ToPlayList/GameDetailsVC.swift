@@ -892,9 +892,9 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         self.navigationItem.leftBarButtonItem?.tintColor = .white
     }
     
-    func back(sender: UIBarButtonItem) {
-        _ = navigationController?.popViewController(animated: true)
+    func back(sender: UIBarButtonItem?) {
         resetNavbar()
+        _ = navigationController?.popViewController(animated: true)
     }
     
     private func makeNavbarTransparent() {
@@ -904,6 +904,9 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     }
     
     private func resetNavbar() {
+        if navigationController == nil {
+            print("nav vc is nil")
+        }
         navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
         navigationController?.navigationBar.shadowImage = nil
     }

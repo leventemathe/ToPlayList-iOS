@@ -17,6 +17,8 @@ class ToPlayListCell: ListCollectionViewCell, OnPanDelegate {
     
     @IBOutlet weak var backgroundDeleteViewText: UILabel!
     
+    @IBOutlet weak var outTodayBadge: OutTodayBadge!
+    
     private var contentLeftConstant: CGFloat!
     private var contentRightConstant: CGFloat!
     
@@ -40,6 +42,15 @@ class ToPlayListCell: ListCollectionViewCell, OnPanDelegate {
     
     private var doTresholdLeft: CGFloat!
     private var doTresholdRight: CGFloat!
+    
+    override func update(_ game: Game) {
+        super.update(game)
+        if game.released != nil && game.released! {
+            outTodayBadge.isHidden = false
+        } else {
+            outTodayBadge.isHidden = true
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

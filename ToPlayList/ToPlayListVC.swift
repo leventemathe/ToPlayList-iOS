@@ -18,16 +18,152 @@ class ToPlayListVC: SubListVC {
     private var shouldRemoveToPlayListListenerAdd = 0
     private var shouldRemoveToPlayListListenerRemove = 0
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setupNotifications()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getToPlayList {
             self.attachListeners()
+            self.removeTabBarBadge()
+            if self.releasedGames != nil {
+                self.addBadgeToReleasedGames()
+            }
+            if self.shouldNavigateToGame != nil {
+                self.navigateToGame(withName: self.shouldNavigateToGame!)
+            }
         }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         removeListeners()
+    }
+    
+    // this is the perfect place for app wide notifications initialization for to play list
+    // it's initialized after login/register or launching the app (if already logged in)
+    // it's deinitialized after logout
+    private func setupNotifications() {
+        ToPlayListNotificationSystem.setup()
+        
+        // add a badge to the game and the tab bar when a notif arrives in the foreground
+        ToPlayListNotificationSystem.instance?.addNotificationArrivedObserver({ gameName in
+            self.setupAddBadgeToReleasedGame(withName: gameName)
+            self.addTabBarBadge()
+        }, withName: "toPlayListBadge")
+        
+        // add a badge to the game and move to the list when the notif is tapped (either in foreground or background)
+        ToPlayListNotificationSystem.instance?.addNotificationTappedObserver({ gameName in
+            self.setupAddBadgeToReleasedGame(withName: gameName)
+            self.setupNavigationToGame(withName: gameName)
+        }, withName: "toPlayListNavigation")
+    }
+
+    // insertIntoReleasedGames and shouldNavigateToGame are needed, because the game is not necessarily in the to play list when the block is called
+    // this can happen for example if a game is added to a list, but the list is not visited before the notif arrives
+    private func setupAddBadgeToReleasedGame(withName gameName: String) {
+        guard let tabController = self.tabBarController else {
+            return
+        }
+        
+        if tabController.selectedIndex == self.TAB_BAR_INDEX {
+            if let _ = detailedVC() {
+                self.insertIntoReleasedGames(gameName)
+            } else {
+                self.addBadgeToReleasedGame(withName: gameName)
+                // this is needed when the block is called before the list had downloaded: when the notif was tapped when the app wasn't running
+                self.insertIntoReleasedGames(gameName)
+            }
+        } else {
+            self.insertIntoReleasedGames(gameName)
+        }
+    }
+    
+    private func setupNavigationToGame(withName gameName: String) {
+        guard let tabController = self.tabBarController else {
+            return
+        }
+        
+        if tabController.selectedIndex == self.TAB_BAR_INDEX {
+            if let detailedVC = detailedVC() {
+                self.shouldNavigateToGame = gameName
+                detailedVC.back(sender: nil)
+            } else {
+                self.navigateToGame(withName: gameName)
+            }
+        } else {
+            self.shouldNavigateToGame = gameName
+            if let detailedVC = detailedVC() {
+                detailedVC.back(sender: nil)
+            }
+            self.moveToListTab()
+        }
+    }
+    
+    private var releasedGames: Set<String>?
+    
+    private func insertIntoReleasedGames(_ name: String) {
+        if releasedGames == nil {
+            releasedGames = Set<String>()
+        }
+        releasedGames?.insert(name)
+    }
+    
+    private func addBadgeToReleasedGames() {
+        releasedGames?.forEach({ addBadgeToReleasedGame(withName: $0) })
+        releasedGames = nil
+    }
+    
+    private func addBadgeToReleasedGame(withName name: String) {
+        for game in toPlayList {
+            if game.name == name {
+                game.released = true
+                if let indexPath = getIndexPathForGame(withName: name) {
+                    if let cell = collectionView.cellForItem(at: indexPath) as? ToPlayListCell {
+                        cell.update(game)
+                    }
+                }
+                break
+            }
+        }
+    }
+    
+    private func moveToListTab() {
+        tabBarController?.selectedIndex = TAB_BAR_INDEX
+    }
+    
+    private var shouldNavigateToGame: String? = nil
+    
+    private func navigateToGame(withName name: String) {
+        shouldNavigateToGame = nil
+        
+        if let indexPath = getIndexPathForGame(withName: name) {
+            collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+        }
+    }
+
+    private func detailedVC() -> GameDetailsVC? {
+        if let navVC = navigationController{
+            for vc in navVC.viewControllers {
+                if let detailsVC = vc as? GameDetailsVC {
+                    return detailsVC
+                }
+            }
+        }
+        return nil
+    }
+    
+    private func getIndexPathForGame(withName name: String) -> IndexPath? {
+        var indexPath: IndexPath? = nil
+        for (index, game) in toPlayList.enumerated() {
+            if game.name == name {
+                indexPath = IndexPath(row: index, section: 0)
+                break
+            }
+        }
+        return indexPath
     }
     
     private func attachListeners() {
@@ -145,7 +281,7 @@ class ToPlayListVC: SubListVC {
     private var listWasEmptyLastTime: Bool?
     
     private func setContent() {
-        print("set content in toPlay list")
+        //print("set content in toPlay list")
         collectionView.reloadData()
         if toPlayList.count < 1 {
             if listWasEmptyLastTime == nil || !listWasEmptyLastTime!{
@@ -173,6 +309,24 @@ class ToPlayListVC: SubListVC {
             return cell
         }
         return UICollectionViewCell()
+    }
+    
+    private let TAB_BAR_INDEX = 0
+    
+    private func addTabBarBadge() {
+        if let tabItems = self.tabBarController?.tabBar.items {
+            if tabItems.count > self.TAB_BAR_INDEX {
+                tabItems[self.TAB_BAR_INDEX].badgeValue = "new"
+            }
+        }
+    }
+    
+    private func removeTabBarBadge() {
+        if let tabItems = self.tabBarController?.tabBar.items {
+            if tabItems.count > TAB_BAR_INDEX {
+                tabItems[TAB_BAR_INDEX].badgeValue = nil
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

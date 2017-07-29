@@ -237,7 +237,7 @@ struct ListsList {
                     
                     if listType == addType {
                         let covers = self.getCovers(game)
-                        let values: [String: Any] = [ListsEndpoints.Game.PROVIDER: game.provider, ListsEndpoints.Game.PROVIDER_ID: game.id, ListsEndpoints.Game.NAME: game.name, ListsEndpoints.Game.COVER_SMALL_URL: covers.small as Any, ListsEndpoints.Game.COVER_BIG_URL: covers.big as Any, ListsEndpoints.Common.TIMESTAMP: timestamp]
+                        let values: [String: Any] = [ListsEndpoints.Game.PROVIDER: game.provider, ListsEndpoints.Game.PROVIDER_ID: game.id, ListsEndpoints.Game.NAME: game.name, ListsEndpoints.Game.COVER_SMALL_URL: covers.small as Any, ListsEndpoints.Game.COVER_BIG_URL: covers.big as Any, ListsEndpoints.Game.FIRST_RELEASE_DATE: game.firstReleaseDate as Any, ListsEndpoints.Common.TIMESTAMP: timestamp]
                         
                         ListsEndpoints.LISTS.child(listID).child(ListsEndpoints.List.GAMES).child(listItemID).updateChildValues(values, withCompletionBlock: { (error, ref) in
                             if error != nil {
@@ -391,6 +391,9 @@ struct ListsList {
         }
         if let timestamp = game[ListsEndpoints.Common.TIMESTAMP] as? Double {
             gameObj.timestamp = timestamp
+        }
+        if let firstReleaseDate = game[ListsEndpoints.Game.FIRST_RELEASE_DATE] as? Double {
+            gameObj.firstReleaseDate = firstReleaseDate
         }
         return gameObj
     }
