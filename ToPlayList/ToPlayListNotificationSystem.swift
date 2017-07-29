@@ -209,7 +209,7 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
     
     private func buildContent(forGame game: Game) -> UNMutableNotificationContent {
         let content = UNMutableNotificationContent()
-        content.title = "Fun times!"
+        content.title = "Fun time!"
         content.body = "A game on your ToPlay list (\(game.name)) is released today."
         content.sound = UNNotificationSound.default()
         content.userInfo = [ToPlayListNotificationSystem.USER_INFO_GAME_KEY: game.name]
@@ -217,10 +217,12 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
     }
     
     private func buildNotificationTrigger(forGame game: Game) -> UNCalendarNotificationTrigger {
-        //let releaseDate = Date(timeIntervalSince1970: game.firstReleaseDate!)
-        let releaseDate = Date(timeIntervalSince1970: Date().timeIntervalSince1970 + 10)
-        let dateComponent = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: releaseDate)
-        //let dateComponent = Calendar.current.dateComponents([.year, .month, .day, .hour], from: releaseDate)
+        let releaseDate = Date(timeIntervalSince1970: game.firstReleaseDate!)
+        let dateComponent = Calendar.current.dateComponents([.year, .month, .day], from: releaseDate)
+        // for debugging: notif arrives in 10 seconds, release date doesn't matter
+        //let releaseDate = Date(timeIntervalSince1970: Date().timeIntervalSince1970 + 10)
+        //let dateComponent = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: releaseDate)
+        print("timezone: \(Calendar.current.timeZone)")
         return UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: false)
     }
     
