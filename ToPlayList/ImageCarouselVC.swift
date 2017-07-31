@@ -14,8 +14,6 @@ class ImageCarouselVC: UIViewController, UICollectionViewDataSource, UICollectio
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    weak var imageLoadErrorDelegate: ErrorHandlerDelegate?
-    
     override func viewDidLoad() {
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -56,11 +54,7 @@ class ImageCarouselVC: UIViewController, UICollectionViewDataSource, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCarouselCell.reuseIdentifier, for: indexPath) as? ImageCarouselCell {
-            cell.update(imageURLs[indexPath.row].small, withOnComplete: { result in
-                if !result {
-                    self.imageLoadErrorDelegate?.handleError()
-                }
-            })
+            cell.update(imageURLs[indexPath.row].small)
             return cell
         }
         return UICollectionViewCell()
