@@ -129,7 +129,7 @@ class PlayedListVC: SubListVC {
                     Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_LISTS_ERROR, forVC: self)
                 }
             case .succes(let list):
-                if self.playedList == list {
+                if list.count > 0 && self.playedList == list {
                     shouldSetContent = false
                 } else {
                     self.playedList = list

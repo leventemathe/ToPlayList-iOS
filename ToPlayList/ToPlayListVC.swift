@@ -265,7 +265,7 @@ class ToPlayListVC: SubListVC {
                     Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_LISTS_ERROR, forVC: self)
                 }
             case .succes(let list):
-                if self.toPlayList == list {
+                if list.count > 0 && self.toPlayList == list {
                     shouldSetContent = false
                 } else {
                     self.toPlayList = list
