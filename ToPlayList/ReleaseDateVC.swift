@@ -37,7 +37,7 @@ class ReleaseDateVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 height += tableView.rowHeight
             }
         }
-        didSetHeightDelegate?.didSet(height: height)
+        didSetHeightDelegate?.didSet(height: height + 8)
     }
     
     func setReleaseDates(_ releaseDates: [ReleaseDate]) {
