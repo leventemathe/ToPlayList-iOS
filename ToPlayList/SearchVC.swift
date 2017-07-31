@@ -155,6 +155,7 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
             resultWillDisappear()
             clearTableView()
             loadingAnimationView?.stopAnimating()
+            hideNoDataLabel()
         }
     }
     
@@ -201,6 +202,10 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
         noDataLabel.textAlignment = NSTextAlignment.center
         noDataLabel.sizeToFit()
         
+    }
+    
+    private func hideNoDataLabel() {
+        noDataLabel.text = nil
     }
     
     private func stepOut() {
