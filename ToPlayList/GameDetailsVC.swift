@@ -390,8 +390,16 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     
     private func finishLoading() {
         loadingAnimationView.stopAnimating()
-        dataView.isHidden = false
         makeNavbarTransparent()
+        showDetails()
+    }
+    
+    private func showDetails() {
+        dataView.alpha = 0.0
+        dataView.isHidden = false
+        UIView.animate(withDuration: 0.3, animations: {
+            self.dataView.alpha = 1.0
+        })
     }
     
     private func addGameDataAlreadyDownloaded() {
