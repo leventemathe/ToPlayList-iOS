@@ -78,7 +78,7 @@ class PlayedListVC: SubListVC {
     }
     
     private func removeLatePlayedListListenerAdd() {
-        if shouldRemovePlayedListListenerAdd > 0 {
+        if shouldRemovePlayedListListenerAdd > 0 && playedListListenerAdd != nil {
             playedListListenerAdd!.removeListener()
             playedListListenerAdd = nil
             shouldRemovePlayedListListenerAdd -= 1
@@ -86,7 +86,7 @@ class PlayedListVC: SubListVC {
     }
     
     private func removeLatePlayedListListenerRemove() {
-        if shouldRemovePlayedListListenerRemove > 0 {
+        if shouldRemovePlayedListListenerRemove > 0 && playedListListenerRemove != nil {
             playedListListenerRemove!.removeListener()
             playedListListenerRemove = nil
             shouldRemovePlayedListListenerRemove -= 1
