@@ -35,6 +35,18 @@ struct Dates {
         return Date().timeIntervalSince1970
     }
     
+    static func randomHourOfDay(_ time: Double) -> Date {
+        let calendar = Calendar.current
+        let startOfToday = calendar.startOfDay(for: Date(timeIntervalSince1970: time))
+        
+        let min = 9 * 60 * 60
+        let max = 14 * 60 * 60
+        let random = arc4random_uniform(UInt32(max - min)) + UInt32(min)
+        let newTime = startOfToday.timeIntervalSince1970 + Double(random)
+        
+        return Date(timeIntervalSince1970: newTime)
+    }
+    
     static func dateFromUnixTimeShort(_ time: Double) -> String {
         return dateFromUnixTime(time, withDateFormat: DATE_FORMAT_SHORT)
     }

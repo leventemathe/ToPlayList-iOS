@@ -216,13 +216,15 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
         return content
     }
     
-    private func buildNotificationTrigger(forGame game: Game) -> UNCalendarNotificationTrigger {
-        let releaseDate = Date(timeIntervalSince1970: game.firstReleaseDate!)
-        let dateComponent = Calendar.current.dateComponents([.year, .month, .day], from: releaseDate)
+    private func buildNotificationTrigger(forGame game: Game) -> UNCalendarNotificationTrigger? {
+        guard let releaseDate = game.firstReleaseDate else {
+            return nil
+        }
+        let randomizedReleaseDate = Dates.randomHourOfDay(releaseDate)
+        let dateComponent = Calendar.current.dateComponents([.year, .month, .day, .hour], from: randomizedReleaseDate)
         // for debugging: notif arrives in 10 seconds, release date doesn't matter
         //let releaseDate = Date(timeIntervalSince1970: Date().timeIntervalSince1970 + 10)
         //let dateComponent = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: releaseDate)
-        print("timezone: \(Calendar.current.timeZone)")
         return UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: false)
     }
     
