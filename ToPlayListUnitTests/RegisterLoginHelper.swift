@@ -40,6 +40,14 @@ struct RegisterLoginTestHelper {
         }
     }
     
+    static func logout() {
+        do {
+            try FIRAuth.auth()?.signOut()
+        } catch let error as NSError {
+            print("Error while logging out: \(error.description))")
+        }
+    }
+    
     static func register(_ userData: UserData, withOnSuccess onSuccess: @escaping (String?)->(), withOnFailure onFailure: @escaping (RegisterServiceError)->()) {
         let registerExp = helperTestCase.expectation(description: "register")
         

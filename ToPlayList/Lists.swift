@@ -68,12 +68,18 @@ class ListsUser {
     
     func removeUser(_ uid: String, withOnComplete onComplete: @escaping ()->()) {
         ListsEndpoints.USERS.child(uid).removeValue { (error, ref) in
+            if error != nil {
+                print("Error while removing user: \(error.debugDescription)")
+            }
             onComplete()
         }
     }
     
     func removeUsername(_ username: String, withOnComplete onComplete: @escaping ()->()) {
         ListsEndpoints.USERNAMES.child(username).removeValue { (error, ref) in
+            if error != nil {
+                print("Error while removing username: \(error.debugDescription)")
+            }
             onComplete()
         }
     }
@@ -92,6 +98,9 @@ class ListsUser {
                 }
                 let listValues = self.buildListIDDictionary(listIDs)
                 ListsEndpoints.BASE.updateChildValues(listValues) { (error, ref) in
+                    if error != nil {
+                        print("Error while removing list: \(error.debugDescription)")
+                    }
                     onComplete()
                 }
             }
@@ -113,12 +122,19 @@ class ListsUser {
             return
         }
         removeUser(uid) {
+            print("removed user")
             self.removeUsername(userName) {
+                print("removed username")
                 self.removeLists(uid) {
+                    print("removed user lists")
                     FIRAuth.auth()?.currentUser?.delete { error in
+                        if error != nil {
+                            print("An error happened while trying to delete user: \(error.debugDescription)")
+                        }
+                        print("removed user auth")
                         // TODO what should i do here?
+                        onComplete()
                     }
-                    onComplete()
                 }
             }
         }

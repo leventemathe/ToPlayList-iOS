@@ -26,6 +26,7 @@ enum RegisterServiceError {
     case invalidUsername
     case invalidEmail
     case noInternet
+    case tooManyRequests
     case passwordTooWeak
     case unknown
 }
@@ -50,20 +51,18 @@ enum RegisterValidationError {
     case noCapitalInPassword
 }
 
-// TODO recheck error codes
 class RegisterService {
     
     static let instance = RegisterService()
     
     private init() {}
     
-    static let USERNAME_FORBIDDEN_CHARACTERS = [".", "#", "$", "[", "]"] //TODO add more?
+    static let USERNAME_FORBIDDEN_CHARACTERS = [".", "#", "$", "[", "]", "/"] //TODO add more?
     static let USERNAME_MAX_LENGTH = 15
     static let EMAIL_MAX_LENGTH = 254
     static let PASSWORD_MIN_LENGTH = 6
     static let PASSWORD_MAX_LENGTH = 254
     
-    // TODO get rid of special chars, check type and length, sync with Firebase secu rules -> unit tests
     func validate(_ userData: OptionalUserData) -> RegisterValidationResult {
         guard var email = userData.email, var password = userData.password, var username = userData.username else {
             return .failure(.noUserData)
@@ -159,21 +158,18 @@ class RegisterService {
         FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
             if let error = error, let errorCode = FIRAuthErrorCode(rawValue: error._code) {
                 switch errorCode {
-                case .errorCodeEmailAlreadyInUse:
-                    onComplete(.failure(.emailAlreadyInUse))
-                    break
-                case .errorCodeInvalidEmail:
-                    onComplete(.failure(.invalidEmail))
-                    break
                 case .errorCodeNetworkError:
                     onComplete(.failure(.noInternet))
-                    break
+                case .errorCodeTooManyRequests:
+                    onComplete(.failure(.tooManyRequests))
+                case .errorCodeEmailAlreadyInUse:
+                    onComplete(.failure(.emailAlreadyInUse))
+                case .errorCodeInvalidEmail:
+                    onComplete(.failure(.invalidEmail))
                 case .errorCodeWeakPassword:
                     onComplete(.failure(.passwordTooWeak))
-                    break
                 default:
                     onComplete(.failure(.unknown))
-                    break
                 }
             } else {
                 self.addUserDataToDatabase(user!.uid, withUsername: username, withOnComplete: onComplete)

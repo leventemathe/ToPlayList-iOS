@@ -393,53 +393,24 @@ class LoggedInUserCleanup: XCTestCase {
             self.uid = result
             XCTAssertTrue(true, "registration succesful")
         }, withOnFailure: { error in
-            XCTAssertTrue(true, "registration failed")
+            XCTAssertTrue(false, "registration failed")
         })
     }
     
     func testDeleteLoggedInUserCompletely() {
-        guard let uid = self.uid else {
-            XCTAssertTrue(false, "testDeleteLoggedInUserCompletely failed, no user is logged in")
-            return
-        }
-        // delete the user
         let deleteExp = expectation(description: "delete registered content for testDeleteLoggedInUserCompletely")
         ListsUser.instance.deleteLoggedInUserCompletely(userData.username) {
             deleteExp.fulfill()
         }
         waitForExpectations(timeout: 15) { error in
             if let error = error {
-                print("Error: \(error.localizedDescription)")
+                XCTAssertTrue(false, "deleting user failed with error: \(error.localizedDescription)")
             }
-        }
-        
-        // check if deletion worked
-        let userExp = expectation(description: "trying to get user for testDeleteLoggedInUserCompletely")
-        let usernameExp = expectation(description: "trying to get username for testDeleteLoggedInUserCompletely")
-        let listsExp = expectation(description: "trying to get lists for testDeleteLoggedInUserCompletely")
-        
-        ListsEndpoints.USERS.child(uid).observeSingleEvent(of: .value, with: { snapshot in
-            XCTAssert(!snapshot.exists(), "user was nil for testDeleteLoggedInUserCompletely")
-            userExp.fulfill()
-        })
-        ListsEndpoints.USERNAMES.child(userData.username).observeSingleEvent(of: .value, with: { snapshot in
-            XCTAssert(!snapshot.exists(), "username was nil for testDeleteLoggedInUserCompletely")
-            usernameExp.fulfill()
-        })
-        ListsEndpoints.LISTS.queryOrdered(byChild: ListsEndpoints.List.USERID).queryEqual(toValue: uid).observeSingleEvent(of: .value, with: { snapshot in
-            XCTAssert(!snapshot.exists(), "lists were nil for testDeleteLoggedInUserCompletely")
-            listsExp.fulfill()
-        })
-        
-        waitForExpectations(timeout: 30) { error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            }
+            XCTAssertTrue(true, "user deleted succesfully")
         }
     }
 }
 
-// firebase level validation
 class RegisterSuccesful: XCTestCase {
  
     private let userData = (email: "levi@levi.com", password: "levilevi", username: "levi")
@@ -562,6 +533,51 @@ class RegisterFailing: XCTestCase {
 
 class RegisterAlreadyExists: XCTestCase {
     
+    private let existingUser = (email: "levi@levi.com", password: "levilevi", username: "levi")
+    private let emailAlreadyExistsUser = (email: "levi@levi.com", password: "levilevi", username: "levi2")
+    private let userNameAlreadyExistsUser = (email: "levi2@levi.com", password: "levilevi", username: "levi")
+    
+    override func setUp() {
+        super.setUp()
+        RegisterLoginTestHelper.register(existingUser, withOnSuccess: {_ in
+            XCTAssertTrue(true, "Registration succesful")
+        }, withOnFailure: { error in
+            XCTAssertTrue(false, "Registration failed")
+        })
+        RegisterLoginTestHelper.logout()
+    }
+    
+    override func tearDown() {
+        RegisterLoginTestHelper.login((email: existingUser.email, password: existingUser.password), withOnSuccess: {_ in}, withOnFailure: {_ in})
+        RegisterLoginTestHelper.deleteUserCompletely(existingUser)
+        super.tearDown()
+    }
+    
+    func testEmailAlreadyExists() {
+        RegisterLoginTestHelper.register(emailAlreadyExistsUser, withOnSuccess: { result in
+            XCTAssertTrue(false, "Register was succesful with already existing email")
+        }, withOnFailure: { error in
+            switch error {
+            case .emailAlreadyInUse:
+                XCTAssertTrue(true, "Registration failed because email already exists")
+            default:
+                XCTAssertTrue(false, "Registration failed because of wrong reason")
+            }
+        })
+    }
+    
+    func testUsernameExists() {
+        RegisterLoginTestHelper.register(userNameAlreadyExistsUser, withOnSuccess: { result in
+            XCTAssertTrue(false, "Register was succesful with already existing username")
+        }, withOnFailure: { error in
+            switch error {
+            case .usernameAlreadyInUse:
+                XCTAssertTrue(true, "Registration failed because username already exists")
+            default:
+                XCTAssertTrue(false, "Registration failed because of wrong reason")
+            }
+        })
+    }
 }
 
 

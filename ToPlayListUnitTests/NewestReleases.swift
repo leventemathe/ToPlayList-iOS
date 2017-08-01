@@ -61,7 +61,7 @@ class NewestReleases: XCTestCase {
             let header = gameSection.header
             for game in gameSection.games {
                 XCTAssert(game.firstReleaseDateAsString == header)
-                print("header: \(header) game: \(game.firstReleaseDateAsString!) \(game.firstReleaseDate!) \(game.name)")
+                //print("header: \(header) game: \(game.firstReleaseDateAsString!) \(game.firstReleaseDate!) \(game.name)")
             }
         }
     }

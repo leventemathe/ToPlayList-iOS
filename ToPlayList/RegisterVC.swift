@@ -31,6 +31,7 @@ class RegisterVC: UIViewController, IdentifiableVC {
     static let ERROR_NO_INTERNET = "No internet!"
     static let ERROR_WEAK_PASSWORD = "Password is too weak!"
     static let ERROR_UNKNOWN = "Unknown error!"
+    static let ERROR_TOO_MANY_REQUESTS = "Too many requests, please slow down!"
     
     @IBOutlet weak var usernameField: LoginSceneTextUsername!
     @IBOutlet weak var emailField: LoginSceneTextFieldEmail!
@@ -82,7 +83,6 @@ class RegisterVC: UIViewController, IdentifiableVC {
                 errorView.show(withText: RegisterVC.VALIDATION_TOO_LONG_PASSWORD)
             case .tooShortPassword:
                 errorView.show(withText: RegisterVC.VALIDATION_TOO_SHORT_PASSWORD)
-                
             }
             return nil
         }
@@ -97,14 +97,16 @@ class RegisterVC: UIViewController, IdentifiableVC {
                 self.registerSuccesful()
             case .failure(let error):
                 switch error {
+                case .noInternet:
+                    self.errorView.show(withText: RegisterVC.ERROR_NO_INTERNET)
+                case .tooManyRequests:
+                    self.errorView.show(withText: RegisterVC.ERROR_TOO_MANY_REQUESTS)
                 case .emailAlreadyInUse:
                     self.errorView.show(withText: RegisterVC.ERROR_EMAIL_ALREADY_IN_USE)
                 case .invalidEmail:
                     self.errorView.show(withText: RegisterVC.ERROR_INVALID_EMAIL)
                 case .invalidUsername:
                     self.errorView.show(withText: RegisterVC.ERROR_INVALID_USERNAME)
-                case .noInternet:
-                    Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
                 case .passwordTooWeak:
                     self.errorView.show(withText: RegisterVC.ERROR_WEAK_PASSWORD)
                 case .usernameAlreadyInUse:
