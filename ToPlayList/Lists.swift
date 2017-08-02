@@ -18,6 +18,7 @@ enum ListsUserResult {
 
 enum ListsUserError {
     case usernameAlreadyInUse
+    case permissionDenied
     case unknownError
 }
 
@@ -31,6 +32,15 @@ class ListsUser {
         guard let uid = FIRAuth.auth()?.currentUser?.uid, let providerid = FIRAuth.auth()?.currentUser?.providerID else {
             onComplete(.failure(.unknownError))
             return
+        }
+        
+        // if a forbidden char appears in a key on firebase, it crashes the app
+        // so a validation rule on firebase is not enough
+        for forbiddenChar in RegisterService.USERNAME_FORBIDDEN_CHARACTERS {
+            if username.contains(forbiddenChar) {
+                onComplete(.failure(.permissionDenied))
+                return
+            }
         }
         
         let timestamp = Date().timeIntervalSince1970
@@ -56,7 +66,7 @@ class ListsUser {
                 
                 ListsEndpoints.BASE.updateChildValues(values, withCompletionBlock: { (error, ref) in
                     if error != nil {
-                        onComplete(.failure(.unknownError))
+                        onComplete(.failure(.permissionDenied))
                         return
                     }
                     onComplete(.success)

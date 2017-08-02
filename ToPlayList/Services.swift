@@ -28,6 +28,7 @@ enum RegisterServiceError {
     case noInternet
     case tooManyRequests
     case passwordTooWeak
+    case permissionDenied
     case unknown
 }
 
@@ -171,8 +172,12 @@ class RegisterService {
                 default:
                     onComplete(.failure(.unknown))
                 }
+                ListsUser.instance.deleteLoggedInUserBeforeFullyCreated()
+            } else if let user = user{
+                self.addUserDataToDatabase(user.uid, withUsername: username, withOnComplete: onComplete)
             } else {
-                self.addUserDataToDatabase(user!.uid, withUsername: username, withOnComplete: onComplete)
+                ListsUser.instance.deleteLoggedInUserBeforeFullyCreated()
+                onComplete(.failure(.unknown))
             }
         }
     }
@@ -187,6 +192,8 @@ class RegisterService {
                 switch error {
                 case .usernameAlreadyInUse:
                     onComplete(.failure(.usernameAlreadyInUse))
+                case .permissionDenied:
+                    onComplete(.failure(.permissionDenied))
                 case .unknownError:
                     onComplete(.failure(.unknown))
                 }

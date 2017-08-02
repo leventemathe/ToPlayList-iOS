@@ -434,6 +434,9 @@ class RegisterFailing: XCTestCase {
     private let userDataNoUsername = (email: "levi@levi.com", password: "levilevi", username: "")
     private let userDataNoEmail = (email: "", password: "levilevi", username: "levi")
     private let userDataNoPassword = (email: "levi@levi.com", password: "", username: "levi")
+    private let userDataTooLongUsername = (email: "levi@levi.com", password: "levilevi", username: "123456789abcqweqwet")
+    private let userDataInvalidCharsInUsername = (email: "levi@levi.com", password: "LeviLevi123", username: "levi[]")
+    private let userDataInvalidCharsInUsername2 = (email: "levi@levi.com", password: "LeviLevi123", username: "levi#123")
     private let userDataWrongEmail1 = (email: "levi@com", password: "levilevi", username: "levi")
     private let userDataWrongEmail2 = (email: "levi.com", password: "levilevi", username: "levi")
     private let userDataWrongEmail3 = (email: "levicom", password: "levilevi", username: "levi")
@@ -472,6 +475,48 @@ class RegisterFailing: XCTestCase {
             switch error {
             case .passwordTooWeak:
                 XCTAssertTrue(true, "Registration failed with no password")
+            default:
+                XCTAssertTrue(false, "Registration failed with wrong error")
+            }
+        })
+    }
+    
+    func testRegisterTooLongUsername() {
+        RegisterLoginTestHelper.register(userDataTooLongUsername, withOnSuccess: {_ in
+            XCTAssertTrue(false, "Registration succesful")
+        }, withOnFailure: { error in
+            switch error {
+            case .usernameAlreadyInUse:
+                // this is also accepted, because the error is just an Error?, no way to tell which validation rule failed
+                XCTAssertTrue(true, "Registration failed with username already in use")
+            case .permissionDenied:
+                XCTAssertTrue(true, "Registration failed with permissions denied")
+            default:
+                XCTAssertTrue(false, "Registration failed with wrong error: \(error)")
+            }
+        })
+    }
+    
+    func testRegisterInvalidCharInUsername1() {
+        RegisterLoginTestHelper.register(userDataInvalidCharsInUsername, withOnSuccess: {_ in
+            XCTAssertTrue(false, "Registration succesful")
+        }, withOnFailure: { error in
+            switch error {
+            case .permissionDenied:
+                XCTAssertTrue(true, "Registration failed with permissions denied")
+            default:
+                XCTAssertTrue(false, "Registration failed with wrong error: \(error)")
+            }
+        })
+    }
+    
+    func testRegisterInvalidCharInUsername2() {
+        RegisterLoginTestHelper.register(userDataInvalidCharsInUsername2, withOnSuccess: {_ in
+            XCTAssertTrue(false, "Registration succesful")
+        }, withOnFailure: { error in
+            switch error {
+            case .permissionDenied:
+                XCTAssertTrue(true, "Registration failed with permissions denied")
             default:
                 XCTAssertTrue(false, "Registration failed with wrong error")
             }

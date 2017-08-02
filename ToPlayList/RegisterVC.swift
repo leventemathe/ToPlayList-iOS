@@ -30,6 +30,7 @@ class RegisterVC: UIViewController, IdentifiableVC {
     static let ERROR_INVALID_USERNAME = "Invalid username!"
     static let ERROR_NO_INTERNET = "No internet!"
     static let ERROR_WEAK_PASSWORD = "Password is too weak!"
+    static let ERROR_PERMISSION_DENIED = "Permission denied!"
     static let ERROR_UNKNOWN = "Unknown error!"
     static let ERROR_TOO_MANY_REQUESTS = "Too many requests, please slow down!"
     
@@ -111,6 +112,8 @@ class RegisterVC: UIViewController, IdentifiableVC {
                     self.errorView.show(withText: RegisterVC.ERROR_WEAK_PASSWORD)
                 case .usernameAlreadyInUse:
                     self.errorView.show(withText: RegisterVC.ERROR_USERNAME_ALREADY_IN_USE)
+                case .permissionDenied:
+                    self.errorView.show(withText: RegisterVC.ERROR_PERMISSION_DENIED)
                 case .unknown:
                     self.errorView.show(withText: RegisterVC.ERROR_UNKNOWN)
                 }
