@@ -424,7 +424,7 @@ class RegisterSuccesful: XCTestCase {
         RegisterLoginTestHelper.register(userData, withOnSuccess: {_ in 
             XCTAssertTrue(true, "Registration succesful")
         }, withOnFailure: { error in
-            XCTAssertTrue(false, "Registration failed")
+            XCTAssertTrue(false, "Registration failed with error: \(error)")
         })
     }
 }
@@ -587,7 +587,7 @@ class RegisterAlreadyExists: XCTestCase {
         RegisterLoginTestHelper.register(existingUser, withOnSuccess: {_ in
             XCTAssertTrue(true, "Registration succesful")
         }, withOnFailure: { error in
-            XCTAssertTrue(false, "Registration failed")
+            XCTAssertTrue(false, "Registration failed with error: \(error)")
         })
         RegisterLoginTestHelper.logout()
     }
