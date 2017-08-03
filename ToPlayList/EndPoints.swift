@@ -43,10 +43,10 @@ struct ListsEndpoints {
     
     struct Game {
         static let PROVIDER = "provider"
-        static let PROVIDER_ID = "providerid"
+        static let PROVIDER_ID = "provider_id"
         static let NAME = "name"
-        static let COVER_SMALL_URL = "coversmallurl"
-        static let COVER_BIG_URL = "coverbigurl"
+        static let COVER_SMALL_URL = "cover_small_url"
+        static let COVER_BIG_URL = "cover_big_url"
         static let FIRST_RELEASE_DATE = "first_release_date"
     }
 }
