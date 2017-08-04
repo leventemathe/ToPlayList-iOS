@@ -295,6 +295,89 @@ class LoginService {
 
 
 
+enum ForgotPasswordResult {
+    case success
+    case failure(ForgotPasswordError)
+}
+
+enum ForgotPasswordError {
+    case invalidEmail
+    case userNotFound
+    case firebaseError
+    case userDisabled
+    case tooManyRequests
+    case noInternet
+    case unknown
+}
+
+enum ForgotPasswordValidationResult {
+    case success(String)
+    case failure(ForgotPasswordValidationError)
+}
+
+enum ForgotPasswordValidationError {
+    case noEmail
+}
+
+class ForgotPasswordService {
+    
+    static let instance = ForgotPasswordService()
+    
+    private init() {}
+    
+    func validate(_ email: String?) -> ForgotPasswordValidationResult {
+        guard var email = email else {
+            return .failure(.noEmail)
+        }
+        
+        email = email.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if email == "" {
+            return .failure(.noEmail)
+        }
+        
+        return .success(email)
+    }
+    
+    func sendRequest(_ email: String, withOnComplete onComplete: @escaping (ForgotPasswordResult)->()) {
+        FIRAuth.auth()?.sendPasswordReset(withEmail: email, completion: { error in
+            if let error = error, let errorCode = FIRAuthErrorCode(rawValue: error._code) {
+                switch errorCode {
+                case .errorCodeInvalidRecipientEmail:
+                    onComplete(.failure(.invalidEmail))
+                case .errorCodeInvalidEmail:
+                    onComplete(.failure(.invalidEmail))
+                case .errorCodeUserNotFound:
+                    onComplete(.failure(.userNotFound))
+                case .errorCodeNetworkError:
+                    onComplete(.failure(.noInternet))
+                case .errorCodeUserDisabled:
+                    onComplete(.failure(.userDisabled))
+                case .errorCodeTooManyRequests:
+                    onComplete(.failure(.tooManyRequests))
+                case .errorCodeAppNotAuthorized:
+                    onComplete(.failure(.firebaseError))
+                case .errorCodeInternalError:
+                    onComplete(.failure(.firebaseError))
+                case .errorCodeInvalidSender:
+                    onComplete(.failure(.firebaseError))
+                case .errorCodeInvalidMessagePayload:
+                    onComplete(.failure(.firebaseError))
+                default:
+                    onComplete(.failure(.unknown))
+                }
+            } else {
+                onComplete(.success)
+            }
+        })
+    }
+}
+
+
+
+
+
+
 
 
 

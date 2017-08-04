@@ -18,7 +18,7 @@ class LoginVC: UIViewController, IdentifiableVC {
     
     static let ERROR_USER_NOT_FOUND = "Invalid email or password!"
     static let ERROR_TOKEN_EXPIRED = "User token expired!"
-    static let ERROR_NO_INTERNET = "No internet!"
+    static let ERROR_NO_INTERNET = "No internet connection!"
     static let ERROR_SERVER = "An error occured on the server. Sorry! 😞"
     static let ERROR_TOO_MANY_REQUESTS = "Too many requests. Please slow down! 😉"
     static let ERROR_USER_DISABLED = "User disabled."

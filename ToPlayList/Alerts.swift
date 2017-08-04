@@ -22,6 +22,13 @@ class Alerts: UIViewController {
         vc.present(alert, animated: true, completion: nil)
     }
     
+    static func alertSuccessWithOKButton(withMessage message: String, forVC vc: UIViewController) {
+        let alert = UIAlertController(title: "Success!", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let okBtn = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
+        alert.addAction(okBtn)
+        vc.present(alert, animated: true, completion: nil)
+    }
+    
     static func alertWithYesAndNoButtons(withTitle title: String, withMessage message: String, forVC vc: UIViewController, withOnYes onYes: @escaping ()->()) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         let okBtn = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default, handler: { action in

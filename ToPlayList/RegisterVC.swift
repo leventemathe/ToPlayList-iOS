@@ -28,7 +28,7 @@ class RegisterVC: UIViewController, IdentifiableVC {
     static let ERROR_USERNAME_ALREADY_IN_USE = "Username already in use!"
     static let ERROR_INVALID_EMAIL = "Invalid email!"
     static let ERROR_INVALID_USERNAME = "Invalid username!"
-    static let ERROR_NO_INTERNET = "No internet!"
+    static let ERROR_NO_INTERNET = "No internet connection!"
     static let ERROR_WEAK_PASSWORD = "Password is too weak!"
     static let ERROR_PERMISSION_DENIED = "Permission denied!"
     static let ERROR_UNKNOWN = "Unknown error!"
