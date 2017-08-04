@@ -39,6 +39,12 @@ class RegisterLoginVC: UIViewController, IdentifiableVC {
         return registerVC
     }()
     
+    private lazy var forgotPWVC: ForgotPasswordVC = {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let forgotPWVC = storyboard.instantiateViewController(withIdentifier: ForgotPasswordVC.id) as! ForgotPasswordVC
+        return forgotPWVC
+    }()
+    
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     @IBAction func segmentedConrolChanged(_ sender: UISegmentedControl) {
@@ -54,6 +60,7 @@ class RegisterLoginVC: UIViewController, IdentifiableVC {
     
     func setRegisterContainer() {
         clearLoginContainer()
+        clearForgotPWContainer()
         addChildViewController(registerVC)
         registerVC.view.frame.size = containerView.frame.size
         containerView.addSubview(registerVC.view)
@@ -62,10 +69,20 @@ class RegisterLoginVC: UIViewController, IdentifiableVC {
     
     func setLoginContainer() {
         clearRegisterContainer()
+        clearForgotPWContainer()
         addChildViewController(loginVC)
         loginVC.view.frame.size = containerView.frame.size
         containerView.addSubview(loginVC.view)
         loginVC.didMove(toParentViewController: self)
+    }
+    
+    func setForgotPWContainer() {
+        clearRegisterContainer()
+        clearLoginContainer()
+        addChildViewController(forgotPWVC)
+        forgotPWVC.view.frame.size = containerView.frame.size
+        containerView.addSubview(forgotPWVC.view)
+        forgotPWVC.didMove(toParentViewController: self)
     }
 
     func clearRegisterContainer() {
@@ -76,6 +93,11 @@ class RegisterLoginVC: UIViewController, IdentifiableVC {
     func clearLoginContainer() {
         loginVC.removeFromParentViewController()
         loginVC.view.removeFromSuperview()
+    }
+    
+    func clearForgotPWContainer() {
+        forgotPWVC.removeFromParentViewController()
+        forgotPWVC.view.removeFromSuperview()
     }
     
     override func viewDidLoad() {

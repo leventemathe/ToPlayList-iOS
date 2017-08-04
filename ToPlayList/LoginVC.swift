@@ -43,6 +43,14 @@ class LoginVC: UIViewController, IdentifiableVC {
         }
     }
     
+    @IBOutlet weak var forgotPasswordButton: UIButton!
+    
+    @IBAction func forgotPasswordClicked(_ sender: UIButton) {
+        if let parent = parent as? RegisterLoginVC {
+            parent.setForgotPWContainer()
+        }
+    }
+    
     private func validate() -> UserDataLogin? {
         switch LoginService.instance.validate((email: emailField.text, password: passwordField.text)) {
         case .success(let result):

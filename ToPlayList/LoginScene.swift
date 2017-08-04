@@ -45,6 +45,14 @@ class LoginSceneTextFieldPassword: LoginSceneTextField, ColoredPlaceholderText {
     }
 }
 
+class ForgotPasswordSceneTextfieldEmail: LoginSceneTextField, ColoredPlaceholderText {
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        changePlaceholderColor("Enter your email", toColor: LoginSceneTextField.PLACE_HOLDER_COLOR)
+    }
+}
+
 class LoginSceneButtonLogin: UIButton, RoundedCorners {
     
     private var loadingAnimationView: NVActivityIndicatorView?
