@@ -160,6 +160,13 @@ class ListsUser {
         return FIRAuth.auth()?.currentUser != nil
     }
     
+    static var verified: Bool {
+        if let verified = FIRAuth.auth()?.currentUser?.isEmailVerified {
+            return verified
+        }
+        return false
+    }
+    
     static var userid: String? {
         if let uid = FIRAuth.auth()?.currentUser?.uid {
             return uid

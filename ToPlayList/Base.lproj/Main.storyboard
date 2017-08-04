@@ -65,7 +65,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hgn-QR-XgW" id="atP-7a-oRe">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <connections>
@@ -973,6 +973,11 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" restorationIdentifier="UserNotVerifiedView" translatesAutoresizingMaskIntoConstraints="NO" id="YVH-qQ-RPZ" customClass="UserNotVerifiedView" customModule="ToPlayList" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -980,12 +985,16 @@
                             <constraint firstItem="WOa-04-8pa" firstAttribute="leading" secondItem="MJu-JL-nvO" secondAttribute="leadingMargin" priority="999" constant="8" id="7F2-De-gkj"/>
                             <constraint firstItem="zCK-4h-43t" firstAttribute="top" secondItem="65Q-Zg-Uje" secondAttribute="bottom" id="Cf7-Jx-3Tu"/>
                             <constraint firstItem="WOa-04-8pa" firstAttribute="top" secondItem="2oc-jG-z9Z" secondAttribute="bottom" constant="8" id="EH2-p6-jjP"/>
+                            <constraint firstItem="YVH-qQ-RPZ" firstAttribute="top" secondItem="MJu-JL-nvO" secondAttribute="top" id="F7Y-6b-ecN"/>
                             <constraint firstItem="Rtj-xj-A9Z" firstAttribute="leading" secondItem="MJu-JL-nvO" secondAttribute="leading" constant="-60" id="Gsr-0K-WjZ"/>
+                            <constraint firstAttribute="bottom" secondItem="YVH-qQ-RPZ" secondAttribute="bottom" id="SAL-9k-XtK"/>
                             <constraint firstAttribute="trailingMargin" secondItem="WOa-04-8pa" secondAttribute="trailing" priority="999" constant="8" id="SFX-aa-7tV"/>
                             <constraint firstItem="65Q-Zg-Uje" firstAttribute="leading" secondItem="MJu-JL-nvO" secondAttribute="leading" id="VfA-4Q-CXf"/>
                             <constraint firstAttribute="trailing" secondItem="Rtj-xj-A9Z" secondAttribute="trailing" constant="-60" id="XkO-t6-hKg"/>
                             <constraint firstItem="zCK-4h-43t" firstAttribute="top" secondItem="Rtj-xj-A9Z" secondAttribute="bottom" constant="-60" id="esH-P8-uUq"/>
                             <constraint firstItem="o1g-ft-PLL" firstAttribute="top" secondItem="WOa-04-8pa" secondAttribute="bottom" constant="8" id="h6y-EI-4LQ"/>
+                            <constraint firstAttribute="trailing" secondItem="YVH-qQ-RPZ" secondAttribute="trailing" id="haY-v4-RpD"/>
+                            <constraint firstItem="YVH-qQ-RPZ" firstAttribute="leading" secondItem="MJu-JL-nvO" secondAttribute="leading" id="pXh-dv-nhB"/>
                             <constraint firstItem="65Q-Zg-Uje" firstAttribute="top" secondItem="o1g-ft-PLL" secondAttribute="bottom" constant="20" id="qiM-n9-3AO"/>
                             <constraint firstItem="Rtj-xj-A9Z" firstAttribute="top" secondItem="2oc-jG-z9Z" secondAttribute="bottom" constant="-60" id="wA0-gG-HKz"/>
                             <constraint firstAttribute="trailing" secondItem="65Q-Zg-Uje" secondAttribute="trailing" id="wts-S8-ZO6"/>
@@ -1003,6 +1012,7 @@
                         <outlet property="backgroundStarImageView" destination="Rtj-xj-A9Z" id="TaW-1f-seD"/>
                         <outlet property="listContainerView" destination="65Q-Zg-Uje" id="qCc-Cz-RBu"/>
                         <outlet property="segmentedControl" destination="o1g-ft-PLL" id="Tfl-KU-dbl"/>
+                        <outlet property="userNotVerifiedView" destination="YVH-qQ-RPZ" id="dJn-Bi-1HQ"/>
                         <outlet property="welcomLbl" destination="WOa-04-8pa" id="kwJ-1d-Kou"/>
                         <outlet property="welcomeLblContainerLeadeingConstraint" destination="7F2-De-gkj" id="86T-jU-7a8"/>
                         <outlet property="welcomeLblContainerTrailingConstraint" destination="SFX-aa-7tV" id="VPw-Va-szP"/>
@@ -1010,7 +1020,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nX4-Lq-TDR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2818.840579710145" y="1683.4239130434785"/>
+            <point key="canvasLocation" x="2818.125" y="1682.7464788732395"/>
         </scene>
         <!--Upcoming-->
         <scene sceneID="5l0-6m-Tuc">
@@ -2010,7 +2020,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your recent searches" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e1l-ht-syg">
-                                        <rect key="frame" x="8" y="7.5" width="312" height="15"/>
+                                        <rect key="frame" x="8" y="8" width="312" height="15"/>
                                         <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -2032,7 +2042,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="V7w-wJ-PW6" id="Fcb-Mt-g8V">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>

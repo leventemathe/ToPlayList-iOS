@@ -40,6 +40,8 @@
 		D72D4CA61E1479EC0070E013 /* IGDBJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72D4CA51E1479EC0070E013 /* IGDBJSON.swift */; };
 		D72E66B71E619D0800BED388 /* ToPlayListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72E66B61E619D0800BED388 /* ToPlayListVC.swift */; };
 		D72E66BA1E619D2100BED388 /* PlayedListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72E66B91E619D2100BED388 /* PlayedListVC.swift */; };
+		D744B7381F3499D70000A3F3 /* UserNotVerifiedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D744B7371F3499D70000A3F3 /* UserNotVerifiedView.swift */; };
+		D744B73A1F3499FF0000A3F3 /* UserNotVerifiedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D744B7391F3499FF0000A3F3 /* UserNotVerifiedView.xib */; };
 		D74AC7DA1E3919B700C37A90 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74AC7D91E3919B700C37A90 /* RegisterVC.swift */; };
 		D75150281E34BB9F00EDA802 /* MainTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75150271E34BB9F00EDA802 /* MainTabVC.swift */; };
 		D75F4EA21E643A9E00CB2875 /* DropShadowed.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75F4EA11E643A9E00CB2875 /* DropShadowed.swift */; };
@@ -154,6 +156,8 @@
 		D72D4CA51E1479EC0070E013 /* IGDBJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGDBJSON.swift; sourceTree = "<group>"; };
 		D72E66B61E619D0800BED388 /* ToPlayListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToPlayListVC.swift; sourceTree = "<group>"; };
 		D72E66B91E619D2100BED388 /* PlayedListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayedListVC.swift; sourceTree = "<group>"; };
+		D744B7371F3499D70000A3F3 /* UserNotVerifiedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNotVerifiedView.swift; sourceTree = "<group>"; };
+		D744B7391F3499FF0000A3F3 /* UserNotVerifiedView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserNotVerifiedView.xib; sourceTree = "<group>"; };
 		D74AC7D91E3919B700C37A90 /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		D75150271E34BB9F00EDA802 /* MainTabVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabVC.swift; sourceTree = "<group>"; };
 		D75A41131E241FC600E91514 /* ToPlayListUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToPlayListUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -320,6 +324,7 @@
 				D726BC891E0ABDD800D6C9CD /* Main.storyboard */,
 				D76437E31E1E506D00B09C7E /* HeaderView.xib */,
 				D7B8C86C1E2D16F100656E64 /* ErrorMessage.xib */,
+				D744B7391F3499FF0000A3F3 /* UserNotVerifiedView.xib */,
 			);
 			name = Nibs;
 			sourceTree = "<group>";
@@ -499,6 +504,7 @@
 				D78B86721E38BC6200F1EA7C /* ListCollectionViewCell.swift */,
 				D7A0E6FC1E7BDDCD00A70989 /* ToPlayListCell.swift */,
 				D7A0E6FE1E7BDDDC00A70989 /* PlayedListCell.swift */,
+				D744B7371F3499D70000A3F3 /* UserNotVerifiedView.swift */,
 			);
 			name = Lists;
 			sourceTree = "<group>";
@@ -673,6 +679,7 @@
 			files = (
 				D76437E51E1E506D00B09C7E /* HeaderView.xib in Resources */,
 				D76437E11E1E4E7300B09C7E /* slkscr.ttf in Resources */,
+				D744B73A1F3499FF0000A3F3 /* UserNotVerifiedView.xib in Resources */,
 				D726BC901E0ABDD800D6C9CD /* LaunchScreen.storyboard in Resources */,
 				D7C3A1721E0DD9120091279C /* Assets.xcassets in Resources */,
 				D7B8C86D1E2D16F100656E64 /* ErrorMessage.xib in Resources */,
@@ -847,6 +854,7 @@
 				D7CC7D0E1E3913E60027BE6F /* RegisterLoginVC.swift in Sources */,
 				D7D0BCC31F1B8CF900C2B071 /* ReleaseDateCell.swift in Sources */,
 				D7B8C86B1E2D16C700656E64 /* ErrorMessage.swift in Sources */,
+				D744B7381F3499D70000A3F3 /* UserNotVerifiedView.swift in Sources */,
 				D7D0BCBF1F1B63FC00C2B071 /* ReleaseDate.swift in Sources */,
 				D7E1AEEB1EC1CECF00661D67 /* DidSetSizeDelegates.swift in Sources */,
 				D760344F1F17A5B600D71240 /* IGDBKeys.swift in Sources */,

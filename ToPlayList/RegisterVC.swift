@@ -95,6 +95,7 @@ class RegisterVC: UIViewController, IdentifiableVC {
             
             switch result {
             case .success:
+                self.sendVerificationEmail()
                 self.registerSuccesful()
             case .failure(let error):
                 switch error {
@@ -120,6 +121,22 @@ class RegisterVC: UIViewController, IdentifiableVC {
                 break
             }
         }
+    }
+    
+    private func sendVerificationEmail() {
+        VerificationService.instance.sendVerification({ result in
+            switch result {
+            case .success:
+                print("Verification email sent succesfully!")
+                break
+            case .failure(let error):
+                switch error {
+                default:
+                    print("An error occured while sending verification email after registration: \(error)")
+                    break
+                }
+            }
+        })
     }
     
     private func registerSuccesful() {

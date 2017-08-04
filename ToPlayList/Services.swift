@@ -291,9 +291,99 @@ class LoginService {
             }
         }
     }
+    
+    func reload(_ onComplete: @escaping (LoginServiceResult)->()) {
+        FIRAuth.auth()?.currentUser?.reload(completion: { error in
+            if let error = error, let errorCode = FIRAuthErrorCode(rawValue: error._code) {
+                switch errorCode {
+                case .errorCodeUserNotFound:
+                    onComplete(.failure(.userNotFound))
+                case .errorCodeUserDisabled:
+                    onComplete(.failure(.userDisabled))
+                case .errorCodeWrongPassword:
+                    onComplete(.failure(.userNotFound))
+                case .errorCodeInvalidEmail:
+                    onComplete(.failure(.invalidEmail))
+                case .errorCodeNetworkError:
+                    onComplete(.failure(.noInternet))
+                case .errorCodeUserTokenExpired:
+                    onComplete(.failure(.userTokenExpired))
+                case .errorCodeTooManyRequests:
+                    onComplete(.failure(.tooManyRequests))
+                case .errorCodeInvalidAPIKey:
+                    onComplete(.failure(.invalidAPIKey))
+                case .errorCodeAppNotAuthorized:
+                    onComplete(.failure(.invalidAPIKey))
+                case .errorCodeKeychainError:
+                    onComplete(.failure(.unknown))
+                case .errorCodeInternalError:
+                    onComplete(.failure(.firebaseError))
+                default:
+                    onComplete(.failure(.unknown))
+                }
+            } else {
+                onComplete(.success)
+            }
+        })
+    }
 }
 
 
+
+enum VerificationResult {
+    case success
+    case failure(VerificationError)
+}
+
+enum VerificationError {
+    case invalidEmail
+    case userNotFound
+    case firebaseError
+    case userDisabled
+    case tooManyRequests
+    case noInternet
+    case unknown
+}
+
+class VerificationService {
+    
+    static let instance = VerificationService()
+    
+    private init() {}
+    
+    func sendVerification(_ onComplete: @escaping (VerificationResult)->()) {
+        FIRAuth.auth()?.currentUser?.sendEmailVerification(completion: { error in
+            if let error = error, let errorCode = FIRAuthErrorCode(rawValue: error._code) {
+                switch errorCode {
+                case .errorCodeInvalidRecipientEmail:
+                    onComplete(.failure(.invalidEmail))
+                case .errorCodeInvalidEmail:
+                    onComplete(.failure(.invalidEmail))
+                case .errorCodeUserNotFound:
+                    onComplete(.failure(.userNotFound))
+                case .errorCodeNetworkError:
+                    onComplete(.failure(.noInternet))
+                case .errorCodeUserDisabled:
+                    onComplete(.failure(.userDisabled))
+                case .errorCodeTooManyRequests:
+                    onComplete(.failure(.tooManyRequests))
+                case .errorCodeAppNotAuthorized:
+                    onComplete(.failure(.firebaseError))
+                case .errorCodeInternalError:
+                    onComplete(.failure(.firebaseError))
+                case .errorCodeInvalidSender:
+                    onComplete(.failure(.firebaseError))
+                case .errorCodeInvalidMessagePayload:
+                    onComplete(.failure(.firebaseError))
+                default:
+                    onComplete(.failure(.unknown))
+                }
+            } else {
+                onComplete(.success)
+            }
+        })
+    }
+}
 
 enum ForgotPasswordResult {
     case success
