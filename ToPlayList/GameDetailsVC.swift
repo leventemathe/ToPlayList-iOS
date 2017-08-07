@@ -173,6 +173,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        setShouldSwipe()
         updateStarState {
             self.detailsLoaded.loaded[DetailsLoaded.LIST_STATE] = true
             self.attachListListeners()
@@ -182,6 +183,10 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     private func setupSwiping() {
         swipeableDetailsCover.game = game
         swipeableDetailsCover.errorHandlerDelegate = self
+    }
+    
+    private func setShouldSwipe() {
+        swipeableDetailsCover.shouldPan = ListsUser.loggedIn && ListsUser.verified
     }
     
     private func setupBadgeVC() {
@@ -253,6 +258,10 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     }
     
     private func attachListListeners() {
+        if !(ListsUser.loggedIn && ListsUser.verified) {
+            return
+        }
+        
         self.listsListenerSystem.attachListeners(withOnAddedToToPlayList: { game in
             if game == self.game {
                 self.gameInExclusiveLists.inToPlayList = true

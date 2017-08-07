@@ -41,6 +41,8 @@ class DetailsCover: UIView, DropShadowed {
     
     var game: Game!
     
+    var shouldPan = false
+    
     weak var errorHandlerDelegate: ErrorHandlerDelegate?
     
     @IBOutlet weak var coverImg: UIImageView!
@@ -166,6 +168,9 @@ class DetailsCover: UIView, DropShadowed {
     }
     
     private func panChanged() {
+        if !shouldPan {
+            return
+        }
         let currentPoint = panRecognizer.translation(in: coverImg)
         let newPosX = currentPoint.x - panStartPoint.x
         moveContent(newPosX)
