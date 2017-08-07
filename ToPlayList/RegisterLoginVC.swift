@@ -65,6 +65,7 @@ class RegisterLoginVC: UIViewController, IdentifiableVC {
         registerVC.view.frame.size = containerView.frame.size
         containerView.addSubview(registerVC.view)
         registerVC.didMove(toParentViewController: self)
+        animateVCAppearance(registerVC)
     }
     
     func setLoginContainer() {
@@ -74,6 +75,7 @@ class RegisterLoginVC: UIViewController, IdentifiableVC {
         loginVC.view.frame.size = containerView.frame.size
         containerView.addSubview(loginVC.view)
         loginVC.didMove(toParentViewController: self)
+        animateVCAppearance(loginVC)
     }
     
     func setForgotPWContainer() {
@@ -83,8 +85,16 @@ class RegisterLoginVC: UIViewController, IdentifiableVC {
         forgotPWVC.view.frame.size = containerView.frame.size
         containerView.addSubview(forgotPWVC.view)
         forgotPWVC.didMove(toParentViewController: self)
+        animateVCAppearance(forgotPWVC)
     }
 
+    private func animateVCAppearance(_ vc: UIViewController) {
+        vc.view.alpha = 0.0
+        UIView.animate(withDuration: 0.3, animations: {
+            vc.view.alpha = 1.0
+        })
+    }
+    
     func clearRegisterContainer() {
         registerVC.removeFromParentViewController()
         registerVC.view.removeFromSuperview()
