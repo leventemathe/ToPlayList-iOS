@@ -77,22 +77,13 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         view.addSubview(loadingAnimationView)
     }
     
-    private var loggedIn = false {
-        didSet {
-            tableView.reloadData()
-            if loggedIn && !listsListenerSystem.isAttached() {
-                getGamesInLists {
-                    self.attachListListeners()
-                }
-            }
-        }
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         clearStars()
-        ListsUser.instance.listenToLoggedInState(onChange: { (userid, loggedIn) in
-            self.loggedIn = loggedIn
-        })
+        if ListsUser.loggedIn && ListsUser.verified {
+            getGamesInLists {
+                self.attachListListeners()
+            }
+        }
     }
     
     private func clearStars() {
@@ -103,10 +94,12 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     override func viewDidDisappear(_ animated: Bool) {
         self.listsListenerSystem.detachListeners()
-        ListsUser.instance.stopListeningToLoggedInState()
     }
     
     private func getGamesInLists(_ onComplete: @escaping ()->()) {
+        if !(ListsUser.loggedIn && ListsUser.verified) {
+            return
+        }
         ListsList.instance.getToPlayAndPlayedList { result in
             switch result {
             case .failure:
@@ -121,6 +114,9 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     }
     
     private func attachListListeners() {
+        if !(ListsUser.loggedIn && ListsUser.verified) {
+            return
+        }
         listsListenerSystem.attachListeners(withOnAddedToToPlayList: { game in
             if self.toPlayList.add(game) {
                 self.tableView.reloadData()
@@ -218,7 +214,7 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
                 cell.update(game)
             }
             cell.updateStar(getStarState(game))
-            cell.loggedIn = loggedIn
+            cell.loggedIn = ListsUser.loggedIn && ListsUser.verified
             return cell
         }
         
