@@ -40,7 +40,6 @@
 		D72D4CA61E1479EC0070E013 /* IGDBJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72D4CA51E1479EC0070E013 /* IGDBJSON.swift */; };
 		D72E66B71E619D0800BED388 /* ToPlayListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72E66B61E619D0800BED388 /* ToPlayListVC.swift */; };
 		D72E66BA1E619D2100BED388 /* PlayedListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72E66B91E619D2100BED388 /* PlayedListVC.swift */; };
-		D744B7381F3499D70000A3F3 /* UserNotVerifiedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D744B7371F3499D70000A3F3 /* UserNotVerifiedView.swift */; };
 		D744B73A1F3499FF0000A3F3 /* UserNotVerifiedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D744B7391F3499FF0000A3F3 /* UserNotVerifiedView.xib */; };
 		D74AC7DA1E3919B700C37A90 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74AC7D91E3919B700C37A90 /* RegisterVC.swift */; };
 		D75150281E34BB9F00EDA802 /* MainTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75150271E34BB9F00EDA802 /* MainTabVC.swift */; };
@@ -89,6 +88,7 @@
 		D7E2124A1E99389000D7F455 /* ReadMoreLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E212491E99389000D7F455 /* ReadMoreLabel.swift */; };
 		D7E5AA881E2AD51A00EA1456 /* TextFieldMargin.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E5AA871E2AD51A00EA1456 /* TextFieldMargin.swift */; };
 		D7E5AA8A1E2AD60300EA1456 /* CustomClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E5AA891E2AD60300EA1456 /* CustomClearButton.swift */; };
+		D7EABAB71F384EF60009C5EA /* UserNotVerifiedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EABAB61F384EF60009C5EA /* UserNotVerifiedVC.swift */; };
 		D7F131951E2BE242004D1704 /* IdentifiableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F131941E2BE242004D1704 /* IdentifiableVC.swift */; };
 		D7F1B4C91E8A93A4006F3FA1 /* RegisterLoginHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F1B4C81E8A93A4006F3FA1 /* RegisterLoginHelper.swift */; };
 		D7F1B4CB1E8A93B4006F3FA1 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F1B4CA1E8A93B4006F3FA1 /* Login.swift */; };
@@ -156,7 +156,6 @@
 		D72D4CA51E1479EC0070E013 /* IGDBJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGDBJSON.swift; sourceTree = "<group>"; };
 		D72E66B61E619D0800BED388 /* ToPlayListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToPlayListVC.swift; sourceTree = "<group>"; };
 		D72E66B91E619D2100BED388 /* PlayedListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayedListVC.swift; sourceTree = "<group>"; };
-		D744B7371F3499D70000A3F3 /* UserNotVerifiedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNotVerifiedView.swift; sourceTree = "<group>"; };
 		D744B7391F3499FF0000A3F3 /* UserNotVerifiedView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserNotVerifiedView.xib; sourceTree = "<group>"; };
 		D74AC7D91E3919B700C37A90 /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		D75150271E34BB9F00EDA802 /* MainTabVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabVC.swift; sourceTree = "<group>"; };
@@ -207,6 +206,7 @@
 		D7E212491E99389000D7F455 /* ReadMoreLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadMoreLabel.swift; sourceTree = "<group>"; };
 		D7E5AA871E2AD51A00EA1456 /* TextFieldMargin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldMargin.swift; sourceTree = "<group>"; };
 		D7E5AA891E2AD60300EA1456 /* CustomClearButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomClearButton.swift; sourceTree = "<group>"; };
+		D7EABAB61F384EF60009C5EA /* UserNotVerifiedVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNotVerifiedVC.swift; sourceTree = "<group>"; };
 		D7F131941E2BE242004D1704 /* IdentifiableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifiableVC.swift; sourceTree = "<group>"; };
 		D7F1B4C81E8A93A4006F3FA1 /* RegisterLoginHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterLoginHelper.swift; sourceTree = "<group>"; };
 		D7F1B4CA1E8A93B4006F3FA1 /* Login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
@@ -504,7 +504,6 @@
 				D78B86721E38BC6200F1EA7C /* ListCollectionViewCell.swift */,
 				D7A0E6FC1E7BDDCD00A70989 /* ToPlayListCell.swift */,
 				D7A0E6FE1E7BDDDC00A70989 /* PlayedListCell.swift */,
-				D744B7371F3499D70000A3F3 /* UserNotVerifiedView.swift */,
 			);
 			name = Lists;
 			sourceTree = "<group>";
@@ -545,6 +544,7 @@
 		D7FADEFD1EC09F2F0006B4E4 /* Lists */ = {
 			isa = PBXGroup;
 			children = (
+				D7EABAB61F384EF60009C5EA /* UserNotVerifiedVC.swift */,
 				D719811A1E26A389005823C2 /* ListVC.swift */,
 				D7A0E7021E7BEA8A00A70989 /* SubListVC.swift */,
 				D72E66B61E619D0800BED388 /* ToPlayListVC.swift */,
@@ -854,7 +854,6 @@
 				D7CC7D0E1E3913E60027BE6F /* RegisterLoginVC.swift in Sources */,
 				D7D0BCC31F1B8CF900C2B071 /* ReleaseDateCell.swift in Sources */,
 				D7B8C86B1E2D16C700656E64 /* ErrorMessage.swift in Sources */,
-				D744B7381F3499D70000A3F3 /* UserNotVerifiedView.swift in Sources */,
 				D7D0BCBF1F1B63FC00C2B071 /* ReleaseDate.swift in Sources */,
 				D7E1AEEB1EC1CECF00661D67 /* DidSetSizeDelegates.swift in Sources */,
 				D760344F1F17A5B600D71240 /* IGDBKeys.swift in Sources */,
@@ -865,6 +864,7 @@
 				D74AC7DA1E3919B700C37A90 /* RegisterVC.swift in Sources */,
 				D7A0E7031E7BEA8A00A70989 /* SubListVC.swift in Sources */,
 				D7FE54EF1F20CBA700F2E566 /* ReleasesVC.swift in Sources */,
+				D7EABAB71F384EF60009C5EA /* UserNotVerifiedVC.swift in Sources */,
 				D7C0F9491F2A285200556AA8 /* OutTodayBadge.swift in Sources */,
 				D72E66BA1E619D2100BED388 /* PlayedListVC.swift in Sources */,
 				D709009D1EC5B89D00A316BE /* SearchCell.swift in Sources */,

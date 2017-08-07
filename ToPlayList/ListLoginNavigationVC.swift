@@ -16,7 +16,11 @@ class ListLoginNavigationVC: UINavigationController {
     
     private func pickVC() {
         if ListsUser.loggedIn {
-            viewControllers[0].performSegue(withIdentifier: "LoginToListSkip", sender: self)
+            if ListsUser.verified {
+                viewControllers[0].performSegue(withIdentifier: "RegisterLoginToLists", sender: self)
+            } else {
+                viewControllers[0].performSegue(withIdentifier: "RegisterLoginToVerification", sender: self)
+            }
         }
     }
 }

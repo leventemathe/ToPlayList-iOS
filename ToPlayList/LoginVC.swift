@@ -100,7 +100,11 @@ class LoginVC: UIViewController, IdentifiableVC {
     
     private func loginSuccesful() {
         resetInput()
-        parent!.performSegue(withIdentifier: "LoginToList", sender: self)
+        if ListsUser.verified {
+            parent!.performSegue(withIdentifier: "RegisterLoginToLists", sender: self)
+        } else {
+            parent!.performSegue(withIdentifier: "RegisterLoginToVerification", sender: self)
+        }
     }
     
     private func resetInput() {

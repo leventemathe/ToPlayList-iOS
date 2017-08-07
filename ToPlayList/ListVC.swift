@@ -11,11 +11,10 @@ import FirebaseAuth
 import FirebaseDatabase
 import NVActivityIndicatorView
 
-class ListVC: UIViewController, IdentifiableVC, UserNotVerifiedDelegate {
+class ListVC: UIViewController, IdentifiableVC {
     
     private static let WELCOME_MSG = "Welcome"
     
-    @IBOutlet weak var userNotVerifiedView: UserNotVerifiedView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var listContainerView: UIView!
     
@@ -107,7 +106,6 @@ class ListVC: UIViewController, IdentifiableVC, UserNotVerifiedDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         setupNavBar(animated)
-        setupVerification()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -117,99 +115,6 @@ class ListVC: UIViewController, IdentifiableVC, UserNotVerifiedDelegate {
     private func setupNavBar(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(false, animated: animated)
         navigationItem.hidesBackButton = true
-    }
-    
-    private func setupVerification() {
-        userNotVerifiedView.delegate = self
-        if ListsUser.verified {
-            hideUserNotVerifiedView()
-        } else {
-            showUserNotVerifiedView()
-        }
-        LoginService.instance.reload({ result in
-            switch result {
-            case .success:
-                if ListsUser.verified {
-                    self.hideUserNotVerifiedView()
-                }
-            case .failure(let error):
-                switch error {
-                default:
-                    print("An error occured while trying to verify user in view will appear: \(error)")
-                }
-            }
-        })
-
-    }
-    
-    static let SUCCESS_EMAIL_SENT = "Verification email sent."
-    static let ERROR_EMAIL_SENT = "An error occured while sending verification email after registration."
-    static let ERROR_NOT_VERIFIED = "You are not verified!"
-    
-    static let ERROR_USER_NOT_FOUND = "Invalid email or password!"
-    static let ERROR_TOKEN_EXPIRED = "User token expired!"
-    static let ERROR_NO_INTERNET = "No internet connection!"
-    static let ERROR_SERVER = "An error occured on the server. Sorry! 😞"
-    static let ERROR_TOO_MANY_REQUESTS = "Too many requests. Please slow down! 😉"
-    static let ERROR_USER_DISABLED = "User disabled."
-    static let ERROR_USER_TOKEN_EXPIRED = "User token expired. Please log in again!"
-    static let ERROR_UNKNOWN = "Unknown error!"
-    
-    func userNotVerifiedResendEmailClicked(_ onComplete: @escaping ()->()) {
-        VerificationService.instance.sendVerification({ result in
-            onComplete()
-            switch result {
-            case .success:
-                Alerts.alertSuccessWithOKButton(withMessage: ListVC.SUCCESS_EMAIL_SENT, forVC: self)
-                break
-            case .failure(let error):
-                switch error {
-                default:
-                    Alerts.alertWithOKButton(withMessage: ListVC.ERROR_EMAIL_SENT, forVC: self)
-                }
-            }
-        })
-    }
-    
-    func userNotVerifiedImVerifiedClicked(_ onComplete: @escaping ()->()) {
-        LoginService.instance.reload({ result in
-            onComplete()
-            switch result {
-            case .success:
-                if ListsUser.verified {
-                    self.hideUserNotVerifiedView()
-                } else {
-                    Alerts.alertWithOKButton(withMessage: ListVC.ERROR_NOT_VERIFIED, forVC: self)
-                }
-            case .failure(let error):
-                switch error {
-                case .noInternet:
-                    Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
-                case .firebaseError:
-                    Alerts.alertWithOKButton(withMessage: ListVC.ERROR_SERVER, forVC: self)
-                case .invalidAPIKey:
-                    Alerts.alertWithOKButton(withMessage: ListVC.ERROR_SERVER, forVC: self)
-                case .tooManyRequests:
-                    Alerts.alertWithOKButton(withMessage: ListVC.ERROR_TOO_MANY_REQUESTS, forVC: self)
-                case .userDisabled:
-                    Alerts.alertWithOKButton(withMessage: ListVC.ERROR_USER_DISABLED, forVC: self)
-                case .userTokenExpired:
-                    Alerts.alertWithOKButton(withMessage: ListVC.ERROR_USER_TOKEN_EXPIRED, forVC: self)
-                case .unknown:
-                    Alerts.alertWithOKButton(withMessage: ListVC.ERROR_UNKNOWN, forVC: self)
-                default:
-                    Alerts.alertWithOKButton(withMessage: ListVC.ERROR_USER_NOT_FOUND, forVC: self)
-                }
-            }
-        })
-    }
-    
-    private func showUserNotVerifiedView() {
-        userNotVerifiedView.isHidden = false
-    }
-    
-    private func hideUserNotVerifiedView() {
-        userNotVerifiedView.isHidden = true
     }
     
     @IBOutlet weak var welcomLbl: UILabel!

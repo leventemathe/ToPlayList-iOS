@@ -141,7 +141,7 @@ class RegisterVC: UIViewController, IdentifiableVC {
     
     private func registerSuccesful() {
         resetInput()
-        self.parent!.performSegue(withIdentifier: "LoginToList", sender: self)
+        self.parent!.performSegue(withIdentifier: "RegisterLoginToVerification", sender: self)
     }
     
     private func resetInput() {

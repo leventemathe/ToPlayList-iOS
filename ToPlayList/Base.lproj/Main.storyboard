@@ -314,7 +314,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AHD-U1-sds">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="efa-6i-V9F" customClass="DetailsBigScreenshot" customModule="ToPlayList" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
@@ -548,7 +548,7 @@
                                         </constraints>
                                     </view>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8NQ-RT-MJ5">
-                                        <rect key="frame" x="0.0" y="274" width="320" height="245"/>
+                                        <rect key="frame" x="0.0" y="274" width="320" height="294"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A8L-fO-z1X">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="550.5"/>
@@ -814,7 +814,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dGx-UB-xEE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4668.75" y="227.11267605633802"/>
+            <point key="canvasLocation" x="4841" y="-217"/>
         </scene>
         <!--Newest-->
         <scene sceneID="fFL-jC-ijf">
@@ -927,13 +927,125 @@
                         <outlet property="containerView" destination="pcw-c8-sZz" id="HSG-KD-GCy"/>
                         <outlet property="segmentedControl" destination="1Lp-75-qir" id="zEG-BK-ThG"/>
                         <outlet property="stackViewTopConstraint" destination="nFD-uQ-4nD" id="C9J-0X-Tmz"/>
-                        <segue destination="Ncq-W1-497" kind="show" identifier="LoginToList" id="d3v-Gf-G1f"/>
-                        <segue destination="Ncq-W1-497" kind="show" identifier="LoginToListSkip" animates="NO" id="FhM-4C-LJm"/>
+                        <segue destination="ijO-f7-qfb" kind="show" identifier="RegisterLoginToVerification" id="733-oz-8ZK"/>
+                        <segue destination="Ncq-W1-497" kind="show" identifier="RegisterLoginToLists" id="VD6-Jd-2Ln"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qth-VT-qxu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1942.5" y="1683.8028169014085"/>
+        </scene>
+        <!--Verification-->
+        <scene sceneID="jCJ-Iv-Qhm">
+            <objects>
+                <viewController restorationIdentifier="UserNotVerifiedVC" storyboardIdentifier="UserNotVerifiedVC" title="Verification" id="ijO-f7-qfb" customClass="UserNotVerifiedVC" customModule="ToPlayList" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="16P-lM-FrO"/>
+                        <viewControllerLayoutGuide type="bottom" id="95I-E8-mPW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3Ha-Oj-T58">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" restorationIdentifier="UserNotVerifiedView" translatesAutoresizingMaskIntoConstraints="NO" id="d3b-Hf-sGF">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <imageView multipleTouchEnabled="YES" userInteractionEnabled="NO" alpha="0.10000000149011612" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="verification_page_background" translatesAutoresizingMaskIntoConstraints="NO" id="1va-kE-geC">
+                                        <rect key="frame" x="-60" y="-60" width="440" height="688"/>
+                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="eV9-7L-V6j">
+                                        <rect key="frame" x="16" y="147" width="288" height="274.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ALMOST THERE!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k48-OY-azy">
+                                                <rect key="frame" x="0.0" y="0.0" width="288" height="124"/>
+                                                <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="62"/>
+                                                <color key="textColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please check your email to verify your account!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BYf-hz-V3H">
+                                                <rect key="frame" x="0.0" y="132" width="288" height="46.5"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gYg-pn-aLR" customClass="LoginSceneButtonLogin" customModule="ToPlayList" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="186.5" width="288" height="40"/>
+                                                <color key="backgroundColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="5Cm-qQ-A0f"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="20"/>
+                                                <state key="normal" title="Resend email">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="resendEmailClicked:" destination="ijO-f7-qfb" eventType="touchUpInside" id="uFx-KN-9AL"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AMh-rt-6ut" customClass="LoginSceneButtonLogin" customModule="ToPlayList" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="234.5" width="288" height="40"/>
+                                                <color key="backgroundColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="tTx-8E-WZh"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="20"/>
+                                                <state key="normal" title="I'm verified">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="imVerifiedClicked:" destination="ijO-f7-qfb" eventType="touchUpInside" id="HJ9-15-xRe"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can start using the list features after the verification is complete." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u6p-EU-1UO">
+                                        <rect key="frame" x="8" y="465" width="304" height="38.5"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="eV9-7L-V6j" firstAttribute="leading" secondItem="d3b-Hf-sGF" secondAttribute="leading" constant="16" id="1hL-Mb-Wcr"/>
+                                    <constraint firstAttribute="trailing" secondItem="eV9-7L-V6j" secondAttribute="trailing" constant="16" id="478-XZ-Qpx"/>
+                                    <constraint firstItem="u6p-EU-1UO" firstAttribute="leading" secondItem="d3b-Hf-sGF" secondAttribute="leading" constant="8" id="API-70-DWK"/>
+                                    <constraint firstAttribute="bottom" secondItem="1va-kE-geC" secondAttribute="bottom" constant="-60" id="Aq2-uS-3qI"/>
+                                    <constraint firstItem="1va-kE-geC" firstAttribute="top" secondItem="d3b-Hf-sGF" secondAttribute="top" constant="-60" id="IUV-qS-IA0"/>
+                                    <constraint firstAttribute="trailing" secondItem="1va-kE-geC" secondAttribute="trailing" constant="-60" id="Thz-8K-8c9"/>
+                                    <constraint firstAttribute="bottom" secondItem="u6p-EU-1UO" secondAttribute="bottom" constant="64.5" id="dit-X2-nSW"/>
+                                    <constraint firstItem="1va-kE-geC" firstAttribute="leading" secondItem="d3b-Hf-sGF" secondAttribute="leading" constant="-60" id="fz3-hJ-Ldo"/>
+                                    <constraint firstAttribute="trailing" secondItem="u6p-EU-1UO" secondAttribute="trailing" constant="8" id="wdU-c8-e2g"/>
+                                    <constraint firstItem="eV9-7L-V6j" firstAttribute="centerY" secondItem="d3b-Hf-sGF" secondAttribute="centerY" id="yse-I7-qFf"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="d3b-Hf-sGF" secondAttribute="trailing" id="Cwc-cJ-KdZ"/>
+                            <constraint firstItem="d3b-Hf-sGF" firstAttribute="leading" secondItem="3Ha-Oj-T58" secondAttribute="leading" id="ISh-hg-Daa"/>
+                            <constraint firstItem="d3b-Hf-sGF" firstAttribute="top" secondItem="3Ha-Oj-T58" secondAttribute="top" id="bHg-uT-B0n"/>
+                            <constraint firstAttribute="bottom" secondItem="d3b-Hf-sGF" secondAttribute="bottom" id="m2y-PL-X97"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Verification" id="cv9-qG-9c4">
+                        <barButtonItem key="leftBarButtonItem" image="logout" id="NbD-Yw-ArH">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="logoutClicked:" destination="ijO-f7-qfb" id="Mqa-Rt-dRz"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="backgroundView" destination="1va-kE-geC" id="bwI-qf-Gw0"/>
+                        <outlet property="imVerifiedButton" destination="AMh-rt-6ut" id="WWD-Bp-wYp"/>
+                        <outlet property="resendEmailButton" destination="gYg-pn-aLR" id="3Hm-bt-GKJ"/>
+                        <segue destination="Ncq-W1-497" kind="show" identifier="VerificationToLists" id="5Jp-eg-eAU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hjI-CC-yeJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2948" y="1684"/>
         </scene>
         <!--Lists-->
         <scene sceneID="tZL-za-AC7">
@@ -973,11 +1085,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" restorationIdentifier="UserNotVerifiedView" translatesAutoresizingMaskIntoConstraints="NO" id="YVH-qQ-RPZ" customClass="UserNotVerifiedView" customModule="ToPlayList" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -985,16 +1092,12 @@
                             <constraint firstItem="WOa-04-8pa" firstAttribute="leading" secondItem="MJu-JL-nvO" secondAttribute="leadingMargin" priority="999" constant="8" id="7F2-De-gkj"/>
                             <constraint firstItem="zCK-4h-43t" firstAttribute="top" secondItem="65Q-Zg-Uje" secondAttribute="bottom" id="Cf7-Jx-3Tu"/>
                             <constraint firstItem="WOa-04-8pa" firstAttribute="top" secondItem="2oc-jG-z9Z" secondAttribute="bottom" constant="8" id="EH2-p6-jjP"/>
-                            <constraint firstItem="YVH-qQ-RPZ" firstAttribute="top" secondItem="MJu-JL-nvO" secondAttribute="top" id="F7Y-6b-ecN"/>
                             <constraint firstItem="Rtj-xj-A9Z" firstAttribute="leading" secondItem="MJu-JL-nvO" secondAttribute="leading" constant="-60" id="Gsr-0K-WjZ"/>
-                            <constraint firstAttribute="bottom" secondItem="YVH-qQ-RPZ" secondAttribute="bottom" id="SAL-9k-XtK"/>
                             <constraint firstAttribute="trailingMargin" secondItem="WOa-04-8pa" secondAttribute="trailing" priority="999" constant="8" id="SFX-aa-7tV"/>
                             <constraint firstItem="65Q-Zg-Uje" firstAttribute="leading" secondItem="MJu-JL-nvO" secondAttribute="leading" id="VfA-4Q-CXf"/>
                             <constraint firstAttribute="trailing" secondItem="Rtj-xj-A9Z" secondAttribute="trailing" constant="-60" id="XkO-t6-hKg"/>
                             <constraint firstItem="zCK-4h-43t" firstAttribute="top" secondItem="Rtj-xj-A9Z" secondAttribute="bottom" constant="-60" id="esH-P8-uUq"/>
                             <constraint firstItem="o1g-ft-PLL" firstAttribute="top" secondItem="WOa-04-8pa" secondAttribute="bottom" constant="8" id="h6y-EI-4LQ"/>
-                            <constraint firstAttribute="trailing" secondItem="YVH-qQ-RPZ" secondAttribute="trailing" id="haY-v4-RpD"/>
-                            <constraint firstItem="YVH-qQ-RPZ" firstAttribute="leading" secondItem="MJu-JL-nvO" secondAttribute="leading" id="pXh-dv-nhB"/>
                             <constraint firstItem="65Q-Zg-Uje" firstAttribute="top" secondItem="o1g-ft-PLL" secondAttribute="bottom" constant="20" id="qiM-n9-3AO"/>
                             <constraint firstItem="Rtj-xj-A9Z" firstAttribute="top" secondItem="2oc-jG-z9Z" secondAttribute="bottom" constant="-60" id="wA0-gG-HKz"/>
                             <constraint firstAttribute="trailing" secondItem="65Q-Zg-Uje" secondAttribute="trailing" id="wts-S8-ZO6"/>
@@ -1012,7 +1115,6 @@
                         <outlet property="backgroundStarImageView" destination="Rtj-xj-A9Z" id="TaW-1f-seD"/>
                         <outlet property="listContainerView" destination="65Q-Zg-Uje" id="qCc-Cz-RBu"/>
                         <outlet property="segmentedControl" destination="o1g-ft-PLL" id="Tfl-KU-dbl"/>
-                        <outlet property="userNotVerifiedView" destination="YVH-qQ-RPZ" id="dJn-Bi-1HQ"/>
                         <outlet property="welcomLbl" destination="WOa-04-8pa" id="kwJ-1d-Kou"/>
                         <outlet property="welcomeLblContainerLeadeingConstraint" destination="7F2-De-gkj" id="86T-jU-7a8"/>
                         <outlet property="welcomeLblContainerTrailingConstraint" destination="SFX-aa-7tV" id="VPw-Va-szP"/>
@@ -1020,7 +1122,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nX4-Lq-TDR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2818.125" y="1682.7464788732395"/>
+            <point key="canvasLocation" x="3840" y="1684"/>
         </scene>
         <!--Upcoming-->
         <scene sceneID="5l0-6m-Tuc">
@@ -1585,7 +1687,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yYQ-mY-UiN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3676.875" y="1200"/>
+            <point key="canvasLocation" x="4628" y="1179"/>
         </scene>
         <!--BadgeVC-->
         <scene sceneID="PKs-2h-Mhg">
@@ -1652,7 +1754,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WsI-gO-wfd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4637" y="772"/>
+            <point key="canvasLocation" x="5055" y="259"/>
         </scene>
         <!--Image CarouselVC-->
         <scene sceneID="O0x-YV-hd2">
@@ -1715,7 +1817,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ztd-z3-MZq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5385" y="771"/>
+            <point key="canvasLocation" x="5784" y="78"/>
         </scene>
         <!--Played ListVC-->
         <scene sceneID="CU3-BN-FTg">
@@ -1890,7 +1992,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YvZ-W2-Scd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3678" y="1881"/>
+            <point key="canvasLocation" x="4628" y="1895"/>
         </scene>
         <!--Release DateVC-->
         <scene sceneID="cMV-rG-VmD">
@@ -1970,7 +2072,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uCv-P3-EgY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5501.25" y="482.74647887323943"/>
+            <point key="canvasLocation" x="5786" y="-136"/>
         </scene>
         <!--Search IconVC-->
         <scene sceneID="3c4-ZU-ch1">
@@ -2020,7 +2122,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your recent searches" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e1l-ht-syg">
-                                        <rect key="frame" x="8" y="8" width="312" height="15"/>
+                                        <rect key="frame" x="8" y="7.5" width="312" height="15"/>
                                         <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -2285,9 +2387,10 @@
         <image name="tab_bar_icon_upcoming" width="21" height="20"/>
         <image name="tab_bar_icon_upcoming_selected" width="21" height="20"/>
         <image name="to_play_list_bg" width="689" height="713"/>
+        <image name="verification_page_background" width="375" height="425"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jAa-me-mvq"/>
-        <segue reference="FhM-4C-LJm"/>
+        <segue reference="5Jp-eg-eAU"/>
+        <segue reference="6Wm-R3-zaj"/>
     </inferredMetricsTieBreakers>
 </document>
