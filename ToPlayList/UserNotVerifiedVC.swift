@@ -84,7 +84,7 @@ class UserNotVerifiedVC: UIViewController {
     @IBAction func logoutClicked(_ sender: UIBarButtonItem) {
         Alerts.alertWithYesAndNoButtons(withTitle: "Log out", withMessage: "Are you sure, you want to log out?", forVC: self, withOnYes: {
             do {
-                try FIRAuth.auth()?.signOut()
+                try Auth.auth().signOut()
                 _ = self.navigationController?.popToRootViewController(animated: true)
             } catch _ as NSError {
                 Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_ERROR, forVC: self)

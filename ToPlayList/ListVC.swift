@@ -89,7 +89,7 @@ class ListVC: UIViewController, IdentifiableVC {
                 ToPlayListNotificationSystem.teardown()
                 self.toPLayListVC.removeListeners()
                 self.playedListVC.removeListeners()
-                try FIRAuth.auth()?.signOut()
+                try Auth.auth().signOut()
                 self.backgroundStarImageView.image = nil // so that it doesn't bleed into login screen while removeing vc from stack
                 _ = self.navigationController?.popToRootViewController(animated: true)
             } catch _ as NSError {

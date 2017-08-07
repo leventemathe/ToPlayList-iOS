@@ -29,7 +29,7 @@ class ListsUser {
     private init() {}
     
     func createUserFromAuthenticated(_ onComplete: @escaping (ListsUserResult)->(), withUsername username: String) {
-        guard let uid = FIRAuth.auth()?.currentUser?.uid, let providerid = FIRAuth.auth()?.currentUser?.providerID else {
+        guard let uid = Auth.auth().currentUser?.uid, let providerid = Auth.auth().currentUser?.providerID else {
             onComplete(.failure(.unknownError))
             return
         }
@@ -128,7 +128,7 @@ class ListsUser {
     }
     
     func deleteLoggedInUserCompletely(_ userName: String, withOnComplete onComplete: @escaping ()->()) {
-        guard let uid = FIRAuth.auth()?.currentUser?.uid else {
+        guard let uid = Auth.auth().currentUser?.uid else {
             return
         }
         removeUser(uid) {
@@ -137,7 +137,7 @@ class ListsUser {
                 print("removed username")
                 self.removeLists(uid) {
                     print("removed user lists")
-                    FIRAuth.auth()?.currentUser?.delete { error in
+                    Auth.auth().currentUser?.delete { error in
                         if error != nil {
                             print("An error happened while trying to delete user: \(error.debugDescription)")
                         }
@@ -151,24 +151,24 @@ class ListsUser {
     }
     
     func deleteLoggedInUserBeforeFullyCreated() {
-        FIRAuth.auth()?.currentUser?.delete { error in
+        Auth.auth().currentUser?.delete { error in
             // TODO what should i do here?
         }
     }
     
     static var loggedIn: Bool {
-        return FIRAuth.auth()?.currentUser != nil
+        return Auth.auth().currentUser != nil
     }
     
     static var verified: Bool {
-        if let verified = FIRAuth.auth()?.currentUser?.isEmailVerified {
+        if let verified = Auth.auth().currentUser?.isEmailVerified {
             return verified
         }
         return false
     }
     
     static var userid: String? {
-        if let uid = FIRAuth.auth()?.currentUser?.uid {
+        if let uid = Auth.auth().currentUser?.uid {
             return uid
         }
         return nil
@@ -203,7 +203,7 @@ struct ListsList {
     }
     
     private func createList(_ onComplete: @escaping (ListsListResult<String>)->(), withType type: String) {
-        guard let uid = FIRAuth.auth()?.currentUser?.uid else {
+        guard let uid = Auth.auth().currentUser?.uid else {
             onComplete(.failure(.unknownError))
             return
         }
@@ -579,7 +579,7 @@ struct ListsList {
         listenerAttached(.succes(ListsListenerReference(handle, forReference: ref)))
     }
     
-    private func getEventType(_ action: ListsListenerAction) -> FIRDataEventType {
+    private func getEventType(_ action: ListsListenerAction) -> DataEventType {
         switch action {
         case .add:
             return .childAdded
@@ -596,14 +596,14 @@ enum ListsListenerAction {
 
 struct ListsListenerReference {
     
-    private let handle: FIRDatabaseHandle
-    private let reference: FIRDatabaseReference
+    private let handle: DatabaseHandle
+    private let reference: DatabaseReference
     
     func removeListener() {
         reference.removeObserver(withHandle: handle)
     }
     
-    init(_ handle: FIRDatabaseHandle, forReference reference: FIRDatabaseReference) {
+    init(_ handle: DatabaseHandle, forReference reference: DatabaseReference) {
         self.handle = handle
         self.reference = reference
     }

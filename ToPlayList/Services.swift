@@ -156,18 +156,18 @@ class RegisterService {
             onComplete(.failure(.invalidEmail))
             return
         }
-        FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
-            if let error = error, let errorCode = FIRAuthErrorCode(rawValue: error._code) {
+        Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
+            if let error = error, let errorCode = AuthErrorCode(rawValue: error._code) {
                 switch errorCode {
-                case .errorCodeNetworkError:
+                case .networkError:
                     onComplete(.failure(.noInternet))
-                case .errorCodeTooManyRequests:
+                case .tooManyRequests:
                     onComplete(.failure(.tooManyRequests))
-                case .errorCodeEmailAlreadyInUse:
+                case .emailAlreadyInUse:
                     onComplete(.failure(.emailAlreadyInUse))
-                case .errorCodeInvalidEmail:
+                case .invalidEmail:
                     onComplete(.failure(.invalidEmail))
-                case .errorCodeWeakPassword:
+                case .weakPassword:
                     onComplete(.failure(.passwordTooWeak))
                 default:
                     onComplete(.failure(.unknown))
@@ -258,30 +258,30 @@ class LoginService {
     }
     
     func login(_ email: String, withPassword password: String, withOnComplete onComplete: @escaping (LoginServiceResult)->()) {
-        FIRAuth.auth()?.signIn(withEmail: email, password: password) { (user, error) in
-            if let error = error, let errorCode = FIRAuthErrorCode(rawValue: error._code) {
+        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+            if let error = error, let errorCode = AuthErrorCode(rawValue: error._code) {
                 switch errorCode {
-                case .errorCodeUserNotFound:
+                case .userNotFound:
                     onComplete(.failure(.userNotFound))
-                case .errorCodeUserDisabled:
+                case .userDisabled:
                     onComplete(.failure(.userDisabled))
-                case .errorCodeWrongPassword:
+                case .wrongPassword:
                     onComplete(.failure(.userNotFound))
-                case .errorCodeInvalidEmail:
+                case .invalidEmail:
                     onComplete(.failure(.invalidEmail))
-                case .errorCodeNetworkError:
+                case .networkError:
                     onComplete(.failure(.noInternet))
-                case .errorCodeUserTokenExpired:
+                case .userTokenExpired:
                     onComplete(.failure(.userTokenExpired))
-                case .errorCodeTooManyRequests:
+                case .tooManyRequests:
                     onComplete(.failure(.tooManyRequests))
-                case .errorCodeInvalidAPIKey:
+                case .invalidAPIKey:
                     onComplete(.failure(.invalidAPIKey))
-                case .errorCodeAppNotAuthorized:
+                case .appNotAuthorized:
                     onComplete(.failure(.invalidAPIKey))
-                case .errorCodeKeychainError:
+                case .keychainError:
                     onComplete(.failure(.unknown))
-                case .errorCodeInternalError:
+                case .internalError:
                     onComplete(.failure(.firebaseError))
                 default:
                     onComplete(.failure(.unknown))
@@ -293,30 +293,30 @@ class LoginService {
     }
     
     func reload(_ onComplete: @escaping (LoginServiceResult)->()) {
-        FIRAuth.auth()?.currentUser?.reload(completion: { error in
-            if let error = error, let errorCode = FIRAuthErrorCode(rawValue: error._code) {
+        Auth.auth().currentUser?.reload(completion: { error in
+            if let error = error, let errorCode = AuthErrorCode(rawValue: error._code) {
                 switch errorCode {
-                case .errorCodeUserNotFound:
+                case .userNotFound:
                     onComplete(.failure(.userNotFound))
-                case .errorCodeUserDisabled:
+                case .userDisabled:
                     onComplete(.failure(.userDisabled))
-                case .errorCodeWrongPassword:
+                case .wrongPassword:
                     onComplete(.failure(.userNotFound))
-                case .errorCodeInvalidEmail:
+                case .invalidEmail:
                     onComplete(.failure(.invalidEmail))
-                case .errorCodeNetworkError:
+                case .networkError:
                     onComplete(.failure(.noInternet))
-                case .errorCodeUserTokenExpired:
+                case .userTokenExpired:
                     onComplete(.failure(.userTokenExpired))
-                case .errorCodeTooManyRequests:
+                case .tooManyRequests:
                     onComplete(.failure(.tooManyRequests))
-                case .errorCodeInvalidAPIKey:
+                case .invalidAPIKey:
                     onComplete(.failure(.invalidAPIKey))
-                case .errorCodeAppNotAuthorized:
+                case .appNotAuthorized:
                     onComplete(.failure(.invalidAPIKey))
-                case .errorCodeKeychainError:
+                case .keychainError:
                     onComplete(.failure(.unknown))
-                case .errorCodeInternalError:
+                case .internalError:
                     onComplete(.failure(.firebaseError))
                 default:
                     onComplete(.failure(.unknown))
@@ -352,28 +352,28 @@ class VerificationService {
     private init() {}
     
     func sendVerification(_ onComplete: @escaping (VerificationResult)->()) {
-        FIRAuth.auth()?.currentUser?.sendEmailVerification(completion: { error in
-            if let error = error, let errorCode = FIRAuthErrorCode(rawValue: error._code) {
+        Auth.auth().currentUser?.sendEmailVerification(completion: { error in
+            if let error = error, let errorCode = AuthErrorCode(rawValue: error._code) {
                 switch errorCode {
-                case .errorCodeInvalidRecipientEmail:
+                case .invalidRecipientEmail:
                     onComplete(.failure(.invalidEmail))
-                case .errorCodeInvalidEmail:
+                case .invalidEmail:
                     onComplete(.failure(.invalidEmail))
-                case .errorCodeUserNotFound:
+                case .userNotFound:
                     onComplete(.failure(.userNotFound))
-                case .errorCodeNetworkError:
+                case .networkError:
                     onComplete(.failure(.noInternet))
-                case .errorCodeUserDisabled:
+                case .userDisabled:
                     onComplete(.failure(.userDisabled))
-                case .errorCodeTooManyRequests:
+                case .tooManyRequests:
                     onComplete(.failure(.tooManyRequests))
-                case .errorCodeAppNotAuthorized:
+                case .appNotAuthorized:
                     onComplete(.failure(.firebaseError))
-                case .errorCodeInternalError:
+                case .internalError:
                     onComplete(.failure(.firebaseError))
-                case .errorCodeInvalidSender:
+                case .invalidSender:
                     onComplete(.failure(.firebaseError))
-                case .errorCodeInvalidMessagePayload:
+                case .invalidMessagePayload:
                     onComplete(.failure(.firebaseError))
                 default:
                     onComplete(.failure(.unknown))
@@ -430,28 +430,28 @@ class ForgotPasswordService {
     }
     
     func sendRequest(_ email: String, withOnComplete onComplete: @escaping (ForgotPasswordResult)->()) {
-        FIRAuth.auth()?.sendPasswordReset(withEmail: email, completion: { error in
-            if let error = error, let errorCode = FIRAuthErrorCode(rawValue: error._code) {
+        Auth.auth().sendPasswordReset(withEmail: email, completion: { error in
+            if let error = error, let errorCode = AuthErrorCode(rawValue: error._code) {
                 switch errorCode {
-                case .errorCodeInvalidRecipientEmail:
+                case .invalidRecipientEmail:
                     onComplete(.failure(.invalidEmail))
-                case .errorCodeInvalidEmail:
+                case .invalidEmail:
                     onComplete(.failure(.invalidEmail))
-                case .errorCodeUserNotFound:
+                case .userNotFound:
                     onComplete(.failure(.userNotFound))
-                case .errorCodeNetworkError:
+                case .networkError:
                     onComplete(.failure(.noInternet))
-                case .errorCodeUserDisabled:
+                case .userDisabled:
                     onComplete(.failure(.userDisabled))
-                case .errorCodeTooManyRequests:
+                case .tooManyRequests:
                     onComplete(.failure(.tooManyRequests))
-                case .errorCodeAppNotAuthorized:
+                case .appNotAuthorized:
                     onComplete(.failure(.firebaseError))
-                case .errorCodeInternalError:
+                case .internalError:
                     onComplete(.failure(.firebaseError))
-                case .errorCodeInvalidSender:
+                case .invalidSender:
                     onComplete(.failure(.firebaseError))
-                case .errorCodeInvalidMessagePayload:
+                case .invalidMessagePayload:
                     onComplete(.failure(.firebaseError))
                 default:
                     onComplete(.failure(.unknown))

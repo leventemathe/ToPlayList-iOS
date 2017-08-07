@@ -10,7 +10,7 @@ import FirebaseDatabase
 
 struct ListsEndpoints {
 
-    static let BASE = FIRDatabase.database().reference()
+    static let BASE = Database.database().reference()
     static let USERS = BASE.child("users")
     static let USERNAMES = BASE.child("usernames")
     static let LISTS = BASE.child("lists")
