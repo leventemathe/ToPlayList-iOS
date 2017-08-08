@@ -54,7 +54,7 @@ class UserNotVerifiedVC: UIViewController {
             switch result {
             case .success:
                 if ListsUser.verified {
-                    self.performSegue(withIdentifier: "VerificationToLists", sender: self)
+                    self.verificationSuccessful()
                 } else {
                     Alerts.alertWithOKButton(withMessage: UserNotVerifiedVC.ERROR_NOT_VERIFIED, forVC: self)
                 }
@@ -90,6 +90,21 @@ class UserNotVerifiedVC: UIViewController {
                 Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_ERROR, forVC: self)
             }
         })
+    }
+    
+    private func verificationSuccessful() {
+        if let uid = ListsUser.userid {
+            ListsUser.instance.createListsForUser(uid, withOnComplete: { result in
+                switch result {
+                case .success:
+                    self.performSegue(withIdentifier: "VerificationToLists", sender: self)
+                case .failure(_):
+                    Alerts.alertWithOKButton(withMessage: UserNotVerifiedVC.ERROR_UNKNOWN, forVC: self)
+                }
+            })
+        } else {
+            Alerts.alertWithOKButton(withMessage: UserNotVerifiedVC.ERROR_UNKNOWN, forVC: self)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
