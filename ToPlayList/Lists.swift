@@ -156,6 +156,10 @@ struct ListsList {
     
     private init() {}
     
+    func getKeyFrom(game: Game) -> String {
+        return "\(game.provider)\(game.id)"
+    }
+    
     func addGameToToPlayList(_ onComplete: @escaping (ListsListResult<String>)->(), thisGame game: Game) {
         addGameToListDeleteFromOther(onComplete, thisGame: game, withType: ListsEndpoints.List.TO_PLAY_LIST)
     }
@@ -174,7 +178,7 @@ struct ListsList {
             return
         }
         let addType = type == ListsEndpoints.List.TO_PLAY_LIST ? ListsEndpoints.List.TO_PLAY_LIST : ListsEndpoints.List.PLAYED_LIST
-        let removeType = type == ListsEndpoints.List.TO_PLAY_LIST ? ListsEndpoints.List.PLAYED_LIST : ListsEndpoints.List.PLAYED_LIST
+        let removeType = addType == ListsEndpoints.List.TO_PLAY_LIST ? ListsEndpoints.List.PLAYED_LIST : ListsEndpoints.List.TO_PLAY_LIST
         
         var done = (add: false, remove: false)
         var errors: (add: ListsListError?, remove: ListsListError?)  = (add: nil, remove: nil)
@@ -183,7 +187,7 @@ struct ListsList {
         let covers = self.getCovers(game)
         let values: [String: Any] = [ListsEndpoints.Game.PROVIDER: game.provider, ListsEndpoints.Game.PROVIDER_ID: game.id, ListsEndpoints.Game.NAME: game.name, ListsEndpoints.Game.COVER_SMALL_URL: covers.small as Any, ListsEndpoints.Game.COVER_BIG_URL: covers.big as Any, ListsEndpoints.Game.FIRST_RELEASE_DATE: game.firstReleaseDate as Any, ListsEndpoints.Common.TIMESTAMP: timestamp]
         
-        ListsEndpoints.LISTS.child(uid).child(addType).updateChildValues(values, withCompletionBlock: { (error, ref) in
+        ListsEndpoints.LISTS.child(uid).child(addType).child(ListsEndpoints.List.GAMES).child(getKeyFrom(game: game)).updateChildValues(values, withCompletionBlock: { (error, ref) in
             if error != nil {
                 errors.add = .unknown
             }
@@ -198,15 +202,16 @@ struct ListsList {
                 }
             }
         })
-        ListsEndpoints.LISTS.child(uid).child(removeType).removeValue(completionBlock:  { (error, ref) in
+        
+        ListsEndpoints.LISTS.child(uid).child(removeType).child(ListsEndpoints.List.GAMES).child(getKeyFrom(game: game)).removeValue(completionBlock: { (error, ref) in
             if error != nil {
                 errors.remove = .unknown
             }
             done.remove = true
             if done.add {
-                if let error = errors.add {
+                if let error = errors.remove {
                     onComplete(.failure(error))
-                } else if let error = errors.remove {
+                } else if let error = errors.add {
                     onComplete(.failure(error))
                 } else {
                     onComplete(.success(""))
@@ -357,7 +362,7 @@ struct ListsList {
             return
         }
         
-        ListsEndpoints.LISTS.child(uid).child(type).child(ListsEndpoints.List.GAMES).removeValue(completionBlock: { (error, ref) in
+        ListsEndpoints.LISTS.child(uid).child(type).child(ListsEndpoints.List.GAMES).child(getKeyFrom(game: game)).removeValue(completionBlock: { (error, ref) in
             if error != nil {
                 onComplete(.failure(.unknown))
             } else {
@@ -372,8 +377,8 @@ struct ListsList {
             return
         }
         
-        let values: [String: Any] = ["\(ListsEndpoints.List.TO_PLAY_LIST)": Optional<String>.none as Any,
-                                     "\(ListsEndpoints.List.PLAYED_LIST)": Optional<String>.none as Any]
+        let values: [String: Any] = ["\(ListsEndpoints.List.TO_PLAY_LIST)/\(ListsEndpoints.List.GAMES)/\(getKeyFrom(game: game))": Optional<String>.none as Any,
+                                     "\(ListsEndpoints.List.PLAYED_LIST)/\(ListsEndpoints.List.GAMES)/\(getKeyFrom(game: game))": Optional<String>.none as Any]
         
         ListsEndpoints.LISTS.child(uid).updateChildValues(values, withCompletionBlock: { (error, ref) in
             if error != nil {
@@ -400,7 +405,6 @@ struct ListsList {
         listenToList(ListsEndpoints.List.PLAYED_LIST, withAction: .remove, withListenerAttached: listenerAttached, withOnChange: onChange)
     }
     
-    // Get list id then call method that attaches observer
     func listenToList(_ type: String, withAction action: ListsListenerAction, withListenerAttached listenerAttached: @escaping (ListsListResult<ListsListenerReference>)->(), withOnChange onChange: @escaping (ListsListResult<Game>)->()) {
         guard let uid = ListsUser.userid else {
             listenerAttached(.failure(.userLoggedOut))
