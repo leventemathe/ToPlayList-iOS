@@ -84,7 +84,7 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
     private func listenToToPlayList(_ action: ListsListenerAction, withOnChange onChange: @escaping (Game)->()) {
         ListsList.instance.listenToList(ListsEndpoints.List.TO_PLAY_LIST, withAction: action, withListenerAttached: { result in
             switch result {
-            case .succes(let ref):
+            case .success(let ref):
                 self.listListenerAttachmentSuccesful(action, forReference: ref)
             case .failure(let error):
                 switch error {
@@ -94,7 +94,7 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
             }
         }, withOnChange: { result in
             switch result {
-            case .succes(let game):
+            case .success(let game):
                 onChange(game)
             case .failure(let error):
                 switch error {

@@ -248,7 +248,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     func starTapped() {
         ListsList.instance.removeGameFromToPlayAndPlayedList({ result in
             switch result {
-            case .succes(_):
+            case .success(_):
                 self.gameInExclusiveLists.inToPlayList = false
                 self.gameInExclusiveLists.inPlayedList = false
             case .failure(_):
@@ -296,7 +296,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
             switch result {
             case .failure:
                 Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_LISTS_ERROR, forVC: self)
-            case .succes(let lists):
+            case .success(let lists):
                 if lists.toPlay.contains(self.game) {
                     self.gameInExclusiveLists.inToPlayList = true
                 } else if lists.played.contains(self.game) {

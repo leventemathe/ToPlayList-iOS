@@ -104,7 +104,7 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             switch result {
             case .failure:
                 Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_LISTS_ERROR, forVC: self)
-            case .succes(let lists):
+            case .success(let lists):
                 self.toPlayList.add(lists.toPlay)
                 self.playedList.add(lists.played)
             }

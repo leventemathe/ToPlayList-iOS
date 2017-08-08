@@ -19,7 +19,7 @@ enum ListsUserResult {
 enum ListsUserError {
     case usernameAlreadyInUse
     case permissionDenied
-    case unknownError
+    case unknown
 }
 
 class ListsUser {
@@ -30,7 +30,7 @@ class ListsUser {
     
     func createUserFromAuthenticated(_ onComplete: @escaping (ListsUserResult)->(), withUsername username: String) {
         guard let uid = Auth.auth().currentUser?.uid, let providerid = Auth.auth().currentUser?.providerID else {
-            onComplete(.failure(.unknownError))
+            onComplete(.failure(.unknown))
             return
         }
         
@@ -51,29 +51,28 @@ class ListsUser {
                 onComplete(.failure(.usernameAlreadyInUse))
                 return
             } else {
-                let toPlayListID = ListsEndpoints.LISTS.childByAutoId().key
-                let playedListID = ListsEndpoints.LISTS.childByAutoId().key
-                
-                let userValues = [toPlayListID, playedListID]
-                let usernameValues: [String: Any] = [ListsEndpoints.Username.USERID: uid, ListsEndpoints.Common.TIMESTAMP: timestamp]
-                let toPlayListValues: [String: Any] = [ListsEndpoints.List.TYPE: ListsEndpoints.List.TO_PLAY_LIST, ListsEndpoints.Common.TIMESTAMP: timestamp, ListsEndpoints.List.USERID: uid]
-                let playedListValues: [String: Any] = [ListsEndpoints.List.TYPE: ListsEndpoints.List.PLAYED_LIST, ListsEndpoints.Common.TIMESTAMP: timestamp, ListsEndpoints.List.USERID: uid]
-                
-                let values: [String: Any] = ["\(ListsEndpoints.User.USERS)/\(uid)/\(ListsEndpoints.List.LISTS)": userValues,
-                    "\(ListsEndpoints.Username.USERNAMES)/\(username)": usernameValues,
-                    "\(ListsEndpoints.List.LISTS)/\(toPlayListID)": toPlayListValues,
-                    "\(ListsEndpoints.List.LISTS)/\(playedListID)": playedListValues]
-                
-                ListsEndpoints.BASE.updateChildValues(values, withCompletionBlock: { (error, ref) in
-                    if error != nil {
-                        onComplete(.failure(.permissionDenied))
-                        return
-                    }
-                    onComplete(.success)
-                    return
-                })
+                onComplete(.success)
             }
         }
+    }
+    
+    func createListsForUser(_ uid: String, withOnComplete onComplete: @escaping (ListsUserResult)->()) {
+        let timestamp = Date().timeIntervalSince1970
+        
+        let toPlayListValues: [String: Any] = [ListsEndpoints.Common.TIMESTAMP: timestamp]
+        let playedListValues: [String: Any] = [ListsEndpoints.Common.TIMESTAMP: timestamp]
+        
+        let values: [String: Any] = ["\(ListsEndpoints.List.LISTS)/\(uid)/\(ListsEndpoints.List.TO_PLAY_LIST)": toPlayListValues,
+                                     "\(ListsEndpoints.List.LISTS)/\(uid)/\(ListsEndpoints.List.PLAYED_LIST)": playedListValues]
+        
+        ListsEndpoints.BASE.updateChildValues(values, withCompletionBlock: { (error, ref) in
+            if error != nil {
+                onComplete(.failure(.permissionDenied))
+                return
+            }
+            onComplete(.success)
+            return
+        })
     }
     
     func removeUser(_ uid: String, withOnComplete onComplete: @escaping ()->()) {
@@ -85,46 +84,13 @@ class ListsUser {
         }
     }
     
-    func removeUsername(_ username: String, withOnComplete onComplete: @escaping ()->()) {
-        ListsEndpoints.USERNAMES.child(username).removeValue { (error, ref) in
+    func removeLists(_ uid: String, withOnComplete onComplete: @escaping ()->()) {
+        ListsEndpoints.LISTS.child(uid).removeValue(completionBlock: { (error, ref) in
             if error != nil {
-                print("Error while removing username: \(error.debugDescription)")
+                print("Error while removing user: \(error.debugDescription)")
             }
             onComplete()
-        }
-    }
-    
-    func removeLists(_ uid: String, withOnComplete onComplete: @escaping ()->()) {
-        var listIDs = [String]()
-        
-        ListsEndpoints.LISTS.queryOrdered(byChild: ListsEndpoints.List.USERID).queryEqual(toValue: uid).observeSingleEvent(of: .value, with: { snapshot in
-            if let values = snapshot.value as? [String: Any] {
-                for value in values {
-                    if let list = value.value as? [String: Any], let listUid = list[ListsEndpoints.List.USERID] as? String {
-                        if listUid == uid {
-                            listIDs.append(value.key)
-                        }
-                    }
-                }
-                let listValues = self.buildListIDDictionary(listIDs)
-                ListsEndpoints.BASE.updateChildValues(listValues) { (error, ref) in
-                    if error != nil {
-                        print("Error while removing list: \(error.debugDescription)")
-                    }
-                    onComplete()
-                }
-            }
-            })
-    }
-    
-    private func buildListIDDictionary(_ listIDs: [String]) -> [String: Any] {
-        var result = [String: Any]()
-        for listID in listIDs {
-            let appendString = "\(ListsEndpoints.List.LISTS)/\(listID)"
-            // an ugly hack to avoid Any? to Any coerce warning, because Firebase wants Any
-            result[appendString] = Optional<String>.none as Any
-        }
-        return result
+        })
     }
     
     func deleteLoggedInUserCompletely(_ userName: String, withOnComplete onComplete: @escaping ()->()) {
@@ -133,18 +99,14 @@ class ListsUser {
         }
         removeUser(uid) {
             print("removed user")
-            self.removeUsername(userName) {
-                print("removed username")
-                self.removeLists(uid) {
-                    print("removed user lists")
-                    Auth.auth().currentUser?.delete { error in
-                        if error != nil {
-                            print("An error happened while trying to delete user: \(error.debugDescription)")
-                        }
-                        print("removed user auth")
-                        // TODO what should i do here?
-                        onComplete()
+            self.removeLists(uid) {
+                print("removed user lists")
+                Auth.auth().currentUser?.delete { error in
+                    if error != nil {
+                        print("An error happened while trying to delete user: \(error.debugDescription)")
                     }
+                    print("removed user auth")
+                    onComplete()
                 }
             }
         }
@@ -178,14 +140,14 @@ class ListsUser {
 
 
 enum ListsListResult<T> {
-    case succes(T)
+    case success(T)
     case failure(ListsListError)
 }
 
 enum ListsListError {
     case userLoggedOut
     case failedGettingListID
-    case unknownError
+    case unknown
 }
 
 struct ListsList {
@@ -193,31 +155,6 @@ struct ListsList {
     static let instance = ListsList()
     
     private init() {}
-    
-    func createToPlayList(_ onComplete: @escaping (ListsListResult<String>)->()) {
-        createList(onComplete, withType: ListsEndpoints.List.TO_PLAY_LIST)
-    }
-    
-    func createPlayedList(_ onComplete: @escaping (ListsListResult<String>)->()) {
-        createList(onComplete, withType: ListsEndpoints.List.PLAYED_LIST)
-    }
-    
-    private func createList(_ onComplete: @escaping (ListsListResult<String>)->(), withType type: String) {
-        guard let uid = Auth.auth().currentUser?.uid else {
-            onComplete(.failure(.unknownError))
-            return
-        }
-        let timestamp = Date().timeIntervalSince1970
-        let value: [String: Any] = [ListsEndpoints.Common.TIMESTAMP: timestamp, ListsEndpoints.List.TYPE: type, ListsEndpoints.List.USERID: uid]
-        ListsEndpoints.LISTS.childByAutoId().updateChildValues(value) { (error, ref) in
-            if error != nil {
-                onComplete(.failure(.unknownError))
-                return
-            }
-            onComplete(.succes(ref.key))
-            return
-        }
-    }
     
     func addGameToToPlayList(_ onComplete: @escaping (ListsListResult<String>)->(), thisGame game: Game) {
         addGameToListDeleteFromOther(onComplete, thisGame: game, withType: ListsEndpoints.List.TO_PLAY_LIST)
@@ -232,42 +169,47 @@ struct ListsList {
             onComplete(.failure(.userLoggedOut))
             return
         }
-
-        ListsEndpoints.LISTS.queryOrdered(byChild: ListsEndpoints.List.USERID).queryEqual(toValue: uid).observeSingleEvent(of: .value, with: { snapshot in
-            
-            guard let values = snapshot.value as? [String: Any] else {
-                onComplete(.failure(.unknownError))
-                return
+        if !(type == ListsEndpoints.List.TO_PLAY_LIST || type == ListsEndpoints.List.PLAYED_LIST) {
+            onComplete(.failure(.unknown))
+            return
+        }
+        let addType = type == ListsEndpoints.List.TO_PLAY_LIST ? ListsEndpoints.List.TO_PLAY_LIST : ListsEndpoints.List.PLAYED_LIST
+        let removeType = type == ListsEndpoints.List.TO_PLAY_LIST ? ListsEndpoints.List.PLAYED_LIST : ListsEndpoints.List.PLAYED_LIST
+        
+        var done = (add: false, remove: false)
+        var errors: (add: ListsListError?, remove: ListsListError?)  = (add: nil, remove: nil)
+        
+        let timestamp = Date().timeIntervalSince1970
+        let covers = self.getCovers(game)
+        let values: [String: Any] = [ListsEndpoints.Game.PROVIDER: game.provider, ListsEndpoints.Game.PROVIDER_ID: game.id, ListsEndpoints.Game.NAME: game.name, ListsEndpoints.Game.COVER_SMALL_URL: covers.small as Any, ListsEndpoints.Game.COVER_BIG_URL: covers.big as Any, ListsEndpoints.Game.FIRST_RELEASE_DATE: game.firstReleaseDate as Any, ListsEndpoints.Common.TIMESTAMP: timestamp]
+        
+        ListsEndpoints.LISTS.child(uid).child(addType).updateChildValues(values, withCompletionBlock: { (error, ref) in
+            if error != nil {
+                errors.add = .unknown
             }
-  
-            let addType = type
-            let deleteType = addType == ListsEndpoints.List.TO_PLAY_LIST ? ListsEndpoints.List.PLAYED_LIST : ListsEndpoints.List.TO_PLAY_LIST
-            
-            for value in values {
-                if let list = value.value as? [String: Any], let listType = list[ListsEndpoints.List.TYPE] as? String {
-                    
-                    let listID = value.key
-                    let listItemID = "\(game.provider)\(game.id)"
-                    let timestamp = Date().timeIntervalSince1970
-                    
-                    if listType == addType {
-                        let covers = self.getCovers(game)
-                        let values: [String: Any] = [ListsEndpoints.Game.PROVIDER: game.provider, ListsEndpoints.Game.PROVIDER_ID: game.id, ListsEndpoints.Game.NAME: game.name, ListsEndpoints.Game.COVER_SMALL_URL: covers.small as Any, ListsEndpoints.Game.COVER_BIG_URL: covers.big as Any, ListsEndpoints.Game.FIRST_RELEASE_DATE: game.firstReleaseDate as Any, ListsEndpoints.Common.TIMESTAMP: timestamp]
-                        
-                        ListsEndpoints.LISTS.child(listID).child(ListsEndpoints.List.GAMES).child(listItemID).updateChildValues(values, withCompletionBlock: { (error, ref) in
-                            if error != nil {
-                                onComplete(.failure(.unknownError))
-                                return
-                            }
-                            onComplete(.succes(""))
-                            return
-                        })
-                    } else if listType == deleteType {
-                        ListsEndpoints.LISTS.child(listID).child(ListsEndpoints.List.GAMES).child(listItemID).removeValue()
-                    }
+            done.add = true
+            if done.remove {
+                if let error = errors.add {
+                    onComplete(.failure(error))
+                } else if let error = errors.remove {
+                    onComplete(.failure(error))
                 } else {
-                    onComplete(.failure(.unknownError))
-                    return
+                    onComplete(.success(""))
+                }
+            }
+        })
+        ListsEndpoints.LISTS.child(uid).child(removeType).removeValue(completionBlock:  { (error, ref) in
+            if error != nil {
+                errors.remove = .unknown
+            }
+            done.remove = true
+            if done.add {
+                if let error = errors.add {
+                    onComplete(.failure(error))
+                } else if let error = errors.remove {
+                    onComplete(.failure(error))
+                } else {
+                    onComplete(.success(""))
                 }
             }
         })
@@ -301,84 +243,27 @@ struct ListsList {
     
     func getList(_ type: String, withOnComplete onComplete: @escaping (ListsListResult<List>)->()) {
         guard let uid = ListsUser.userid else {
-            onComplete(.failure(.unknownError))
+            onComplete(.failure(.userLoggedOut))
+            return
+        }
+        if !(type == ListsEndpoints.List.TO_PLAY_LIST || type == ListsEndpoints.List.PLAYED_LIST) {
+            onComplete(.failure(.unknown))
             return
         }
         
-        ListsEndpoints.LISTS.queryOrdered(byChild: ListsEndpoints.List.USERID).queryEqual(toValue: uid).observeSingleEvent(of: .value, with: { snapshot in
-            guard let lists = snapshot.value as? [String: Any] else {
-                onComplete(.failure(.unknownError))
+        ListsEndpoints.LISTS.child(uid).child(type).observeSingleEvent(of: .value, with: { snapshot in
+            guard let list = snapshot.value as? [String: Any] else {
+                onComplete(.failure(.unknown))
                 return
             }
-            
-            for list in lists {
-                if let list = list.value as? [String: Any], let listUID = list[ListsEndpoints.List.USERID] as? String {
-                    if !self.isListOfType(list, isType: type) {
-                        continue
-                    }
-                    if listUID != String(uid) {
-                        onComplete(.failure(.unknownError))
-                        return
-                    }
-                    
-                    let result = self.deserializeGames(type, fromList: list)
-                    if result != nil {
-                        onComplete(.succes(result!))
-                        return
-                    } else {
-                        onComplete(.failure(.unknownError))
-                        return
-                    }
-                } else {
-                    onComplete(.failure(.unknownError))
-                    return
-                }
-            }
-        })
-    }
-    
-    func getToPlayListID(onComplete: @escaping (ListsListResult<String>)->()) {
-        getListID(ListsEndpoints.List.TO_PLAY_LIST, withOnComplete: onComplete)
-    }
-    
-    func getPlayedListID(onComplete: @escaping (ListsListResult<String>)->()) {
-        getListID(ListsEndpoints.List.PLAYED_LIST, withOnComplete: onComplete)
-    }
-    
-    func getListID(_ type: String, withOnComplete onComplete: @escaping (ListsListResult<String>)->()) {
-        guard let uid = ListsUser.userid else {
-            onComplete(.failure(.unknownError))
-            return
-        }
-        
-        ListsEndpoints.LISTS.queryOrdered(byChild: ListsEndpoints.List.USERID).queryEqual(toValue: uid).observeSingleEvent(of: .value, with: { snapshot in
-            if let lists = snapshot.value as? [String: Any] {
-                for (key, value) in lists {
-                    if let value = value as? [String: Any], let valueType = value[ListsEndpoints.List.TYPE] as? String, let valueUid = value[ListsEndpoints.List.USERID] as? String {
-                        if valueType == type && valueUid == uid {
-                            let listID = key
-                            onComplete(.succes(listID))
-                            return
-                        }
-                    } else {
-                        onComplete(.failure(.unknownError))
-                        return
-                    }
-                }
+            if let games = self.deserializeGames(type, fromList: list) {
+                onComplete(.success(games))
+                return
             } else {
-                onComplete(.failure(.unknownError))
+                onComplete(.failure(.unknown))
                 return
             }
         })
-    }
-    
-    private func isListOfType(_ list: [String: Any], isType type: String) -> Bool {
-        if let listType = list[ListsEndpoints.List.TYPE] as? String {
-            if listType != type {
-                return false
-            }
-        }
-        return true
     }
     
     private func deserializeGames(_ type: String, fromList list: [String: Any]) -> List? {
@@ -417,48 +302,40 @@ struct ListsList {
     
     func getToPlayAndPlayedList(_ onComplete: @escaping (ListsListResult<CombinedLists>)->()) {
         guard let uid = ListsUser.userid else {
-            onComplete(.failure(.unknownError))
+            onComplete(.failure(.userLoggedOut))
             return
         }
         
-        ListsEndpoints.LISTS.queryOrdered(byChild: ListsEndpoints.List.USERID).queryEqual(toValue: uid).observeSingleEvent(of: .value, with: { snapshot in
-            guard let lists = snapshot.value as? [String: Any] else {
-                onComplete(.failure(.unknownError))
-                return
+        var done = (toPlay: false, played: false)
+        var toPlay: List?
+        var played: List?
+        
+        ListsEndpoints.LISTS.child(uid).child(ListsEndpoints.List.TO_PLAY_LIST).observeSingleEvent(of: .value, with: { snapshot in
+            if let list = snapshot.value as? [String: Any], let games = self.deserializeGames(ListsEndpoints.List.TO_PLAY_LIST, fromList: list) {
+                toPlay = games
             }
-
-            var toPlayList = List(ListsEndpoints.List.TO_PLAY_LIST)
-            var playedList = List(ListsEndpoints.List.PLAYED_LIST)
-            for list in lists {
-                if let list = list.value as? [String: Any], let listUID = list[ListsEndpoints.List.USERID] as? String {
-                    if listUID != String(uid) {
-                        onComplete(.failure(.unknownError))
-                        return
-                    }
-                    
-                    if self.isListOfType(list, isType: ListsEndpoints.List.TO_PLAY_LIST) {
-                        let games = self.deserializeGames(ListsEndpoints.List.TO_PLAY_LIST, fromList: list)
-                        if games == nil {
-                            onComplete(.failure(.unknownError))
-                            return
-                        }
-                        toPlayList = games!
-                    }
-                    if self.isListOfType(list, isType: ListsEndpoints.List.PLAYED_LIST) {
-                        let games = self.deserializeGames(ListsEndpoints.List.PLAYED_LIST, fromList: list)
-                        if games == nil {
-                            onComplete(.failure(.unknownError))
-                            return
-                        }
-                        playedList = games!
-                    }
+            done.toPlay = true
+            if done.played {
+                if toPlay == nil || played == nil {
+                    onComplete(.failure(.unknown))
                 } else {
-                    onComplete(.failure(.unknownError))
-                    return
+                    onComplete(.success((toPlay: toPlay!, played: played!)))
                 }
             }
-            onComplete(.succes((toPlay: toPlayList, played: playedList)))
-            return
+        })
+        
+        ListsEndpoints.LISTS.child(uid).child(ListsEndpoints.List.PLAYED_LIST).observeSingleEvent(of: .value, with: { snapshot in
+            if let list = snapshot.value as? [String: Any], let games = self.deserializeGames(ListsEndpoints.List.PLAYED_LIST, fromList: list) {
+                played = games
+            }
+            done.played = true
+            if done.toPlay {
+                if toPlay == nil || played == nil {
+                    onComplete(.failure(.unknown))
+                } else {
+                    onComplete(.success((toPlay: toPlay!, played: played!)))
+                }
+            }
         })
     }
     
@@ -475,27 +352,17 @@ struct ListsList {
             onComplete(.failure(.userLoggedOut))
             return
         }
-        
-        ListsEndpoints.LISTS.queryOrdered(byChild: ListsEndpoints.List.USERID).queryEqual(toValue: uid).observeSingleEvent(of: .value, with: { snapshot in
-            
-            guard let values = snapshot.value as? [String: Any] else {
-                onComplete(.failure(.unknownError))
-                return
-            }
-            
-            for value in values {
-                if let list = value.value as? [String: Any], let listType = list[ListsEndpoints.List.TYPE] as? String {
-                    if listType == type {
-                        let listID = value.key
-                        let listItemID = "\(game.provider)\(game.id)"
-                        ListsEndpoints.LISTS.child(listID).child(ListsEndpoints.List.GAMES).child(listItemID).removeValue()
-                        onComplete(.succes(""))
-                        return
-                    }
-                }
-            }
-            onComplete(.failure(.unknownError))
+        if !(type == ListsEndpoints.List.TO_PLAY_LIST || type == ListsEndpoints.List.PLAYED_LIST) {
+            onComplete(.failure(.unknown))
             return
+        }
+        
+        ListsEndpoints.LISTS.child(uid).child(type).child(ListsEndpoints.List.GAMES).removeValue(completionBlock: { (error, ref) in
+            if error != nil {
+                onComplete(.failure(.unknown))
+            } else {
+                onComplete(.success(""))
+            }
         })
     }
     
@@ -505,32 +372,15 @@ struct ListsList {
             return
         }
         
-        ListsEndpoints.LISTS.queryOrdered(byChild: ListsEndpoints.List.USERID).queryEqual(toValue: uid).observeSingleEvent(of: .value, with: { snapshot in
-            
-            guard let values = snapshot.value as? [String: Any] else {
-                onComplete(.failure(.unknownError))
-                return
+        let values: [String: Any] = ["\(ListsEndpoints.List.TO_PLAY_LIST)": Optional<String>.none as Any,
+                                     "\(ListsEndpoints.List.PLAYED_LIST)": Optional<String>.none as Any]
+        
+        ListsEndpoints.LISTS.child(uid).updateChildValues(values, withCompletionBlock: { (error, ref) in
+            if error != nil {
+                onComplete(.failure(.unknown))
+            } else {
+                onComplete(.success(""))
             }
-            
-            for value in values {
-                if let list = value.value as? [String: Any], let listType = list[ListsEndpoints.List.TYPE] as? String {
-                    if listType == ListsEndpoints.List.TO_PLAY_LIST {
-                        let listID = value.key
-                        let listItemID = "\(game.provider)\(game.id)"
-                        ListsEndpoints.LISTS.child(listID).child(ListsEndpoints.List.GAMES).child(listItemID).removeValue()
-                    }
-                    if listType == ListsEndpoints.List.PLAYED_LIST {
-                        let listID = value.key
-                        let listItemID = "\(game.provider)\(game.id)"
-                        ListsEndpoints.LISTS.child(listID).child(ListsEndpoints.List.GAMES).child(listItemID).removeValue()
-                    }
-                } else {
-                    onComplete(.failure(.unknownError))
-                    return
-                }
-            }
-            onComplete(.succes(""))
-            return
         })
     }
     
@@ -552,31 +402,25 @@ struct ListsList {
     
     // Get list id then call method that attaches observer
     func listenToList(_ type: String, withAction action: ListsListenerAction, withListenerAttached listenerAttached: @escaping (ListsListResult<ListsListenerReference>)->(), withOnChange onChange: @escaping (ListsListResult<Game>)->()) {
-        getListID(type, withOnComplete: { result in
-            switch result {
-            case .failure(let error):
-                switch error {
-                default:
-                    listenerAttached(.failure(.failedGettingListID))
-                }
-            case .succes(let id):
-                self.listenToList(listenerAttached, withListID: id, withAction: action, withOnChange: onChange)
-            }
-        })
-    }
-    
-    // Attaches the observer, after list id was found
-    private func listenToList(_ listenerAttached: @escaping (ListsListResult<ListsListenerReference>)->(), withListID listID: String, withAction action: ListsListenerAction, withOnChange onChange: @escaping (ListsListResult<Game>)->()) {
-        let ref = ListsEndpoints.LISTS.child(listID).child(ListsEndpoints.List.GAMES)
+        guard let uid = ListsUser.userid else {
+            listenerAttached(.failure(.userLoggedOut))
+            return
+        }
+        if !(type == ListsEndpoints.List.TO_PLAY_LIST || type == ListsEndpoints.List.PLAYED_LIST) {
+            listenerAttached(.failure(.unknown))
+            return
+        }
+        
+        let ref = ListsEndpoints.LISTS.child(uid).child(type).child(ListsEndpoints.List.GAMES)
         let handle = ref.observe(getEventType(action), with: { snapshot in
             if let game = snapshot.value as? [String: Any], let providerID = game[ListsEndpoints.Game.PROVIDER_ID] as? UInt64, let gameName = game[ListsEndpoints.Game.NAME] as? String, let gameProvider = game[ListsEndpoints.Game.PROVIDER] as? String {
                 let gameObj = self.deserializeGame(game, withProviderID: providerID, withName: gameName, withProvider: gameProvider)
-                onChange(.succes(gameObj))
+                onChange(.success(gameObj))
             } else {
-                onChange(.failure(.unknownError))
+                onChange(.failure(.unknown))
             }
         })
-        listenerAttached(.succes(ListsListenerReference(handle, forReference: ref)))
+        listenerAttached(.success(ListsListenerReference(handle, forReference: ref)))
     }
     
     private func getEventType(_ action: ListsListenerAction) -> DataEventType {

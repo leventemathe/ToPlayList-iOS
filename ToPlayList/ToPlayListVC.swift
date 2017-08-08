@@ -183,7 +183,7 @@ class ToPlayListVC: SubListVC {
     private func listenToToPlayList(_ action: ListsListenerAction, withOnChange onChange: @escaping (Game)->()) {
         ListsList.instance.listenToList(ListsEndpoints.List.TO_PLAY_LIST, withAction: action, withListenerAttached: { result in
             switch result {
-            case .succes(let ref):
+            case .success(let ref):
                 self.listListenerAttachmentSuccesful(action, forReference: ref)
             case .failure(let error):
                 switch error {
@@ -193,7 +193,7 @@ class ToPlayListVC: SubListVC {
             }
         }, withOnChange: { result in
             switch result {
-            case .succes(let game):
+            case .success(let game):
                 onChange(game)
             case .failure(let error):
                 switch error {
@@ -264,7 +264,7 @@ class ToPlayListVC: SubListVC {
                 default:
                     Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_LISTS_ERROR, forVC: self)
                 }
-            case .succes(let list):
+            case .success(let list):
                 if list.count > 0 && self.toPlayList == list {
                     shouldSetContent = false
                 } else {

@@ -193,7 +193,7 @@ class DetailsCover: UIView, DropShadowed {
     private func addGameToToPlayList() {
         ListsList.instance.addGameToToPlayList({ result in
             switch result {
-            case .succes:
+            case .success:
                 break
             case .failure(_):
                 self.errorHandlerDelegate?.handleError(Alerts.UNKNOWN_LISTS_ERROR)
@@ -204,7 +204,7 @@ class DetailsCover: UIView, DropShadowed {
     private func addGameToPlayedList() {
         ListsList.instance.addGameToPlayedList({ result in
             switch result {
-            case .succes:
+            case .success:
                 break
             case .failure(_):
                 self.errorHandlerDelegate?.handleError(Alerts.UNKNOWN_LISTS_ERROR)
@@ -215,7 +215,7 @@ class DetailsCover: UIView, DropShadowed {
     private func removeGameFromList() {
         ListsList.instance.removeGameFromToPlayAndPlayedList({result in
             switch result {
-            case .succes:
+            case .success:
                 break
             case .failure(_):
                 self.errorHandlerDelegate?.handleError(Alerts.UNKNOWN_LISTS_ERROR)

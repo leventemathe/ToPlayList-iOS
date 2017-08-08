@@ -175,7 +175,7 @@ class PlayedListCell: ListCollectionViewCell, OnPanDelegate {
             switch result {
             case .failure(_):
                 self.networkErrorHandlerDelegate?.handleError(Alerts.UNKNOWN_ERROR)
-            case .succes(_):
+            case .success(_):
                 break
             }
         }, thisGame: game)
@@ -186,7 +186,7 @@ class PlayedListCell: ListCollectionViewCell, OnPanDelegate {
             switch result {
             case .failure(_):
                 self.networkErrorHandlerDelegate?.handleError(Alerts.UNKNOWN_ERROR)
-            case .succes(_):
+            case .success(_):
                 break
             }
         }

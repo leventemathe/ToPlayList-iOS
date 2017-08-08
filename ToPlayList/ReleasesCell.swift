@@ -270,7 +270,7 @@ class ReleasesCell: UITableViewCell, ReusableView {
     private func addGameToToPlayList() {
         ListsList.instance.addGameToToPlayList({ result in
             switch result {
-            case .succes:
+            case .success:
                 break
             case .failure(_):
                 self.networkErrorHandlerDelegate?.handleError(Alerts.UNKNOWN_ERROR)
@@ -281,7 +281,7 @@ class ReleasesCell: UITableViewCell, ReusableView {
     private func addGameToPlayedList() {
         ListsList.instance.addGameToPlayedList({ result in
             switch result {
-            case .succes:
+            case .success:
                 break
             case .failure(_):
                 self.networkErrorHandlerDelegate?.handleError(Alerts.UNKNOWN_ERROR)
@@ -292,7 +292,7 @@ class ReleasesCell: UITableViewCell, ReusableView {
     private func removeGameFromList() {
         ListsList.instance.removeGameFromToPlayAndPlayedList({result in
             switch result {
-            case .succes:
+            case .success:
                 break
             case .failure(_):
                 self.networkErrorHandlerDelegate?.handleError(Alerts.UNKNOWN_ERROR)

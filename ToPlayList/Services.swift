@@ -194,7 +194,7 @@ class RegisterService {
                     onComplete(.failure(.usernameAlreadyInUse))
                 case .permissionDenied:
                     onComplete(.failure(.permissionDenied))
-                case .unknownError:
+                case .unknown:
                     onComplete(.failure(.unknown))
                 }
             }

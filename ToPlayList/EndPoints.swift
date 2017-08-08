@@ -12,7 +12,6 @@ struct ListsEndpoints {
 
     static let BASE = Database.database().reference()
     static let USERS = BASE.child("users")
-    static let USERNAMES = BASE.child("usernames")
     static let LISTS = BASE.child("lists")
     
     struct Common {
@@ -21,24 +20,15 @@ struct ListsEndpoints {
     
     struct User {
         static let USERS = "users"
-        static let PROVIDER = "provider"
         static let USERNAME = "username"
-        static let LISTS = "lists"
-    }
-    
-    struct Username {
-        static let USERNAMES = "usernames"
-        static let USERID = "userid"
+        static let PROVIDER = "provider"
     }
     
     struct List {
         static let LISTS = "lists"
-        static let TYPE = "type"
-        static let USERID = "userid"
-        static let GAMES = "games"
-        
         static let TO_PLAY_LIST = "toplay"
         static let PLAYED_LIST = "played"
+        static let GAMES = "games"
     }
     
     struct Game {
