@@ -518,7 +518,7 @@ class RegisterFailing: XCTestCase {
             case .permissionDenied:
                 XCTAssertTrue(true, "Registration failed with permissions denied")
             default:
-                XCTAssertTrue(false, "Registration failed with wrong error")
+                XCTAssertTrue(false, "Registration failed with wrong error: \(error)")
             }
         })
     }
@@ -618,6 +618,8 @@ class RegisterAlreadyExists: XCTestCase {
             switch error {
             case .usernameAlreadyInUse:
                 XCTAssertTrue(true, "Registration failed because username already exists")
+            case .permissionDenied:
+                XCTAssertTrue(true, "Registration failed because permission was denied")
             default:
                 XCTAssertTrue(false, "Registration failed because of wrong reason")
             }

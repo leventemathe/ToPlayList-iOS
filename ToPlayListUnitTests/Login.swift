@@ -55,7 +55,11 @@ class LoginSuccesful: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        RegisterLoginTestHelper.register(userData, withOnSuccess: { _ in }, withOnFailure: {_ in })
+        RegisterLoginTestHelper.register(userData, withOnSuccess: { _ in
+            XCTAssert(true, "Registration succesful in login succesful tests")
+        }, withOnFailure: {_ in
+            XCTAssert(true, "Registration failed in login succesful tests")
+        })
     }
     
     override func tearDown() {

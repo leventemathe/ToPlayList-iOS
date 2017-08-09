@@ -46,15 +46,20 @@ class ListsUser {
         let timestamp = Date().timeIntervalSince1970
         let userValues: [String: Any] = [ListsEndpoints.Common.TIMESTAMP: timestamp, ListsEndpoints.User.USERNAME: username, ListsEndpoints.User.PROVIDER: providerid]
         let usernameValues: [String: Any] = [ListsEndpoints.Common.TIMESTAMP: timestamp, ListsEndpoints.Username.UID: uid]
-        let values = ["\(ListsEndpoints.User.USERS)/\(uid)": userValues,
-                      "\(ListsEndpoints.Username.USERNAMES)/\(username)": usernameValues]
         
-        ListsEndpoints.BASE.updateChildValues(values, withCompletionBlock: { (error, ref) in
+        ListsEndpoints.USERS.child(uid).updateChildValues(userValues, withCompletionBlock: { (error, ref) in
             if error != nil {
-                onComplete(.failure(.usernameAlreadyInUse))
+                onComplete(.failure(.permissionDenied))
                 return
             } else {
-                onComplete(.success)
+                ListsEndpoints.USERNAMES.child(username).updateChildValues(usernameValues, withCompletionBlock: { (error, ref) in
+                    if error != nil {
+                        onComplete(.failure(.usernameAlreadyInUse))
+                        return
+                    } else {
+                        onComplete(.success)
+                    }
+                })
             }
         })
     }
@@ -109,10 +114,10 @@ class ListsUser {
         guard let uid = Auth.auth().currentUser?.uid else {
             return
         }
-        removeUser(uid) {
-            print("removed user")
-            self.removeUsername(userName) {
-                print("removed username")
+        removeUsername(userName) {
+            print("removed username")
+            self.removeUser(uid) {
+                print("removed user")
                 self.removeLists(uid) {
                     print("removed user lists")
                     Auth.auth().currentUser?.delete { error in
