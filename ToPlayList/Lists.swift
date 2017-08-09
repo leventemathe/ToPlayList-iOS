@@ -389,30 +389,28 @@ struct ListsList {
         })
     }
     
-    func listenToToplayListAdd(_ listenerAttached: @escaping (ListsListResult<ListsListenerReference>)->(), withOnChange onChange: @escaping (ListsListResult<Game>)->()) {
-        listenToList(ListsEndpoints.List.TO_PLAY_LIST, withAction: .add, withListenerAttached: listenerAttached, withOnChange: onChange)
+    func listenToToplayListAdd(_ onChange: @escaping (ListsListResult<Game>)->()) -> ListsListResult<ListsListenerReference> {
+        return listenToList(ListsEndpoints.List.TO_PLAY_LIST, withAction: .add, withOnChange: onChange)
     }
     
-    func listenToPlayedListAdd(_ listenerAttached: @escaping (ListsListResult<ListsListenerReference>)->(), withOnChange onChange: @escaping (ListsListResult<Game>)->()) {
-        listenToList(ListsEndpoints.List.PLAYED_LIST, withAction: .add, withListenerAttached: listenerAttached, withOnChange: onChange)
+    func listenToPlayedListAdd(_ onChange: @escaping (ListsListResult<Game>)->()) -> ListsListResult<ListsListenerReference> {
+        return listenToList(ListsEndpoints.List.PLAYED_LIST, withAction: .add, withOnChange: onChange)
     }
     
-    func listenToToplayListRemove(_ listenerAttached: @escaping (ListsListResult<ListsListenerReference>)->(), withOnChange onChange: @escaping (ListsListResult<Game>)->()) {
-        listenToList(ListsEndpoints.List.TO_PLAY_LIST, withAction: .remove, withListenerAttached: listenerAttached, withOnChange: onChange)
+    func listenToToplayListRemove(_ onChange: @escaping (ListsListResult<Game>)->()) -> ListsListResult<ListsListenerReference> {
+        return listenToList(ListsEndpoints.List.TO_PLAY_LIST, withAction: .remove, withOnChange: onChange)
     }
     
-    func listenToPlayedListRemove(_ listenerAttached: @escaping (ListsListResult<ListsListenerReference>)->(), withOnChange onChange: @escaping (ListsListResult<Game>)->()) {
-        listenToList(ListsEndpoints.List.PLAYED_LIST, withAction: .remove, withListenerAttached: listenerAttached, withOnChange: onChange)
+    func listenToPlayedListRemove(_ onChange: @escaping (ListsListResult<Game>)->()) -> ListsListResult<ListsListenerReference> {
+        return listenToList(ListsEndpoints.List.PLAYED_LIST, withAction: .remove, withOnChange: onChange)
     }
     
-    func listenToList(_ type: String, withAction action: ListsListenerAction, withListenerAttached listenerAttached: @escaping (ListsListResult<ListsListenerReference>)->(), withOnChange onChange: @escaping (ListsListResult<Game>)->()) {
+    func listenToList(_ type: String, withAction action: ListsListenerAction, withOnChange onChange: @escaping (ListsListResult<Game>)->()) -> ListsListResult<ListsListenerReference> {
         guard let uid = ListsUser.userid else {
-            listenerAttached(.failure(.userLoggedOut))
-            return
+            return .failure(.userLoggedOut)
         }
         if !(type == ListsEndpoints.List.TO_PLAY_LIST || type == ListsEndpoints.List.PLAYED_LIST) {
-            listenerAttached(.failure(.unknown))
-            return
+            return .failure(.unknown)
         }
         
         let ref = ListsEndpoints.LISTS.child(uid).child(type).child(ListsEndpoints.List.GAMES)
@@ -424,7 +422,7 @@ struct ListsList {
                 onChange(.failure(.unknown))
             }
         })
-        listenerAttached(.success(ListsListenerReference(handle, forReference: ref)))
+        return .success(ListsListenerReference(handle, forReference: ref))
     }
     
     private func getEventType(_ action: ListsListenerAction) -> DataEventType {

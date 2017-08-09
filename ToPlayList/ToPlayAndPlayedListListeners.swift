@@ -15,13 +15,6 @@ class ToPlayAndPlayedListListeners {
     private var toPlayListListenerRemove: ListsListenerReference?
     private var playedListListenerRemove: ListsListenerReference?
     
-    // these counters are needed, because the attachment of new listeners is async
-    // because of this, quickly calling attach and detach can result in more listeners attached, than detached
-    private var shouldRemoveToPlayListListenerAdd = 0
-    private var shouldRemoveToPlayListListenerRemove = 0
-    private var shouldRemovePlayedListListenerAdd = 0
-    private var shouldRemovePlayedListListenerRemove = 0
-    
     func isAttached() -> Bool {
         if toPlayListListenerAdd == nil {
             return false
@@ -44,10 +37,7 @@ class ToPlayAndPlayedListListeners {
                          withOnRemovedFromToPlayList onRemovedFromToPlayList: @escaping (Game)->(),
                          withOnAddedToPlayedList onAddedToPlayedList: @escaping (Game)->(),
                          withOnRemovedFromPlayedList onRemovedFromPlayedList: @escaping (Game)->()) {
-        removeLateToPlayListListenerAdd()
-        removeLatePlayedListListenerAdd()
-        removeLateToPlayListListenerRemove()
-        removeLatePlayedListListenerRemove()
+
         listenToToPlayListAdd(onAddedToToPlayList)
         listenToPlayedListAdd(onAddedToPlayedList)
         listenToToPlayListRemove(onRemovedFromToPlayList)
@@ -79,17 +69,7 @@ class ToPlayAndPlayedListListeners {
     }
     
     private func listenToList(_ list: String, withAction action: ListsListenerAction, withOnChange onChange: @escaping (Game)->()) {
-        ListsList.instance.listenToList(list, withAction: action, withListenerAttached: { result in
-            switch result {
-            case .success(let ref):
-                self.listListenerAttachmentSuccesful(list, withAction: action, forReference: ref)
-            case .failure(let error):
-                switch error {
-                default:
-                    self.errorHandlerDelegate?.handleError(Alerts.UNKNOWN_LISTS_ERROR)
-                }
-            }
-        }, withOnChange: { result in
+        let listeningResult = ListsList.instance.listenToList(list, withAction: action, withOnChange: { result in
             switch result {
             case .success(let game):
                 onChange(game)
@@ -100,6 +80,16 @@ class ToPlayAndPlayedListListeners {
                 }
             }
         })
+        
+        switch listeningResult {
+        case .success(let ref):
+            self.listListenerAttachmentSuccesful(list, withAction: action, forReference: ref)
+        case .failure(let error):
+            switch error {
+            default:
+                self.errorHandlerDelegate?.handleError(Alerts.UNKNOWN_LISTS_ERROR)
+            }
+        }
     }
     
     private func listListenerAttachmentSuccesful(_ list: String, withAction action: ListsListenerAction, forReference ref: ListsListenerReference) {
@@ -119,38 +109,6 @@ class ToPlayAndPlayedListListeners {
         }
     }
     
-    private func removeLateToPlayListListenerAdd() {
-        if shouldRemoveToPlayListListenerAdd > 0  && toPlayListListenerAdd != nil {
-            toPlayListListenerAdd!.removeListener()
-            toPlayListListenerAdd = nil
-            shouldRemoveToPlayListListenerAdd -= 1
-        }
-    }
-    
-    private func removeLatePlayedListListenerAdd() {
-        if shouldRemovePlayedListListenerAdd > 0 && playedListListenerAdd != nil {
-            playedListListenerAdd!.removeListener()
-            playedListListenerAdd = nil
-            shouldRemovePlayedListListenerAdd -= 1
-        }
-    }
-    
-    private func removeLateToPlayListListenerRemove() {
-        if shouldRemoveToPlayListListenerRemove > 0 && toPlayListListenerRemove != nil {
-            toPlayListListenerRemove!.removeListener()
-            toPlayListListenerRemove = nil
-            shouldRemoveToPlayListListenerRemove -= 1
-        }
-    }
-    
-    private func removeLatePlayedListListenerRemove() {
-        if shouldRemovePlayedListListenerRemove > 0 && playedListListenerRemove != nil {
-            playedListListenerRemove!.removeListener()
-            playedListListenerRemove = nil
-            shouldRemovePlayedListListenerRemove -= 1
-        }
-    }
-    
     func detachListeners() {
         detachToPlayListListenerAdd()
         detachPlayedListListenerAdd()
@@ -159,38 +117,22 @@ class ToPlayAndPlayedListListeners {
     }
     
     private func detachToPlayListListenerAdd() {
-        if toPlayListListenerAdd != nil {
-            toPlayListListenerAdd!.removeListener()
-            toPlayListListenerAdd = nil
-        } else {
-            shouldRemoveToPlayListListenerAdd += 1
-        }
+        toPlayListListenerAdd?.removeListener()
+        toPlayListListenerAdd = nil
     }
     
     private func detachPlayedListListenerAdd() {
-        if playedListListenerAdd != nil {
-            playedListListenerAdd!.removeListener()
-            playedListListenerAdd = nil
-        } else {
-            shouldRemovePlayedListListenerAdd += 1
-        }
+        playedListListenerAdd?.removeListener()
+        playedListListenerAdd = nil
     }
     
     private func detachToPlayListListenerRemove() {
-        if toPlayListListenerRemove != nil {
-            toPlayListListenerRemove!.removeListener()
-            toPlayListListenerRemove = nil
-        } else {
-            shouldRemoveToPlayListListenerRemove += 1
-        }
+        toPlayListListenerRemove?.removeListener()
+        toPlayListListenerRemove = nil
     }
     
     private func detachPlayedListListenerRemove() {
-        if playedListListenerRemove != nil {
-            playedListListenerRemove!.removeListener()
-            playedListListenerRemove = nil
-        } else {
-            shouldRemovePlayedListListenerRemove += 1
-        }
+        playedListListenerRemove?.removeListener()
+        playedListListenerRemove = nil
     }
 }

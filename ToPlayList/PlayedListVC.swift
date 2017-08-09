@@ -15,9 +15,6 @@ class PlayedListVC: SubListVC {
     private var playedListListenerAdd: ListsListenerReference?
     private var playedListListenerRemove: ListsListenerReference?
     
-    private var shouldRemovePlayedListListenerAdd = 0
-    private var shouldRemovePlayedListListenerRemove = 0
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getPlayedList {
@@ -31,8 +28,6 @@ class PlayedListVC: SubListVC {
     }
     
     private func attachListeners() {
-        self.removeLatePlayedListListenerAdd()
-        self.removeLatePlayedListListenerRemove()
         listenToPlayedList(.add, withOnChange: { game in
             if self.playedList.add(game) {
                 self.setContent()
@@ -45,17 +40,7 @@ class PlayedListVC: SubListVC {
     }
     
     private func listenToPlayedList(_ action: ListsListenerAction, withOnChange onChange: @escaping (Game)->()) {
-        ListsList.instance.listenToList(ListsEndpoints.List.PLAYED_LIST, withAction: action, withListenerAttached: { result in
-            switch result {
-            case .success(let ref):
-                self.listListenerAttachmentSuccesful(action, forReference: ref)
-            case .failure(let error):
-                switch error {
-                default:
-                    Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_LISTS_ERROR, forVC: self)
-                }
-            }
-        }, withOnChange: { result in
+        let listeningResult = ListsList.instance.listenToList(ListsEndpoints.List.PLAYED_LIST, withAction: action, withOnChange: { result in
             switch result {
             case .success(let game):
                 onChange(game)
@@ -66,6 +51,16 @@ class PlayedListVC: SubListVC {
                 }
             }
         })
+        
+        switch listeningResult {
+        case .success(let ref):
+            self.listListenerAttachmentSuccesful(action, forReference: ref)
+        case .failure(let error):
+            switch error {
+            default:
+                Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_LISTS_ERROR, forVC: self)
+            }
+        }
     }
     
     private func listListenerAttachmentSuccesful(_ action: ListsListenerAction, forReference ref: ListsListenerReference) {
@@ -77,43 +72,19 @@ class PlayedListVC: SubListVC {
         }
     }
     
-    private func removeLatePlayedListListenerAdd() {
-        if shouldRemovePlayedListListenerAdd > 0 && playedListListenerAdd != nil {
-            playedListListenerAdd!.removeListener()
-            playedListListenerAdd = nil
-            shouldRemovePlayedListListenerAdd -= 1
-        }
-    }
-    
-    private func removeLatePlayedListListenerRemove() {
-        if shouldRemovePlayedListListenerRemove > 0 && playedListListenerRemove != nil {
-            playedListListenerRemove!.removeListener()
-            playedListListenerRemove = nil
-            shouldRemovePlayedListListenerRemove -= 1
-        }
-    }
-    
     func removeListeners() {
         removePlayedListListenerAdd()
         removePlayedListListenerRemove()
     }
     
     private func removePlayedListListenerAdd() {
-        if playedListListenerAdd != nil {
-            playedListListenerAdd!.removeListener()
-            playedListListenerAdd = nil
-        } else {
-            shouldRemovePlayedListListenerAdd += 1
-        }
+        playedListListenerAdd?.removeListener()
+        playedListListenerAdd = nil
     }
     
     private func removePlayedListListenerRemove() {
-        if playedListListenerRemove != nil {
-            playedListListenerRemove!.removeListener()
-            playedListListenerRemove = nil
-        } else {
-            shouldRemovePlayedListListenerRemove += 1
-        }
+        playedListListenerRemove?.removeListener()
+        playedListListenerRemove = nil
     }
     
     private func getPlayedList(_ onComplete: @escaping ()->()) {

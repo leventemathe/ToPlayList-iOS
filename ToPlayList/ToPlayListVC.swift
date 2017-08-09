@@ -15,9 +15,6 @@ class ToPlayListVC: SubListVC {
     private var toPlayListListenerAdd: ListsListenerReference?
     private var toPlayListListenerRemove: ListsListenerReference?
     
-    private var shouldRemoveToPlayListListenerAdd = 0
-    private var shouldRemoveToPlayListListenerRemove = 0
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupNotifications()
@@ -167,8 +164,6 @@ class ToPlayListVC: SubListVC {
     }
     
     private func attachListeners() {
-        self.removeLateToPlayListListenerAdd()
-        self.removeLateToPlayListListenerRemove()
         listenToToPlayList(.add, withOnChange: { game in
             if self.toPlayList.add(game) {
                 self.setContent()
@@ -181,17 +176,7 @@ class ToPlayListVC: SubListVC {
     }
     
     private func listenToToPlayList(_ action: ListsListenerAction, withOnChange onChange: @escaping (Game)->()) {
-        ListsList.instance.listenToList(ListsEndpoints.List.TO_PLAY_LIST, withAction: action, withListenerAttached: { result in
-            switch result {
-            case .success(let ref):
-                self.listListenerAttachmentSuccesful(action, forReference: ref)
-            case .failure(let error):
-                switch error {
-                default:
-                    Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_LISTS_ERROR, forVC: self)
-                }
-            }
-        }, withOnChange: { result in
+        let listeningResult = ListsList.instance.listenToList(ListsEndpoints.List.TO_PLAY_LIST, withAction: action, withOnChange: { result in
             switch result {
             case .success(let game):
                 onChange(game)
@@ -202,6 +187,16 @@ class ToPlayListVC: SubListVC {
                 }
             }
         })
+        
+        switch listeningResult {
+        case .success(let ref):
+            self.listListenerAttachmentSuccesful(action, forReference: ref)
+        case .failure(let error):
+            switch error {
+            default:
+                Alerts.alertWithOKButton(withMessage: Alerts.UNKNOWN_LISTS_ERROR, forVC: self)
+            }
+        }
     }
     
     private func listListenerAttachmentSuccesful(_ action: ListsListenerAction, forReference ref: ListsListenerReference) {
@@ -213,43 +208,19 @@ class ToPlayListVC: SubListVC {
         }
     }
     
-    private func removeLateToPlayListListenerAdd() {
-        if shouldRemoveToPlayListListenerAdd > 0 && toPlayListListenerAdd != nil {
-            toPlayListListenerAdd!.removeListener()
-            toPlayListListenerAdd = nil
-            shouldRemoveToPlayListListenerAdd -= 1
-        }
-    }
-    
-    private func removeLateToPlayListListenerRemove() {
-        if shouldRemoveToPlayListListenerRemove > 0  && toPlayListListenerAdd != nil {
-            toPlayListListenerRemove!.removeListener()
-            toPlayListListenerRemove = nil
-            shouldRemoveToPlayListListenerRemove -= 1
-        }
-    }
-    
     func removeListeners() {
         removeToPlayListListenerAdd()
         removeToPlayListListenerRemove()
     }
     
     private func removeToPlayListListenerAdd() {
-        if toPlayListListenerAdd != nil {
-            toPlayListListenerAdd!.removeListener()
-            toPlayListListenerAdd = nil
-        } else {
-            shouldRemoveToPlayListListenerAdd += 1
-        }
+        toPlayListListenerAdd?.removeListener()
+        toPlayListListenerAdd = nil
     }
     
     private func removeToPlayListListenerRemove() {
-        if toPlayListListenerRemove != nil {
-            toPlayListListenerRemove!.removeListener()
-            toPlayListListenerRemove = nil
-        } else {
-            shouldRemoveToPlayListListenerRemove += 1
-        }
+        toPlayListListenerRemove?.removeListener()
+        toPlayListListenerRemove = nil
     }
     
     private func getToPlayList(_ onComplete: @escaping ()->()) {

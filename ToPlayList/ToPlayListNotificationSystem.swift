@@ -47,13 +47,11 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
     
     private override init() {
         super.init()
-        print("notification system initialized")
         UNUserNotificationCenter.current().delegate = self
         requestPermission()
     }
     
     deinit {
-        print("notification system deinitialized")
         removeListeners()
     }
     
@@ -68,9 +66,6 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
     // DB LISTENERS
     
     private func attachListeners() {
-        print("attaching listeners")
-        removeLateToPlayListListenerAdd()
-        removeLatePlayedListListenerRemove()
         listenToToPlayList(.add, withOnChange: { game in
             print("add listener fired for \(game.name)")
             self.addNotification(forGame: game)
@@ -82,27 +77,27 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
     }
     
     private func listenToToPlayList(_ action: ListsListenerAction, withOnChange onChange: @escaping (Game)->()) {
-        ListsList.instance.listenToList(ListsEndpoints.List.TO_PLAY_LIST, withAction: action, withListenerAttached: { result in
-            switch result {
-            case .success(let ref):
-                self.listListenerAttachmentSuccesful(action, forReference: ref)
-            case .failure(let error):
-                switch error {
-                default:
-                    print("An error occured while trying to attach listeners for notifications: \(error)")
-                }
-            }
-        }, withOnChange: { result in
+        let listeningResult = ListsList.instance.listenToList(ListsEndpoints.List.TO_PLAY_LIST, withAction: action, withOnChange: { result in
             switch result {
             case .success(let game):
                 onChange(game)
             case .failure(let error):
                 switch error {
                 default:
-                    print("An error occured while trying to attach listeners for notifications: \(error)")
+                    print("An error occured while listening to db for notifications: \(error)")
                 }
             }
         })
+        
+        switch listeningResult {
+        case .success(let ref):
+            self.listListenerAttachmentSuccesful(action, forReference: ref)
+        case .failure(let error):
+            switch error {
+            default:
+                print("An error occured while trying to attach listeners for notifications: \(error)")
+            }
+        }
     }
     
     private func listListenerAttachmentSuccesful(_ action: ListsListenerAction, forReference ref: ListsListenerReference) {
@@ -114,44 +109,19 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
         }
     }
     
-    private func removeLateToPlayListListenerAdd() {
-        if shouldRemoveToPlayListListenerAdd > 0 {
-            toPlayListListenerAdd?.removeListener()
-            toPlayListListenerAdd = nil
-            shouldRemoveToPlayListListenerAdd -= 1
-        }
-    }
-    
-    private func removeLatePlayedListListenerRemove() {
-        if shouldRemoveToPlayListListenerRemove > 0 {
-            toPlayListListenerRemove?.removeListener()
-            toPlayListListenerRemove = nil
-            shouldRemoveToPlayListListenerRemove -= 1
-        }
-    }
-    
     private func removeListeners() {
-        print("removing listeners")
         removeToPlayListListenerAdd()
         removeToPlayListListenerRemove()
     }
     
     private func removeToPlayListListenerAdd() {
-        if toPlayListListenerAdd != nil {
-            toPlayListListenerAdd!.removeListener()
-            toPlayListListenerAdd = nil
-        } else {
-            shouldRemoveToPlayListListenerAdd += 1
-        }
+        toPlayListListenerAdd?.removeListener()
+        toPlayListListenerAdd = nil
     }
     
     private func removeToPlayListListenerRemove() {
-        if toPlayListListenerRemove != nil {
-            toPlayListListenerRemove!.removeListener()
-            toPlayListListenerRemove = nil
-        } else {
-            shouldRemoveToPlayListListenerRemove += 1
-        }
+        toPlayListListenerRemove?.removeListener()
+        toPlayListListenerRemove = nil
     }
     
     
