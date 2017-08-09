@@ -21,6 +21,7 @@ struct ListsEndpoints {
     
     struct User {
         static let USERS = "users"
+        static let USERNAME = "username"
         static let PROVIDER = "provider"
     }
     

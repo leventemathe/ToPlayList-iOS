@@ -44,7 +44,7 @@ class ListsUser {
         }
         
         let timestamp = Date().timeIntervalSince1970
-        let userValues: [String: Any] = [ListsEndpoints.Common.TIMESTAMP: timestamp, ListsEndpoints.User.PROVIDER: providerid]
+        let userValues: [String: Any] = [ListsEndpoints.Common.TIMESTAMP: timestamp, ListsEndpoints.User.USERNAME: username, ListsEndpoints.User.PROVIDER: providerid]
         let usernameValues: [String: Any] = [ListsEndpoints.Common.TIMESTAMP: timestamp, ListsEndpoints.Username.UID: uid]
         let values = ["\(ListsEndpoints.User.USERS)/\(uid)": userValues,
                       "\(ListsEndpoints.Username.USERNAMES)/\(username)": usernameValues]
@@ -87,6 +87,15 @@ class ListsUser {
         }
     }
     
+    func removeUsername(_ username: String, withOnComplete onComplete: @escaping ()->()) {
+        ListsEndpoints.USERNAMES.child(username).removeValue { (error, ref) in
+            if error != nil {
+                print("Error while removing user: \(error.debugDescription)")
+            }
+            onComplete()
+        }
+    }
+    
     func removeLists(_ uid: String, withOnComplete onComplete: @escaping ()->()) {
         ListsEndpoints.LISTS.child(uid).removeValue(completionBlock: { (error, ref) in
             if error != nil {
@@ -102,14 +111,17 @@ class ListsUser {
         }
         removeUser(uid) {
             print("removed user")
-            self.removeLists(uid) {
-                print("removed user lists")
-                Auth.auth().currentUser?.delete { error in
-                    if error != nil {
-                        print("An error happened while trying to delete user: \(error.debugDescription)")
+            self.removeUsername(userName) {
+                print("removed username")
+                self.removeLists(uid) {
+                    print("removed user lists")
+                    Auth.auth().currentUser?.delete { error in
+                        if error != nil {
+                            print("An error happened while trying to delete user: \(error.debugDescription)")
+                        }
+                        print("removed user auth")
+                        onComplete()
                     }
-                    print("removed user auth")
-                    onComplete()
                 }
             }
         }
