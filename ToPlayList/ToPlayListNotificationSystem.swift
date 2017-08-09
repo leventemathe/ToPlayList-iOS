@@ -162,6 +162,10 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
             onComplete(false)
             return
         }
+        if !(ListsUser.loggedIn && ListsUser.verified) {
+            onComplete(false)
+            return
+        }
         UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { notifs in
             for notif in notifs {
                 if let notifGame = notif.content.userInfo[ToPlayListNotificationSystem.USER_INFO_GAME_KEY] as? String {
@@ -190,11 +194,11 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
         guard let releaseDate = game.firstReleaseDate else {
             return nil
         }
-        let randomizedReleaseDate = Dates.randomHourOfDay(releaseDate)
-        let dateComponent = Calendar.current.dateComponents([.year, .month, .day, .hour], from: randomizedReleaseDate)
-        // for debugging: notif arrives in 10 seconds, release date doesn't matter
-        //let releaseDate = Date(timeIntervalSince1970: Date().timeIntervalSince1970 + 10)
-        //let dateComponent = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: releaseDate)
+        //let randomizedReleaseDate = Dates.randomHourOfDay(releaseDate)
+        //let dateComponent = Calendar.current.dateComponents([.year, .month, .day, .hour], from: randomizedReleaseDate)
+        // for debugging: notif arrives in 8 seconds, release date doesn't matter
+        let debugReleaseDate = Date(timeIntervalSince1970: Date().timeIntervalSince1970 + 8)
+        let dateComponent = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: debugReleaseDate)
         return UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: false)
     }
     
