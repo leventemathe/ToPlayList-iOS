@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ToPlayListVC: SubListVC {
+class ToPlayListVC: SubListVC, ToPlayListNotificationSystemDelegate {
     
     private var toPlayList = List(ListsEndpoints.List.TO_PLAY_LIST)
     
@@ -44,6 +44,9 @@ class ToPlayListVC: SubListVC {
     // it's deinitialized after logout
     private func setupNotifications() {
         ToPlayListNotificationSystem.setup()
+        
+        ToPlayListNotificationSystem.instance?.delegate = self
+        ToPlayListNotificationSystem.instance?.requestPermission()
         
         // add a badge to the game and the tab bar when a notif arrives in the foreground
         ToPlayListNotificationSystem.instance?.addNotificationArrivedObserver({ gameName in
@@ -281,6 +284,13 @@ class ToPlayListVC: SubListVC {
             return cell
         }
         return UICollectionViewCell()
+    }
+    
+    func toPlayListNotifictaionSystempermissionRequested(_ onComplete: @escaping () -> ()) {
+        let alert = UIAlertController(title: "Notifications", message: "The app can send you notifications when a game on your ToPlay list is released. In order to use this feature, please accept the request in the following alert!", preferredStyle: UIAlertControllerStyle.alert)
+        let okBtn = UIAlertAction(title: "OK", style: .default, handler: { _ in onComplete() })
+        alert.addAction(okBtn)
+        present(alert, animated: true, completion: nil)
     }
     
     private let TAB_BAR_INDEX = 0

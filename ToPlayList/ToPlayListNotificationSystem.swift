@@ -10,6 +10,11 @@ import Foundation
 import Firebase
 import UserNotifications
 
+protocol ToPlayListNotificationSystemDelegate: class {
+    
+    func toPlayListNotifictaionSystempermissionRequested(_ onComplete: @escaping ()->())
+}
+
 class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
     
     // SETUP AND TEARDOWN
@@ -48,7 +53,6 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
     private override init() {
         super.init()
         UNUserNotificationCenter.current().delegate = self
-        requestPermission()
     }
     
     deinit {
@@ -128,7 +132,22 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
     
     // SHCEDULING/UNSCHEDULING NOTIFICATIONS
     
-    private func requestPermission() {
+    weak var delegate: ToPlayListNotificationSystemDelegate?
+    
+    private let HAS_PERMISSION_BEEN_ASKED_FOR = "permission_asked_for"
+    
+    func requestPermission() {
+        if UserDefaults.standard.bool(forKey: HAS_PERMISSION_BEEN_ASKED_FOR) {
+            sendPermissionRequest()
+        } else {
+            delegate?.toPlayListNotifictaionSystempermissionRequested {
+                self.sendPermissionRequest()
+            }
+            UserDefaults.standard.set(true, forKey: HAS_PERMISSION_BEEN_ASKED_FOR)
+        }
+    }
+    
+    private func sendPermissionRequest() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound,], completionHandler: { (granted, error) in
             print("Called request auth with result: \(granted)")
             if granted {
