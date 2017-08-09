@@ -42,7 +42,7 @@ struct RegisterLoginTestHelper {
     
     static func logout() {
         do {
-            try FIRAuth.auth()?.signOut()
+            try Auth.auth().signOut()
         } catch let error as NSError {
             print("Error while logging out: \(error.description))")
         }
@@ -54,11 +54,19 @@ struct RegisterLoginTestHelper {
         RegisterService.instance.register(withEmail: userData.email, withPassword: userData.password, withUsername: userData.username) { result in
             switch result {
             case .success(let uid):
-                onSuccess(uid)
+                ListsUser.instance.createListsForUser(uid, withOnComplete: { result in
+                    switch result {
+                    case .success:
+                        onSuccess(uid)
+                    case .failure(_):
+                        onFailure(RegisterServiceError.unknown)
+                    }
+                    registerExp.fulfill()
+                })
             case .failure(let error):
                 onFailure(error)
+                registerExp.fulfill()
             }
-            registerExp.fulfill()
         }
         
         helperTestCase.waitForExpectations(timeout: 10) { error in

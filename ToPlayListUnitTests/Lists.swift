@@ -42,7 +42,7 @@ class ListsSuccesful: XCTestCase {
         
         ListsList.instance.addGameToToPlayList({ result in
             switch result {
-            case .succes(_):
+            case .success(_):
                 XCTAssertTrue(true, "Succesfully added game to to play list")
             case .failure(let error):
                 XCTAssertTrue(false, "Adding game to to play list failed with error: \(error)")
@@ -63,7 +63,7 @@ class ListsSuccesful: XCTestCase {
         
         ListsList.instance.getList(list, withOnComplete: { result in
             switch result {
-            case .succes(let list):
+            case .success(let list):
                 funcResult = list.contains(game)
             case .failure(let error):
                 print("An error happened while retrieving list: \(error)")
@@ -78,7 +78,7 @@ class ListsSuccesful: XCTestCase {
     func testGameWithCoverToPlayList() {
         ListsList.instance.addGameToToPlayList({ result in
             switch result {
-            case .succes(_):
+            case .success(_):
                 XCTAssertTrue(true, "Succesfully added game with cover to to play list")
             case .failure(let error):
                 XCTAssertTrue(false, "Adding game with cover to to play list failed with error: \(error)")
@@ -91,7 +91,7 @@ class ListsSuccesful: XCTestCase {
         
         ListsList.instance.addGameToPlayedList({ result in
             switch result {
-            case .succes(_):
+            case .success(_):
                 XCTAssertTrue(true, "Succesfully added game to played list")
             case .failure(let error):
                 XCTAssertTrue(false, "Adding game to played list failed with error: \(error)")
@@ -109,7 +109,7 @@ class ListsSuccesful: XCTestCase {
     func testGameWithCoverPlayedList() {
         ListsList.instance.addGameToPlayedList({ result in
             switch result {
-            case .succes(_):
+            case .success(_):
                 XCTAssertTrue(true, "Succesfully added game with cover to played list")
             case .failure(let error):
                 XCTAssertTrue(false, "Adding game with cover to played list failed with error: \(error)")
@@ -143,7 +143,7 @@ class ListsFailing: XCTestCase {
     func testGameWithoutProvider() {
         ListsList.instance.addGameToToPlayList({ result in
             switch result {
-            case .succes(_):
+            case .success(_):
                 XCTAssertTrue(false, "Succesfully added game without provider to toplay list")
             case .failure(let error):
                 XCTAssertTrue(true, "Adding game without provider to totoplay list failed with error: \(error)")

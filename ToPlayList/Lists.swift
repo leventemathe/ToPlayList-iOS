@@ -44,16 +44,19 @@ class ListsUser {
         }
         
         let timestamp = Date().timeIntervalSince1970
-        let userValues: [String: Any] = [ListsEndpoints.User.USERNAME: username, ListsEndpoints.Common.TIMESTAMP: timestamp, ListsEndpoints.User.PROVIDER: providerid]
+        let userValues: [String: Any] = [ListsEndpoints.Common.TIMESTAMP: timestamp, ListsEndpoints.User.PROVIDER: providerid]
+        let usernameValues: [String: Any] = [ListsEndpoints.Common.TIMESTAMP: timestamp, ListsEndpoints.Username.UID: uid]
+        let values = ["\(ListsEndpoints.User.USERS)/\(uid)": userValues,
+                      "\(ListsEndpoints.Username.USERNAMES)/\(username)": usernameValues]
         
-        ListsEndpoints.USERS.child(uid).updateChildValues(userValues) { (error, ref) in
+        ListsEndpoints.BASE.updateChildValues(values, withCompletionBlock: { (error, ref) in
             if error != nil {
                 onComplete(.failure(.usernameAlreadyInUse))
                 return
             } else {
                 onComplete(.success)
             }
-        }
+        })
     }
     
     func createListsForUser(_ uid: String, withOnComplete onComplete: @escaping (ListsUserResult)->()) {
