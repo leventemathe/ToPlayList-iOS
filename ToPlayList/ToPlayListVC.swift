@@ -138,6 +138,7 @@ class ToPlayListVC: SubListVC {
         
         if let indexPath = getIndexPathForGame(withName: name) {
             collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+            collectionView.reloadItems(at: [indexPath])
         }
     }
 
