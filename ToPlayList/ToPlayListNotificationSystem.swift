@@ -213,11 +213,11 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
         guard let releaseDate = game.firstReleaseDate else {
             return nil
         }
-        //let randomizedReleaseDate = Dates.randomHourOfDay(releaseDate)
-        //let dateComponent = Calendar.current.dateComponents([.year, .month, .day, .hour], from: randomizedReleaseDate)
+        let randomizedReleaseDate = Dates.randomHourOfDay(releaseDate)
+        let dateComponent = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: randomizedReleaseDate)
         // for debugging: notif arrives in 8 seconds, release date doesn't matter
-        let debugReleaseDate = Date(timeIntervalSince1970: Date().timeIntervalSince1970 + 8)
-        let dateComponent = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: debugReleaseDate)
+        //let debugReleaseDate = Date(timeIntervalSince1970: Date().timeIntervalSince1970 + 8)
+        //let dateComponent = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: debugReleaseDate)
         return UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: false)
     }
     

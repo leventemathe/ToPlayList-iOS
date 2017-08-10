@@ -37,10 +37,16 @@ struct Dates {
     
     static func randomHourOfDay(_ time: Double) -> Date {
         let calendar = Calendar.current
+        if calendar.isDateInToday(Date(timeIntervalSince1970: time)) {
+            return Date(timeIntervalSince1970: time + 3)
+        }
+        
         let startOfToday = calendar.startOfDay(for: Date(timeIntervalSince1970: time))
         
-        let min = 9 * 60 * 60
-        let max = 14 * 60 * 60
+        let min: Double = 9 * 60 * 60
+        let intervalLength: Double = 3 * 60 * 60
+        let max = min + intervalLength
+        
         let random = arc4random_uniform(UInt32(max - min)) + UInt32(min)
         let newTime = startOfToday.timeIntervalSince1970 + Double(random)
         
