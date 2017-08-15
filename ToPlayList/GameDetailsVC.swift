@@ -173,6 +173,11 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        if let navVC = navigationController as? NavigationControllerWithCustomBackGestureDelegate {
+            if finishedLoading {
+                navVC.makeNavbarTransparent()
+            }
+        }
         setShouldSwipe()
         updateStarState {
             self.detailsLoaded.loaded[DetailsLoaded.LIST_STATE] = true
@@ -339,11 +344,17 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         listsListenerSystem.detachListeners()
     }
     
+    private var finishedLoading = false
+    
     private func setupLoadingListener() {
         detailsLoaded = DetailsLoaded({ [unowned self] in
+            if self.finishedLoading {
+                return
+            }
             self.setImages()
             self.setScreenshotCarousel()
             self.finishLoading()
+            self.finishedLoading = true
         })
     }
     
@@ -378,7 +389,9 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     
     private func finishLoading() {
         loadingAnimationView.stopAnimating()
-        makeNavbarTransparent()
+        if let navVC = navigationController as? NavigationControllerWithCustomBackGestureDelegate {
+            navVC.makeNavbarTransparent()
+        }
         showDetails()
     }
     
@@ -881,7 +894,6 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     // BACK BUTTON
     
     private func addCustomBackButton() {
-        self.navigationItem.hidesBackButton = true
         let newBackButton = UIBarButtonItem(image: #imageLiteral(resourceName: "back_button"), style: .plain, target: self, action: #selector(GameDetailsVC.back(sender:)))
 
         self.navigationItem.leftBarButtonItem = newBackButton
@@ -889,22 +901,10 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     }
     
     func back(sender: UIBarButtonItem?) {
-        resetNavbar()
-        _ = navigationController?.popViewController(animated: true)
-    }
-    
-    private func makeNavbarTransparent() {
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.topItem?.title = ""
-    }
-    
-    private func resetNavbar() {
-        if navigationController == nil {
-            print("nav vc is nil")
+        if let navVC = navigationController as? NavigationControllerWithCustomBackGestureDelegate {
+            navVC.resetNavbar()
         }
-        navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
-        navigationController?.navigationBar.shadowImage = nil
+        _ = navigationController?.popViewController(animated: true)
     }
     
     

@@ -18,7 +18,7 @@
         <!--Search-->
         <scene sceneID="H2H-iy-FR1">
             <objects>
-                <navigationController id="Awp-TJ-ELN" sceneMemberID="viewController">
+                <navigationController id="Awp-TJ-ELN" customClass="NavigationControllerWithCustomBackGestureDelegate" customModule="ToPlayList" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Search" image="tab_bar_icon_search" selectedImage="tab_bar_icon_search_selected" id="TJk-wP-6ZP"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="h5p-O4-c0U">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -551,10 +551,10 @@
                                         <rect key="frame" x="0.0" y="274" width="320" height="294"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A8L-fO-z1X">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="550.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="549.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="mKa-wy-ZnB">
-                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="550.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="549.5"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="laR-nx-NpS" customClass="ContainerView" customModule="ToPlayList" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="89"/>
@@ -635,19 +635,19 @@
                                                                 </constraints>
                                                             </view>
                                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8ol-Q6-CjN" customClass="ContainerView" customModule="ToPlayList" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="235" width="320" height="56"/>
+                                                                <rect key="frame" x="0.0" y="235" width="320" height="55"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="rzw-Pc-eRs">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Part of collection/franchise:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OWP-Kd-sz2">
-                                                                                <rect key="frame" x="8" y="8" width="304" height="20"/>
+                                                                                <rect key="frame" x="8" y="8" width="304" height="19.5"/>
                                                                                 <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="15"/>
                                                                                 <color key="textColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lgm-Ra-DOI">
-                                                                                <rect key="frame" x="8" y="28" width="304" height="20"/>
+                                                                                <rect key="frame" x="8" y="27.5" width="304" height="19.5"/>
                                                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
@@ -665,7 +665,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5zH-n9-enf" customClass="ContainerView" customModule="ToPlayList" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="303" width="320" height="122"/>
+                                                                <rect key="frame" x="0.0" y="302" width="320" height="122"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="uqw-af-6jC">
                                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="122"/>
@@ -699,7 +699,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hyq-5D-X05" customClass="ContainerView" customModule="ToPlayList" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="437" width="320" height="113.5"/>
+                                                                <rect key="frame" x="0.0" y="436" width="320" height="113.5"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="CEp-Td-C48">
                                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="113.5"/>
@@ -819,7 +819,7 @@
         <!--Newest-->
         <scene sceneID="fFL-jC-ijf">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gaI-Tc-Uxl" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gaI-Tc-Uxl" customClass="NavigationControllerWithCustomBackGestureDelegate" customModule="ToPlayList" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Newest" image="tab_bar_icon_newest" selectedImage="tab_bar_icon_newest_selected" id="PZM-gt-7Be"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="H9z-Bw-GSh">
@@ -954,7 +954,7 @@
                                         <rect key="frame" x="-60" y="-60" width="440" height="688"/>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="eV9-7L-V6j">
-                                        <rect key="frame" x="16" y="147" width="288" height="274.5"/>
+                                        <rect key="frame" x="16" y="147.5" width="288" height="274.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ALMOST THERE!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k48-OY-azy">
                                                 <rect key="frame" x="0.0" y="0.0" width="288" height="124"/>
@@ -1127,7 +1127,7 @@
         <!--Upcoming-->
         <scene sceneID="5l0-6m-Tuc">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sBD-RD-Qe6" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sBD-RD-Qe6" customClass="NavigationControllerWithCustomBackGestureDelegate" customModule="ToPlayList" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Upcoming" image="tab_bar_icon_upcoming" selectedImage="tab_bar_icon_upcoming_selected" id="QVx-Lx-zhY"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="KAn-qY-Vvm">
@@ -2122,7 +2122,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your recent searches" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e1l-ht-syg">
-                                        <rect key="frame" x="8" y="7.5" width="312" height="15"/>
+                                        <rect key="frame" x="8" y="8" width="312" height="15"/>
                                         <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>

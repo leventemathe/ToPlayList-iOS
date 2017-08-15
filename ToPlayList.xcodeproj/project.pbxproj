@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -88,6 +88,7 @@
 		D7E5AA881E2AD51A00EA1456 /* TextFieldMargin.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E5AA871E2AD51A00EA1456 /* TextFieldMargin.swift */; };
 		D7E5AA8A1E2AD60300EA1456 /* CustomClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7E5AA891E2AD60300EA1456 /* CustomClearButton.swift */; };
 		D7EABAB71F384EF60009C5EA /* UserNotVerifiedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EABAB61F384EF60009C5EA /* UserNotVerifiedVC.swift */; };
+		D7EF927F1F43371100485FC4 /* NavigationControllerWithCustomBackGestureDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EF927E1F43371100485FC4 /* NavigationControllerWithCustomBackGestureDelegate.swift */; };
 		D7F131951E2BE242004D1704 /* IdentifiableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F131941E2BE242004D1704 /* IdentifiableVC.swift */; };
 		D7F1B4C91E8A93A4006F3FA1 /* RegisterLoginHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F1B4C81E8A93A4006F3FA1 /* RegisterLoginHelper.swift */; };
 		D7F1B4CB1E8A93B4006F3FA1 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F1B4CA1E8A93B4006F3FA1 /* Login.swift */; };
@@ -205,6 +206,7 @@
 		D7E5AA871E2AD51A00EA1456 /* TextFieldMargin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldMargin.swift; sourceTree = "<group>"; };
 		D7E5AA891E2AD60300EA1456 /* CustomClearButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomClearButton.swift; sourceTree = "<group>"; };
 		D7EABAB61F384EF60009C5EA /* UserNotVerifiedVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNotVerifiedVC.swift; sourceTree = "<group>"; };
+		D7EF927E1F43371100485FC4 /* NavigationControllerWithCustomBackGestureDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationControllerWithCustomBackGestureDelegate.swift; sourceTree = "<group>"; };
 		D7F131941E2BE242004D1704 /* IdentifiableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifiableVC.swift; sourceTree = "<group>"; };
 		D7F1B4C81E8A93A4006F3FA1 /* RegisterLoginHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterLoginHelper.swift; sourceTree = "<group>"; };
 		D7F1B4CA1E8A93B4006F3FA1 /* Login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
@@ -370,6 +372,7 @@
 				D7FADEFB1EC09EFD0006B4E4 /* Details */,
 				D7FADEFD1EC09F2F0006B4E4 /* Lists */,
 				D75150271E34BB9F00EDA802 /* MainTabVC.swift */,
+				D7EF927E1F43371100485FC4 /* NavigationControllerWithCustomBackGestureDelegate.swift */,
 				D71981141E264D31005823C2 /* ListLoginNavigationVC.swift */,
 			);
 			name = Controller;
@@ -642,7 +645,7 @@
 				};
 			};
 			buildConfigurationList = D726BC7D1E0ABDD800D6C9CD /* Build configuration list for PBXProject "ToPlayList" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -821,6 +824,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D7EF927F1F43371100485FC4 /* NavigationControllerWithCustomBackGestureDelegate.swift in Sources */,
 				D78ADCA61E3750EB008DE943 /* Lists.swift in Sources */,
 				D75F4EA21E643A9E00CB2875 /* DropShadowed.swift in Sources */,
 				D719811B1E26A389005823C2 /* ListVC.swift in Sources */,

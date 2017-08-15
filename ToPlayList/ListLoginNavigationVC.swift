@@ -8,9 +8,10 @@
 
 import UIKit
 
-class ListLoginNavigationVC: UINavigationController {
+class ListLoginNavigationVC: NavigationControllerWithCustomBackGestureDelegate {
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         pickVC()
     }
     
