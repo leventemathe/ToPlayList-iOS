@@ -41,9 +41,13 @@ class NavigationControllerWithCustomBackGestureDelegate: UINavigationController,
         return viewControllers.count > 1
     }
     
-    // This is necessary because without it, subviews of your top controller can
-    // cancel out your gesture recognizer on the edge.
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    // i don't know why this works, and shouldRequireFailureOf doesn't...
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
 }
+
+
+
+
+
