@@ -278,12 +278,24 @@ class ToPlayListVC: SubListVC, ToPlayListNotificationSystemDelegate {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ToPlayListCell.reuseIdentifier, for: indexPath) as? ToPlayListCell {
             if let game = toPlayList[indexPath.row] {
+                reevaluateOutToday(game)
                 cell.update(game)
             }
             cell.networkErrorHandlerDelegate = self
             return cell
         }
         return UICollectionViewCell()
+    }
+    
+    private func reevaluateOutToday(_ game: Game) {
+        if game.released == nil {
+            return
+        }
+        if let releaseDate = game.firstReleaseDate {
+            if releaseDate < Calendar.current.startOfDay(for: Date()).timeIntervalSince1970 {
+                game.released = nil
+            }
+        }
     }
     
     func toPlayListNotifictaionSystempermissionRequested(_ onComplete: @escaping () -> ()) {
