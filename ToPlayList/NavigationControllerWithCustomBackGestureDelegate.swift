@@ -38,6 +38,13 @@ class NavigationControllerWithCustomBackGestureDelegate: UINavigationController,
     }
     
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        // this ugly hack prevents going back to register/login vc from lists and user not verified vc
+        // it's needed, because even though i removed the back button, gestures still worked to go back
+        if let visibleVC = visibleViewController {
+            if visibleVC is ListVC || visibleVC is UserNotVerifiedVC {
+                return false
+            }
+        }
         return viewControllers.count > 1
     }
     
