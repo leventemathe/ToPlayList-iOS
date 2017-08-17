@@ -9,7 +9,7 @@
 import UIKit
 import NVActivityIndicatorView
 
-class SubListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, ErrorHandlerDelegate, UIScrollViewDelegate {
+class SubListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, ErrorHandlerDelegate, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var listEmptyLabels: UIStackView!
@@ -27,8 +27,11 @@ class SubListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFlowL
     var loadingAnimationView: NVActivityIndicatorView!
     var appeared = false
     
+    var panRecognizer: UIPanGestureRecognizer!
+    
     override func viewDidLoad() {
         setupDelegates()
+        setupPanRecognizer()
     }
     
     override func viewDidLayoutSubviews() {
@@ -47,6 +50,11 @@ class SubListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFlowL
         collectionView.dataSource = self
     }
     
+    private func setupPanRecognizer() {
+        panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(SubListVC.handlePan(_:)))
+        self.view.addGestureRecognizer(panRecognizer)
+    }
+    
     private func setupLoadingAnimation() {
         let width: CGFloat = 80.0
         let height: CGFloat = width
@@ -59,6 +67,31 @@ class SubListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFlowL
         loadingAnimationView = NVActivityIndicatorView(frame: frame, type: .ballClipRotate, color: UIColor.MyCustomColors.orange, padding: 0.0)
         view.addSubview(loadingAnimationView)
         loadingAnimationView.stopAnimating()
+    }
+    
+    private var panStartPoint: CGPoint?
+    
+    func handlePan(_ recognizer: UIGestureRecognizer?) {
+        guard let recognizer = recognizer as? UIPanGestureRecognizer else {
+            return
+        }
+        switch recognizer.state {
+        case .began:
+            panStartPoint = recognizer.location(in: collectionView)
+        case .changed:
+            if var start = panStartPoint, let indexPath = collectionView.indexPathForItem(at: start), let cell = collectionView.cellForItem(at: indexPath) as? ListCollectionViewCell {
+                start = view.convert(start, to: cell)
+                let loc = recognizer.location(in: cell)
+                cell.panChanged(loc, fromStartingPoint: start)
+            }
+        case .ended:
+            if let loc = panStartPoint, let indexPath = collectionView.indexPathForItem(at: loc), let cell = collectionView.cellForItem(at: indexPath) as? ListCollectionViewCell {
+                cell.panEnded()
+                panStartPoint = nil
+            }
+        default:
+            break
+        }
     }
     
     func swapToListEmptyLabels() {
@@ -143,7 +176,7 @@ class SubListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFlowL
         return 1
     }
     
-    // Make sure to override these with specific list typed cell and count
+    // Make sure to override these 2 methods with specific list typed cell and count
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1
     }
@@ -152,27 +185,22 @@ class SubListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFlowL
         return UICollectionViewCell()
     }
     
-    // these scroll view delegates set the visible cells' scrolling field, so that the cells can decide if swiping left/right should be allowed or not
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        setCellScrolling(true)
-    }
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if !decelerate {
-            setCellScrolling(false)
-        }
-    }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        setCellScrolling(false)
-    }
-    
-    private func setCellScrolling(_ to: Bool) {
-        let cells = collectionView.visibleCells
-        for cell in cells {
-            if let cell = cell as? ListCollectionViewCell {
-                cell.scrolling = to
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer == panRecognizer {
+            if let rec = gestureRecognizer as? UIPanGestureRecognizer {
+                if abs(rec.velocity(in: collectionView).x) > abs(rec.velocity(in: collectionView).y) {
+                    return true
+                }
             }
         }
+        return false
     }
 }
+
+
+
+
+
+
+
+

@@ -13,7 +13,7 @@ enum ColorState {
     case from
 }
 
-class ListCollectionViewCell: UICollectionViewCell, ReusableView, UIGestureRecognizerDelegate, DropShadowed {
+class ListCollectionViewCell: UICollectionViewCell, ReusableView, DropShadowed {
     
     
     @IBOutlet weak var coverImg: UIImageView! {
@@ -50,17 +50,10 @@ class ListCollectionViewCell: UICollectionViewCell, ReusableView, UIGestureRecog
     @IBOutlet weak var contentLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var contentRightConstraint: NSLayoutConstraint!
     
-    var shouldPan = false
-    var scrolling = false
-    
-    private var panRecognizer: UIPanGestureRecognizer!
-    private var panStartPoint: CGPoint!
-    
     weak var onPanDelegate: OnPanDelegate?
     
     override func awakeFromNib() {
         setupDropShadow()
-        setupPanRecognizer()
     }
     
     private func setupDropShadow() {
@@ -68,67 +61,18 @@ class ListCollectionViewCell: UICollectionViewCell, ReusableView, UIGestureRecog
         maskedView.layer.masksToBounds = true
     }
     
-    private func setupPanRecognizer() {
-        panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(pan))
-        panRecognizer.delegate = self
-        content.addGestureRecognizer(panRecognizer)
-    }
-    
-    func pan() {
-        switch panRecognizer.state {
-        case .began:
-            panBegan()
-        case .changed:
-            panChanged()
-        case .ended:
-            panEnded()
-        case .cancelled:
-            print("pan cancelled")
-        default:
-            break
-        }
-    }
-    
-    private func panBegan() {
-        setShouldPan()
-        panStartPoint = panRecognizer.translation(in: content)
-    }
-    
-    private func setShouldPan() {
-        if scrolling {
-            shouldPan = false
-            return
-        }
-        
-        let velocity = panRecognizer.velocity(in: self)
-        if abs(velocity.y) >= abs(velocity.x) {
-            shouldPan = false
-        } else {
-            shouldPan = true
-        }
-    }
-    
-    private func panChanged() {
-        if !shouldPan {
-            return
-        }
-        
-        let currentPoint = panRecognizer.translation(in: content)
+    func panChanged(_ currentPoint: CGPoint, fromStartingPoint panStartPoint: CGPoint) {
         let newPosX = currentPoint.x - panStartPoint.x
         onPanDelegate?.moveContent(newPosX)
         onPanDelegate?.animateColor(newPosX)
     }
     
-    private func panEnded() {
-        shouldPan = false
+    func panEnded() {
         onPanDelegate?.doNetworking()
         onPanDelegate?.panEndedAnimation()
     }
-    
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return !shouldPan
-    }
 }
+
 
 
 
