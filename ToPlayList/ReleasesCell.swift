@@ -85,10 +85,7 @@ class ReleasesCell: UITableViewCell, ReusableView {
     
     // SWIPING
     
-    var scrolling = false
     var loggedIn = false
-    
-    var shouldPan = false
     
     @IBOutlet weak var content: UIView!
     @IBOutlet weak var toPlayView: UIView!
@@ -130,9 +127,6 @@ class ReleasesCell: UITableViewCell, ReusableView {
     
     private var colorStateLeft = ColorState.to
     private var colorStateRight = ColorState.to
-    
-    private var panRecognizer: UIPanGestureRecognizer!
-    private var panStartPoint: CGPoint!
     
     weak var networkErrorHandlerDelegate: ErrorHandlerDelegate?
     
@@ -191,10 +185,6 @@ class ReleasesCell: UITableViewCell, ReusableView {
     }
     
     private func setupGestureRecognizer() {
-        panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(pan))
-        panRecognizer.delegate = self
-        content.addGestureRecognizer(panRecognizer)
-        
         star.isUserInteractionEnabled = true
         let starTap = UITapGestureRecognizer(target: self, action: #selector(starTapped))
         star.addGestureRecognizer(starTap)
@@ -204,57 +194,16 @@ class ReleasesCell: UITableViewCell, ReusableView {
         removeGameFromList()
     }
     
-    func pan() {
-        switch panRecognizer.state {
-        case .began:
-            panBegan()
-        case .changed:
-            panChanged()
-        case .ended:
-            panEnded()
-        case .cancelled:
-            print("cancelled")
-        default:
-            break
-        }
-    }
-    
-    private func panBegan() {
-        setShouldPan()
-        panStartPoint = panRecognizer.translation(in: content)
-    }
-    
-    private func setShouldPan() {
-        if scrolling {
-            shouldPan = false
-            return
-        }
+    func panChanged(_ currentPoint: CGPoint, fromStartingPoint startPont: CGPoint) {
         if !loggedIn {
-            shouldPan = false
             return
         }
-        
-        let velocity = panRecognizer.velocity(in: self)
-        if abs(velocity.y) >= abs(velocity.x) {
-            shouldPan = false
-        } else {
-            shouldPan = true
-        }
-    }
-    
-    private func panChanged() {
-        if !shouldPan {
-            return
-        }
-        
-        let currentPoint = panRecognizer.translation(in: content)
-        let newPosX = currentPoint.x - panStartPoint.x
+        let newPosX = currentPoint.x - startPont.x
         moveContent(newPosX)
         animateColor(newPosX)
     }
     
-    private func panEnded() {
-        shouldPan = false
+    func panEnded() {
         addGameToList()
         panEndedAnimation()
     }
@@ -417,10 +366,6 @@ class ReleasesCell: UITableViewCell, ReusableView {
             self.toPlayView.backgroundColor = self.toPlayViewStartingColor
             self.toPlayText.textColor = self.toPlayTextStartingColor
         })
-    }
-    
-    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return !shouldPan
     }
 }
 

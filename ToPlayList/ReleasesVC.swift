@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 import NVActivityIndicatorView
 
-class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, ErrorHandlerDelegate {
+class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, ErrorHandlerDelegate, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -40,6 +40,7 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         setupNoDataLabel()
         setupRefreshVC()
         setupLoadingAnimation()
+        setupPanRecognizer()
         initialLoadGames()
         loadingAnimationView.startAnimating()
     }
@@ -75,6 +76,37 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         
         loadingAnimationView = NVActivityIndicatorView(frame: frame, type: .ballClipRotate, color: UIColor.MyCustomColors.orange, padding: 0.0)
         view.addSubview(loadingAnimationView)
+    }
+    
+    var panRecognizer: UIPanGestureRecognizer!
+    var panStartPoint: CGPoint?
+    
+    private func setupPanRecognizer() {
+        panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(ReleasesVC.handlePan(_:)))
+        self.view.addGestureRecognizer(panRecognizer)
+    }
+    
+    func handlePan(_ recognizer: UIGestureRecognizer?) {
+        guard let recognizer = recognizer as? UIPanGestureRecognizer else {
+            return
+        }
+        switch recognizer.state {
+        case .began:
+            panStartPoint = recognizer.location(in: tableView)
+        case .changed:
+            if var start = panStartPoint, let indexPath = tableView.indexPathForRow(at: start), let cell = tableView.cellForRow(at: indexPath) as? ReleasesCell {
+                start = view.convert(start, to: cell)
+                let loc = recognizer.location(in: cell)
+                cell.panChanged(loc, fromStartingPoint: start)
+            }
+        case .ended:
+            if let loc = panStartPoint, let indexPath = tableView.indexPathForRow(at: loc), let cell = tableView.cellForRow(at: indexPath) as? ReleasesCell {
+                cell.panEnded()
+                panStartPoint = nil
+            }
+        default:
+            break
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -245,29 +277,6 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         }
     }
     
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        setCellScrollings(true)
-    }
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if !decelerate {
-            setCellScrollings(false)
-        }
-    }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        setCellScrollings(false)
-    }
-    
-    private func setCellScrollings(_ to: Bool) {
-        let cells = tableView.visibleCells
-        for cell in cells {
-            if let cell = cell as? ReleasesCell {
-                cell.scrolling = to
-            }
-        }
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationVC = segue.destination as? GameDetailsVC {
             if let i = tableView.indexPathForSelectedRow {
@@ -279,6 +288,17 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     func handleError(_ message: String) {
         Alerts.alertWithOKButton(withMessage: message, forVC: self)
+    }
+    
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer == panRecognizer {
+            if let rec = gestureRecognizer as? UIPanGestureRecognizer {
+                if abs(rec.velocity(in: tableView).x) > abs(rec.velocity(in: tableView).y) {
+                    return true
+                }
+            }
+        }
+        return false
     }
 }
 
