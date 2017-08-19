@@ -17,20 +17,20 @@ class UpcomingReleasesVC: ReleasesVC {
     
     override func initialLoadGames() {
         IGDB.instance.getUpcomingGames({ result in
-            self.handleLoadingGames(fromResult: result, withResultPacker: self.initialLoadGamesResultPacker)
+            self.handleLoadingGames(fromResult: result, fromLocation: .reload, withResultPacker: self.initialLoadGamesResultPacker)
         }, withLimit: paginationLimit)
     }
     
     override func reloadGames() {
         IGDB.instance.getUpcomingGames({ result in
-            self.handleLoadingGames(fromResult: result, withResultPacker: self.relaodGamesResultPacker)
+            self.handleLoadingGames(fromResult: result, fromLocation: .reload, withResultPacker: self.relaodGamesResultPacker)
         }, withLimit: paginationLimit)
     }
     
     override func loadMoreGames() {
         paginationOffset += paginationLimit
         IGDB.instance.getUpcomingGames({ result in
-            self.handleLoadingGames(fromResult: result, withResultPacker: self.loadMoreGamesResultPacker)
+            self.handleLoadingGames(fromResult: result, fromLocation: .loadMore, withResultPacker: self.loadMoreGamesResultPacker)
         }, withLimit: paginationLimit, withOffset: paginationOffset)
     }
     

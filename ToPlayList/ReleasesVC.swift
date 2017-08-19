@@ -19,6 +19,7 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     private var refreshVC = UIRefreshControl()
     
     private var loadingMoreGames = true
+    private var noInternetAlertAppearedForScrolling = false
     
     var gameSections = [GameSection]() {
         didSet {
@@ -110,6 +111,7 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        noInternetAlertAppearedForScrolling = false
         clearStars()
         if ListsUser.loggedIn && ListsUser.verified {
             getGamesInLists {
@@ -198,7 +200,12 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         })
     }
     
-    func handleLoadingGames(fromResult result: IGDBResult<[Game]>, withResultPacker packer: ([Game])->Void) {
+    enum GameLoadingLocation {
+        case reload
+        case loadMore
+    }
+    
+    func handleLoadingGames(fromResult result: IGDBResult<[Game]>, fromLocation location: GameLoadingLocation, withResultPacker packer: ([Game])->Void) {
         switch result {
         case .success(let games):
             packer(games)
@@ -209,7 +216,15 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
             case .server, .url, .json:
                 Alerts.alertWithOKButton(withMessage: Alerts.SERVER_ERROR, forVC: self)
             case .noInternet:
-                Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
+                switch location {
+                case .reload:
+                    Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
+                case .loadMore:
+                    if !noInternetAlertAppearedForScrolling {
+                        Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
+                    }
+                    noInternetAlertAppearedForScrolling = true
+                }
             case .noData:
                 break
             case .unknown:
@@ -268,10 +283,13 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if loadingMoreGames || gameSections.count < 1 {
+            return
+        }
         let position = scrollView.contentOffset.y
         let height = scrollView.contentSize.height
         
-        if position > height - scrollView.frame.size.height * 1.5 && !loadingMoreGames && gameSections.count != 0 {
+        if position > height - scrollView.frame.size.height * 1.5 {
             loadingMoreGames = true
             loadMoreGames()
         }
