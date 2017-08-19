@@ -59,6 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {        
         FirebaseApp.configure()
+        Database.database().isPersistenceEnabled = true
         
         UNUserNotificationCenter.current().delegate = self
         

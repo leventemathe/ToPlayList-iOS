@@ -89,7 +89,7 @@ class PlayedListVC: SubListVC {
     
     private func getPlayedList(_ onComplete: @escaping ()->()) {
         ListsList.instance.getPlayedList { result in
-            self.loadingAnimationView.stopAnimating()
+            self.loadingAnimationView?.stopAnimating()
             self.appeared = true
             var shouldSetContent = true
             

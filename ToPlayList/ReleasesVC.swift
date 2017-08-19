@@ -26,7 +26,7 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         }
     }
     
-    let paginationLimit = 10
+    let paginationLimit = 30
     var paginationOffset = 0
     
     private var listsListenerSystem = ToPlayAndPlayedListListeners()

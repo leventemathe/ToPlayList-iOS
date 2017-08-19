@@ -229,7 +229,7 @@ class ToPlayListVC: SubListVC, ToPlayListNotificationSystemDelegate {
     
     private func getToPlayList(_ onComplete: @escaping ()->()) {
         ListsList.instance.getToPlayList { result in
-            self.loadingAnimationView.stopAnimating()
+            self.loadingAnimationView?.stopAnimating()
             self.appeared = true
             var shouldSetContent = true
             

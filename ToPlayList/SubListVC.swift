@@ -24,7 +24,7 @@ class SubListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFlowL
     private var cellInterItemMargin: CGFloat!
     private var cellVerticalInterItemMargin: CGFloat!
     
-    var loadingAnimationView: NVActivityIndicatorView!
+    var loadingAnimationView: NVActivityIndicatorView?
     var appeared = false
     
     var panRecognizer: UIPanGestureRecognizer!
@@ -40,7 +40,7 @@ class SubListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFlowL
     
     override func viewDidAppear(_ animated: Bool) {
         if !appeared {
-            loadingAnimationView.startAnimating()
+            loadingAnimationView?.startAnimating()
         }
         appeared = true
     }
@@ -65,8 +65,8 @@ class SubListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFlowL
         let frame = CGRect(x: x, y: y, width: width, height: height)
         
         loadingAnimationView = NVActivityIndicatorView(frame: frame, type: .ballClipRotate, color: UIColor.MyCustomColors.orange, padding: 0.0)
-        view.addSubview(loadingAnimationView)
-        loadingAnimationView.stopAnimating()
+        view.addSubview(loadingAnimationView!)
+        loadingAnimationView!.stopAnimating()
     }
     
     private var panStartPoint: CGPoint?
