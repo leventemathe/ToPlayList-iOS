@@ -11,6 +11,7 @@ import FirebaseDatabase
 struct ListsEndpoints {
 
     static let BASE = Database.database().reference()
+    static let CONNECITON = Database.database().reference(withPath: ".info/connected")
     static let USERS = BASE.child("users")
     static let USERNAMES = BASE.child("usernames")
     static let LISTS = BASE.child("lists")

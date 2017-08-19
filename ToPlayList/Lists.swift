@@ -22,6 +22,20 @@ enum ListsUserError {
     case unknown
 }
 
+class ListsConnection {
+    
+    static func attachListenerForConnection(_ onChange: @escaping (Bool)->()) ->ListsListenerReference {
+        let handle = ListsEndpoints.CONNECITON.observe(.value, with: { snapshot in
+            if snapshot.value as? Bool ?? false {
+                onChange(true)
+            } else {
+                onChange(false)
+            }
+        })
+        return ListsListenerReference(handle, forReference: ListsEndpoints.CONNECITON);
+    }
+}
+
 class ListsUser {
     
     static let instance = ListsUser()

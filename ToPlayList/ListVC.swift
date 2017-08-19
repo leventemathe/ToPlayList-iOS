@@ -98,6 +98,9 @@ class ListVC: UIViewController, IdentifiableVC {
         })
     }
     
+    private var connectionListener: ListsListenerReference?
+    @IBOutlet weak var connectionLabel: UILabel!
+    
     override func viewDidLoad() {
         setupWelcomeMsg()
         setupSegmentedView()
@@ -106,10 +109,15 @@ class ListVC: UIViewController, IdentifiableVC {
     
     override func viewWillAppear(_ animated: Bool) {
         setupNavBar(animated)
+        attachConnectionListener()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         welcomeMsgReadyForAnimation.viewAppeared = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        detachConnectionListener()
     }
     
     private func setupNavBar(_ animated: Bool) {
@@ -181,6 +189,20 @@ class ListVC: UIViewController, IdentifiableVC {
         default:
             break
         }
+    }
+    
+    private func attachConnectionListener() {
+        connectionListener = ListsConnection.attachListenerForConnection({ connected in
+            if connected {
+                self.connectionLabel.isHidden = true
+            } else {
+                self.connectionLabel.isHidden = false
+            }
+        })
+    }
+    
+    private func detachConnectionListener() {
+        connectionListener?.removeListener()
     }
     
     private func setupTiltingBackground() {

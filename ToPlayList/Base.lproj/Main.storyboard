@@ -954,7 +954,7 @@
                                         <rect key="frame" x="-60" y="-60" width="440" height="688"/>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="eV9-7L-V6j">
-                                        <rect key="frame" x="16" y="147.5" width="288" height="274.5"/>
+                                        <rect key="frame" x="16" y="147" width="288" height="274.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ALMOST THERE!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k48-OY-azy">
                                                 <rect key="frame" x="0.0" y="0.0" width="288" height="124"/>
@@ -1073,6 +1073,12 @@
                                     <action selector="segmentedChanged:" destination="Ncq-W1-497" eventType="valueChanged" id="2o4-eL-y35"/>
                                 </connections>
                             </segmentedControl>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OFFLINE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ozf-UH-FEz">
+                                <rect key="frame" x="39.5" y="111.5" width="49" height="16.5"/>
+                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="65Q-Zg-Uje">
                                 <rect key="frame" x="0.0" y="153" width="320" height="366"/>
                             </containerView>
@@ -1089,6 +1095,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="o1g-ft-PLL" firstAttribute="centerX" secondItem="MJu-JL-nvO" secondAttribute="centerX" id="0wz-7h-pRK"/>
+                            <constraint firstItem="o1g-ft-PLL" firstAttribute="leading" secondItem="Ozf-UH-FEz" secondAttribute="trailing" constant="16" id="1Ku-WI-hfD"/>
                             <constraint firstItem="WOa-04-8pa" firstAttribute="leading" secondItem="MJu-JL-nvO" secondAttribute="leadingMargin" priority="999" constant="8" id="7F2-De-gkj"/>
                             <constraint firstItem="zCK-4h-43t" firstAttribute="top" secondItem="65Q-Zg-Uje" secondAttribute="bottom" id="Cf7-Jx-3Tu"/>
                             <constraint firstItem="WOa-04-8pa" firstAttribute="top" secondItem="2oc-jG-z9Z" secondAttribute="bottom" constant="8" id="EH2-p6-jjP"/>
@@ -1099,6 +1106,7 @@
                             <constraint firstItem="zCK-4h-43t" firstAttribute="top" secondItem="Rtj-xj-A9Z" secondAttribute="bottom" constant="-60" id="esH-P8-uUq"/>
                             <constraint firstItem="o1g-ft-PLL" firstAttribute="top" secondItem="WOa-04-8pa" secondAttribute="bottom" constant="8" id="h6y-EI-4LQ"/>
                             <constraint firstItem="65Q-Zg-Uje" firstAttribute="top" secondItem="o1g-ft-PLL" secondAttribute="bottom" constant="20" id="qiM-n9-3AO"/>
+                            <constraint firstItem="Ozf-UH-FEz" firstAttribute="centerY" secondItem="o1g-ft-PLL" secondAttribute="centerY" id="uJQ-7B-gri"/>
                             <constraint firstItem="Rtj-xj-A9Z" firstAttribute="top" secondItem="2oc-jG-z9Z" secondAttribute="bottom" constant="-60" id="wA0-gG-HKz"/>
                             <constraint firstAttribute="trailing" secondItem="65Q-Zg-Uje" secondAttribute="trailing" id="wts-S8-ZO6"/>
                         </constraints>
@@ -1113,6 +1121,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="backgroundStarImageView" destination="Rtj-xj-A9Z" id="TaW-1f-seD"/>
+                        <outlet property="connectionLabel" destination="Ozf-UH-FEz" id="9ew-Wm-b3u"/>
                         <outlet property="listContainerView" destination="65Q-Zg-Uje" id="qCc-Cz-RBu"/>
                         <outlet property="segmentedControl" destination="o1g-ft-PLL" id="Tfl-KU-dbl"/>
                         <outlet property="welcomLbl" destination="WOa-04-8pa" id="kwJ-1d-Kou"/>
@@ -2122,7 +2131,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your recent searches" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e1l-ht-syg">
-                                        <rect key="frame" x="8" y="8" width="312" height="15"/>
+                                        <rect key="frame" x="8" y="7.5" width="312" height="15"/>
                                         <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
