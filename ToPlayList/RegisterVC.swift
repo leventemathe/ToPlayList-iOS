@@ -127,12 +127,12 @@ class RegisterVC: UIViewController, IdentifiableVC {
         VerificationService.instance.sendVerification({ result in
             switch result {
             case .success:
-                print("Verification email sent succesfully!")
+                //print("Verification email sent succesfully!")
                 break
             case .failure(let error):
                 switch error {
                 default:
-                    print("An error occured while sending verification email after registration: \(error)")
+                    //print("An error occured while sending verification email after registration: \(error)")
                     break
                 }
             }

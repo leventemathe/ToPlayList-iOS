@@ -100,7 +100,7 @@ class ImageCarouselVC: UIViewController, UICollectionViewDataSource, UICollectio
                 if error == nil {
                     onComplete(image)
                 } else {
-                    print(error!)
+                    //print(error!)
                     KingfisherManager.shared.retrieveImage(with: self.imageURLs[index].small, options: nil, progressBlock: nil, completionHandler: { (image, error, _, _) in
                         // this doesn't seem to throw error if image is nil, the loading anim continues to spin
                         // but it's pretty safe, because small is guaranteed to exist: the image carousel wouldn't be visible otherwise

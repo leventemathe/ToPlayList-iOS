@@ -266,26 +266,27 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         if !(ListsUser.loggedIn && ListsUser.verified) {
             return
         }
+        //print("\(self): attached listener")
         
         self.listsListenerSystem.attachListeners(withOnAddedToToPlayList: { game in
             if game == self.game {
                 self.gameInExclusiveLists.inToPlayList = true
-                print("set content in details view")
+                //print("set content in details view")
             }
         }, withOnRemovedFromToPlayList: { game in
             if game == self.game {
                 self.gameInExclusiveLists.inToPlayList = false
-                print("set content in details view")
+                //print("set content in details view")
             }
         }, withOnAddedToPlayedList: { game in
             if game == self.game {
                 self.gameInExclusiveLists.inPlayedList = true
-                print("set content in details view")
+                //print("set content in details view")
             }
         }, withOnRemovedFromPlayedList: { game in
             if game == self.game {
                 self.gameInExclusiveLists.inPlayedList = false
-                print("set content in details view")
+                //print("set content in details view")
             }
         })
     }
@@ -341,6 +342,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        //print("\(self): detached listener")
         listsListenerSystem.detachListeners()
     }
     

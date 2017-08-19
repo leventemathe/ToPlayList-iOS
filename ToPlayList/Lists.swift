@@ -86,7 +86,7 @@ class ListsUser {
     func removeUser(_ uid: String, withOnComplete onComplete: @escaping ()->()) {
         ListsEndpoints.USERS.child(uid).removeValue { (error, ref) in
             if error != nil {
-                print("Error while removing user: \(error.debugDescription)")
+                //print("Error while removing user: \(error.debugDescription)")
             }
             onComplete()
         }
@@ -95,7 +95,7 @@ class ListsUser {
     func removeUsername(_ username: String, withOnComplete onComplete: @escaping ()->()) {
         ListsEndpoints.USERNAMES.child(username).removeValue { (error, ref) in
             if error != nil {
-                print("Error while removing user: \(error.debugDescription)")
+                //print("Error while removing user: \(error.debugDescription)")
             }
             onComplete()
         }
@@ -104,7 +104,7 @@ class ListsUser {
     func removeLists(_ uid: String, withOnComplete onComplete: @escaping ()->()) {
         ListsEndpoints.LISTS.child(uid).removeValue(completionBlock: { (error, ref) in
             if error != nil {
-                print("Error while removing user: \(error.debugDescription)")
+                //print("Error while removing user: \(error.debugDescription)")
             }
             onComplete()
         })
@@ -115,16 +115,16 @@ class ListsUser {
             return
         }
         removeUsername(userName) {
-            print("removed username")
+            //print("removed username")
             self.removeUser(uid) {
-                print("removed user")
+                //print("removed user")
                 self.removeLists(uid) {
-                    print("removed user lists")
+                    //print("removed user lists")
                     Auth.auth().currentUser?.delete { error in
                         if error != nil {
-                            print("An error happened while trying to delete user: \(error.debugDescription)")
+                            //print("An error happened while trying to delete user: \(error.debugDescription)")
                         }
-                        print("removed user auth")
+                        //print("removed user auth")
                         onComplete()
                     }
                 }

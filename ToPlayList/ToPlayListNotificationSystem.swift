@@ -71,11 +71,11 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
     
     private func attachListeners() {
         listenToToPlayList(.add, withOnChange: { game in
-            print("add listener fired for \(game.name)")
+            //print("add listener fired for \(game.name)")
             self.addNotification(forGame: game)
         })
         listenToToPlayList(.remove, withOnChange: { game in
-            print("remove listener fired for \(game.name)")
+            //print("remove listener fired for \(game.name)")
             self.removeNotification(forGame: game)
         })
     }
@@ -88,7 +88,8 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
             case .failure(let error):
                 switch error {
                 default:
-                    print("An error occured while listening to db for notifications: \(error)")
+                    //print("An error occured while listening to db for notifications: \(error)")
+                    break
                 }
             }
         })
@@ -99,7 +100,8 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
         case .failure(let error):
             switch error {
             default:
-                print("An error occured while trying to attach listeners for notifications: \(error)")
+                //print("An error occured while trying to attach listeners for notifications: \(error)")
+                break
             }
         }
     }
@@ -149,7 +151,7 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
     
     private func sendPermissionRequest() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound,], completionHandler: { (granted, error) in
-            print("Called request auth with result: \(granted)")
+            //print("Called request auth with result: \(granted)")
             if granted {
                 self.permissionGranted = true
                 self.listen()
@@ -166,11 +168,11 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
                 
                 UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
                     if error != nil {
-                        print("An error happened while request notification permission: \(error!.localizedDescription)")
+                        //print("An error happened while request notification permission: \(error!.localizedDescription)")
                     }
                 })
             } else {
-                print("Shouldn't add notif for \(game.name)")
+                //print("Shouldn't add notif for \(game.name)")
             }
         })
     }

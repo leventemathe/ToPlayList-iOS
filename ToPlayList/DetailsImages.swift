@@ -157,7 +157,7 @@ class DetailsCover: UIView, DropShadowed {
         case .ended:
             panEnded()
         case .cancelled:
-            print("cancelled")
+            panEnded()
         default:
             break
         }

@@ -127,6 +127,7 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+        //print("\(self): detached listener")
         self.listsListenerSystem.detachListeners()
     }
     
@@ -148,6 +149,8 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     }
     
     private func attachListListeners() {
+        //print("\(self): attached listener")
+        
         if !(ListsUser.loggedIn && ListsUser.verified) {
             return
         }

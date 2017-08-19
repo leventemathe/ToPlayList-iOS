@@ -365,11 +365,11 @@ class IGDB: GameAPI {
                     case .success(let ts):
                         onComplete(IGDBResult.success(ts))
                     case .failure(let error) :
-                        print("getting T failed while jsoning inside")
+                        //print("getting T failed while jsoning inside")
                         onComplete(IGDBResult.failure(error))
                     }
                 } else {
-                    print("getting T failed while jsoning outside")
+                    //print("getting T failed while jsoning outside")
                     onComplete(IGDBResult.failure(.json))
                 }
             case .failure(_):
@@ -488,11 +488,11 @@ class IGDB: GameAPI {
                         }
                     } else {
                         onFailure(.json)
-                        print("failed getting cahced game ids inside")
+                        //print("failed getting cahced game ids inside")
                     }
                 case .failure(_):
                     onFailure(IGDBError.generateError(fromResponse: response))
-                    print("failed getting cahced game ids")
+                    //print("failed getting cahced game ids")
                 }
             }
 
@@ -504,11 +504,11 @@ class IGDB: GameAPI {
             if let genres = gameIDs.genres {
                 self.getGenres(onComplete, withIDs: genres)
             } else {
-                print("no data error")
+                //print("no data error")
                 onComplete(.failure(.noData))
             }
         }, withOnFailure: { error in
-            print("failed getting cached game ids in getGenres")
+            //print("failed getting cached game ids in getGenres")
             onComplete(.failure(error))
         })
     }
@@ -521,7 +521,7 @@ class IGDB: GameAPI {
                 onComplete(.failure(.noData))
             }
         }, withOnFailure: { error in
-            print("failed getting cahced game ids in getdevs")
+            //print("failed getting cahced game ids in getdevs")
             onComplete(.failure(error))
         })
     }
