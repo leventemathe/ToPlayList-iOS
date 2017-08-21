@@ -8,6 +8,7 @@
 
 import UIKit
 import NVActivityIndicatorView
+import Firebase
 
 class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
     
@@ -17,6 +18,8 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
     @IBOutlet weak var searchIconView: UIView!
     @IBOutlet weak var recentSearchesView: UIView!
     private var recentSearchesVC: RecentSearchesVC!
+    
+    @IBOutlet weak var bannerAd: GADBannerView!
     
     private let RECENT_SEARCH_KEY = "recent_searches"
     private let RECENT_SEARCHES_LIMIT = 20
@@ -41,6 +44,7 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
         setupLoadingAnimation()
         setupRecentSearches()
         setupPlaceHolderViews()
+        setupBannerAd()
     }
     
     private func setupSearchBar() {
@@ -123,6 +127,14 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
             recentSearchesView.isHidden = false
             searchIconView.isHidden = true
         }
+    }
+    
+    private func setupBannerAd() {
+        bannerAd.adUnitID = "ca-app-pub-6151617651580775/3086098810"
+        bannerAd.rootViewController = self
+        let request = GADRequest()
+        request.testDevices = [kGADSimulatorID, "12ef71784cd669837273f30fa368f77b"];
+        bannerAd.load(request)
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {

@@ -50,16 +50,11 @@ extension UIFont {
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
-
-
-    override init() {
-        super.init()
-        //FIRDatabase.database().persistenceEnabled = true
-    }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {        
         FirebaseApp.configure()
         Database.database().isPersistenceEnabled = true
+        GADMobileAds.configure(withApplicationID: "ca-app-pub-6151617651580775~5306898046")
         
         UNUserNotificationCenter.current().delegate = self
         

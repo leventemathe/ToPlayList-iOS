@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import FirebaseAuth
-import FirebaseDatabase
 import NVActivityIndicatorView
+import Firebase
 
 class ListVC: UIViewController, IdentifiableVC {
     
@@ -19,6 +18,8 @@ class ListVC: UIViewController, IdentifiableVC {
     @IBOutlet weak var listContainerView: UIView!
     
     @IBOutlet weak var backgroundStarImageView: UIImageView!
+    
+    @IBOutlet weak var bannerAd: GADBannerView!
     
     @IBAction func segmentedChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
@@ -105,6 +106,7 @@ class ListVC: UIViewController, IdentifiableVC {
         setupWelcomeMsg()
         setupSegmentedView()
         setupTiltingBackground()
+        setupBannerAd()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -218,5 +220,13 @@ class ListVC: UIViewController, IdentifiableVC {
         
         backgroundStarImageView.addMotionEffect(horizontalMotion)
         backgroundStarImageView.addMotionEffect(verticalMotion)
+    }
+    
+    private func setupBannerAd() {
+        bannerAd.adUnitID = "ca-app-pub-6151617651580775/3442974423"
+        bannerAd.rootViewController = self
+        let request = GADRequest()
+        request.testDevices = [kGADSimulatorID, "12ef71784cd669837273f30fa368f77b"];
+        bannerAd.load(request)
     }
 }

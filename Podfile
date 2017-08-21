@@ -8,6 +8,7 @@ target 'ToPlayList' do
   pod 'Firebase/Core', '~> 4.0.4'
   pod 'Firebase/Auth', '~> 4.0.4'
   pod 'Firebase/Database', '~> 4.0.4'
+  pod 'Firebase/AdMob', '~> 4.0.3'
   pod 'NVActivityIndicatorView', '~> 3.6.1'
   pod 'ImageViewer', '~> 4.1.0'
 

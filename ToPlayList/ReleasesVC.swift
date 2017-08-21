@@ -9,10 +9,12 @@
 import UIKit
 import Kingfisher
 import NVActivityIndicatorView
+import Firebase
 
 class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, ErrorHandlerDelegate, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var bannerAd: GADBannerView!
     
     private var noDataLbl = UILabel()
     private var loadingAnimationView: NVActivityIndicatorView!
@@ -42,6 +44,7 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         setupRefreshVC()
         setupLoadingAnimation()
         setupPanRecognizer()
+        setupBannerAd()
         initialLoadGames()
         loadingAnimationView.startAnimating()
     }
@@ -108,6 +111,14 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         default:
             break
         }
+    }
+    
+    private func setupBannerAd() {
+        bannerAd.adUnitID = "ca-app-pub-6151617651580775/4590752172"
+        bannerAd.rootViewController = self
+        let request = GADRequest()
+        request.testDevices = [kGADSimulatorID, "12ef71784cd669837273f30fa368f77b"];
+        bannerAd.load(request)
     }
     
     override func viewWillAppear(_ animated: Bool) {
