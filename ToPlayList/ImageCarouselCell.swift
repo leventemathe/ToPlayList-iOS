@@ -13,9 +13,11 @@ class ImageCarouselCell: UICollectionViewCell, ReusableView {
     
     @IBOutlet weak var imageView: UIImageView!
     
-    func update(_ imageUrl: URL, withOnComplete onComplete: ((Bool) -> ())? = nil) {
-        imageView.kf.setImage(with: imageUrl, placeholder: #imageLiteral(resourceName: "img_missing"), options: nil, progressBlock: nil, completionHandler: { (image, _, _, _) in
-            onComplete?(image != nil)
+    func update(_ smallUrl: URL, withBackupURL bigURL: URL) {
+        imageView.kf.setImage(with: smallUrl, placeholder: #imageLiteral(resourceName: "img_missing"), options: nil, progressBlock: nil, completionHandler: { (image, _, _, _) in
+            if image == nil {
+                self.imageView.kf.setImage(with: bigURL, placeholder: #imageLiteral(resourceName: "img_missing"))
+            }
         })
     }
 }

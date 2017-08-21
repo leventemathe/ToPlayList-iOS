@@ -54,7 +54,7 @@ class ImageCarouselVC: UIViewController, UICollectionViewDataSource, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCarouselCell.reuseIdentifier, for: indexPath) as? ImageCarouselCell {
-            cell.update(imageURLs[indexPath.row].small)
+            cell.update(imageURLs[indexPath.row].small, withBackupURL: imageURLs[indexPath.row].big)
             return cell
         }
         return UICollectionViewCell()
