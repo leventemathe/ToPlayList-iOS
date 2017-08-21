@@ -10,7 +10,7 @@ import UIKit
 import NVActivityIndicatorView
 import Firebase
 
-class ListVC: UIViewController, IdentifiableVC {
+class ListVC: UIViewController, IdentifiableVC, GADBannerViewDelegate {
     
     private static let WELCOME_MSG = "Welcome"
     
@@ -20,6 +20,7 @@ class ListVC: UIViewController, IdentifiableVC {
     @IBOutlet weak var backgroundStarImageView: UIImageView!
     
     @IBOutlet weak var bannerAd: GADBannerView!
+    @IBOutlet weak var adContainer: UIView!
     
     @IBAction func segmentedChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
@@ -225,8 +226,14 @@ class ListVC: UIViewController, IdentifiableVC {
     private func setupBannerAd() {
         bannerAd.adUnitID = "ca-app-pub-6151617651580775/3442974423"
         bannerAd.rootViewController = self
+        adContainer.isHidden = true
+        bannerAd.delegate = self
         let request = GADRequest()
         request.testDevices = [kGADSimulatorID, "12ef71784cd669837273f30fa368f77b"];
         bannerAd.load(request)
+    }
+    
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        adContainer.isHidden = false
     }
 }

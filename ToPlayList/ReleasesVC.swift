@@ -11,10 +11,11 @@ import Kingfisher
 import NVActivityIndicatorView
 import Firebase
 
-class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, ErrorHandlerDelegate, UIGestureRecognizerDelegate {
+class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, ErrorHandlerDelegate, UIGestureRecognizerDelegate, GADBannerViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bannerAd: GADBannerView!
+    @IBOutlet weak var adContainer: UIView!
     
     private var noDataLbl = UILabel()
     private var loadingAnimationView: NVActivityIndicatorView!
@@ -114,11 +115,17 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     }
     
     private func setupBannerAd() {
-        bannerAd.adUnitID = "ca-app-pub-6151617651580775/4590752172"
+        bannerAd.adUnitID = "ca-app-pub-6151617651580775/3442974423"
         bannerAd.rootViewController = self
+        adContainer.isHidden = true
+        bannerAd.delegate = self
         let request = GADRequest()
         request.testDevices = [kGADSimulatorID, "12ef71784cd669837273f30fa368f77b"];
         bannerAd.load(request)
+    }
+    
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        adContainer.isHidden = false
     }
     
     override func viewWillAppear(_ animated: Bool) {

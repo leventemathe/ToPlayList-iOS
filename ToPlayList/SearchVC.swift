@@ -10,7 +10,7 @@ import UIKit
 import NVActivityIndicatorView
 import Firebase
 
-class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
+class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, GADBannerViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -20,6 +20,7 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
     private var recentSearchesVC: RecentSearchesVC!
     
     @IBOutlet weak var bannerAd: GADBannerView!
+    @IBOutlet weak var adContainer: UIView!
     
     private let RECENT_SEARCH_KEY = "recent_searches"
     private let RECENT_SEARCHES_LIMIT = 20
@@ -130,11 +131,17 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
     }
     
     private func setupBannerAd() {
-        bannerAd.adUnitID = "ca-app-pub-6151617651580775/3086098810"
+        bannerAd.adUnitID = "ca-app-pub-6151617651580775/3442974423"
         bannerAd.rootViewController = self
+        adContainer.isHidden = true
+        bannerAd.delegate = self
         let request = GADRequest()
         request.testDevices = [kGADSimulatorID, "12ef71784cd669837273f30fa368f77b"];
         bannerAd.load(request)
+    }
+    
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        adContainer.isHidden = false
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {

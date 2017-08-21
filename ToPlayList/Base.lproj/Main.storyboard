@@ -90,29 +90,41 @@
                                     <segue destination="kgK-1y-gHU" kind="embed" id="LGV-cU-Zlh"/>
                                 </connections>
                             </containerView>
-                            <view contentMode="scaleToFill" restorationIdentifier="GADBannerViewToPlayList" translatesAutoresizingMaskIntoConstraints="NO" id="PZm-ew-Ddt" customClass="GADBannerView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U04-Cy-hnn">
                                 <rect key="frame" x="0.0" y="469" width="320" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" restorationIdentifier="GADBannerViewToPlayList" translatesAutoresizingMaskIntoConstraints="NO" id="PZm-ew-Ddt" customClass="GADBannerView">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Xfc-Ak-ZhB"/>
+                                            <constraint firstAttribute="width" constant="320" id="tYB-o8-9Jz"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="Xfc-Ak-ZhB"/>
-                                    <constraint firstAttribute="width" constant="320" id="tYB-o8-9Jz"/>
+                                    <constraint firstItem="PZm-ew-Ddt" firstAttribute="centerY" secondItem="U04-Cy-hnn" secondAttribute="centerY" id="DoX-rU-uxq"/>
+                                    <constraint firstAttribute="height" constant="50" id="Fgk-rU-LhK"/>
+                                    <constraint firstItem="PZm-ew-Ddt" firstAttribute="centerX" secondItem="U04-Cy-hnn" secondAttribute="centerX" id="ujn-Ym-Cej"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="1LR-O0-mUV" secondAttribute="trailing" id="24Y-6d-Le5"/>
+                            <constraint firstItem="Qdd-2C-Q3B" firstAttribute="top" secondItem="U04-Cy-hnn" secondAttribute="bottom" id="35e-PS-ufn"/>
                             <constraint firstItem="gF1-gv-DWq" firstAttribute="leading" secondItem="2WG-wW-Wfy" secondAttribute="leading" id="3rD-t3-2ci"/>
                             <constraint firstItem="eRQ-1R-hJZ" firstAttribute="leading" secondItem="2WG-wW-Wfy" secondAttribute="leading" id="437-9f-YkR"/>
                             <constraint firstItem="yMg-bi-deP" firstAttribute="centerY" secondItem="2WG-wW-Wfy" secondAttribute="centerY" id="59T-kU-8Qv"/>
                             <constraint firstItem="1LR-O0-mUV" firstAttribute="leading" secondItem="2WG-wW-Wfy" secondAttribute="leading" id="5lN-FD-4Od"/>
-                            <constraint firstItem="PZm-ew-Ddt" firstAttribute="centerX" secondItem="2WG-wW-Wfy" secondAttribute="centerX" id="7rq-Hd-nSF"/>
                             <constraint firstAttribute="trailing" secondItem="eRQ-1R-hJZ" secondAttribute="trailing" id="PYk-v3-Kms"/>
+                            <constraint firstAttribute="trailing" secondItem="U04-Cy-hnn" secondAttribute="trailing" id="Pfz-uQ-kIL"/>
                             <constraint firstItem="Qdd-2C-Q3B" firstAttribute="top" secondItem="eRQ-1R-hJZ" secondAttribute="bottom" id="Zb1-sq-Hbs"/>
                             <constraint firstItem="yMg-bi-deP" firstAttribute="centerX" secondItem="2WG-wW-Wfy" secondAttribute="centerX" id="a67-mm-jf0"/>
+                            <constraint firstItem="U04-Cy-hnn" firstAttribute="leading" secondItem="2WG-wW-Wfy" secondAttribute="leading" id="b5i-kd-ASf"/>
                             <constraint firstItem="gF1-gv-DWq" firstAttribute="top" secondItem="1LR-O0-mUV" secondAttribute="bottom" id="byH-eW-5SJ"/>
                             <constraint firstItem="Qdd-2C-Q3B" firstAttribute="top" secondItem="gF1-gv-DWq" secondAttribute="bottom" id="fje-qH-Cnw"/>
-                            <constraint firstItem="Qdd-2C-Q3B" firstAttribute="top" secondItem="PZm-ew-Ddt" secondAttribute="bottom" id="pv9-Uh-Kvl"/>
                             <constraint firstItem="1LR-O0-mUV" firstAttribute="top" secondItem="NRq-nX-1ZJ" secondAttribute="bottom" id="qoM-XD-gFW"/>
                             <constraint firstAttribute="trailing" secondItem="gF1-gv-DWq" secondAttribute="trailing" id="vBH-sH-XQf"/>
                             <constraint firstItem="eRQ-1R-hJZ" firstAttribute="top" secondItem="1LR-O0-mUV" secondAttribute="bottom" id="vHe-32-po3"/>
@@ -120,6 +132,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Search" id="XAV-pr-Duq"/>
                     <connections>
+                        <outlet property="adContainer" destination="U04-Cy-hnn" id="X3y-HD-Q9f"/>
                         <outlet property="bannerAd" destination="PZm-ew-Ddt" id="39L-WO-uo0"/>
                         <outlet property="recentSearchesView" destination="gF1-gv-DWq" id="gSk-9q-SMb"/>
                         <outlet property="searchBar" destination="1LR-O0-mUV" id="VRw-i7-Edl"/>
@@ -292,12 +305,23 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" restorationIdentifier="GADBannerViewToPlayList" translatesAutoresizingMaskIntoConstraints="NO" id="8Cn-b7-Vhj" customClass="GADBannerView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xZq-vC-uxj">
                                 <rect key="frame" x="0.0" y="469" width="320" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" restorationIdentifier="GADBannerViewToPlayList" translatesAutoresizingMaskIntoConstraints="NO" id="8Cn-b7-Vhj" customClass="GADBannerView">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="CVH-Qf-usk"/>
+                                            <constraint firstAttribute="width" constant="320" id="mvV-M2-deQ"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="CVH-Qf-usk"/>
-                                    <constraint firstAttribute="width" constant="320" id="mvV-M2-deQ"/>
+                                    <constraint firstAttribute="height" constant="50" id="4nK-dO-D2V"/>
+                                    <constraint firstItem="8Cn-b7-Vhj" firstAttribute="centerY" secondItem="xZq-vC-uxj" secondAttribute="centerY" id="QxS-qQ-qSd"/>
+                                    <constraint firstItem="8Cn-b7-Vhj" firstAttribute="centerX" secondItem="xZq-vC-uxj" secondAttribute="centerX" id="njs-t3-3i7"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -306,15 +330,17 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="nZ5-EG-NUq" secondAttribute="bottom" id="Cle-GP-hEW"/>
                             <constraint firstItem="nZ5-EG-NUq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Jz1-83-xfu"/>
                             <constraint firstItem="nZ5-EG-NUq" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="MzR-eA-WAX"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="8Cn-b7-Vhj" secondAttribute="bottom" id="aGA-0i-ECT"/>
                             <constraint firstAttribute="trailing" secondItem="nZ5-EG-NUq" secondAttribute="trailing" id="cQF-oO-sAb"/>
-                            <constraint firstItem="8Cn-b7-Vhj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="uBd-bW-URN"/>
+                            <constraint firstItem="xZq-vC-uxj" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="dH1-qq-bS5"/>
+                            <constraint firstAttribute="trailing" secondItem="xZq-vC-uxj" secondAttribute="trailing" id="kag-cS-GfB"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="xZq-vC-uxj" secondAttribute="bottom" id="uam-Dc-Q4K"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Newest Releases" id="WdO-uO-jdw">
                         <barButtonItem key="backBarButtonItem" title="Back" id="0Jq-U8-0T6"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="adContainer" destination="xZq-vC-uxj" id="HDk-zX-N4j"/>
                         <outlet property="bannerAd" destination="8Cn-b7-Vhj" id="Dn9-dW-S1j"/>
                         <outlet property="tableView" destination="nZ5-EG-NUq" id="fWg-Ih-lsW"/>
                     </connections>
@@ -976,7 +1002,7 @@
                                         <rect key="frame" x="-60" y="-60" width="440" height="688"/>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="eV9-7L-V6j">
-                                        <rect key="frame" x="16" y="147.5" width="288" height="274.5"/>
+                                        <rect key="frame" x="16" y="147" width="288" height="274.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ALMOST THERE!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k48-OY-azy">
                                                 <rect key="frame" x="0.0" y="0.0" width="288" height="124"/>
@@ -1113,12 +1139,23 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" restorationIdentifier="GADBannerViewToPlayList" translatesAutoresizingMaskIntoConstraints="NO" id="utN-FE-T56" customClass="GADBannerView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HPt-p4-rdA">
                                 <rect key="frame" x="0.0" y="469" width="320" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" restorationIdentifier="GADBannerViewToPlayList" translatesAutoresizingMaskIntoConstraints="NO" id="utN-FE-T56" customClass="GADBannerView">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="fis-P7-tdh"/>
+                                            <constraint firstAttribute="width" constant="320" id="i1y-tD-i6H"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="320" id="Tj6-RV-cSe"/>
-                                    <constraint firstAttribute="height" constant="50" id="ZSk-gU-P1q"/>
+                                    <constraint firstItem="utN-FE-T56" firstAttribute="centerX" secondItem="HPt-p4-rdA" secondAttribute="centerX" id="OfY-kl-Lhr"/>
+                                    <constraint firstItem="utN-FE-T56" firstAttribute="centerY" secondItem="HPt-p4-rdA" secondAttribute="centerY" id="Qfb-DU-Ruj"/>
+                                    <constraint firstAttribute="height" constant="50" id="Zen-jd-K1g"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1131,12 +1168,13 @@
                             <constraint firstItem="WOa-04-8pa" firstAttribute="top" secondItem="2oc-jG-z9Z" secondAttribute="bottom" constant="8" id="EH2-p6-jjP"/>
                             <constraint firstItem="Rtj-xj-A9Z" firstAttribute="leading" secondItem="MJu-JL-nvO" secondAttribute="leading" constant="-60" id="Gsr-0K-WjZ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="WOa-04-8pa" secondAttribute="trailing" priority="999" constant="8" id="SFX-aa-7tV"/>
+                            <constraint firstItem="zCK-4h-43t" firstAttribute="top" secondItem="HPt-p4-rdA" secondAttribute="bottom" id="TnQ-yl-0sY"/>
                             <constraint firstItem="65Q-Zg-Uje" firstAttribute="leading" secondItem="MJu-JL-nvO" secondAttribute="leading" id="VfA-4Q-CXf"/>
                             <constraint firstAttribute="trailing" secondItem="Rtj-xj-A9Z" secondAttribute="trailing" constant="-60" id="XkO-t6-hKg"/>
-                            <constraint firstItem="zCK-4h-43t" firstAttribute="top" secondItem="utN-FE-T56" secondAttribute="bottom" id="d3e-SM-5U9"/>
                             <constraint firstItem="zCK-4h-43t" firstAttribute="top" secondItem="Rtj-xj-A9Z" secondAttribute="bottom" constant="-60" id="esH-P8-uUq"/>
                             <constraint firstItem="o1g-ft-PLL" firstAttribute="top" secondItem="WOa-04-8pa" secondAttribute="bottom" constant="8" id="h6y-EI-4LQ"/>
-                            <constraint firstItem="utN-FE-T56" firstAttribute="centerX" secondItem="MJu-JL-nvO" secondAttribute="centerX" id="knC-ZB-Niw"/>
+                            <constraint firstAttribute="trailing" secondItem="HPt-p4-rdA" secondAttribute="trailing" id="mk1-ix-srT"/>
+                            <constraint firstItem="HPt-p4-rdA" firstAttribute="leading" secondItem="MJu-JL-nvO" secondAttribute="leading" id="niO-y1-A3V"/>
                             <constraint firstItem="65Q-Zg-Uje" firstAttribute="top" secondItem="o1g-ft-PLL" secondAttribute="bottom" constant="20" id="qiM-n9-3AO"/>
                             <constraint firstItem="Ozf-UH-FEz" firstAttribute="centerY" secondItem="o1g-ft-PLL" secondAttribute="centerY" id="uJQ-7B-gri"/>
                             <constraint firstItem="Rtj-xj-A9Z" firstAttribute="top" secondItem="2oc-jG-z9Z" secondAttribute="bottom" constant="-60" id="wA0-gG-HKz"/>
@@ -1152,6 +1190,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="adContainer" destination="HPt-p4-rdA" id="L7R-VW-g0x"/>
                         <outlet property="backgroundStarImageView" destination="Rtj-xj-A9Z" id="TaW-1f-seD"/>
                         <outlet property="bannerAd" destination="utN-FE-T56" id="fLe-1f-QvR"/>
                         <outlet property="connectionLabel" destination="Ozf-UH-FEz" id="9ew-Wm-b3u"/>
@@ -2164,13 +2203,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your recent searches" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e1l-ht-syg">
-                                        <rect key="frame" x="8" y="8" width="312" height="15"/>
+                                        <rect key="frame" x="8" y="7.5" width="312" height="15"/>
                                         <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gto-ma-gmV">
-                                        <rect key="frame" x="276" y="-1" width="36" height="33"/>
+                                        <rect key="frame" x="276" y="-2" width="36" height="33"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                         <state key="normal" title="Clear">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2385,12 +2424,23 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" restorationIdentifier="GADBannerViewToPlayList" translatesAutoresizingMaskIntoConstraints="NO" id="deT-3H-RTx" customClass="GADBannerView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OJ0-SE-OHh">
                                 <rect key="frame" x="0.0" y="469" width="320" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" restorationIdentifier="GADBannerViewToPlayList" translatesAutoresizingMaskIntoConstraints="NO" id="deT-3H-RTx" customClass="GADBannerView">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="YcG-SX-eIR"/>
+                                            <constraint firstAttribute="width" constant="320" id="cEt-ok-WwB"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="YcG-SX-eIR"/>
-                                    <constraint firstAttribute="width" constant="320" id="cEt-ok-WwB"/>
+                                    <constraint firstAttribute="height" constant="50" id="BFf-K2-Xgj"/>
+                                    <constraint firstItem="deT-3H-RTx" firstAttribute="centerY" secondItem="OJ0-SE-OHh" secondAttribute="centerY" id="SWa-xN-ol9"/>
+                                    <constraint firstItem="deT-3H-RTx" firstAttribute="centerX" secondItem="OJ0-SE-OHh" secondAttribute="centerX" id="pO4-1J-3lE"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -2399,15 +2449,17 @@
                             <constraint firstAttribute="trailing" secondItem="0dZ-wk-s8P" secondAttribute="trailing" id="1Ee-Gg-mXg"/>
                             <constraint firstItem="0dZ-wk-s8P" firstAttribute="top" secondItem="tBz-em-5D1" secondAttribute="bottom" id="48p-aJ-DEb"/>
                             <constraint firstItem="bAq-QC-5oh" firstAttribute="top" secondItem="0dZ-wk-s8P" secondAttribute="bottom" id="7ok-dP-CCP"/>
+                            <constraint firstItem="bAq-QC-5oh" firstAttribute="top" secondItem="OJ0-SE-OHh" secondAttribute="bottom" id="Ega-o1-IbD"/>
+                            <constraint firstAttribute="trailing" secondItem="OJ0-SE-OHh" secondAttribute="trailing" id="N0u-iq-aJM"/>
                             <constraint firstItem="0dZ-wk-s8P" firstAttribute="leading" secondItem="Oax-Ui-JFv" secondAttribute="leading" id="OXP-Pu-87v"/>
-                            <constraint firstItem="deT-3H-RTx" firstAttribute="centerX" secondItem="Oax-Ui-JFv" secondAttribute="centerX" id="aEl-4t-VVY"/>
-                            <constraint firstItem="bAq-QC-5oh" firstAttribute="top" secondItem="deT-3H-RTx" secondAttribute="bottom" id="pJw-NQ-wtH"/>
+                            <constraint firstItem="OJ0-SE-OHh" firstAttribute="leading" secondItem="Oax-Ui-JFv" secondAttribute="leading" id="od5-pN-1TR"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Upcoming Releases" id="9Wn-Mg-XJE">
                         <barButtonItem key="backBarButtonItem" title="Back" id="jOr-Yy-ceJ"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="adContainer" destination="OJ0-SE-OHh" id="FoL-FH-mWn"/>
                         <outlet property="bannerAd" destination="deT-3H-RTx" id="X4k-Jb-0z7"/>
                         <outlet property="tableView" destination="0dZ-wk-s8P" id="2bD-nT-aKF"/>
                     </connections>
@@ -2439,6 +2491,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="5Jp-eg-eAU"/>
-        <segue reference="v2d-kz-Jth"/>
+        <segue reference="a7x-K3-wKb"/>
     </inferredMetricsTieBreakers>
 </document>
