@@ -9,6 +9,7 @@
 import UIKit
 import NVActivityIndicatorView
 import Kingfisher
+import Firebase
 
 // this is needed because the badge appears/disappears, and it could flicker if the game was moved from one list to another
 struct GameInExclusiveLists {
@@ -38,7 +39,7 @@ struct GameInExclusiveLists {
     }
 }
 
-class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizerDelegate, ErrorHandlerDelegate, CollectionViewSizeDidSetDelegate {
+class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizerDelegate, ErrorHandlerDelegate, CollectionViewSizeDidSetDelegate, GADBannerViewDelegate {
     
     typealias OnFinishedListener = () -> ()
     
@@ -149,6 +150,9 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     @IBOutlet weak var releaseDateVCHeightConstraint: NSLayoutConstraint!
     var releaseDateVC: ReleaseDateVC?
     
+    @IBOutlet weak var bannerAd: GADBannerView!
+    @IBOutlet weak var bannerContainer: GADBannerView!
+    
     var game: Game!
     private var api: GameAPI!
     
@@ -165,6 +169,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         setupBadgeVC()
         setupImageCarouselVC()
         setupReleaseDateVC()
+        setupBannerAd()
         
         startLoading()
         
@@ -234,6 +239,20 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
                 self.releaseDateVC!.didSetHeightDelegate = releaseDateVCDidSetHeightDelegate
             }
         }
+    }
+    
+    private func setupBannerAd() {
+        bannerAd.adUnitID = "ca-app-pub-6151617651580775/9162043263"
+        bannerAd.rootViewController = self
+        bannerContainer.isHidden = true
+        bannerAd.delegate = self
+        let request = GADRequest()
+        request.testDevices = [kGADSimulatorID, "12ef71784cd669837273f30fa368f77b"];
+        bannerAd.load(request)
+    }
+    
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        bannerContainer.isHidden = false
     }
     
     func didSetSize(numberOfItems: Int, numberOfRows: Int, sizeOfItems: CGSize, sizeOfMargins: CGSize) {

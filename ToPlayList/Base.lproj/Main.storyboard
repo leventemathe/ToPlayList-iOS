@@ -799,12 +799,33 @@
                                             <constraint firstAttribute="bottom" secondItem="A8L-fO-z1X" secondAttribute="bottom" id="pBP-ep-jUF"/>
                                         </constraints>
                                     </scrollView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="52c-k6-PcL">
+                                        <rect key="frame" x="0.0" y="469" width="320" height="50"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" restorationIdentifier="GADBannerViewToPlayList" translatesAutoresizingMaskIntoConstraints="NO" id="fAn-mO-DCF" customClass="GADBannerView">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="654-R0-uDv"/>
+                                                    <constraint firstAttribute="width" constant="320" id="p8G-iZ-GBM"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="fAn-mO-DCF" firstAttribute="centerY" secondItem="52c-k6-PcL" secondAttribute="centerY" id="7tK-9r-fVN"/>
+                                            <constraint firstAttribute="height" constant="50" id="V09-yC-xM8"/>
+                                            <constraint firstItem="fAn-mO-DCF" firstAttribute="centerX" secondItem="52c-k6-PcL" secondAttribute="centerX" id="oyX-Yu-5KK"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.92241037436548223" green="0.92241037436548223" blue="0.92241037436548223" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="8NQ-RT-MJ5" firstAttribute="top" secondItem="2xt-nC-PKO" secondAttribute="bottom" constant="8" id="2Fx-sx-f5B"/>
                                     <constraint firstAttribute="trailing" secondItem="2xt-nC-PKO" secondAttribute="trailing" id="6FP-PM-PQg"/>
                                     <constraint firstItem="2xt-nC-PKO" firstAttribute="top" secondItem="AHD-U1-sds" secondAttribute="top" constant="70" id="BOV-nY-YE8"/>
+                                    <constraint firstAttribute="trailing" secondItem="52c-k6-PcL" secondAttribute="trailing" id="JfC-BN-TqQ"/>
+                                    <constraint firstItem="52c-k6-PcL" firstAttribute="leading" secondItem="AHD-U1-sds" secondAttribute="leading" id="Jnf-lk-9d5"/>
                                     <constraint firstItem="efa-6i-V9F" firstAttribute="top" secondItem="AHD-U1-sds" secondAttribute="top" id="QO2-My-y4d"/>
                                     <constraint firstItem="8NQ-RT-MJ5" firstAttribute="leading" secondItem="AHD-U1-sds" secondAttribute="leading" id="Z30-6K-FhK"/>
                                     <constraint firstAttribute="trailing" secondItem="efa-6i-V9F" secondAttribute="trailing" id="Z8r-lX-4jf"/>
@@ -815,6 +836,7 @@
                                     <constraint firstAttribute="bottom" secondItem="8NQ-RT-MJ5" secondAttribute="bottom" id="vbf-bb-VeJ"/>
                                     <constraint firstItem="2xt-nC-PKO" firstAttribute="leading" secondItem="AHD-U1-sds" secondAttribute="leading" id="xOI-me-IZg"/>
                                     <constraint firstAttribute="trailing" secondItem="8H2-nN-eDd" secondAttribute="trailing" priority="999" constant="8" id="yZh-q3-wQe"/>
+                                    <constraint firstAttribute="bottom" secondItem="52c-k6-PcL" secondAttribute="bottom" id="yu0-fY-K3f"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -831,6 +853,8 @@
                     <connections>
                         <outlet property="badgeVCContainer" destination="Dpq-g9-ur6" id="eVK-3O-vhl"/>
                         <outlet property="badgeVCHeightConstraint" destination="0MI-wB-DNx" id="H4J-1s-8fI"/>
+                        <outlet property="bannerAd" destination="fAn-mO-DCF" id="Rgl-Tg-6c8"/>
+                        <outlet property="bannerContainer" destination="fAn-mO-DCF" id="e9d-Fd-8W9"/>
                         <outlet property="bigScreenShotHeightConstraint" destination="9QK-RS-XRL" id="8J9-I5-6bC"/>
                         <outlet property="bigScreenshot" destination="rnH-6d-GnC" id="phi-Ht-Cj0"/>
                         <outlet property="centeredTitle" destination="8H2-nN-eDd" id="fCH-Cu-etD"/>
