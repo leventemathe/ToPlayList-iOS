@@ -44,7 +44,6 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         setupNoDataLabel()
         setupRefreshVC()
         setupLoadingAnimation()
-        setupPanRecognizer()
         setupBannerAd()
         initialLoadGames()
         loadingAnimationView.startAnimating()
@@ -87,8 +86,17 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     var panStartPoint: CGPoint?
     
     private func setupPanRecognizer() {
-        panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(ReleasesVC.handlePan(_:)))
-        self.view.addGestureRecognizer(panRecognizer)
+        if ListsUser.loggedIn && ListsUser.verified {
+            if panRecognizer == nil {
+                panRecognizer = UIPanGestureRecognizer(target: self, action: #selector(ReleasesVC.handlePan(_:)))
+                view.addGestureRecognizer(panRecognizer)
+            }
+        } else {
+            if panRecognizer != nil {
+                view.removeGestureRecognizer(panRecognizer)
+                panRecognizer = nil
+            }
+        }
     }
     
     func handlePan(_ recognizer: UIGestureRecognizer?) {
@@ -130,6 +138,7 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     override func viewWillAppear(_ animated: Bool) {
         noInternetAlertAppearedForScrolling = false
+        setupPanRecognizer()
         clearStars()
         if ListsUser.loggedIn && ListsUser.verified {
             getGamesInLists {
