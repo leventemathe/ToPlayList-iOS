@@ -35,12 +35,11 @@
 		D726BC9D1E0ACF3900D6C9CD /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = D726BC9C1E0ACF3900D6C9CD /* Game.swift */; };
 		D726D51B1E5A45870045AE8C /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = D726D51A1E5A45870045AE8C /* List.swift */; };
 		D727AFE41E9B7ACF00E1C93F /* ToPlayAndPlayedListListeners.swift in Sources */ = {isa = PBXBuildFile; fileRef = D727AFE31E9B7ACF00E1C93F /* ToPlayAndPlayedListListeners.swift */; };
-		D72A619B1F20FBA400D9F5BA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D78D87C81F20D51500C28C4E /* GoogleService-Info.plist */; };
-		D72A619C1F20FBA500D9F5BA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D78D87C81F20D51500C28C4E /* GoogleService-Info.plist */; };
 		D72D4CA61E1479EC0070E013 /* IGDBJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72D4CA51E1479EC0070E013 /* IGDBJSON.swift */; };
 		D72E66B71E619D0800BED388 /* ToPlayListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72E66B61E619D0800BED388 /* ToPlayListVC.swift */; };
 		D72E66BA1E619D2100BED388 /* PlayedListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72E66B91E619D2100BED388 /* PlayedListVC.swift */; };
 		D74AC7DA1E3919B700C37A90 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74AC7D91E3919B700C37A90 /* RegisterVC.swift */; };
+		D74C76271F4C70D50020E91D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D74C76261F4C70D50020E91D /* GoogleService-Info.plist */; };
 		D75150281E34BB9F00EDA802 /* MainTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75150271E34BB9F00EDA802 /* MainTabVC.swift */; };
 		D75F4EA21E643A9E00CB2875 /* DropShadowed.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75F4EA11E643A9E00CB2875 /* DropShadowed.swift */; };
 		D760344F1F17A5B600D71240 /* IGDBKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = D760344E1F17A5B600D71240 /* IGDBKeys.swift */; };
@@ -57,7 +56,6 @@
 		D78B86731E38BC6200F1EA7C /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78B86721E38BC6200F1EA7C /* ListCollectionViewCell.swift */; };
 		D78C0E291E1465440088560F /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78C0E281E1465440088560F /* Identifiable.swift */; };
 		D78D87C71F20D2CA00C28C4E /* ReleasesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78D87C51F20D2CA00C28C4E /* ReleasesCell.swift */; };
-		D78D87C91F20D51500C28C4E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D78D87C81F20D51500C28C4E /* GoogleService-Info.plist */; };
 		D78EA56C1EBC8E4C00CDB70E /* BadgeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78EA56B1EBC8E4C00CDB70E /* BadgeVC.swift */; };
 		D795B00D1E1DB3D700776670 /* GameSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D795B00C1E1DB3D700776670 /* GameSection.swift */; };
 		D795B0101E1DBA5700776670 /* Dates.swift in Sources */ = {isa = PBXBuildFile; fileRef = D795B00F1E1DBA5700776670 /* Dates.swift */; };
@@ -157,6 +155,7 @@
 		D72E66B61E619D0800BED388 /* ToPlayListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToPlayListVC.swift; sourceTree = "<group>"; };
 		D72E66B91E619D2100BED388 /* PlayedListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayedListVC.swift; sourceTree = "<group>"; };
 		D74AC7D91E3919B700C37A90 /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
+		D74C76261F4C70D50020E91D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D75150271E34BB9F00EDA802 /* MainTabVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabVC.swift; sourceTree = "<group>"; };
 		D75A41131E241FC600E91514 /* ToPlayListUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToPlayListUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D75F4EA11E643A9E00CB2875 /* DropShadowed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropShadowed.swift; sourceTree = "<group>"; };
@@ -174,7 +173,6 @@
 		D78B86721E38BC6200F1EA7C /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListCollectionViewCell.swift; sourceTree = "<group>"; };
 		D78C0E281E1465440088560F /* Identifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
 		D78D87C51F20D2CA00C28C4E /* ReleasesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReleasesCell.swift; sourceTree = "<group>"; };
-		D78D87C81F20D51500C28C4E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "ToPlayList/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D78EA56B1EBC8E4C00CDB70E /* BadgeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeVC.swift; sourceTree = "<group>"; };
 		D795B00C1E1DB3D700776670 /* GameSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSection.swift; sourceTree = "<group>"; };
 		D795B00F1E1DBA5700776670 /* Dates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dates.swift; sourceTree = "<group>"; };
@@ -331,7 +329,7 @@
 		D726BC791E0ABDD800D6C9CD = {
 			isa = PBXGroup;
 			children = (
-				D78D87C81F20D51500C28C4E /* GoogleService-Info.plist */,
+				D74C76261F4C70D50020E91D /* GoogleService-Info.plist */,
 				D726BC841E0ABDD800D6C9CD /* ToPlayList */,
 				D75A41141E241FC600E91514 /* ToPlayListUnitTests */,
 				D70DC31D1E8048DA0080DBAA /* ToPlayListUITests */,
@@ -634,7 +632,6 @@
 					};
 					D726BC811E0ABDD800D6C9CD = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 8Q64XKLZ2L;
 						ProvisioningStyle = Automatic;
 					};
 					D75A41121E241FC600E91514 = {
@@ -669,7 +666,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D72A619C1F20FBA500D9F5BA /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -683,7 +679,7 @@
 				D7C3A1721E0DD9120091279C /* Assets.xcassets in Resources */,
 				D7B8C86D1E2D16F100656E64 /* ErrorMessage.xib in Resources */,
 				D726BC8B1E0ABDD800D6C9CD /* Main.storyboard in Resources */,
-				D78D87C91F20D51500C28C4E /* GoogleService-Info.plist in Resources */,
+				D74C76271F4C70D50020E91D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -691,7 +687,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D72A619B1F20FBA400D9F5BA /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1072,7 +1067,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 8Q64XKLZ2L;
+				DEVELOPMENT_TEAM = 2XA4EDUMR4;
 				INFOPLIST_FILE = ToPlayList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.levente.mathe.ToPlayList;
@@ -1087,7 +1082,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 8Q64XKLZ2L;
+				DEVELOPMENT_TEAM = 2XA4EDUMR4;
 				INFOPLIST_FILE = ToPlayList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.levente.mathe.ToPlayList;

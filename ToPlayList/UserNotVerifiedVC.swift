@@ -50,15 +50,16 @@ class UserNotVerifiedVC: UIViewController {
         imVerifiedButton.startLoadingAnimation()
         
         LoginService.instance.reload({ result in
-            self.imVerifiedButton.stopLoadingAnimation()
             switch result {
             case .success:
                 if ListsUser.verified {
                     self.verificationSuccessful()
                 } else {
                     Alerts.alertWithOKButton(withMessage: UserNotVerifiedVC.ERROR_NOT_VERIFIED, forVC: self)
+                    self.imVerifiedButton.stopLoadingAnimation()
                 }
             case .failure(let error):
+                self.imVerifiedButton.stopLoadingAnimation()
                 switch error {
                 case .noInternet:
                     Alerts.alertWithOKButton(withMessage: Alerts.NETWORK_ERROR, forVC: self)
@@ -95,6 +96,7 @@ class UserNotVerifiedVC: UIViewController {
     private func verificationSuccessful() {
         if let uid = ListsUser.userid {
             ListsUser.instance.createListsForUser(uid, withOnComplete: { result in
+                self.imVerifiedButton.stopLoadingAnimation()
                 switch result {
                 case .success:
                     self.performSegue(withIdentifier: "VerificationToLists", sender: self)

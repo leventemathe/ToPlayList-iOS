@@ -63,7 +63,7 @@ class ListsUser {
         
         ListsEndpoints.USERS.child(uid).updateChildValues(userValues, withCompletionBlock: { (error, ref) in
             if error != nil {
-                onComplete(.failure(.permissionDenied))
+                onComplete(.failure(.usernameAlreadyInUse))
                 return
             } else {
                 ListsEndpoints.USERNAMES.child(username).updateChildValues(usernameValues, withCompletionBlock: { (error, ref) in

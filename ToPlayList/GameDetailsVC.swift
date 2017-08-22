@@ -311,7 +311,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     }
     
     private func updateStarState(_ onComplete: @escaping ()->()) {
-        if !ListsUser.loggedIn {
+        if !(ListsUser.loggedIn && ListsUser.verified) {
             self.gameInExclusiveLists.inToPlayList = false
             self.gameInExclusiveLists.inPlayedList = false
             onComplete()
