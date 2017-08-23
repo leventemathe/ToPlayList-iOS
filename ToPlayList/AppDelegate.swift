@@ -52,9 +52,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {        
-        FirebaseApp.configure()
-        Database.database().isPersistenceEnabled = true
-        GADMobileAds.configure(withApplicationID: "ca-app-pub-6151617651580775~5306898046")
+        setupFirebase()
+        setupAdmob()
         
         UNUserNotificationCenter.current().delegate = self
         
@@ -72,6 +71,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             AppDelegate.appLaunchedWithNotifTappedForThisGame = game
         }
         completionHandler()
+    }
+    
+    private func setupFirebase() {
+        guard let firebaseConfig = Bundle.main.path(forResource: Configuration.instance.firebase.plist, ofType: "plist") else {
+            fatalError("Invalid Firebase configuration file.")
+        }
+        guard let options = FirebaseOptions(contentsOfFile: firebaseConfig) else {
+            fatalError("Invalid Firebase configuration file.")
+        }
+        FirebaseApp.configure(options: options)
+        Database.database().isPersistenceEnabled = true
+    }
+    
+    private func setupAdmob() {
+        GADMobileAds.configure(withApplicationID: Configuration.instance.admob.applicationID)
     }
     
     private func setupTabBarAppearance() {

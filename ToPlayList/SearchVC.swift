@@ -131,12 +131,13 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
     }
     
     private func setupBannerAd() {
-        bannerAd.adUnitID = "ca-app-pub-6151617651580775/3442974423"
+        bannerAd.adUnitID = Configuration.instance.admob.searchAdUnitID
+        
         bannerAd.rootViewController = self
         adContainer.isHidden = true
         bannerAd.delegate = self
+        
         let request = GADRequest()
-        request.testDevices = [kGADSimulatorID, "12ef71784cd669837273f30fa368f77b"];
         bannerAd.load(request)
     }
     

@@ -39,10 +39,9 @@
 		D72E66B71E619D0800BED388 /* ToPlayListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72E66B61E619D0800BED388 /* ToPlayListVC.swift */; };
 		D72E66BA1E619D2100BED388 /* PlayedListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72E66B91E619D2100BED388 /* PlayedListVC.swift */; };
 		D74AC7DA1E3919B700C37A90 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74AC7D91E3919B700C37A90 /* RegisterVC.swift */; };
-		D74C76271F4C70D50020E91D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D74C76261F4C70D50020E91D /* GoogleService-Info.plist */; };
+		D74C76271F4C70D50020E91D /* GoogleService-Info-Dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = D74C76261F4C70D50020E91D /* GoogleService-Info-Dev.plist */; };
 		D75150281E34BB9F00EDA802 /* MainTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75150271E34BB9F00EDA802 /* MainTabVC.swift */; };
 		D75F4EA21E643A9E00CB2875 /* DropShadowed.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75F4EA11E643A9E00CB2875 /* DropShadowed.swift */; };
-		D760344F1F17A5B600D71240 /* IGDBKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = D760344E1F17A5B600D71240 /* IGDBKeys.swift */; };
 		D76437E11E1E4E7300B09C7E /* slkscr.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D76437E01E1E4E7300B09C7E /* slkscr.ttf */; };
 		D76437E41E1E506D00B09C7E /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76437E21E1E506D00B09C7E /* HeaderView.swift */; };
 		D76437E51E1E506D00B09C7E /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D76437E31E1E506D00B09C7E /* HeaderView.xib */; };
@@ -69,6 +68,7 @@
 		D7B8C86B1E2D16C700656E64 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B8C86A1E2D16C700656E64 /* ErrorMessage.swift */; };
 		D7B8C86D1E2D16F100656E64 /* ErrorMessage.xib in Resources */ = {isa = PBXBuildFile; fileRef = D7B8C86C1E2D16F100656E64 /* ErrorMessage.xib */; };
 		D7BC469B1F2CB085007F05DB /* SearchIconVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BC469A1F2CB085007F05DB /* SearchIconVC.swift */; };
+		D7C077DF1F4D87C700760585 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C077DE1F4D87C700760585 /* Configuration.swift */; };
 		D7C0F9471F26148C00556AA8 /* ToPlayListNotificationSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C0F9461F26148B00556AA8 /* ToPlayListNotificationSystem.swift */; };
 		D7C0F9491F2A285200556AA8 /* OutTodayBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C0F9481F2A285100556AA8 /* OutTodayBadge.swift */; };
 		D7C3A1701E0DA2DF0091279C /* GameProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C3A16F1E0DA2DF0091279C /* GameProperties.swift */; };
@@ -113,14 +113,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		089C14B4351238AB6978A742 /* Pods-ToPlayListUnitTests.release dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToPlayListUnitTests.release dev.xcconfig"; path = "Pods/Target Support Files/Pods-ToPlayListUnitTests/Pods-ToPlayListUnitTests.release dev.xcconfig"; sourceTree = "<group>"; };
 		1DA6F271D10ACDF634516C75 /* Pods_ToPlayListUnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ToPlayListUnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		24A666255842E64CA62AAEC7 /* Pods-ToPlayList.release dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToPlayList.release dev.xcconfig"; path = "Pods/Target Support Files/Pods-ToPlayList/Pods-ToPlayList.release dev.xcconfig"; sourceTree = "<group>"; };
 		3B9447719F1960C6A0B1D4F2 /* Pods-ToPlayList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToPlayList.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ToPlayList/Pods-ToPlayList.debug.xcconfig"; sourceTree = "<group>"; };
+		3B9894BC6EA49A0048A5CACF /* Pods-ToPlayListUnitTests.debug prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToPlayListUnitTests.debug prod.xcconfig"; path = "Pods/Target Support Files/Pods-ToPlayListUnitTests/Pods-ToPlayListUnitTests.debug prod.xcconfig"; sourceTree = "<group>"; };
 		56AD1F62056EF3A7842609AC /* Pods-ToPlayListUnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToPlayListUnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ToPlayListUnitTests/Pods-ToPlayListUnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6145022A2978B0561A8DA46B /* Pods-ToPlayList-ToPlayListUnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToPlayList-ToPlayListUnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ToPlayList-ToPlayListUnitTests/Pods-ToPlayList-ToPlayListUnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		705E9608BAAFE73EB2D2C1A0 /* Pods-ToPlayList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToPlayList.release.xcconfig"; path = "Pods/Target Support Files/Pods-ToPlayList/Pods-ToPlayList.release.xcconfig"; sourceTree = "<group>"; };
+		AECA0DC3116384FBCB064ECE /* Pods-ToPlayList.debug prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToPlayList.debug prod.xcconfig"; path = "Pods/Target Support Files/Pods-ToPlayList/Pods-ToPlayList.debug prod.xcconfig"; sourceTree = "<group>"; };
 		B84B20D64D553B9B36723B6B /* Pods-ToPlayList-ToPlayListUnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToPlayList-ToPlayListUnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ToPlayList-ToPlayListUnitTests/Pods-ToPlayList-ToPlayListUnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BC37B2FC211DCF9DE8B1AAC2 /* Pods-ToPlayListUnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToPlayListUnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ToPlayListUnitTests/Pods-ToPlayListUnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		CE1015AB877BDCDC510C82BC /* Pods_ToPlayList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ToPlayList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF6C6AD091F1B4EF116FE5D9 /* Pods-ToPlayList.release prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToPlayList.release prod.xcconfig"; path = "Pods/Target Support Files/Pods-ToPlayList/Pods-ToPlayList.release prod.xcconfig"; sourceTree = "<group>"; };
 		D70560591F33473700AD64CF /* Lists.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lists.swift; sourceTree = "<group>"; };
 		D70900991EC5B80600A316BE /* SearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		D709009C1EC5B89D00A316BE /* SearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
@@ -155,11 +160,10 @@
 		D72E66B61E619D0800BED388 /* ToPlayListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToPlayListVC.swift; sourceTree = "<group>"; };
 		D72E66B91E619D2100BED388 /* PlayedListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayedListVC.swift; sourceTree = "<group>"; };
 		D74AC7D91E3919B700C37A90 /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
-		D74C76261F4C70D50020E91D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D74C76261F4C70D50020E91D /* GoogleService-Info-Dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Dev.plist"; sourceTree = "<group>"; };
 		D75150271E34BB9F00EDA802 /* MainTabVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabVC.swift; sourceTree = "<group>"; };
 		D75A41131E241FC600E91514 /* ToPlayListUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToPlayListUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D75F4EA11E643A9E00CB2875 /* DropShadowed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropShadowed.swift; sourceTree = "<group>"; };
-		D760344E1F17A5B600D71240 /* IGDBKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGDBKeys.swift; sourceTree = "<group>"; };
 		D76437E01E1E4E7300B09C7E /* slkscr.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = slkscr.ttf; sourceTree = "<group>"; };
 		D76437E21E1E506D00B09C7E /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		D76437E31E1E506D00B09C7E /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
@@ -186,6 +190,7 @@
 		D7B8C86A1E2D16C700656E64 /* ErrorMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		D7B8C86C1E2D16F100656E64 /* ErrorMessage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ErrorMessage.xib; sourceTree = "<group>"; };
 		D7BC469A1F2CB085007F05DB /* SearchIconVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchIconVC.swift; sourceTree = "<group>"; };
+		D7C077DE1F4D87C700760585 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		D7C0F9461F26148B00556AA8 /* ToPlayListNotificationSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToPlayListNotificationSystem.swift; sourceTree = "<group>"; };
 		D7C0F9481F2A285100556AA8 /* OutTodayBadge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutTodayBadge.swift; sourceTree = "<group>"; };
 		D7C3A16F1E0DA2DF0091279C /* GameProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameProperties.swift; sourceTree = "<group>"; };
@@ -211,6 +216,9 @@
 		D7FADEF41EC09D4B0006B4E4 /* BadgeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeCell.swift; sourceTree = "<group>"; };
 		D7FDC0981E34CCF8005FB1CF /* Alerts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
 		D7FE54EE1F20CBA700F2E566 /* ReleasesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReleasesVC.swift; sourceTree = "<group>"; };
+		DCE03429A22DB1EF92275A59 /* Pods-ToPlayListUnitTests.debug dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToPlayListUnitTests.debug dev.xcconfig"; path = "Pods/Target Support Files/Pods-ToPlayListUnitTests/Pods-ToPlayListUnitTests.debug dev.xcconfig"; sourceTree = "<group>"; };
+		E69B70523C766E52CA3AA619 /* Pods-ToPlayListUnitTests.release prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToPlayListUnitTests.release prod.xcconfig"; path = "Pods/Target Support Files/Pods-ToPlayListUnitTests/Pods-ToPlayListUnitTests.release prod.xcconfig"; sourceTree = "<group>"; };
+		FF32AB1995B93894D2EF1E92 /* Pods-ToPlayList.debug dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToPlayList.debug dev.xcconfig"; path = "Pods/Target Support Files/Pods-ToPlayList/Pods-ToPlayList.debug dev.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,6 +266,14 @@
 				6145022A2978B0561A8DA46B /* Pods-ToPlayList-ToPlayListUnitTests.release.xcconfig */,
 				56AD1F62056EF3A7842609AC /* Pods-ToPlayListUnitTests.debug.xcconfig */,
 				BC37B2FC211DCF9DE8B1AAC2 /* Pods-ToPlayListUnitTests.release.xcconfig */,
+				FF32AB1995B93894D2EF1E92 /* Pods-ToPlayList.debug dev.xcconfig */,
+				AECA0DC3116384FBCB064ECE /* Pods-ToPlayList.debug prod.xcconfig */,
+				24A666255842E64CA62AAEC7 /* Pods-ToPlayList.release dev.xcconfig */,
+				CF6C6AD091F1B4EF116FE5D9 /* Pods-ToPlayList.release prod.xcconfig */,
+				DCE03429A22DB1EF92275A59 /* Pods-ToPlayListUnitTests.debug dev.xcconfig */,
+				3B9894BC6EA49A0048A5CACF /* Pods-ToPlayListUnitTests.debug prod.xcconfig */,
+				089C14B4351238AB6978A742 /* Pods-ToPlayListUnitTests.release dev.xcconfig */,
+				E69B70523C766E52CA3AA619 /* Pods-ToPlayListUnitTests.release prod.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -329,7 +345,7 @@
 		D726BC791E0ABDD800D6C9CD = {
 			isa = PBXGroup;
 			children = (
-				D74C76261F4C70D50020E91D /* GoogleService-Info.plist */,
+				D74C76261F4C70D50020E91D /* GoogleService-Info-Dev.plist */,
 				D726BC841E0ABDD800D6C9CD /* ToPlayList */,
 				D75A41141E241FC600E91514 /* ToPlayListUnitTests */,
 				D70DC31D1E8048DA0080DBAA /* ToPlayListUITests */,
@@ -357,6 +373,7 @@
 				D726BC991E0AC12200D6C9CD /* Model */,
 				D726BC981E0AC11B00D6C9CD /* View */,
 				D726BC971E0AC05B00D6C9CD /* Controller */,
+				D7C077DE1F4D87C700760585 /* Configuration.swift */,
 			);
 			path = ToPlayList;
 			sourceTree = "<group>";
@@ -421,7 +438,6 @@
 		D78ADCA31E3750BD008DE943 /* IGDB */ = {
 			isa = PBXGroup;
 			children = (
-				D760344E1F17A5B600D71240 /* IGDBKeys.swift */,
 				D70B03221E0C1F9500F67E7A /* IGDB.swift */,
 				D72D4CA51E1479EC0070E013 /* IGDBJSON.swift */,
 				D76B47FC1E197CCD00D18DDF /* GameIDs.swift */,
@@ -679,7 +695,7 @@
 				D7C3A1721E0DD9120091279C /* Assets.xcassets in Resources */,
 				D7B8C86D1E2D16F100656E64 /* ErrorMessage.xib in Resources */,
 				D726BC8B1E0ABDD800D6C9CD /* Main.storyboard in Resources */,
-				D74C76271F4C70D50020E91D /* GoogleService-Info.plist in Resources */,
+				D74C76271F4C70D50020E91D /* GoogleService-Info-Dev.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -820,6 +836,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7EF927F1F43371100485FC4 /* NavigationControllerWithCustomBackGestureDelegate.swift in Sources */,
+				D7C077DF1F4D87C700760585 /* Configuration.swift in Sources */,
 				D78ADCA61E3750EB008DE943 /* Lists.swift in Sources */,
 				D75F4EA21E643A9E00CB2875 /* DropShadowed.swift in Sources */,
 				D719811B1E26A389005823C2 /* ListVC.swift in Sources */,
@@ -872,7 +889,6 @@
 				D7B8C86B1E2D16C700656E64 /* ErrorMessage.swift in Sources */,
 				D7D0BCBF1F1B63FC00C2B071 /* ReleaseDate.swift in Sources */,
 				D7E1AEEB1EC1CECF00661D67 /* DidSetSizeDelegates.swift in Sources */,
-				D760344F1F17A5B600D71240 /* IGDBKeys.swift in Sources */,
 				D77F504B1ED6186D00B40D0C /* ImageCarouselVC.swift in Sources */,
 				D7BC469B1F2CB085007F05DB /* SearchIconVC.swift in Sources */,
 				D72676551EB50E7C004DC2E1 /* BadgeLabel.swift in Sources */,
@@ -940,7 +956,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		D70DC3241E8048DA0080DBAA /* Debug */ = {
+		D70DC3241E8048DA0080DBAA /* Debug Dev */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = 8Q64XKLZ2L;
@@ -952,9 +968,9 @@
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = ToPlayList;
 			};
-			name = Debug;
+			name = "Debug Dev";
 		};
-		D70DC3251E8048DA0080DBAA /* Release */ = {
+		D70DC3251E8048DA0080DBAA /* Release Dev */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = 8Q64XKLZ2L;
@@ -966,9 +982,9 @@
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = ToPlayList;
 			};
-			name = Release;
+			name = "Release Dev";
 		};
-		D726BC921E0ABDD800D6C9CD /* Debug */ = {
+		D726BC921E0ABDD800D6C9CD /* Debug Dev */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1016,9 +1032,9 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = Debug;
+			name = "Debug Dev";
 		};
-		D726BC931E0ABDD800D6C9CD /* Release */ = {
+		D726BC931E0ABDD800D6C9CD /* Release Dev */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1059,11 +1075,11 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = Release;
+			name = "Release Dev";
 		};
-		D726BC951E0ABDD800D6C9CD /* Debug */ = {
+		D726BC951E0ABDD800D6C9CD /* Debug Dev */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B9447719F1960C6A0B1D4F2 /* Pods-ToPlayList.debug.xcconfig */;
+			baseConfigurationReference = FF32AB1995B93894D2EF1E92 /* Pods-ToPlayList.debug dev.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1074,11 +1090,11 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
-			name = Debug;
+			name = "Debug Dev";
 		};
-		D726BC961E0ABDD800D6C9CD /* Release */ = {
+		D726BC961E0ABDD800D6C9CD /* Release Dev */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 705E9608BAAFE73EB2D2C1A0 /* Pods-ToPlayList.release.xcconfig */;
+			baseConfigurationReference = 24A666255842E64CA62AAEC7 /* Pods-ToPlayList.release dev.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1089,11 +1105,11 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
-			name = Release;
+			name = "Release Dev";
 		};
-		D75A411B1E241FC600E91514 /* Debug */ = {
+		D75A411B1E241FC600E91514 /* Debug Dev */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 56AD1F62056EF3A7842609AC /* Pods-ToPlayListUnitTests.debug.xcconfig */;
+			baseConfigurationReference = DCE03429A22DB1EF92275A59 /* Pods-ToPlayListUnitTests.debug dev.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1115,11 +1131,11 @@
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ToPlayList.app/ToPlayList";
 			};
-			name = Debug;
+			name = "Debug Dev";
 		};
-		D75A411C1E241FC600E91514 /* Release */ = {
+		D75A411C1E241FC600E91514 /* Release Dev */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BC37B2FC211DCF9DE8B1AAC2 /* Pods-ToPlayListUnitTests.release.xcconfig */;
+			baseConfigurationReference = 089C14B4351238AB6978A742 /* Pods-ToPlayListUnitTests.release dev.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1141,7 +1157,210 @@
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ToPlayList.app/ToPlayList";
 			};
-			name = Release;
+			name = "Release Dev";
+		};
+		D7C077D61F4D7EDC00760585 /* Debug Prod */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug Prod";
+		};
+		D7C077D71F4D7EDC00760585 /* Debug Prod */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AECA0DC3116384FBCB064ECE /* Pods-ToPlayList.debug prod.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 2XA4EDUMR4;
+				INFOPLIST_FILE = ToPlayList/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.levente.mathe.ToPlayList;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = "Debug Prod";
+		};
+		D7C077D81F4D7EDC00760585 /* Debug Prod */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3B9894BC6EA49A0048A5CACF /* Pods-ToPlayListUnitTests.debug prod.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalytics\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAuth\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseCore\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseDatabase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseInstanceID\"",
+					"\"${PODS_ROOT}/Firebase/Core/Sources\"",
+				);
+				INFOPLIST_FILE = ToPlayListUnitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.levente.mathe.ToPlayListUnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ToPlayList.app/ToPlayList";
+			};
+			name = "Debug Prod";
+		};
+		D7C077D91F4D7EDC00760585 /* Debug Prod */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 8Q64XKLZ2L;
+				INFOPLIST_FILE = ToPlayListUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.levente.mathe.ToPlayListUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = ToPlayList;
+			};
+			name = "Debug Prod";
+		};
+		D7C077DA1F4D7EF300760585 /* Release Prod */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release Prod";
+		};
+		D7C077DB1F4D7EF300760585 /* Release Prod */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CF6C6AD091F1B4EF116FE5D9 /* Pods-ToPlayList.release prod.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 2XA4EDUMR4;
+				INFOPLIST_FILE = ToPlayList/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.levente.mathe.ToPlayList;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = "Release Prod";
+		};
+		D7C077DC1F4D7EF300760585 /* Release Prod */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E69B70523C766E52CA3AA619 /* Pods-ToPlayListUnitTests.release prod.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalytics\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAuth\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseCore\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseDatabase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseInstanceID\"",
+					"\"${PODS_ROOT}/Firebase/Core/Sources\"",
+				);
+				INFOPLIST_FILE = ToPlayListUnitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.levente.mathe.ToPlayListUnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ToPlayList.app/ToPlayList";
+			};
+			name = "Release Prod";
+		};
+		D7C077DD1F4D7EF300760585 /* Release Prod */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 8Q64XKLZ2L;
+				INFOPLIST_FILE = ToPlayListUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.levente.mathe.ToPlayListUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = ToPlayList;
+			};
+			name = "Release Prod";
 		};
 /* End XCBuildConfiguration section */
 
@@ -1149,38 +1368,46 @@
 		D70DC3231E8048DA0080DBAA /* Build configuration list for PBXNativeTarget "ToPlayListUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D70DC3241E8048DA0080DBAA /* Debug */,
-				D70DC3251E8048DA0080DBAA /* Release */,
+				D70DC3241E8048DA0080DBAA /* Debug Dev */,
+				D7C077D91F4D7EDC00760585 /* Debug Prod */,
+				D70DC3251E8048DA0080DBAA /* Release Dev */,
+				D7C077DD1F4D7EF300760585 /* Release Prod */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = "Release Dev";
 		};
 		D726BC7D1E0ABDD800D6C9CD /* Build configuration list for PBXProject "ToPlayList" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D726BC921E0ABDD800D6C9CD /* Debug */,
-				D726BC931E0ABDD800D6C9CD /* Release */,
+				D726BC921E0ABDD800D6C9CD /* Debug Dev */,
+				D7C077D61F4D7EDC00760585 /* Debug Prod */,
+				D726BC931E0ABDD800D6C9CD /* Release Dev */,
+				D7C077DA1F4D7EF300760585 /* Release Prod */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = "Release Dev";
 		};
 		D726BC941E0ABDD800D6C9CD /* Build configuration list for PBXNativeTarget "ToPlayList" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D726BC951E0ABDD800D6C9CD /* Debug */,
-				D726BC961E0ABDD800D6C9CD /* Release */,
+				D726BC951E0ABDD800D6C9CD /* Debug Dev */,
+				D7C077D71F4D7EDC00760585 /* Debug Prod */,
+				D726BC961E0ABDD800D6C9CD /* Release Dev */,
+				D7C077DB1F4D7EF300760585 /* Release Prod */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = "Release Dev";
 		};
 		D75A411A1E241FC600E91514 /* Build configuration list for PBXNativeTarget "ToPlayListUnitTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D75A411B1E241FC600E91514 /* Debug */,
-				D75A411C1E241FC600E91514 /* Release */,
+				D75A411B1E241FC600E91514 /* Debug Dev */,
+				D7C077D81F4D7EDC00760585 /* Debug Prod */,
+				D75A411C1E241FC600E91514 /* Release Dev */,
+				D7C077DC1F4D7EF300760585 /* Release Prod */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = "Release Dev";
 		};
 /* End XCConfigurationList section */
 	};

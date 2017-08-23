@@ -151,7 +151,7 @@ class IGDB: GameAPI {
     static let PROVIDER = "IGDB"
     
     private static let HEADERS: HTTPHeaders = [
-        IGDBKeys.BASE_KEY.key: IGDBKeys.BASE_KEY.value
+        Configuration.instance.igdb.api.key: Configuration.instance.igdb.api.value
     ]
     
     func getGames(bySearchString search: String, withLimit limit: Int, withOffset offset: Int, withOnComplete onComplete: @escaping (IGDBResult<[Game]>)->Void) {

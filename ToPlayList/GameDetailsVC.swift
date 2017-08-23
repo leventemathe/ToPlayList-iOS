@@ -242,12 +242,13 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     }
     
     private func setupBannerAd() {
-        bannerAd.adUnitID = "ca-app-pub-6151617651580775/9162043263"
+        bannerAd.adUnitID = Configuration.instance.admob.detailsAdUnitID
+        
         bannerAd.rootViewController = self
         bannerContainer.isHidden = true
         bannerAd.delegate = self
+        
         let request = GADRequest()
-        request.testDevices = [kGADSimulatorID, "12ef71784cd669837273f30fa368f77b"];
         bannerAd.load(request)
     }
     
