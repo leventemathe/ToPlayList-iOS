@@ -3,5 +3,6 @@
 build
 ToPlayList.xcworkspace/*
 
-GoogleService-Info.plist
-IGDBKeys.swift
+GoogleService-Info-Dev.plist
+GoogleService-Info-Prod.plist
+Configuration.swift
