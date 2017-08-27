@@ -99,7 +99,7 @@ class IGDB: GameAPI {
     
     private init() {}
     
-    static let BASE_URL = "https://igdbcom-internet-game-database-v1.p.mashape.com"
+    static let BASE_URL = Configuration.instance.igdb.baseURL
     static let GAMES = "/games/"
     static let GENRES = "/genres/"
     static let COMPANIES = "/companies/"
