@@ -74,13 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     private func setupFirebase() {
-        guard let firebaseConfig = Bundle.main.path(forResource: Configuration.instance.firebase.plist, ofType: "plist") else {
-            fatalError("Invalid Firebase configuration file.")
-        }
-        guard let options = FirebaseOptions(contentsOfFile: firebaseConfig) else {
-            fatalError("Invalid Firebase configuration file.")
-        }
-        FirebaseApp.configure(options: options)
+        FirebaseApp.configure()
         Database.database().isPersistenceEnabled = true
     }
     

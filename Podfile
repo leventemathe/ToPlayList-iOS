@@ -1,8 +1,8 @@
 platform :ios, '9.0'
 
-target 'ToPlayList' do
-  use_frameworks!
+use_frameworks!
 
+def my_pods
   pod 'Alamofire', '~> 4.4.0'
   pod 'Kingfisher', '~> 3.9.1'
   pod 'Firebase/Core', '~> 4.0.4'
@@ -11,9 +11,16 @@ target 'ToPlayList' do
   pod 'Firebase/AdMob', '~> 4.0.3'
   pod 'NVActivityIndicatorView', '~> 3.6.1'
   pod 'ImageViewer', '~> 4.1.0'
+end
+
+target 'ToPlayList' do
+  my_pods
+end
+
+target 'ToPlayListDev' do
+  my_pods
 
   target 'ToPlayListUnitTests' do
     inherit! :search_paths
   end
-
 end

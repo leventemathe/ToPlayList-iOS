@@ -5,4 +5,6 @@ ToPlayList.xcworkspace/*
 
 GoogleService-Info-Dev.plist
 GoogleService-Info-Prod.plist
+FirebaseConfig/Dev/GoogleService-Info.plist
+FirebaseConfig/Prod/GoogleService-Info.plist
 Configuration.swift

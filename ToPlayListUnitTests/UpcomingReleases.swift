@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import ToPlayList
+@testable import ToPlayListDev
 
 class UpcomingReleases: XCTestCase {
     

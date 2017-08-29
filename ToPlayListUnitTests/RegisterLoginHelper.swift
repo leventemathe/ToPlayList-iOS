@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import ToPlayList
+@testable import ToPlayListDev
 @testable import Firebase
 
 typealias UserData = (email: String, password: String, username: String)
