@@ -13,7 +13,7 @@ class UserNotVerifiedVC: UIViewController {
     
     static let SUCCESS_EMAIL_SENT = "Verification email sent."
     static let ERROR_EMAIL_SENT = "An error occured while sending verification email after registration."
-    static let ERROR_NOT_VERIFIED = "You are not verified."
+    static let ERROR_NOT_VERIFIED = "Your account has not been verified."
     
     static let ERROR_USER_NOT_FOUND = "Invalid email or password."
     static let ERROR_TOKEN_EXPIRED = "User token expired."
