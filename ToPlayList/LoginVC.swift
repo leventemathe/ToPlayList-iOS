@@ -12,18 +12,18 @@ import FirebaseDatabase
 
 class LoginVC: UIViewController, IdentifiableVC {
     
-    static let VALIDATION_NO_USERDATA = "Please fill in the form below!"
-    static let VALIDATION_NO_EMAIL = "Please provide an email address!"
-    static let VALIDATION_NO_PASSWORD = "Please provide a password!"
+    static let VALIDATION_NO_USERDATA = "Please fill in the form below."
+    static let VALIDATION_NO_EMAIL = "Please provide an email address."
+    static let VALIDATION_NO_PASSWORD = "Please provide a password."
     
-    static let ERROR_USER_NOT_FOUND = "Invalid email or password!"
-    static let ERROR_TOKEN_EXPIRED = "User token expired!"
-    static let ERROR_NO_INTERNET = "No internet connection!"
+    static let ERROR_USER_NOT_FOUND = "Invalid email or password."
+    static let ERROR_TOKEN_EXPIRED = "User token expired."
+    static let ERROR_NO_INTERNET = "No internet connection."
     static let ERROR_SERVER = "An error occured on the server. Sorry! 😞"
-    static let ERROR_TOO_MANY_REQUESTS = "Too many requests. Please slow down! 😉"
+    static let ERROR_TOO_MANY_REQUESTS = "Too many requests. Please slow down. 😉"
     static let ERROR_USER_DISABLED = "User disabled."
-    static let ERROR_USER_TOKEN_EXPIRED = "User token expired. Please log in again!"
-    static let ERROR_UNKNOWN = "Unknown error!"
+    static let ERROR_USER_TOKEN_EXPIRED = "User token expired. Please log in again."
+    static let ERROR_UNKNOWN = "Unknown error."
     
     @IBOutlet weak var emailField: LoginSceneTextFieldEmail!
     @IBOutlet weak var passwordField: LoginSceneTextFieldPassword!

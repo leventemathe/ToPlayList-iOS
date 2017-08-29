@@ -151,7 +151,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     var releaseDateVC: ReleaseDateVC?
     
     @IBOutlet weak var bannerAd: GADBannerView!
-    @IBOutlet weak var bannerContainer: GADBannerView!
+    @IBOutlet weak var bannerContainer: UIView!
     
     var game: Game!
     private var api: GameAPI!
@@ -242,7 +242,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     }
     
     private func setupBannerAd() {
-        bannerAd.adUnitID = Configuration.instance.admob.detailsAdUnitID
+        bannerAd.adUnitID = Configuration.instance.admob.releasesAdUnitID
         
         bannerAd.rootViewController = self
         bannerContainer.isHidden = true

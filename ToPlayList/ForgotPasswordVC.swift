@@ -10,16 +10,16 @@ import UIKit
 
 class ForgotPasswordVC: UIViewController, IdentifiableVC {
     
-    static let VALIDATION_NO_EMAIL = "Please provide an email address!"
-    static let ERROR_INVALID_EMAIL = "Invalid email!"
+    static let VALIDATION_NO_EMAIL = "Please provide an email address."
+    static let ERROR_INVALID_EMAIL = "Invalid email."
     static let ERROR_SERVER = "An error occured on the server. Sorry! 😞"
-    static let ERROR_UNKNOWN = "Unknown error!"
-    static let ERROR_NO_INTERNET = "No internet connection!"
-    static let ERROR_TOO_MANY_REQUESTS = "Too many requests. Please slow down! 😉"
+    static let ERROR_UNKNOWN = "Unknown error."
+    static let ERROR_NO_INTERNET = "No internet connection."
+    static let ERROR_TOO_MANY_REQUESTS = "Too many requests. Please slow down. 😉"
     static let ERROR_USER_DISABLED = "User disabled."
     static let ERROR_USER_NOT_FOUND = "Email not found."
     
-    static let SUCCESS_EMAIL_SENT = "Password reset email sent!"
+    static let SUCCESS_EMAIL_SENT = "Password reset email sent."
     
     @IBOutlet weak var emailTextField: ForgotPasswordSceneTextfieldEmail!
     @IBOutlet weak var requestButton: LoginSceneButtonLogin!

@@ -13,16 +13,16 @@ class UserNotVerifiedVC: UIViewController {
     
     static let SUCCESS_EMAIL_SENT = "Verification email sent."
     static let ERROR_EMAIL_SENT = "An error occured while sending verification email after registration."
-    static let ERROR_NOT_VERIFIED = "You are not verified!"
+    static let ERROR_NOT_VERIFIED = "You are not verified."
     
-    static let ERROR_USER_NOT_FOUND = "Invalid email or password!"
-    static let ERROR_TOKEN_EXPIRED = "User token expired!"
-    static let ERROR_NO_INTERNET = "No internet connection!"
+    static let ERROR_USER_NOT_FOUND = "Invalid email or password."
+    static let ERROR_TOKEN_EXPIRED = "User token expired."
+    static let ERROR_NO_INTERNET = "No internet connection."
     static let ERROR_SERVER = "An error occured on the server. Sorry! 😞"
-    static let ERROR_TOO_MANY_REQUESTS = "Too many requests. Please slow down! 😉"
+    static let ERROR_TOO_MANY_REQUESTS = "Too many requests. Please slow down. 😉"
     static let ERROR_USER_DISABLED = "User disabled."
-    static let ERROR_USER_TOKEN_EXPIRED = "User token expired. Please log in again!"
-    static let ERROR_UNKNOWN = "Unknown error!"
+    static let ERROR_USER_TOKEN_EXPIRED = "User token expired. Please log in again."
+    static let ERROR_UNKNOWN = "Unknown error."
     
     @IBOutlet weak var backgroundView: UIImageView!
     @IBOutlet weak var resendEmailButton: LoginSceneButtonLogin!

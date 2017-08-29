@@ -58,7 +58,7 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     private func setupNoDataLabel() {
         noDataLbl.bounds = CGRect(x: 0.0, y: 0.0, width: tableView.bounds.width, height: tableView.bounds.height)
-        noDataLbl.text = "No data. Pull to refresh!"
+        noDataLbl.text = "No data. Pull to refresh."
         noDataLbl.font = UIFont.MyFonts.avenirDefault(size: 22)!
         noDataLbl.textAlignment = NSTextAlignment.center
         noDataLbl.sizeToFit()

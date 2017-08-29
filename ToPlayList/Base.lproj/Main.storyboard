@@ -799,7 +799,7 @@
                                             <constraint firstAttribute="bottom" secondItem="A8L-fO-z1X" secondAttribute="bottom" id="pBP-ep-jUF"/>
                                         </constraints>
                                     </scrollView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="52c-k6-PcL">
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="52c-k6-PcL">
                                         <rect key="frame" x="0.0" y="469" width="320" height="50"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" restorationIdentifier="GADBannerViewToPlayList" translatesAutoresizingMaskIntoConstraints="NO" id="fAn-mO-DCF" customClass="GADBannerView">
@@ -854,7 +854,7 @@
                         <outlet property="badgeVCContainer" destination="Dpq-g9-ur6" id="eVK-3O-vhl"/>
                         <outlet property="badgeVCHeightConstraint" destination="0MI-wB-DNx" id="H4J-1s-8fI"/>
                         <outlet property="bannerAd" destination="fAn-mO-DCF" id="Rgl-Tg-6c8"/>
-                        <outlet property="bannerContainer" destination="fAn-mO-DCF" id="e9d-Fd-8W9"/>
+                        <outlet property="bannerContainer" destination="52c-k6-PcL" id="64F-20-4by"/>
                         <outlet property="bigScreenShotHeightConstraint" destination="9QK-RS-XRL" id="8J9-I5-6bC"/>
                         <outlet property="bigScreenshot" destination="rnH-6d-GnC" id="phi-Ht-Cj0"/>
                         <outlet property="centeredTitle" destination="8H2-nN-eDd" id="fCH-Cu-etD"/>
@@ -1026,7 +1026,7 @@
                                         <rect key="frame" x="-60" y="-60" width="440" height="688"/>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="eV9-7L-V6j">
-                                        <rect key="frame" x="16" y="147" width="288" height="274.5"/>
+                                        <rect key="frame" x="16" y="147.5" width="288" height="274.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ALMOST THERE!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k48-OY-azy">
                                                 <rect key="frame" x="0.0" y="0.0" width="288" height="124"/>
@@ -2227,13 +2227,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your recent searches" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e1l-ht-syg">
-                                        <rect key="frame" x="8" y="7.5" width="312" height="15"/>
+                                        <rect key="frame" x="8" y="8" width="312" height="15"/>
                                         <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gto-ma-gmV">
-                                        <rect key="frame" x="276" y="-2" width="36" height="33"/>
+                                        <rect key="frame" x="276" y="-1" width="36" height="33"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                         <state key="normal" title="Clear">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
