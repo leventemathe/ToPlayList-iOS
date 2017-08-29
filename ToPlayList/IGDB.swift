@@ -70,6 +70,8 @@ protocol GameAPI {
     func getPlayerPerspectives(_ onComplete: @escaping (IGDBResult<[PlayerPerspective]>)->Void, withIDs ids: [UInt64])
     func getPlatforms(_ onComplete: @escaping (IGDBResult<[Platform]>)->Void, withIDs ids: [UInt64])
     
+    func refreshCachedGameIDs(forGame game: Game, withOnSuccess onSuccess: @escaping (GameIDs)->(), withOnFailure onFailure: @escaping (IGDBError)->())
+    
     func getGenres(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[Genre]>)->Void)
     func getDevelopers(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[Company]>)->Void)
     func getPublishers(forGame game: Game, withOnComplete onComplete: @escaping (IGDBResult<[Company]>)->Void)
@@ -161,6 +163,7 @@ class IGDB: GameAPI {
                                       "offset": offset,
                                       "search": search]
         
+        print("Getting games by search")
         Alamofire.request(url, parameters: parameters, headers: IGDB.HEADERS).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
@@ -223,6 +226,7 @@ class IGDB: GameAPI {
                                       "offset": offset]
         
         Alamofire.request(url, parameters: parameters, headers: IGDB.HEADERS).validate().responseJSON { response in
+            print("Getting games for list")
             //print(response.debugDescription)
             switch response.result {
             case .success(let value):
@@ -388,6 +392,7 @@ class IGDB: GameAPI {
         let url = "\(IGDB.BASE_URL)\(IGDB.GENRES)\(idsString)/"
         let parameters = ["fields": "id,name"]
         
+        print("Getting genres")
         get(onComplete, withURL: url, withParams: parameters, withHeaders: IGDB.HEADERS)
     }
     
@@ -400,6 +405,7 @@ class IGDB: GameAPI {
         let url = "\(IGDB.BASE_URL)\(IGDB.COMPANIES)\(idsString)/"
         let parameters = ["fields": "id,name"]
         
+        print("Getting companies")
         get(onComplete, withURL: url, withParams: parameters, withHeaders: IGDB.HEADERS)
     }
     
@@ -412,6 +418,7 @@ class IGDB: GameAPI {
         let url = "\(IGDB.BASE_URL)\(IGDB.FRANCHISES)\(idsString)/"
         let parameters = ["fields": "id,name"]
         
+        print("Getting franchises")
         get(onComplete, withURL: url, withParams: parameters, withHeaders: IGDB.HEADERS)
     }
     
@@ -425,6 +432,7 @@ class IGDB: GameAPI {
         let url = "\(IGDB.BASE_URL)\(IGDB.COLLECTIONS)\(idsString)/"
         let parameters = ["fields": "id,name"]
         
+        print("Getting collections")
         get(onComplete, withURL: url, withParams: parameters, withHeaders: IGDB.HEADERS)
     }
     
@@ -437,6 +445,7 @@ class IGDB: GameAPI {
         let url = "\(IGDB.BASE_URL)\(IGDB.GAME_MODES)\(idsString)/"
         let parameters = ["fields": "id,name"]
         
+        print("Getting game modes")
         get(onComplete, withURL: url, withParams: parameters, withHeaders: IGDB.HEADERS)
     }
     
@@ -449,6 +458,7 @@ class IGDB: GameAPI {
         let url = "\(IGDB.BASE_URL)\(IGDB.PLAYER_PERSPECTIVES)\(idsString)/"
         let parameters = ["fields": "id,name"]
         
+        print("Getting player perspectives")
         get(onComplete, withURL: url, withParams: parameters, withHeaders: IGDB.HEADERS)
     }
     
@@ -461,12 +471,13 @@ class IGDB: GameAPI {
         let url = "\(IGDB.BASE_URL)\(IGDB.PLATFORMS)\(idsString)/"
         let parameters = ["fields": "id,name"]
         
+        print("Getting platforms")
         get(onComplete, withURL: url, withParams: parameters, withHeaders: IGDB.HEADERS)
     }
     
     private var cachedGameIDs: GameIDs?
     
-    private func refreshCachedGameIDs(forGame game: Game, withOnSuccess onSuccess: @escaping (GameIDs)->(), withOnFailure onFailure: @escaping (IGDBError)->()) {
+    func refreshCachedGameIDs(forGame game: Game, withOnSuccess onSuccess: @escaping (GameIDs)->(), withOnFailure onFailure: @escaping (IGDBError)->()) {
         if cachedGameIDs != nil && game.id == cachedGameIDs!.id {
             onSuccess(cachedGameIDs!)
             return
@@ -474,6 +485,7 @@ class IGDB: GameAPI {
             let url =  IGDB.BASE_URL + IGDB.GAMES + "\(game.id)"
             let parameters: Parameters = ["fields": "first_release_date,release_dates,genres,developers,publishers,screenshots,videos,summary,status,category,franchise,collection,game_modes,player_perspectives"]
             
+            print("Getting cached game ids")
             Alamofire.request(url, parameters: parameters, headers: IGDB.HEADERS).validate().responseJSON { response in
                 switch response.result {
                 case .success(let value):

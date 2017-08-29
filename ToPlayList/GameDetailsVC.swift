@@ -434,6 +434,14 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     }
     
     private func downloadGameData() {
+        api.refreshCachedGameIDs(forGame: game, withOnSuccess: { _ in
+            self.downloadAll()
+        }, withOnFailure: { error in
+            self.handleLoadingError(Alerts.SERVER_ERROR)
+        })
+    }
+    
+    private func downloadAll() {
         downloadBasics()
         downloadScreenshotURLs()
         // for legal reasons
