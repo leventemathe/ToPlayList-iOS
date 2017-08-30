@@ -18,7 +18,7 @@ class ListLoginNavigationVC: NavigationControllerWithCustomBackGestureDelegate {
     private func pickVC() {
         if ListsUser.loggedIn {
             if ListsUser.verified {
-                viewControllers[0].performSegue(withIdentifier: "RegisterLoginToLists", sender: self)
+                viewControllers[0].performSegue(withIdentifier: "RegisterLoginToListsNonAnimated", sender: self)
             } else {
                 viewControllers[0].performSegue(withIdentifier: "RegisterLoginToVerification", sender: self)
             }

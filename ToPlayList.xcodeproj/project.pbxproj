@@ -10,7 +10,17 @@
 		2ECC62947C6D486DCF1C22BF /* Pods_ToPlayList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1015AB877BDCDC510C82BC /* Pods_ToPlayList.framework */; };
 		5273774488723080321E6091 /* Pods_ToPlayListDev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC86CB7E77AF43011AA08818 /* Pods_ToPlayListDev.framework */; };
 		776B411A9B30AAD0B34C82CC /* Pods_ToPlayListUnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DA6F271D10ACDF634516C75 /* Pods_ToPlayListUnitTests.framework */; };
+		D702E41E1F56AEE400731C96 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D702E41D1F56AEE400731C96 /* Onboarding.storyboard */; };
+		D702E4211F56AF6D00731C96 /* OnboardingDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D702E4201F56AF6D00731C96 /* OnboardingDetailsVC.swift */; };
+		D702E4221F56AF6D00731C96 /* OnboardingDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D702E4201F56AF6D00731C96 /* OnboardingDetailsVC.swift */; };
+		D702E4231F56AF7200731C96 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D702E41D1F56AEE400731C96 /* Onboarding.storyboard */; };
+		D702E4251F56B53900731C96 /* OnboardingPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D702E4241F56B53900731C96 /* OnboardingPageVC.swift */; };
+		D702E4261F56B53900731C96 /* OnboardingPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D702E4241F56B53900731C96 /* OnboardingPageVC.swift */; };
 		D705605A1F33473700AD64CF /* Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70560591F33473700AD64CF /* Lists.swift */; };
+		D708B2BC1F56FAAC009C4ABE /* OnboardingWelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D708B2BB1F56FAAC009C4ABE /* OnboardingWelcomeVC.swift */; };
+		D708B2BD1F56FAAC009C4ABE /* OnboardingWelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D708B2BB1F56FAAC009C4ABE /* OnboardingWelcomeVC.swift */; };
+		D708B2BF1F56FC9F009C4ABE /* OnboardingOverviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D708B2BE1F56FC9F009C4ABE /* OnboardingOverviewVC.swift */; };
+		D708B2C01F56FC9F009C4ABE /* OnboardingOverviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D708B2BE1F56FC9F009C4ABE /* OnboardingOverviewVC.swift */; };
 		D709009A1EC5B80600A316BE /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70900991EC5B80600A316BE /* SearchVC.swift */; };
 		D709009D1EC5B89D00A316BE /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D709009C1EC5B89D00A316BE /* SearchCell.swift */; };
 		D70A0D221F4E12E3001585D2 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70A0D211F4E12E3001585D2 /* Configuration.swift */; };
@@ -207,7 +217,12 @@
 		BC86CB7E77AF43011AA08818 /* Pods_ToPlayListDev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ToPlayListDev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE1015AB877BDCDC510C82BC /* Pods_ToPlayList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ToPlayList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF6C6AD091F1B4EF116FE5D9 /* Pods-ToPlayList.release prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToPlayList.release prod.xcconfig"; path = "Pods/Target Support Files/Pods-ToPlayList/Pods-ToPlayList.release prod.xcconfig"; sourceTree = "<group>"; };
+		D702E41D1F56AEE400731C96 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
+		D702E4201F56AF6D00731C96 /* OnboardingDetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingDetailsVC.swift; sourceTree = "<group>"; };
+		D702E4241F56B53900731C96 /* OnboardingPageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingPageVC.swift; sourceTree = "<group>"; };
 		D70560591F33473700AD64CF /* Lists.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lists.swift; sourceTree = "<group>"; };
+		D708B2BB1F56FAAC009C4ABE /* OnboardingWelcomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingWelcomeVC.swift; sourceTree = "<group>"; };
+		D708B2BE1F56FC9F009C4ABE /* OnboardingOverviewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingOverviewVC.swift; sourceTree = "<group>"; };
 		D70900991EC5B80600A316BE /* SearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		D709009C1EC5B89D00A316BE /* SearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		D70A0D211F4E12E3001585D2 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
@@ -373,6 +388,17 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		D702E41F1F56AF4600731C96 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				D708B2BB1F56FAAC009C4ABE /* OnboardingWelcomeVC.swift */,
+				D702E4241F56B53900731C96 /* OnboardingPageVC.swift */,
+				D708B2BE1F56FC9F009C4ABE /* OnboardingOverviewVC.swift */,
+				D702E4201F56AF6D00731C96 /* OnboardingDetailsVC.swift */,
+			);
+			name = Onboarding;
+			sourceTree = "<group>";
+		};
 		D70900981EC5B7DB00A316BE /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -455,6 +481,7 @@
 			isa = PBXGroup;
 			children = (
 				D726BC8E1E0ABDD800D6C9CD /* LaunchScreen.storyboard */,
+				D702E41D1F56AEE400731C96 /* Onboarding.storyboard */,
 				D726BC891E0ABDD800D6C9CD /* Main.storyboard */,
 				D76437E31E1E506D00B09C7E /* HeaderView.xib */,
 				D7B8C86C1E2D16F100656E64 /* ErrorMessage.xib */,
@@ -502,6 +529,7 @@
 		D726BC971E0AC05B00D6C9CD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D702E41F1F56AF4600731C96 /* Onboarding */,
 				D70900981EC5B7DB00A316BE /* Search */,
 				D7FADEFC1EC09F0D0006B4E4 /* RegisterLogin */,
 				D7FADEFA1EC09EE80006B4E4 /* Releases */,
@@ -839,6 +867,7 @@
 				D71357111F5578B900F3AB3D /* ErrorMessage.xib in Resources */,
 				D71357121F5578B900F3AB3D /* Main.storyboard in Resources */,
 				D71357131F5578B900F3AB3D /* GoogleService-Info.plist in Resources */,
+				D702E4231F56AF7200731C96 /* Onboarding.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -853,6 +882,7 @@
 				D7C3A1721E0DD9120091279C /* Assets.xcassets in Resources */,
 				D7B8C86D1E2D16F100656E64 /* ErrorMessage.xib in Resources */,
 				D726BC8B1E0ABDD800D6C9CD /* Main.storyboard in Resources */,
+				D702E41E1F56AEE400731C96 /* Onboarding.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1087,6 +1117,7 @@
 				D71356D11F5578B900F3AB3D /* OnPanDelegate.swift in Sources */,
 				D71356D21F5578B900F3AB3D /* PlayedListCell.swift in Sources */,
 				D71356D31F5578B900F3AB3D /* Configuration.swift in Sources */,
+				D702E4221F56AF6D00731C96 /* OnboardingDetailsVC.swift in Sources */,
 				D71356D41F5578B900F3AB3D /* BadgeCell.swift in Sources */,
 				D71356D51F5578B900F3AB3D /* TextFieldMargin.swift in Sources */,
 				D71356D61F5578B900F3AB3D /* HeaderView.swift in Sources */,
@@ -1119,6 +1150,7 @@
 				D71356F11F5578B900F3AB3D /* ImageCarouselCell.swift in Sources */,
 				D71356F21F5578B900F3AB3D /* UpcomingReleasesVC.swift in Sources */,
 				D71356F31F5578B900F3AB3D /* ColoredPlaceholderText.swift in Sources */,
+				D708B2BD1F56FAAC009C4ABE /* OnboardingWelcomeVC.swift in Sources */,
 				D71356F41F5578B900F3AB3D /* RegisterLoginVC.swift in Sources */,
 				D71356F51F5578B900F3AB3D /* ReleaseDateCell.swift in Sources */,
 				D71356F61F5578B900F3AB3D /* ErrorMessage.swift in Sources */,
@@ -1130,11 +1162,13 @@
 				D71356FC1F5578B900F3AB3D /* ToPlayAndPlayedListListeners.swift in Sources */,
 				D71356FD1F5578B900F3AB3D /* RegisterVC.swift in Sources */,
 				D71356FE1F5578B900F3AB3D /* SubListVC.swift in Sources */,
+				D708B2C01F56FC9F009C4ABE /* OnboardingOverviewVC.swift in Sources */,
 				D71356FF1F5578B900F3AB3D /* ReleasesVC.swift in Sources */,
 				D71357001F5578B900F3AB3D /* UserNotVerifiedVC.swift in Sources */,
 				D71357011F5578B900F3AB3D /* OutTodayBadge.swift in Sources */,
 				D71357021F5578B900F3AB3D /* PlayedListVC.swift in Sources */,
 				D71357031F5578B900F3AB3D /* SearchCell.swift in Sources */,
+				D702E4261F56B53900731C96 /* OnboardingPageVC.swift in Sources */,
 				D71357041F5578B900F3AB3D /* ErrorHandlerDelegate.swift in Sources */,
 				D71357051F5578B900F3AB3D /* LoginScene.swift in Sources */,
 				D71357061F5578B900F3AB3D /* RoundedCorners.swift in Sources */,
@@ -1164,6 +1198,7 @@
 				D7A0E7011E7BE82800A70989 /* OnPanDelegate.swift in Sources */,
 				D7A0E6FF1E7BDDDC00A70989 /* PlayedListCell.swift in Sources */,
 				D70A0D221F4E12E3001585D2 /* Configuration.swift in Sources */,
+				D702E4211F56AF6D00731C96 /* OnboardingDetailsVC.swift in Sources */,
 				D7FADEF51EC09D4B0006B4E4 /* BadgeCell.swift in Sources */,
 				D7E5AA881E2AD51A00EA1456 /* TextFieldMargin.swift in Sources */,
 				D76437E41E1E506D00B09C7E /* HeaderView.swift in Sources */,
@@ -1196,6 +1231,7 @@
 				D77F504E1ED6191000B40D0C /* ImageCarouselCell.swift in Sources */,
 				D71981171E26A2A5005823C2 /* UpcomingReleasesVC.swift in Sources */,
 				D719812A1E26F7AC005823C2 /* ColoredPlaceholderText.swift in Sources */,
+				D708B2BC1F56FAAC009C4ABE /* OnboardingWelcomeVC.swift in Sources */,
 				D7CC7D0E1E3913E60027BE6F /* RegisterLoginVC.swift in Sources */,
 				D7D0BCC31F1B8CF900C2B071 /* ReleaseDateCell.swift in Sources */,
 				D7B8C86B1E2D16C700656E64 /* ErrorMessage.swift in Sources */,
@@ -1207,11 +1243,13 @@
 				D727AFE41E9B7ACF00E1C93F /* ToPlayAndPlayedListListeners.swift in Sources */,
 				D74AC7DA1E3919B700C37A90 /* RegisterVC.swift in Sources */,
 				D7A0E7031E7BEA8A00A70989 /* SubListVC.swift in Sources */,
+				D708B2BF1F56FC9F009C4ABE /* OnboardingOverviewVC.swift in Sources */,
 				D7FE54EF1F20CBA700F2E566 /* ReleasesVC.swift in Sources */,
 				D7EABAB71F384EF60009C5EA /* UserNotVerifiedVC.swift in Sources */,
 				D7C0F9491F2A285200556AA8 /* OutTodayBadge.swift in Sources */,
 				D72E66BA1E619D2100BED388 /* PlayedListVC.swift in Sources */,
 				D709009D1EC5B89D00A316BE /* SearchCell.swift in Sources */,
+				D702E4251F56B53900731C96 /* OnboardingPageVC.swift in Sources */,
 				D7975D081E586255003B64E6 /* ErrorHandlerDelegate.swift in Sources */,
 				D719812C1E26F89A005823C2 /* LoginScene.swift in Sources */,
 				D76606FD1E13123400D5979C /* RoundedCorners.swift in Sources */,

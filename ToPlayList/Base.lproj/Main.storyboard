@@ -1005,11 +1005,12 @@
                         <outlet property="stackViewTopConstraint" destination="nFD-uQ-4nD" id="C9J-0X-Tmz"/>
                         <segue destination="ijO-f7-qfb" kind="show" identifier="RegisterLoginToVerification" id="733-oz-8ZK"/>
                         <segue destination="Ncq-W1-497" kind="show" identifier="RegisterLoginToLists" id="VD6-Jd-2Ln"/>
+                        <segue destination="Ncq-W1-497" kind="show" identifier="RegisterLoginToListsNonAnimated" animates="NO" id="Ahb-lF-BWh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qth-VT-qxu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1942.5" y="1683.8028169014085"/>
+            <point key="canvasLocation" x="1965" y="1750"/>
         </scene>
         <!--Verification-->
         <scene sceneID="jCJ-Iv-Qhm">
@@ -1030,7 +1031,7 @@
                                         <rect key="frame" x="-60" y="-60" width="440" height="688"/>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="eV9-7L-V6j">
-                                        <rect key="frame" x="16" y="147" width="288" height="274.5"/>
+                                        <rect key="frame" x="16" y="147.5" width="288" height="274.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ALMOST THERE!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k48-OY-azy">
                                                 <rect key="frame" x="0.0" y="0.0" width="288" height="124"/>
@@ -1121,7 +1122,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hjI-CC-yeJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2948" y="1684"/>
+            <point key="canvasLocation" x="2861" y="1332"/>
         </scene>
         <!--Lists-->
         <scene sceneID="tZL-za-AC7">
@@ -2232,13 +2233,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your recent searches" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e1l-ht-syg">
-                                        <rect key="frame" x="8" y="8" width="312" height="15"/>
+                                        <rect key="frame" x="8" y="7.5" width="312" height="15"/>
                                         <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gto-ma-gmV">
-                                        <rect key="frame" x="276" y="-1" width="36" height="33"/>
+                                        <rect key="frame" x="276" y="-2" width="36" height="33"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                         <state key="normal" title="Clear">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2520,7 +2521,7 @@
         <image name="verification_page_background" width="375" height="425"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="VD6-Jd-2Ln"/>
         <segue reference="v2d-kz-Jth"/>
-        <segue reference="5Jp-eg-eAU"/>
     </inferredMetricsTieBreakers>
 </document>

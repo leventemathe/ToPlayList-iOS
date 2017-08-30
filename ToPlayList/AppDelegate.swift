@@ -60,6 +60,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         setupTabBarAppearance()
         setupSearchBarAppearance()
         setupSegmentedControlAppearance()
+        setupPageControlAppearance()
+        
+        onboardOrRegular()
         
         return true
     }
@@ -93,6 +96,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     private func setupSegmentedControlAppearance() {
         UISegmentedControl.appearance().setTitleTextAttributes([NSFontAttributeName : UIFont.MyFonts.avenirDefault(size: 14)!], for: .normal)
+    }
+    
+    private func setupPageControlAppearance() {
+        let proxy = UIPageControl.appearance()
+        proxy.pageIndicatorTintColor = UIColor.lightGray
+        proxy.currentPageIndicatorTintColor = UIColor.MyCustomColors.orange
+        proxy.backgroundColor = UIColor.white
+    }
+    
+    let ONBOARDING_DONE = "OnboardingDone"
+    
+    private func onboardOrRegular() {
+        if UserDefaults.standard.bool(forKey: ONBOARDING_DONE) {
+            return
+        }
+        let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "OnboardingWelcomeVC")
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = vc
+        window?.makeKeyAndVisible()
     }
     
     
