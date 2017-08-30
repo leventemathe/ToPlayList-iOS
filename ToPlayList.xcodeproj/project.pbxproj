@@ -1309,6 +1309,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.levente.mathe.dev.ToPlayList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1325,6 +1326,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.levente.mathe.dev.ToPlayList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -1434,6 +1436,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.levente.mathe.ToPlayList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1449,6 +1452,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.levente.mathe.ToPlayList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
