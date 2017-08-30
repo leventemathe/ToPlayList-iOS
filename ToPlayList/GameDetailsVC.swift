@@ -152,6 +152,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     
     @IBOutlet weak var bannerAd: GADBannerView!
     @IBOutlet weak var bannerContainer: UIView!
+    @IBOutlet weak var scrollViewBottomConstraint: NSLayoutConstraint!
     
     var game: Game!
     private var api: GameAPI!
@@ -254,6 +255,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
         bannerContainer.isHidden = false
+        scrollViewBottomConstraint.constant = bannerAd.frame.size.height
     }
     
     func didSetSize(numberOfItems: Int, numberOfRows: Int, sizeOfItems: CGSize, sizeOfMargins: CGSize) {

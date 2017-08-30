@@ -21,6 +21,8 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
     
     @IBOutlet weak var bannerAd: GADBannerView!
     @IBOutlet weak var adContainer: UIView!
+    @IBOutlet weak var recentSearchesBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     
     private let RECENT_SEARCH_KEY = "recent_searches"
     private let RECENT_SEARCHES_LIMIT = 20
@@ -143,6 +145,9 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
     
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
         adContainer.isHidden = false
+        let height = bannerAd.frame.size.height
+        tableViewBottomConstraint.constant = height
+        recentSearchesBottomConstraint.constant = height
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {

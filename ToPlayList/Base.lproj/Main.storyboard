@@ -134,10 +134,12 @@
                     <connections>
                         <outlet property="adContainer" destination="U04-Cy-hnn" id="X3y-HD-Q9f"/>
                         <outlet property="bannerAd" destination="PZm-ew-Ddt" id="39L-WO-uo0"/>
+                        <outlet property="recentSearchesBottomConstraint" destination="fje-qH-Cnw" id="DpC-4O-IVS"/>
                         <outlet property="recentSearchesView" destination="gF1-gv-DWq" id="gSk-9q-SMb"/>
                         <outlet property="searchBar" destination="1LR-O0-mUV" id="VRw-i7-Edl"/>
                         <outlet property="searchIconView" destination="yMg-bi-deP" id="OD3-j5-GZb"/>
                         <outlet property="tableView" destination="eRQ-1R-hJZ" id="JcG-Xw-zlP"/>
+                        <outlet property="tableViewBottomConstraint" destination="Zb1-sq-Hbs" id="Wgu-1P-bh6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b8q-6p-89u" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -343,6 +345,7 @@
                         <outlet property="adContainer" destination="xZq-vC-uxj" id="HDk-zX-N4j"/>
                         <outlet property="bannerAd" destination="8Cn-b7-Vhj" id="Dn9-dW-S1j"/>
                         <outlet property="tableView" destination="nZ5-EG-NUq" id="fWg-Ih-lsW"/>
+                        <outlet property="tableViewBottomConstraint" destination="Cle-GP-hEW" id="pWS-iC-DfZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -362,7 +365,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AHD-U1-sds">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="efa-6i-V9F" customClass="DetailsBigScreenshot" customModule="ToPlayList" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
@@ -596,7 +599,7 @@
                                         </constraints>
                                     </view>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8NQ-RT-MJ5">
-                                        <rect key="frame" x="0.0" y="274" width="320" height="294"/>
+                                        <rect key="frame" x="0.0" y="274" width="320" height="245"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A8L-fO-z1X">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="549.5"/>
@@ -654,7 +657,7 @@
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="rhd-gk-bU0">
                                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="122"/>
                                                                         <subviews>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Useful tags" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jDG-yx-KEB">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tags" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jDG-yx-KEB">
                                                                                 <rect key="frame" x="8" y="8" width="304" height="18"/>
                                                                                 <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="15"/>
                                                                                 <color key="textColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -800,7 +803,7 @@
                                         </constraints>
                                     </scrollView>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="52c-k6-PcL">
-                                        <rect key="frame" x="0.0" y="518" width="320" height="50"/>
+                                        <rect key="frame" x="0.0" y="469" width="320" height="50"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" restorationIdentifier="GADBannerViewToPlayList" translatesAutoresizingMaskIntoConstraints="NO" id="fAn-mO-DCF" customClass="GADBannerView">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
@@ -824,6 +827,7 @@
                                     <constraint firstItem="8NQ-RT-MJ5" firstAttribute="top" secondItem="2xt-nC-PKO" secondAttribute="bottom" constant="8" id="2Fx-sx-f5B"/>
                                     <constraint firstAttribute="trailing" secondItem="2xt-nC-PKO" secondAttribute="trailing" id="6FP-PM-PQg"/>
                                     <constraint firstItem="2xt-nC-PKO" firstAttribute="top" secondItem="AHD-U1-sds" secondAttribute="top" constant="70" id="BOV-nY-YE8"/>
+                                    <constraint firstAttribute="bottom" secondItem="52c-k6-PcL" secondAttribute="bottom" id="JEI-WG-cyq"/>
                                     <constraint firstAttribute="trailing" secondItem="52c-k6-PcL" secondAttribute="trailing" id="JfC-BN-TqQ"/>
                                     <constraint firstItem="52c-k6-PcL" firstAttribute="leading" secondItem="AHD-U1-sds" secondAttribute="leading" id="Jnf-lk-9d5"/>
                                     <constraint firstItem="efa-6i-V9F" firstAttribute="top" secondItem="AHD-U1-sds" secondAttribute="top" id="QO2-My-y4d"/>
@@ -836,7 +840,6 @@
                                     <constraint firstAttribute="bottom" secondItem="8NQ-RT-MJ5" secondAttribute="bottom" id="vbf-bb-VeJ"/>
                                     <constraint firstItem="2xt-nC-PKO" firstAttribute="leading" secondItem="AHD-U1-sds" secondAttribute="leading" id="xOI-me-IZg"/>
                                     <constraint firstAttribute="trailing" secondItem="8H2-nN-eDd" secondAttribute="trailing" priority="999" constant="8" id="yZh-q3-wQe"/>
-                                    <constraint firstAttribute="bottom" secondItem="52c-k6-PcL" secondAttribute="bottom" id="yu0-fY-K3f"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -876,6 +879,7 @@
                         <outlet property="scrollContentStackView" destination="mKa-wy-ZnB" id="TgP-tT-dzj"/>
                         <outlet property="scrollContentView" destination="A8L-fO-z1X" id="3V6-sL-MUb"/>
                         <outlet property="scrollView" destination="8NQ-RT-MJ5" id="0HN-0S-he5"/>
+                        <outlet property="scrollViewBottomConstraint" destination="vbf-bb-VeJ" id="DbT-9U-Fit"/>
                         <outlet property="showMoreDescriptionButton" destination="yqb-Ft-MHO" id="T2a-h8-pNi"/>
                         <outlet property="starBanner" destination="oZt-mw-jh0" id="Up5-Dt-Tdn"/>
                         <outlet property="starBannerLeftConstraint" destination="B25-yT-Ymm" id="qZ9-p9-lyF"/>
@@ -1218,6 +1222,7 @@
                         <outlet property="backgroundStarImageView" destination="Rtj-xj-A9Z" id="TaW-1f-seD"/>
                         <outlet property="bannerAd" destination="utN-FE-T56" id="fLe-1f-QvR"/>
                         <outlet property="connectionLabel" destination="Ozf-UH-FEz" id="9ew-Wm-b3u"/>
+                        <outlet property="listContainerBottomConstraint" destination="Cf7-Jx-3Tu" id="VCh-sJ-lDi"/>
                         <outlet property="listContainerView" destination="65Q-Zg-Uje" id="qCc-Cz-RBu"/>
                         <outlet property="segmentedControl" destination="o1g-ft-PLL" id="Tfl-KU-dbl"/>
                         <outlet property="welcomLbl" destination="WOa-04-8pa" id="kwJ-1d-Kou"/>
@@ -2227,7 +2232,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your recent searches" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e1l-ht-syg">
-                                        <rect key="frame" x="8" y="8.5" width="312" height="15"/>
+                                        <rect key="frame" x="8" y="8" width="312" height="15"/>
                                         <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -2486,6 +2491,7 @@
                         <outlet property="adContainer" destination="OJ0-SE-OHh" id="FoL-FH-mWn"/>
                         <outlet property="bannerAd" destination="deT-3H-RTx" id="X4k-Jb-0z7"/>
                         <outlet property="tableView" destination="0dZ-wk-s8P" id="2bD-nT-aKF"/>
+                        <outlet property="tableViewBottomConstraint" destination="7ok-dP-CCP" id="kaT-Wy-7fv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h0j-Qf-RBs" sceneMemberID="firstResponder"/>
@@ -2514,7 +2520,7 @@
         <image name="verification_page_background" width="375" height="425"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="v2d-kz-Jth"/>
         <segue reference="5Jp-eg-eAU"/>
-        <segue reference="OMc-yb-7M5"/>
     </inferredMetricsTieBreakers>
 </document>

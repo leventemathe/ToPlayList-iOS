@@ -16,6 +16,7 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bannerAd: GADBannerView!
     @IBOutlet weak var adContainer: UIView!
+    @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     
     private var noDataLbl = UILabel()
     private var loadingAnimationView: NVActivityIndicatorView!
@@ -135,6 +136,7 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
         adContainer.isHidden = false
+        tableViewBottomConstraint.constant = bannerAd.frame.size.height
     }
     
     override func viewWillAppear(_ animated: Bool) {

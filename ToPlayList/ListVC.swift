@@ -21,6 +21,7 @@ class ListVC: UIViewController, IdentifiableVC, GADBannerViewDelegate {
     
     @IBOutlet weak var bannerAd: GADBannerView!
     @IBOutlet weak var adContainer: UIView!
+    @IBOutlet weak var listContainerBottomConstraint: NSLayoutConstraint!
     
     @IBAction func segmentedChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
@@ -235,6 +236,7 @@ class ListVC: UIViewController, IdentifiableVC, GADBannerViewDelegate {
     }
     
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        listContainerBottomConstraint.constant = bannerAd.frame.size.height
         adContainer.isHidden = false
     }
 }
