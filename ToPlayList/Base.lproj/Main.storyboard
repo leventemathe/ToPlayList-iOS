@@ -90,7 +90,7 @@
                                     <segue destination="kgK-1y-gHU" kind="embed" id="LGV-cU-Zlh"/>
                                 </connections>
                             </containerView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U04-Cy-hnn">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U04-Cy-hnn">
                                 <rect key="frame" x="0.0" y="469" width="320" height="50"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" restorationIdentifier="GADBannerViewToPlayList" translatesAutoresizingMaskIntoConstraints="NO" id="PZm-ew-Ddt" customClass="GADBannerView">
@@ -307,7 +307,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xZq-vC-uxj">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xZq-vC-uxj">
                                 <rect key="frame" x="0.0" y="469" width="320" height="50"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" restorationIdentifier="GADBannerViewToPlayList" translatesAutoresizingMaskIntoConstraints="NO" id="8Cn-b7-Vhj" customClass="GADBannerView">
@@ -1168,7 +1168,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HPt-p4-rdA">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HPt-p4-rdA">
                                 <rect key="frame" x="0.0" y="469" width="320" height="50"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" restorationIdentifier="GADBannerViewToPlayList" translatesAutoresizingMaskIntoConstraints="NO" id="utN-FE-T56" customClass="GADBannerView">
@@ -2454,7 +2454,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OJ0-SE-OHh">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OJ0-SE-OHh">
                                 <rect key="frame" x="0.0" y="469" width="320" height="50"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" restorationIdentifier="GADBannerViewToPlayList" translatesAutoresizingMaskIntoConstraints="NO" id="deT-3H-RTx" customClass="GADBannerView">
@@ -2521,7 +2521,7 @@
         <image name="verification_page_background" width="375" height="425"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VD6-Jd-2Ln"/>
-        <segue reference="v2d-kz-Jth"/>
+        <segue reference="a7x-K3-wKb"/>
+        <segue reference="5Jp-eg-eAU"/>
     </inferredMetricsTieBreakers>
 </document>

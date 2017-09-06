@@ -24,16 +24,21 @@ class OnboardingPageVC: UIPageViewController, UIPageViewControllerDataSource, UI
     
     private func setupVCs() {
         let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
-        let vcOverView = storyboard.instantiateViewController(withIdentifier: "OnboardingOverviewVC") as! OnboardingOverviewVC
-        let vcDetails1 = storyboard.instantiateViewController(withIdentifier: "OnboardingDetailsVC") as! OnboardingDetailsVC
-        let vcDetails2 = storyboard.instantiateViewController(withIdentifier: "OnboardingDetailsVC") as! OnboardingDetailsVC
-        let vcDetails3 = storyboard.instantiateViewController(withIdentifier: "OnboardingDetailsVC") as! OnboardingDetailsVC
+        let vcDetailsA1 = storyboard.instantiateViewController(withIdentifier: "OnboardingDetailsVCA") as! OnboardingDetailsVC
+        let vcDetailsA2 = storyboard.instantiateViewController(withIdentifier: "OnboardingDetailsVCA") as! OnboardingDetailsVC
+        let vcDetailsB1 = storyboard.instantiateViewController(withIdentifier: "OnboardingDetailsVCB") as! OnboardingDetailsVC
+        let vcDetailsB2 = storyboard.instantiateViewController(withIdentifier: "OnboardingDetailsVCB") as! OnboardingDetailsVC
+        let vcDetailsB3 = storyboard.instantiateViewController(withIdentifier: "OnboardingDetailsVCB") as! OnboardingDetailsVC
+        let vcDetailsB4 = storyboard.instantiateViewController(withIdentifier: "OnboardingDetailsVCB") as! OnboardingDetailsVC
         
-        vcDetails1.setup(iphoneImage: #imageLiteral(resourceName: "onb_phone_stars"), title: "Stars represent lists", text: "A star displayed next to a game means it’s in a list. An unfilled star represents the ToPlay list, while a filled star means the game is in the Played list.")
-        vcDetails2.setup(iphoneImage: #imageLiteral(resourceName: "onb_phone_lists"), title: "Managing Lists", text: "In the lists view you can manage your ToPlay and Played list. To move a game from one list to the other, swipe it in the direction of the other list. If you want to remove a game, swipe it in the opposite direction.")
-        vcDetails3.setup(iphoneImage: #imageLiteral(resourceName: "onb_phone_swipe"), title: "Swipe to add to a list", text: "Swiping a game left or right will add it to a list. You can do this in all views: swipe left to add to ToPlay, right to add to Played in one of the releases views, or swipe the game cover in the details view.")
-        vcDetails3.lastVCInPageVC = true
-        vcs = [vcOverView, vcDetails1, vcDetails2, vcDetails3]
+        vcDetailsA1.setup(iphoneImage: #imageLiteral(resourceName: "onb_phone_discover"), title: "Discover", text: "Discover new games by browsing the newest or upcoming releases. You can also search for specific games.", backgroundFlipped: true)
+        vcDetailsA2.setup(iphoneImage: #imageLiteral(resourceName: "onb_phone_lists"), title: "Lists & Notifications", text: "After a quick registration, you'll have two lists in the Lists view: ToPlay and Played list. You can get notifications when a game on your ToPlay list is released.", backgroundFlipped: true)
+        vcDetailsB1.setup(iphoneImage: #imageLiteral(resourceName: "onb_phone_stars"), title: "Stars represent lists", text: "A star displayed next to a game means it’s on a list. An unfilled star represents the ToPlay list, while a filled star means the game is on the Played list.")
+        vcDetailsB2.setup(iphoneImage: #imageLiteral(resourceName: "onb_phone_releases_swipe"), title: "Swipe in the releases", text: "Swiping a game left or right will add it to a list: swipe left to add to the ToPlay list, or right to add it to the Played list.")
+        vcDetailsB3.setup(iphoneImage: #imageLiteral(resourceName: "onb_phone_details_swipe"), title: "Swipe in the details view", text: "Add a game to a list in the details view by swiping the game cover. Notice the unfilled star on the screenshot: we’re moving the game from the ToPlay list to the Played list.")
+        vcDetailsB4.setup(iphoneImage: #imageLiteral(resourceName: "onb_phone_manage_lists"), title: "Managing Lists", text: "In the lists view you can manage your ToPlay and Played list. To move a game from one list to the other, swipe it in the direction of the other list. If you want to remove a game, just swipe it in the opposite direction.")
+        vcDetailsB4.lastVCInPageVC = true
+        vcs = [vcDetailsA1, vcDetailsA2, vcDetailsB1, vcDetailsB2, vcDetailsB3, vcDetailsB4]
         setViewControllers([vcs[0]], direction: .forward, animated: true, completion: nil)
     }
     

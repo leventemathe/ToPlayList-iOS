@@ -225,6 +225,9 @@ class ListVC: UIViewController, IdentifiableVC, GADBannerViewDelegate {
     }
     
     private func setupBannerAd() {
+        if !Configuration.instance.admob.enabled {
+            return
+        }
         bannerAd.adUnitID = Configuration.instance.admob.listsAdUnitID
         
         bannerAd.rootViewController = self

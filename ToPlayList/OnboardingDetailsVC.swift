@@ -10,7 +10,7 @@ import UIKit
 
 class OnboardingDetailsVC: UIViewController {
 
-    @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var iphoneImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var textLabel: UILabel!
@@ -20,17 +20,21 @@ class OnboardingDetailsVC: UIViewController {
     var iphoneImage: UIImage?
     var titleText: String?
     var text: String?
+    var shouldFlipBackground = false
     
-    func setup(iphoneImage: UIImage, title: String, text: String) {
+    func setup(iphoneImage: UIImage, title: String, text: String, backgroundFlipped: Bool = false) {
         self.iphoneImage = iphoneImage
         self.titleText = title
         self.text = text
+        self.shouldFlipBackground = backgroundFlipped
     }
     
     override func viewWillAppear(_ animated: Bool) {
         iphoneImageView.image = iphoneImage
         titleLabel.text = titleText
         textLabel.text = text
-        startButton.isHidden = !lastVCInPageVC
+        if shouldFlipBackground {
+            backgroundImage.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi))
+        }
     }
 }

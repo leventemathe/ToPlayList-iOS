@@ -124,6 +124,9 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     }
     
     private func setupBannerAd() {
+        if !Configuration.instance.admob.enabled {
+            return
+        }
         bannerAd.adUnitID = Configuration.instance.admob.releasesAdUnitID
         
         bannerAd.rootViewController = self

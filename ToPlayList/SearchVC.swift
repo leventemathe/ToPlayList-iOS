@@ -133,6 +133,9 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
     }
     
     private func setupBannerAd() {
+        if !Configuration.instance.admob.enabled {
+            return
+        }
         bannerAd.adUnitID = Configuration.instance.admob.searchAdUnitID
         
         bannerAd.rootViewController = self
