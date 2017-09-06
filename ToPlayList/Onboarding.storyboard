@@ -133,6 +133,54 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lpH-tQ-Cv1">
                                 <rect key="frame" x="49" y="57" width="276" height="553"/>
                             </imageView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fUn-MZ-c6n">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="172"/>
+                                <subviews>
+                                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n0N-9h-IPs">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="172"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="etG-K2-82u">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="172"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </view>
+                                        <blurEffect style="dark"/>
+                                    </visualEffectView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xmc-WQ-wdS">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="172"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hzX-ib-Pz6" customClass="LoginSceneButtonLogin" customModule="ToPlayList" customModuleProvider="target">
+                                                <rect key="frame" x="107.5" y="92" width="160" height="40"/>
+                                                <color key="backgroundColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="9KE-cg-sRf"/>
+                                                    <constraint firstAttribute="width" constant="160" id="F9l-nc-41P"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="22"/>
+                                                <state key="normal" title="Start">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <segue destination="bZX-kL-dm2" kind="show" id="oFC-Nl-LqE"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="hzX-ib-Pz6" firstAttribute="centerX" secondItem="xmc-WQ-wdS" secondAttribute="centerX" id="wUe-ZE-VAf"/>
+                                            <constraint firstAttribute="bottom" secondItem="hzX-ib-Pz6" secondAttribute="bottom" constant="40" id="xZt-Ps-mUj"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="n0N-9h-IPs" secondAttribute="bottom" id="3Kz-zH-uhY"/>
+                                    <constraint firstItem="xmc-WQ-wdS" firstAttribute="leading" secondItem="fUn-MZ-c6n" secondAttribute="leading" id="Gri-Ei-Ms8"/>
+                                    <constraint firstAttribute="trailing" secondItem="n0N-9h-IPs" secondAttribute="trailing" id="S8T-vn-W2p"/>
+                                    <constraint firstItem="n0N-9h-IPs" firstAttribute="leading" secondItem="fUn-MZ-c6n" secondAttribute="leading" id="a5y-Uc-hr6"/>
+                                    <constraint firstAttribute="bottom" secondItem="xmc-WQ-wdS" secondAttribute="bottom" id="aIB-eE-314"/>
+                                    <constraint firstItem="n0N-9h-IPs" firstAttribute="top" secondItem="fUn-MZ-c6n" secondAttribute="top" id="dQs-EM-2FO"/>
+                                    <constraint firstAttribute="height" constant="172" id="iCL-ev-Vxj"/>
+                                    <constraint firstItem="xmc-WQ-wdS" firstAttribute="top" secondItem="fUn-MZ-c6n" secondAttribute="top" id="ivn-SZ-3Ka"/>
+                                    <constraint firstAttribute="trailing" secondItem="xmc-WQ-wdS" secondAttribute="trailing" id="uvZ-ji-Nc8"/>
+                                </constraints>
+                            </view>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aTj-ln-BKJ">
                                 <rect key="frame" x="0.0" y="495" width="375" height="172"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="oMv-zW-juu">
@@ -172,10 +220,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="lpH-tQ-Cv1" firstAttribute="leading" secondItem="OGj-x8-gzK" secondAttribute="leadingMargin" constant="33" id="3eB-kq-664"/>
+                            <constraint firstItem="fUn-MZ-c6n" firstAttribute="leading" secondItem="OGj-x8-gzK" secondAttribute="leading" id="CDD-Ur-KuE"/>
                             <constraint firstAttribute="trailing" secondItem="aTj-ln-BKJ" secondAttribute="trailing" id="CTb-eb-28p"/>
                             <constraint firstAttribute="trailing" secondItem="QWc-65-nix" secondAttribute="trailing" id="E6d-Le-Wqc"/>
+                            <constraint firstItem="fUn-MZ-c6n" firstAttribute="top" secondItem="OGj-x8-gzK" secondAttribute="top" id="IKU-rB-acp"/>
                             <constraint firstAttribute="trailingMargin" secondItem="lpH-tQ-Cv1" secondAttribute="trailing" constant="34" id="L1E-ko-Xgz"/>
                             <constraint firstItem="QWc-65-nix" firstAttribute="leading" secondItem="OGj-x8-gzK" secondAttribute="leading" id="PYU-SD-ThJ"/>
+                            <constraint firstAttribute="trailing" secondItem="fUn-MZ-c6n" secondAttribute="trailing" id="QtJ-Bg-SMl"/>
                             <constraint firstItem="BDN-dG-8OH" firstAttribute="top" secondItem="QWc-65-nix" secondAttribute="bottom" id="TAw-m7-AQo"/>
                             <constraint firstItem="fsv-6g-5Up" firstAttribute="leading" secondItem="OGj-x8-gzK" secondAttribute="leading" id="Uui-Bi-2cD"/>
                             <constraint firstItem="BDN-dG-8OH" firstAttribute="top" secondItem="lpH-tQ-Cv1" secondAttribute="bottom" constant="57" id="WXQ-ni-qt9"/>
@@ -190,6 +241,8 @@
                     <connections>
                         <outlet property="backgroundImage" destination="fsv-6g-5Up" id="wtU-hM-Oom"/>
                         <outlet property="iphoneImageView" destination="lpH-tQ-Cv1" id="zKb-L6-8cD"/>
+                        <outlet property="startButtonContainer" destination="fUn-MZ-c6n" id="9NI-Fy-REm"/>
+                        <outlet property="startButtonContainerTopConstraint" destination="IKU-rB-acp" id="Lwq-SI-07n"/>
                         <outlet property="textLabel" destination="Xjw-RP-ong" id="y3c-hJ-hzk"/>
                         <outlet property="titleLabel" destination="ubO-j1-8u1" id="L9K-8w-T2B"/>
                     </connections>
@@ -296,4 +349,7 @@
         <image name="logo" width="349" height="203"/>
         <image name="orange_gradient_background" width="375" height="667"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="oFC-Nl-LqE"/>
+    </inferredMetricsTieBreakers>
 </document>
