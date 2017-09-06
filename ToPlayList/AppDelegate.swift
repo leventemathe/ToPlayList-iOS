@@ -108,7 +108,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     let ONBOARDING_DONE = "OnboardingDone"
     
     private func onboardOrRegular() {
-        if UserDefaults.standard.bool(forKey: ONBOARDING_DONE) {
+        Configuration.instance.alwaysShowOnboarding = true
+        if UserDefaults.standard.bool(forKey: ONBOARDING_DONE) && !Configuration.instance.alwaysShowOnboarding {
             return
         }
         let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
@@ -116,6 +117,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = vc
         window?.makeKeyAndVisible()
+        UserDefaults.standard.set(true, forKey: ONBOARDING_DONE)
     }
     
     
