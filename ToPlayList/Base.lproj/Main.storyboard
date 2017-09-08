@@ -1210,11 +1210,11 @@
                             <constraint firstAttribute="trailing" secondItem="65Q-Zg-Uje" secondAttribute="trailing" id="wts-S8-ZO6"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Lists" id="s8v-2S-Lck">
-                        <barButtonItem key="leftBarButtonItem" image="logout" id="ava-sZ-rhd">
-                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <navigationItem key="navigationItem" title="Lists" id="KSJ-nw-0co">
+                        <barButtonItem key="rightBarButtonItem" title="Upgrade" id="EN5-R8-WiV">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <action selector="logoutClicked:" destination="Ncq-W1-497" id="QZJ-bu-569"/>
+                                <segue destination="Qrj-wY-cLo" kind="show" id="ksw-Na-f6P"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1226,6 +1226,7 @@
                         <outlet property="listContainerBottomConstraint" destination="Cf7-Jx-3Tu" id="VCh-sJ-lDi"/>
                         <outlet property="listContainerView" destination="65Q-Zg-Uje" id="qCc-Cz-RBu"/>
                         <outlet property="segmentedControl" destination="o1g-ft-PLL" id="Tfl-KU-dbl"/>
+                        <outlet property="upgradeButton" destination="EN5-R8-WiV" id="L5n-6s-T3C"/>
                         <outlet property="welcomLbl" destination="WOa-04-8pa" id="kwJ-1d-Kou"/>
                         <outlet property="welcomeLblContainerLeadeingConstraint" destination="7F2-De-gkj" id="86T-jU-7a8"/>
                         <outlet property="welcomeLblContainerTrailingConstraint" destination="SFX-aa-7tV" id="VPw-Va-szP"/>
@@ -1929,6 +1930,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ztd-z3-MZq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5784" y="78"/>
+        </scene>
+        <!--UpgradeVC-->
+        <scene sceneID="yqE-is-p3C">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Upgrade" referencedIdentifier="UpgradeVC" id="Qrj-wY-cLo" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yTB-4U-qpJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3804" y="2296"/>
         </scene>
         <!--Played ListVC-->
         <scene sceneID="CU3-BN-FTg">

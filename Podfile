@@ -11,6 +11,7 @@ def my_pods
   pod 'Firebase/AdMob', '~> 4.0.3'
   pod 'NVActivityIndicatorView', '~> 3.6.1'
   pod 'ImageViewer', '~> 4.1.0'
+  pod 'SwiftyStoreKit', '~> 0.10.7'
 end
 
 target 'ToPlayList' do

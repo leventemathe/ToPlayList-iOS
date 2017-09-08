@@ -108,7 +108,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     let ONBOARDING_DONE = "OnboardingDone"
     
     private func onboardOrRegular() {
-        Configuration.instance.alwaysShowOnboarding = true
+        Configuration.instance.alwaysShowOnboarding = false
         if UserDefaults.standard.bool(forKey: ONBOARDING_DONE) && !Configuration.instance.alwaysShowOnboarding {
             return
         }

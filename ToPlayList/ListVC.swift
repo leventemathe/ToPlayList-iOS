@@ -23,6 +23,8 @@ class ListVC: UIViewController, IdentifiableVC, GADBannerViewDelegate {
     @IBOutlet weak var adContainer: UIView!
     @IBOutlet weak var listContainerBottomConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var upgradeButton: UIBarButtonItem!
+    
     @IBAction func segmentedChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
@@ -109,6 +111,7 @@ class ListVC: UIViewController, IdentifiableVC, GADBannerViewDelegate {
         setupSegmentedView()
         setupTiltingBackground()
         setupBannerAd()
+        setupBackButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -125,6 +128,7 @@ class ListVC: UIViewController, IdentifiableVC, GADBannerViewDelegate {
     }
     
     private func setupNavBar(_ animated: Bool) {
+        upgradeButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Avenir", size: 18)!], for: .normal)
         navigationController?.setNavigationBarHidden(false, animated: animated)
         navigationItem.hidesBackButton = true
     }
@@ -241,5 +245,12 @@ class ListVC: UIViewController, IdentifiableVC, GADBannerViewDelegate {
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
         listContainerBottomConstraint.constant = bannerAd.frame.size.height
         adContainer.isHidden = false
+    }
+    
+    private func setupBackButton() {
+        self.navigationController?.navigationBar.backIndicatorImage = #imageLiteral(resourceName: "back_button")
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "back_button")
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
 }
