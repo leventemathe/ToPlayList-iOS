@@ -1031,7 +1031,7 @@
                                         <rect key="frame" x="-60" y="-60" width="440" height="688"/>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="eV9-7L-V6j">
-                                        <rect key="frame" x="16" y="147.5" width="288" height="274.5"/>
+                                        <rect key="frame" x="16" y="147" width="288" height="274.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ALMOST THERE!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k48-OY-azy">
                                                 <rect key="frame" x="0.0" y="0.0" width="288" height="124"/>
@@ -1211,6 +1211,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Lists" id="KSJ-nw-0co">
+                        <barButtonItem key="leftBarButtonItem" image="logout" id="FDY-fe-qQN">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="logoutClicked:" destination="Ncq-W1-497" id="c0K-Eq-MlA"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Upgrade" id="EN5-R8-WiV">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
