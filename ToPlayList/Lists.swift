@@ -169,6 +169,24 @@ class ListsUser {
         }
         return nil
     }
+    
+    static func getToken(_ onComplete: @escaping (String?)->()) {
+        guard let user = Auth.auth().currentUser else {
+            onComplete(nil)
+            return
+        }
+        user.getIDToken(completion: { (token, error) in
+            if error != nil {
+                onComplete(nil)
+            } else {
+                if let token = token {
+                    onComplete(token)
+                } else {
+                    onComplete(nil)
+                }
+            }
+        })
+    }
 }
 
 

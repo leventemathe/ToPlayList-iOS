@@ -23,6 +23,14 @@ class UpgradeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        InappPurchasesService.instance.getProductIDs({ result in
+            switch result {
+            case .success(let ids):
+                print(ids)
+            case .failure(let error):
+                print("error while getting product ids from firebase: \(error)")
+            }
+        })
     }
     
     override func viewDidAppear(_ animated: Bool) {
