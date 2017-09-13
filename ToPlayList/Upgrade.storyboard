@@ -21,19 +21,91 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Upgrade" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sry-aV-WKa">
-                                <rect key="frame" x="166" y="191" width="105" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GY2-wk-NLk" customClass="LoginSceneButtonLogin" customModule="ToPlayList" customModuleProvider="target">
-                                <rect key="frame" x="121" y="247" width="160" height="43"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_bg" translatesAutoresizingMaskIntoConstraints="NO" id="I2T-Il-86V">
+                                <rect key="frame" x="-60" y="-60" width="495" height="787"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="2va-Fh-5PM">
+                                <rect key="frame" x="0.0" y="60" width="375" height="222"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sry-aV-WKa">
+                                        <rect key="frame" x="16" y="8" width="343" height="90.5"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="For the price of an ">
+                                                <attributes>
+                                                    <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <font key="NSFont" size="22" name="Avenir-Light"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="espresso">
+                                                <attributes>
+                                                    <color key="NSColor" red="1" green="0.60784313725490191" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="22" name="Silkscreen"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content=", you can upgrade to a ">
+                                                <attributes>
+                                                    <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <font key="NSFont" size="22" name="Avenir-Light"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="premium">
+                                                <attributes>
+                                                    <color key="NSColor" red="1" green="0.60784313725490191" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="22" name="Silkscreen"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content=" account.">
+                                                <attributes>
+                                                    <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <font key="NSFont" size="22" name="Avenir-Light"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Why you should upgrade:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TsZ-Nh-fCB">
+                                        <rect key="frame" x="16" y="114.5" width="343" height="25"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="DZh-mx-5On">
+                                        <rect key="frame" x="16" y="155.5" width="343" height="58.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="◇ no ads for premium members" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fd0-Hz-IlJ">
+                                                <rect key="frame" x="0.0" y="0.0" width="203" height="19.5"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="◇ unlimited number of games can be added to lists" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RrP-F3-yoW">
+                                                <rect key="frame" x="0.0" y="19.5" width="325.5" height="19.5"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="◇ you support the dev, and help with server costs" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K73-ey-X88">
+                                                <rect key="frame" x="0.0" y="39" width="313" height="19.5"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <edgeInsets key="layoutMargins" top="8" left="16" bottom="8" right="16"/>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GY2-wk-NLk" customClass="LoginSceneButtonLogin" customModule="ToPlayList" customModuleProvider="target">
+                                <rect key="frame" x="107.5" y="306" width="160" height="42"/>
                                 <color key="backgroundColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="BLy-nB-Wdi"/>
-                                    <constraint firstAttribute="width" constant="160" id="egr-gM-yiL"/>
+                                    <constraint firstAttribute="width" constant="160" id="NOL-JJ-wak"/>
+                                    <constraint firstAttribute="height" constant="42" id="cNZ-Tc-4zU"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="22"/>
                                 <state key="normal" title="Upgrade">
@@ -45,9 +117,22 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="2va-Fh-5PM" secondAttribute="trailing" id="DbG-jN-Ved"/>
+                            <constraint firstItem="GY2-wk-NLk" firstAttribute="centerX" secondItem="K9J-Gy-ZoR" secondAttribute="centerX" id="E1a-sQ-wUU"/>
+                            <constraint firstItem="2va-Fh-5PM" firstAttribute="leading" secondItem="K9J-Gy-ZoR" secondAttribute="leading" id="FcS-Mz-9TK"/>
+                            <constraint firstAttribute="trailing" secondItem="I2T-Il-86V" secondAttribute="trailing" constant="-60" id="Rsw-WX-Clr"/>
+                            <constraint firstItem="GY2-wk-NLk" firstAttribute="top" secondItem="2va-Fh-5PM" secondAttribute="bottom" constant="24" id="Ubv-6b-iIw"/>
+                            <constraint firstItem="1lW-KI-4rI" firstAttribute="top" secondItem="I2T-Il-86V" secondAttribute="bottom" constant="-60" id="ZAd-hV-Eul"/>
+                            <constraint firstItem="I2T-Il-86V" firstAttribute="top" secondItem="K9J-Gy-ZoR" secondAttribute="top" constant="-60" id="dJ7-i3-r05"/>
+                            <constraint firstItem="I2T-Il-86V" firstAttribute="leading" secondItem="K9J-Gy-ZoR" secondAttribute="leading" constant="-60" id="mMx-eY-hhL"/>
+                            <constraint firstItem="2va-Fh-5PM" firstAttribute="top" secondItem="ACc-J5-SsT" secondAttribute="bottom" constant="40" id="rdS-7c-pTg"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Upgrade" id="xCX-mB-QEZ"/>
                     <connections>
+                        <outlet property="backgroundImageLeftConstraint" destination="mMx-eY-hhL" id="73V-E3-COf"/>
+                        <outlet property="backgroundImageView" destination="I2T-Il-86V" id="h5O-LR-8Dy"/>
                         <outlet property="upgradeButton" destination="GY2-wk-NLk" id="shF-RP-6XL"/>
                     </connections>
                 </viewController>
@@ -56,4 +141,7 @@
             <point key="canvasLocation" x="-223.19999999999999" y="117.39130434782609"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="login_bg" width="768" height="512"/>
+    </resources>
 </document>
