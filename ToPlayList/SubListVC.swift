@@ -71,7 +71,7 @@ class SubListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFlowL
     
     private var panStartPoint: CGPoint?
     
-    func handlePan(_ recognizer: UIGestureRecognizer?) {
+    @objc func handlePan(_ recognizer: UIGestureRecognizer?) {
         guard let recognizer = recognizer as? UIPanGestureRecognizer else {
             return
         }

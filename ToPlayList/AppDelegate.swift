@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import UserNotifications
+import StoreKit
 
 extension UIColor {
     
@@ -54,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {        
         setupFirebase()
         setupAdmob()
-        downloadIAPProducts()
+        setupIAP()
         
         UNUserNotificationCenter.current().delegate = self
         
@@ -86,21 +87,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         GADMobileAds.configure(withApplicationID: Configuration.instance.admob.applicationID)
     }
     
-    private func downloadIAPProducts() {
+    private func setupIAP() {
+        SKPaymentQueue.default().add(InappPurchaseSystem.instance)
         InappPurchaseSystem.instance.loadProducts()
     }
     
     private func setupTabBarAppearance() {
-        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for: .normal)
-        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.MyCustomColors.orange], for: .selected)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.white], for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.MyCustomColors.orange], for: .selected)
     }
     
     private func setupSearchBarAppearance() {
-        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes([NSFontAttributeName : UIFont.MyFonts.avenirDefault(size: 17)!], for: .normal)
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes([NSAttributedStringKey.font : UIFont.MyFonts.avenirDefault(size: 17)!], for: .normal)
     }
 
     private func setupSegmentedControlAppearance() {
-        UISegmentedControl.appearance().setTitleTextAttributes([NSFontAttributeName : UIFont.MyFonts.avenirDefault(size: 14)!], for: .normal)
+        UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedStringKey.font : UIFont.MyFonts.avenirDefault(size: 14)!], for: .normal)
     }
     
     private func setupPageControlAppearance() {

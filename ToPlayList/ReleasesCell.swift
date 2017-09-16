@@ -190,7 +190,7 @@ class ReleasesCell: UITableViewCell, ReusableView {
         star.addGestureRecognizer(starTap)
     }
     
-    func starTapped() {
+    @objc func starTapped() {
         removeGameFromList()
     }
     

@@ -15,7 +15,7 @@ protocol ColoredPlaceholderText {
 extension ColoredPlaceholderText where Self: UITextField {
     
     func changePlaceholderColor(_ text: String, toColor color: UIColor) {
-        let str = NSAttributedString(string: text, attributes: [NSForegroundColorAttributeName: color])
+        let str = NSAttributedString(string: text, attributes: [NSAttributedStringKey.foregroundColor: color])
         attributedPlaceholder = str
     }
 }

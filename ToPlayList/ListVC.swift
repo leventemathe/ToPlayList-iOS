@@ -128,7 +128,7 @@ class ListVC: UIViewController, IdentifiableVC, GADBannerViewDelegate {
     }
     
     private func setupNavBar(_ animated: Bool) {
-        upgradeButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Avenir", size: 18)!], for: .normal)
+        upgradeButton.setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: "Avenir", size: 18)!], for: .normal)
         navigationController?.setNavigationBarHidden(false, animated: animated)
         navigationItem.hidesBackButton = true
     }
@@ -150,13 +150,13 @@ class ListVC: UIViewController, IdentifiableVC, GADBannerViewDelegate {
     }
     
     private func setupWelcomeMsg() {
-        let welcomeAttributes: [String: Any] = [
-            NSFontAttributeName : UIFont(name: "Silkscreen", size: 18) as Any,
-            NSForegroundColorAttributeName : UIColor.MyCustomColors.orange
+        let welcomeAttributes: [NSAttributedStringKey: Any] = [
+            NSAttributedStringKey.font : UIFont(name: "Silkscreen", size: 18) as Any,
+            NSAttributedStringKey.foregroundColor : UIColor.MyCustomColors.orange
         ]
-        let userAttributes: [String: Any] = [
-            NSFontAttributeName : UIFont(name: "Avenir Book", size: 18) as Any,
-            NSForegroundColorAttributeName : UIColor.black
+        let userAttributes: [NSAttributedStringKey: Any] = [
+            NSAttributedStringKey.font : UIFont(name: "Avenir Book", size: 18) as Any,
+            NSAttributedStringKey.foregroundColor : UIColor.black
         ]
         
         welcomLbl.attributedText = NSMutableAttributedString(string: "\(ListVC.WELCOME_MSG)!", attributes: welcomeAttributes)

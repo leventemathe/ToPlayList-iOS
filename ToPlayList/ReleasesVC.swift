@@ -100,7 +100,7 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         }
     }
     
-    func handlePan(_ recognizer: UIGestureRecognizer?) {
+    @objc func handlePan(_ recognizer: UIGestureRecognizer?) {
         guard let recognizer = recognizer as? UIPanGestureRecognizer else {
             return
         }

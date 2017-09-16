@@ -13,30 +13,25 @@ class UpgradeVC: UIViewController {
     private let NETWORK_ERROR = "No internet connection."
     private let SERVER_ERROR = "There was an error on the server. Please try again later."
     
+    private let PRODUCT_NAME = "Premium"
+    
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var backgroundImageLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var upgradeButton: LoginSceneButtonLogin!
     
     @IBAction func upgradeButtonClicked(_ sender: UIButton) {
-        
+        InappPurchaseSystem.instance.purchase(product: PRODUCT_NAME)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        InappPurchasesService.instance.getProductIDs({ result in
-            switch result {
-            case .success(let ids):
-                print(ids)
-            case .failure(let error):
-                print("error while getting product ids from firebase: \(error)")
-            }
-        })
+        upgradeButton.startLoadingAnimation()
+        InappPurchaseSystem.instance.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
         backgroundImageLeftConstraint.constant = -60
         addTiltingBackground()
-        upgradeButton.startLoadingAnimation()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -69,5 +64,24 @@ class UpgradeVC: UIViewController {
             backgroundImageView.removeMotionEffect(hor)
             backgroundImageView.removeMotionEffect(ver)
         }
+    }
+}
+
+extension UpgradeVC: InappPurchaseSystemDelegate {
+    
+    func didReceiveProducts(_ products: [String]) {
+        print("Received products:\(products)")
+        for product in products {
+            if let name = product.split(separator: ".").last {
+                if name == PRODUCT_NAME {
+                    upgradeButton.stopLoadingAnimation()
+                    upgradeButton.isEnabled = true
+                }
+            }
+        }
+    }
+    
+    func productRequestFailed(with error: Error) {
+        print("Product request failed with error: \(error)")
     }
 }

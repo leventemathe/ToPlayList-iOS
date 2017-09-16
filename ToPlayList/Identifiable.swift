@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol Identifiable: Hashable, Equatable, CustomStringConvertible {
+protocol Identifiable: Hashable, CustomStringConvertible {
     var id: UInt64 { get }
     var name: String { get }
 }

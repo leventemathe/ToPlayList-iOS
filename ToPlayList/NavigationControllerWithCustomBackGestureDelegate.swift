@@ -15,7 +15,7 @@ class NavigationControllerWithCustomBackGestureDelegate: UINavigationController,
         interactivePopGestureRecognizer?.addTarget(self, action: #selector(NavigationControllerWithCustomBackGestureDelegate.backGesturePanning(_:)))
     }
     
-    func backGesturePanning(_ gestureRecognizer: UIGestureRecognizer?) {
+    @objc func backGesturePanning(_ gestureRecognizer: UIGestureRecognizer?) {
         if let rec = gestureRecognizer {
             switch rec.state {
             case .began:

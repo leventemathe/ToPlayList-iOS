@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BEDF85F2CBBC4ADCB14DE6EF7D5907C4"
+               BlueprintIdentifier = "A24EF843836CF7AD4B09E0C4E0733D4A"
                BuildableName = "Pods_ToPlayListDev.framework"
                BlueprintName = "Pods-ToPlayListDev"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -26,6 +26,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
@@ -36,6 +37,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = ""
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -45,7 +47,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BEDF85F2CBBC4ADCB14DE6EF7D5907C4"
+            BlueprintIdentifier = "A24EF843836CF7AD4B09E0C4E0733D4A"
             BuildableName = "Pods_ToPlayListDev.framework"
             BlueprintName = "Pods-ToPlayListDev"
             ReferencedContainer = "container:Pods.xcodeproj">

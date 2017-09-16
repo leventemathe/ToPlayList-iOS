@@ -148,7 +148,7 @@ class DetailsCover: UIView, DropShadowed {
         self.addGestureRecognizer(panRecognizer)
     }
     
-    func pan() {
+    @objc func pan() {
         switch panRecognizer.state {
         case .began:
             panBegan()

@@ -16,7 +16,7 @@ extension UIViewController
         view.addGestureRecognizer(tap)
     }
     
-    func dismissKeyboard()
+    @objc func dismissKeyboard()
     {
         view.endEditing(true)
     }
@@ -181,11 +181,11 @@ class RegisterLoginVC: UIViewController, IdentifiableVC {
         })
     }
     
-    func keyboardWillAppear() {
+    @objc func keyboardWillAppear() {
         animateStackViewUp()
     }
     
-    func keyboardWillDisappear() {
+    @objc func keyboardWillDisappear() {
         animateStackViewDown()
     }
 }

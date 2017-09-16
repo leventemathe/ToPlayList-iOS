@@ -275,7 +275,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         starImage.addGestureRecognizer(starTap)
     }
     
-    func starTapped() {
+    @objc func starTapped() {
         ListsList.instance.removeGameFromToPlayAndPlayedList({ result in
             switch result {
             case .success(_):
@@ -935,7 +935,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         self.navigationItem.leftBarButtonItem?.tintColor = .white
     }
     
-    func back(sender: UIBarButtonItem?) {
+    @objc func back(sender: UIBarButtonItem?) {
         if let navVC = navigationController as? NavigationControllerWithCustomBackGestureDelegate {
             navVC.resetNavbar()
         }

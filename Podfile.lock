@@ -1,33 +1,36 @@
 PODS:
-  - Alamofire (4.4.0)
-  - Firebase/AdMob (4.0.4):
+  - Alamofire (4.5.1)
+  - Firebase/AdMob (4.1.1):
     - Firebase/Core
-    - Google-Mobile-Ads-SDK (= 7.21.0)
-  - Firebase/Auth (4.0.4):
+    - Google-Mobile-Ads-SDK (= 7.23.0)
+  - Firebase/Auth (4.1.1):
     - Firebase/Core
-    - FirebaseAuth (= 4.0.0)
-  - Firebase/Core (4.0.4):
-    - FirebaseAnalytics (= 4.0.2)
-    - FirebaseCore (= 4.0.4)
-  - Firebase/Database (4.0.4):
+    - FirebaseAuth (= 4.1.1)
+  - Firebase/Core (4.1.1):
+    - FirebaseAnalytics (= 4.0.3)
+    - FirebaseCore (= 4.0.6)
+  - Firebase/Database (4.1.1):
     - Firebase/Core
-    - FirebaseDatabase (= 4.0.0)
-  - FirebaseAnalytics (4.0.2):
+    - FirebaseDatabase (= 4.0.2)
+  - FirebaseAnalytics (4.0.3):
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseAuth (4.0.0):
+    - nanopb (~> 0.3)
+  - FirebaseAuth (4.1.1):
     - FirebaseAnalytics (~> 4.0)
     - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseCore (4.0.4):
+  - FirebaseCore (4.0.6):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
     - nanopb (~> 0.3)
-  - FirebaseDatabase (4.0.0):
+  - FirebaseDatabase (4.0.2):
     - FirebaseAnalytics (~> 4.0)
-  - FirebaseInstanceID (2.0.1):
     - FirebaseCore (~> 4.0)
-  - Google-Mobile-Ads-SDK (7.21.0)
+    - leveldb-library (~> 1.18)
+  - FirebaseInstanceID (2.0.2):
+    - FirebaseCore (~> 4.0)
+  - Google-Mobile-Ads-SDK (7.23.0)
   - GoogleToolboxForMac/DebugUtils (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
   - GoogleToolboxForMac/Defines (2.1.1)
@@ -40,43 +43,58 @@ PODS:
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
   - GTMSessionFetcher/Core (1.1.11)
   - ImageViewer (4.1.0)
-  - Kingfisher (3.9.1)
+  - Kingfisher (4.0.1)
+  - leveldb-library (1.18.3)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
-  - NVActivityIndicatorView (3.6.1)
-  - SwiftyStoreKit (0.10.7)
+  - NVActivityIndicatorView (3.7.0):
+    - NVActivityIndicatorView/Presenter (= 3.7.0)
+  - NVActivityIndicatorView/Presenter (3.7.0)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.4.0)
-  - Firebase/AdMob (~> 4.0.3)
-  - Firebase/Auth (~> 4.0.4)
-  - Firebase/Core (~> 4.0.4)
-  - Firebase/Database (~> 4.0.4)
-  - ImageViewer (~> 4.1.0)
-  - Kingfisher (~> 3.9.1)
-  - NVActivityIndicatorView (~> 3.6.1)
-  - SwiftyStoreKit (~> 0.10.7)
+  - Alamofire (~> 4.5.1)
+  - Firebase/AdMob (~> 4.1.1)
+  - Firebase/Auth (~> 4.1.1)
+  - Firebase/Core (~> 4.1.1)
+  - Firebase/Database (~> 4.1.1)
+  - ImageViewer (from `https://github.com/leviouss/ImageViewer`)
+  - Kingfisher (~> 4.0.1)
+  - NVActivityIndicatorView (from `https://github.com/leviouss/NVActivityIndicatorView`)
+
+EXTERNAL SOURCES:
+  ImageViewer:
+    :git: https://github.com/leviouss/ImageViewer
+  NVActivityIndicatorView:
+    :git: https://github.com/leviouss/NVActivityIndicatorView
+
+CHECKOUT OPTIONS:
+  ImageViewer:
+    :commit: 60a8f8eea30e27573f1c542f2b0287321c091edd
+    :git: https://github.com/leviouss/ImageViewer
+  NVActivityIndicatorView:
+    :commit: 2ddb9cdf88272487702da10d285adc1cb9625542
+    :git: https://github.com/leviouss/NVActivityIndicatorView
 
 SPEC CHECKSUMS:
-  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
-  Firebase: 1492bf04e1b73a7353b4fb2cf5a20bac9692f341
-  FirebaseAnalytics: ad41720e3e67fc63fbe3d2948d3e26932a8de311
-  FirebaseAuth: ebb6abcbabae00fc47446d690c19ce68d8484fde
-  FirebaseCore: cfc042628ef9f20debe09c0eb683135fcd404cb4
-  FirebaseDatabase: d829b3a8c3e2ac7a16773c5df226966b0805dfc2
-  FirebaseInstanceID: 0500e3cb54a1a4e01a8cffcc09323b8bb8fc7e1e
-  Google-Mobile-Ads-SDK: 4a6f1b43c8cc0e1e95a3b59d9f52a01671c6f9f3
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  Firebase: 052c0de688fc87b414996eea13e223dd9fee3fa2
+  FirebaseAnalytics: 76f754d37ca5b04f36856729b6af3ca0152d1069
+  FirebaseAuth: f8b07aa83de60d606b4eadd81484b3ac2097ea3e
+  FirebaseCore: 28def3c643989c97ea5a69ea5000f5fa9902b9fd
+  FirebaseDatabase: 4d1a10639a42cae26e094296951b53c689e5e191
+  FirebaseInstanceID: c4c7fca62c7b7330caee5da04f19a37ea37bb1c1
+  Google-Mobile-Ads-SDK: a43dc8efdb566c74d00ac6934c781de969348d80
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
-  ImageViewer: 163e5832e0a09e31a3e3482cce6e5e9029356174
-  Kingfisher: 6729a0baaa458245bfb8cd5a1296c71c10d6eb6c
+  ImageViewer: 1b1fd505659cb88d9358d76accb1d58a6d8f073d
+  Kingfisher: b771785e9461ed4b8686d40e7145f9e58100cb24
+  leveldb-library: 10fb39c39e243db4af1828441162405bbcec1404
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
-  NVActivityIndicatorView: 9f52a7f84bf5c6a798722c450fe3c198e01c56ed
-  SwiftyStoreKit: b13badd58fe138e258d04dec7bc1c9b092351af6
+  NVActivityIndicatorView: 0222d44ebe29c6256ec493af79662745915b2eb8
 
-PODFILE CHECKSUM: 2000eb9bcf42f92c6f4e5b21a74ea49b9f4083c1
+PODFILE CHECKSUM: 9527482fcd286c89128de03309aa47b372cdd93e
 
 COCOAPODS: 1.3.1
