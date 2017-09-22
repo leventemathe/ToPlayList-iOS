@@ -144,8 +144,8 @@
 		D77F1ADC1F62CE00008E58E5 /* InappPurchaseSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77F1ADA1F62CE00008E58E5 /* InappPurchaseSystem.swift */; };
 		D77F504B1ED6186D00B40D0C /* ImageCarouselVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77F504A1ED6186D00B40D0C /* ImageCarouselVC.swift */; };
 		D77F504E1ED6191000B40D0C /* ImageCarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77F504D1ED6191000B40D0C /* ImageCarouselCell.swift */; };
-		D7872ECD1F62C2D1006F36B7 /* InappPurchasesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7872ECC1F62C2D1006F36B7 /* InappPurchasesService.swift */; };
-		D7872ECE1F62C2D1006F36B7 /* InappPurchasesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7872ECC1F62C2D1006F36B7 /* InappPurchasesService.swift */; };
+		D7872ECD1F62C2D1006F36B7 /* InappPurchaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7872ECC1F62C2D1006F36B7 /* InappPurchaseService.swift */; };
+		D7872ECE1F62C2D1006F36B7 /* InappPurchaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7872ECC1F62C2D1006F36B7 /* InappPurchaseService.swift */; };
 		D7875F541E982F7E003C51ED /* Gradiented.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7875F531E982F7E003C51ED /* Gradiented.swift */; };
 		D7898E7B1E131992008B7647 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7898E7A1E131992008B7647 /* ReusableView.swift */; };
 		D78ADCA61E3750EB008DE943 /* Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78ADCA51E3750EB008DE943 /* Lists.swift */; };
@@ -282,7 +282,7 @@
 		D77F1ADA1F62CE00008E58E5 /* InappPurchaseSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InappPurchaseSystem.swift; sourceTree = "<group>"; };
 		D77F504A1ED6186D00B40D0C /* ImageCarouselVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCarouselVC.swift; sourceTree = "<group>"; };
 		D77F504D1ED6191000B40D0C /* ImageCarouselCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCarouselCell.swift; sourceTree = "<group>"; };
-		D7872ECC1F62C2D1006F36B7 /* InappPurchasesService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InappPurchasesService.swift; sourceTree = "<group>"; };
+		D7872ECC1F62C2D1006F36B7 /* InappPurchaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InappPurchaseService.swift; sourceTree = "<group>"; };
 		D7875F531E982F7E003C51ED /* Gradiented.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gradiented.swift; sourceTree = "<group>"; };
 		D7898E7A1E131992008B7647 /* ReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		D78ADCA51E3750EB008DE943 /* Lists.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lists.swift; sourceTree = "<group>"; };
@@ -613,7 +613,7 @@
 		D7872ECB1F62C2A4006F36B7 /* FirebaseCloud */ = {
 			isa = PBXGroup;
 			children = (
-				D7872ECC1F62C2D1006F36B7 /* InappPurchasesService.swift */,
+				D7872ECC1F62C2D1006F36B7 /* InappPurchaseService.swift */,
 			);
 			name = FirebaseCloud;
 			sourceTree = "<group>";
@@ -1225,7 +1225,7 @@
 				D71357011F5578B900F3AB3D /* OutTodayBadge.swift in Sources */,
 				D71357021F5578B900F3AB3D /* PlayedListVC.swift in Sources */,
 				D71357031F5578B900F3AB3D /* SearchCell.swift in Sources */,
-				D7872ECE1F62C2D1006F36B7 /* InappPurchasesService.swift in Sources */,
+				D7872ECE1F62C2D1006F36B7 /* InappPurchaseService.swift in Sources */,
 				D707B5191F62899800B0317F /* UpgradeVC.swift in Sources */,
 				D702E4261F56B53900731C96 /* OnboardingPageVC.swift in Sources */,
 				D71357041F5578B900F3AB3D /* ErrorHandlerDelegate.swift in Sources */,
@@ -1308,7 +1308,7 @@
 				D7C0F9491F2A285200556AA8 /* OutTodayBadge.swift in Sources */,
 				D72E66BA1E619D2100BED388 /* PlayedListVC.swift in Sources */,
 				D709009D1EC5B89D00A316BE /* SearchCell.swift in Sources */,
-				D7872ECD1F62C2D1006F36B7 /* InappPurchasesService.swift in Sources */,
+				D7872ECD1F62C2D1006F36B7 /* InappPurchaseService.swift in Sources */,
 				D707B5181F62899800B0317F /* UpgradeVC.swift in Sources */,
 				D702E4251F56B53900731C96 /* OnboardingPageVC.swift in Sources */,
 				D7975D081E586255003B64E6 /* ErrorHandlerDelegate.swift in Sources */,

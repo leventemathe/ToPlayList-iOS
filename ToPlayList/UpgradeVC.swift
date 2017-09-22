@@ -13,14 +13,14 @@ class UpgradeVC: UIViewController {
     private let NETWORK_ERROR = "No internet connection."
     private let SERVER_ERROR = "There was an error on the server. Please try again later."
     
-    private let PRODUCT_NAME = "Premium"
-    
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var backgroundImageLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var upgradeButton: LoginSceneButtonLogin!
     
     @IBAction func upgradeButtonClicked(_ sender: UIButton) {
-        InappPurchaseSystem.instance.purchase(product: PRODUCT_NAME)
+        upgradeButton.startLoadingAnimation()
+        upgradeButton.isEnabled = false
+        InappPurchaseSystem.instance.purchase(product: InappPurchaseSystem.PREMIUM_ID)
     }
     
     override func viewDidLoad() {
@@ -72,16 +72,31 @@ extension UpgradeVC: InappPurchaseSystemDelegate {
     func didReceiveProducts(_ products: [String]) {
         print("Received products:\(products)")
         for product in products {
-            if let name = product.split(separator: ".").last {
-                if name == PRODUCT_NAME {
-                    upgradeButton.stopLoadingAnimation()
-                    upgradeButton.isEnabled = true
-                }
+            if product == InappPurchaseSystem.PREMIUM_ID {
+                upgradeButton.stopLoadingAnimation()
+                upgradeButton.isEnabled = true
             }
         }
     }
     
     func productRequestFailed(with error: Error) {
         print("Product request failed with error: \(error)")
+        upgradeButton.stopLoadingAnimation()
+        upgradeButton.isEnabled = true
+    }
+    
+    func productPurchased(_ product: String) {
+        upgradeButton.stopLoadingAnimation()
+        upgradeButton.isEnabled = true
+    }
+    
+    func productPurchaseFailed(_ product: String) {
+        upgradeButton.stopLoadingAnimation()
+        upgradeButton.isEnabled = true
+    }
+    
+    func productRestored(_ product: String) {
+        upgradeButton.stopLoadingAnimation()
+        upgradeButton.isEnabled = true
     }
 }
