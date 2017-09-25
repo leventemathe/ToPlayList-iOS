@@ -97,7 +97,7 @@ class InappPurchaseSystem: NSObject, SKProductsRequestDelegate, SKPaymentTransac
             case .restored:
                 handleRestoredState(for: transaction, in: queue)
             case .failed:
-                handleFailedState(for: transaction, in: queue)
+                handleFailedState(for: transaction, in: queue, with: transaction.error)
             case .deferred:
                 handleDeferredState(for: transaction, in: queue)
             }
@@ -122,8 +122,8 @@ class InappPurchaseSystem: NSObject, SKProductsRequestDelegate, SKPaymentTransac
         delegate?.productRestored(transaction.payment.productIdentifier)
     }
     
-    func handleFailedState(for transaction: SKPaymentTransaction, in queue: SKPaymentQueue) {
-        print("Purchase failed for product id: \(transaction.payment.productIdentifier)")
+    func handleFailedState(for transaction: SKPaymentTransaction, in queue: SKPaymentQueue, with error: Error?) {
+        print("Purchase failed for product id: \(transaction.payment.productIdentifier), with error: \(error.debugDescription)")
         queue.finishTransaction(transaction)
         delegate?.productPurchaseFailed(transaction.payment.productIdentifier)
     }

@@ -12,6 +12,7 @@ class UpgradeVC: UIViewController {
     
     private let NETWORK_ERROR = "No internet connection."
     private let SERVER_ERROR = "There was an error on the server. Please try again later."
+    private let UNKNOWN_ERROR = "An error happened, please try again later."
     
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var backgroundImageLeftConstraint: NSLayoutConstraint!
@@ -93,6 +94,7 @@ extension UpgradeVC: InappPurchaseSystemDelegate {
     func productPurchaseFailed(_ product: String) {
         upgradeButton.stopLoadingAnimation()
         upgradeButton.isEnabled = true
+        Alerts.alertWithOKButton(withMessage: UNKNOWN_ERROR, forVC: self)
     }
     
     func productRestored(_ product: String) {

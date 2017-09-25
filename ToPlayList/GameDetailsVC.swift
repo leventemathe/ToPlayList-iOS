@@ -803,12 +803,18 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     }
     
     private func buildFranchiseCollectionString(_ string: String) {
-        if franchiseCollectionString == nil {
+        if franchiseCollectionString == nil || franchiseCollectionString! == "" {
             franchiseCollectionString = string
-        } else if franchiseCollectionString != nil && franchiseCollectionString!.characters.count > 0 {
+        } else {
+            let strings = franchiseCollectionString!.split(separator: ",")
+            for str in strings {
+                let str = str.trimmingCharacters(in: .whitespaces)
+                if str == string {
+                    return
+                }
+            }
             franchiseCollectionString!.append(", ")
-        } else if franchiseCollectionString != nil {
-            franchiseCollectionString = string
+            franchiseCollectionString!.append(string)
         }
     }
     
