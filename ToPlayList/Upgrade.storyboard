@@ -134,6 +134,22 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zNY-q8-pFL" customClass="LoginSceneButtonLogin" customModule="ToPlayList" customModuleProvider="target">
+                                <rect key="frame" x="87" y="419" width="200" height="42"/>
+                                <color key="backgroundColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="42" id="8bX-EX-f6d"/>
+                                    <constraint firstAttribute="width" constant="200" id="fjJ-hn-mUX"/>
+                                    <constraint firstAttribute="height" constant="42" id="o1q-Nk-Ro9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="22"/>
+                                <state key="normal" title="Retry Verification">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="retryVerificationClicked:" destination="TN3-rN-roW" eventType="touchUpInside" id="miv-nP-O7I"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -150,7 +166,9 @@
                             <constraint firstItem="I2T-Il-86V" firstAttribute="top" secondItem="K9J-Gy-ZoR" secondAttribute="top" constant="-60" id="dJ7-i3-r05"/>
                             <constraint firstItem="I2T-Il-86V" firstAttribute="leading" secondItem="K9J-Gy-ZoR" secondAttribute="leading" constant="-60" id="mMx-eY-hhL"/>
                             <constraint firstItem="2va-Fh-5PM" firstAttribute="top" secondItem="ACc-J5-SsT" secondAttribute="bottom" constant="40" id="rdS-7c-pTg"/>
+                            <constraint firstItem="zNY-q8-pFL" firstAttribute="top" secondItem="qS7-NW-bxA" secondAttribute="bottom" constant="8" id="rl7-I8-UKA"/>
                             <constraint firstAttribute="trailing" secondItem="qS7-NW-bxA" secondAttribute="trailing" constant="16" id="tgr-Gq-NGr"/>
+                            <constraint firstItem="zNY-q8-pFL" firstAttribute="centerX" secondItem="K9J-Gy-ZoR" secondAttribute="centerX" id="xY4-j8-AzI"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Upgrade" id="xCX-mB-QEZ"/>
@@ -159,6 +177,7 @@
                         <outlet property="backgroundImageView" destination="I2T-Il-86V" id="h5O-LR-8Dy"/>
                         <outlet property="infoLabel" destination="qS7-NW-bxA" id="n5G-sn-NYJ"/>
                         <outlet property="priceLabel" destination="Bb0-JH-nCW" id="NXt-Tq-mLJ"/>
+                        <outlet property="retryVerificationButton" destination="zNY-q8-pFL" id="D5U-wV-aRi"/>
                         <outlet property="upgradeButton" destination="GY2-wk-NLk" id="shF-RP-6XL"/>
                     </connections>
                 </viewController>

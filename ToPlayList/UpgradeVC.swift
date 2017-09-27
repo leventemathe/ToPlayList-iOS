@@ -28,11 +28,34 @@ class UpgradeVC: UIViewController {
     @IBOutlet weak var upgradeButton: LoginSceneButtonLogin!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var infoLabel: UILabel!
+    @IBOutlet weak var retryVerificationButton: LoginSceneButtonLogin!
     
     @IBAction func upgradeButtonClicked(_ sender: UIButton) {
         upgradeButton.startLoadingAnimation()
         upgradeButton.isEnabled = false
         InappPurchaseSystem.instance.purchase(product: InappPurchaseSystem.PREMIUM_ID)
+    }
+    
+    @IBAction func retryVerificationClicked(_ sender: LoginSceneButtonLogin) {
+        InappPurchaseSystem.instance.verifyReceipt { result in
+            switch result {
+            case .succeeded:
+                InappPurchaseSystem.instance.setReceipt()
+                self.setInfoLabel(self.VERIFICATION_SUCCEEDED, color: .green)
+                self.retryVerificationButton.isHidden = true
+            case .failed:
+                self.setInfoLabel(self.VERIFICATION_FAILED, color: .red)
+            case .error(let error):
+                switch error {
+                case .receiptMissing:
+                    self.setInfoLabel(self.RECEIPT_MISSING_VERIFICATION_ERROR, color: .red)
+                case .network:
+                    self.setInfoLabel(self.NETWORK_VERIFICATION_ERROR, color: .red)
+                case .server:
+                    self.setInfoLabel(self.SERVER_VERIFICATION_ERROR, color: .red)
+                }
+            }
+        }
     }
     
     override func viewDidLoad() {
@@ -136,9 +159,11 @@ extension UpgradeVC: InappPurchaseSystemDelegate {
             upgradeButton.isEnabled = true
             upgradeButton.setTitle(BUTTON_NOT_SUBSCRIBED, for: .normal)
             setInfoLabel(VERIFICATION_FAILED, color: .red)
+            retryVerificationButton.isHidden = false
         case .error(let error):
             upgradeButton.isEnabled = true
             upgradeButton.setTitle(BUTTON_NOT_SUBSCRIBED, for: .normal)
+            retryVerificationButton.isHidden = false
             switch error {
             case .receiptMissing:
                 setInfoLabel(RECEIPT_MISSING_VERIFICATION_ERROR, color: .red)

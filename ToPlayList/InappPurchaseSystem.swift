@@ -146,6 +146,12 @@ class InappPurchaseSystem: NSObject, SKProductsRequestDelegate, SKPaymentTransac
         queue.finishTransaction(transaction)
         self.delegate?.productPurchased(transaction.payment.productIdentifier)
         verifyReceipt { result in
+            switch result {
+            case .succeeded:
+                self.setReceipt()
+            default:
+                break
+            }
             self.delegate?.productVerification(result: result)
         }
     }
@@ -166,7 +172,7 @@ class InappPurchaseSystem: NSObject, SKProductsRequestDelegate, SKPaymentTransac
         print("Purchase deferred for product id: \(transaction.payment.productIdentifier)")
     }
     
-    private func verifyReceipt(_ onComplete: @escaping (InappPurchaseVerificationResult)->()) {
+    func verifyReceipt(_ onComplete: @escaping (InappPurchaseVerificationResult)->()) {
         guard let receipt = loadReceipt() else {
             onComplete(.error(.receiptMissing))
             return
@@ -203,5 +209,9 @@ class InappPurchaseSystem: NSObject, SKProductsRequestDelegate, SKPaymentTransac
             print("Error loading receipt data: \(error.localizedDescription)")
             return nil
         }
+    }
+    
+    func setReceipt() {
+        
     }
 }
