@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Avenir.ttc">
+            <string>Avenir-Book</string>
+            <string>Avenir-Heavy</string>
+            <string>Avenir-Light</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Upgrade-->
         <scene sceneID="hVA-um-6AT">
@@ -78,19 +85,19 @@
                                         <rect key="frame" x="16" y="155.5" width="343" height="58.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="◇ no ads for premium members" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fd0-Hz-IlJ">
-                                                <rect key="frame" x="0.0" y="0.0" width="203" height="19.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="19.5"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="◇ unlimited number of games can be added to lists" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RrP-F3-yoW">
-                                                <rect key="frame" x="0.0" y="19.5" width="325.5" height="19.5"/>
+                                                <rect key="frame" x="0.0" y="19.5" width="0.0" height="19.5"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="◇ you support the dev, and help with server costs" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K73-ey-X88">
-                                                <rect key="frame" x="0.0" y="39" width="313" height="19.5"/>
+                                                <rect key="frame" x="0.0" y="39" width="0.0" height="19.5"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -115,24 +122,43 @@
                                     <action selector="upgradeButtonClicked:" destination="TN3-rN-roW" eventType="touchUpInside" id="4gz-NM-x4O"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bb0-JH-nCW">
+                                <rect key="frame" x="171.5" y="356" width="31" height="19.5"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Info" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qS7-NW-bxA">
+                                <rect key="frame" x="16" y="391.5" width="343" height="19.5"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Bb0-JH-nCW" firstAttribute="top" secondItem="GY2-wk-NLk" secondAttribute="bottom" constant="8" id="8it-KJ-jSG"/>
                             <constraint firstAttribute="trailing" secondItem="2va-Fh-5PM" secondAttribute="trailing" id="DbG-jN-Ved"/>
                             <constraint firstItem="GY2-wk-NLk" firstAttribute="centerX" secondItem="K9J-Gy-ZoR" secondAttribute="centerX" id="E1a-sQ-wUU"/>
                             <constraint firstItem="2va-Fh-5PM" firstAttribute="leading" secondItem="K9J-Gy-ZoR" secondAttribute="leading" id="FcS-Mz-9TK"/>
+                            <constraint firstItem="Bb0-JH-nCW" firstAttribute="centerX" secondItem="K9J-Gy-ZoR" secondAttribute="centerX" id="Jq8-Xg-5as"/>
+                            <constraint firstItem="qS7-NW-bxA" firstAttribute="leading" secondItem="K9J-Gy-ZoR" secondAttribute="leading" constant="16" id="K5S-Wa-WdH"/>
                             <constraint firstAttribute="trailing" secondItem="I2T-Il-86V" secondAttribute="trailing" constant="-60" id="Rsw-WX-Clr"/>
                             <constraint firstItem="GY2-wk-NLk" firstAttribute="top" secondItem="2va-Fh-5PM" secondAttribute="bottom" constant="24" id="Ubv-6b-iIw"/>
                             <constraint firstItem="1lW-KI-4rI" firstAttribute="top" secondItem="I2T-Il-86V" secondAttribute="bottom" constant="-60" id="ZAd-hV-Eul"/>
+                            <constraint firstItem="qS7-NW-bxA" firstAttribute="top" secondItem="Bb0-JH-nCW" secondAttribute="bottom" constant="16" id="anR-8f-7i3"/>
                             <constraint firstItem="I2T-Il-86V" firstAttribute="top" secondItem="K9J-Gy-ZoR" secondAttribute="top" constant="-60" id="dJ7-i3-r05"/>
                             <constraint firstItem="I2T-Il-86V" firstAttribute="leading" secondItem="K9J-Gy-ZoR" secondAttribute="leading" constant="-60" id="mMx-eY-hhL"/>
                             <constraint firstItem="2va-Fh-5PM" firstAttribute="top" secondItem="ACc-J5-SsT" secondAttribute="bottom" constant="40" id="rdS-7c-pTg"/>
+                            <constraint firstAttribute="trailing" secondItem="qS7-NW-bxA" secondAttribute="trailing" constant="16" id="tgr-Gq-NGr"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Upgrade" id="xCX-mB-QEZ"/>
                     <connections>
                         <outlet property="backgroundImageLeftConstraint" destination="mMx-eY-hhL" id="73V-E3-COf"/>
                         <outlet property="backgroundImageView" destination="I2T-Il-86V" id="h5O-LR-8Dy"/>
+                        <outlet property="infoLabel" destination="qS7-NW-bxA" id="n5G-sn-NYJ"/>
+                        <outlet property="priceLabel" destination="Bb0-JH-nCW" id="NXt-Tq-mLJ"/>
                         <outlet property="upgradeButton" destination="GY2-wk-NLk" id="shF-RP-6XL"/>
                     </connections>
                 </viewController>

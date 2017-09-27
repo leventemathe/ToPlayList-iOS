@@ -10,11 +10,40 @@ import StoreKit
 
 protocol InappPurchaseSystemDelegate: class {
     
-    func didReceiveProducts(_ products: [String])
+    func didReceiveProducts(_ products: [InappPurchaseProduct])
     func productRequestFailed(with error: Error)
     func productPurchased(_ product: String)
     func productPurchaseFailed(_ product: String)
     func productRestored(_ product: String)
+    func productVerification(result: InappPurchaseVerificationResult)
+}
+
+enum InappPurchaseVerificationResult {
+    case succeeded
+    case failed
+    case error(InappPurchaseVerificationError)
+}
+
+enum InappPurchaseVerificationError {
+    case receiptMissing
+    case server
+    case network
+}
+
+struct InappPurchaseProduct {
+    
+    let id: String
+    let price: String
+}
+
+extension SKProduct {
+    
+    func localizedPrice() -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = self.priceLocale
+        return formatter.string(from: self.price)!
+    }
 }
 
 class InappPurchaseSystem: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
@@ -31,11 +60,15 @@ class InappPurchaseSystem: NSObject, SKProductsRequestDelegate, SKPaymentTransac
     weak var delegate: InappPurchaseSystemDelegate? {
         didSet {
             if products.count > 0 {
-                delegate?.didReceiveProducts(products.map({ $0.productIdentifier }))
+                delegate?.didReceiveProducts(createProducts())
             }
         }
     }
-    
+
+    private func createProducts() -> [InappPurchaseProduct] {
+        return products.map({ InappPurchaseProduct(id: $0.productIdentifier, price: $0.localizedPrice()) })
+    }
+
     func loadProducts() {
         let ids = Set([InappPurchaseSystem.PREMIUM_ID])
         let request = SKProductsRequest(productIdentifiers: ids)
@@ -50,7 +83,7 @@ class InappPurchaseSystem: NSObject, SKProductsRequestDelegate, SKPaymentTransac
             print("***************")
             print(product.productIdentifier)
         }
-        delegate?.didReceiveProducts(products.map({ $0.productIdentifier }))
+        delegate?.didReceiveProducts(createProducts())
     }
     
     // request.start() failed
@@ -109,10 +142,11 @@ class InappPurchaseSystem: NSObject, SKProductsRequestDelegate, SKPaymentTransac
     }
     
     func handlePurchasedState(for transaction: SKPaymentTransaction, in queue: SKPaymentQueue) {
-        print("User purchased product id: \(transaction.payment.productIdentifier)")
-        verifyReceipt {
-            queue.finishTransaction(transaction)
-            self.delegate?.productPurchased(transaction.payment.productIdentifier)
+        print("User purchased product id: \(transaction.payment.productIdentifier) at : \(String(describing: transaction.transactionDate))")
+        queue.finishTransaction(transaction)
+        self.delegate?.productPurchased(transaction.payment.productIdentifier)
+        verifyReceipt { result in
+            self.delegate?.productVerification(result: result)
         }
     }
     
@@ -132,20 +166,28 @@ class InappPurchaseSystem: NSObject, SKProductsRequestDelegate, SKPaymentTransac
         print("Purchase deferred for product id: \(transaction.payment.productIdentifier)")
     }
     
-    // TODO handle error, add return enum
-    private func verifyReceipt(_ onComplete: @escaping ()->()) {
+    private func verifyReceipt(_ onComplete: @escaping (InappPurchaseVerificationResult)->()) {
         guard let receipt = loadReceipt() else {
-            onComplete()
+            onComplete(.error(.receiptMissing))
             return
         }
         InappPurchaseService.instance.verify(receipt: receipt, withOnComplete: { result in
             switch result {
             case .success(let success):
                 print(success)
-                onComplete()
+                if success {
+                    onComplete(.succeeded)
+                } else {
+                    onComplete(.failed)
+                }
             case .failure(let error):
                 print(error)
-                onComplete()
+                switch error {
+                case .network:
+                    onComplete(.error(.network))
+                case .server, .json:
+                    onComplete(.error(.server))
+                }
             }
         })
     }

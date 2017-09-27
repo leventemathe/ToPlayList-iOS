@@ -10,13 +10,24 @@ import UIKit
 
 class UpgradeVC: UIViewController {
     
-    private let NETWORK_ERROR = "No internet connection."
-    private let SERVER_ERROR = "There was an error on the server. Please try again later."
     private let UNKNOWN_ERROR = "An error happened, please try again later."
+    private let PRODUCT_REQUEST_ERROR = "Failed getting in-app purchase products. Please try again later."
+    private let RECEIPT_MISSING_VERIFICATION_ERROR = "Purchase verification failed with error: receipt is missing. Please try again later."
+    private let NETWORK_VERIFICATION_ERROR = "Network error while verifying purchase. Please check your internet connection, and try again later."
+    private let SERVER_VERIFICATION_ERROR = "Server error while verifying purchase. Please try again later."
+    
+    private let TRANSACTION_FINISHED_MSG = "Transaction finished. Verifying purchase..."
+    
+    private let BUTTON_NOT_SUBSCRIBED = "Upgrade"
+    private let BUTTON_SUBSCRIBED = "Subscribed"
+    private let VERIFICATION_SUCCEEDED = "Verification finished, purchase was successful. Enjoy. 🙂"
+    private let VERIFICATION_FAILED = "Verification failed, please try again later."
     
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var backgroundImageLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var upgradeButton: LoginSceneButtonLogin!
+    @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var infoLabel: UILabel!
     
     @IBAction func upgradeButtonClicked(_ sender: UIButton) {
         upgradeButton.startLoadingAnimation()
@@ -68,37 +79,74 @@ class UpgradeVC: UIViewController {
     }
 }
 
+extension UpgradeVC {
+    
+    private func setInfoLabel(_ text: String, color: UIColor) {
+        infoLabel.text = text
+        infoLabel.textColor = color
+        infoLabel.isHidden = false
+    }
+    
+    private func unsetInfoLabel() {
+        infoLabel.isHidden = true
+    }
+}
+
 extension UpgradeVC: InappPurchaseSystemDelegate {
     
-    func didReceiveProducts(_ products: [String]) {
-        print("Received products:\(products)")
+    func didReceiveProducts(_ products: [InappPurchaseProduct]) {
         for product in products {
-            if product == InappPurchaseSystem.PREMIUM_ID {
+            if product.id == InappPurchaseSystem.PREMIUM_ID {
                 upgradeButton.stopLoadingAnimation()
                 upgradeButton.isEnabled = true
+                priceLabel.text = product.price
             }
         }
     }
     
     func productRequestFailed(with error: Error) {
-        print("Product request failed with error: \(error)")
+        setInfoLabel(PRODUCT_REQUEST_ERROR, color: .red)
         upgradeButton.stopLoadingAnimation()
-        upgradeButton.isEnabled = true
+        upgradeButton.isEnabled = false
     }
     
     func productPurchased(_ product: String) {
-        upgradeButton.stopLoadingAnimation()
-        upgradeButton.isEnabled = true
+        setInfoLabel(TRANSACTION_FINISHED_MSG, color: .green)
     }
     
     func productPurchaseFailed(_ product: String) {
         upgradeButton.stopLoadingAnimation()
         upgradeButton.isEnabled = true
-        Alerts.alertWithOKButton(withMessage: UNKNOWN_ERROR, forVC: self)
+        setInfoLabel(UNKNOWN_ERROR, color: .red)
     }
     
     func productRestored(_ product: String) {
         upgradeButton.stopLoadingAnimation()
         upgradeButton.isEnabled = true
+    }
+    
+    func productVerification(result: InappPurchaseVerificationResult) {
+        upgradeButton.stopLoadingAnimation()
+        switch result {
+        case .succeeded:
+            upgradeButton.isEnabled = false
+            upgradeButton.setTitle(BUTTON_SUBSCRIBED, for: .disabled)
+            setInfoLabel(VERIFICATION_SUCCEEDED, color: .green)
+        case .failed:
+            upgradeButton.isEnabled = true
+            upgradeButton.setTitle(BUTTON_NOT_SUBSCRIBED, for: .normal)
+            setInfoLabel(VERIFICATION_FAILED, color: .red)
+        case .error(let error):
+            upgradeButton.isEnabled = true
+            upgradeButton.setTitle(BUTTON_NOT_SUBSCRIBED, for: .normal)
+            switch error {
+            case .receiptMissing:
+                setInfoLabel(RECEIPT_MISSING_VERIFICATION_ERROR, color: .red)
+            case .network:
+                setInfoLabel(NETWORK_VERIFICATION_ERROR, color: .red)
+            case .server:
+                setInfoLabel(SERVER_VERIFICATION_ERROR, color: .red)
+            }
+        }
     }
 }
