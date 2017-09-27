@@ -191,7 +191,7 @@ class InappPurchaseSystem: NSObject, SKProductsRequestDelegate, SKPaymentTransac
                 switch error {
                 case .network:
                     onComplete(.error(.network))
-                case .server, .json:
+                case .server, .json, .unauthorized:
                     onComplete(.error(.server))
                 }
             }

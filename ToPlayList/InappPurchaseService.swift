@@ -17,6 +17,7 @@ enum InappPurchasesServiceError {
     case network
     case server
     case json
+    case unauthorized
 }
 
 class InappPurchaseService {
@@ -48,6 +49,12 @@ class InappPurchaseService {
                         onComplete(.failure(.json))
                     }
                 case .failure(_):
+                    if let statusCode = response.response?.statusCode {
+                        if statusCode == 403 {
+                            onComplete(.failure(.unauthorized))
+                            return
+                        }
+                    }
                     onComplete(.failure(.server))
                 }
             })
