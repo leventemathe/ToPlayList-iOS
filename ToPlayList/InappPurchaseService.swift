@@ -79,7 +79,11 @@ class InappPurchaseService {
                             onComplete(.failure(.server))
                             return
                         }
-                        onComplete(.success(success))
+                        guard let _ = json["error"] as? Bool else {
+                            onComplete(.success(success))
+                            return
+                        }
+                        onComplete(.failure(.server))
                     } else {
                         onComplete(.failure(.json))
                     }
