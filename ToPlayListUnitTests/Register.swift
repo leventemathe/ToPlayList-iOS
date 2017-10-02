@@ -236,7 +236,7 @@ class RegisterValidationFailed: XCTestCase {
             XCTAssertTrue(false, "validation successful")
         case .failure(let error):
             switch error {
-            case .invalidEmail(_):
+            case .invalidEmail:
                 XCTAssertTrue(true, "validation failed forbidden char in email")
             default:
                 XCTAssertTrue(false, "validation failed other error")
@@ -251,7 +251,7 @@ class RegisterValidationFailed: XCTestCase {
             XCTAssertTrue(false, "validation successful")
         case .failure(let error):
             switch error {
-            case .invalidEmail(_):
+            case .invalidEmail:
                 XCTAssertTrue(true, "validation failed forbidden char in email")
             default:
                 XCTAssertTrue(false, "validation failed other error")
@@ -266,7 +266,7 @@ class RegisterValidationFailed: XCTestCase {
             XCTAssertTrue(false, "validation successful")
         case .failure(let error):
             switch error {
-            case .invalidEmail(_):
+            case .invalidEmail:
                 XCTAssertTrue(true, "validation failed forbidden char in email")
             default:
                 XCTAssertTrue(false, "validation failed other error")
@@ -281,7 +281,7 @@ class RegisterValidationFailed: XCTestCase {
             XCTAssertTrue(false, "validation successful")
         case .failure(let error):
             switch error {
-            case .invalidEmail(_):
+            case .invalidEmail:
                 XCTAssertTrue(true, "validation failed forbidden char in email")
             default:
                 XCTAssertTrue(false, "validation failed other error")
@@ -296,7 +296,7 @@ class RegisterValidationFailed: XCTestCase {
             XCTAssertTrue(false, "validation successful")
         case .failure(let error):
             switch error {
-            case .tooLongUsername(_):
+            case .tooLongUsername:
                 XCTAssertTrue(true, "validation failed username too long")
             default:
                 XCTAssertTrue(false, "validation failed other error")
@@ -311,7 +311,7 @@ class RegisterValidationFailed: XCTestCase {
             XCTAssertTrue(false, "validation successful")
         case .failure(let error):
             switch error {
-            case .tooLongEmail(_):
+            case .tooLongEmail:
                 XCTAssertTrue(true, "validation failed email too long")
             default:
                 XCTAssertTrue(false, "validation failed other error")
@@ -326,7 +326,7 @@ class RegisterValidationFailed: XCTestCase {
             XCTAssertTrue(false, "validation successful")
         case .failure(let error):
             switch error {
-            case .tooLongPassword(_):
+            case .tooLongPassword:
                 XCTAssertTrue(true, "validation failed password too long")
             default:
                 XCTAssertTrue(false, "validation failed other error")
@@ -341,7 +341,7 @@ class RegisterValidationFailed: XCTestCase {
             XCTAssertTrue(false, "validation successful")
         case .failure(let error):
             switch error {
-            case .tooShortPassword(_):
+            case .tooShortPassword:
                 XCTAssertTrue(true, "validation failed password too short")
             default:
                 XCTAssertTrue(false, "validation failed other error")
@@ -356,7 +356,7 @@ class RegisterValidationFailed: XCTestCase {
             XCTAssertTrue(false, "validation successful")
         case .failure(let error):
             switch error {
-            case .noCapitalInPassword(_):
+            case .noCapitalInPassword:
                 XCTAssertTrue(true, "validation failed no capital in password")
             default:
                 XCTAssertTrue(false, "validation failed other error")
@@ -371,7 +371,7 @@ class RegisterValidationFailed: XCTestCase {
             XCTAssertTrue(false, "validation successful")
         case .failure(let error):
             switch error {
-            case .noNumberInPassword(_):
+            case .noNumberInPassword:
                 XCTAssertTrue(true, "validation failed no number in password")
             default:
                 XCTAssertTrue(false, "validation failed other error")
@@ -593,7 +593,7 @@ class RegisterAlreadyExists: XCTestCase {
     }
     
     override func tearDown() {
-        RegisterLoginTestHelper.login((email: existingUser.email, password: existingUser.password), withOnSuccess: {_ in}, withOnFailure: {_ in})
+        RegisterLoginTestHelper.login((email: existingUser.email, password: existingUser.password), withOnSuccess: {}, withOnFailure: {_ in})
         RegisterLoginTestHelper.deleteUserCompletely(existingUser)
         super.tearDown()
     }
