@@ -19,8 +19,9 @@ protocol InappPurchaseSystemDelegate: class {
 }
 
 enum InappPurchaseVerificationResult {
-    case succeeded
-    case failed
+    case validReceipt
+    case invalidReceipt
+    case receiptTaken
     case error(InappPurchaseVerificationError)
 }
 
@@ -147,7 +148,7 @@ class InappPurchaseSystem: NSObject, SKProductsRequestDelegate, SKPaymentTransac
         self.delegate?.productPurchased(transaction.payment.productIdentifier)
         verifyReceipt { result in
             switch result {
-            case .succeeded:
+            case .validReceipt:
                 self.setReceipt()
             default:
                 break
@@ -180,18 +181,19 @@ class InappPurchaseSystem: NSObject, SKProductsRequestDelegate, SKPaymentTransac
         InappPurchaseService.instance.verify(receipt: receipt, withOnComplete: { result in
             switch result {
             case .success(let success):
-                print(success)
-                if success {
-                    onComplete(.succeeded)
-                } else {
-                    onComplete(.failed)
+                switch success {
+                case .success:
+                    onComplete(.validReceipt)
+                case .invalidReceipt:
+                    onComplete(.invalidReceipt)
+                case .receiptTaken:
+                    onComplete(.receiptTaken)
                 }
-            case .failure(let error):
-                print(error)
+            case .error(let error):
                 switch error {
                 case .network:
                     onComplete(.error(.network))
-                case .server, .json, .unauthorized:
+                case .server, .json, .unauthorized, . appleServer, .noReceipt:
                     onComplete(.error(.server))
                 }
             }

@@ -21,7 +21,8 @@ class UpgradeVC: UIViewController {
     private let BUTTON_NOT_SUBSCRIBED = "Upgrade"
     private let BUTTON_SUBSCRIBED = "Subscribed"
     private let VERIFICATION_SUCCEEDED = "Verification finished, purchase was successful. Enjoy. 🙂"
-    private let VERIFICATION_FAILED = "Verification failed, please try again later."
+    private let VERIFICATION_FAILED_INVALID_RECEIPT = "Verification failed, please try again later."
+    private let VERIFICATION_FAILED_RECEIPT_TAKEN = "Another user already has this subscription tied to their account. If you made the purchase earlier, with another account, please log out and log in with that account."
     
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var backgroundImageLeftConstraint: NSLayoutConstraint!
@@ -37,14 +38,20 @@ class UpgradeVC: UIViewController {
     }
     
     @IBAction func retryVerificationClicked(_ sender: LoginSceneButtonLogin) {
+        retryVerificationButton.startLoadingAnimation()
+        retryVerificationButton.isEnabled = false
         InappPurchaseSystem.instance.verifyReceipt { result in
+            self.retryVerificationButton.stopLoadingAnimation()
+            self.retryVerificationButton.isEnabled = true
             switch result {
-            case .succeeded:
+            case .validReceipt:
                 InappPurchaseSystem.instance.setReceipt()
                 self.setInfoLabel(self.VERIFICATION_SUCCEEDED, color: .green)
                 self.retryVerificationButton.isHidden = true
-            case .failed:
-                self.setInfoLabel(self.VERIFICATION_FAILED, color: .red)
+            case .invalidReceipt:
+                self.setInfoLabel(self.VERIFICATION_FAILED_INVALID_RECEIPT, color: .red)
+            case .receiptTaken:
+                self.setInfoLabel(self.VERIFICATION_FAILED_RECEIPT_TAKEN, color: .red)
             case .error(let error):
                 switch error {
                 case .receiptMissing:
@@ -150,19 +157,20 @@ extension UpgradeVC: InappPurchaseSystemDelegate {
     
     func productVerification(result: InappPurchaseVerificationResult) {
         upgradeButton.stopLoadingAnimation()
+        upgradeButton.isEnabled = false
         switch result {
-        case .succeeded:
-            upgradeButton.isEnabled = false
+        case .validReceipt:
             upgradeButton.setTitle(BUTTON_SUBSCRIBED, for: .disabled)
             setInfoLabel(VERIFICATION_SUCCEEDED, color: .green)
-        case .failed:
-            upgradeButton.isEnabled = true
-            upgradeButton.setTitle(BUTTON_NOT_SUBSCRIBED, for: .normal)
-            setInfoLabel(VERIFICATION_FAILED, color: .red)
+        case .invalidReceipt:
+            upgradeButton.setTitle(BUTTON_NOT_SUBSCRIBED, for: .disabled)
+            setInfoLabel(VERIFICATION_FAILED_INVALID_RECEIPT, color: .red)
             retryVerificationButton.isHidden = false
+        case .receiptTaken:
+            upgradeButton.setTitle(BUTTON_NOT_SUBSCRIBED, for: .disabled)
+            setInfoLabel(VERIFICATION_FAILED_RECEIPT_TAKEN, color: .red)
         case .error(let error):
-            upgradeButton.isEnabled = true
-            upgradeButton.setTitle(BUTTON_NOT_SUBSCRIBED, for: .normal)
+            upgradeButton.setTitle(BUTTON_NOT_SUBSCRIBED, for: .disabled)
             retryVerificationButton.isHidden = false
             switch error {
             case .receiptMissing:

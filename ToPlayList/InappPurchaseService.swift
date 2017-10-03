@@ -10,7 +10,13 @@ import Alamofire
 
 enum InappPurchasesServiceResult<T> {
     case success(T)
-    case failure(InappPurchasesServiceError)
+    case error(InappPurchasesServiceError)
+}
+
+enum InappPurchasesServiceSuccess {
+    case success
+    case invalidReceipt
+    case receiptTaken
 }
 
 enum InappPurchasesServiceError {
@@ -18,6 +24,8 @@ enum InappPurchasesServiceError {
     case server
     case json
     case unauthorized
+    case noReceipt
+    case appleServer
 }
 
 class InappPurchaseService {
@@ -32,7 +40,7 @@ class InappPurchaseService {
         let url = baseURL + "/productIDs"
         ListsUser.getToken { token in
             guard let token = token else {
-                onComplete(.failure(.network))
+                onComplete(.error(.network))
                 return
             }
             let headers = ["Authorization": "Bearer \(token)"]
@@ -41,57 +49,77 @@ class InappPurchaseService {
                 case .success(let value):
                     if let json = value as? JSON {
                         guard let ids = json as? [String] else {
-                            onComplete(.failure(.server))
+                            onComplete(.error(.server))
                             return
                         }
                         onComplete(.success(ids))
                     } else {
-                        onComplete(.failure(.json))
+                        onComplete(.error(.json))
                     }
                 case .failure(_):
-                    if let statusCode = response.response?.statusCode {
-                        if statusCode == 403 {
-                            onComplete(.failure(.unauthorized))
-                            return
-                        }
+                    if !self.isAuthorized(response) {
+                        onComplete(.error(.unauthorized))
+                        return
                     }
-                    onComplete(.failure(.server))
+                    onComplete(.error(.server))
                 }
             })
         }
     }
     
-    func verify(receipt: Data, withOnComplete onComplete: @escaping (InappPurchasesServiceResult<Bool>)->()) {
+    func verify(receipt: Data, withOnComplete onComplete: @escaping (InappPurchasesServiceResult<InappPurchasesServiceSuccess>)->()) {
         let url = baseURL + "/verifyReceipt"
         ListsUser.getToken { token in
             guard let token = token else {
-                onComplete(.failure(.network))
+                onComplete(.error(.network))
                 return
             }
             let headers = ["Authorization": "Bearer \(token)",
                            "Content-Type": "application/json"]
             let params = ["data": receipt.base64EncodedString()]
             Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON(completionHandler: { response in
-                switch response.result {
-                case .success(let value):
-                    if let json = value as? [String: Any] {
-                        guard let success = json["success"] as? Bool else {
-                            onComplete(.failure(.server))
-                            return
-                        }
-                        guard let _ = json["error"] as? Bool else {
-                            onComplete(.success(success))
-                            return
-                        }
-                        onComplete(.failure(.server))
-                    } else {
-                        onComplete(.failure(.json))
+                if !self.isAuthorized(response) {
+                    onComplete(.error(.unauthorized))
+                    return
+                }
+                guard let json = response.result.value as? [String: Any] else {
+                    onComplete(.error(.server))
+                    return
+                }
+                if let success = json["success"] as? Int {
+                    switch success {
+                    case 0:
+                        onComplete(.success(.success))
+                    case 1:
+                        onComplete(.success(.invalidReceipt))
+                    case 2:
+                        onComplete(.success(.receiptTaken))
+                    default:
+                        onComplete(.error(.server))
                     }
-                case .failure(_):
-                    onComplete(.failure(.server))
+                } else if let error = json["error"] as? Int {
+                    switch error {
+                    case 1:
+                        onComplete(.error(.appleServer))
+                    case 2:
+                        onComplete(.error(.noReceipt))
+                    default:
+                        onComplete(.error(.server))
+                    }
+                } else {
+                    onComplete(.error(.json))
                 }
             })
         }
+    }
+    
+    private func isAuthorized(_ response: DataResponse<Any>) -> Bool {
+        if let statusCode = response.response?.statusCode {
+            if statusCode == 403 {
+                return false
+            }
+        }
+        return true
     }
 }
 
