@@ -52,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     var window: UIWindow?
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {        
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {        
         setupFirebase()
         
         UNUserNotificationCenter.current().delegate = self
@@ -82,16 +82,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     private func setupTabBarAppearance() {
-        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.white], for: .normal)
-        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.MyCustomColors.orange], for: .selected)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.MyCustomColors.orange], for: .selected)
     }
     
     private func setupSearchBarAppearance() {
-        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes([NSAttributedStringKey.font : UIFont.MyFonts.avenirDefault(size: 17)!], for: .normal)
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes([NSAttributedString.Key.font : UIFont.MyFonts.avenirDefault(size: 17)!], for: .normal)
     }
 
     private func setupSegmentedControlAppearance() {
-        UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedStringKey.font : UIFont.MyFonts.avenirDefault(size: 14)!], for: .normal)
+        UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedString.Key.font : UIFont.MyFonts.avenirDefault(size: 14)!], for: .normal)
     }
     
     private func setupPageControlAppearance() {

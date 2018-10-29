@@ -1,16 +1,16 @@
-platform :ios, '10.0'
+platform :ios, '11.0'
 
 use_frameworks!
 
 def my_pods
-  pod 'Alamofire', '~> 4.5.1'
-  pod 'Kingfisher', '~> 4.0.1'
-  pod 'Firebase/Core', '~> 4.2.0'
-  pod 'Firebase/Auth', '~> 4.2.0'
-  pod 'Firebase/Database', '~> 4.2.0'
-  pod 'Firebase/AdMob', '~> 4.2.0'
-  pod 'NVActivityIndicatorView', '~> 4.0.0'
-  pod 'ImageViewer', :git => 'https://github.com/leviouss/ImageViewer'
+  pod 'Alamofire'
+  pod 'Kingfisher'
+  pod 'Firebase/Core'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Database'
+  pod 'Firebase/AdMob'
+  pod 'NVActivityIndicatorView'
+  pod 'ImageViewer', :git => 'https://github.com/leventemathe/ImageViewer', :commit => 'a37916fade3ecb575e6d1527dcc0ed617c9481f2'
 end
 
 target 'ToPlayList' do
@@ -19,8 +19,4 @@ end
 
 target 'ToPlayListDev' do
   my_pods
-
-  target 'ToPlayListUnitTests' do
-    inherit! :search_paths
-  end
 end

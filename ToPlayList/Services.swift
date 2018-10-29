@@ -98,7 +98,7 @@ class RegisterService {
                 return .forbiddenCharacterInUsername(forbiddenChar)
             }
         }
-        if username.characters.count > RegisterService.USERNAME_MAX_LENGTH {
+        if username.count > RegisterService.USERNAME_MAX_LENGTH {
             return .tooLongUsername
         }
         return nil
@@ -108,7 +108,7 @@ class RegisterService {
         if email == "" {
             return .noEmail
         }
-        if email.characters.count > RegisterService.EMAIL_MAX_LENGTH {
+        if email.count > RegisterService.EMAIL_MAX_LENGTH {
             return .tooLongEmail
         }
         
@@ -125,10 +125,10 @@ class RegisterService {
         if password == "" {
             return .noPassword
         }
-        if password.characters.count < RegisterService.PASSWORD_MIN_LENGTH {
+        if password.count < RegisterService.PASSWORD_MIN_LENGTH {
             return .tooShortPassword
         }
-        if password.characters.count > RegisterService.PASSWORD_MAX_LENGTH {
+        if password.count > RegisterService.PASSWORD_MAX_LENGTH {
             return .tooLongPassword
         }
         
@@ -174,7 +174,7 @@ class RegisterService {
                 }
                 ListsUser.instance.deleteLoggedInUserBeforeFullyCreated()
             } else if let user = user{
-                self.addUserDataToDatabase(user.uid, withUsername: username, withOnComplete: onComplete)
+                self.addUserDataToDatabase(user.user.uid, withUsername: username, withOnComplete: onComplete)
             } else {
                 ListsUser.instance.deleteLoggedInUserBeforeFullyCreated()
                 onComplete(.failure(.unknown))

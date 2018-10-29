@@ -61,30 +61,30 @@ class RegisterLoginVC: UIViewController, IdentifiableVC {
     func setRegisterContainer() {
         clearLoginContainer()
         clearForgotPWContainer()
-        addChildViewController(registerVC)
+        addChild(registerVC)
         registerVC.view.frame.size = containerView.frame.size
         containerView.addSubview(registerVC.view)
-        registerVC.didMove(toParentViewController: self)
+        registerVC.didMove(toParent: self)
         animateVCAppearance(registerVC)
     }
     
     func setLoginContainer() {
         clearRegisterContainer()
         clearForgotPWContainer()
-        addChildViewController(loginVC)
+        addChild(loginVC)
         loginVC.view.frame.size = containerView.frame.size
         containerView.addSubview(loginVC.view)
-        loginVC.didMove(toParentViewController: self)
+        loginVC.didMove(toParent: self)
         animateVCAppearance(loginVC)
     }
     
     func setForgotPWContainer() {
         clearRegisterContainer()
         clearLoginContainer()
-        addChildViewController(forgotPWVC)
+        addChild(forgotPWVC)
         forgotPWVC.view.frame.size = containerView.frame.size
         containerView.addSubview(forgotPWVC.view)
-        forgotPWVC.didMove(toParentViewController: self)
+        forgotPWVC.didMove(toParent: self)
         animateVCAppearance(forgotPWVC)
     }
 
@@ -96,17 +96,17 @@ class RegisterLoginVC: UIViewController, IdentifiableVC {
     }
     
     func clearRegisterContainer() {
-        registerVC.removeFromParentViewController()
+        registerVC.removeFromParent()
         registerVC.view.removeFromSuperview()
     }
     
     func clearLoginContainer() {
-        loginVC.removeFromParentViewController()
+        loginVC.removeFromParent()
         loginVC.view.removeFromSuperview()
     }
     
     func clearForgotPWContainer() {
-        forgotPWVC.removeFromParentViewController()
+        forgotPWVC.removeFromParent()
         forgotPWVC.view.removeFromSuperview()
     }
     
@@ -119,8 +119,8 @@ class RegisterLoginVC: UIViewController, IdentifiableVC {
     }
     
     private func setupKeyboardNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {

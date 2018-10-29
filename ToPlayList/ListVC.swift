@@ -60,27 +60,27 @@ class ListVC: UIViewController, IdentifiableVC {
     
     func setToPLayListContainer() {
         clearPlayedListnContainer()
-        addChildViewController(toPLayListVC)
+        addChild(toPLayListVC)
         toPLayListVC.view.frame.size = listContainerView.frame.size
         listContainerView.addSubview(toPLayListVC.view)
-        toPLayListVC.didMove(toParentViewController: self)
+        toPLayListVC.didMove(toParent: self)
     }
     
     func setPlayedListContainer() {
         clearToPlayListContainer()
-        addChildViewController(playedListVC)
+        addChild(playedListVC)
         playedListVC.view.frame.size = listContainerView.frame.size
         listContainerView.addSubview(playedListVC.view)
-        playedListVC.didMove(toParentViewController: self)
+        playedListVC.didMove(toParent: self)
     }
     
     func clearToPlayListContainer() {
-        toPLayListVC.removeFromParentViewController()
+        toPLayListVC.removeFromParent()
         toPLayListVC.view.removeFromSuperview()
     }
     
     func clearPlayedListnContainer() {
-        playedListVC.removeFromParentViewController()
+        playedListVC.removeFromParent()
         playedListVC.view.removeFromSuperview()
     }
     
@@ -144,13 +144,13 @@ class ListVC: UIViewController, IdentifiableVC {
     }
     
     private func setupWelcomeMsg() {
-        let welcomeAttributes: [NSAttributedStringKey: Any] = [
-            NSAttributedStringKey.font : UIFont(name: "Silkscreen", size: 18) as Any,
-            NSAttributedStringKey.foregroundColor : UIColor.MyCustomColors.orange
+        let welcomeAttributes: [NSAttributedString.Key: Any] = [
+            NSAttributedString.Key.font : UIFont(name: "Silkscreen", size: 18) as Any,
+            NSAttributedString.Key.foregroundColor : UIColor.MyCustomColors.orange
         ]
-        let userAttributes: [NSAttributedStringKey: Any] = [
-            NSAttributedStringKey.font : UIFont(name: "Avenir Book", size: 18) as Any,
-            NSAttributedStringKey.foregroundColor : UIColor.black
+        let userAttributes: [NSAttributedString.Key: Any] = [
+            NSAttributedString.Key.font : UIFont(name: "Avenir Book", size: 18) as Any,
+            NSAttributedString.Key.foregroundColor : UIColor.black
         ]
         
         welcomLbl.attributedText = NSMutableAttributedString(string: "\(ListVC.WELCOME_MSG)!", attributes: welcomeAttributes)

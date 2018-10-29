@@ -254,13 +254,13 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         if(gameSections.count > 0) {
             return
         }
-        tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         tableView.backgroundView = noDataLbl
     }
     
     private func resetListBackground() {
         tableView.backgroundView = nil
-        tableView.separatorStyle = UITableViewCellSeparatorStyle.singleLine
+        tableView.separatorStyle = UITableViewCell.SeparatorStyle.singleLine
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

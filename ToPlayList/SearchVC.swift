@@ -92,7 +92,7 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
     }
     
     private func findRecentSearchesVC() {
-        for vc in childViewControllers {
+        for vc in children {
             if let rsVC = vc as? RecentSearchesVC {
                 self.recentSearchesVC = rsVC
                 break

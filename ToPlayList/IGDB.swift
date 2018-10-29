@@ -11,7 +11,7 @@ import Alamofire
 func createIDList<T: Sequence>(from ids: T) -> String where T.Iterator.Element == UInt64 {
     var idsString = ""
     for id in ids {
-        if idsString.characters.count > 0 {
+        if idsString.count > 0 {
             idsString.append(",")
         }
         idsString.append(String(describing: id))

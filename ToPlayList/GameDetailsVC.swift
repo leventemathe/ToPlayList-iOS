@@ -198,7 +198,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     }
     
     private func setupBadgeVC() {
-        for vc in childViewControllers {
+        for vc in children {
             if let bVC = vc as? BadgeVC {
                 self.badgeVC = bVC
             }
@@ -207,7 +207,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     }
     
     private func setupImageCarouselVC() {
-        for vc in childViewControllers {
+        for vc in children {
             if let iVC = vc as? ImageCarouselVC {
                 self.imageCarouselVC = iVC
             }
@@ -230,7 +230,7 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     private var releaseDateVCDidSetHeightDelegate: TableViewDidSetHeightDelegate?
     
     private func setupReleaseDateVC() {
-        for vc in childViewControllers {
+        for vc in children {
             if let rdVC = vc as? ReleaseDateVC {
                 self.releaseDateVC = rdVC
                 releaseDateVCDidSetHeightDelegate = TableViewDidSetHeightDelegate(releaseDatesVCHeightConstraint: releaseDateVCHeightConstraint)

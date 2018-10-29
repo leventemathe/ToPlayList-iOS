@@ -16,26 +16,26 @@ class Alerts: UIViewController {
     static let UNKNOWN_LISTS_ERROR = "An unknown error occured while fetching list data."
     
     static func alertWithOKButton(withMessage message: String, forVC vc: UIViewController) {
-        let alert = UIAlertController(title: "Error 😟", message: message, preferredStyle: UIAlertControllerStyle.alert)
-        let okBtn = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
+        let alert = UIAlertController(title: "Error 😟", message: message, preferredStyle: UIAlertController.Style.alert)
+        let okBtn = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil)
         alert.addAction(okBtn)
         vc.present(alert, animated: true, completion: nil)
     }
     
     static func alertSuccessWithOKButton(withMessage message: String, forVC vc: UIViewController) {
-        let alert = UIAlertController(title: "Success!", message: message, preferredStyle: UIAlertControllerStyle.alert)
-        let okBtn = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
+        let alert = UIAlertController(title: "Success!", message: message, preferredStyle: UIAlertController.Style.alert)
+        let okBtn = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil)
         alert.addAction(okBtn)
         vc.present(alert, animated: true, completion: nil)
     }
     
     static func alertWithYesAndNoButtons(withTitle title: String, withMessage message: String, forVC vc: UIViewController, withOnYes onYes: @escaping ()->()) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        let okBtn = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default, handler: { action in
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        let okBtn = UIAlertAction(title: "Yes", style: UIAlertAction.Style.default, handler: { action in
             onYes()
         })
         alert.addAction(okBtn)
-        let cancelBtn = UIAlertAction(title: "No", style: UIAlertActionStyle.default, handler: nil)
+        let cancelBtn = UIAlertAction(title: "No", style: UIAlertAction.Style.default, handler: nil)
         alert.addAction(cancelBtn)
         vc.present(alert, animated: true, completion: nil)
     }

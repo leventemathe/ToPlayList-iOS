@@ -206,7 +206,7 @@ class ToPlayListNotificationSystem: NSObject, UNUserNotificationCenterDelegate {
         let content = UNMutableNotificationContent()
         content.title = "Fun time!"
         content.body = "A game on your ToPlay list (\(game.name)) is released today."
-        content.sound = UNNotificationSound.default()
+        content.sound = UNNotificationSound.default
         content.userInfo = [ToPlayListNotificationSystem.USER_INFO_GAME_KEY: game.name]
         return content
     }

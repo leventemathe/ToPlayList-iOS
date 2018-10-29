@@ -299,7 +299,7 @@ class ToPlayListVC: SubListVC, ToPlayListNotificationSystemDelegate {
     }
     
     func toPlayListNotifictaionSystempermissionRequested(_ onComplete: @escaping () -> ()) {
-        let alert = UIAlertController(title: "Notifications", message: "The app can send you notifications when a game on your ToPlay list is released. In order to use this feature, please accept the request in the following alert.", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "Notifications", message: "The app can send you notifications when a game on your ToPlay list is released. In order to use this feature, please accept the request in the following alert.", preferredStyle: UIAlertController.Style.alert)
         let okBtn = UIAlertAction(title: "OK", style: .default, handler: { _ in onComplete() })
         alert.addAction(okBtn)
         present(alert, animated: true, completion: nil)
