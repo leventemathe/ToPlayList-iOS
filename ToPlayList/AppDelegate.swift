@@ -151,13 +151,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 //print("authorized")
                 ToPlayListNotificationSystem.instance?.listen()
                 ToPlayListNotificationSystem.instance?.permissionGranted = true
-            case .denied:
-                //print("denied")
+            default:
                 ToPlayListNotificationSystem.instance?.permissionGranted = false
-            case .notDetermined:
-                //print("not determined")
-                ToPlayListNotificationSystem.instance?.permissionGranted = false
-                break
             }
         })
     }

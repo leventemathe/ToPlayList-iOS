@@ -149,7 +149,9 @@ class SubListVC: UIViewController, IdentifiableVC, UICollectionViewDelegateFlowL
         cellInsetMargin = 20.0
         cellInterItemMargin = (cellInsetMargin + 10.0) / 2.0
         cellVerticalInterItemMargin = cellInterItemMargin * 2.0
-        cellWidth = collectionViewWidth / CELLS_PER_COLUMNS - (CELLS_PER_COLUMNS-1) * cellInterItemMargin - (2.0 * cellInsetMargin) / CELLS_PER_COLUMNS
+        cellWidth = collectionViewWidth / CELLS_PER_COLUMNS
+        cellWidth -= (CELLS_PER_COLUMNS-1) * cellInterItemMargin
+        cellWidth -= (2.0 * cellInsetMargin) / CELLS_PER_COLUMNS
         cellHeight = cellWidth * CELL_ASPECT_RATIO + CELL_TITLE_HEIGHT
     }
     
