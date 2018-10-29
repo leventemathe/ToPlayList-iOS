@@ -10,7 +10,7 @@ import UIKit
 import NVActivityIndicatorView
 import Firebase
 
-class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, GADBannerViewDelegate {
+class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -19,8 +19,6 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
     @IBOutlet weak var recentSearchesView: UIView!
     private var recentSearchesVC: RecentSearchesVC!
     
-    @IBOutlet weak var bannerAd: GADBannerView!
-    @IBOutlet weak var adContainer: UIView!
     @IBOutlet weak var recentSearchesBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     
@@ -47,7 +45,6 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
         setupLoadingAnimation()
         setupRecentSearches()
         setupPlaceHolderViews()
-        setupBannerAd()
     }
     
     private func setupSearchBar() {
@@ -131,28 +128,7 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITa
             searchIconView.isHidden = true
         }
     }
-    
-    private func setupBannerAd() {
-        if !Configuration.instance.admob.enabled {
-            return
-        }
-        bannerAd.adUnitID = Configuration.instance.admob.searchAdUnitID
-        
-        bannerAd.rootViewController = self
-        adContainer.isHidden = true
-        bannerAd.delegate = self
-        
-        let request = GADRequest()
-        bannerAd.load(request)
-    }
-    
-    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-        adContainer.isHidden = false
-        let height = bannerAd.frame.size.height
-        tableViewBottomConstraint.constant = height
-        recentSearchesBottomConstraint.constant = height
-    }
-    
+
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         stepIn()
     }

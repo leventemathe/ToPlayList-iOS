@@ -54,7 +54,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {        
         setupFirebase()
-        setupAdmob()
         
         UNUserNotificationCenter.current().delegate = self
         
@@ -80,10 +79,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     private func setupFirebase() {
         FirebaseApp.configure()
         Database.database().isPersistenceEnabled = true
-    }
-    
-    private func setupAdmob() {
-        GADMobileAds.configure(withApplicationID: Configuration.instance.admob.applicationID)
     }
     
     private func setupTabBarAppearance() {

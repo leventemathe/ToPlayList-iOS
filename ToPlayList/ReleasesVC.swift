@@ -11,11 +11,9 @@ import Kingfisher
 import NVActivityIndicatorView
 import Firebase
 
-class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, ErrorHandlerDelegate, UIGestureRecognizerDelegate, GADBannerViewDelegate {
+class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, ErrorHandlerDelegate, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var bannerAd: GADBannerView!
-    @IBOutlet weak var adContainer: UIView!
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     
     private var noDataLbl = UILabel()
@@ -45,7 +43,6 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         setupNoDataLabel()
         setupRefreshVC()
         setupLoadingAnimation()
-        setupBannerAd()
         initialLoadGames()
         loadingAnimationView.startAnimating()
     }
@@ -121,25 +118,6 @@ class ReleasesVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         default:
             break
         }
-    }
-    
-    private func setupBannerAd() {
-        if !Configuration.instance.admob.enabled {
-            return
-        }
-        bannerAd.adUnitID = Configuration.instance.admob.releasesAdUnitID
-        
-        bannerAd.rootViewController = self
-        adContainer.isHidden = true
-        bannerAd.delegate = self
-        
-        let request = GADRequest()
-        bannerAd.load(request)
-    }
-    
-    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-        adContainer.isHidden = false
-        tableViewBottomConstraint.constant = bannerAd.frame.size.height
     }
     
     override func viewWillAppear(_ animated: Bool) {

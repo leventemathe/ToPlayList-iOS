@@ -39,7 +39,7 @@ struct GameInExclusiveLists {
     }
 }
 
-class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizerDelegate, ErrorHandlerDelegate, CollectionViewSizeDidSetDelegate, GADBannerViewDelegate {
+class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizerDelegate, ErrorHandlerDelegate, CollectionViewSizeDidSetDelegate {
     
     typealias OnFinishedListener = () -> ()
     
@@ -150,8 +150,6 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
     @IBOutlet weak var releaseDateVCHeightConstraint: NSLayoutConstraint!
     var releaseDateVC: ReleaseDateVC?
     
-    @IBOutlet weak var bannerAd: GADBannerView!
-    @IBOutlet weak var bannerContainer: UIView!
     @IBOutlet weak var scrollViewBottomConstraint: NSLayoutConstraint!
     
     var game: Game!
@@ -170,7 +168,6 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
         setupBadgeVC()
         setupImageCarouselVC()
         setupReleaseDateVC()
-        setupBannerAd()
         
         startLoading()
         
@@ -240,25 +237,6 @@ class GameDetailsVC: UIViewController, UIScrollViewDelegate, UIGestureRecognizer
                 self.releaseDateVC!.didSetHeightDelegate = releaseDateVCDidSetHeightDelegate
             }
         }
-    }
-    
-    private func setupBannerAd() {
-        if !Configuration.instance.admob.enabled {
-            return
-        }
-        bannerAd.adUnitID = Configuration.instance.admob.releasesAdUnitID
-        
-        bannerAd.rootViewController = self
-        bannerContainer.isHidden = true
-        bannerAd.delegate = self
-        
-        let request = GADRequest()
-        bannerAd.load(request)
-    }
-    
-    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-        bannerContainer.isHidden = false
-        scrollViewBottomConstraint.constant = bannerAd.frame.size.height
     }
     
     func didSetSize(numberOfItems: Int, numberOfRows: Int, sizeOfItems: CGSize, sizeOfMargins: CGSize) {

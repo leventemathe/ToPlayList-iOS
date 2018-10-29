@@ -10,7 +10,7 @@ import UIKit
 import NVActivityIndicatorView
 import Firebase
 
-class ListVC: UIViewController, IdentifiableVC, GADBannerViewDelegate {
+class ListVC: UIViewController, IdentifiableVC {
     
     private static let WELCOME_MSG = "Welcome"
     
@@ -19,8 +19,6 @@ class ListVC: UIViewController, IdentifiableVC, GADBannerViewDelegate {
     
     @IBOutlet weak var backgroundStarImageView: UIImageView!
     
-    @IBOutlet weak var bannerAd: GADBannerView!
-    @IBOutlet weak var adContainer: UIView!
     @IBOutlet weak var listContainerBottomConstraint: NSLayoutConstraint!
     
     @IBAction func segmentedChanged(_ sender: UISegmentedControl) {
@@ -108,7 +106,6 @@ class ListVC: UIViewController, IdentifiableVC, GADBannerViewDelegate {
         setupWelcomeMsg()
         setupSegmentedView()
         setupTiltingBackground()
-        setupBannerAd()
         setupBackButton()
     }
     
@@ -223,25 +220,6 @@ class ListVC: UIViewController, IdentifiableVC, GADBannerViewDelegate {
         
         backgroundStarImageView.addMotionEffect(horizontalMotion)
         backgroundStarImageView.addMotionEffect(verticalMotion)
-    }
-    
-    private func setupBannerAd() {
-        if !Configuration.instance.admob.enabled {
-            return
-        }
-        bannerAd.adUnitID = Configuration.instance.admob.listsAdUnitID
-        
-        bannerAd.rootViewController = self
-        adContainer.isHidden = true
-        bannerAd.delegate = self
-        
-        let request = GADRequest()
-        bannerAd.load(request)
-    }
-    
-    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-        listContainerBottomConstraint.constant = bannerAd.frame.size.height
-        adContainer.isHidden = false
     }
     
     private func setupBackButton() {
