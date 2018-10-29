@@ -1,21 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bhe-U8-59S">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bhe-U8-59S">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Avenir.ttc">
-            <string>Avenir-Book</string>
-            <string>Avenir-Heavy</string>
-            <string>Avenir-Light</string>
-            <string>Avenir-Medium</string>
-        </array>
         <array key="slkscr.ttf">
             <string>Silkscreen</string>
         </array>
@@ -180,7 +173,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="120" height="88"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Played" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4sL-A5-Khe">
-                                                            <rect key="frame" x="27.5" y="29.5" width="65.5" height="30.5"/>
+                                                            <rect key="frame" x="27.5" y="29" width="65.5" height="30.5"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="22"/>
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
@@ -197,7 +190,7 @@
                                                     <rect key="frame" x="255" y="0.0" width="120" height="88"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ToPlay" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Z8-zz-Ugh">
-                                                            <rect key="frame" x="28.5" y="29.5" width="63" height="30.5"/>
+                                                            <rect key="frame" x="28.5" y="29" width="63" height="30.5"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="22"/>
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -384,7 +377,7 @@
                                         </constraints>
                                     </view>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8H2-nN-eDd">
-                                        <rect key="frame" x="8" y="128.5" width="359" height="23.5"/>
+                                        <rect key="frame" x="8" y="132" width="359" height="20"/>
                                         <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -527,7 +520,7 @@
                                                 </subviews>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aw5-Re-hAD">
-                                                <rect key="frame" x="114" y="58.5" width="253" height="23.5"/>
+                                                <rect key="frame" x="114" y="62" width="253" height="20"/>
                                                 <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="20"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -591,19 +584,19 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="89"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CFP-5D-6eC">
-                                                                                <rect key="frame" x="8" y="8" width="40.5" height="17.5"/>
+                                                                                <rect key="frame" x="8" y="8" width="52" height="15"/>
                                                                                 <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="15"/>
                                                                                 <color key="textColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No description available..." textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B6e-9T-2Iw">
-                                                                                <rect key="frame" x="8" y="28.5" width="163.5" height="19.5"/>
+                                                                                <rect key="frame" x="8" y="26" width="163.5" height="19.5"/>
                                                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yqb-Ft-MHO">
-                                                                                <rect key="frame" x="8" y="51" width="77" height="30"/>
+                                                                                <rect key="frame" x="8" y="48.5" width="77" height="32.5"/>
                                                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
                                                                                 <state key="normal" title="Show more...">
                                                                                     <color key="titleColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1008,22 +1001,22 @@
                                         <rect key="frame" x="-60" y="-60" width="495" height="787"/>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="eV9-7L-V6j">
-                                        <rect key="frame" x="16" y="187" width="343" height="295"/>
+                                        <rect key="frame" x="16" y="196.5" width="343" height="274.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ALMOST THERE!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k48-OY-azy">
-                                                <rect key="frame" x="0.0" y="0.0" width="343" height="144.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="343" height="124"/>
                                                 <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="62"/>
                                                 <color key="textColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please check your email to verify your account." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BYf-hz-V3H">
-                                                <rect key="frame" x="0.0" y="152.5" width="343" height="46.5"/>
+                                                <rect key="frame" x="0.0" y="132" width="343" height="46.5"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gYg-pn-aLR" customClass="LoginSceneButtonLogin" customModule="ToPlayList" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="207" width="343" height="40"/>
+                                                <rect key="frame" x="0.0" y="186.5" width="343" height="40"/>
                                                 <color key="backgroundColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="5Cm-qQ-A0f"/>
@@ -1037,7 +1030,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AMh-rt-6ut" customClass="LoginSceneButtonLogin" customModule="ToPlayList" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="255" width="343" height="40"/>
+                                                <rect key="frame" x="0.0" y="234.5" width="343" height="40"/>
                                                 <color key="backgroundColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="tTx-8E-WZh"/>
@@ -1117,7 +1110,7 @@
                                 <rect key="frame" x="-60" y="4" width="495" height="674"/>
                             </imageView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="o1g-ft-PLL">
-                                <rect key="frame" x="96.5" y="105" width="182" height="29"/>
+                                <rect key="frame" x="97" y="105" width="181" height="29"/>
                                 <segments>
                                     <segment title="ToPlay"/>
                                     <segment title="Played"/>
@@ -1195,12 +1188,6 @@
                                 <action selector="logoutClicked:" destination="Ncq-W1-497" id="c0K-Eq-MlA"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Upgrade" id="EN5-R8-WiV">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <segue destination="Qrj-wY-cLo" kind="show" id="ksw-Na-f6P"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="adContainer" destination="HPt-p4-rdA" id="L7R-VW-g0x"/>
@@ -1210,7 +1197,6 @@
                         <outlet property="listContainerBottomConstraint" destination="Cf7-Jx-3Tu" id="VCh-sJ-lDi"/>
                         <outlet property="listContainerView" destination="65Q-Zg-Uje" id="qCc-Cz-RBu"/>
                         <outlet property="segmentedControl" destination="o1g-ft-PLL" id="Tfl-KU-dbl"/>
-                        <outlet property="upgradeButton" destination="EN5-R8-WiV" id="L5n-6s-T3C"/>
                         <outlet property="welcomLbl" destination="WOa-04-8pa" id="kwJ-1d-Kou"/>
                         <outlet property="welcomeLblContainerLeadeingConstraint" destination="7F2-De-gkj" id="86T-jU-7a8"/>
                         <outlet property="welcomeLblContainerTrailingConstraint" destination="SFX-aa-7tV" id="VPw-Va-szP"/>
@@ -1708,7 +1694,7 @@
                                                     </constraints>
                                                 </view>
                                                 <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="OutTodayBadge" text="Out today!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Up-Au-TRW" customClass="OutTodayBadge" customModule="ToPlayList" customModuleProvider="target">
-                                                    <rect key="frame" x="-16" y="-16" width="108" height="30"/>
+                                                    <rect key="frame" x="-8" y="12" width="108" height="30"/>
                                                     <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="108" id="O14-VK-3Lf"/>
@@ -1747,16 +1733,16 @@
                                 </cells>
                             </collectionView>
                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ugs-81-o8s">
-                                <rect key="frame" x="0.0" y="273.5" width="0.0" height="120"/>
+                                <rect key="frame" x="48" y="273.5" width="279" height="120"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This list is empty. " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V5c-z4-V1N">
-                                        <rect key="frame" x="0.0" y="0.0" width="159" height="40.5"/>
+                                        <rect key="frame" x="25" y="0.0" width="229" height="36"/>
                                         <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="20"/>
                                         <color key="textColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe left or right on a game or game cover to add it to a list." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="09O-Kn-A3U">
-                                        <rect key="frame" x="0.0" y="40.5" width="0.0" height="79.5"/>
+                                        <rect key="frame" x="16.5" y="36" width="246" height="84"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -1916,14 +1902,6 @@
             </objects>
             <point key="canvasLocation" x="5784" y="78"/>
         </scene>
-        <!--UpgradeVC-->
-        <scene sceneID="yqE-is-p3C">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Upgrade" referencedIdentifier="UpgradeVC" id="Qrj-wY-cLo" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yTB-4U-qpJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3804" y="2296"/>
-        </scene>
         <!--Played ListVC-->
         <scene sceneID="CU3-BN-FTg">
             <objects>
@@ -2060,16 +2038,16 @@
                                 </cells>
                             </collectionView>
                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Gyl-dj-iE9">
-                                <rect key="frame" x="48" y="273.5" width="0.0" height="120"/>
+                                <rect key="frame" x="48" y="273.5" width="279" height="120"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This list is empty. " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X98-7V-9ym">
-                                        <rect key="frame" x="-48" y="0.0" width="159" height="40.5"/>
+                                        <rect key="frame" x="25" y="0.0" width="229" height="36"/>
                                         <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="20"/>
                                         <color key="textColor" red="1" green="0.60784313729999995" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe left or right on a game or game cover to add it to a list." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W7Z-4w-dtX">
-                                        <rect key="frame" x="-48" y="40.5" width="0.0" height="79.5"/>
+                                        <rect key="frame" x="16.5" y="36" width="246" height="84"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -2123,19 +2101,19 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aiw-iF-cCY">
-                                                    <rect key="frame" x="8" y="0.0" width="343" height="30"/>
+                                                    <rect key="frame" x="8" y="0.0" width="343" height="29.5"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="cad-pJ-0g6">
-                                                            <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="343" height="29.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z8C-55-Led">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="30.5" height="30"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="30.5" height="29.5"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Platform" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="woS-PO-2RJ">
-                                                                    <rect key="frame" x="266" y="0.0" width="77" height="30"/>
+                                                                    <rect key="frame" x="266" y="0.0" width="77" height="29.5"/>
                                                                     <fontDescription key="fontDescription" name="Silkscreen" family="Silkscreen" pointSize="14"/>
                                                                     <color key="textColor" red="1" green="0.60784313725490191" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -2323,7 +2301,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="120" height="88"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Played" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="En3-ZO-2fC">
-                                                            <rect key="frame" x="27.5" y="29.5" width="65.5" height="30.5"/>
+                                                            <rect key="frame" x="27.5" y="29" width="65.5" height="30.5"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="22"/>
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
@@ -2340,7 +2318,7 @@
                                                     <rect key="frame" x="255" y="0.0" width="120" height="88"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ToPlay" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uvo-gz-9yq">
-                                                            <rect key="frame" x="28.5" y="29.5" width="63" height="30.5"/>
+                                                            <rect key="frame" x="28.5" y="29" width="63" height="30.5"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="22"/>
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -2501,7 +2479,7 @@
         <image name="img_missing" width="70" height="70"/>
         <image name="img_missing_cover" width="176" height="250"/>
         <image name="img_missing_screenshot_big" width="320" height="160"/>
-        <image name="login_bg" width="768" height="512"/>
+        <image name="login_bg" width="768.5" height="512"/>
         <image name="logo" width="349" height="203"/>
         <image name="logout" width="22" height="22"/>
         <image name="search_big_icon" width="240" height="240"/>

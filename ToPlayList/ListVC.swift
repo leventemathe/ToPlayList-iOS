@@ -23,8 +23,6 @@ class ListVC: UIViewController, IdentifiableVC, GADBannerViewDelegate {
     @IBOutlet weak var adContainer: UIView!
     @IBOutlet weak var listContainerBottomConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var upgradeButton: UIBarButtonItem!
-    
     @IBAction func segmentedChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
@@ -128,7 +126,6 @@ class ListVC: UIViewController, IdentifiableVC, GADBannerViewDelegate {
     }
     
     private func setupNavBar(_ animated: Bool) {
-        upgradeButton.setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: "Avenir", size: 18)!], for: .normal)
         navigationController?.setNavigationBarHidden(false, animated: animated)
         navigationItem.hidesBackButton = true
     }

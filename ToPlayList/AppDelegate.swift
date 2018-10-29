@@ -55,7 +55,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {        
         setupFirebase()
         setupAdmob()
-        setupIAP()
         
         UNUserNotificationCenter.current().delegate = self
         
@@ -85,11 +84,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     private func setupAdmob() {
         GADMobileAds.configure(withApplicationID: Configuration.instance.admob.applicationID)
-    }
-    
-    private func setupIAP() {
-        SKPaymentQueue.default().add(InappPurchaseSystem.instance)
-        InappPurchaseSystem.instance.loadProducts()
     }
     
     private func setupTabBarAppearance() {
