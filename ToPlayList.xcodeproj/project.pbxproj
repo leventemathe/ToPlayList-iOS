@@ -20,6 +20,7 @@
 		D709009A1EC5B80600A316BE /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70900991EC5B80600A316BE /* SearchVC.swift */; };
 		D709009D1EC5B89D00A316BE /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D709009C1EC5B89D00A316BE /* SearchCell.swift */; };
 		D70B03231E0C1F9500F67E7A /* IGDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70B03221E0C1F9500F67E7A /* IGDB.swift */; };
+		D70FEEA22188B19000DE28E8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D70FEEA12188B19000DE28E8 /* GoogleService-Info.plist */; };
 		D71356C31F5578B900F3AB3D /* NavigationControllerWithCustomBackGestureDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7EF927E1F43371100485FC4 /* NavigationControllerWithCustomBackGestureDelegate.swift */; };
 		D71356C41F5578B900F3AB3D /* Lists.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78ADCA51E3750EB008DE943 /* Lists.swift */; };
 		D71356C51F5578B900F3AB3D /* DropShadowed.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75F4EA11E643A9E00CB2875 /* DropShadowed.swift */; };
@@ -117,7 +118,6 @@
 		D72D4CA61E1479EC0070E013 /* IGDBJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72D4CA51E1479EC0070E013 /* IGDBJSON.swift */; };
 		D72E66B71E619D0800BED388 /* ToPlayListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72E66B61E619D0800BED388 /* ToPlayListVC.swift */; };
 		D72E66BA1E619D2100BED388 /* PlayedListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72E66B91E619D2100BED388 /* PlayedListVC.swift */; };
-		D74979F121873712006408D6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D74979EE21873712006408D6 /* GoogleService-Info.plist */; };
 		D74979F621873712006408D6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D74979F021873712006408D6 /* GoogleService-Info.plist */; };
 		D74979FA2187387E006408D6 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74979F92187387E006408D6 /* Configuration.swift */; };
 		D74979FB2187387E006408D6 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74979F92187387E006408D6 /* Configuration.swift */; };
@@ -197,6 +197,7 @@
 		D70900991EC5B80600A316BE /* SearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		D709009C1EC5B89D00A316BE /* SearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		D70B03221E0C1F9500F67E7A /* IGDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGDB.swift; sourceTree = "<group>"; };
+		D70FEEA12188B19000DE28E8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D71357191F5578B900F3AB3D /* ToPlayListDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToPlayListDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D713571B1F557BC200F3AB3D /* InfoProd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InfoProd.plist; sourceTree = "<group>"; };
 		D71449D51E81214900C6A96D /* Services.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
@@ -223,7 +224,6 @@
 		D72D4CA51E1479EC0070E013 /* IGDBJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGDBJSON.swift; sourceTree = "<group>"; };
 		D72E66B61E619D0800BED388 /* ToPlayListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToPlayListVC.swift; sourceTree = "<group>"; };
 		D72E66B91E619D2100BED388 /* PlayedListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayedListVC.swift; sourceTree = "<group>"; };
-		D74979EE21873712006408D6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D74979F021873712006408D6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D74979F92187387E006408D6 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		D74AC7D91E3919B700C37A90 /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
@@ -489,7 +489,7 @@
 		D74979ED21873712006408D6 /* Prod */ = {
 			isa = PBXGroup;
 			children = (
-				D74979EE21873712006408D6 /* GoogleService-Info.plist */,
+				D70FEEA12188B19000DE28E8 /* GoogleService-Info.plist */,
 			);
 			path = Prod;
 			sourceTree = "<group>";
@@ -748,7 +748,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D76437E51E1E506D00B09C7E /* HeaderView.xib in Resources */,
-				D74979F121873712006408D6 /* GoogleService-Info.plist in Resources */,
+				D70FEEA22188B19000DE28E8 /* GoogleService-Info.plist in Resources */,
 				D76437E11E1E4E7300B09C7E /* slkscr.ttf in Resources */,
 				D726BC901E0ABDD800D6C9CD /* LaunchScreen.storyboard in Resources */,
 				D7C3A1721E0DD9120091279C /* Assets.xcassets in Resources */,
@@ -1212,7 +1212,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.levente.mathe.ToPlayList;
+				PRODUCT_BUNDLE_IDENTIFIER = com.levente.mathe.dev.ToPlayList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
@@ -1232,7 +1232,7 @@
 				INFOPLIST_FILE = ToPlayList/InfoProd.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.levente.mathe.ToPlayList;
+				PRODUCT_BUNDLE_IDENTIFIER = com.levente.mathe.dev.ToPlayList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
