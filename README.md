@@ -4,7 +4,9 @@ An iOS app for discovering new games
 Browse the newest releases or upcoming lists to discover new games, or search for specific ones.  
 Save the games you want to play or have played to your ToPlay list or Played list.  
 
+<p float="left">
 ![lists](./doc/img/lists.png) ![panning](./doc/img/panning.png) ![stars](./doc/img/stars.png)
+</p>
 
 ## Techie stuff
 ToPlayList was my first iOS app ever, I learned basic iOS development, Swift, git etc. with this project.  
