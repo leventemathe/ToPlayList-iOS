@@ -12,7 +12,7 @@ Save the games you want to play or have played to your ToPlay list or Played lis
 
 ## Techie stuff
 ToPlayList was my first iOS app ever, I learned basic iOS development, Swift, git etc. with this project.  
-I started it while I was studying Computer Science at university in Budapest.  
+I built it during the time I was studying Computer Science at university in Budapest.  
 As you can imagine, the code is far from perfect, please don't judge me. :)  
 
 The game data in the list and detail views are downloaded from the IGDB REST API, and I store the lists and manage authentication with Firebase.  
