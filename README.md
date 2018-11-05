@@ -5,7 +5,9 @@ Browse the newest releases or upcoming lists to discover new games, or search fo
 Save the games you want to play or have played to your ToPlay list or Played list.  
 
 <p float="left">
-![lists](./doc/img/lists.png) ![panning](./doc/img/panning.png) ![stars](./doc/img/stars.png)
+  <img src="/doc/img/lists.png" width="100" />
+  <img src="/doc/img/panning.png" width="100" /> 
+  <img src="/doc/img/stars.png" width="100" />
 </p>
 
 ## Techie stuff
